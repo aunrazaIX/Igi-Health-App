@@ -61,7 +61,7 @@ const index = () => {
               </View>
 
               <View style={styles.inputBox}>
-                <Text style={styles.inputLabel}>Your Password </Text>
+                <Text style={styles.inputLabel}>Your Password</Text>
 
                 <TextInput style={styles.inputText} secureTextEntry />
               </View>
