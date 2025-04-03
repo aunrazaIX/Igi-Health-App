@@ -5,7 +5,6 @@ import {Colors} from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
-    alignItems: 'center',
   },
 
   igiVitalityLogo: {
@@ -15,7 +14,6 @@ export const styles = StyleSheet.create({
     gap: vh * 2,
     width: '100%',
     alignItems: 'center',
-  
   },
   loginContainer: {
     backgroundColor: Colors.loginContainer,
@@ -24,8 +22,6 @@ export const styles = StyleSheet.create({
     width: '90%',
     justifyContent: 'center',
     alignItems: 'center',
-   
-    
   },
 
   loginContainerText: {
@@ -81,12 +77,12 @@ export const styles = StyleSheet.create({
 
   inputLabel: {
     fontSize: vh * 1.5,
-    color : Colors.textColor
+    color: Colors.textColor,
   },
 
   inputText: {
     bottom: 10,
-    color : Colors.textColor,
+    color: Colors.textColor,
     paddingHorizontal: 0,
   },
 
@@ -100,7 +96,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   forgetPassword: {
-    color : Colors.forgotPass
+    color: Colors.forgotPass,
   },
 
   loginButtonContainer: {
@@ -126,12 +122,12 @@ export const styles = StyleSheet.create({
     width: '90%',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: vw*4,
-    marginBottom : vh*5
+    gap: vw * 4,
+    marginBottom: vh * 5,
   },
-  loginOptionBox:{
-    gap : vh*1,
-    alignItems:'center'
+  loginOptionBox: {
+    gap: vh * 1,
+    alignItems: 'center',
   },
   verticalLine: {
     width: 1,

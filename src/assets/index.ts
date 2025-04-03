@@ -1,5 +1,6 @@
 export const images = {
      backgroundImage: require('./icons/loginBackground.png'),
+     SignupBg : require('./images/SignupBg.png')
 
   };
 

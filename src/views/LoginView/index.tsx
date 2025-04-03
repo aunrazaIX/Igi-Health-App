@@ -14,6 +14,7 @@ import DMSansMedium from '../../components/DMSansMedium';
 import {styles} from './styles';
 import Button from '../../components/Button';
 import {Checkbox} from 'react-native-paper';
+import DMSansBold from '../../components/DMSansBold';
 
 const index = () => {
   const [checked, setChecked] = useState(false);
