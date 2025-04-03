@@ -74,7 +74,6 @@ const index = () => {
                   />
 
                   <Text> Remember Me </Text>
-                  
                 </View>
 
                 <View>
