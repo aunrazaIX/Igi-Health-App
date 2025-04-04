@@ -8,4 +8,6 @@ export const icons = {
   leftArrow: require('./icons/leftArrow.png'),
   faceID: require('./icons/faceID.png'),
   fingerprint: require('./icons/fingerprint.png'),
+  eyeClosed: require('./icons/eyeClosed.png'),
+  eyeOpen: require('./icons/eyeOpen.png'),
 };

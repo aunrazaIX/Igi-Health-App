@@ -1,28 +1,54 @@
-import {Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  TouchableOpacityProps,
+} from 'react-native';
 import React from 'react';
-import {vh} from '../../assets/theme/dimension';
+import {vh, vw} from '../../assets/theme/dimension';
 import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
+import LinearGradient from 'react-native-linear-gradient';
 
-const Button: React.FC<{name: string}> = ({name}) => {
+interface ButtonProps extends TouchableOpacityProps {
+  name?: string;
+  containerStyle?: Record<string, string | number | boolean>;
+  inputStyle?: Record<string, string | number | boolean>;
+  showIcon?: boolean;
+}
+
+const Button: React.FC<ButtonProps> = ({
+  name,
+  containerStyle,
+  inputStyle,
+  showIcon,
+  onPress,
+}) => {
   return (
-    <TouchableOpacity style={styles.loginButton}>
-      <Image source={icons.leftArrow} />
-      <Text style={styles.buttonText}>{name}</Text>
-    </TouchableOpacity>
+    <LinearGradient
+      style={[styles.container, containerStyle]}
+      colors={COLORS.activeButtonGradient}>
+      <TouchableOpacity onPress={onPress}>
+        {showIcon && <Image source={icons.eyeClosed} />}
+        <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
+      </TouchableOpacity>
+    </LinearGradient>
   );
 };
 
 export default Button;
 
 const styles = StyleSheet.create({
-  loginButton: {
+  container: {
+    width: '100%',
+    borderRadius: vw * 4,
+    paddingVertical: vh * 2,
     flexDirection: 'row',
-    gap: 4,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 2 * vh,
   },
+
   buttonText: {
     color: COLORS.buttonText,
   },

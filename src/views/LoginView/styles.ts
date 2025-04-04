@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
   },
-
   logo: {
     marginVertical: vh * 3,
     height: vh * 10,
@@ -40,24 +39,21 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: vw * 3,
     elevation: 5,
-    paddingVertical: vh ,
+    paddingVertical: vh,
     borderRadius: vw * 6,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
 
   tab: {
-    borderWidth: 2,
-    width: '45%',
+    width: '47%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: vh * 0.7,
+    paddingVertical: vh * 1.5,
     borderRadius: vw * 6,
-    borderColor: COLORS.activeTab,
-    backgroundColor: COLORS.activeTab,
   },
-  loginTabText: {
-    color: COLORS.tabText,
+  tabText: {
+    fontSize: vh * 1.6,
   },
   signupTab: {
     paddingHorizontal: vw * 8,
@@ -140,5 +136,10 @@ export const styles = StyleSheet.create({
     height: 40,
     backgroundColor: COLORS.textColor,
     marginHorizontal: 10,
+  },
+  row: {
+    width:'100%',
+    marginVertical: vh,
+    flexDirection: 'row',
   },
 });
