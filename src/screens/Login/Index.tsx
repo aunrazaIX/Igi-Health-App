@@ -1,8 +1,13 @@
 import React from 'react';
 import LoginView from '../../views/LoginView';
+import useLoginViewModel from '../../viewmodels/useLoginViewModel';
 
-const Welcome = () => {
-  return <LoginView />;
+const Login = () => {
+  const {functions, states} = useLoginViewModel();
+
+  const {selectedTab} = states;
+  const {onPressTab} = functions;
+  return <LoginView onPressTab={onPressTab} selectedTab={selectedTab} />;
 };
 
-export default Welcome;
+export default Login;

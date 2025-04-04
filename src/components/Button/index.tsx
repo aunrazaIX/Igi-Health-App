@@ -1,8 +1,8 @@
-import { Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {vh} from '../../assets/theme/dimension';
 import {icons} from '../../assets';
-import {Colors} from '../../assets/theme/colors';
+import {COLORS} from '../../assets/theme/colors';
 
 const Button: React.FC<{name: string}> = ({name}) => {
   return (
@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
     paddingVertical: 2 * vh,
   },
   buttonText: {
-    color: Colors.buttonText,
+    color: COLORS.buttonText,
   },
 });

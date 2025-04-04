@@ -1,0 +1,25 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Aileron-Bold.otf",
+      "sha1": "4cab3574a70b6c2b65b87121074adcd21b0d1b96"
+    },
+    {
+      "path": "src/assets/fonts/Aileron-Light.otf",
+      "sha1": "f369e6be35775f2fb8b979129ab12edc2b199bcf"
+    },
+    {
+      "path": "src/assets/fonts/Aileron-Regular.otf",
+      "sha1": "950adda857e71cf983192b79501b535f7e85da49"
+    },
+    {
+      "path": "src/assets/fonts/Aileron-SemiBold.otf",
+      "sha1": "6cf804659ab13f09971fafe59d10e92567ef2a0a"
+    },
+    {
+      "path": "src/assets/fonts/index.ts",
+      "sha1": "fbe7d5e2b90e3bf30aaf47ab88ef92c1c4e533b2"
+    }
+  ]
+}

@@ -11,6 +11,11 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		428F8FA979794847A7E6D245 /* Aileron-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F795F834212643FC9EAB17C3 /* Aileron-Bold.otf */; };
+		7354492F2775448FB69270B6 /* Aileron-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4BC5B6CAB2FA48DBA0C3D542 /* Aileron-Light.otf */; };
+		98995E0BD2C04C8BA543FE6D /* Aileron-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D07E081DE5A848E3AB3EA465 /* Aileron-Regular.otf */; };
+		9673AABE08AF45CE8511693D /* Aileron-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F49CDCF7FFAB4A92ABC762C8 /* Aileron-SemiBold.otf */; };
+		E0233A2624884557A820B733 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 33C7D46A1BB3495CB367F99B /* index.ts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +40,11 @@
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = igihealth/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = igihealth/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F795F834212643FC9EAB17C3 /* Aileron-Bold.otf */ = {isa = PBXFileReference; name = "Aileron-Bold.otf"; path = "../src/assets/fonts/Aileron-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4BC5B6CAB2FA48DBA0C3D542 /* Aileron-Light.otf */ = {isa = PBXFileReference; name = "Aileron-Light.otf"; path = "../src/assets/fonts/Aileron-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D07E081DE5A848E3AB3EA465 /* Aileron-Regular.otf */ = {isa = PBXFileReference; name = "Aileron-Regular.otf"; path = "../src/assets/fonts/Aileron-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F49CDCF7FFAB4A92ABC762C8 /* Aileron-SemiBold.otf */ = {isa = PBXFileReference; name = "Aileron-SemiBold.otf"; path = "../src/assets/fonts/Aileron-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		33C7D46A1BB3495CB367F99B /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../src/assets/fonts/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +103,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				35FDDEDCF6B14A51B9403BE4 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -115,6 +126,19 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		35FDDEDCF6B14A51B9403BE4 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				F795F834212643FC9EAB17C3 /* Aileron-Bold.otf */,
+				4BC5B6CAB2FA48DBA0C3D542 /* Aileron-Light.otf */,
+				D07E081DE5A848E3AB3EA465 /* Aileron-Regular.otf */,
+				F49CDCF7FFAB4A92ABC762C8 /* Aileron-SemiBold.otf */,
+				33C7D46A1BB3495CB367F99B /* index.ts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -185,6 +209,11 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				428F8FA979794847A7E6D245 /* Aileron-Bold.otf in Resources */,
+				7354492F2775448FB69270B6 /* Aileron-Light.otf in Resources */,
+				98995E0BD2C04C8BA543FE6D /* Aileron-Regular.otf in Resources */,
+				9673AABE08AF45CE8511693D /* Aileron-SemiBold.otf in Resources */,
+				E0233A2624884557A820B733 /* index.ts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,15 +1,8 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-// import Index from './src/screens/Login/Index'
-import Signup from './src/screens/Signup';
+import Login from './src/screens/Login/Index';
 
 const App = () => {
-  return (
-    <View style={{flex: 1}}>
-      {/* <Index/> */}
-      <Signup />
-    </View>
-  );
+  return <Login />;
 };
 
 export default App;

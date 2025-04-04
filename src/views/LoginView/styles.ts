@@ -1,57 +1,63 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from '../../assets/theme/dimension';
-import {Colors} from '../../assets/theme/colors';
+import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
   },
 
-  igiVitalityLogo: {
-    marginTop: vh * 5,
+  logo: {
+    marginVertical: vh * 3,
+    height: vh * 10,
+    width: vw * 60,
+    resizeMode: 'contain',
   },
   loginContent: {
-    gap: vh * 2,
-    width: '100%',
+    flex: 1,
+    paddingHorizontal: vw * 4,
     alignItems: 'center',
   },
   loginContainer: {
-    backgroundColor: Colors.loginContainer,
-    borderRadius: vw * 6,
+    width: '100%',
+    borderRadius: vw * 5,
+    backgroundColor: COLORS.loginContainer,
     paddingVertical: vh * 4,
-    width: '90%',
+    paddingHorizontal: vw * 4,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
   loginContainerText: {
+    color: COLORS.textColorLight,
     marginTop: vh * 2,
-    fontSize: vw * 3,
-    width: '80%',
+    fontSize: vh * 1.7,
+    textAlign: 'left',
   },
   tabContainer: {
-    backgroundColor: 'white',
-    borderWidth: 1,
+    width: '100%',
+    backgroundColor: COLORS.white,
+    alignItems: 'center',
+    paddingHorizontal: vw * 3,
     elevation: 5,
-    borderColor: 'white',
+    paddingVertical: vh ,
     borderRadius: vw * 6,
     flexDirection: 'row',
-    width: '80%',
     justifyContent: 'space-between',
-    paddingHorizontal: vw * 2,
-    paddingVertical: vh * 1,
   },
 
-  loginTab: {
+  tab: {
     borderWidth: 2,
-    paddingHorizontal: vw * 12,
+    width: '45%',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: vh * 0.7,
     borderRadius: vw * 6,
-    borderColor: Colors.activeTab,
-    backgroundColor: Colors.activeTab,
+    borderColor: COLORS.activeTab,
+    backgroundColor: COLORS.activeTab,
   },
   loginTabText: {
-    color: Colors.tabText,
+    color: COLORS.tabText,
   },
   signupTab: {
     paddingHorizontal: vw * 8,
@@ -77,12 +83,12 @@ export const styles = StyleSheet.create({
 
   inputLabel: {
     fontSize: vh * 1.5,
-    color: Colors.textColor,
+    color: COLORS.textColor,
   },
 
   inputText: {
     bottom: 10,
-    color: Colors.textColor,
+    color: COLORS.textColor,
     paddingHorizontal: 0,
   },
 
@@ -96,12 +102,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   forgetPassword: {
-    color: Colors.forgotPass,
+    color: COLORS.forgotPass,
   },
 
   loginButtonContainer: {
     borderRadius: vw * 4,
-    backgroundColor: Colors.loginButton,
+    backgroundColor: COLORS.loginButton,
     marginVertical: 2 * vh,
   },
   loginButton: {
@@ -112,11 +118,11 @@ export const styles = StyleSheet.create({
     paddingVertical: 2 * vh,
   },
   buttonText: {
-    color: Colors.buttonText,
+    color: COLORS.buttonText,
   },
   loginOptionContainer: {
     flexDirection: 'row',
-    backgroundColor: Colors.loginContainer,
+    backgroundColor: COLORS.loginContainer,
     borderRadius: vw * 6,
     paddingVertical: vh * 3,
     width: '90%',
@@ -132,7 +138,7 @@ export const styles = StyleSheet.create({
   verticalLine: {
     width: 1,
     height: 40,
-    backgroundColor: Colors.textColor,
+    backgroundColor: COLORS.textColor,
     marginHorizontal: 10,
   },
 });
