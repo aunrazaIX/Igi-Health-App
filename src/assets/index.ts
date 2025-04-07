@@ -10,4 +10,5 @@ export const icons = {
   fingerprint: require('./icons/fingerprint.png'),
   eyeClosed: require('./icons/eyeClosed.png'),
   eyeOpen: require('./icons/eyeOpen.png'),
+  tickIcon: require('./icons/tickIcon.png'),
 };

@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   loginContainerText: {
     color: COLORS.textColorLight,
     marginTop: vh * 2,
@@ -44,7 +43,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-
   tab: {
     width: '47%',
     justifyContent: 'center',
@@ -55,77 +53,22 @@ export const styles = StyleSheet.create({
   tabText: {
     fontSize: vh * 1.6,
   },
-  signupTab: {
-    paddingHorizontal: vw * 8,
-    paddingVertical: vh * 0.7,
-    borderRadius: vw * 2,
-  },
-
-  inputContainer: {
-    marginTop: vh * 2,
-    width: '80%',
-    justifyContent: 'space-between',
-  },
-
-  inputBox: {
-    backgroundColor: 'white',
-    borderRadius: vw * 3,
-    paddingVertical: vh * 1.3,
-    paddingHorizontal: vw * 4,
-    elevation: 3,
-    height: 61,
-    marginBottom: 20,
-  },
-
-  inputLabel: {
-    fontSize: vh * 1.5,
-    color: COLORS.textColor,
-  },
-
-  inputText: {
-    bottom: 10,
-    color: COLORS.textColor,
-    paddingHorizontal: 0,
-  },
-
-  loginOptions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  rememberMe: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   forgetPassword: {
+    fontSize: vh * 1.5,
     color: COLORS.forgotPass,
   },
-
-  loginButtonContainer: {
-    borderRadius: vw * 4,
-    backgroundColor: COLORS.loginButton,
-    marginVertical: 2 * vh,
-  },
   loginButton: {
-    flexDirection: 'row',
-    gap: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 2 * vh,
-  },
-  buttonText: {
-    color: COLORS.buttonText,
+    marginTop: vh * 2,
   },
   loginOptionContainer: {
     flexDirection: 'row',
     backgroundColor: COLORS.loginContainer,
     borderRadius: vw * 6,
     paddingVertical: vh * 3,
-    width: '90%',
+    width: '100%',
+    alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: vw * 4,
-    marginBottom: vh * 5,
   },
   loginOptionBox: {
     gap: vh * 1,
@@ -133,13 +76,17 @@ export const styles = StyleSheet.create({
   },
   verticalLine: {
     width: 1,
-    height: 40,
+    height: vh * 4,
     backgroundColor: COLORS.textColor,
     marginHorizontal: 10,
   },
   row: {
-    width:'100%',
+    width: '100%',
     marginVertical: vh,
     flexDirection: 'row',
+  },
+  orText: {
+    fontSize: vh * 1.7,
+    marginVertical: vh * 2,
   },
 });
