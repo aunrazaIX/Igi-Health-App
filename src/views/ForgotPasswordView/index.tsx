@@ -14,6 +14,7 @@ import {
   CurvedView,
 } from '../../components';
 import styles from './styles';
+import {ImageSourcePropType} from 'react-native';
 
 const ForgotPasswordView = ({
   step,
@@ -47,14 +48,15 @@ const ForgotPasswordView = ({
     2: 'OTP Verification',
     3: 'Create New Password',
   };
+  const returnHeaderIcon: Record<number, ImageSourcePropType | null> = {
+    1: icons.forgotPassword,
+    2: icons.resetPassword,
+    3: null,
+  };
 
   return (
     <Container>
-      <TopView
-        showIcon={step == 1 || step == 2}
-        icon={icons.forgotPassword}
-        title={returnHeaderName[step]}
-      />
+      <TopView icon={returnHeaderIcon[step]} title={returnHeaderName[step]} />
       <CurvedView>
         <AileronBold style={styles.titleText} name={returnTitle[step]} />
         <AileronRegular

@@ -10,16 +10,14 @@ import {
 } from 'react-native';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {icons} from '../../../assets';
-import { AileronSemiBold } from '../../../components';
+import {AileronSemiBold} from '../../../components';
 
 const TopView = ({
   title,
   icon,
-  showIcon,
 }: {
   title: string;
-  icon: ImageSourcePropType;
-  showIcon: boolean;
+  icon: ImageSourcePropType | null;
 }) => {
   return (
     <LinearGradient
@@ -32,7 +30,7 @@ const TopView = ({
         <AileronSemiBold style={styles.headerName} name={title} />
       </View>
       <View style={styles.spacedView}>
-        {showIcon && <Image style={styles.iconStyle} source={icon} />}
+        {icon && <Image style={styles.iconStyle} source={icon} />}
       </View>
     </LinearGradient>
   );

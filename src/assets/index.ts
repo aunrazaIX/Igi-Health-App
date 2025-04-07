@@ -14,4 +14,5 @@ export const icons = {
   backArrow: require('./icons/backArrow.png'),
   forgotPassword: require('./icons/forgotPassword.png'),
   email: require('./icons/email.png'),
+  resetPassword: require('./icons/resetPassword.png'),
 };
