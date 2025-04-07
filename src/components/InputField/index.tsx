@@ -24,6 +24,7 @@ interface InputFieldProps extends TextInputProps {
   mask?: boolean;
   lightBorder?: boolean;
   rightIcon?: any;
+  iconViewStyle?: StyleObject | StyleObject[];
 }
 
 const InputField = forwardRef<TextInput, InputFieldProps>(
@@ -37,6 +38,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
       value,
       onSubmitEditing,
       onChangeText,
+      iconViewStyle,
       keyboardType,
       returnKeyType,
       multiline,
@@ -92,7 +94,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             <TouchableOpacity
               disabled={!secureTextEntry}
               onPress={() => setShowPassword(!showPassword)}
-              style={styles.iconView}>
+              style={[styles.iconView, iconViewStyle]}>
               <Image
                 style={styles.eyeIcon}
                 source={

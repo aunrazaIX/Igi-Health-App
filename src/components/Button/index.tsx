@@ -12,7 +12,7 @@ import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 
 interface ButtonProps extends TouchableOpacityProps {
-  name?: string;
+  name: string;
   containerStyle?: Record<string, string | number | boolean>;
   inputStyle?: Record<string, string | number | boolean>;
   showIcon?: boolean;

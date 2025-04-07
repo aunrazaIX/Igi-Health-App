@@ -2,14 +2,16 @@ import {View, ImageBackground, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {images, icons} from '../../assets';
 import {styles} from './styles';
-import Button from '../../components/Button';
-import AileronSemiBold from '../../components/AileronSemiBold';
 import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import InputField from '../../components/InputField';
-import CheckBox from '../../components/CheckBox';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import AileronBold from '../../components/AileronBold';
+import {
+  AileronBold,
+  AileronSemiBold,
+  Button,
+  CheckBox,
+  InputField,
+} from '../../components';
 
 const LoginView = ({
   onPressTab,

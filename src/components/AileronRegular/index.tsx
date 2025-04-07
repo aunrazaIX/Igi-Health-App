@@ -1,22 +1,24 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, TextProps, StyleProp, TextStyle} from 'react-native';
 import {fonts} from '../../assets/fonts';
 import {vh} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
-type styleObject = string | number | boolean;
+interface AileronRegularProps extends TextProps {
+  name: string;
+  style?: StyleProp<TextStyle>;
+  numberOfLines?: number;
+}
 
-const AileronRegular = ({
+const AileronRegular: React.FC<AileronRegularProps> = ({
   name,
   numberOfLines,
   style,
-}: {
-  name: string;
-  numberOfLines: number;
-  style: Record<string, styleObject>;
+  ...rest
 }) => {
   return (
     <Text
+      {...rest}
       numberOfLines={numberOfLines}
       allowFontScaling={false}
       style={[styles.textStyle, style]}>

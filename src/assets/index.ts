@@ -11,4 +11,7 @@ export const icons = {
   eyeClosed: require('./icons/eyeClosed.png'),
   eyeOpen: require('./icons/eyeOpen.png'),
   tickIcon: require('./icons/tickIcon.png'),
+  backArrow: require('./icons/backArrow.png'),
+  forgotPassword: require('./icons/forgotPassword.png'),
+  email: require('./icons/email.png'),
 };
