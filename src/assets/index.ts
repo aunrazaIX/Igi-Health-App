@@ -1,6 +1,9 @@
 export const images = {
   backgroundImage: require('./images/loginBackground.png'),
   SignupBg: require('./images/SignupBg.png'),
+  maximumBenefits: require('./images/maximumBenefits.png'),
+  Logo: require('./images/Logo.png'),
+  Insured: require('./images/per-insured.png'),
 };
 
 export const icons = {
