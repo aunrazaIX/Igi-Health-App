@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     paddingBottom: vh * 5,
     borderBottomColor: '#DADADA',
     borderBottomWidth: 1.5,
-    borderStyle: 'dashed'
+    borderStyle: 'dashed',
   },
   CardBox: {
     paddingVertical: vh * 2,
@@ -72,9 +72,13 @@ const styles = StyleSheet.create({
     fontSize: vh * 1.8,
     color: '#121212',
   },
-  flatListContainer:{
+  flatListContainer: {
     paddingBottom: vh * 16,
-  }
+  },
+  benefitsImage: {
+    resizeMode: 'contain',
+    width: '100%',
+  },
 });
 
 export default styles;

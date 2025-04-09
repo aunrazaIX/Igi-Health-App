@@ -1,6 +1,6 @@
 export const COLORS = {
   white: '#FFFFFF',
-  black:"#000000",
+  black: '#000000',
   transparent: 'transparent',
   loginContainer: 'rgba(255, 255, 255, 0.7)',
   activeTab: 'rgba(0, 143, 213, 1)',
@@ -11,5 +11,6 @@ export const COLORS = {
   textColorLight: '#5C5E5A',
   forgotPass: 'rgba(41, 41, 39, 1)',
   activeButtonGradient: ['#48C3FF', '#0B4A98'],
-  placeholderColor:"#292927"
+  placeholderColor: '#292927',
+  benefitsCardGradient: ['#FFE9EC', '#ECF1FC'],
 };

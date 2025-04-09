@@ -94,13 +94,7 @@ const BenefitCards = () => {
           />
         </View>
       ))} */}
-      <FlatList
-        data={CoverageAndBenefits}
-        renderItem={RenderBenefits}
-        keyExtractor={(item, index) => index.toString()}
-        numColumns={3}
-        contentContainerStyle={styles.flatListContainer}
-      />
+     
     </View>
   );
 };
