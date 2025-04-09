@@ -1,9 +1,9 @@
 import React from 'react';
-import Login from './src/screens/Login/Index';
+import Login from './src/screens/Login';
 import ForgotPassword from './src/screens/ForgotPassword';
 
 const App = () => {
-  return <ForgotPassword />;
+  return <Login />;
 };
 
 export default App;
