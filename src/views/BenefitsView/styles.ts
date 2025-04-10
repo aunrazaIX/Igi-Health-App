@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
   },
   coverageTitle: {
     fontSize: vh * 2.3,
-    color: '#004984',
+    color: COLORS.coverageTitle,
   },
 
   benefitTitle: {
     fontSize: vh * 2.3,
-    color: '#EE2560',
+    color: COLORS.benefitTitle,
   },
   card: {
     width: '33.33%',
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
   },
   insuredTitle: {
     fontSize: vh * 1.8,
-    color: '#121212',
+    color: COLORS.insuredPrice,
     marginVertical: vh * 1,
   },
   insuredPrice: {
     fontSize: vh * 1.8,
-    color: '#121212',
+    color: COLORS.insuredPrice,
   },
   flatListContainer: {
     paddingBottom: vh * 16,

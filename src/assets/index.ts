@@ -4,6 +4,8 @@ export const images = {
   maximumBenefits: require('./images/maximumBenefits.png'),
   Logo: require('./images/Logo.png'),
   Insured: require('./images/per-insured.png'),
+  SecureFuture: require('./images/secure-future.png'),
+  AddNew: require('./images/Add-New.png'),
 };
 
 export const icons = {
@@ -18,4 +20,11 @@ export const icons = {
   forgotPassword: require('./icons/forgotPassword.png'),
   email: require('./icons/email.png'),
   resetPassword: require('./icons/resetPassword.png'),
+  arrowUp: require('./icons/arrowUp.png'),
+  arrowDown: require('./icons/arrowDown.png'),
+  edit: require('./icons/edit.png'),
+  delete: require('./icons/delete.png'),
+  frame: require('./icons/frame.png'),
+  personalDetail: require('./icons/personalDetail.png'),
+  claimDetails: require('./icons/claimDetails.png'),
 };

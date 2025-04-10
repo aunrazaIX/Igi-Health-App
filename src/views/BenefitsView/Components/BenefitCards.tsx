@@ -94,7 +94,7 @@ const BenefitCards = () => {
           />
         </View>
       ))} */}
-     
+
     </View>
   );
 };

@@ -17,11 +17,13 @@ import { icons } from '../../assets';
 const TopView = ({
   title,
   icon,
+  TopViewSideIcon,
   onPressBack
 }: {
   title: string;
   onPressBack?: () => void,
   icon?: ImageSourcePropType | null;
+  TopViewSideIcon?: ImageSourcePropType | null;
 }) => {
   return (
     <LinearGradient
@@ -32,6 +34,7 @@ const TopView = ({
           <Image style={styles.backIcon} source={icons.backArrow} />
         </TouchableOpacity>
         <AileronSemiBold style={styles.headerName} name={title} />
+        {TopViewSideIcon && <Image style={styles.TopViewIcon} source={TopViewSideIcon} />}
       </View>
       <View style={styles.spacedView}>
         {icon && <Image style={styles.iconStyle} source={icon} />}
@@ -77,5 +80,8 @@ const styles = StyleSheet.create({
     width: vw * 50,
     alignSelf: 'center',
     resizeMode: 'contain',
+  },
+  TopViewIcon: {
+
   },
 });
