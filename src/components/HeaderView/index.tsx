@@ -8,53 +8,46 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {COLORS} from '../../assets/theme/colors';
-import AileronSemiBold from '../AileronSemiBold';
+
 import {vh, vw} from '../../assets/theme/dimension';
 import {icons} from '../../assets';
+import AileronSemiBold from '../AileronSemiBold';
+import {COLORS} from '../../assets/theme/colors';
 
-const TopView = ({
+const HeaderView = ({
   title,
   icon,
-  onPressBack,
 }: {
   title: string;
-  onPressBack?: () => void;
-  icon?: ImageSourcePropType | null;
+  icon: ImageSourcePropType | null;
 }) => {
   return (
     <LinearGradient
       style={styles.container}
       colors={COLORS.activeButtonGradient}>
-
       <View style={styles.row}>
-        <TouchableOpacity
-          onPress={onPressBack}
-          style={styles.backIconContainer}>
+        <TouchableOpacity style={styles.backIconContainer}>
           <Image style={styles.backIcon} source={icons.backArrow} />
         </TouchableOpacity>
         <AileronSemiBold style={styles.headerName} name={title} />
       </View>
-
       <View style={styles.spacedView}>
         {icon && <Image style={styles.iconStyle} source={icon} />}
       </View>
     </LinearGradient>
   );
 };
-export default TopView;
+export default HeaderView;
 
 const styles = StyleSheet.create({
   container: {
     paddingVertical: vh * 3,
     paddingHorizontal: vw * 3,
-    flexDirection : "row"
   },
   row: {
     alignItems: 'center',
     flexDirection: 'row',
-    width: '90%',
-  
+    width: '100%',
   },
   backIconContainer: {
     height: vh * 4.5,
@@ -78,8 +71,8 @@ const styles = StyleSheet.create({
     marginVertical: vh * 3,
   },
   iconStyle: {
-    height: vh * 8,
-    width: vw * 8,
+    height: vh * 16,
+    width: vw * 50,
     alignSelf: 'center',
     resizeMode: 'contain',
   },
