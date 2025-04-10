@@ -3,7 +3,6 @@ import {
   CreateNewPassword,
   EnterEmailView,
   OtpView,
-  TopView,
 } from './components';
 import {icons} from '../../assets';
 import {
@@ -12,6 +11,7 @@ import {
   Button,
   Container,
   CurvedView,
+  TopView,
 } from '../../components';
 import styles from './styles';
 import {ImageSourcePropType} from 'react-native';
@@ -19,8 +19,10 @@ import {ImageSourcePropType} from 'react-native';
 const ForgotPasswordView = ({
   step,
   handleStep,
+  onPressBack
 }: {
   step: number;
+  onPressBack:()=>void,
   handleStep: (step: number) => void;
 }) => {
   const returnComponent: Record<number, JSX.Element> = {
@@ -56,7 +58,7 @@ const ForgotPasswordView = ({
 
   return (
     <Container>
-      <TopView icon={returnHeaderIcon[step]} title={returnHeaderName[step]} />
+      <TopView onPressBack={onPressBack} icon={returnHeaderIcon[step]} title={returnHeaderName[step]} />
       <CurvedView>
         <AileronBold style={styles.titleText} name={returnTitle[step]} />
         <AileronRegular

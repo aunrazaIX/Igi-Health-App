@@ -7,3 +7,4 @@ export {default as AileronSemiBold} from './AileronSemiBold';
 export {default as AileronLight} from './AileronLight';
 export {default as CheckBox} from './CheckBox';
 export {default as InputField} from './InputField';
+export {default as TopView} from './TopView';

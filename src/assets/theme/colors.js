@@ -1,10 +1,9 @@
 export const COLORS = {
   white: '#FFFFFF',
-  black:"#000000",
-  textBlackShade : 'rgba(41, 41, 39, 1)',
-  textGrayShade : 'rgba(16, 16, 16, 0.5)',
-
-
+  black: '#000000',
+  textBlackShade: 'rgba(41, 41, 39, 1)',
+  textGrayShade: 'rgba(16, 16, 16, 0.5)',
+  black: '#000000',
   transparent: 'transparent',
   loginContainer: 'rgba(255, 255, 255, 0.7)',
   activeTab: 'rgba(0, 143, 213, 1)',
@@ -15,9 +14,12 @@ export const COLORS = {
   textColorLight: '#5C5E5A',
   forgotPass: 'rgba(41, 41, 39, 1)',
   activeButtonGradient: ['#48C3FF', '#0B4A98'],
-  placeholderColor:"#292927",
+  placeholderColor: '#292927',
   cardBackgroundBlue: 'rgba(34, 78, 162, 1)',
-  cardBackgroundRed : 'rgba(238, 37, 96, 1)'
-  
-  
+  cardBackgroundRed: 'rgba(238, 37, 96, 1)',
+  placeholderColor: '#292927',
+  benefitsCardGradient: ['#FFE9EC', '#ECF1FC'],
+  buttonBorder : 'rgba(230, 231, 235, 1)',
+  buttonBackground: 'rgba(248, 248, 248, 1)'
+
 };

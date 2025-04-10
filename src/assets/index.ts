@@ -3,6 +3,9 @@ export const images = {
   SignupBg: require('./images/SignupBg.png'),
   logoWhite: require('./images/logoWhite.png'),
   flipCard: require('./images/flip-card.png'),
+  maximumBenefits: require('./images/maximumBenefits.png'),
+  Logo: require('./images/Logo.png'),
+  Insured: require('./images/per-insured.png'),
 };
 
 export const icons = {
@@ -23,10 +26,20 @@ export const icons = {
   leftArrowStraight: require('./icons/leftArrowStraight.png'),
   rightArrowStraight: require('./icons/rightArrowStraight.png'),
   benefits: require('./icons/benifits.png'),
-  rightArrowRound : require('./icons/rightArrowRound.png'),
-  addSquare : require('./icons/add-square.png'),
-  arrowUp : require('./icons/arrow-up.png'),
-  person : require('./icons/person.png'),
-  claim :  require('./icons/claim.png'),
-  chart: require('./icons/chart.png')
+  rightArrowRound: require('./icons/rightArrowRound.png'),
+  addSquare: require('./icons/add-square.png'),
+  arrowUp: require('./icons/arrow-up.png'),
+  person: require('./icons/person.png'),
+  claim: require('./icons/claim.png'),
+  chart: require('./icons/chart.png'),
+  payment: require('./icons/payment-02.png'),
+  creditCard: require('./icons/credit-card.png'),
+  editTask: require('./icons/task-edit.png'),
+  toggleTop: require('./icons/toggleTop.png'),
+  toggleBottom: require('./icons/arrow-down.png'),
+  map: require('./icons/google-maps.png'),
+  listIcon: require('./icons/list-icon.png'),
+  labs: require('./icons/labs.png'),
+  hospital : require('./icons/hospital-02.png'),
+
 };
