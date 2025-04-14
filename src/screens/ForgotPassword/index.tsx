@@ -5,7 +5,7 @@ import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewMo
 const ForgotPassword = () => {
   const {states, functions} = useForgotPasswordViewModel();
   const {step} = states;
-  const {handleStep} = functions;
-  return <ForgotPasswordView handleStep={handleStep} step={step} />;
+  const {handleStep,onPressBack} = functions;
+  return <ForgotPasswordView onPressBack={onPressBack} handleStep={handleStep} step={step} />;
 };
 export default ForgotPassword;

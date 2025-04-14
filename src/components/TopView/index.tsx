@@ -1,6 +1,6 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {COLORS} from '../../../assets/theme/colors';
+
 import {
   Image,
   ImageSourcePropType,
@@ -8,23 +8,27 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {vh, vw} from '../../../assets/theme/dimension';
-import {icons} from '../../../assets';
-import {AileronSemiBold} from '../../../components';
+import { COLORS } from '../../assets/theme/colors';
+import AileronSemiBold from '../AileronSemiBold';
+import { vh, vw } from '../../assets/theme/dimension';
+import { icons } from '../../assets';
+
 
 const TopView = ({
   title,
   icon,
+  onPressBack
 }: {
   title: string;
-  icon: ImageSourcePropType | null;
+  onPressBack?: () => void,
+  icon?: ImageSourcePropType | null;
 }) => {
   return (
     <LinearGradient
       style={styles.container}
       colors={COLORS.activeButtonGradient}>
       <View style={styles.row}>
-        <TouchableOpacity style={styles.backIconContainer}>
+        <TouchableOpacity onPress={onPressBack} style={styles.backIconContainer}>
           <Image style={styles.backIcon} source={icons.backArrow} />
         </TouchableOpacity>
         <AileronSemiBold style={styles.headerName} name={title} />

@@ -1,6 +1,9 @@
 export const images = {
   backgroundImage: require('./images/loginBackground.png'),
   SignupBg: require('./images/SignupBg.png'),
+  maximumBenefits: require('./images/maximumBenefits.png'),
+  Logo: require('./images/Logo.png'),
+  Insured: require('./images/per-insured.png'),
 };
 
 export const icons = {
@@ -17,5 +20,18 @@ export const icons = {
   resetPassword: require('./icons/resetPassword.png'),
   name: require('./icons/name.png'),
   cnic: require('./icons/cnic.png'),
-
+  plus: require('./icons/plus.png'),
+  minus: require('./icons/minus.png'),  
+  bellNotification: require('./icons/bellNotification.png'),
+  friend: require('./icons/friend.png'),
+  help: require('./icons/help.png'),
+  account: require('./icons/userAccount.png'),
+  privacy: require('./icons/privacy.png'),
+  resetPasswordIcon: require('./icons/resetPasswordIcon.png'),
+  rightArrow: require('./icons/rightArrow.png'),
+  faceIDIcon: require('./icons/faceIDpink.png'),
+  twoStep: require('./icons/twoStep.png'),
+  mail: require('./icons/mail.png'),
+  location: require('./icons/location.png'),
+  call: require('./icons/call.png'),
 };
