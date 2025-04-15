@@ -10,7 +10,7 @@ import Hospitals from './src/screens/Hospitals';
 import Home from './src/screens/Home';
 
 const App = () => {
-  return <ForgotPassword />;
+  return <ClaimsHistory />;
 };
 
 export default App;
