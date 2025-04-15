@@ -4,9 +4,10 @@ import ForgotPassword from './src/screens/ForgotPassword';
 import Benefits from './src/screens/Benefits';
 import ClaimsHistory from './src/screens/ClaimsHistory';
 import PanelHospitalList from './src/screens/PanelHospitalList';
+import DiscountedCenters from './src/screens/DiscountedCenters';
 
 const App = () => {
-  return <ClaimsHistory />;
+  return <PanelHospitalList />;
 };
 
 export default App;
