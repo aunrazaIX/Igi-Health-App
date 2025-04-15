@@ -1,9 +1,5 @@
 import React, {JSX} from 'react';
-import {
-  CreateNewPassword,
-  EnterEmailView,
-  OtpView,
-} from './components';
+import {CreateNewPassword, EnterEmailView, OtpView} from './components';
 import {icons} from '../../assets';
 import {
   AileronBold,
@@ -19,10 +15,10 @@ import {ImageSourcePropType} from 'react-native';
 const ForgotPasswordView = ({
   step,
   handleStep,
-  onPressBack
+  onPressBack,
 }: {
   step: number;
-  onPressBack:()=>void,
+  onPressBack: () => void;
   handleStep: (step: number) => void;
 }) => {
   const returnComponent: Record<number, JSX.Element> = {
@@ -58,7 +54,11 @@ const ForgotPasswordView = ({
 
   return (
     <Container>
-      <TopView onPressBack={onPressBack} icon={returnHeaderIcon[step]} title={returnHeaderName[step]} />
+      <TopView
+        onPressBack={onPressBack}
+        icon={returnHeaderIcon[step]}
+        title={returnHeaderName[step]}
+      />
       <CurvedView>
         <AileronBold style={styles.titleText} name={returnTitle[step]} />
         <AileronRegular

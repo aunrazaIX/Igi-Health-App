@@ -1,3 +1,8 @@
+import {useState} from 'react';
+
+export type AmountStatus = 'paid Amount' | 'Pending Amount';
+export type daysStatus = 'Daily' | 'Monthly' | 'Yearly';
+
 export type ClaimHistory = {
   label: string;
   value: string;
@@ -6,10 +11,36 @@ export type ClaimHistory = {
 type UseClaimsHistoryViewModel = {
   states: {
     data: ClaimHistory[][];
+    amountStatusTab: AmountStatus;
+    daysStatusTab: daysStatus;
+    isCalendarVisible: boolean;
+  };
+  functions: {
+    onPressAmountStatusTab: (tab: AmountStatus) => void;
+    onPressDaysStatusTab: (tab: daysStatus) => void;
+    onPressHeaderIcon: () => void;
   };
 };
 
 const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
+  const [amountStatusTab, setAmountStatusTab] =
+    useState<AmountStatus>('paid Amount');
+
+  const [daysStatusTab, setDaysStatusTab] = useState<daysStatus>('Daily');
+  const [isCalendarVisible, setIsCalendarVisible] = useState<boolean>(false);
+
+  const onPressAmountStatusTab = (tab: AmountStatus) => {
+    setAmountStatusTab(tab);
+  };
+
+  const onPressDaysStatusTab = (tab: daysStatus) => {
+    setDaysStatusTab(tab);
+  };
+
+  const onPressHeaderIcon = () => {
+    setIsCalendarVisible(prev => !prev);
+  };
+
   const data: ClaimHistory[][] = [
     [
       {label: 'Claim:', value: '0071453'},
@@ -38,6 +69,14 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
   return {
     states: {
       data,
+      amountStatusTab,
+      daysStatusTab,
+      isCalendarVisible,
+    },
+    functions: {
+      onPressAmountStatusTab,
+      onPressDaysStatusTab,
+      onPressHeaderIcon,
     },
   };
 };

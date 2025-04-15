@@ -35,9 +35,9 @@ export const styles = StyleSheet.create({
     fontSize: vh * 1.7,
     color: COLORS.black,
   },
-  activeTabRightText: {
-    color: COLORS.white,
-  },
+//   activeTabRightText: {
+//     color: COLORS.white,
+//   },
   infoContainerHeaderTabs: {
     flexDirection: 'row',
     marginVertical: vh * 2,
@@ -93,10 +93,12 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 1.5,
     marginVertical: vh * 3,
+
+
   },
   mapTabIcon: {
-    height: vh * 4,
-    width: vw * 9,
+    height: vh * 3,
+    width: vw * 7,
   },
   mapTabText: {
     fontSize: vh * 2,
@@ -107,7 +109,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.cardBackgroundRed,
     padding: vw * 4,
     justifyContent: 'center',
-    borderRadius: vw * 6,
+    borderRadius: vw * 8,
     gap: vw * 1.5,
     alignItems: 'center',
   },
@@ -115,7 +117,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: COLORS.buttonBorder,
     padding: vw * 4,
-    borderRadius: vw * 6,
+    borderRadius: vw * 8,
     gap: vw * 1.5,
     alignItems: 'center',
   },

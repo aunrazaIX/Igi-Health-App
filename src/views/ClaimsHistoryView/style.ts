@@ -21,6 +21,30 @@ export const styles = StyleSheet.create({
   },
 
   leftButton: {
+    width: '50%',
+    backgroundColor: COLORS.buttonBackground,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: vw * 2,
+    paddingVertical: vh * 1.4,
+    paddingHorizontal: vw * 5,
+    borderRadius: vw * 1,
+    color: COLORS.textBlackShade,
+  },
+  leftButtonActive: {
+    backgroundColor: COLORS.cardBackgroundRed,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: vw * 2,
+    paddingHorizontal: vw * 8,
+    paddingVertical: vh * 1.4,
+    borderRadius: vw * 2.5,
+    width: '50%',
+  },
+
+  rightButtonActive: {
     backgroundColor: COLORS.cardBackgroundRed,
     justifyContent: 'center',
     flexDirection: 'row',
@@ -53,7 +77,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 0.5,
     marginTop: vh * 1.5,
   },
-  leftMidButton: {
+
+  inActiveButton: {
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
@@ -65,7 +90,7 @@ export const styles = StyleSheet.create({
     width: '33%',
   },
 
-  midButton: {
+  activeButton: {
     backgroundColor: COLORS.cardBackgroundRed,
     justifyContent: 'center',
     flexDirection: 'row',
@@ -75,18 +100,34 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 5,
     borderRadius: vw * 1,
     color: COLORS.textBlackShade,
+    width: '33%',
+  },
 
-    width: '33%',
-  },
-  rightMidButton: {
-    justifyContent: 'center',
+  calendarButtonsContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    gap: vw * 2,
-    paddingHorizontal: vw * 8,
-    paddingVertical: vh * 1.4,
-    borderRadius: vw * 2.5,
-    width: '33%',
+    marginTop: vh * 2,
   },
-  
+
+  cancelButton: {
+    paddingVertical: vh * 1.5,
+    backgroundColor: COLORS.buttonBackground,
+    borderRadius: 10,
+    marginRight: vw * 2,
+    alignItems: 'center',
+    width: '50%',
+  },
+
+  applyButton: {
+    paddingVertical: vh * 1.5,
+    width: '50%',
+    borderRadius: 10,
+    marginLeft: vw * 2,
+    alignItems: 'center',
+  },
+
+  buttonLabel: {
+    color: COLORS.white,
+    fontSize: vh * 2,
+    fontWeight: 'bold',
+  },
 });

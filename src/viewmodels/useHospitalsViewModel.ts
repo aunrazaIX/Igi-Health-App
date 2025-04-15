@@ -10,16 +10,19 @@ type usePanelHospitalListViewModel = {
     data: PanelHospitalList[][];
     selectedTab: string;
     selectedTabRight: string;
+    selectedMapTab: string;
   };
   functions: {
     onPressTab: (tab: string) => void;
     onPressRightTab: (tab: string) => void;
+    onPressMapTab: (tab: string) => void;
   };
 };
 
-const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
+const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
   const [selectedTab, setSelectedTab] = useState('Panel Hospitals');
   const [selectedTabRight, setSelectedTabRight] = useState('list');
+  const [selectedMapTab, setSelectedMapTab] = useState('Sindh');
 
   const onPressTab = (tab: string) => {
     setSelectedTab(tab);
@@ -27,6 +30,10 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
 
   const onPressRightTab = (tab: string) => {
     setSelectedTabRight(tab);
+  };
+
+  const onPressMapTab = (tab: string) => {
+    setSelectedMapTab(tab);
   };
 
   const data: PanelHospitalList[][] = [
@@ -88,12 +95,14 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
       data,
       selectedTab,
       selectedTabRight,
+      selectedMapTab,
     },
     functions: {
       onPressTab,
       onPressRightTab,
+      onPressMapTab,
     },
   };
 };
 
-export default usePanelHospitalListViewModel;
+export default useHospitalsViewModel;

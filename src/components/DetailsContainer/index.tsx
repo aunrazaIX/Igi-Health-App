@@ -1,4 +1,10 @@
-import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ImageSourcePropType,
+} from 'react-native';
 import React, {useState} from 'react';
 import {COLORS} from '../../assets/theme/colors';
 import {icons} from '../../assets';
@@ -11,13 +17,23 @@ type Item = {
 };
 type Props = {
   data: Item[];
+  detailsTextLabel: {};
+  detailsText: {};
+  detailsTextValue: {};
+  headerIcon: ImageSourcePropType | null;
 };
 
-const DetailsContainer: React.FC<Props> = ({data}) => {
+const DetailsContainer: React.FC<Props> = ({
+  data,
+  detailsTextLabel,
+  detailsTextValue,
+  detailsText,
+  headerIcon,
+}) => {
   const [isArrowUp, setIsArrowUp] = useState<boolean>(true);
 
   return (
-    <View style={styles.claimsHistoryCard}>
+    <View style={[styles.claimsHistoryCard]}>
       <View style={styles.claimsHistoryCardHeader}>
         <View style={styles.claimsHistoryCardHeaderLeft}>
           <Image source={icons.editTask} />
@@ -26,9 +42,12 @@ const DetailsContainer: React.FC<Props> = ({data}) => {
 
         <View style={styles.claimsHistoryCardHeaderRight}>
           {isArrowUp ? (
-            <TouchableOpacity onPress={() => setIsArrowUp(!isArrowUp)}>
-              <Image source={icons.toggleTop} />
-            </TouchableOpacity>
+            <>
+              {headerIcon && <Image source={headerIcon} />}
+              <TouchableOpacity onPress={() => setIsArrowUp(!isArrowUp)}>
+                <Image source={icons.toggleTop} />
+              </TouchableOpacity>
+            </>
           ) : (
             <TouchableOpacity onPress={() => setIsArrowUp(!isArrowUp)}>
               <Image source={icons.toggleBottom} />
@@ -44,14 +63,13 @@ const DetailsContainer: React.FC<Props> = ({data}) => {
           {data.map((item, index) => (
             <View key={index} style={styles.claimsHistoryCardDetails}>
               <AileronBold
-                style={styles.detailsText}
+                style={[styles.detailsText, detailsTextLabel]}
                 name={item.label}
-                numberOfLines={1}
               />
+
               <AileronBold
-                style={styles.detailsText}
+                style={[styles.detailsText, detailsTextValue]}
                 name={item.value}
-                numberOfLines={1}
               />
             </View>
           ))}
@@ -65,19 +83,26 @@ export default DetailsContainer;
 
 export const styles = StyleSheet.create({
   claimsHistoryCard: {
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: COLORS.buttonBorder,
-    marginVertical: vh * 1,
     borderRadius: vw * 4,
+
+    backgroundColor: COLORS.white,
+    paddingHorizontal: vw * 4,
+    paddingVertical: vh * 2,
+
+    marginVertical: vh * 1.5,
     alignItems: 'center',
     gap: vh * 1,
+
+    elevation: 4,
   },
+
   claimsHistoryCardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    paddingHorizontal: vw * 4,
-    paddingVertical: vh * 2,
+    paddingVertical: vh * 0.5,
   },
 
   claimsHistoryCardHeaderLeft: {
@@ -89,22 +114,25 @@ export const styles = StyleSheet.create({
   claimsHistoryCardHeaderRight: {
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
+    gap: vw * 2,
   },
 
   cardHorizontalLine: {
     borderWidth: 1,
     borderStyle: 'dashed',
-    width: '90%',
+    width: '100%',
     borderColor: COLORS.textGrayShade,
     marginBottom: vh * 2,
     opacity: 0.4,
   },
+  claimsHistoryCardDetailsContainer: {},
   claimsHistoryCardDetails: {
     marginBottom: vh * 1,
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    paddingHorizontal: vw * 4,
   },
   detailsText: {
     fontSize: vh * 1.7,

@@ -16,17 +16,22 @@ import {icons} from '../../assets';
 const TopView = ({
   title,
   icon,
+  HeaderIcon,
+  HeaderSecondIcon,
+  onPressHeaderIcon,
   onPressBack,
 }: {
   title: string;
   onPressBack?: () => void;
   icon?: ImageSourcePropType | null;
+  HeaderIcon: ImageSourcePropType | null;
+  HeaderSecondIcon: ImageSourcePropType | null;
+  onPressHeaderIcon?: () => void | null;
 }) => {
   return (
     <LinearGradient
       style={styles.container}
       colors={COLORS.activeButtonGradient}>
-
       <View style={styles.row}>
         <TouchableOpacity
           onPress={onPressBack}
@@ -34,6 +39,18 @@ const TopView = ({
           <Image style={styles.backIcon} source={icons.backArrow} />
         </TouchableOpacity>
         <AileronSemiBold style={styles.headerName} name={title} />
+
+        <View style={styles.headerIcons}>
+          {HeaderIcon && (
+            <TouchableOpacity onPress={onPressHeaderIcon}>
+              <Image style={styles.iconStyle} source={HeaderIcon} />{' '}
+            </TouchableOpacity>
+          )}
+
+          {HeaderSecondIcon && (
+            <Image style={styles.iconStyle} source={HeaderSecondIcon} />
+          )}
+        </View>
       </View>
 
       <View style={styles.spacedView}>
@@ -48,13 +65,17 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: vh * 3,
     paddingHorizontal: vw * 3,
-    flexDirection : "row"
+
+    alignItems: 'center',
+  },
+  headerIcons: {
+    flexDirection: 'row',
+    gap: vw * 2,
   },
   row: {
     alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row',
-    width: '90%',
-  
   },
   backIconContainer: {
     height: vh * 4.5,
@@ -76,10 +97,12 @@ const styles = StyleSheet.create({
   },
   spacedView: {
     marginVertical: vh * 3,
+    // flexDirection: 'row',
+    // gap: vw * 3,
   },
   iconStyle: {
-    height: vh * 8,
-    width: vw * 8,
+    height: vh * 6,
+    width: vw * 6,
     alignSelf: 'center',
     resizeMode: 'contain',
   },

@@ -15,24 +15,26 @@ import {vh} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
 type HomeViewProps = {
-  data: [][];
   selectedTab: string;
   selectedTabRight: string;
+  selectedMapTab: string;
   onPressTab: (tab: string) => void;
   onPressRightTab: (tab: string) => void;
+  onPressMapTab: (tab: string) => void;
 };
 
 const PanelHospitalListView: React.FC<HomeViewProps> = ({
-  data,
   selectedTab,
   onPressTab,
   onPressRightTab,
+  selectedMapTab,
   selectedTabRight,
+  onPressMapTab,
 }) => {
   return (
     <>
       <TopView
-        title="Panel Hospital List"
+        title="Hospitals"
         HeaderIcon={icons.search}
         HeaderSecondIcon={null}
       />
@@ -129,20 +131,118 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             </TouchableOpacity>
           </View>
 
-          <FlatList
-            data={data}
-            contentContainerStyle={{paddingBottom: vh * 10}}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({item}) => (
-              <DetailsContainer
-                detailsText={style.detailsText}
-                detailsTextLabel={style.detailsTextLabel}
-                detailsTextValue={style.detailsTextValue}
-                headerIcon={icons.arrowDirection}
-                data={item}
-              />
-            )}
-          />
+          <View style={styles.mapTextContainer}>
+            <AileronBold style={style.mapText} name="Search By">
+              {' '}
+            </AileronBold>
+            <AileronBold style={style.mapTextColor} name="Province">
+              {' '}
+            </AileronBold>
+          </View>
+
+          <View style={styles.mapTabsContainer}>
+            <TouchableOpacity
+              onPress={() => onPressMapTab('Sindh')}
+              style={
+                selectedMapTab === 'Sindh' ? styles.mapTabActive : styles.mapTab
+              }>
+              <View>
+                {selectedMapTab === 'Sindh' ? (
+                  <Image
+                    style={styles.mapTabIcon}
+                    source={icons.mapLoacationActive}
+                  />
+                ) : (
+                  <Image
+                    style={styles.mapTabIcon}
+                    source={icons.mapLoacationInActive}
+                  />
+                )}
+              </View>
+
+              <View>
+                {selectedMapTab === 'Sindh' ? (
+                  <AileronBold style={style.mapTabTextActive} name="Sindh">
+                    {' '}
+                  </AileronBold>
+                ) : (
+                  <AileronBold style={style.mapTabText} name="Sindh">
+                    {' '}
+                  </AileronBold>
+                )}
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => onPressMapTab('Punjab')}
+              style={
+                selectedMapTab === 'Punjab'
+                  ? styles.mapTabActive
+                  : styles.mapTab
+              }>
+              <View>
+                {selectedMapTab === 'Punjab' ? (
+                  <Image
+                    style={styles.mapTabIcon}
+                    source={icons.mapLoacationActive}
+                  />
+                ) : (
+                  <Image
+                    style={styles.mapTabIcon}
+                    source={icons.mapLoacationInActive}
+                  />
+                )}
+              </View>
+
+              <View>
+                {selectedMapTab === 'Punjab' ? (
+                  <AileronBold style={style.mapTabTextActive} name="Punjab">
+                    {' '}
+                  </AileronBold>
+                ) : (
+                  <AileronBold style={style.mapTabText} name="Punjab">
+                    {' '}
+                  </AileronBold>
+                )}
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => onPressMapTab('Balochistan')}
+              style={
+                selectedMapTab === 'Balochistan'
+                  ? styles.mapTabActive
+                  : styles.mapTab
+              }>
+              <View>
+                {selectedMapTab === 'Balochistan' ? (
+                  <Image
+                    style={styles.mapTabIcon}
+                    source={icons.mapLoacationActive}
+                  />
+                ) : (
+                  <Image
+                    style={styles.mapTabIcon}
+                    source={icons.mapLoacationInActive}
+                  />
+                )}
+              </View>
+
+              <View>
+                {selectedMapTab === 'Balochistan' ? (
+                  <AileronBold
+                    style={style.mapTabTextActive}
+                    name="Balochistan">
+                    {' '}
+                  </AileronBold>
+                ) : (
+                  <AileronBold style={style.mapTabText} name="Baluchistan">
+                    {' '}
+                  </AileronBold>
+                )}
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </CurvedView>
     </>
@@ -163,4 +263,20 @@ const style = StyleSheet.create({
   },
 
   detailsText: {},
+  mapText: {
+    fontSize: vh * 2.5,
+    color: COLORS.black,
+  },
+  mapTextColor: {
+    color: COLORS.cardBackgroundRed,
+    fontSize: vh * 2.5,
+  },
+  mapTabText: {
+    fontSize: vh * 1.3,
+    color: COLORS.black,
+  },
+  mapTabTextActive: {
+    fontSize: vh * 1.3,
+    color: COLORS.white,
+  },
 });
