@@ -3,14 +3,18 @@ import React, { ReactNode } from 'react'
 import { COLORS } from '../../assets/theme/colors'
 import { vh, vw } from '../../assets/theme/dimension'
 
+type StyleObject = Record<string, string | number | boolean>;
+
 
 const DependentBox = ({
     children,
+    containerStyle,
 }: {
     children: ReactNode;
+    containerStyle?: StyleObject | StyleObject[];
 }) => {
     return (
-        <View style={styles.detailBox}>
+        <View style={[styles.detailBox, containerStyle]}>
             {children}
         </View>
     )

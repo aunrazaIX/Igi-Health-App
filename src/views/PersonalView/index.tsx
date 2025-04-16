@@ -1,52 +1,62 @@
 import {
     View, Image, ImageBackground, TouchableOpacity,
     FlatList,
-
+    ImageSourcePropType,
 } from 'react-native'
 import React, { useState } from 'react'
 import { AileronBold, AileronSemiBold, Container, CurvedView, TopView, } from '../../components'
 import { icons, images } from '../../assets'
 import styles from './styles'
 import DependentBox from '../../components/DependentBox'
+import ModalCustom from '../../components/Modal'
+import { personalDetail } from '../../types/personalTypes'
+import ModalDelete from '../../components/Modal/ModalDelete'
 
-// const dependentDetails = [
-
-//     [
-//         { label: 'Name:', value: 'Madiha Imran Qureshi' },
-//         { label: 'Gender:', value: 'Female' },
-//         { label: 'Relationship:', value: 'Wife' },
-//         { label: 'Age:', value: '35 Years' },
-//     ]
-// ];
 
 type Props = {
-    data: Item[];
+    data: dependentDetail[];
+    gender: personalDetail[];
+    relation: personalDetail[]
+}
+
+type dependentDetail = {
+    dependent: string;
+    image: ImageSourcePropType;
+    dependentDetail: Item[]
 }
 
 type Item = {
-    label: String;
-    value: String;
+    label: string;
+    value: string;
 }
 
-const PersonalView: React.FC<Props> = ({ data }) => {
+
+
+const PersonalView: React.FC<Props> = ({ data, gender, relation }) => {
 
     const [expanded, setExpanded] = useState(false);
+    const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
-    const toggleExpand = () => {
-        setExpanded(!expanded);
+    const toggleExpand = (index: number) => {
+        setExpandedIndex(prevIndex => (prevIndex === index ? null : index));
     };
 
-    const dependentRenders = ({ item }) => (
+    const dependentRenders = ({ item }: { item: Item }) => (
         <View style={styles.detailRow}>
             <AileronSemiBold name={item.label} style={styles.detailLabel} />
             <AileronSemiBold name={item.value} style={styles.detailvalue} />
         </View>
     )
 
+    const manageUpdate = () => {
+        setModalVisible(true)
+    }
 
     return (
         <Container>
-            <TopView title={'Personal'} TopViewSideIcon={images.AddNew}>
+            <TopView title={'Personal'} TopViewSideIcon={images.AddNew} AddModal={manageUpdate}>
 
             </TopView>
             <CurvedView>
@@ -62,35 +72,59 @@ const PersonalView: React.FC<Props> = ({ data }) => {
                     <AileronBold name={'Details!'} style={styles.detailsText} />
                 </View>
 
-                <DependentBox>
-                    <View style={styles.header} >
-                        <Image source={icons.frame} style={styles.avatar} />
-                        <AileronBold style={styles.headerText} name={'Dependent Detail'} />
-                        <View style={styles.iconsROw}>
-                            <Image source={icons.edit} style={styles.editIcon} />
-                            <Image source={icons.delete} style={styles.deleteIcon} />
-                            <TouchableOpacity onPress={toggleExpand}>
-                                <Image
-                                    source={expanded ? icons.arrowUp : icons.arrowDown}
-                                    style={styles.icon}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                {data.map((dependent, index) => (
+                    <DependentBox key={index}>
+                        <View style={styles.header} >
+                            <Image source={dependent.image} style={styles.avatar} />
+                            <AileronBold style={styles.headerText} name={dependent.dependent} />
+                            <View style={styles.iconsROw}>
+                                {/* {expandedIndex === index && ( */}
+                                    <View style={styles.deleteEditRow}>
+                                        <TouchableOpacity>
+                                            <Image source={icons.edit} style={styles.editIcon} />
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={()=> setDeleteModalVisible(true)}>
+                                            <Image source={icons.delete} style={styles.deleteIcon} />
+                                        </TouchableOpacity>
+                                    </View>
+                                {/* )} */}
 
-                    {expanded && (
-                        <View style={styles.details}>
-                            <FlatList
-                                data={data}
-                                keyExtractor={(item, index) => index.toString()}
-                                contentContainerStyle={styles.detailsListContainer}
-                                renderItem={dependentRenders}
-                            />
+                                <TouchableOpacity onPress={() => toggleExpand(index)}>
+                                    <Image
+                                        source={expandedIndex === index ? icons.arrowUp : icons.arrowDown}
+                                        style={styles.icon}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                    )}
-                </DependentBox>
+
+                        {expandedIndex === index && (
+                            <View style={styles.details}>
+                                <FlatList
+                                    data={dependent.dependentDetail}
+                                    keyExtractor={(_, index) => index.toString()}
+                                    contentContainerStyle={styles.detailsListContainer}
+                                    renderItem={dependentRenders}
+                                />
+                            </View>
+                        )}
+                    </DependentBox>
+                ))}
 
             </CurvedView>
+
+            <ModalCustom
+                expanded={expanded}
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                gender={gender}
+                relation={relation}
+            />
+
+            <ModalDelete 
+                deleteModalVisible={deleteModalVisible}
+                setDeleteModalVisible={setDeleteModalVisible}
+            />
         </Container>
     )
 }

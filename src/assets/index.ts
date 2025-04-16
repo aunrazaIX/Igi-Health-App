@@ -3,9 +3,10 @@ export const images = {
   SignupBg: require('./images/SignupBg.png'),
   maximumBenefits: require('./images/maximumBenefits.png'),
   Logo: require('./images/Logo.png'),
-  Insured: require('./images/per-insured.png'),
   SecureFuture: require('./images/secure-future.png'),
   AddNew: require('./images/Add-New.png'),
+  priorUpload: require('./images/priorUpload.png'),
+  personalFrame: require('./images/personal-Popup-Frame.png'),
 };
 
 export const icons = {
@@ -27,4 +28,15 @@ export const icons = {
   frame: require('./icons/frame.png'),
   personalDetail: require('./icons/personalDetail.png'),
   claimDetails: require('./icons/claimDetails.png'),
+  document: require('./icons/document.png'),
+  tick: require('./icons/tick.png'),
+  CancelIcon: require('./icons/cancel-circle.png'),
+  Insured: require('./icons/per-insured.png'),
+  meetingRoom: require('./icons/meeting-room.png'),
+  doctor: require('./icons/doctor.png'),
+  stethoscope: require('./icons/stethoscope.png'),
+  hospital: require('./icons/hospital.png'),
+  hospitalBed: require('./icons/hospitalBed.png'),
+  baby: require('./icons/baby.png'),
+  medicalList: require('./icons/medicalList.png'),
 };

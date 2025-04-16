@@ -6,9 +6,9 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import React from 'react';
-import {vh, vw} from '../../assets/theme/dimension';
-import {icons} from '../../assets';
-import {COLORS} from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
+import { icons } from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -16,6 +16,7 @@ interface ButtonProps extends TouchableOpacityProps {
   containerStyle?: Record<string, string | number | boolean>;
   inputStyle?: Record<string, string | number | boolean>;
   showIcon?: boolean;
+  gradientColors?: string[];
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -24,12 +25,15 @@ const Button: React.FC<ButtonProps> = ({
   inputStyle,
   showIcon,
   onPress,
+  gradientColors,
 }) => {
   return (
     <LinearGradient
       style={[styles.container, containerStyle]}
-      colors={COLORS.activeButtonGradient}>
-      <TouchableOpacity onPress={onPress}>
+      // colors={COLORS.activeButtonGradient}
+      colors={gradientColors || COLORS.activeButtonGradient}
+    >
+      <TouchableOpacity onPress={onPress} >
         {showIcon && <Image source={icons.eyeClosed} />}
         <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
       </TouchableOpacity>

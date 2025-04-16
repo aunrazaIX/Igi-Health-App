@@ -3,40 +3,6 @@ import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 
 const styles = StyleSheet.create({
-  Patient: {
-    textAlign: 'left',
-  },
-  selectBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  selectText: {
-    color: COLORS.personalValue,
-    fontSize: vh * 1.7,
-  },
-  arrow: {
-    width: vh * 2,
-    height: vh * 2,
-  },
-  dropdown: {
-    borderWidth: 1,
-    borderColor: 'transparent',
-    borderRadius: 12,
-    marginTop: 4,
-    backgroundColor: COLORS.white,
-    elevation: 3,
-    zIndex: 10,
-  },
-  dropdownItem: {
-    padding: 12,
-    borderBottomWidth: 2,
-    borderBottomColor: COLORS.dependentBorder,
-  },
-  listText: {
-    textAlign: 'left',
-    fontSize: vh * 1.7,
-  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -76,18 +42,20 @@ const styles = StyleSheet.create({
   },
 
   priorGradient: {
-    marginTop: vh * 3,
+    marginTop: vh * 1,
     borderRadius: vh * 1.5,
-    padding: vh * 2
+    padding: vh * 2,
   },
-  priorTouchable: {
-
-  },
+  priorTouchable: {},
 
   priorNext: {
     textAlign: 'center',
     color: COLORS.white,
-    fontSize: vh * 2
+    fontSize: vh * 2,
+  },
+  container: {
+    height: '100%',
+    justifyContent: 'space-between',
   },
 });
 

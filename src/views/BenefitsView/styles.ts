@@ -1,7 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
-import Benefits from '../../screens/Benefits';
 
 const styles = StyleSheet.create({
   BenefitsGradients: {
@@ -19,10 +18,11 @@ const styles = StyleSheet.create({
     width: '45%',
   },
   benefitsLogo: {
-    width: vh * 12,
-    height: vh * 4.5,
-    resizeMode: 'contain',
+    width: vh * 15,
+    height: vh * 6,
+    resizeMode: 'stretch',
   },
+
   MaximumTitle: {
     fontSize: vh * 2.7,
     textAlign: 'left',
@@ -51,33 +51,41 @@ const styles = StyleSheet.create({
   card: {
     width: '33.33%',
     alignItems: 'center',
-    marginTop: vh * 3,
-    paddingBottom: vh * 5,
+    marginTop: vh * 2.5,
+    paddingBottom: vh * 2.5,
     borderBottomColor: '#DADADA',
     borderBottomWidth: 1.5,
     borderStyle: 'dashed',
   },
   CardBox: {
-    paddingVertical: vh * 2,
-    paddingHorizontal: vh * 3,
-    borderRadius: vh * 2,
+    paddingVertical: vh * 1.5,
+    paddingHorizontal: vh * 2.8,
+    borderRadius: vh * 1.5,
     alignItems: 'center',
   },
   insuredTitle: {
-    fontSize: vh * 1.8,
+    fontSize: vh * 1.6,
     color: COLORS.insuredPrice,
     marginVertical: vh * 1,
+    fontWeight: '600',
+    width: vh * 12,
   },
   insuredPrice: {
-    fontSize: vh * 1.8,
+    fontSize: vh * 1.6,
     color: COLORS.insuredPrice,
+    width: vh * 11,
   },
   flatListContainer: {
-    paddingBottom: vh * 16,
+    // paddingBottom: vh * 16,
   },
   benefitsImage: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: '100%',
+    // backgroundColor: 'red'
+  },
+  coverageCardImage: {
+    height: vh * 4,
+    width: vh * 4,
   },
 });
 

@@ -1,13 +1,18 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import PersonalView from '../../views/PersonalView'
-import usePersonalViewModall from '../../viewmodels/useBenefitsViewModel';
+import usePersonalViewModal from '../../viewmodels/usePersonalViewModel';
+import usePersonalModalViewModel from '../../viewmodels/usePersonalModalViewModel';
+
 
 const Personal = () => {
-    const { states } = usePersonalViewModall();
+    const { states } = usePersonalViewModal();
+    const { genderRelationStates } = usePersonalModalViewModel();
 
     const { data } = states;
-    return <PersonalView data={data} />
+    const { gender, relation } = genderRelationStates;
+
+
+    return <PersonalView data={data} gender={gender} relation={relation} />
 }
 
 export default Personal

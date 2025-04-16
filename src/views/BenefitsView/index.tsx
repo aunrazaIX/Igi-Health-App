@@ -5,6 +5,7 @@ import { FlatList, Image, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import { COLORS } from '../../assets/theme/colors';
+import { ImageSourcePropType } from 'react-native';
 
 
 type Props = {
@@ -12,18 +13,19 @@ type Props = {
 }
 
 type Item = {
-    title: String;
-    price: String;
+    title: string;
+    price: string;
+    image: ImageSourcePropType;
 }
 
 const BenefitsView: React.FC<Props> = ({ data }) => {
-    const RenderBenefits = ({ item }) => (
+    const RenderBenefits = ({ item }: { item: Item }) => (
         <View style={styles.card}>
             <LinearGradient
                 colors={['#0B4A98', '#48C3FF']}
                 style={styles.CardBox}
             >
-                <Image source={images.Insured} />
+                <Image source={item.image} style={styles.coverageCardImage} />
             </LinearGradient>
 
             <AileronSemiBold

@@ -1,0 +1,111 @@
+import { View, Text, TouchableOpacity, Image, FlatList, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import DependentBox from '../DependentBox';
+import AileronRegular from '../AileronRegular';
+import AileronBold from '../AileronBold';
+import { icons } from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
+import { vh } from '../../assets/theme/dimension';
+
+
+type Patient = {
+    id: number;
+    name: string;
+};
+type SelectProps = {
+    selectData: Patient[];
+    selectLabel: string;
+    selectPlaceholder: string
+};
+
+const Select: React.FC<SelectProps> = ({ selectData, selectLabel, selectPlaceholder }) => {
+    const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+    const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+    const handleSelect = (item: Patient) => {
+        setSelectedPatient(item);
+        setDropdownVisible(false);
+    };
+
+    return (
+        <View style={styles.selectContainer}>
+            <DependentBox>
+                <AileronRegular name={selectLabel} style={styles.Patient} />
+
+                <View
+                    style={styles.selectBox}
+                >
+                    <AileronBold style={styles.selectText} name={selectedPatient?.name || selectPlaceholder} />
+
+                    <TouchableOpacity
+                        onPress={() => setDropdownVisible(!isDropdownVisible)}
+                    >
+                        <Image style={styles.arrow} source={isDropdownVisible ? icons.arrowUp : icons.arrowDown} />
+                    </TouchableOpacity>
+
+                </View>
+
+            </DependentBox>
+
+            {isDropdownVisible && (
+                <View style={styles.dropdown}>
+                    <FlatList
+                        data={selectData}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                style={styles.dropdownItem}
+                                onPress={() => handleSelect(item)}
+                            >
+                                <AileronBold name={item.name} style={styles.listText} />
+                            </TouchableOpacity>
+                        )}
+                    />
+                </View>
+            )}
+
+        </View>
+    )
+}
+
+export default Select
+
+const styles = StyleSheet.create({
+    Patient: {
+        textAlign: 'left',
+    },
+    selectBox: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    selectText: {
+        color: COLORS.personalValue,
+        fontSize: vh * 1.7,
+    },
+    arrow: {
+        width: vh * 2,
+        height: vh * 2,
+    },
+    dropdown: {
+        borderWidth: 1,
+        borderColor: 'transparent',
+        borderRadius: 12,
+        marginTop: 4,
+        backgroundColor: COLORS.white,
+        elevation: 3,
+        zIndex: 10,
+    },
+    dropdownItem: {
+        padding: 12,
+        borderBottomWidth: 2,
+        borderBottomColor: COLORS.dependentBorder,
+    },
+    listText: {
+        textAlign: 'left',
+        fontSize: vh * 1.7,
+    },
+    selectContainer: {
+        width: '100%'
+    },
+})
