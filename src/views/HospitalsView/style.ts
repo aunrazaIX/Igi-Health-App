@@ -7,18 +7,17 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
 
-  infoContainerHeader: {},
+
   infoContainerHeaderRight: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-
     gap: vw * 2,
   },
   rightTab: {
     flexDirection: 'row',
     borderWidth: 2,
     borderColor: COLORS.buttonBorder,
-    borderRadius: vw * 3,
+    borderRadius: vw * 5,
     paddingHorizontal: vw * 2,
     paddingVertical: vh * 1,
     alignItems: 'center',
@@ -35,9 +34,7 @@ export const styles = StyleSheet.create({
     fontSize: vh * 1.7,
     color: COLORS.black,
   },
-//   activeTabRightText: {
-//     color: COLORS.white,
-//   },
+
   infoContainerHeaderTabs: {
     flexDirection: 'row',
     marginVertical: vh * 2,
@@ -61,7 +58,7 @@ export const styles = StyleSheet.create({
 
   tabText: {
     color: COLORS.black,
-    fontSize: vh * 1.5,
+    fontSize: vh * 1.6,
   },
   activeTab: {
     backgroundColor: COLORS.cardBackgroundRed,
@@ -69,6 +66,11 @@ export const styles = StyleSheet.create({
   },
   activeTabText: {
     color: COLORS.white,
+    fontSize: vh * 1.6,
+  },
+
+  headerStyle: {
+    fontSize: vw * 5,
   },
 
   discountTab: {
@@ -93,12 +95,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 1.5,
     marginVertical: vh * 3,
-
-
   },
   mapTabIcon: {
     height: vh * 3,
-    width: vw * 7,
+    width: vw * 6,
   },
   mapTabText: {
     fontSize: vh * 2,

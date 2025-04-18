@@ -12,20 +12,36 @@ export const styles = StyleSheet.create({
     gap: vh * 1,
   },
 
+  termsAndConditions: {
+    flexDirection: 'row',
+    gap: vw * 2,
+  },
+
   termsAndConditionsHeading: {
     textAlign: 'left',
-    fontSize: vh * 1.7,
+    fontSize: vw * 3.9,
+    color: COLORS.textBlackShade,
+  },
+  termsAndConditionsText: {
+    textAlign: 'left',
+    fontSize: vw * 3.5,
     color: COLORS.textBlackShade,
   },
   termsAndConditionsPoints: {
     flexDirection: 'row',
     gap: vw * 2,
+    marginHorizontal: vw * 2,
 
-    textAlign: 'left',
-
-    width: '90%',
+    alignItems: 'flex-start',
   },
-  termsAndConditions: {
-    flexDirection: 'row',
+  bullet: {
+    fontSize: vw * 6,
+    lineHeight: vh * 2,
+  },
+  pointsText: {
+    textAlign: 'left',
+    fontSize: vw * 3.7,
+    lineHeight: vh * 2.5,
+    color: COLORS.textBlackShade,
   },
 });

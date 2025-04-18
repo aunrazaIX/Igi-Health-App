@@ -1,6 +1,8 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
+import { fonts } from '../../assets/fonts';
+
 
 export const styles = StyleSheet.create({
   infoContainer: {
@@ -18,9 +20,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     borderWidth: 2,
     borderColor: COLORS.buttonBorder,
-    borderRadius: vw * 3,
+    borderRadius: vw * 5,
     paddingHorizontal: vw * 2,
-    paddingVertical: vh * 1,
+    paddingVertical: vh * 1.2,
     alignItems: 'center',
     backgroundColor: COLORS.buttonBorder,
     gap: vw * 1,
@@ -32,12 +34,10 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
   },
   infoContainerHeaderText: {
-    fontSize: vh * 1.7,
+    fontSize: vw * 3.5,
     color: COLORS.black,
   },
-  activeTabRightText: {
-    color: COLORS.white,
-  },
+
   infoContainerHeaderTabs: {
     flexDirection: 'row',
     marginVertical: vh * 2,
@@ -46,22 +46,49 @@ export const styles = StyleSheet.create({
     gap: vw * 2,
     borderColor: COLORS.buttonBorder,
   },
+
   tab: {
     borderRadius: vw * 8,
     paddingVertical: vh * 2,
     paddingHorizontal: vw * 4,
-
     flexDirection: 'row',
     gap: vw * 2,
     alignItems: 'center',
-
     borderColor: COLORS.buttonBorder,
     backgroundColor: COLORS.buttonBorder,
   },
+  detailsTextLabel: {
+    width: '20%',
+    textAlign: 'left',
+  },
 
+  detailsTextValue: {
+    width: '60%',
+    textAlign: 'right',
+  },
+
+  detailsText: {},
+  inputFeild: {
+    borderWidth: 2,
+    height: vh * 7,
+  },
+  searchFieldRight: {
+    position: 'relative',
+    top: vh * 2,
+    right: vw * 6,
+  },
+  searchFieldRightIcon: {
+    height: vh * 2,
+    width: vw * 4,
+  },
+  inputStyle: {
+    fontSize: vw * 4,
+    color: COLORS.textBlackShade,
+    fontFamily: fonts.Aileron.bold,
+  },
   tabText: {
     color: COLORS.black,
-    fontSize: vh * 1.5,
+    fontSize: vw * 3.5,
   },
   activeTab: {
     backgroundColor: COLORS.cardBackgroundRed,
@@ -71,52 +98,11 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
   },
 
-  discountTab: {
-    borderRadius: vw * 8,
-    paddingVertical: vh * 2,
-    paddingHorizontal: vw * 4,
-    flexDirection: 'row',
-    gap: vw * 2,
-    alignItems: 'center',
-    borderColor: COLORS.buttonBorder,
-    backgroundColor: COLORS.buttonBorder,
-  },
-  discountTabText: {
-    color: COLORS.black,
-    fontSize: vh * 1.5,
-  },
-  mapTextContainer: {
-    flexDirection: 'row',
-    gap: vw * 2,
-  },
-  mapTabsContainer: {
-    flexDirection: 'row',
-    gap: vw * 1.5,
-    marginVertical: vh * 3,
-  },
-  mapTabIcon: {
-    height: vh * 4,
-    width: vw * 9,
-  },
   mapTabText: {
-    fontSize: vh * 2,
+    fontSize: vw * 2,
   },
 
-  mapTabActive: {
-    flexDirection: 'row',
-    backgroundColor: COLORS.cardBackgroundRed,
-    padding: vw * 4,
-    justifyContent: 'center',
-    borderRadius: vw * 6,
-    gap: vw * 1.5,
-    alignItems: 'center',
-  },
-  mapTab: {
-    flexDirection: 'row',
-    backgroundColor: COLORS.buttonBorder,
-    padding: vw * 4,
-    borderRadius: vw * 6,
-    gap: vw * 1.5,
-    alignItems: 'center',
-  },
+  
+ 
+
 });

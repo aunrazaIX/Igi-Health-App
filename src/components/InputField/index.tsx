@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   TextInputProps,
+  ImageSourcePropType,
 } from 'react-native';
 import {fonts} from '../../assets/fonts';
 import {icons} from '../../assets';
@@ -17,6 +18,9 @@ import AileronBold from '../AileronBold';
 type StyleObject = Record<string, string | number | boolean>;
 
 interface InputFieldProps extends TextInputProps {
+  searchIcon?: ImageSourcePropType;
+  searchFieldRight?: StyleObject;
+  searchFieldRightIcon?: StyleObject;
   label?: string;
   labelStyle?: StyleObject | StyleObject[] | any;
   containerStyle?: object;
@@ -30,6 +34,9 @@ interface InputFieldProps extends TextInputProps {
 const InputField = forwardRef<TextInput, InputFieldProps>(
   (
     {
+      searchIcon,
+      searchFieldRight,
+      searchFieldRightIcon,
       label,
       labelStyle,
       placeholder,
@@ -104,6 +111,12 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             </TouchableOpacity>
           )}
         </View>
+
+        {searchIcon && (
+          <View style={searchFieldRight}>
+            <Image style={searchFieldRightIcon} source={icons.searchBlack} />
+          </View>
+        )}
       </View>
     );
   },
@@ -121,6 +134,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     marginVertical: vh * 1.5,
     paddingHorizontal: vw * 2,
+    flexDirection: 'row',
+    position: 'absolute',
   },
   inheritStyles: {
     height: '100%',
@@ -139,8 +154,8 @@ const styles = StyleSheet.create({
   textInput: {
     width: '85%',
     height: '100%',
-    fontSize: vh * 1.55,
-    color: COLORS.black,
+    fontSize: vw * 1.55,
+    color: COLORS.textBlackShade,
     fontFamily: fonts.Aileron.regular,
   },
   iconView: {

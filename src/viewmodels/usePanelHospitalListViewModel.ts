@@ -18,7 +18,7 @@ type usePanelHospitalListViewModel = {
 };
 
 const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
-  const [selectedTab, setSelectedTab] = useState('Panel Hospitals');
+  const [selectedTab, setSelectedTab] = useState('PanelHospitals');
   const [selectedTabRight, setSelectedTabRight] = useState('list');
 
   const onPressTab = (tab: string) => {

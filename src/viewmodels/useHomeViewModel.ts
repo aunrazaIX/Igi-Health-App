@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import {icons, images} from '../assets';
+import {icons} from '../assets';
 import {COLORS} from '../assets/theme/colors';
 
-type CardItemData = {
+export type CardItemData = {
   logo: any;
   name: string;
   image: any;
@@ -39,7 +39,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
     {
       logo: icons.claim,
-      name: 'Lodge a Claim',
+      name: 'Lodge A Claim',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
     },

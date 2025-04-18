@@ -5,20 +5,20 @@ import useClaimsHistoryViewModel from '../../viewmodels/useClaimsHistoryViewMode
 
 const ClaimsHistory = () => {
   const {states, functions} = useClaimsHistoryViewModel();
-  const {data ,  amountStatusTab , daysStatusTab ,  isCalendarVisible} = states;
-  const {onPressAmountStatusTab , onPressDaysStatusTab , onPressHeaderIcon} = functions;
+  const {data, amountStatusTab, daysStatusTab, isCalendarVisible} = states;
+  const {onPressAmountStatusTab, onPressDaysStatusTab, onPressHeaderIcon} =
+    functions;
 
   return (
     <ClaimsHistoryView
-    data={data}
-    amountStatusTab ={ amountStatusTab}
-    daysStatusTab= {daysStatusTab}
-    isCalendarVisible={isCalendarVisible}
-    onPressHeaderIcon={onPressHeaderIcon}
-    onPressDaysStatusTab = {onPressDaysStatusTab}
-    onPressAmountStatusTab={onPressAmountStatusTab}
-
-  />
+      data={data}
+      amountStatusTab={amountStatusTab}
+      daysStatusTab={daysStatusTab}
+      isCalendarVisible={isCalendarVisible}
+      onPressHeaderIcon={onPressHeaderIcon}
+      onPressDaysStatusTab={onPressDaysStatusTab}
+      onPressAmountStatusTab={onPressAmountStatusTab}
+    />
   );
 };
 

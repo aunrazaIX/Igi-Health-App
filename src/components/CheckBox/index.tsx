@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   descriptionText: {
     color: COLORS.textColorLight,
     marginLeft: vw * 2,
-    fontSize: vh * 1.7,
+    fontSize: vw * 1.7,
   },
   tickIcon: {
     height: '100%',

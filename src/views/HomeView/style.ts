@@ -20,7 +20,8 @@ export const styles = StyleSheet.create({
   },
   headerLogo: {
     width: 24 * vw,
-    height: 6 * vh,
+    aspectRatio: 2,
+    resizeMode: 'contain',
   },
   headerIcons: {
     flexDirection: 'row',
@@ -38,12 +39,24 @@ export const styles = StyleSheet.create({
   logo: {
     width: 24 * vw,
     height: 6 * vh,
+    resizeMode: 'contain',
   },
   homeInfoContainerHeader: {
-    // borderWidth: 2,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  text: {
+    color: COLORS.textColor,
+    fontSize: vh * 2,
+  },
+  meterDetailTextEnd: {
+    flexDirection: 'row',
+    gap: vw * 1,
+  },
+
+  meterArrowUp: {
+    height: vh * 2,
   },
   infoCardTextBold: {
     fontSize: vh * 2,
@@ -78,9 +91,7 @@ export const styles = StyleSheet.create({
   },
   infoCardFooterTextBold: {
     fontSize: vh * 2.3,
-    color : COLORS.textBlackShade,
-  
-    
+    color: COLORS.textBlackShade,
   },
   infoCardFooterLeft: {},
   infoCardFooterRight: {
@@ -130,38 +141,46 @@ export const styles = StyleSheet.create({
     fontSize: vh * 2.3,
     color: COLORS.textBlackShade,
   },
-  dashboardContainerTextLight: {
-    fontSize: vh * 2.3,
+  meterDetailTextLight: {
+    fontSize: vw * 4,
     color: COLORS.textGrayShade,
   },
   dashboardContainerCards: {
     paddingHorizontal: vw * 2,
+
     marginVertical: vh * 2,
 
     justifyContent: 'space-between',
     height: '70%',
     borderRadius: vw * 2,
     backgroundColor: COLORS.cardBackgroundBlue,
-    width: vw * 35,
+    width: vw * 40,
     marginRight: vw * 4,
   },
   cardLogoContainer: {
     marginVertical: vh * 2,
+
+    marginLeft: vw * 1,
+    resizeMode: 'contain',
   },
   cardLogo: {
-    width: vw * 8,
-    height: vh * 6,
+    width: vw * 14,
+    height: vh * 8,
+    resizeMode: 'contain',
   },
   cardContent: {
     marginBottom: vh,
     flexDirection: 'row',
     justifyContent: 'space-between',
+   
+
+    alignItems: 'center',
   },
   dashboardContainerCardText: {
     textAlign: 'left',
-    fontSize: vh * 2.3,
+    fontSize: vw * 4,
     color: COLORS.white,
-    flexWrap: 'wrap',
+  
   },
 
   dashboardMeterContent: {
@@ -169,22 +188,31 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-  dashboardMeterLeft: {
+  dashboardMeterDetail: {
     gap: vh * 1,
+  },
+  dashboardMeterDetailTop: {
+    flexDirection: 'row',
+    gap: vw * 1.8,
+    alignItems: 'center',
   },
 
-  dashboardMeterRight: {
-    gap: vh * 1,
-  },
-  meterLeftIcon: {
+  meterIcon: {
     height: vh * 2,
-    width: vw * 3,
+    width: vw * 4,
+    resizeMode: 'contain',
   },
-  meterLeftText: {
-    fontSize: vh * 5,
+  meterDetailTextBold: {
+    fontSize: vw * 9,
     textAlign: 'left',
     color: COLORS.black,
   },
-
-  
+  meterDetailTextEnd: {
+    flexDirection: 'row',
+    gap: vw * 1,
+  },
+  textRed: {
+    color: COLORS.cardBackgroundRed,
+    fontSize: vh * 2,
+  },
 });

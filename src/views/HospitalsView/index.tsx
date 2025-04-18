@@ -13,8 +13,9 @@ import {styles} from './style';
 import DetailsContainer from '../../components/DetailsContainer';
 import {vh} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
+import ProvinceTab from '../../components/provinceTab';
 
-type HomeViewProps = {
+type HospitalsViewProps = {
   selectedTab: string;
   selectedTabRight: string;
   selectedMapTab: string;
@@ -23,7 +24,7 @@ type HomeViewProps = {
   onPressMapTab: (tab: string) => void;
 };
 
-const PanelHospitalListView: React.FC<HomeViewProps> = ({
+const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
   selectedTab,
   onPressTab,
   onPressRightTab,
@@ -35,12 +36,13 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
     <>
       <TopView
         title="Hospitals"
-        HeaderIcon={icons.search}
+        HeaderIcon={icons.searchWhite}
         HeaderSecondIcon={null}
+        headerStyle={styles.headerStyle}
       />
 
       <CurvedView>
-        <View style={styles.infoContainerHeader}>
+        <View>
           <View style={styles.infoContainerHeaderRight}>
             <TouchableOpacity
               onPress={() => onPressRightTab('list')}
@@ -135,113 +137,28 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             <AileronBold style={style.mapText} name="Search By">
               {' '}
             </AileronBold>
-            <AileronBold style={style.mapTextColor} name="Province">
+            <AileronBold style={style.mapTextColor} name="Provinces">
               {' '}
             </AileronBold>
           </View>
 
           <View style={styles.mapTabsContainer}>
-            <TouchableOpacity
-              onPress={() => onPressMapTab('Sindh')}
-              style={
-                selectedMapTab === 'Sindh' ? styles.mapTabActive : styles.mapTab
-              }>
-              <View>
-                {selectedMapTab === 'Sindh' ? (
-                  <Image
-                    style={styles.mapTabIcon}
-                    source={icons.mapLoacationActive}
-                  />
-                ) : (
-                  <Image
-                    style={styles.mapTabIcon}
-                    source={icons.mapLoacationInActive}
-                  />
-                )}
-              </View>
+            <ProvinceTab
+              onPressMapTab={onPressMapTab}
+              selectedMapTab={selectedMapTab}
+              provinceName={'Sindh'}
+            />
 
-              <View>
-                {selectedMapTab === 'Sindh' ? (
-                  <AileronBold style={style.mapTabTextActive} name="Sindh">
-                    {' '}
-                  </AileronBold>
-                ) : (
-                  <AileronBold style={style.mapTabText} name="Sindh">
-                    {' '}
-                  </AileronBold>
-                )}
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => onPressMapTab('Punjab')}
-              style={
-                selectedMapTab === 'Punjab'
-                  ? styles.mapTabActive
-                  : styles.mapTab
-              }>
-              <View>
-                {selectedMapTab === 'Punjab' ? (
-                  <Image
-                    style={styles.mapTabIcon}
-                    source={icons.mapLoacationActive}
-                  />
-                ) : (
-                  <Image
-                    style={styles.mapTabIcon}
-                    source={icons.mapLoacationInActive}
-                  />
-                )}
-              </View>
-
-              <View>
-                {selectedMapTab === 'Punjab' ? (
-                  <AileronBold style={style.mapTabTextActive} name="Punjab">
-                    {' '}
-                  </AileronBold>
-                ) : (
-                  <AileronBold style={style.mapTabText} name="Punjab">
-                    {' '}
-                  </AileronBold>
-                )}
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => onPressMapTab('Balochistan')}
-              style={
-                selectedMapTab === 'Balochistan'
-                  ? styles.mapTabActive
-                  : styles.mapTab
-              }>
-              <View>
-                {selectedMapTab === 'Balochistan' ? (
-                  <Image
-                    style={styles.mapTabIcon}
-                    source={icons.mapLoacationActive}
-                  />
-                ) : (
-                  <Image
-                    style={styles.mapTabIcon}
-                    source={icons.mapLoacationInActive}
-                  />
-                )}
-              </View>
-
-              <View>
-                {selectedMapTab === 'Balochistan' ? (
-                  <AileronBold
-                    style={style.mapTabTextActive}
-                    name="Balochistan">
-                    {' '}
-                  </AileronBold>
-                ) : (
-                  <AileronBold style={style.mapTabText} name="Baluchistan">
-                    {' '}
-                  </AileronBold>
-                )}
-              </View>
-            </TouchableOpacity>
+            <ProvinceTab
+              onPressMapTab={onPressMapTab}
+              selectedMapTab={selectedMapTab}
+              provinceName={'Punjab'}
+            />
+            <ProvinceTab
+              onPressMapTab={onPressMapTab}
+              selectedMapTab={selectedMapTab}
+              provinceName={'Baluchistan'}
+            />
           </View>
         </View>
       </CurvedView>
@@ -272,11 +189,11 @@ const style = StyleSheet.create({
     fontSize: vh * 2.5,
   },
   mapTabText: {
-    fontSize: vh * 1.3,
+    fontSize: vh * 1.5,
     color: COLORS.black,
   },
   mapTabTextActive: {
-    fontSize: vh * 1.3,
+    fontSize: vh * 1.4,
     color: COLORS.white,
   },
 });

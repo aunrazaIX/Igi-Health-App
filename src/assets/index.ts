@@ -33,7 +33,7 @@ export const icons = {
   claim: require('./icons/claim.png'),
   chart: require('./icons/chart.png'),
   payment: require('./icons/payment-02.png'),
-  paymentInactive : require('./icons/payment-inactive.png'),
+  paymentInactive: require('./icons/payment-inactive.png'),
   creditCard: require('./icons/credit-card.png'),
   editTask: require('./icons/task-edit.png'),
   toggleTop: require('./icons/toggleTop.png'),
@@ -49,5 +49,8 @@ export const icons = {
   mapLoacationActive: require('./icons/mapLocationActive.png'),
   mapLoacationInActive: require('./icons/mapLocation-inactive.png'),
   calender: require('./icons/calender.png'),
-  arrowDirection  : require('./icons/arrow.png'),
+  arrowDirection: require('./icons/arrow.png'),
+  searchBlack: require('./icons/searchBlack.png'),
+  searchWhite: require('./icons/searchWhite.png'),
+  claimStats: require('./icons/claimStats.png'),
 };

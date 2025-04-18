@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-export type AmountStatus = 'paid Amount' | 'Pending Amount';
+export type AmountStatus = 'paidAmount' | 'PendingAmount';
 export type daysStatus = 'Daily' | 'Monthly' | 'Yearly';
 
 export type ClaimHistory = {
@@ -8,7 +8,7 @@ export type ClaimHistory = {
   value: string;
 };
 
-type UseClaimsHistoryViewModel = {
+ type UseClaimsHistoryViewModel = {
   states: {
     data: ClaimHistory[][];
     amountStatusTab: AmountStatus;
@@ -24,7 +24,7 @@ type UseClaimsHistoryViewModel = {
 
 const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
   const [amountStatusTab, setAmountStatusTab] =
-    useState<AmountStatus>('paid Amount');
+    useState<AmountStatus>('paidAmount');
 
   const [daysStatusTab, setDaysStatusTab] = useState<daysStatus>('Daily');
   const [isCalendarVisible, setIsCalendarVisible] = useState<boolean>(false);

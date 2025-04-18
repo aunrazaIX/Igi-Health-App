@@ -126,9 +126,9 @@ const HomeView: React.FC<HomeViewProps> = ({cardData}) => {
 
           <View style={styles.homeInfoContainerScroll}>
             <View style={styles.indicatorDots}>
-              <View style={[styles.inactiveDot, styles.dot]} />
-              <View style={[styles.dot, styles.activeDot]} />
-              <View style={[styles.dot, styles.inactiveDot]} />
+              <TouchableOpacity style={[styles.inactiveDot, styles.dot]} />
+              <TouchableOpacity style={[styles.dot, styles.activeDot]} />
+              <TouchableOpacity style={[styles.dot, styles.inactiveDot]} />
             </View>
           </View>
         </LinearGradient>
@@ -179,73 +179,70 @@ const HomeView: React.FC<HomeViewProps> = ({cardData}) => {
           />
 
           <View style={styles.dashboardMeterContent}>
-            <View style={styles.dashboardMeterLeft}>
-              <View style={style.dashboardMeterLeftTop}>
+            <View style={styles.dashboardMeterDetail}>
+              <View style={styles.dashboardMeterDetailTop}>
                 <View>
-                  <Image
-                    style={styles.meterLeftIcon}
-                    source={icons.addSquare}
-                  />
+                  <Image style={styles.meterIcon} source={icons.addSquare} />
                 </View>
 
                 <AileronBold
-                  style={styles.dashboardContainerTextLight}
+                  style={styles.meterDetailTextLight}
                   name="Total Deducted"
                   numberOfLines={1}></AileronBold>
               </View>
 
               <AileronBold
                 name={'285, 000'}
-                style={styles.meterLeftText}
+                style={styles.meterDetailTextBold}
                 numberOfLines={1}></AileronBold>
 
-              <View style={style.meterLeftTextEnd}>
-                <Image source={icons.arrowUp} style={style.meterArrowUp} />
+              <View style={styles.meterDetailTextEnd}>
+                <Image source={icons.arrowUp} style={styles.meterArrowUp} />
 
                 <AileronLight
                   name={'19.6%'}
                   numberOfLines={1}
-                  style={style.textRed}
+                  style={styles.textRed}
                 />
 
                 <AileronLight
                   name={'44.714'}
                   numberOfLines={1}
-                  style={style.text}
+                  style={styles.text}
                 />
               </View>
             </View>
 
-            <View style={styles.dashboardMeterRight}>
-              <View style={style.dashboardMeterLeftTop}>
+            <View style={styles.dashboardMeterDetail}>
+              <View style={styles.dashboardMeterDetailTop}>
                 <View>
-                  <Image style={styles.meterLeftIcon} source={icons.chart} />
+                  <Image style={styles.meterIcon} source={icons.chart} />
                 </View>
 
                 <AileronBold
-                  style={styles.dashboardContainerTextLight}
+                  style={styles.meterDetailTextLight}
                   name="Total Paid"
                   numberOfLines={1}></AileronBold>
               </View>
 
               <AileronBold
                 name={'855, 000'}
-                style={styles.meterLeftText}
+                style={styles.meterDetailTextBold}
                 numberOfLines={1}></AileronBold>
 
-              <View style={style.meterLeftTextEnd}>
-                <Image source={icons.arrowUp} style={style.meterArrowUp} />
+              <View style={styles.meterDetailTextEnd}>
+                <Image source={icons.arrowUp} style={styles.meterArrowUp} />
 
                 <AileronLight
                   name={'19.6%'}
                   numberOfLines={1}
-                  style={style.textRed}
+                  style={styles.textRed}
                 />
 
                 <AileronLight
                   name={'44.714'}
                   numberOfLines={1}
-                  style={style.text}
+                  style={styles.text}
                 />
               </View>
             </View>
@@ -257,26 +254,3 @@ const HomeView: React.FC<HomeViewProps> = ({cardData}) => {
 };
 
 export default HomeView;
-
-const style = StyleSheet.create({
-  textRed: {
-    color: COLORS.cardBackgroundRed,
-    fontSize: vh * 2,
-  },
-  text: {
-    color: COLORS.textColor,
-    fontSize: vh * 2,
-  },
-  meterLeftTextEnd: {
-    flexDirection: 'row',
-    gap: vw * 1,
-  },
-  dashboardMeterLeftTop: {
-    flexDirection: 'row',
-    gap: vw * 1.8,
-    alignItems: 'center',
-  },
-  meterArrowUp: {
-    height: vh * 2,
-  },
-});

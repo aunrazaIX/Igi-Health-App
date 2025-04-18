@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   headerName: {
     width: '70%',
     color: COLORS.white,
-    fontSize: vh * 2,
+    fontSize: vw * 2,
   },
   spacedView: {
     marginVertical: vh * 3,

@@ -4,10 +4,10 @@ import HomeView from '../../views/HomeView';
 import useHomeViewModel from '../../viewmodels/useHomeViewModel';
 
 const Home = () => {
-  const {states , functions} = useHomeViewModel();
+  const {states, functions} = useHomeViewModel();
   const {cardData} = states;
-  console.log(cardData , "usman")
-  
+  const {onPressTab} = functions;
+
   return <HomeView cardData={cardData} />;
 };
 

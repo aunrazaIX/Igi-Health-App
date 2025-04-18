@@ -8,7 +8,7 @@ import {
 } from '../../components';
 import {icons} from '../../assets';
 import {styles} from './style';
-import {vh} from '../../assets/theme/dimension';
+import {vh, vw} from '../../assets/theme/dimension';
 
 const TermsAndConditionsView = () => {
   return (
@@ -23,37 +23,45 @@ const TermsAndConditionsView = () => {
                 name="Policy Information:"></AileronBold>
 
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   name=" Policy Number: A unique identifier for the insurance policy."></AileronRegular>
               </View>
 
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold name="."> </AileronBold>
+                <AileronBold style={styles.bullet} name="•">
+                  {' '}
+                </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   name=" Policy Number: A unique identifier for the insurance policy."></AileronRegular>
               </View>
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold name="."> </AileronBold>
+                <AileronBold style={styles.bullet} name="•">
+                  {' '}
+                </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   name="Policyholder: The person who owns the policy."></AileronRegular>
               </View>
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold name="."> </AileronBold>
+                <AileronBold style={styles.bullet} name="•">
+                  {' '}
+                </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   name="Insured: The person whose life is covered by the policy"></AileronRegular>
               </View>
 
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold name="."> </AileronBold>
+                <AileronBold style={styles.bullet} name="•">
+                  {' '}
+                </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   name="Beneficiary: The individual or entity who will receive the death benefit upon the insured's death"></AileronRegular>
               </View>
             </View>
@@ -64,25 +72,29 @@ const TermsAndConditionsView = () => {
                 name="Coverage Details:"></AileronBold>
 
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   numberOfLines={2}
                   name="Death Benefit: The amount paid to the beneficiary upon the death of the insured."></AileronRegular>
               </View>
 
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold name="."> </AileronBold>
+                <AileronBold style={styles.bullet} name="•">
+                  {' '}
+                </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   name="Policy Term: The duration for which the policy provides coverage."></AileronRegular>
               </View>
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold name="."> </AileronBold>
+                <AileronBold style={styles.bullet} name="•">
+                  {' '}
+                </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   name="Premiums: The periodic payments made by the policyholder to keep the policy in force."></AileronRegular>
               </View>
             </View>
@@ -94,7 +106,7 @@ const TermsAndConditionsView = () => {
 
               <View style={styles.termsAndConditions}>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
+                  style={styles.termsAndConditionsText}
                   name="Frequency: Specifies how often premium payments are due (e.g., monthly, quarterly, annually).">
                   {' '}
                 </AileronRegular>
@@ -102,7 +114,7 @@ const TermsAndConditionsView = () => {
 
               <View style={styles.termsAndConditions}>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
+                  style={styles.termsAndConditionsText}
                   name="Grace Period: A period after the due date during which the policy remains in force despite non-payment">
                   {' '}
                 </AileronRegular>
@@ -118,14 +130,12 @@ const TermsAndConditionsView = () => {
                 Exclusions::"></AileronBold>
 
               <View style={styles.termsAndConditions}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
-                  name="
-
-Conditions or circumstances under which the insurance company may deny a claim (e.g., suicide within the first two years of the policy)">
+                  style={styles.termsAndConditionsText}
+                  name="Conditions or circumstances under which the insurance company may deny a claim (e.g., suicide within the first two years of the policy)">
                   {' '}
                 </AileronRegular>
               </View>
@@ -138,14 +148,12 @@ Conditions or circumstances under which the insurance company may deny a claim (
 Riders and Options:"></AileronBold>
 
               <View style={styles.termsAndConditions}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
-                  name="
-
-Additional features or options that can be added to the policy for an extra cost (e.g., accidental death rider, critical illness rider)">
+                  style={styles.termsAndConditionsText}
+                  name="Additional features or options that can be added to the policy for an extra cost (e.g., accidental death rider, critical illness rider)">
                   {' '}
                 </AileronRegular>
               </View>
@@ -158,14 +166,12 @@ Additional features or options that can be added to the policy for an extra cost
 Policy Loans:"></AileronBold>
 
               <View style={styles.termsAndConditions}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
-                  name="
-
-Provision allowing the policyholder to borrow against the cash value of the policy">
+                  style={styles.termsAndConditionsText}
+                  name="Provision allowing the policyholder to borrow against the cash value of the policy">
                   {' '}
                 </AileronRegular>
               </View>
@@ -178,14 +184,12 @@ Provision allowing the policyholder to borrow against the cash value of the poli
 Cash Value:"></AileronBold>
 
               <View style={styles.termsAndConditions}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
-                  name="
-
-For permanent life insurance policies, a portion of the premium may accumulate as a cash value that can be accessed or used to pay premiums.">
+                  style={styles.termsAndConditionsText}
+                  name="For permanent life insurance policies, a portion of the premium may accumulate as a cash value that can be accessed or used to pay premiums.">
                   {' '}
                 </AileronRegular>
               </View>
@@ -198,14 +202,12 @@ For permanent life insurance policies, a portion of the premium may accumulate a
 Surrender and Lapse:"></AileronBold>
 
               <View style={styles.termsAndConditions}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
-                  name="
-
-Conditions under which the policyholder can surrender the policy for its cash value or allow it to lapse.">
+                  style={styles.termsAndConditionsText}
+                  name="Conditions under which the policyholder can surrender the policy for its cash value or allow it to lapse.">
                   {' '}
                 </AileronRegular>
               </View>
@@ -218,14 +220,12 @@ Conditions under which the policyholder can surrender the policy for its cash va
 Contestability Period:"></AileronBold>
 
               <View style={styles.termsAndConditions}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
-                  name="
-
-A period during which the insurance company can contest the validity of the policy based on misrepresented information in the application.">
+                  style={styles.termsAndConditionsText}
+                  name="A period during which the insurance company can contest the validity of the policy based on misrepresented information in the application.">
                   {' '}
                 </AileronRegular>
               </View>
@@ -238,14 +238,12 @@ A period during which the insurance company can contest the validity of the poli
 Policy Termination:"></AileronBold>
 
               <View style={styles.termsAndConditions}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
-                  name="
-
-Circumstances under which the policy may be terminated, such as non-payment of premiums.">
+                  style={styles.termsAndConditionsText}
+                  name="Circumstances under which the policy may be terminated, such as non-payment of premiums.">
                   {' '}
                 </AileronRegular>
               </View>
@@ -258,15 +256,12 @@ Circumstances under which the policy may be terminated, such as non-payment of p
 Policy Renewal and Convertibility:"></AileronBold>
 
               <View style={styles.termsAndConditions}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.termsAndConditionsText}
-                  name="
-
-
-Terms related to the renewal of term policies or the ability to convert a term policy to a permanent policy.">
+                  style={styles.termsAndConditionsText}
+                  name="Terms related to the renewal of term policies or the ability to convert a term policy to a permanent policy.">
                   {' '}
                 </AileronRegular>
               </View>
@@ -279,16 +274,13 @@ Terms related to the renewal of term policies or the ability to convert a term p
 Grace Period:"></AileronBold>
 
               <View style={styles.termsAndConditions}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
 
                 <AileronRegular
-                  style={style.termsAndConditionsText}
-                  name="
-
-
-A specified period after the premium due date during which the policy remains in force.
+                  style={styles.termsAndConditionsText}
+                  name="A specified period after the premium due date during which the policy remains in force.
 ">
                   {' '}
                 </AileronRegular>
@@ -302,19 +294,21 @@ A specified period after the premium due date during which the policy remains in
 Policyholder's Responsibilities:"></AileronBold>
 
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold style={style.bullet} name=".">
+                <AileronBold style={styles.bullet} name="•">
                   {' '}
                 </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   numberOfLines={2}
                   name="Requirements and obligations of the policyholder, such as providing accurate information and notifying the insurance company of any changes."></AileronRegular>
               </View>
 
               <View style={styles.termsAndConditionsPoints}>
-                <AileronBold name="."> </AileronBold>
+                <AileronBold style={styles.bullet} name="•">
+                  {' '}
+                </AileronBold>
                 <AileronRegular
-                  style={style.pointsText}
+                  style={styles.pointsText}
                   name="This is a very high-level overview, and the actual policy document will contain much more detail and legal language. It's crucial to thoroughly review the policy and consult with an insurance professional to ensure you understand the terms and conditions specific to the policy you are considering."></AileronRegular>
               </View>
             </View>
@@ -326,15 +320,3 @@ Policyholder's Responsibilities:"></AileronBold>
 };
 
 export default TermsAndConditionsView;
-const style = StyleSheet.create({
-  pointsText: {
-    textAlign: 'left',
-    fontSize: vh * 1.7,
-    lineHeight: vh * 2.5,
-  },
-  bullet: {},
-  termsAndConditionsText: {
-    textAlign: 'left',
-    fontSize: vh * 1.7,
-  },
-});

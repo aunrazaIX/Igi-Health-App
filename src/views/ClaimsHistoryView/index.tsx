@@ -15,15 +15,16 @@ import {AileronBold, CurvedView} from '../../components';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import DetailsContainer from '../../components/DetailsContainer';
-import {Calendar} from 'react-native-calendars';
+
 import {
   ClaimHistory,
   AmountStatus,
   daysStatus,
 } from '../../viewmodels/useClaimsHistoryViewModel';
 import LinearGradient from 'react-native-linear-gradient';
+import Calender from './Component/Calender';
 
-type HomeViewProps = {
+type claimsHistoryViewProps = {
   data: ClaimHistory[][];
   amountStatusTab: AmountStatus;
   daysStatusTab: daysStatus;
@@ -33,7 +34,7 @@ type HomeViewProps = {
   onPressAmountStatusTab: (tab: AmountStatus) => void;
 };
 
-const ClaimsHistoryView: React.FC<HomeViewProps> = ({
+const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
   data,
   amountStatusTab,
   daysStatusTab,
@@ -42,13 +43,13 @@ const ClaimsHistoryView: React.FC<HomeViewProps> = ({
   isCalendarVisible,
   onPressHeaderIcon,
 }) => {
-  console.log(data, 'data');
   return (
     <View style={styles.claimHistoryContainer}>
       <View style={styles.header}>
         <TopView
           title="Claims History"
-          HeaderSecondIcon={icons.search}
+          containerStyle={styles.containerStyle}
+          HeaderSecondIcon={icons.searchWhite}
           HeaderIcon={icons.calender}
           onPressBack={() => console.log('Back Pressed')}
           onPressHeaderIcon={onPressHeaderIcon}
@@ -59,15 +60,15 @@ const ClaimsHistoryView: React.FC<HomeViewProps> = ({
         <View style={styles.infoContainer}>
           <View style={styles.infoContainerTop}>
             <TouchableOpacity
-              onPress={() => onPressAmountStatusTab('paid Amount')}
+              onPress={() => onPressAmountStatusTab('paidAmount')}
               style={
-                amountStatusTab === 'paid Amount'
-                  ? styles.leftButtonActive
-                  : styles.leftButton
+                amountStatusTab === 'paidAmount'
+                  ? styles.buttonActive
+                  : styles.button
               }>
               <Image
                 source={
-                  amountStatusTab === 'paid Amount'
+                  amountStatusTab === 'paidAmount'
                     ? icons.payment
                     : icons.paymentInactive
                 }
@@ -77,28 +78,28 @@ const ClaimsHistoryView: React.FC<HomeViewProps> = ({
                 name="Paid Amount"
                 numberOfLines={1}
                 style={
-                  amountStatusTab === 'paid Amount'
-                    ? style.buttonTextActive
-                    : style.buttonText
+                  amountStatusTab === 'paidAmount'
+                    ? styles.buttonTextActive
+                    : styles.buttonText
                 }
               />
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => onPressAmountStatusTab('Pending Amount')}
+              onPress={() => onPressAmountStatusTab('PendingAmount')}
               style={
-                amountStatusTab === 'Pending Amount'
-                  ? styles.rightButtonActive
-                  : styles.leftButton
+                amountStatusTab === 'PendingAmount'
+                  ? styles.buttonActive
+                  : styles.button
               }>
               <Image source={icons.creditCard} />
               <AileronBold
                 name="Pending Amount"
                 numberOfLines={1}
                 style={
-                  amountStatusTab === 'Pending Amount'
-                    ? style.buttonTextActive
-                    : style.buttonText
+                  amountStatusTab === 'PendingAmount'
+                    ? styles.buttonTextActive
+                    : styles.buttonText
                 }
               />
             </TouchableOpacity>
@@ -117,8 +118,8 @@ const ClaimsHistoryView: React.FC<HomeViewProps> = ({
                 numberOfLines={1}
                 style={
                   daysStatusTab === 'Daily'
-                    ? style.buttonTextActive
-                    : style.buttonText
+                    ? styles.buttonTextActive
+                    : styles.infoContainerSecondTopButtonText
                 }
               />
             </TouchableOpacity>
@@ -135,8 +136,8 @@ const ClaimsHistoryView: React.FC<HomeViewProps> = ({
                 numberOfLines={1}
                 style={
                   daysStatusTab === 'Monthly'
-                    ? style.buttonTextActive
-                    : style.buttonText
+                    ? styles.buttonTextActive
+                    : styles.infoContainerSecondTopButtonText
                 }
               />
             </TouchableOpacity>
@@ -153,13 +154,14 @@ const ClaimsHistoryView: React.FC<HomeViewProps> = ({
                 numberOfLines={1}
                 style={
                   daysStatusTab === 'Yearly'
-                    ? style.buttonTextActive
-                    : style.buttonText
+                    ? styles.buttonTextActive
+                    : styles.infoContainerSecondTopButtonText
                 }
               />
             </TouchableOpacity>
           </View>
 
+          {}
           <FlatList
             data={data}
             keyExtractor={(_, index) => index.toString()}
@@ -168,89 +170,14 @@ const ClaimsHistoryView: React.FC<HomeViewProps> = ({
         </View>
       </CurvedView>
 
-      <Modal
-        isVisible={isCalendarVisible}
-        onBackdropPress={onPressHeaderIcon}
-        style={style.modalStyle}
-        animationIn="slideInUp"
-        animationInTiming={3}
-        animationOut="slideOutDown"
-        backdropOpacity={0}>
-        <View style={style.modalContent}>
-          <Calendar
-            onDayPress={day => console.log(day)}
-            style={{
-              height: vh * 70, // more screen coverage
-              paddingHorizontal: vw * 4,
-              paddingBottom: vh * 2,
-            }}
-            dayComponent={({date, state}) => {
-              return (
-                <>
-                  <View>
-                    <AileronBold
-                      style={style.daysSection}
-                      name={date?.day?.toString() || ''}
-                    />
-                  </View>
-                </>
-              );
-            }}
-          />
-
-          <View style={styles.calendarButtonsContainer}>
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={onPressHeaderIcon}>
-              <AileronBold name={'Cancel'}> </AileronBold>
-            </TouchableOpacity>
-
-            <LinearGradient colors={COLORS.activeButtonGradient}>
-              {' '}
-              <TouchableOpacity
-                style={styles.applyButton}
-                onPress={() => console.log('Apply pressed')}>
-                <AileronBold name={'Select'}> </AileronBold>
-              </TouchableOpacity>{' '}
-            </LinearGradient>
-          </View>
-        </View>
-      </Modal>
+      {isCalendarVisible && (
+        <Calender
+          onPressHeaderIcon={onPressHeaderIcon}
+          isCalendarVisible={isCalendarVisible}
+        />
+      )}
     </View>
   );
 };
 
 export default ClaimsHistoryView;
-
-const style = StyleSheet.create({
-  buttonTextActive: {
-    color: COLORS.white,
-    fontSize: vh * 2,
-  },
-  buttonText: {
-    color: COLORS.textGrayShade,
-    fontSize: vh * 2,
-  },
-  cardText: {
-    fontSize: vh * 2,
-  },
-  modalStyle: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-  modalContent: {
-    backgroundColor: COLORS.white,
-    paddingVertical: vh * 1,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  modalText: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  daysSection: {
-    fontSize: vh * 2,
-    paddingVertical: vh * 2,
-    paddingHorizontal: vw * 2,
-  },
-});

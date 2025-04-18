@@ -7,12 +7,13 @@ import {
   StyleSheet,
 } from 'react-native';
 import React from 'react';
-import {AileronBold, CurvedView, TopView} from '../../components';
+import {AileronBold, CurvedView, InputField, TopView} from '../../components';
 import {icons} from '../../assets';
 import {styles} from './style';
 import DetailsContainer from '../../components/DetailsContainer';
-import {vh} from '../../assets/theme/dimension';
+import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
+import {fonts} from '../../assets/fonts';
 
 type HomeViewProps = {
   data: [][];
@@ -32,8 +33,12 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   return (
     <>
       <TopView
-        title="Panel Hospital List"
-        HeaderIcon={icons.search}
+        title={
+          selectedTab === 'PanelHospitals'
+            ? 'Panel Hospital List'
+            : 'Discounted Centers'
+        }
+        HeaderIcon={icons.searchWhite}
         HeaderSecondIcon={null}
       />
 
@@ -89,10 +94,10 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             <TouchableOpacity
               style={[
                 styles.tab,
-                selectedTab === 'Panel Hospitals' && styles.activeTab,
+                selectedTab === 'PanelHospitals' && styles.activeTab,
               ]}
-              onPress={() => onPressTab('Panel Hospitals')}>
-              {selectedTab === 'Panel Hospitals' ? (
+              onPress={() => onPressTab('PanelHospitals')}>
+              {selectedTab === 'PanelHospitals' ? (
                 <Image source={icons.hospital} />
               ) : (
                 <Image source={icons.hospitalInactive} />
@@ -101,7 +106,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               <AileronBold
                 style={[
                   styles.tabText,
-                  selectedTab === 'Panel Hospitals' && styles.activeTabText,
+                  selectedTab === 'PanelHospitals' && styles.activeTabText,
                 ]}
                 name="Panel Hospitals"
               />
@@ -110,10 +115,10 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             <TouchableOpacity
               style={[
                 styles.tab,
-                selectedTab === 'Discounted Centers' && styles.activeTab,
+                selectedTab === 'DiscountedCenters' && styles.activeTab,
               ]}
-              onPress={() => onPressTab('Discounted Centers')}>
-              {selectedTab === 'Discounted Centers' ? (
+              onPress={() => onPressTab('DiscountedCenters')}>
+              {selectedTab === 'DiscountedCenters' ? (
                 <Image source={icons.labsActive} />
               ) : (
                 <Image source={icons.labsInactive} />
@@ -122,27 +127,48 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               <AileronBold
                 style={[
                   styles.tabText,
-                  selectedTab === 'Discounted Centers' && styles.activeTabText,
+                  selectedTab === 'DiscountedCenters' && styles.activeTabText,
                 ]}
                 name="Discounted Centers"
               />
             </TouchableOpacity>
           </View>
 
-          <FlatList
-            data={data}
-            contentContainerStyle={{paddingBottom: vh * 10}}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({item}) => (
-              <DetailsContainer
-                detailsText={style.detailsText}
-                detailsTextLabel={style.detailsTextLabel}
-                detailsTextValue={style.detailsTextValue}
-                headerIcon={icons.arrowDirection}
-                data={item}
-              />
-            )}
-          />
+          {/*rendering list card based on list tab active  */}
+          {selectedTabRight === 'map' && (
+            <View>
+              <View>
+                <InputField
+                  searchFieldRight={styles.searchFieldRight}
+                  searchFieldRightIcon={styles.searchFieldRightIcon}
+                  inputStyle={styles.inputStyle}
+                  searchIcon={icons.searchBlack}
+                  containerStyle={styles.inputFeild}
+                />
+              </View>
+            </View>
+          )}
+
+          {((selectedTab === 'PanelHospitals' && selectedTabRight === 'list') ||
+            (selectedTab === 'DiscountedCenters' &&
+              selectedTabRight === 'list')) && (
+            <FlatList
+              data={data}
+              contentContainerStyle={{paddingBottom: vh * 10}}
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={({item}) => (
+                <DetailsContainer
+                  detailsText={styles.detailsText}
+                  detailsTextLabel={styles.detailsTextLabel}
+                  detailsTextValue={styles.detailsTextValue}
+                  headerIcon={
+                    selectedTab === 'PanelHospitals' && icons.arrowDirection
+                  }
+                  data={item}
+                />
+              )}
+            />
+          )}
         </View>
       </CurvedView>
     </>
@@ -151,16 +177,4 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
 
 export default PanelHospitalListView;
 
-const style = StyleSheet.create({
-  detailsTextLabel: {
-    width: '20%',
-    textAlign: 'left',
-  },
-
-  detailsTextValue: {
-    width: '60%',
-    textAlign: 'right',
-  },
-
-  detailsText: {},
-});
+const style = StyleSheet.create({});

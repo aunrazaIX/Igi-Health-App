@@ -18,27 +18,32 @@ const TopView = ({
   icon,
   HeaderIcon,
   HeaderSecondIcon,
+  headerStyle,
+  containerStyle,
   onPressHeaderIcon,
   onPressBack,
 }: {
-  title: string;
+  title?: string;
   onPressBack?: () => void;
-  icon?: ImageSourcePropType | null;
-  HeaderIcon: ImageSourcePropType | null;
-  HeaderSecondIcon: ImageSourcePropType | null;
+  icon?: ImageSourcePropType | null; 
+  headerStyle?:object
+  containerStyle?: object | null;
+  HeaderIcon?: ImageSourcePropType | null;
+  HeaderSecondIcon?: ImageSourcePropType | null;
   onPressHeaderIcon?: () => void | null;
 }) => {
   return (
     <LinearGradient
-      style={styles.container}
+      style={[styles.container]}
       colors={COLORS.activeButtonGradient}>
-      <View style={styles.row}>
+      <View style={[styles.row, , containerStyle]}>
         <TouchableOpacity
           onPress={onPressBack}
           style={styles.backIconContainer}>
           <Image style={styles.backIcon} source={icons.backArrow} />
         </TouchableOpacity>
-        <AileronSemiBold style={styles.headerName} name={title} />
+
+        <AileronSemiBold style={[styles.headerName , headerStyle]} name={title} />
 
         <View style={styles.headerIcons}>
           {HeaderIcon && (
@@ -63,9 +68,7 @@ export default TopView;
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: vh * 3,
     paddingHorizontal: vw * 3,
-
     alignItems: 'center',
   },
   headerIcons: {
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    marginTop: vh * 5,
   },
   backIconContainer: {
     height: vh * 4.5,
@@ -93,16 +97,14 @@ const styles = StyleSheet.create({
   headerName: {
     width: '70%',
     color: COLORS.white,
-    fontSize: vh * 2,
+    fontSize: vw * 4,
   },
   spacedView: {
     marginVertical: vh * 3,
-    // flexDirection: 'row',
-    // gap: vw * 3,
   },
   iconStyle: {
-    height: vh * 6,
-    width: vw * 6,
+    height: vh * 8,
+    width: vw * 8,
     alignSelf: 'center',
     resizeMode: 'contain',
   },

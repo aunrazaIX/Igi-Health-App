@@ -26,6 +26,7 @@ const ForgotPasswordView = ({
     2: <OtpView />,
     3: <CreateNewPassword />,
   };
+
   const returnTitle: Record<number, string> = {
     1: 'Forgot Password',
     2: 'OTP Verification',
@@ -66,6 +67,7 @@ const ForgotPasswordView = ({
           name={returnDescription[step]}
         />
         {returnComponent[step]}
+
         <Button
           onPress={() => handleStep(step)}
           name={returnButtonName[step]}

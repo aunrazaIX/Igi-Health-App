@@ -4,13 +4,12 @@ import ForgotPassword from './src/screens/ForgotPassword';
 import Benefits from './src/screens/Benefits';
 import ClaimsHistory from './src/screens/ClaimsHistory';
 import PanelHospitalList from './src/screens/PanelHospitalList';
-
 import TermsAndConditions from './src/screens/TermsAndConditions';
 import Hospitals from './src/screens/Hospitals';
 import Home from './src/screens/Home';
 
 const App = () => {
-  return <ClaimsHistory />;
+  return <TermsAndConditions />;
 };
 
 export default App;

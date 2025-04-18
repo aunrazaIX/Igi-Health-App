@@ -16,11 +16,11 @@ type Item = {
   value: string;
 };
 type Props = {
-  data: Item[];
-  detailsTextLabel: {};
-  detailsText: {};
-  detailsTextValue: {};
-  headerIcon: ImageSourcePropType | null;
+  data?: Item[];
+  detailsTextLabel?: {};
+  detailsText?: {};
+  detailsTextValue?: {};
+  headerIcon?: ImageSourcePropType | null;
 };
 
 const DetailsContainer: React.FC<Props> = ({
@@ -33,14 +33,14 @@ const DetailsContainer: React.FC<Props> = ({
   const [isArrowUp, setIsArrowUp] = useState<boolean>(true);
 
   return (
-    <View style={[styles.claimsHistoryCard]}>
-      <View style={styles.claimsHistoryCardHeader}>
-        <View style={styles.claimsHistoryCardHeaderLeft}>
+    <View style={[styles.card]}>
+      <View style={styles.cardHeader}>
+        <View style={styles.cardHeaderLeft}>
           <Image source={icons.editTask} />
-          <AileronBold name={`Claim`} numberOfLines={1} />
+          <AileronBold style={styles.cardHeaderLeftText} name={`Claim`} />
         </View>
 
-        <View style={styles.claimsHistoryCardHeaderRight}>
+        <View style={styles.cardHeaderRight}>
           {isArrowUp ? (
             <>
               {headerIcon && <Image source={headerIcon} />}
@@ -60,15 +60,15 @@ const DetailsContainer: React.FC<Props> = ({
         <>
           <View style={styles.cardHorizontalLine} />
 
-          {data.map((item, index) => (
-            <View key={index} style={styles.claimsHistoryCardDetails}>
+          {data?.map((item, index) => (
+            <View key={index} style={styles.cardDetails}>
               <AileronBold
-                style={[styles.detailsText, detailsTextLabel]}
+                style={[styles.detailsLabel, detailsTextLabel]}
                 name={item.label}
               />
 
               <AileronBold
-                style={[styles.detailsText, detailsTextValue]}
+                style={[styles.detailsValue, detailsTextValue]}
                 name={item.value}
               />
             </View>
@@ -82,11 +82,10 @@ const DetailsContainer: React.FC<Props> = ({
 export default DetailsContainer;
 
 export const styles = StyleSheet.create({
-  claimsHistoryCard: {
-    borderWidth: 1,
+  card: {
+    borderWidth: vw * 0.4,
     borderColor: COLORS.buttonBorder,
-    borderRadius: vw * 4,
-
+    borderRadius: vw * 5,
     backgroundColor: COLORS.white,
     paddingHorizontal: vw * 4,
     paddingVertical: vh * 2,
@@ -95,23 +94,27 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: vh * 1,
 
-    elevation: 4,
+    elevation: 2,
   },
 
-  claimsHistoryCardHeader: {
+  cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     paddingVertical: vh * 0.5,
   },
 
-  claimsHistoryCardHeaderLeft: {
+  cardHeaderLeft: {
     gap: vw * 2,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  claimsHistoryCardHeaderRight: {
+  cardHeaderLeftText: {
+    fontSize: vw * 4,
+    color: COLORS.black,
+  },
+  cardHeaderRight: {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
@@ -119,22 +122,27 @@ export const styles = StyleSheet.create({
   },
 
   cardHorizontalLine: {
-    borderWidth: 1,
+    borderWidth: vw * 0.2,
     borderStyle: 'dashed',
     width: '100%',
+
     borderColor: COLORS.textGrayShade,
     marginBottom: vh * 2,
     opacity: 0.4,
   },
   claimsHistoryCardDetailsContainer: {},
-  claimsHistoryCardDetails: {
+  cardDetails: {
     marginBottom: vh * 1,
 
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
   },
-  detailsText: {
-    fontSize: vh * 1.7,
+  detailsLabel: {
+    fontSize: vw * 3.5,
+  },
+  detailsValue: {
+    fontSize: vw * 3.5,
+    color: COLORS.textBlackShade,
   },
 });
