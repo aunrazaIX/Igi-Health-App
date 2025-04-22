@@ -22,7 +22,9 @@ const BenefitsView: React.FC<Props> = ({ data }) => {
     const RenderBenefits = ({ item }: { item: Item }) => (
         <View style={styles.card}>
             <LinearGradient
-                colors={['#0B4A98', '#48C3FF']}
+                colors={['#48C3FF', '#0B4A98']}
+                start={{ x: -.6, y: 1 }}
+                end={{ x: .5, y: .4 }}
                 style={styles.CardBox}
             >
                 <Image source={item.image} style={styles.coverageCardImage} />

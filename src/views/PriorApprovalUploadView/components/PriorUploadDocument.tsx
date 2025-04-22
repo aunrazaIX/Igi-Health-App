@@ -34,7 +34,6 @@ const PriorUploadDocument = () => {
 
     return (
         <View>
-
             <View style={styles.uploadBox}>
                 <View>
                     <Image source={images.priorUpload} style={styles.uploadImage} />
@@ -46,7 +45,6 @@ const PriorUploadDocument = () => {
                 </TouchableOpacity>
                 <AileronSemiBold name='(Max. File size: 25 MB)' style={styles.maxFile} />
             </View>
-
             {selectedImages.map((item, index) => {
                 return (
                     <View style={styles.documentBox} key={index}>
@@ -55,7 +53,7 @@ const PriorUploadDocument = () => {
                                 <Image source={icons.document} style={styles.documentIcon} />
                                 <View>
                                     <AileronSemiBold name={item.fileName || ''} style={styles.documentText} />
-                                    <AileronSemiBold name={`${item.fileSize} kb`} style={styles.documentSize} />
+                                    <AileronSemiBold name={`${item.fileSize} KB`} style={styles.documentSize} />
                                 </View>
                             </View>
                             <View>
@@ -74,30 +72,6 @@ const PriorUploadDocument = () => {
                     </View>
                 )
             })}
-            {/* <View style={styles.documentBox}>
-                <View style={styles.documentBoxInside}>
-                    <View style={styles.documentNameRow}>
-                        <Image source={icons.document} style={styles.documentIcon} />
-                        <View>
-                            <AileronSemiBold name='Hospital_Claim_Form.pdf' style={styles.documentText} />
-                            <AileronSemiBold name='150 KB' style={styles.documentSize} />
-                        </View>
-                    </View>
-                    <View>
-                        <Image source={icons.tick} style={styles.tick} />
-                    </View>
-                </View>
-
-                <View style={styles.downloadContainer}>
-                    <View style={styles.downloadBackside}>
-                        <View style={styles.downloadUpSide}></View>
-                    </View>
-                    <View style={styles.downloadPercentage}>
-                        <AileronSemiBold name={'100%'} style={styles.PercentageNumber} />
-                    </View>
-                </View>
-            </View> */}
-
         </View>
     )
 }

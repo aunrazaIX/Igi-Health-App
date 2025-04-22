@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../assets/theme/colors";
-import { vh } from "../../assets/theme/dimension";
+import { vh, vw } from "../../assets/theme/dimension";
 
 const styles = StyleSheet.create({
     personalImage: {
@@ -96,35 +96,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: vh * 1
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // popupSelectBox: {
-    //     width: '100%',
-    //     flexDirection: 'row',
-    //     justifyContent: 'space-between',
-    //     alignItems: 'center'
-    // },
-    // selectedGender: {
-    //     color: COLORS.personalValue,
-    //     fontSize: vh * 1.8,
-    //     fontWeight: '500',
-    //     textAlign: 'left'
-    // },
-    // arrow: {
-    //     width: vh * 2.5,
-    //     height: vh * 2.5,
-    // },
+    dependentBoxStyle: {
+        padding: vw * 3.5
+    }
 })
 
 export default styles;

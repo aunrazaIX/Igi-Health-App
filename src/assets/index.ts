@@ -7,6 +7,7 @@ export const images = {
   AddNew: require('./images/Add-New.png'),
   priorUpload: require('./images/priorUpload.png'),
   personalFrame: require('./images/personal-Popup-Frame.png'),
+  taskDone: require('./images/taskDone.png'),
 };
 
 export const icons = {

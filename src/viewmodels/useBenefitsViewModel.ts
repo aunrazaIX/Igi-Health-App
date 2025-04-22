@@ -36,7 +36,7 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
       image: icons.stethoscope,
     },
     {
-      title: 'Post-Hospitalization Expenses',
+      title: 'Post-\nHospitalization Expenses',
       price: 'Covered upto 30 days Rs. 3,000/-',
       image: icons.hospital,
     },

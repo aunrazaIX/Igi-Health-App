@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   uploadFileContainer: {
     flex: 1,
     justifyContent: 'space-between',
+    minHeight: '100%'
   },
   submitButton: {
     borderRadius: vh * 1.5,
@@ -118,6 +119,9 @@ const styles = StyleSheet.create({
   remarksInput:{
     color: COLORS.placeholderColor,
     fontSize: vh * 1.5,
+  },
+  confimationContainer:{
+    height: '52%'
   }
 });
 

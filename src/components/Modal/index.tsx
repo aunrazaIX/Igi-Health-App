@@ -57,8 +57,6 @@ const ModalCustom: React.FC<ModalCustomProps> = ({ modalVisible, setModalVisible
                         <Button name='Submit' containerStyle={styles.modalAddButton} inputStyle={styles.modalAddText} />
 
                         <Button name='Cancel' containerStyle={styles.modalCancelButton} gradientColors={['#E1E3E6', '#E1E3E6']} inputStyle={styles.modalCancelText} />
-
-
                     </View>
                 </View>
             </View>
@@ -74,12 +72,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
+        backgroundColor: '#5d605f3d'
     },
     modalView: {
         backgroundColor: COLORS.white,
         borderTopRightRadius: vw * 6,
         borderTopLeftRadius: vw * 6,
         width: '100%',
+        // height: vh * 83,
         height: '88%',
         paddingHorizontal: vh * 1,
         paddingTop: vh * 3.5,
@@ -107,65 +107,46 @@ const styles = StyleSheet.create({
     },
     manageText: {
         color: COLORS.coverageTitle,
-        fontSize: vh * 3,
+        fontSize: vw * 6.6,
     },
     DependentText: {
         color: COLORS.benefitTitle,
-        fontSize: vh * 3,
+        fontSize: vw * 6.6,
     },
     dependentOuterStyle: {
         width: '100%',
         borderWidth: vh * .3,
-        paddingHorizontal: vh * 1.5,
-        paddingTop: vh * 1.5,
-        paddingBottom: vh * 0.2
+        padding: vw * 3.5,
+        paddingBottom: vh * 0,
     },
     selectLabel: {
         textAlign: 'left',
         color: COLORS.personalValue,
-        fontSize: vh * 1.6
+        fontSize: vw * 3.6
     },
     popupInput: {
         marginTop: vh * -0.9,
         marginLeft: 0,
         color: COLORS.personalValue,
-        fontSize: vh * 1.8,
+        fontSize: vw * 4,
         fontWeight: '500',
     },
-    // popupSelectBox: {
-    //     width: '100%',
-    //     flexDirection: 'row',
-    //     justifyContent: 'space-between',
-    //     alignItems: 'center'
-    // },
-    // selectedGender: {
-    //     color: COLORS.personalValue,
-    //     fontSize: vh * 1.8,
-    //     fontWeight: '500',
-    //     textAlign: 'left'
-    // },
-    // arrow: {
-    //     width: vh * 2.5,
-    //     height: vh * 2.5,
-    // },
     modalAddButton: {
         marginTop: vh * 2,
         borderRadius: vw * 3.5,
     },
     modalAddText: {
-        fontSize: vh * 2,
+        fontSize: vw * 4.4,
         fontWeight: '700',
 
     },
     modalCancelButton: {
         marginTop: vh * 2,
         borderRadius: vw * 3.5,
-
     },
     modalCancelText: {
         color: COLORS.cancelButton,
-        fontSize: vh * 2,
+        fontSize: vw * 4.4,
         fontWeight: '700',
-
     },
 })

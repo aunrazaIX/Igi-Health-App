@@ -5,7 +5,7 @@ import AileronRegular from '../AileronRegular';
 import AileronBold from '../AileronBold';
 import { icons } from '../../assets';
 import { COLORS } from '../../assets/theme/colors';
-import { vh } from '../../assets/theme/dimension';
+import { vh, vw } from '../../assets/theme/dimension';
 
 
 type Patient = {
@@ -29,7 +29,7 @@ const Select: React.FC<SelectProps> = ({ selectData, selectLabel, selectPlacehol
 
     return (
         <View style={styles.selectContainer}>
-            <DependentBox>
+            <DependentBox containerStyle={styles.dependentContainer}>
                 <AileronRegular name={selectLabel} style={styles.Patient} />
 
                 <View
@@ -73,6 +73,7 @@ export default Select
 const styles = StyleSheet.create({
     Patient: {
         textAlign: 'left',
+        fontSize: vw * 3.6
     },
     selectBox: {
         flexDirection: 'row',
@@ -106,6 +107,9 @@ const styles = StyleSheet.create({
         fontSize: vh * 1.7,
     },
     selectContainer: {
-        width: '100%'
+        width: '100%',
     },
+    dependentContainer: {
+        padding: vw * 3.5
+    }
 })

@@ -10,7 +10,7 @@ import styles from './styles'
 import DependentBox from '../../components/DependentBox'
 import ModalCustom from '../../components/Modal'
 import { personalDetail } from '../../types/personalTypes'
-import ModalDelete from '../../components/Modal/ModalDelete'
+import ConfimationModal from '../../components/Modal/confimationModal'
 
 
 type Props = {
@@ -37,7 +37,7 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation }) => {
     const [expanded, setExpanded] = useState(false);
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
     const [modalVisible, setModalVisible] = useState(false);
-    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+    const [ConfimationModalVisible, setConfimationModalVisible] = useState(false);
 
     const toggleExpand = (index: number) => {
         setExpandedIndex(prevIndex => (prevIndex === index ? null : index));
@@ -73,21 +73,21 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation }) => {
                 </View>
 
                 {data.map((dependent, index) => (
-                    <DependentBox key={index}>
+                    <DependentBox key={index} containerStyle={styles.dependentBoxStyle}>
                         <View style={styles.header} >
                             <Image source={dependent.image} style={styles.avatar} />
                             <AileronBold style={styles.headerText} name={dependent.dependent} />
                             <View style={styles.iconsROw}>
-                                {/* {expandedIndex === index && ( */}
+                                {expandedIndex === index && (
                                     <View style={styles.deleteEditRow}>
                                         <TouchableOpacity>
                                             <Image source={icons.edit} style={styles.editIcon} />
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={()=> setDeleteModalVisible(true)}>
+                                        <TouchableOpacity onPress={() => setConfimationModalVisible(true)}>
                                             <Image source={icons.delete} style={styles.deleteIcon} />
                                         </TouchableOpacity>
                                     </View>
-                                {/* )} */}
+                                )}
 
                                 <TouchableOpacity onPress={() => toggleExpand(index)}>
                                     <Image
@@ -121,9 +121,13 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation }) => {
                 relation={relation}
             />
 
-            <ModalDelete 
-                deleteModalVisible={deleteModalVisible}
-                setDeleteModalVisible={setDeleteModalVisible}
+            <ConfimationModal
+                ConfirmationModalVisible={ConfimationModalVisible}
+                setConfirmationModalVisible={setConfimationModalVisible}
+                frameImage={images.personalFrame}
+                confirmationMessage={'Are you sure you want to delete this dependent detail? This action cannot be undone, and it may affect other related data.'}
+                confirmationRequired={true}
+                deleteButton={true}
             />
         </Container>
     )

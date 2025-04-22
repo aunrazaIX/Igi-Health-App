@@ -1,9 +1,9 @@
 export type UsePersonalModalTypes = {
-    genderRelationStates: {
-      gender: personalDetail[];
-      relation: personalDetail[];
-    };
+  genderRelationStates: {
+    gender: personalDetail[];
+    relation: personalDetail[];
   };
+};
 
 export type personalDetail = {
   id: number;
