@@ -12,6 +12,7 @@ type UseForgotPasswordViewModelReturnType = {
 };
 const useForgotPasswordViewModel = (): UseForgotPasswordViewModelReturnType => {
   const [step, setStep] = useState<number>(1);
+  
   const handleStep = (step: number): void => {
     if (step < 3) {
       setStep(step + 1);

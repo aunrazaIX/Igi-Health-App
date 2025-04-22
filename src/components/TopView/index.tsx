@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { COLORS } from '../../assets/theme/colors';
+import {COLORS} from '../../assets/theme/colors';
 import AileronSemiBold from '../AileronSemiBold';
-import { vh, vw } from '../../assets/theme/dimension';
-import { icons } from '../../assets';
+import {vh, vw} from '../../assets/theme/dimension';
+import {icons} from '../../assets';
 
+type StyleObject = Record<string, string | number | boolean>;
 
 const TopView = ({
   title,
@@ -20,7 +21,8 @@ const TopView = ({
   TopViewSideIcon,
   onPressBack,
   AddModal,
-  TopViewSecondIcon
+  TopViewSecondIcon,
+  containerStyle
 }: {
   title: string;
   onPressBack?: () => void,
@@ -28,13 +30,16 @@ const TopView = ({
   TopViewSideIcon?: ImageSourcePropType | null;
   TopViewSecondIcon?: ImageSourcePropType | null;
   AddModal?: () => void,
+  containerStyle?: StyleObject | StyleObject[];
 }) => {
   return (
     <LinearGradient
-      style={styles.container}
+      style={[styles.container]}
       colors={COLORS.activeButtonGradient}>
-      <View style={styles.row}>
-        <TouchableOpacity onPress={onPressBack} style={styles.backIconContainer}>
+      <View style={[styles.row, , containerStyle]}>
+        <TouchableOpacity
+          onPress={onPressBack}
+          style={styles.backIconContainer}>
           <Image style={styles.backIcon} source={icons.backArrow} />
         </TouchableOpacity>
         <AileronSemiBold style={styles.headerName} name={title} />
@@ -55,6 +60,7 @@ const TopView = ({
         </View>
 
       </View>
+
       <View style={styles.spacedView}>
         {icon && <Image style={styles.iconStyle} source={icon} />}
       </View>
@@ -65,13 +71,18 @@ export default TopView;
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: vh * 3,
     paddingHorizontal: vw * 3,
+    alignItems: 'center',
+  },
+  headerIcons: {
+    flexDirection: 'row',
+    gap: vw * 2,
   },
   row: {
     alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row',
-    width: '100%',
+    marginTop: vh * 5,
   },
   backIconContainer: {
     height: vh * 4.5,
@@ -89,14 +100,14 @@ const styles = StyleSheet.create({
   headerName: {
     width: '65%',
     color: COLORS.white,
-    fontSize: vh * 2,
+    fontSize: vw * 4,
   },
   spacedView: {
     marginVertical: vh * 3,
   },
   iconStyle: {
-    height: vh * 16,
-    width: vw * 50,
+    height: vh * 8,
+    width: vw * 8,
     alignSelf: 'center',
     resizeMode: 'contain',
   },

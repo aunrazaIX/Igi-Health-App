@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TextProps, StyleProp, TextStyle} from 'react-native';
 import {fonts} from '../../assets/fonts';
-import {vh} from '../../assets/theme/dimension';
+import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
 interface AileronLightProps extends TextProps {
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.Aileron.light,
     textAlign: 'center',
     color: COLORS.textColor,
-    fontSize: vh * 1.3,
+    fontSize: vw * 1.3,
   },
 });

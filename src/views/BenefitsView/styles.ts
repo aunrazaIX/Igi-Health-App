@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
   },
 
   MaximumTitle: {
-    fontSize: vh * 2.7,
+    fontSize: vw * 2.7,
     textAlign: 'left',
     marginTop: vh * 1.5,
     color: '#004984',
   },
   BenefitsTitle: {
-    fontSize: vh * 2.5,
+    fontSize: vw * 2.5,
     textAlign: 'left',
     color: '#EE2560',
   },
