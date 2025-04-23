@@ -1,19 +1,14 @@
 import {
   View,
   Image,
-  StyleSheet,
   FlatList,
   TouchableOpacity,
-  Text,
 } from 'react-native';
 import React from 'react';
-import Modal from 'react-native-modal';
 import {styles} from './style';
 import TopView from '../../components/TopView';
 import {icons} from '../../assets';
 import {AileronBold, CurvedView} from '../../components';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
 import DetailsContainer from '../../components/DetailsContainer';
 
 import {
@@ -21,17 +16,17 @@ import {
   AmountStatus,
   daysStatus,
 } from '../../viewmodels/useClaimsHistoryViewModel';
-import LinearGradient from 'react-native-linear-gradient';
 import Calender from './Component/Calender';
 
 type claimsHistoryViewProps = {
   data: ClaimHistory[][];
-  amountStatusTab: AmountStatus;
+  amountStatusTab: AmountStatus;  
   daysStatusTab: daysStatus;
   isCalendarVisible: boolean;
   onPressDaysStatusTab: (tab: daysStatus) => void;
   onPressHeaderIcon: () => void;
   onPressAmountStatusTab: (tab: AmountStatus) => void;
+
 };
 
 const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
@@ -49,10 +44,10 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
         <TopView
           title="Claims History"
           containerStyle={styles.containerStyle}
-          HeaderSecondIcon={icons.searchWhite}
-          HeaderIcon={icons.calender}
+          TopViewSideIcon={icons.searchWhite}
+          TopViewSecondIcon={icons.calender}
           onPressBack={() => console.log('Back Pressed')}
-          onPressHeaderIcon={onPressHeaderIcon}
+          AddModal={onPressHeaderIcon}
         />
       </View>
 

@@ -13,24 +13,24 @@ import AileronSemiBold from '../AileronSemiBold';
 import {vh, vw} from '../../assets/theme/dimension';
 import {icons} from '../../assets';
 
+type StyleObject = Record<string, string | number | boolean>;
+
 const TopView = ({
   title,
   icon,
-  HeaderIcon,
-  HeaderSecondIcon,
-  headerStyle,
-  containerStyle,
-  onPressHeaderIcon,
+  TopViewSideIcon,
   onPressBack,
+  AddModal,
+  TopViewSecondIcon,
+  containerStyle
 }: {
-  title?: string;
-  onPressBack?: () => void;
-  icon?: ImageSourcePropType | null; 
-  headerStyle?:object
-  containerStyle?: object | null;
-  HeaderIcon?: ImageSourcePropType | null;
-  HeaderSecondIcon?: ImageSourcePropType | null;
-  onPressHeaderIcon?: () => void | null;
+  title: string;
+  onPressBack?: () => void,
+  icon?: ImageSourcePropType | null;
+  TopViewSideIcon?: ImageSourcePropType | null;
+  TopViewSecondIcon?: ImageSourcePropType | null;
+  AddModal?: () => void,
+  containerStyle?: StyleObject | StyleObject[];
 }) => {
   return (
     <LinearGradient
@@ -42,20 +42,23 @@ const TopView = ({
           style={styles.backIconContainer}>
           <Image style={styles.backIcon} source={icons.backArrow} />
         </TouchableOpacity>
+        <AileronSemiBold style={styles.headerName} name={title} />
+        <View style={styles.headerIcon}>
 
-        <AileronSemiBold style={[styles.headerName , headerStyle]} name={title} />
 
-        <View style={styles.headerIcons}>
-          {HeaderIcon && (
-            <TouchableOpacity onPress={onPressHeaderIcon}>
-              <Image style={styles.iconStyle} source={HeaderIcon} />{' '}
+          {TopViewSecondIcon &&
+            <TouchableOpacity>
+              <Image style={styles.TopViewIcon} source={TopViewSecondIcon} />
             </TouchableOpacity>
-          )}
+          }
 
-          {HeaderSecondIcon && (
-            <Image style={styles.iconStyle} source={HeaderSecondIcon} />
-          )}
+          {TopViewSideIcon &&
+            <TouchableOpacity onPress={AddModal}>
+              <Image style={styles.TopViewIcon} source={TopViewSideIcon} />
+            </TouchableOpacity>
+          }
         </View>
+
       </View>
 
       <View style={styles.spacedView}>
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   headerName: {
-    width: '70%',
+    width: '65%',
     color: COLORS.white,
     fontSize: vw * 4,
   },
@@ -108,4 +111,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     resizeMode: 'contain',
   },
+  TopViewIcon: {
+
+  },
+  headerIcon: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: vh * 8,
+    gap: vh * .5
+  }
 });

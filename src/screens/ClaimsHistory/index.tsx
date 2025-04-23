@@ -18,6 +18,7 @@ const ClaimsHistory = () => {
       onPressHeaderIcon={onPressHeaderIcon}
       onPressDaysStatusTab={onPressDaysStatusTab}
       onPressAmountStatusTab={onPressAmountStatusTab}
+   
     />
   );
 };

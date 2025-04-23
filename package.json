@@ -20,6 +20,7 @@
     "react-native-calendars": "^1.1310.0",
     "react-native-event-listeners": "^1.0.7",
     "react-native-gesture-handler": "^2.25.0",
+    "react-native-image-picker": "^8.2.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-mask-input": "^1.2.3",

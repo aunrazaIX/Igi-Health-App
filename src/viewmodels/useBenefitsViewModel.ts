@@ -1,3 +1,6 @@
+import {icons} from '../assets';
+import {ImageSourcePropType} from 'react-native';
+
 type UseBenefitsViewModel = {
   states: {
     data: CoverageBenefit[];
@@ -7,6 +10,7 @@ type UseBenefitsViewModel = {
 type CoverageBenefit = {
   title: string;
   price: string;
+  image?: ImageSourcePropType;
 };
 
 const useBenefitsViewModel = (): UseBenefitsViewModel => {
@@ -14,42 +18,42 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
     {
       title: 'Per insured per disability',
       price: 'Rs. 550,000/-',
+      image: icons.Insured,
     },
     {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
+      title: 'Daily Room & Board Limit',
+      price: 'Rs. 20,000/-',
+      image: icons.meetingRoom,
     },
     {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
+      title: 'Dental/Optical & Psychiatric',
+      price: 'Not Covered in IPD',
+      image: icons.doctor,
     },
     {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
+      title: 'Pre-Admission Testing',
+      price: 'Covered upto 30 days',
+      image: icons.stethoscope,
     },
     {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
+      title: 'Post-\nHospitalization Expenses',
+      price: 'Covered upto 30 days Rs. 3,000/-',
+      image: icons.hospital,
     },
     {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
+      title: 'Day Care Surgery',
+      price: 'Covered as per schedule',
+      image: icons.hospitalBed,
     },
     {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
+      title: 'Congenital Birth Defects',
+      price: 'Covered',
+      image: icons.baby,
     },
     {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
-    },
-    {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
-    },
-    {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
+      title: 'Pre Existing Conditions',
+      price: 'Covered',
+      image: icons.medicalList,
     },
   ];
 

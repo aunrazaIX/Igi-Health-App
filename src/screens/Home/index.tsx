@@ -1,20 +1,18 @@
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
 import HomeView from '../../views/HomeView';
 import useHomeViewModel from '../../viewmodels/useHomeViewModel';
 
-const Home = () => {
-  const {states, functions} = useHomeViewModel();
-  const {cardData, frontCard} = states;
-  const {onPressTab, onPressCard} = functions;
+type HomeViewProps = {
+  navigation: any
+};
 
-  return (
-    <HomeView
-      cardData={cardData}
-      onPressCard={onPressCard}
-      frontCard={frontCard}
-    />
-  );
+const Home: React.FC<HomeViewProps> = ({ navigation }) => {
+  const { states, functions } = useHomeViewModel();
+  const { cardData } = states;
+  const { onPressTab } = functions;
+
+  return <HomeView cardData={cardData} navigation={navigation} />;
 };
 
 export default Home;
