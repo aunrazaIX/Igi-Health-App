@@ -4,7 +4,7 @@ export const images = {
   logoWhite: require('./images/logoWhite.png'),
   flipCard: require('./images/flip-card.png'),
   maximumBenefits: require('./images/maximumBenefits.png'),
-  Logo: require('./images/Logo.png'),
+  Logo: require('./images/logo.png'),
   SecureFuture: require('./images/secure-future.png'),
   AddNew: require('./images/Add-New.png'),
   priorUpload: require('./images/priorUpload.png'),
@@ -75,3 +75,21 @@ export const icons = {
   searchWhite: require('./icons/searchWhite.png'),
   claimStats: require('./icons/claimStats.png'),
 };
+
+
+export const drawerIcons = {
+  drawerHome: require('./icons/drawerHome.png'),
+  drawerBenefits: require('./icons/drawerBenefits.png'),
+  drawerPersonal: require('./icons/drawerPersonal.png'),
+  drawerLodgeClaim: require('./icons/drawerLodgeClaim.png'),
+  drawerPriorApproval: require('./icons/drawerPriorApproval.png'),
+  drawerAddDependent: require('./icons/drawerAddDependent.png'),
+  drawerClaimHistory: require('./icons/drawerClaimHistory.png'),
+  drawerHospitalDirectory: require('./icons/drawerHospitalDirectory.png'),
+  drawerDiscountedCenters: require('./icons/drawerDiscountedCenters.png'),
+  drawerHelpline: require('./icons/drawerHelpline.png'),
+  drawerInviteFriend: require('./icons/drawerInviteFriend.png'),
+  drawerNotification: require('./icons/drawerNotification.png'),
+  drawerFAQ: require('./icons/drawerFAQ.png'),
+  drawerSettings: require('./icons/drawerSettings.png'),
+}

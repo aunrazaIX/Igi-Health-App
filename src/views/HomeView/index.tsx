@@ -27,9 +27,10 @@ type CardItem = {
 
 type HomeViewProps = {
   cardData: CardItem[];
+  navigation: any
 };
 
-const HomeView: React.FC<HomeViewProps> = ({cardData}) => {
+const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
   console.log(cardData, 'cardData');
   return (
     <View style={styles.homeContainer}>
@@ -51,7 +52,7 @@ const HomeView: React.FC<HomeViewProps> = ({cardData}) => {
                 <Image source={icons.notification} />
               </TouchableOpacity>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
                 <Image source={icons.menu} />
               </TouchableOpacity>
             </View>

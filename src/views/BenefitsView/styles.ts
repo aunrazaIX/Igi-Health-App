@@ -5,6 +5,7 @@ import {COLORS} from '../../assets/theme/colors';
 const styles = StyleSheet.create({
   BenefitsGradients: {
     borderRadius: vw * 3,
+    marginTop: vh * 3
   },
   Maximum: {
     flexDirection: 'row',
@@ -24,13 +25,13 @@ const styles = StyleSheet.create({
   },
 
   MaximumTitle: {
-    fontSize: vw * 2.7,
+    fontSize: vw * 6,
     textAlign: 'left',
     marginTop: vh * 1.5,
     color: '#004984',
   },
   BenefitsTitle: {
-    fontSize: vw * 2.5,
+    fontSize: vw * 5.5,
     textAlign: 'left',
     color: '#EE2560',
   },
