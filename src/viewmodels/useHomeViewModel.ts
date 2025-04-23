@@ -12,15 +12,23 @@ export type CardItemData = {
 type UseHomeViewModelReturn = {
   states: {
     selectedTab: string;
+    frontCard: boolean;
     cardData: CardItemData[];
   };
   functions: {
     onPressTab: (name: string) => void;
+    onPressCard : (value : boolean) =>void;
   };
 };
 
 const useHomeViewModel = (): UseHomeViewModelReturn => {
   const [selectedTab, setSelectedTab] = useState<string>('login');
+
+  const [frontCard, setFrontCard] = useState<boolean>(true);
+
+  const onPressTab = (name: string) => setSelectedTab(name);
+
+  const onPressCard = (value: boolean) => setFrontCard(!frontCard);
 
   const cardData: CardItemData[] = [
     {
@@ -70,15 +78,15 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
   ];
 
-  const onPressTab = (name: string) => setSelectedTab(name);
-
   return {
     states: {
       selectedTab,
       cardData,
+      frontCard
     },
     functions: {
       onPressTab,
+      onPressCard
     },
   };
 };

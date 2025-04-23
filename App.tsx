@@ -9,7 +9,7 @@ import Hospitals from './src/screens/Hospitals';
 import Home from './src/screens/Home';
 
 const App = () => {
-  return <TermsAndConditions />;
+  return <Home />;
 };
 
 export default App;

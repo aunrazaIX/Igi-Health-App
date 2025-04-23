@@ -5,10 +5,16 @@ import useHomeViewModel from '../../viewmodels/useHomeViewModel';
 
 const Home = () => {
   const {states, functions} = useHomeViewModel();
-  const {cardData} = states;
-  const {onPressTab} = functions;
+  const {cardData, frontCard} = states;
+  const {onPressTab, onPressCard} = functions;
 
-  return <HomeView cardData={cardData} />;
+  return (
+    <HomeView
+      cardData={cardData}
+      onPressCard={onPressCard}
+      frontCard={frontCard}
+    />
+  );
 };
 
 export default Home;

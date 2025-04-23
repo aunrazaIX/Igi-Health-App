@@ -53,4 +53,7 @@ export const icons = {
   searchBlack: require('./icons/searchBlack.png'),
   searchWhite: require('./icons/searchWhite.png'),
   claimStats: require('./icons/claimStats.png'),
+  room  : require('./icons/Room.png'),
+  maternity  : require('./icons/maternity.png'),
+
 };

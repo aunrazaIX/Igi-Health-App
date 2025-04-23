@@ -172,7 +172,6 @@ export const styles = StyleSheet.create({
     marginBottom: vh,
     flexDirection: 'row',
     justifyContent: 'space-between',
-   
 
     alignItems: 'center',
   },
@@ -180,7 +179,6 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: vw * 4,
     color: COLORS.white,
-  
   },
 
   dashboardMeterContent: {
@@ -214,5 +212,69 @@ export const styles = StyleSheet.create({
   textRed: {
     color: COLORS.cardBackgroundRed,
     fontSize: vh * 2,
+  },
+
+  homeBackCardContainer: {
+    marginTop: vh * 4,
+    marginHorizontal: vw * 4,
+    paddingHorizontal: vw * 5,
+    paddingVertical: vh * 2,
+    borderRadius: vw * 4,
+    backgroundColor: COLORS.white,
+    elevation: 5,
+    gap: vh * 0.9,
+  },
+  homeBackInfoContainerHeader: {
+    flexDirection: 'row',
+  },
+  homeBackCardHeading: {
+    flexDirection: 'row',
+    gap: vw * 1,
+  },
+  homeBackCardHeadingBlack: {
+    fontSize: vw * 4.5,
+    color: COLORS.textBlackShade,
+  },
+  homeBackCardHeadingColor: {
+    fontSize: vw * 4.5,
+    color: COLORS.cardBackgroundRed,
+  },
+  homeBackCardText: {
+    fontSize: vw * 3.5,
+    textAlign: 'left',
+    color: COLORS.textBlackShade,
+  },
+  homeBackCardRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  homeBackCardRowText: {
+    gap: vh * 0.7,
+  },
+  homeBackCardTextRow: {
+    flexDirection: 'row',
+    gap: vw * 7,
+  },
+
+  backCardFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  backCardFooterBox: {
+    flexDirection: 'row',
+    gap: vw * 2,
+    alignItems: 'center',
+  },
+  backCardFooterText: {},
+  backCardFooterIcon: {
+    width: vw * 8,
+    height: vh * 5,
+    resizeMode: 'contain',
+  },
+  backCardFooterSecondIcon: {
+    width: vw * 7,
+    height: vh * 4,
+    resizeMode: 'contain',
   },
 });

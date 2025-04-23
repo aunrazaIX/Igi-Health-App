@@ -27,9 +27,15 @@ type CardItem = {
 
 type HomeViewProps = {
   cardData: CardItem[];
+  onPressCard: (value: boolean) => void;
+  frontCard: boolean;
 };
 
-const HomeView: React.FC<HomeViewProps> = ({cardData}) => {
+const HomeView: React.FC<HomeViewProps> = ({
+  cardData,
+  onPressCard,
+  frontCard,
+}) => {
   console.log(cardData, 'cardData');
   return (
     <View style={styles.homeContainer}>
@@ -57,72 +63,169 @@ const HomeView: React.FC<HomeViewProps> = ({cardData}) => {
             </View>
           </View>
 
-          <View style={styles.homeInfoContainer}>
-            <View style={styles.homeInfoContainerHeader}>
-              <View>
-                <Image style={styles.logo} source={icons.logo} />
-              </View>
-
-              <View style={styles.homeInfoContainerHeaderText}>
-                <AileronBold
-                  name={'Health Insurance'}
-                  numberOfLines={1}
-                  style={styles.infoCardTextBold}></AileronBold>
-
-                <AileronSemiBold
-                  name={'User ID: 123450000123'}
-                  style={styles.infoCardTextlight}
-                  numberOfLines={1}></AileronSemiBold>
-              </View>
-            </View>
-
-            <View style={styles.homeInfoContainerMiddle}>
-              <View style={styles.homeInfoContainerMiddleText}>
-                <AileronSemiBold
-                  name={'Policy Number: 12345'}
-                  style={styles.infoCardMiddleTextlight}
-                  numberOfLines={1}></AileronSemiBold>
-              </View>
-
-              <View style={styles.homeInfoContainerMiddleTextLogo}>
+          {frontCard ? (
+            <View style={styles.homeInfoContainer}>
+              <View style={styles.homeInfoContainerHeader}>
                 <View>
+                  <Image style={styles.logo} source={icons.logo} />
+                </View>
+
+                <View style={styles.homeInfoContainerHeaderText}>
+                  <AileronBold
+                    name={'Health Insurance'}
+                    numberOfLines={1}
+                    style={styles.infoCardTextBold}></AileronBold>
+
                   <AileronSemiBold
-                    name={'CNIC: 12345-6789012-3'}
+                    name={'User ID: 123450000123'}
+                    style={styles.infoCardTextlight}
+                    numberOfLines={1}></AileronSemiBold>
+                </View>
+              </View>
+
+              <View style={styles.homeInfoContainerMiddle}>
+                <View style={styles.homeInfoContainerMiddleText}>
+                  <AileronSemiBold
+                    name={'Policy Number: 12345'}
                     style={styles.infoCardMiddleTextlight}
                     numberOfLines={1}></AileronSemiBold>
                 </View>
-                <View>
-                  <Image source={images.flipCard} />
+
+                <View style={styles.homeInfoContainerMiddleTextLogo}>
+                  <View>
+                    <AileronSemiBold
+                      name={'CNIC: 12345-6789012-3'}
+                      style={styles.infoCardMiddleTextlight}
+                      numberOfLines={1}></AileronSemiBold>
+                  </View>
+                  <View>
+                    <TouchableOpacity onPress={() => onPressCard(false)}>
+                      <Image source={images.flipCard} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+
+              <View style={styles.infoCardFooter}>
+                <View style={styles.infoCardFooterLeft}>
+                  <AileronSemiBold
+                    name={'Card Holder Name'}
+                    style={styles.infoCardMiddleTextlight}
+                    numberOfLines={1}></AileronSemiBold>
+
+                  <AileronBold
+                    name={'Imran Naveed Qureshi'}
+                    style={styles.infoCardTextBold}
+                    numberOfLines={1}></AileronBold>
+                </View>
+
+                <View style={styles.infoCardFooterRight}>
+                  <AileronSemiBold
+                    name={'Expiry Date'}
+                    style={styles.infoCardMiddleTextlight}
+                    numberOfLines={1}></AileronSemiBold>
+
+                  <AileronBold
+                    name={'02/07/2025'}
+                    style={styles.infoCardFooterTextBold}
+                    numberOfLines={1}></AileronBold>
                 </View>
               </View>
             </View>
-
-            <View style={styles.infoCardFooter}>
-              <View style={styles.infoCardFooterLeft}>
-                <AileronSemiBold
-                  name={'Card Holder Name'}
-                  style={styles.infoCardMiddleTextlight}
-                  numberOfLines={1}></AileronSemiBold>
-
+          ) : (
+            <View style={styles.homeBackCardContainer}>
+              <View style={styles.homeBackCardHeading}>
                 <AileronBold
-                  name={'Imran Naveed Qureshi'}
-                  style={styles.infoCardTextBold}
-                  numberOfLines={1}></AileronBold>
+                  style={styles.homeBackCardHeadingBlack}
+                  name={'Dependent'}></AileronBold>
+                <AileronBold
+                  style={styles.homeBackCardHeadingColor}
+                  name={'Details'}></AileronBold>
               </View>
 
-              <View style={styles.infoCardFooterRight}>
-                <AileronSemiBold
-                  name={'Expiry Date'}
-                  style={styles.infoCardMiddleTextlight}
-                  numberOfLines={1}></AileronSemiBold>
+              <AileronRegular
+                name="Madhia Imran Qureshi: 36"
+                style={styles.homeBackCardText}>
+                {' '}
+              </AileronRegular>
 
-                <AileronBold
-                  name={'02/07/2025'}
-                  style={styles.infoCardFooterTextBold}
-                  numberOfLines={1}></AileronBold>
+              <AileronRegular
+                name="Saad Imran Qureshi: 8"
+                style={styles.homeBackCardText}>
+                {' '}
+              </AileronRegular>
+
+              <View style={styles.homeBackCardRow}>
+                {' '}
+                <View style={styles.homeBackCardRowText}>
+                  <AileronRegular
+                    style={styles.homeBackCardText}
+                    name="Tariq Imran Qureshi: 5">
+                    {' '}
+                  </AileronRegular>{' '}
+                  <AileronRegular
+                    name="Emaan Imran Qureshi: 6"
+                    style={styles.homeBackCardText}></AileronRegular>
+                </View>
+                <TouchableOpacity onPress={() => onPressCard(true)}>
+                  <Image source={images.flipCard} />
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.homeBackCardTextRow}>
+                <AileronSemiBold
+                  style={styles.homeBackCardText}
+                  name="Class: 0000"
+                />
+                <AileronSemiBold
+                  style={styles.homeBackCardText}
+                  name="Cert No: 491"
+                />
+                <AileronSemiBold
+                  style={styles.homeBackCardText}
+                  name="Age: 41"
+                />
+              </View>
+
+              <View style={styles.backCardFooter}>
+                <View style={styles.backCardFooterBox}>
+                  <Image
+                    style={styles.backCardFooterIcon}
+                    source={icons.room}
+                  />
+
+                  <View style={styles.backCardFooterText}>
+                    <AileronSemiBold
+                      style={styles.homeBackCardText}
+                      name="Max. Room & Board"
+                    />
+                    <AileronSemiBold
+                      style={styles.homeBackCardText}
+                      name="Rs. Per Day: 20,000"
+                    />
+                  </View>
+                </View>
+
+                <View style={styles.backCardFooterBox}>
+                  <Image
+                    style={styles.backCardFooterSecondIcon}
+                    source={icons.maternity}
+                  />
+
+                  <View style={styles.backCardFooterText}>
+                    <AileronSemiBold
+                      style={styles.homeBackCardText}
+                      name="Maternity"
+                    />
+                    <AileronSemiBold
+                      style={styles.homeBackCardText}
+                      name="60,000"
+                    />
+                  </View>
+                </View>
               </View>
             </View>
-          </View>
+          )}
 
           <View style={styles.homeInfoContainerScroll}>
             <View style={styles.indicatorDots}>
