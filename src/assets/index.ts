@@ -75,6 +75,22 @@ export const icons = {
   searchBlack: require('./icons/searchBlack.png'),
   searchWhite: require('./icons/searchWhite.png'),
   claimStats: require('./icons/claimStats.png'),
+  name: require('./icons/name.png'),
+  cnic: require('./icons/cnic.png'),
+  plus: require('./icons/plus.png'),
+  minus: require('./icons/minus.png'),  
+  bellNotification: require('./icons/bellNotification.png'),
+  friend: require('./icons/friend.png'),
+  help: require('./icons/help.png'),
+  account: require('./icons/userAccount.png'),
+  privacy: require('./icons/privacy.png'),
+  resetPasswordIcon: require('./icons/resetPasswordIcon.png'),
+  rightArrow: require('./icons/rightArrow.png'),
+  faceIDIcon: require('./icons/faceIDpink.png'),
+  twoStep: require('./icons/twoStep.png'),
+  mail: require('./icons/mail.png'),
+  location: require('./icons/location.png'),
+  call: require('./icons/call.png'),
 };
 
 

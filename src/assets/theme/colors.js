@@ -8,7 +8,7 @@ export const COLORS = {
   loginContainer: 'rgba(255, 255, 255, 0.7)',
   activeTab: 'rgba(0, 143, 213, 1)',
   tabText: 'white',
-  textColor: 'rgba(92, 94, 90, 1)',
+  textColor: '#393939',
   loginButton: 'rgba(0, 143, 213, 1)',
   buttonText: 'white',
   textColorLight: '#5C5E5A',
@@ -39,6 +39,10 @@ export const COLORS = {
   placeholderColor: '#292927',
   benefitsCardGradient: ['#FFE9EC', '#ECF1FC'],
   buttonBorder : 'rgba(230, 231, 235, 1)',
-  buttonBackground: 'rgba(248, 248, 248, 1)'
+  buttonBackground: 'rgba(248, 248, 248, 1)',
 
+  faqsGradient: ['#EBEBEB', '#E2E8EB00'],
+  faqsSubHeading: '#EE2560',
+  toggleFalse: '#D3D3D3',
+  borderColor: '#DDE0EB',
 };

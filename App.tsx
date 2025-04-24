@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './src/screens/Login/Index';
+import Login from './src/screens/Login';
 import ForgotPassword from './src/screens/ForgotPassword';
 import Benefits from './src/screens/Benefits';
 import Personal from './src/screens/Personal';
