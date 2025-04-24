@@ -10,6 +10,7 @@ export const images = {
   priorUpload: require('./images/priorUpload.png'),
   personalFrame: require('./images/personal-Popup-Frame.png'),
   taskDone: require('./images/taskDone.png'),
+  LogoLife: require('./images/LogoLife.png')
 };
 
 export const icons = {
@@ -92,4 +93,7 @@ export const drawerIcons = {
   drawerNotification: require('./icons/drawerNotification.png'),
   drawerFAQ: require('./icons/drawerFAQ.png'),
   drawerSettings: require('./icons/drawerSettings.png'),
+  drawerProfile: require('./images/drawerProfile.png'),
+  drawerClose: require('./icons/drawerClose.png'),
+  drawerArrowRight: require('./icons/drawerArrowRight.png'),
 }

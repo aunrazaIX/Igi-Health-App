@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import Benefits from '../../screens/Benefits';
@@ -8,9 +8,11 @@ import { vh, vw } from '../../assets/theme/dimension';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { drawerIcons, icons, images } from '../../assets';
 import { ScrollView } from 'react-native-gesture-handler';
-import { AileronBold } from '../../components';
+import { AileronBold, AileronRegular, AileronSemiBold, Button } from '../../components';
 import Personal from '../../screens/Personal';
 import PriorApproval from '../../screens/PriorApproval';
+import LinearGradient from 'react-native-linear-gradient';
+import PanelHospitalList from '../../screens/Hospitals';
 
 const Drawer = createDrawerNavigator();
 
@@ -62,6 +64,7 @@ const DrawerContent = (props: DrawerContentComponentProps) => {
       id: 8,
       name: 'Hospital Directory',
       icon: drawerIcons.drawerHospitalDirectory,
+      to: 'Hospital',
     },
     {
       id: 9,
@@ -99,14 +102,14 @@ const DrawerContent = (props: DrawerContentComponentProps) => {
   return (
     <View>
       <View style={styles.logoContainer}>
-        <Image source={images.Logo} style={styles.logo} />
+        <Image source={images.LogoLife} style={styles.logo} />
 
         <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
-          <Image source={icons.CancelIcon} />
+          <Image source={drawerIcons.drawerClose} style={styles.closeIcon} />
         </TouchableOpacity>
       </View>
 
-      <ScrollView>
+      <ScrollView style={styles.scrollContainer}>
         <View style={styles.menuContainer}>
           {routes?.length > 0 &&
             routes?.map((route, index) => (
@@ -116,13 +119,30 @@ const DrawerContent = (props: DrawerContentComponentProps) => {
                 onPress={() => {
                   if (route.to) {
                     props.navigation.navigate(route.to);
+                    return;
                   }
                 }}
               >
                 <Image style={styles.icon} source={route?.icon} />
-                <AileronBold style={styles.title} name={route?.name} />
+                <AileronSemiBold style={styles.title} name={route?.name} />
               </TouchableOpacity>
             ))}
+        </View>
+
+        <View style={styles.profileContainer}>
+          <Image source={drawerIcons.drawerProfile} style={styles.profileImg} />
+          <AileronRegular name='Imran Naveed Qureshi' style={styles.profileTittle} />
+        </View>
+        <View>
+          <LinearGradient
+            colors={COLORS.PriorGradient}
+            style={styles.gradientContainer}
+          >
+            <TouchableOpacity style={styles.buttonContainer}>
+              <AileronSemiBold name={'View Prifile'} style={styles.viewButton} />
+              <Image source={drawerIcons.drawerArrowRight} style={styles.arrowRight} />
+            </TouchableOpacity>
+          </LinearGradient>
         </View>
       </ScrollView>
     </View>
@@ -145,6 +165,7 @@ const DrawerStack = () => {
       <Drawer.Screen name="Personal" component={Personal} />
       {/* <Drawer.Screen name="LodgeClaim" component={} /> */}
       <Drawer.Screen name="PriorApproval" component={PriorApproval} />
+      <Drawer.Screen name="Hospital" component={PanelHospitalList} />
 
     </Drawer.Navigator>
   )
@@ -155,12 +176,11 @@ export default DrawerStack
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.white,
-    borderTopRightRadius: 0,
+    borderTopRightRadius: vh * 3,
     borderBottomRightRadius: 0,
-    width: vw * 75,
+    width: vw * 70,
     paddingVertical: vh * 3,
     paddingHorizontal: vw * 6,
-
   },
   logoContainer: {
     flexDirection: 'row',
@@ -169,8 +189,8 @@ const styles = StyleSheet.create({
     marginBottom: vh * 4
   },
   logo: {
-    width: vw * 35,
-    height: vh * 7,
+    width: vw * 30,
+    height: vh * 6,
     resizeMode: 'contain'
   },
   row: {
@@ -179,15 +199,59 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    width: vw * 8,
-    height: vw * 8,
+    width: vw * 7,
+    height: vw * 7,
     resizeMode: 'contain',
   },
   title: {
-    fontSize: vw * 4,
+    fontSize: vw * 4.5,
     color: COLORS.textBlackShade
   },
   menuContainer: {
-    gap: vh * 3
+    gap: vh * 4,
+    marginBottom: vh * 5
   },
+  profileImg: {
+    width: vw * 15,
+    height: vw * 12,
+    borderRadius: vh * .5
+  },
+  scrollContainer: {
+    marginBottom: vh * 12
+  },
+  profileContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: vw * 4,
+    marginBottom: vh * 2
+  },
+  profileTittle: {
+    color: COLORS.textBlackShade,
+    fontSize: vw * 4.3,
+    flexShrink: 1,
+    textAlign: 'left',
+  },
+  closeIcon: {
+    width: vw * 7,
+    height: vw * 7
+  },
+  gradientContainer: {
+    width: vw * 45,
+    borderRadius: vh * 3,
+    padding: vw * 1.3
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: "center",
+    gap: vw * 3,
+  },
+  arrowRight: {
+    width: vw * 9,
+    height: vh * 4
+  },
+  viewButton: {
+    fontSize: vw * 3.5,
+    color: COLORS.white
+  }
 })
