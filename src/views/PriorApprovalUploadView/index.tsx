@@ -17,7 +17,6 @@ const PriorApprovalUploadView = () => {
                 <ScrollView>
                     <View style={styles.uploadFileContainer}>
                         <PriorUploadDocument />
-
                         <View>
                             <View style={styles.addRemarks}>
                                 <AileronSemiBold name='Add Remarks' style={styles.remarks} />

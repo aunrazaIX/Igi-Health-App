@@ -3,16 +3,13 @@ import React from 'react';
 import HomeView from '../../views/HomeView';
 import useHomeViewModel from '../../viewmodels/useHomeViewModel';
 
-type HomeViewProps = {
-  navigation: any
-};
+const Home = () => {
+  const {states, functions} = useHomeViewModel();
+  const {cardData,  backAnimatedStyle,frontAnimatedStyle,} = states;
+  const {onPressTab,animateCard,toggleDrawer} = functions;
 
-const Home: React.FC<HomeViewProps> = ({ navigation }) => {
-  const { states, functions } = useHomeViewModel();
-  const { cardData } = states;
-  const { onPressTab } = functions;
-
-  return <HomeView cardData={cardData} navigation={navigation} />;
+  return <HomeView cardData={cardData} animateCard={animateCard} toggleDrawer={toggleDrawer}   backAnimatedStyle={backAnimatedStyle}
+  frontAnimatedStyle={frontAnimatedStyle} />;
 };
 
 export default Home;

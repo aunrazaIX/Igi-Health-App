@@ -23,9 +23,9 @@ const BenefitsView: React.FC<Props> = ({ data }) => {
     const RenderBenefits = ({ item }: { item: Item }) => (
         <View style={styles.card}>
             <LinearGradient
-                colors={['#48C3FF', '#0B4A98']}
-                start={{ x: -.6, y: 1 }}
-                end={{ x: .5, y: .4 }}
+                colors={['#0B4A98','#0f8dd7']}
+                start={{ x: 1, y: 0 }}
+                end={{ x: 0, y: 1 }}
                 style={styles.CardBox}
             >
                 <Image source={item.image} style={styles.coverageCardImage} />
@@ -42,46 +42,51 @@ const BenefitsView: React.FC<Props> = ({ data }) => {
         </View>
     )
 
-    return (
-        <Container>
-            <TopView title={'Benefits'} />
-            <CurvedView>
-                <ScrollView>
-                    <LinearGradient
-                        colors={COLORS.benefitsCardGradient}
-                        style={styles.BenefitsGradients}>
-                        <View style={styles.Maximum}>
-                            <View style={styles.MaximumLeftBox}>
-                                <Image source={images.Logo} style={styles.benefitsLogo} />
-                                <AileronBold
-                                    name={'Maximum\nHospitalization'}
-                                    style={styles.MaximumTitle}
-                                />
-                                <AileronBold name={'Benefits!'} style={styles.BenefitsTitle} />
-                            </View>
-                            <View style={styles.MaximumRightBox}>
-                                <Image
-                                    style={styles.benefitsImage}
-                                    source={images.maximumBenefits}
-                                />
-                            </View>
+    const headerComponent = () => (
+        <>
+        <TopView title={'Benefits'} />
+            <CurvedView containerStyle={styles.CurvedView}>
+                <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0.8, y: 0 }}
+                    colors={COLORS.benefitsCardGradient}
+                    style={styles.BenefitsGradients}>
+                    <View style={styles.Maximum}>
+                        <View style={styles.MaximumLeftBox}>
+                            <Image source={images.Logo} style={styles.benefitsLogo} />
+                            <AileronBold
+                                name={'Maximum\nHospitalization'}
+                                style={styles.MaximumTitle}
+                            />
+                            <AileronBold name={'Benefits!'} style={styles.BenefitsTitle} />
+                        </View>
+                        <View style={styles.MaximumRightBox}>
+                            <Image
+                                style={styles.benefitsImage}
+                                source={images.maximumBenefits}
+                            />
+                        </View>
                         </View>
                     </LinearGradient>
                     <View style={styles.coverage}>
                         <AileronBold name={'Coverage &'} style={styles.coverageTitle} />
                         <AileronBold name={' Benefits!'} style={styles.benefitTitle} />
                     </View>
+                    </CurvedView>
+        </>
+        
+    )
 
+    return (
                     <FlatList
+                        ListHeaderComponent={headerComponent}
                         data={data}
                         renderItem={RenderBenefits}
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={3}
                         contentContainerStyle={styles.flatListContainer}
                     />
-                </ScrollView>
-            </CurvedView>
-        </Container>
+
     );
 };
 

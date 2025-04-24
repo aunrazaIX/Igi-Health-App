@@ -1,11 +1,10 @@
 import {
   View,
-  Text,
   Image,
   ScrollView,
   FlatList,
-  StyleSheet,
   TouchableOpacity,
+  Animated,
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -15,8 +14,8 @@ import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import {vh} from '../../assets/theme/dimension';
+
 
 type CardItem = {
   logo: any;
@@ -27,11 +26,15 @@ type CardItem = {
 
 type HomeViewProps = {
   cardData: CardItem[];
-  navigation: any
+  animateCard: () => void;
+  backAnimatedStyle:{},
+  frontAnimatedStyle:{},
+  toggleDrawer:() => void;
 };
 
-const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
-  console.log(cardData, 'cardData');
+const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,frontAnimatedStyle,backAnimatedStyle}) => {
+
+  console.log(frontAnimatedStyle)
   return (
     <View style={styles.homeContainer}>
       <ScrollView>
@@ -52,13 +55,14 @@ const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
                 <Image source={icons.notification} />
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+              <TouchableOpacity onPress={toggleDrawer}>
                 <Image source={icons.menu} />
               </TouchableOpacity>
             </View>
           </View>
-
-          <View style={styles.homeInfoContainer}>
+          <View style={styles.flipCardContainer}>
+           <Animated.View style={[styles.homeInfoContainer,frontAnimatedStyle]}>
+            <View>
             <View style={styles.homeInfoContainerHeader}>
               <View>
                 <Image style={styles.logo} source={icons.logo} />
@@ -92,9 +96,9 @@ const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
                     style={styles.infoCardMiddleTextlight}
                     numberOfLines={1}></AileronSemiBold>
                 </View>
-                <View>
+                <TouchableOpacity style={styles.rotateCard} onPress={animateCard}>
                   <Image source={images.flipCard} />
-                </View>
+                </TouchableOpacity>
               </View>
             </View>
 
@@ -123,15 +127,84 @@ const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
                   numberOfLines={1}></AileronBold>
               </View>
             </View>
-          </View>
+            </View>
+          </Animated.View>
+          <Animated.View style={[styles.homeInfoContainer,backAnimatedStyle,styles.flipBackCard]}>
+            <View>
+            <View style={styles.homeInfoContainerHeader}>
+              <View>
+                <Image style={styles.logo} source={icons.logo} />
+              </View>
 
-          <View style={styles.homeInfoContainerScroll}>
+              <View style={styles.homeInfoContainerHeaderText}>
+                <AileronBold
+                  name={'Back Side'}
+                  numberOfLines={1}
+                  style={styles.infoCardTextBold}></AileronBold>
+
+                <AileronSemiBold
+                  name={'User ID: 123450000123'}
+                  style={styles.infoCardTextlight}
+                  numberOfLines={1}></AileronSemiBold>
+              </View>
+            </View>
+
+            <View style={styles.homeInfoContainerMiddle}>
+              <View style={styles.homeInfoContainerMiddleText}>
+                <AileronSemiBold
+                  name={'Policy Number: 12345'}
+                  style={styles.infoCardMiddleTextlight}
+                  numberOfLines={1}></AileronSemiBold>
+              </View>
+
+              <View style={styles.homeInfoContainerMiddleTextLogo}>
+                <View>
+                  <AileronSemiBold
+                    name={'CNIC: 12345-6789012-3'}
+                    style={styles.infoCardMiddleTextlight}
+                    numberOfLines={1}></AileronSemiBold>
+                </View>
+                <TouchableOpacity style={styles.rotateCard} onPress={animateCard}>
+                  <Image source={images.flipCard} />
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={styles.infoCardFooter}>
+              <View style={styles.infoCardFooterLeft}>
+                <AileronSemiBold
+                  name={'Card Holder Name'}
+                  style={styles.infoCardMiddleTextlight}
+                  numberOfLines={1}></AileronSemiBold>
+
+                <AileronBold
+                  name={'Imran Naveed Qureshi'}
+                  style={styles.infoCardTextBold}
+                  numberOfLines={1}></AileronBold>
+              </View>
+
+              <View style={styles.infoCardFooterRight}>
+                <AileronSemiBold
+                  name={'Expiry Date'}
+                  style={styles.infoCardMiddleTextlight}
+                  numberOfLines={1}></AileronSemiBold>
+
+                <AileronBold
+                  name={'02/07/2025'}
+                  style={styles.infoCardFooterTextBold}
+                  numberOfLines={1}></AileronBold>
+              </View>
+            </View>
+            </View>
+            </Animated.View>
+          </View>
+          {/* <View style={styles.homeInfoContainerScroll}>
             <View style={styles.indicatorDots}>
               <TouchableOpacity style={[styles.inactiveDot, styles.dot]} />
               <TouchableOpacity style={[styles.dot, styles.activeDot]} />
               <TouchableOpacity style={[styles.dot, styles.inactiveDot]} />
             </View>
-          </View>
+          </View> */}
         </LinearGradient>
 
         <View style={styles.dashboardContainer}>

@@ -37,7 +37,6 @@ export const COLORS = {
   cardBackgroundBlue: 'rgba(34, 78, 162, 1)',
   cardBackgroundRed: 'rgba(238, 37, 96, 1)',
   placeholderColor: '#292927',
-  benefitsCardGradient: ['#FFE9EC', '#ECF1FC'],
   buttonBorder : 'rgba(230, 231, 235, 1)',
   buttonBackground: 'rgba(248, 248, 248, 1)'
 

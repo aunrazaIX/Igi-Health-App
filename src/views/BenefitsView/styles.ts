@@ -5,10 +5,13 @@ import {COLORS} from '../../assets/theme/colors';
 const styles = StyleSheet.create({
   BenefitsGradients: {
     borderRadius: vw * 3,
-    marginTop: vh * 3
+    marginTop: vh * 3,
+    height: vh * 22,
   },
   Maximum: {
+    height: '100%',
     flexDirection: 'row',
+    width: '100%',
   },
   MaximumLeftBox: {
     width: '55%',
@@ -77,12 +80,15 @@ const styles = StyleSheet.create({
     width: vh * 11,
   },
   flatListContainer: {
-    // paddingBottom: vh * 16,
+    backgroundColor: COLORS.white,
+  },
+  CurvedView:{
+    marginBottom: -vh * 4,
   },
   benefitsImage: {
-    resizeMode: 'cover',
+    resizeMode: 'contain',
+    height: "100%",
     width: '100%',
-    // backgroundColor: 'red'
   },
   coverageCardImage: {
     height: vh * 4,

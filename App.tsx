@@ -7,19 +7,30 @@ import PriorApproval from './src/screens/PriorApproval';
 import PriorApprovalUpload from './src/screens/PriorApproval/priorApprovalUpload';
 import { NavigationContainer } from '@react-navigation/native';
 import MainStack from './src/navigation/MainStack';
-import Home from './src/screens/Home';
-import ClaimsHistory from './src/screens/ClaimsHistory';
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <MainStack/>
-      {/* <Home /> */}
-      {/* <ClaimsHistory/> */}
-    </NavigationContainer>
+    <SafeAreaView style={styles.container}>
+          <StatusBar
+            barStyle="light-content"
+            translucent={true}
+            backgroundColor="transparent"
+          />
+          <NavigationContainer>
+            <MainStack />
+          </NavigationContainer>
+        </SafeAreaView>
   )
 
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+

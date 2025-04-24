@@ -37,6 +37,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({ ConfirmationModalV
             animationType="slide"
             transparent={true}
             visible={ConfirmationModalVisible}
+            statusBarTranslucent
         >
             <View style={styles.centeredView}>
                 <View style={[styles.modalView, containerStyle]}>

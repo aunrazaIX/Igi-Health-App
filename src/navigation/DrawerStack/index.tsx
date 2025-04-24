@@ -13,6 +13,7 @@ import Personal from '../../screens/Personal';
 import PriorApproval from '../../screens/PriorApproval';
 import LinearGradient from 'react-native-linear-gradient';
 import PanelHospitalList from '../../screens/Hospitals';
+import LodgeClaim from '../../screens/LodgeClaim';
 
 const Drawer = createDrawerNavigator();
 
@@ -163,7 +164,7 @@ const DrawerStack = () => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Benefits" component={Benefits} />
       <Drawer.Screen name="Personal" component={Personal} />
-      {/* <Drawer.Screen name="LodgeClaim" component={} /> */}
+      <Drawer.Screen name="LodgeClaim" component={LodgeClaim} />
       <Drawer.Screen name="PriorApproval" component={PriorApproval} />
       <Drawer.Screen name="Hospital" component={PanelHospitalList} />
 

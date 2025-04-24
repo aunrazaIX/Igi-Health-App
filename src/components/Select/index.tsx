@@ -31,7 +31,6 @@ const Select: React.FC<SelectProps> = ({ selectData, selectLabel, selectPlacehol
         <View style={styles.selectContainer}>
             <DependentBox containerStyle={styles.dependentContainer}>
                 <AileronRegular name={selectLabel} style={styles.Patient} />
-
                 <View
                     style={styles.selectBox}
                 >
@@ -110,6 +109,6 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     dependentContainer: {
-        padding: vw * 3.5
+        padding: vw * 3.5,
     }
 })
