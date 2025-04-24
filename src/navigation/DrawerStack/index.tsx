@@ -211,9 +211,6 @@ const styles = StyleSheet.create({
     gap: vh * 4,
     marginBottom: vh * 5
   },
-<<<<<<< HEAD
-})
-=======
   profileImg: {
     width: vw * 15,
     height: vw * 12,
@@ -258,4 +255,3 @@ const styles = StyleSheet.create({
     color: COLORS.white
   }
 })
->>>>>>> dc9045367dbfb23472641e8435af31076dd46d48
