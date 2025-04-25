@@ -3,9 +3,14 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
-  
+  homeContainer: {
+    // borderWidth: 2,
+    // flex: 1,
+    backgroundColor: COLORS.white,
+  },
   gradient: {
-    height: '58%',
+    // height: '58%',
+    paddingBottom: vh * 2,
   },
   homeHeader: {
     marginTop: vh * 8,
@@ -93,34 +98,9 @@ export const styles = StyleSheet.create({
   infoCardFooterRight: {
     alignItems: 'flex-end',
   },
-  homeInfoContainerScroll: {
-    alignItems: 'center',
-    marginTop: vh * 2,
-  },
-
-  indicatorDots: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: vw * 2.2,
-  },
-
-  dot: {
-    width: vw * 8,
-    height: vw * 1.5,
-    borderRadius: vw,
-  },
-
-  activeDot: {
-    backgroundColor: COLORS.cardBackgroundRed,
-    opacity: 1,
-  },
-
-  inactiveDot: {
-    backgroundColor: COLORS.white,
-  },
-
   dashboardContainer: {
     marginHorizontal: vw * 4,
+    marginBottom: vh * 4,
   },
   dashboardContainerHeader: {
     flexDirection: 'row',
@@ -149,7 +129,7 @@ export const styles = StyleSheet.create({
     marginVertical: vh * 2,
 
     justifyContent: 'space-between',
-    height: '70%',
+    // height: '70%',
     borderRadius: vw * 2,
     backgroundColor: COLORS.cardBackgroundBlue,
     width: vw * 40,
@@ -203,10 +183,10 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.black,
   },
-  meterDetailTextEnd: {
-    flexDirection: 'row',
-    gap: vw * 1,
-  },
+  // meterDetailTextEnd: {
+  //   flexDirection: 'row',
+  //   gap: vw * 1,
+  // },
   textRed: {
     color: COLORS.cardBackgroundRed,
     fontSize: vh * 2,
@@ -274,5 +254,43 @@ export const styles = StyleSheet.create({
     width: vw * 7,
     height: vh * 4,
     resizeMode: 'contain',
+  },
+  associatedContainer: {
+    flexDirection: 'row',
+    gap: '2%',
+  },
+  associatedTittle: {
+    textAlign: 'left',
+    marginVertical: vh * 2,
+    fontSize: vw * 6,
+    color: COLORS.textBlackShade,
+  },
+  associatedImageContainer: {
+    width: '49%',
+    padding: vw * 1,
+    backgroundColor: COLORS.white,
+    borderRadius: vh * 2.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+  },
+  associatedImage: {
+    width: vw * 30,
+    height: vw * 20,
+    resizeMode: 'contain',
+  },
+  meterContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: vw * 3,
+    marginBottom: vh * 2,
+  },
+  statisticsIcon: {
+    width: vw * 8,
+    height: vw * 8,
+  },
+  claimTittle: {
+    fontSize: vw * 5,
+    color: COLORS.textBlackShade,
   },
 });

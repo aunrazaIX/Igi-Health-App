@@ -32,18 +32,16 @@ const Select: React.FC<SelectProps> = ({ selectData, selectLabel, selectPlacehol
             <DependentBox containerStyle={styles.dependentContainer}>
                 <AileronRegular name={selectLabel} style={styles.Patient} />
 
-                <View
-                    style={styles.selectBox}
-                >
-                    <AileronBold style={styles.selectText} name={selectedPatient?.name || selectPlaceholder} />
-
-                    <TouchableOpacity
-                        onPress={() => setDropdownVisible(!isDropdownVisible)}
+                <TouchableOpacity onPress={() => setDropdownVisible(!isDropdownVisible)}>
+                    <View
+                        style={styles.selectBox}
                     >
-                        <Image style={styles.arrow} source={isDropdownVisible ? icons.arrowUp : icons.arrowDown} />
-                    </TouchableOpacity>
 
-                </View>
+                        <AileronBold style={styles.selectText} name={selectedPatient?.name || selectPlaceholder} />
+                        <Image style={styles.arrow} source={isDropdownVisible ? icons.selectArrowUp : icons.arrowDown} />
+
+                    </View>
+                </TouchableOpacity>
 
             </DependentBox>
 
@@ -87,6 +85,7 @@ const styles = StyleSheet.create({
     arrow: {
         width: vh * 2,
         height: vh * 2,
+        marginTop: -vh * 1.5
     },
     dropdown: {
         borderWidth: 1,
