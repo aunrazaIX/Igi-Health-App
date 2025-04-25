@@ -10,7 +10,8 @@ export const images = {
   priorUpload: require('./images/priorUpload.png'),
   personalFrame: require('./images/personal-Popup-Frame.png'),
   taskDone: require('./images/taskDone.png'),
-  LogoLife: require('./images/LogoLife.png')
+  LogoLife: require('./images/LogoLife.png'),
+  sehatKahani: require('./images/sehatKahani.png')
 };
 
 export const icons = {
@@ -52,6 +53,7 @@ export const icons = {
   rightArrowRound: require('./icons/rightArrowRound.png'),
   addSquare: require('./icons/add-square.png'),
   arrowUp: require('./icons/arrow-up.png'),
+  selectArrowUp: require('./icons/arrowUp.png'),
   person: require('./icons/person.png'),
   claim: require('./icons/claim.png'),
   chart: require('./icons/chart.png'),
@@ -75,6 +77,7 @@ export const icons = {
   searchBlack: require('./icons/searchBlack.png'),
   searchWhite: require('./icons/searchWhite.png'),
   claimStats: require('./icons/claimStats.png'),
+<<<<<<< Updated upstream
   name: require('./icons/name.png'),
   cnic: require('./icons/cnic.png'),
   plus: require('./icons/plus.png'),
@@ -91,6 +94,9 @@ export const icons = {
   mail: require('./icons/mail.png'),
   location: require('./icons/location.png'),
   call: require('./icons/call.png'),
+=======
+  claimStatistics: require('./icons/claimStatistics.png'),
+>>>>>>> Stashed changes
 };
 
 

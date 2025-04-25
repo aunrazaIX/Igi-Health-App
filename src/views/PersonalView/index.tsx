@@ -91,7 +91,7 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation }) => {
 
                                 <TouchableOpacity onPress={() => toggleExpand(index)}>
                                     <Image
-                                        source={expandedIndex === index ? icons.arrowUp : icons.arrowDown}
+                                        source={expandedIndex === index ? icons.selectArrowUp : icons.arrowDown}
                                         style={styles.icon}
                                     />
                                 </TouchableOpacity>

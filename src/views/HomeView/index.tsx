@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {styles} from './style';
-import {icons, images} from '../../assets';
+import { styles } from './style';
+import { icons, images } from '../../assets';
 import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 
 type CardItem = {
   logo: any;
@@ -30,7 +30,7 @@ type HomeViewProps = {
   navigation: any
 };
 
-const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
+const HomeView: React.FC<HomeViewProps> = ({ cardData, navigation }) => {
   console.log(cardData, 'cardData');
   return (
     <View style={styles.homeContainer}>
@@ -124,14 +124,6 @@ const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
               </View>
             </View>
           </View>
-
-          <View style={styles.homeInfoContainerScroll}>
-            <View style={styles.indicatorDots}>
-              <TouchableOpacity style={[styles.inactiveDot, styles.dot]} />
-              <TouchableOpacity style={[styles.dot, styles.activeDot]} />
-              <TouchableOpacity style={[styles.dot, styles.inactiveDot]} />
-            </View>
-          </View>
         </LinearGradient>
 
         <View style={styles.dashboardContainer}>
@@ -143,34 +135,36 @@ const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
                 numberOfLines={1}></AileronBold>
             </View>
 
-            <View style={styles.dashboardContainerHeaderIcons}>
+            {/* <View style={styles.dashboardContainerHeaderIcons}>
               <Image source={icons.leftArrowStraight} />
               <Image source={icons.rightArrowStraight} />
-            </View>
+            </View> */}
           </View>
 
           <FlatList
             horizontal
-            style={{height: vh * 25}}
             data={cardData}
             keyExtractor={(_item, index) => index.toString()}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <View
                 style={[
                   styles.dashboardContainerCards,
-                  {backgroundColor: item.backgroundColor},
+                  { backgroundColor: item.backgroundColor },
                 ]}>
                 <View style={styles.cardLogoContainer}>
                   <Image style={styles.cardLogo} source={item.logo} />
                 </View>
 
                 <View style={styles.cardContent}>
-                  <View style={{width: '70%'}}>
+                  <View
+                    style={{ width: '70%' }}
+                  >
                     <AileronRegular
                       style={styles.dashboardContainerCardText}
                       name={item.name}
-                      numberOfLines={2}></AileronRegular>
+                      numberOfLines={2}
+                    />
                   </View>
 
                   <Image source={item.image} />
@@ -178,6 +172,13 @@ const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
               </View>
             )}
           />
+          <View>
+            <View style={styles.meterContainer}>
+              <Image source={icons.claimStatistics} style={styles.statisticsIcon} />
+              <AileronSemiBold name='Claim Statistics' style={styles.claimTittle} />
+            </View>
+            <View></View>
+          </View>
 
           <View style={styles.dashboardMeterContent}>
             <View style={styles.dashboardMeterDetail}>
@@ -245,6 +246,18 @@ const HomeView: React.FC<HomeViewProps> = ({cardData, navigation}) => {
                   numberOfLines={1}
                   style={styles.text}
                 />
+              </View>
+            </View>
+          </View>
+
+          <View>
+            <AileronSemiBold name={'Associated Apps'} style={styles.associatedTittle} />
+            <View style={styles.associatedContainer}>
+              <View style={styles.associatedImageContainer}>
+                <Image source={images.LogoLife} style={styles.associatedImage} />
+              </View>
+              <View style={styles.associatedImageContainer}>
+                <Image source={images.sehatKahani} style={styles.associatedImage} />
               </View>
             </View>
           </View>
