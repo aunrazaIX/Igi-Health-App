@@ -23,8 +23,10 @@ const ModalCustom: React.FC<ModalCustomProps> = ({ modalVisible, setModalVisible
     return (
         <Modal
             animationType="slide"
-            transparent={true}
+            transparent
             visible={modalVisible}
+            backdropColor={'#5d605f3d'}
+            statusBarTranslucent
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        backgroundColor: '#5d605f3d'
+        backgroundColor: COLORS.black + 40
     },
     modalView: {
         backgroundColor: COLORS.white,

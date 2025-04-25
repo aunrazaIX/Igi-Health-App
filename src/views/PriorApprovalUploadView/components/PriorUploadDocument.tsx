@@ -30,8 +30,6 @@ const PriorUploadDocument = () => {
         });
     };
 
-    console.log("selectedImages", selectedImages)
-
     return (
         <View>
             <View style={styles.uploadBox}>

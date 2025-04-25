@@ -36,6 +36,16 @@ export const styles = StyleSheet.create({
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
     elevation: 5,
+    backfaceVisibility: 'hidden',
+  },
+  rotateCard:{
+  },
+  flipCardContainer: {
+    width: '100%',
+    height: vh*30,
+  },
+  flipBackCard: {
+   marginTop: -vh*27,
   },
   logo: {
     width: 24 * vw,
@@ -183,10 +193,6 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.black,
   },
-  // meterDetailTextEnd: {
-  //   flexDirection: 'row',
-  //   gap: vw * 1,
-  // },
   textRed: {
     color: COLORS.cardBackgroundRed,
     fontSize: vh * 2,

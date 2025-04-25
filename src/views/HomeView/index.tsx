@@ -1,10 +1,10 @@
 import {
   View,
-  Text,
   Image,
   ScrollView,
   FlatList,
   TouchableOpacity,
+  Animated,
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -14,9 +14,8 @@ import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
+import {vh} from '../../assets/theme/dimension';
 
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
 
 type CardItem = {
   logo: any;
@@ -102,11 +101,9 @@ const HomeView: React.FC<HomeViewProps> = ({
                     style={styles.infoCardMiddleTextlight}
                     numberOfLines={1}></AileronSemiBold>
                 </View>
-                <View>
-                  <TouchableOpacity onPress={() => onPressCard(false)}>
-                    <Image source={images.flipCard} />
-                  </TouchableOpacity>
-                </View>
+                <TouchableOpacity style={styles.rotateCard} onPress={animateCard}>
+                  <Image source={images.flipCard} />
+                </TouchableOpacity>
               </View>
             </View>
 

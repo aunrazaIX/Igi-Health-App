@@ -109,6 +109,6 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     dependentContainer: {
-        padding: vw * 3.5
+        padding: vw * 3.5,
     }
 })
