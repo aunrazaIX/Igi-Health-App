@@ -9,7 +9,6 @@ const MainStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name={'DrawerStack'} component={DrawerStack} />
-  
     </Stack.Navigator>
   );
 };
