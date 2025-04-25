@@ -37,7 +37,6 @@ export const styles = StyleSheet.create({
     backfaceVisibility: 'hidden',
   },
   rotateCard:{
-    zIndex: 1,
   },
   flipCardContainer: {
     width: '100%',

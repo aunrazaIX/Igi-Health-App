@@ -29,8 +29,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const navigate = useNavigation();
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const animateValue = useRef(new Animated.Value(0)).current;
-
-
   const currentValue = useRef(0);
   animateValue.addListener(({value}) => {
     currentValue.current = value;
@@ -49,6 +47,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
         useNativeDriver: true,
       }).start()
     }
+    
   }
 
   const rotateFront = animateValue.interpolate({
@@ -68,8 +67,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const backAnimatedStyle = {
     transform: [{ perspective: 1000 },{ rotateY: rotateBack }],
   };
-
-
   const cardData: CardItemData[] = [
     {
       logo: icons.benefits,

@@ -8,7 +8,7 @@ const Home = () => {
   const {cardData,  backAnimatedStyle,frontAnimatedStyle,} = states;
   const {onPressTab,animateCard,toggleDrawer} = functions;
 
-  return <HomeView cardData={cardData} animateCard={animateCard} toggleDrawer={toggleDrawer}   backAnimatedStyle={backAnimatedStyle}
+  return <HomeView cardData={cardData} animateCard={animateCard} toggleDrawer={toggleDrawer} backAnimatedStyle={backAnimatedStyle}
   frontAnimatedStyle={frontAnimatedStyle} />;
 };
 

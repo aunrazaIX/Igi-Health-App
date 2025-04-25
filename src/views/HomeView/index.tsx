@@ -26,6 +26,7 @@ type CardItem = {
 
 type HomeViewProps = {
   cardData: CardItem[];
+
   animateCard: () => void;
   backAnimatedStyle:{},
   frontAnimatedStyle:{},
@@ -33,8 +34,7 @@ type HomeViewProps = {
 };
 
 const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,frontAnimatedStyle,backAnimatedStyle}) => {
-
-  console.log(frontAnimatedStyle)
+ 
   return (
     <View style={styles.homeContainer}>
       <ScrollView>
@@ -62,7 +62,7 @@ const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,fr
           </View>
           <View style={styles.flipCardContainer}>
            <Animated.View style={[styles.homeInfoContainer,frontAnimatedStyle]}>
-            <View>
+            <TouchableOpacity onPress={animateCard}>
             <View style={styles.homeInfoContainerHeader}>
               <View>
                 <Image style={styles.logo} source={icons.logo} />
@@ -127,10 +127,10 @@ const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,fr
                   numberOfLines={1}></AileronBold>
               </View>
             </View>
-            </View>
+            </TouchableOpacity>
           </Animated.View>
           <Animated.View style={[styles.homeInfoContainer,backAnimatedStyle,styles.flipBackCard]}>
-            <View>
+            < TouchableOpacity onPress={animateCard}>
             <View style={styles.homeInfoContainerHeader}>
               <View>
                 <Image style={styles.logo} source={icons.logo} />
@@ -195,7 +195,7 @@ const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,fr
                   numberOfLines={1}></AileronBold>
               </View>
             </View>
-            </View>
+            </TouchableOpacity >
             </Animated.View>
           </View>
           {/* <View style={styles.homeInfoContainerScroll}>
