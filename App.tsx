@@ -9,14 +9,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import MainStack from './src/navigation/MainStack';
 import Home from './src/screens/Home';
 import ClaimsHistory from './src/screens/ClaimsHistory';
+import Notification from './src/screens/Notification';
 
 
 const App = () => {
   return (
     <NavigationContainer>
-      <MainStack/>
-      {/* <Home /> */}
-      {/* <ClaimsHistory/> */}
+      {/* <MainStack/> */}
+      <Notification />
     </NavigationContainer>
   )
 

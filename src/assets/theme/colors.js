@@ -40,9 +40,9 @@ export const COLORS = {
   benefitsCardGradient: ['#FFE9EC', '#ECF1FC'],
   buttonBorder : 'rgba(230, 231, 235, 1)',
   buttonBackground: 'rgba(248, 248, 248, 1)',
-
   faqsGradient: ['#EBEBEB', '#E2E8EB00'],
   faqsSubHeading: '#EE2560',
   toggleFalse: '#D3D3D3',
   borderColor: '#DDE0EB',
+  unread: 'rgba(158, 160, 170, 1)'
 };

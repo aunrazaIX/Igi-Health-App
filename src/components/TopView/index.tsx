@@ -22,7 +22,8 @@ const TopView = ({
   onPressBack,
   AddModal,
   TopViewSecondIcon,
-  containerStyle
+  containerStyle,
+  containerStyleIcon,
 }: {
   title: string;
   onPressBack?: () => void,
@@ -31,6 +32,7 @@ const TopView = ({
   TopViewSecondIcon?: ImageSourcePropType | null;
   AddModal?: () => void,
   containerStyle?: StyleObject | StyleObject[];
+  containerStyleIcon?: StyleObject | StyleObject[]
 }) => {
   return (
     <LinearGradient
@@ -54,7 +56,7 @@ const TopView = ({
 
           {TopViewSideIcon &&
             <TouchableOpacity onPress={AddModal}>
-              <Image style={styles.TopViewIcon} source={TopViewSideIcon} />
+              <Image style={[styles.TopViewIcon, containerStyleIcon]} source={TopViewSideIcon} />
             </TouchableOpacity>
           }
         </View>

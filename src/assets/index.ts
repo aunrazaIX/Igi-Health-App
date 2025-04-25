@@ -77,7 +77,6 @@ export const icons = {
   searchBlack: require('./icons/searchBlack.png'),
   searchWhite: require('./icons/searchWhite.png'),
   claimStats: require('./icons/claimStats.png'),
-<<<<<<< Updated upstream
   name: require('./icons/name.png'),
   cnic: require('./icons/cnic.png'),
   plus: require('./icons/plus.png'),
@@ -94,9 +93,10 @@ export const icons = {
   mail: require('./icons/mail.png'),
   location: require('./icons/location.png'),
   call: require('./icons/call.png'),
-=======
   claimStatistics: require('./icons/claimStatistics.png'),
->>>>>>> Stashed changes
+  notificationPlan: require('./icons/notificationPlan.png'),
+  arrowDownNotification: require('./icons/arrowDownNotification.png'),
+  notificationCheck: require('./icons/notificationCheck.png'),
 };
 
 
