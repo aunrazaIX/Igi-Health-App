@@ -1,3 +1,5 @@
+
+
 export const images = {
   backgroundImage: require('./images/loginBackground.png'),
   SignupBg: require('./images/SignupBg.png'),
@@ -75,11 +77,9 @@ export const icons = {
   searchBlack: require('./icons/searchBlack.png'),
   searchWhite: require('./icons/searchWhite.png'),
   claimStats: require('./icons/claimStats.png'),
-  room  : require('./icons/Room.png'),
-  maternity  : require('./icons/maternity.png'),
-
+  room: require('./icons/Room.png'),
+  maternity: require('./icons/maternity.png'),
 };
-
 
 export const drawerIcons = {
   drawerHome: require('./icons/drawerHome.png'),
@@ -100,3 +100,11 @@ export const drawerIcons = {
   drawerClose: require('./icons/drawerClose.png'),
   drawerArrowRight: require('./icons/drawerArrowRight.png'),
 }
+
+
+export const tabIcons = {
+  home: require('./icons/home.png'),
+  note: require('./icons/note.png'),
+  PriorApproval: require('./icons/PriorApproval.png'),
+  customerSupport: require('./icons/customer-support.png'),
+};

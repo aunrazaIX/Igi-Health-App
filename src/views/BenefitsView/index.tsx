@@ -1,12 +1,12 @@
 import React from 'react';
 import { AileronBold, AileronSemiBold, Container, CurvedView, TopView } from '../../components';
 import { images } from '../../assets';
-import { FlatList, Image, View } from 'react-native';
+import { FlatList, Image, ScrollView, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import { COLORS } from '../../assets/theme/colors';
 import { ImageSourcePropType } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+
 
 
 type Props = {
@@ -71,7 +71,6 @@ const BenefitsView: React.FC<Props> = ({ data }) => {
                         <AileronBold name={'Coverage &'} style={styles.coverageTitle} />
                         <AileronBold name={' Benefits!'} style={styles.benefitTitle} />
                     </View>
-
                     <FlatList
                         data={data}
                         renderItem={RenderBenefits}

@@ -1,13 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 export const styles = StyleSheet.create({
-  homeContainer: {
-    // borderWidth: 2,
-    flex: 1,
-  },
+  
   gradient: {
     height: '58%',
   },
@@ -147,6 +143,8 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCards: {
     paddingHorizontal: vw * 2,
+   
+   
 
     marginVertical: vh * 2,
 

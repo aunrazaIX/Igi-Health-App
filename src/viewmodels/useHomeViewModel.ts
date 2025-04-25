@@ -1,13 +1,22 @@
 import {useState} from 'react';
 import {icons} from '../assets';
 import {COLORS} from '../assets/theme/colors';
+import {useNavigation} from '@react-navigation/native';
+import {ImageSourcePropType} from 'react-native';
 
 export type CardItemData = {
   logo: any;
   name: string;
   image: any;
   backgroundColor: any;
+  to: any;
 };
+
+// export type menusData = {
+//   name: string;
+//   icon: ImageSourcePropType;
+//   to: string;
+// };
 
 type UseHomeViewModelReturn = {
   states: {
@@ -17,12 +26,18 @@ type UseHomeViewModelReturn = {
   };
   functions: {
     onPressTab: (name: string) => void;
-    onPressCard : (value : boolean) =>void;
+    onPressCard: (value: boolean) => void;
+    openDrawer: () => void;
+    onPressMenu: (route: string) => void;
   };
 };
 
 const useHomeViewModel = (): UseHomeViewModelReturn => {
+
+
+
   const [selectedTab, setSelectedTab] = useState<string>('login');
+  const navigate = useNavigation();
 
   const [frontCard, setFrontCard] = useState<boolean>(true);
 
@@ -30,12 +45,31 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   const onPressCard = (value: boolean) => setFrontCard(!frontCard);
 
+  // const menus: menusData[] = [
+  //   {
+  //     name: 'Benefits',
+  //     icon: icons.benefits,
+  //     to: 'Benefits',
+  //   },
+  //   {
+  //     name: 'Personal',
+  //     icon: icons.benefits,
+  //     to: 'Personal',
+  //   },
+  //   {
+  //     name: 'Prior Approval',
+  //     icon: icons.benefits,
+  //     to: 'PriorApproval',
+  //   },
+  // ];
+
   const cardData: CardItemData[] = [
     {
       logo: icons.benefits,
       name: 'Benefits',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'Benefits',
     },
 
     {
@@ -43,6 +77,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       name: 'Personal',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundRed,
+      to: 'Personal',
     },
 
     {
@@ -50,6 +85,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       name: 'Lodge A Claim',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'PriorApproval',
     },
 
     {
@@ -57,36 +93,52 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       name: 'Prior Approval',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'PriorApproval',
     },
     {
       logo: icons.benefits,
       name: 'Hopsital Directory',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundRed,
+      to: 'Hospitals',
     },
     {
       logo: icons.benefits,
       name: 'Discounted Centers',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'PanelHospitalList',
     },
     {
       logo: icons.benefits,
       name: 'Help Line',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'HelpLine',
     },
   ];
+
+  const openDrawer = () => {
+    navigate?.toggleDrawer();
+  };
+
+  const onPressMenu = (route: string) => {
+    console.log("hye" , route)
+    navigate.navigate(route);
+  };
+
 
   return {
     states: {
       selectedTab,
       cardData,
-      frontCard
+      frontCard,
     },
     functions: {
       onPressTab,
-      onPressCard
+      onPressCard,
+      openDrawer,
+      onPressMenu,
     },
   };
 };
