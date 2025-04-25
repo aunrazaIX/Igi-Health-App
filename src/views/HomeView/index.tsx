@@ -289,7 +289,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                 numberOfLines={1}></AileronBold>
             </View>
 
-<<<<<<< HEAD
             <AileronBold
               name={'285, 000'}
               style={styles.meterDetailTextBold}
@@ -316,64 +315,6 @@ const HomeView: React.FC<HomeViewProps> = ({
             <View style={styles.dashboardMeterDetailTop}>
               <View>
                 <Image style={styles.meterIcon} source={icons.chart} />
-=======
-            {/* <View style={styles.dashboardContainerHeaderIcons}>
-              <Image source={icons.leftArrowStraight} />
-              <Image source={icons.rightArrowStraight} />
-            </View> */}
-          </View>
-
-          <FlatList
-            horizontal
-            data={cardData}
-            keyExtractor={(_item, index) => index.toString()}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <View
-                style={[
-                  styles.dashboardContainerCards,
-                  { backgroundColor: item.backgroundColor },
-                ]}>
-                <View style={styles.cardLogoContainer}>
-                  <Image style={styles.cardLogo} source={item.logo} />
-                </View>
-
-                <View style={styles.cardContent}>
-                  <View
-                    style={{ width: '70%' }}
-                  >
-                    <AileronRegular
-                      style={styles.dashboardContainerCardText}
-                      name={item.name}
-                      numberOfLines={2}
-                    />
-                  </View>
-
-                  <Image source={item.image} />
-                </View>
-              </View>
-            )}
-          />
-          <View>
-            <View style={styles.meterContainer}>
-              <Image source={icons.claimStatistics} style={styles.statisticsIcon} />
-              <AileronSemiBold name='Claim Statistics' style={styles.claimTittle} />
-            </View>
-            <View></View>
-          </View>
-
-          <View style={styles.dashboardMeterContent}>
-            <View style={styles.dashboardMeterDetail}>
-              <View style={styles.dashboardMeterDetailTop}>
-                <View>
-                  <Image style={styles.meterIcon} source={icons.addSquare} />
-                </View>
-
-                <AileronBold
-                  style={styles.meterDetailTextLight}
-                  name="Total Deducted"
-                  numberOfLines={1}></AileronBold>
->>>>>>> 259af7fd7909750b2a888af35293c8e4861b07be
               </View>
 
               <AileronBold
