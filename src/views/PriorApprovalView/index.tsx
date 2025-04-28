@@ -24,7 +24,6 @@ const PriorApprovalView = ({ data, selectData }: any) => {
 
                         <PatientsDetailView data={data} />
                     </View>
-
                     <View>
                         <LinearGradient
                             colors={COLORS.PriorGradient}

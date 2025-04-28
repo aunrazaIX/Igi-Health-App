@@ -4,6 +4,7 @@ import {COLORS} from '../assets/theme/colors';
 import { Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+
 export type CardItemData = {
   logo: any;
   name: string;
@@ -74,21 +75,18 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
     },
-
     {
       logo: icons.person,
       name: 'Personal',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundRed,
     },
-
     {
       logo: icons.claim,
       name: 'Lodge A Claim',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
     },
-
     {
       logo: icons.benefits,
       name: 'Prior Approval',

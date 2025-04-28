@@ -62,7 +62,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 8,
     paddingVertical: vh * 1.4,
     borderRadius: vw * 2.5,
-
     width: '33%',
   },
 
@@ -74,7 +73,7 @@ export const styles = StyleSheet.create({
     gap: vw * 2,
     paddingVertical: vh * 1.4,
     paddingHorizontal: vw * 5,
-    borderRadius: vw * 1,
+    borderRadius: vw * 2,
     color: COLORS.textBlackShade,
     width: '33%',
   },

@@ -14,6 +14,7 @@ import PriorApproval from '../../screens/PriorApproval';
 import LinearGradient from 'react-native-linear-gradient';
 import PanelHospitalList from '../../screens/Hospitals';
 import LodgeClaim from '../../screens/LodgeClaim';
+import ClaimsHistory from '../../screens/ClaimsHistory';
 
 const Drawer = createDrawerNavigator();
 
@@ -60,6 +61,7 @@ const DrawerContent = (props: DrawerContentComponentProps) => {
       id: 7,
       name: 'Claims History',
       icon: drawerIcons.drawerClaimHistory,
+      to: 'claimHistory'
     },
     {
       id: 8,
@@ -167,6 +169,7 @@ const DrawerStack = () => {
       <Drawer.Screen name="LodgeClaim" component={LodgeClaim} />
       <Drawer.Screen name="PriorApproval" component={PriorApproval} />
       <Drawer.Screen name="Hospital" component={PanelHospitalList} />
+      <Drawer.Screen name="claimHistory" component={ClaimsHistory} />
 
     </Drawer.Navigator>
   )

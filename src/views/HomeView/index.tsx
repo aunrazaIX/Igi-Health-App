@@ -26,7 +26,6 @@ type CardItem = {
 
 type HomeViewProps = {
   cardData: CardItem[];
-
   animateCard: () => void;
   backAnimatedStyle:{},
   frontAnimatedStyle:{},
