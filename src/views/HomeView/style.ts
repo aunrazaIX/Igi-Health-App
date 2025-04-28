@@ -3,16 +3,13 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
-  homeContainer: {
-    flex: 1,
-  },
   gradient: {
-    // height: '58%',
     paddingBottom: vh * 2,
+    paddingHorizontal:vw*2.75,
+    backgroundColor:COLORS.white
   },
   homeHeader: {
     marginTop: vh * 8,
-    marginHorizontal: vw * 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -27,8 +24,8 @@ export const styles = StyleSheet.create({
     gap: vw * 5,
   },
   homeInfoContainer: {
+    width:'100%',
     marginTop: vh * 4,
-    marginHorizontal: vw * 4,
     paddingHorizontal: vw * 5,
     paddingVertical: vh * 3,
     borderRadius: vw * 4,
@@ -58,6 +55,17 @@ export const styles = StyleSheet.create({
   text: {
     color: COLORS.textColor,
     fontSize: vh * 2,
+  },
+  statisticsContainer:{
+    flexDirection:'row',justifyContent:'space-between' 
+  },
+  statisticsHeader:{
+    fontSize:vw*5,
+    alignSelf:'flex-start'
+  },
+  graphContainer:{
+height:vh*20,
+width:'100%',
   },
   meterDetailTextEnd: {
     flexDirection: 'row',
@@ -105,10 +113,6 @@ export const styles = StyleSheet.create({
   infoCardFooterLeft: {},
   infoCardFooterRight: {
     alignItems: 'flex-end',
-  },
-  dashboardContainer: {
-    marginHorizontal: vw * 4,
-    marginBottom: vh * 4,
   },
   dashboardContainerHeader: {
     flexDirection: 'row',

@@ -8,14 +8,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { styles } from './style';
-import { icons, images } from '../../assets';
+import {styles} from './style';
+import {icons, images} from '../../assets';
 import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 type CardItem = {
   logo: any;
@@ -29,195 +29,256 @@ type HomeViewProps = {
   openDrawer: () => void;
   cardData: CardItem[];
   animateCard: () => void;
-  backAnimatedStyle:{},
-  frontAnimatedStyle:{},
-  toggleDrawer:() => void;
+  backAnimatedStyle: {};
+  frontAnimatedStyle: {};
+  toggleDrawer: () => void;
 };
 
-const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,frontAnimatedStyle,backAnimatedStyle}) => {
+const HomeView: React.FC<HomeViewProps> = ({
+  toggleDrawer,
+  cardData,
+  animateCard,
+  frontAnimatedStyle,
+  backAnimatedStyle,
+}) => {
   return (
     // <View style={styles.homeContainer}>
-      <ScrollView>
-        <LinearGradient
-          style={styles.gradient}
-          colors={['rgba(11, 74, 152, 1)', 'rgba(72, 195, 255, 1)']}>
-          <View style={styles.homeHeader}>
-            <View>
-              <Image style={styles.headerLogo} source={images.logoWhite} />
-            </View>
-
-            <View style={styles.headerIcons}>
-              <TouchableOpacity>
-                <Image source={icons.search} />
-              </TouchableOpacity>
-
-              <TouchableOpacity>
-                <Image source={icons.notification} />
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={toggleDrawer}>
-                <Image source={icons.menu} />
-              </TouchableOpacity>
-            </View>
+    <ScrollView>
+      <LinearGradient
+        style={styles.gradient}
+        colors={['rgba(11, 74, 152, 1)', 'rgba(72, 195, 255, 1)']}>
+        <View style={styles.homeHeader}>
+          <View>
+            <Image style={styles.headerLogo} source={images.logoWhite} />
           </View>
-          <View style={styles.flipCardContainer}>
-           <Animated.View style={[styles.homeInfoContainer,frontAnimatedStyle]}>
+
+          <View style={styles.headerIcons}>
+            <TouchableOpacity>
+              <Image source={icons.search} />
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+              <Image source={icons.notification} />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={toggleDrawer}>
+              <Image source={icons.menu} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.flipCardContainer}>
+          <Animated.View style={[styles.homeInfoContainer, frontAnimatedStyle]}>
             <TouchableOpacity onPress={animateCard}>
-            <View style={styles.homeInfoContainerHeader}>
-              <View>
-                <Image style={styles.logo} source={icons.logo} />
-              </View>
-
-              <View style={styles.homeInfoContainerHeaderText}>
-                <AileronBold
-                  name={'Health Insurance'}
-                  numberOfLines={1}
-                  style={styles.infoCardTextBold}></AileronBold>
-
-                <AileronSemiBold
-                  name={'User ID: 123450000123'}
-                  style={styles.infoCardTextlight}
-                  numberOfLines={1}></AileronSemiBold>
-              </View>
-            </View>
-
-            <View style={styles.homeInfoContainerMiddle}>
-              <View style={styles.homeInfoContainerMiddleText}>
-                <AileronSemiBold
-                  name={'Policy Number: 12345'}
-                  style={styles.infoCardMiddleTextlight}
-                  numberOfLines={1}></AileronSemiBold>
-              </View>
-
-              <View style={styles.homeInfoContainerMiddleTextLogo}>
+              <View style={styles.homeInfoContainerHeader}>
                 <View>
-                  <AileronSemiBold
-                    name={'CNIC: 12345-6789012-3'}
-                    style={styles.infoCardMiddleTextlight}
-                    numberOfLines={1}></AileronSemiBold>
+                  <Image style={styles.logo} source={icons.logo} />
                 </View>
-                <TouchableOpacity style={styles.rotateCard} onPress={animateCard}>
-                  <Image source={images.flipCard} />
-                </TouchableOpacity>
-              </View>
-            </View>
 
-            <View style={styles.infoCardFooter}>
-              <View style={styles.infoCardFooterLeft}>
-                <AileronSemiBold
-                  name={'Card Holder Name'}
-                  style={styles.infoCardMiddleTextlight}
-                  numberOfLines={1}></AileronSemiBold>
+                <View style={styles.homeInfoContainerHeaderText}>
+                  <AileronBold
+                    name={'Health Insurance'}
+                    numberOfLines={1}
+                    style={styles.infoCardTextBold}></AileronBold>
 
-                <AileronBold
-                  name={'Imran Naveed Qureshi'}
-                  style={styles.infoCardTextBold}
-                  numberOfLines={1}></AileronBold>
+                  <AileronSemiBold
+                    name={'User ID: 123450000123'}
+                    style={styles.infoCardTextlight}
+                    numberOfLines={1}
+                  />
+                </View>
               </View>
 
-              <View style={styles.infoCardFooterRight}>
-                <AileronSemiBold
-                  name={'Expiry Date'}
-                  style={styles.infoCardMiddleTextlight}
-                  numberOfLines={1}></AileronSemiBold>
+              <View style={styles.homeInfoContainerMiddle}>
+                <View style={styles.homeInfoContainerMiddleText}>
+                  <AileronSemiBold
+                    name={'Policy Number: 12345'}
+                    style={styles.infoCardMiddleTextlight}
+                    numberOfLines={1}
+                  />
+                </View>
 
-                <AileronBold
-                  name={'02/07/2025'}
-                  style={styles.infoCardFooterTextBold}
-                  numberOfLines={1}></AileronBold>
+                <View style={styles.homeInfoContainerMiddleTextLogo}>
+                  <View>
+                    <AileronSemiBold
+                      name={'CNIC: 12345-6789012-3'}
+                      style={styles.infoCardMiddleTextlight}
+                      numberOfLines={1}
+                    />
+                  </View>
+                  <TouchableOpacity
+                    style={styles.rotateCard}
+                    onPress={animateCard}>
+                    <Image source={images.flipCard} />
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
+
+              <View style={styles.infoCardFooter}>
+                <View style={styles.infoCardFooterLeft}>
+                  <AileronSemiBold
+                    name={'Card Holder Name'}
+                    style={styles.infoCardMiddleTextlight}
+                    numberOfLines={1}
+                  />
+
+                  <AileronBold
+                    name={'Imran Naveed Qureshi'}
+                    style={styles.infoCardTextBold}
+                    numberOfLines={1}
+                  />
+                </View>
+
+                <View style={styles.infoCardFooterRight}>
+                  <AileronSemiBold
+                    name={'Expiry Date'}
+                    style={styles.infoCardMiddleTextlight}
+                    numberOfLines={1}
+                  />
+
+                  <AileronBold
+                    name={'02/07/2025'}
+                    style={styles.infoCardFooterTextBold}
+                    numberOfLines={1}></AileronBold>
+                </View>
+              </View>
             </TouchableOpacity>
           </Animated.View>
-          <Animated.View style={[styles.homeInfoContainer,backAnimatedStyle,styles.flipBackCard]}>
-            < TouchableOpacity onPress={animateCard}>
-            <View style={styles.homeInfoContainerHeader}>
-              <View>
-                <Image style={styles.logo} source={icons.logo} />
-              </View>
-
-              <View style={styles.homeInfoContainerHeaderText}>
-                <AileronBold
-                  name={'Back Side'}
-                  numberOfLines={1}
-                  style={styles.infoCardTextBold}></AileronBold>
-
-                <AileronSemiBold
-                  name={'User ID: 123450000123'}
-                  style={styles.infoCardTextlight}
-                  numberOfLines={1}></AileronSemiBold>
-              </View>
-            </View>
-
-            <View style={styles.homeInfoContainerMiddle}>
-              <View style={styles.homeInfoContainerMiddleText}>
-                <AileronSemiBold
-                  name={'Policy Number: 12345'}
-                  style={styles.infoCardMiddleTextlight}
-                  numberOfLines={1}></AileronSemiBold>
-              </View>
-
-              <View style={styles.homeInfoContainerMiddleTextLogo}>
+          <Animated.View
+            style={[
+              styles.homeInfoContainer,
+              backAnimatedStyle,
+              styles.flipBackCard,
+            ]}>
+            <TouchableOpacity onPress={animateCard}>
+              <View style={styles.homeInfoContainerHeader}>
                 <View>
-                  <AileronSemiBold
-                    name={'CNIC: 12345-6789012-3'}
-                    style={styles.infoCardMiddleTextlight}
-                    numberOfLines={1}></AileronSemiBold>
+                  <Image style={styles.logo} source={icons.logo} />
                 </View>
-                <TouchableOpacity style={styles.rotateCard} onPress={animateCard}>
-                  <Image source={images.flipCard} />
-                </TouchableOpacity>
-              </View>
-            </View>
 
-            <View style={styles.infoCardFooter}>
-              <View style={styles.infoCardFooterLeft}>
-                <AileronSemiBold
-                  name={'Card Holder Name'}
-                  style={styles.infoCardMiddleTextlight}
-                  numberOfLines={1}></AileronSemiBold>
+                <View style={styles.homeInfoContainerHeaderText}>
+                  <AileronBold
+                    name={'Back Side'}
+                    numberOfLines={1}
+                    style={styles.infoCardTextBold}></AileronBold>
 
-                <AileronBold
-                  name={'Imran Naveed Qureshi'}
-                  style={styles.infoCardTextBold}
-                  numberOfLines={1}></AileronBold>
+                  <AileronSemiBold
+                    name={'User ID: 123450000123'}
+                    style={styles.infoCardTextlight}
+                    numberOfLines={1}
+                  />
+                </View>
               </View>
 
-              <View style={styles.infoCardFooterRight}>
-                <AileronSemiBold
-                  name={'Expiry Date'}
-                  style={styles.infoCardMiddleTextlight}
-                  numberOfLines={1}></AileronSemiBold>
+              <View style={styles.homeInfoContainerMiddle}>
+                <View style={styles.homeInfoContainerMiddleText}>
+                  <AileronSemiBold
+                    name={'Policy Number: 12345'}
+                    style={styles.infoCardMiddleTextlight}
+                    numberOfLines={1}
+                  />
+                </View>
 
-                <AileronBold
-                  name={'02/07/2025'}
-                  style={styles.infoCardFooterTextBold}
-                  numberOfLines={1}></AileronBold>
+                <View style={styles.homeInfoContainerMiddleTextLogo}>
+                  <View>
+                    <AileronSemiBold
+                      name={'CNIC: 12345-6789012-3'}
+                      style={styles.infoCardMiddleTextlight}
+                      numberOfLines={1}
+                    />
+                  </View>
+                  <TouchableOpacity
+                    style={styles.rotateCard}
+                    onPress={animateCard}>
+                    <Image source={images.flipCard} />
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-            </TouchableOpacity >
-            </Animated.View>
-          </View>
-          {/* <View style={styles.homeInfoContainerScroll}>
-            <View style={styles.indicatorDots}>
-              <TouchableOpacity style={[styles.inactiveDot, styles.dot]} />
-              <TouchableOpacity style={[styles.dot, styles.activeDot]} />
-              <TouchableOpacity style={[styles.dot, styles.inactiveDot]} />
-            </View>
-          </View> */}
-        </LinearGradient>
 
+              <View style={styles.infoCardFooter}>
+                <View style={styles.infoCardFooterLeft}>
+                  <AileronSemiBold
+                    name={'Card Holder Name'}
+                    style={styles.infoCardMiddleTextlight}
+                    numberOfLines={1}
+                  />
+
+                  <AileronBold
+                    name={'Imran Naveed Qureshi'}
+                    style={styles.infoCardTextBold}
+                    numberOfLines={1}></AileronBold>
+                </View>
+
+                <View style={styles.infoCardFooterRight}>
+                  <AileronSemiBold
+                    name={'Expiry Date'}
+                    style={styles.infoCardMiddleTextlight}
+                    numberOfLines={1}
+                  />
+
+                  <AileronBold
+                    name={'02/07/2025'}
+                    style={styles.infoCardFooterTextBold}
+                    numberOfLines={1}></AileronBold>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </Animated.View>
+        </View>
+      </LinearGradient>
+      <View style={styles.gradient}>
+        <View>
+          <View style={styles.dashboardContainerHeader}>
               <AileronBold
-                style={styles.meterDetailTextLight}
-                name="Total Deducted"
+                style={styles.dashboardContainerTextBold}
+                name="Health & Wellness"
                 numberOfLines={1}/>
-            {/* </View> */}
+          </View>
+          <FlatList
+            horizontal
+            style={{height: vh * 25}}
+            data={cardData}
+            keyExtractor={(_item, index) => index.toString()}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => (
+              <View
+                style={[
+                  styles.dashboardContainerCards,
+                  {backgroundColor: item.backgroundColor},
+                ]}>
+                <View style={styles.cardLogoContainer}>
+                  <Image style={styles.cardLogo} source={item.logo} />
+                </View>
 
+                <View style={styles.cardContent}>
+                  <View style={{width: '70%'}}>
+                    <AileronRegular
+                      style={styles.dashboardContainerCardText}
+                      name={item.name}
+                      numberOfLines={2}/>
+                  </View>
+
+                  <Image source={item.image} />
+                </View>
+              </View>
+            )}
+          />
+          </View>
+        <AileronBold style={styles.statisticsHeader} name='Claim Statistics'/>
+        <View style={styles.graphContainer}>
+        </View>
+        <View style={styles.statisticsContainer}>
+          
+          <View style={styles.dashboardMeterDetail}>
+            <AileronBold
+              style={styles.meterDetailTextLight}
+              name="Total Deducted"
+              numberOfLines={1}
+            />
             <AileronBold
               name={'285, 000'}
               style={styles.meterDetailTextBold}
-              numberOfLines={1}/>
-
+              numberOfLines={1}
+            />
             <View style={styles.meterDetailTextEnd}>
               <Image source={icons.arrowUp} style={styles.meterArrowUp} />
 
@@ -233,8 +294,7 @@ const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,fr
                 style={styles.text}
               />
             </View>
-          {/* </View> */}
-
+          </View>
           <View style={styles.dashboardMeterDetail}>
             <View style={styles.dashboardMeterDetailTop}>
               <View>
@@ -268,20 +328,25 @@ const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,fr
               />
             </View>
           </View>
-
-          <View>
-            <AileronSemiBold name={'Associated Apps'} style={styles.associatedTittle} />
-            <View style={styles.associatedContainer}>
-              <View style={styles.associatedImageContainer}>
-                <Image source={images.LogoLife} style={styles.associatedImage} />
-              </View>
-              <View style={styles.associatedImageContainer}>
-                <Image source={images.sehatKahani} style={styles.associatedImage} />
-              </View>
+        </View>
+        <View>
+          <AileronSemiBold
+            name={'Associated Apps'}
+            style={styles.associatedTittle}
+          />
+          <View style={styles.associatedContainer}>
+            <View style={styles.associatedImageContainer}>
+              <Image source={images.LogoLife} style={styles.associatedImage} />
+            </View>
+            <View style={styles.associatedImageContainer}>
+              <Image
+                source={images.sehatKahani}
+                style={styles.associatedImage}
+              />
             </View>
           </View>
-        {/* </View> */}
-      {/* </View> */}
+        </View>
+      </View>
     </ScrollView>
   );
 };

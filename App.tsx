@@ -16,8 +16,8 @@ import Notification from './src/screens/Notification';
 const App = () => {
   return (
     <NavigationContainer>
-      {/* <MainStack/> */}
-      <Notification />
+      <MainStack/>
+      {/* <Notification /> */}
     </NavigationContainer>
   )
 
