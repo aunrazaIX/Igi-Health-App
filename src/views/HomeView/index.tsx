@@ -8,23 +8,25 @@ import {
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {styles} from './style';
-import {icons, images} from '../../assets';
+import { styles } from './style';
+import { icons, images } from '../../assets';
 import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import {vh} from '../../assets/theme/dimension';
-
+import { vh, vw } from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 
 type CardItem = {
   logo: any;
   name: string;
   image: any;
   backgroundColor: any;
+  to: any;
 };
 
 type HomeViewProps = {
+  openDrawer: () => void;
   cardData: CardItem[];
   animateCard: () => void;
   backAnimatedStyle:{},
@@ -33,9 +35,8 @@ type HomeViewProps = {
 };
 
 const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,frontAnimatedStyle,backAnimatedStyle}) => {
- 
   return (
-    <View style={styles.homeContainer}>
+    // <View style={styles.homeContainer}>
       <ScrollView>
         <LinearGradient
           style={styles.gradient}
@@ -206,123 +207,82 @@ const HomeView: React.FC<HomeViewProps> = ({toggleDrawer,cardData,animateCard,fr
           </View> */}
         </LinearGradient>
 
-        <View style={styles.dashboardContainer}>
-          <View style={styles.dashboardContainerHeader}>
-            <View>
               <AileronBold
-                style={styles.dashboardContainerTextBold}
-                name="Health & Wellness"
+                style={styles.meterDetailTextLight}
+                name="Total Deducted"
+                numberOfLines={1}/>
+            {/* </View> */}
+
+            <AileronBold
+              name={'285, 000'}
+              style={styles.meterDetailTextBold}
+              numberOfLines={1}/>
+
+            <View style={styles.meterDetailTextEnd}>
+              <Image source={icons.arrowUp} style={styles.meterArrowUp} />
+
+              <AileronLight
+                name={'19.6%'}
+                numberOfLines={1}
+                style={styles.textRed}
+              />
+
+              <AileronLight
+                name={'44.714'}
+                numberOfLines={1}
+                style={styles.text}
+              />
+            </View>
+          {/* </View> */}
+
+          <View style={styles.dashboardMeterDetail}>
+            <View style={styles.dashboardMeterDetailTop}>
+              <View>
+                <Image style={styles.meterIcon} source={icons.chart} />
+              </View>
+
+              <AileronBold
+                style={styles.meterDetailTextLight}
+                name="Total Paid"
                 numberOfLines={1}></AileronBold>
             </View>
 
-            <View style={styles.dashboardContainerHeaderIcons}>
-              <Image source={icons.leftArrowStraight} />
-              <Image source={icons.rightArrowStraight} />
+            <AileronBold
+              name={'855, 000'}
+              style={styles.meterDetailTextBold}
+              numberOfLines={1}></AileronBold>
+
+            <View style={styles.meterDetailTextEnd}>
+              <Image source={icons.arrowUp} style={styles.meterArrowUp} />
+
+              <AileronLight
+                name={'19.6%'}
+                numberOfLines={1}
+                style={styles.textRed}
+              />
+
+              <AileronLight
+                name={'44.714'}
+                numberOfLines={1}
+                style={styles.text}
+              />
             </View>
           </View>
 
-          <FlatList
-            horizontal
-            style={{height: vh * 25}}
-            data={cardData}
-            keyExtractor={(_item, index) => index.toString()}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
-              <View
-                style={[
-                  styles.dashboardContainerCards,
-                  {backgroundColor: item.backgroundColor},
-                ]}>
-                <View style={styles.cardLogoContainer}>
-                  <Image style={styles.cardLogo} source={item.logo} />
-                </View>
-
-                <View style={styles.cardContent}>
-                  <View style={{width: '70%'}}>
-                    <AileronRegular
-                      style={styles.dashboardContainerCardText}
-                      name={item.name}
-                      numberOfLines={2}></AileronRegular>
-                  </View>
-
-                  <Image source={item.image} />
-                </View>
+          <View>
+            <AileronSemiBold name={'Associated Apps'} style={styles.associatedTittle} />
+            <View style={styles.associatedContainer}>
+              <View style={styles.associatedImageContainer}>
+                <Image source={images.LogoLife} style={styles.associatedImage} />
               </View>
-            )}
-          />
-
-          <View style={styles.dashboardMeterContent}>
-            <View style={styles.dashboardMeterDetail}>
-              <View style={styles.dashboardMeterDetailTop}>
-                <View>
-                  <Image style={styles.meterIcon} source={icons.addSquare} />
-                </View>
-
-                <AileronBold
-                  style={styles.meterDetailTextLight}
-                  name="Total Deducted"
-                  numberOfLines={1}></AileronBold>
-              </View>
-
-              <AileronBold
-                name={'285, 000'}
-                style={styles.meterDetailTextBold}
-                numberOfLines={1}></AileronBold>
-
-              <View style={styles.meterDetailTextEnd}>
-                <Image source={icons.arrowUp} style={styles.meterArrowUp} />
-
-                <AileronLight
-                  name={'19.6%'}
-                  numberOfLines={1}
-                  style={styles.textRed}
-                />
-
-                <AileronLight
-                  name={'44.714'}
-                  numberOfLines={1}
-                  style={styles.text}
-                />
-              </View>
-            </View>
-
-            <View style={styles.dashboardMeterDetail}>
-              <View style={styles.dashboardMeterDetailTop}>
-                <View>
-                  <Image style={styles.meterIcon} source={icons.chart} />
-                </View>
-
-                <AileronBold
-                  style={styles.meterDetailTextLight}
-                  name="Total Paid"
-                  numberOfLines={1}></AileronBold>
-              </View>
-
-              <AileronBold
-                name={'855, 000'}
-                style={styles.meterDetailTextBold}
-                numberOfLines={1}></AileronBold>
-
-              <View style={styles.meterDetailTextEnd}>
-                <Image source={icons.arrowUp} style={styles.meterArrowUp} />
-
-                <AileronLight
-                  name={'19.6%'}
-                  numberOfLines={1}
-                  style={styles.textRed}
-                />
-
-                <AileronLight
-                  name={'44.714'}
-                  numberOfLines={1}
-                  style={styles.text}
-                />
+              <View style={styles.associatedImageContainer}>
+                <Image source={images.sehatKahani} style={styles.associatedImage} />
               </View>
             </View>
           </View>
-        </View>
-      </ScrollView>
-    </View>
+        {/* </View> */}
+      {/* </View> */}
+    </ScrollView>
   );
 };
 

@@ -1,27 +1,30 @@
 import {View, ImageBackground, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, { JSX } from 'react';
 import {images, icons} from '../../assets';
 import {styles} from './styles';
 import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
-  AileronBold,
   AileronSemiBold,
-  Button,
-  CheckBox,
-  InputField,
 } from '../../components';
+import { LoginForm, SignUpView } from './components';
 
 const LoginView = ({
   onPressTab,
-  selectedTab,
+  selectedTab, tabs
 }: {
   onPressTab: (name: string) => void;
-  selectedTab: string;
+  selectedTab: string; 
+  tabs: string[];
 }) => {
-  const LoginWrapper = selectedTab === 'login' ? LinearGradient : View;
-  const SignupWrapper = selectedTab === 'signup' ? LinearGradient : View;
+  const Wrapper = (tab: string) =>
+    selectedTab === tab ? LinearGradient : TouchableOpacity;
+
+  const renderForm: Record<string, JSX.Element> = {
+    login: <LoginForm />,
+    signup: <SignUpView />,
+  };
   return (
     <ImageBackground
       source={images.backgroundImage}
@@ -31,81 +34,33 @@ const LoginView = ({
           <Image source={icons.logo} style={styles.logo} />
           <View style={styles.loginContainer}>
             <View style={styles.tabContainer}>
-              <LoginWrapper
-                style={styles.tab}
-                colors={COLORS.activeButtonGradient}>
-                <TouchableOpacity onPress={() => onPressTab('login')}>
-                  <AileronSemiBold
-                    style={[
-                      styles.tabText,
-                      {
-                        color:
-                          selectedTab === 'login'
-                            ? COLORS.white
-                            : COLORS.textColor,
-                      },
-                    ]}
-                    numberOfLines={2}
-                    name="Login"
-                  />
-                </TouchableOpacity>
-              </LoginWrapper>
-              <SignupWrapper
-                style={styles.tab}
-                colors={COLORS.activeButtonGradient}>
-                <TouchableOpacity onPress={() => onPressTab('signup')}>
-                  <AileronSemiBold
-                    style={[
-                      styles.tabText,
-                      {
-                        color:
-                          selectedTab === 'signup'
-                            ? COLORS.white
-                            : COLORS.textColor,
-                      },
-                    ]}
-                    numberOfLines={2}
-                    name="Signup"
-                  />
-                </TouchableOpacity>
-              </SignupWrapper>
+            {tabs.map(tab => {
+                const TabWrapper = Wrapper(tab);
+                return (
+                  <TabWrapper
+                    key={tab}
+                    onPress={() => onPressTab(tab)}
+                    style={styles.tab}
+                    colors={COLORS.activeButtonGradient}>
+                    <AileronSemiBold
+                      style={[
+                        styles.tabText,
+                        {
+                          color:
+                            selectedTab === tab
+                              ? COLORS.white
+                              : COLORS.textColor,
+                        },
+                      ]}
+                      numberOfLines={2}
+                      name={tab === 'login' ? 'Login' : 'Signup'}
+                    />
+                  </TabWrapper>
+                );
+              })}
             </View>
-
-            <AileronSemiBold
-              numberOfLines={2}
-              name={'Enter your email or mobile number to access your account.'}
-              style={styles.loginContainerText}
-            />
-            <InputField
-              label="Email Address / Mobile Number"
-              placeholder="Enter Email/Mobile Number"
-            />
-            <InputField
-              label="Your Password"
-              secureTextEntry
-              placeholder="Enter Password"
-            />
-            <View style={[styles.row, {justifyContent: 'space-between'}]}>
-              <CheckBox description="Remember me" />
-              <TouchableOpacity>
-                <AileronSemiBold
-                  style={styles.forgetPassword}
-                  name="Forgot Password ?"
-                />
-              </TouchableOpacity>
-            </View>
-
-            <Button containerStyle={styles.loginButton} name="login" />
-          </View>
-          <AileronBold style={styles.orText} name="Or" />
-          <View style={styles.loginOptionContainer}>
-            <View style={styles.loginOptionBox}>
-              <Image source={icons.faceID} />
-            </View>
-            <View style={styles.verticalLine} />
-            <View style={styles.loginOptionBox}>
-              <Image source={icons.fingerprint} />
-            </View>
+            {renderForm[selectedTab]}
+            
           </View>
         </View>
       </KeyboardAwareScrollView>

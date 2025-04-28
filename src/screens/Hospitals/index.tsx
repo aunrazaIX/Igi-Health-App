@@ -1,7 +1,7 @@
 import HospitalsView from '../../views/HospitalsView';
 import useHospitalsViewModel from '../../viewmodels/useHospitalsViewModel';
 
-const PanelHospitalList = () => {
+const Hospitals = () => {
   const {states, functions} = useHospitalsViewModel();
 
   const {onPressTab, onPressRightTab, onPressMapTab} = functions;
@@ -18,4 +18,4 @@ const PanelHospitalList = () => {
   );
 };
 
-export default PanelHospitalList;
+export default Hospitals;

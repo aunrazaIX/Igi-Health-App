@@ -93,12 +93,15 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
           <View style={styles.infoContainerHeaderTabs}>
             <TouchableOpacity
               style={[
-                styles.tab,
+                styles.tab, 
                 selectedTab === 'PanelHospitals' && styles.activeTab,
               ]}
               onPress={() => onPressTab('PanelHospitals')}>
               {selectedTab === 'PanelHospitals' ? (
-                <Image source={icons.hospital} />
+                <Image
+                  source={icons.hospital}
+                  style={{width: vw * 7, height: vw * 7}}
+                />
               ) : (
                 <Image source={icons.hospitalInactive} />
               )}

@@ -3,18 +3,26 @@ import {icons} from '../assets';
 import {COLORS} from '../assets/theme/colors';
 import { Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import {ImageSourcePropType} from 'react-native';
 
 export type CardItemData = {
   logo: any;
   name: string;
   image: any;
   backgroundColor: any;
+  to: any;
 };
+
+// export type menusData = {
+//   name: string;
+//   icon: ImageSourcePropType;
+//   to: string;
+// };
 
 type UseHomeViewModelReturn = {
   states: {
     selectedTab: string;
+    frontCard: boolean;
     cardData: CardItemData[];
     frontAnimatedStyle: {};
     backAnimatedStyle: {};
@@ -23,6 +31,7 @@ type UseHomeViewModelReturn = {
     onPressTab: (name: string) => void;
     animateCard: () => void;
     toggleDrawer: () => void;
+    onPressMenu: (route: string) => void;
   };
 };
 
@@ -74,42 +83,49 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       name: 'Benefits',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'Benefits',
     },
     {
       logo: icons.person,
       name: 'Personal',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundRed,
+      to: 'Personal',
     },
     {
       logo: icons.claim,
       name: 'Lodge A Claim',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'PriorApproval',
     },
     {
       logo: icons.benefits,
       name: 'Prior Approval',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'PriorApproval',
     },
     {
       logo: icons.benefits,
       name: 'Hopsital Directory',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundRed,
+      to: 'Hospitals',
     },
     {
       logo: icons.benefits,
       name: 'Discounted Centers',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'PanelHospitalList',
     },
     {
       logo: icons.benefits,
       name: 'Help Line',
       image: icons.rightArrowRound,
       backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'HelpLine',
     },
   ];
 
@@ -117,6 +133,11 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const toggleDrawer=()=>{
     navigate.toggleDrawer();
   }
+
+  const onPressMenu = (route: string) => {
+    console.log("hye" , route)
+    navigate.navigate(route);
+  };
 
   return {
     states: {
@@ -129,6 +150,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       onPressTab,
       animateCard,
       toggleDrawer,
+      onPressMenu
     },
   };
 };
