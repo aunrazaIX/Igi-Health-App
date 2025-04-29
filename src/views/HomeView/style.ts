@@ -7,12 +7,14 @@ export const styles = StyleSheet.create({
     paddingBottom: vh * 2,
     paddingHorizontal: vw * 2.75,
     backgroundColor: COLORS.white,
+   
   },
   homeHeader: {
     marginTop: vh * 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+
   },
   headerLogo: {
     width: 25 * vw,
@@ -25,15 +27,16 @@ export const styles = StyleSheet.create({
   },
   homeInfoContainer: {
     width: '100%',
-    marginTop: vh * 4,
+    marginTop: vh * 2,
     paddingHorizontal: vw * 5,
     paddingVertical: vh * 3,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
-    elevation: 5,
+    elevation: 3,
     backfaceVisibility: 'hidden',
     height: vh * 27,
   },
+
   flipCardContainer: {
     width: '100%',
   },

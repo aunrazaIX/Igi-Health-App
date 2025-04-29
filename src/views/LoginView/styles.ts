@@ -12,6 +12,9 @@ export const styles = StyleSheet.create({
     width: vw * 60,
     resizeMode: 'contain',
   },
+  curvedStyle: {
+    marginVertical: vh * 10,
+  },
   loginContent: {
     flex: 1,
     paddingHorizontal: vw * 4,

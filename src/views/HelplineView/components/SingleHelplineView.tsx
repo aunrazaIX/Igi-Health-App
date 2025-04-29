@@ -13,14 +13,14 @@ const SingleHelplineView = ({ cities, emails, website }: {
     <View style={styles.box}>
       <AileronSemiBold style={styles.title} name="24/7 Medical Hotlines" />
       {cities?.map((item, index) => (
-        <View key={index} style={{ marginBottom: 8 }}>
+        <View key={index} style={{ marginBottom: 15 }}>
           <AileronSemiBold style={styles.subtitle} name={item?.city} />
           <AileronSemiBold style={styles.subtitle} name={`Mobile: ${item?.mobile}`} />
         </View>
       ))}
       <AileronBold style={styles.subtitle} name={'Email:'} />
       {emails?.map((email, i) => (
-        <View key={i} style={{ marginBottom: 4 }}>
+        <View key={i} style={{ marginBottom: 10 }}>
           <AileronSemiBold style={styles.label} name={email?.label} />
           <AileronSemiBold style={styles.email} name={email?.email} />
         </View>

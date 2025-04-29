@@ -7,11 +7,10 @@ const styles = StyleSheet.create({
     paddingTop: vh * 3,
   },
   box: {
-    padding: vh * 1.5,
-    paddingTop: vh * 2.5,
+    padding: vh * 2,
     borderRadius: vh * 2,
     marginVertical: vh,
-    borderWidth: 2,
+    borderWidth: vh * 0.3,
     borderColor: COLORS.borderColor + 88,
     // shadowColor: '#000',
     // shadowOffset: {
@@ -23,13 +22,13 @@ const styles = StyleSheet.create({
     // elevation: 5,
   },
   title: {
-    fontSize: vh * 2,
-    marginBottom: vh,
+    fontSize: vw * 5.5,
+    marginBottom: vh * 2,
     textAlign: 'left',
-    color: COLORS.black,
+    color: COLORS.textBlackShade,
   },
   subtitle: {
-    fontSize: vh * 1.5,
+    fontSize: vw * 4,
     textAlign: 'left',
   },
   label: {
@@ -37,13 +36,13 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   subHeading: {
-    fontSize: vh * 1.5,
+    fontSize: vw * 4,
     textAlign: 'left',
     marginTop: vh * 1.5,
   },
   address: {
     marginTop: vh * 2,
-    fontSize: vh * 1.5,
+    fontSize: vw * 4,
   },
   name: {
     fontSize: vh * 2,
@@ -52,29 +51,37 @@ const styles = StyleSheet.create({
   },
   buttonRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     marginTop: vh * 1.5,
   },
   icon: {
     objectFit: 'contain',
-    width: vh * 2.8,
-    height: vh * 2.8,
+    width: vw * 8,
+    height: vw * 8,
   },
   actionBtn: {
-    padding: vh,
-    paddingHorizontal: vh * 3,
-    borderRadius: vh * 2,
+    paddingVertical: vw * 3,
+    borderRadius: vh * 2.5,
     borderWidth: 2,
     borderColor: COLORS.borderColor + 88,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '31%',
+    gap: vh,
   },
-  email:{
-    fontSize: vh * 1.5,
+  email: {
+    fontSize: vw * 3.8,
     textAlign: 'left',
     textDecorationLine: 'underline',
     marginBottom: vh,
-  }
+  },
+  addressDetail: {
+    fontSize: vw * 3.7,
+  },
+  callTittle: {
+    fontSize: vw * 3.3,
+    color: COLORS.confimationDetail,
+  },
 });
 
 export default styles;

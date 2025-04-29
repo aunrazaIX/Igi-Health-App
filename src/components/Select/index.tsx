@@ -14,7 +14,7 @@ type Patient = {
 };
 type SelectProps = {
     selectData: Patient[];
-    selectLabel: string;
+    selectLabel?: string;
     selectPlaceholder: string
 };
 

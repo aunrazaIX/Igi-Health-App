@@ -4,7 +4,7 @@ export const images = {
   logoWhite: require('./images/IGIwhiteLogo.png'),
   flipCard: require('./images/flip-card.png'),
   maximumBenefits: require('./images/maximumBenefits.png'),
-  Logo: require('./images/Logo.png'),
+  Logo: require('./images/logo.png'),
   SecureFuture: require('./images/secure-future.png'),
   AddNew: require('./images/Add-New.png'),
   priorUpload: require('./images/priorUpload.png'),
@@ -101,6 +101,7 @@ export const icons = {
   forwardArrow: require('./icons/forwardArrow.png'),
   flipCardRoom: require('./icons/flipCardRoom.png'),
   flipCardMaternity: require('./icons/flipCardMaternity.png'),
+  notificationIcon: require('./icons/notificationIcon.png'),
 };
 
 export const drawerIcons = {

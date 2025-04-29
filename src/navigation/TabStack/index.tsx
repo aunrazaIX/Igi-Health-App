@@ -149,7 +149,7 @@ export default Tabs;
 const styles = StyleSheet.create({
   tabBarStyle: {
     elevation: 0,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     borderRadius: vh * 50,
     height: vh * 10,
     marginHorizontal: vw * 4,
