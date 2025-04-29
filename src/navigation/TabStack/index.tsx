@@ -96,7 +96,7 @@ const Tabs = () => {
                 <Image
                   style={[
                     styles.iconStyle,
-                    {tintColor: 'white', height: vh * 5, width: vw * 6},
+                    {tintColor: 'white', height: vh * 5, width: vw * 9},
                   ]}
                   source={tabIcons.PriorApproval}
                 />
@@ -104,7 +104,7 @@ const Tabs = () => {
             ) : (
               <View style={styles.iconContainer}>
                 <Image
-                  style={[styles.iconStyle, {height: vh * 6, width: vw * 7}]}
+                  style={[styles.iconStyle, {height: vh * 5, width: vw * 7}]}
                   source={tabIcons.PriorApproval}
                 />
               </View>
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     height: vh * 4,
-    width: vw * 8,
+    width: vw * 9,
   },
   iconStyleLarge: {
     height: vh * 6,

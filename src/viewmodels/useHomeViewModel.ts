@@ -1,8 +1,8 @@
 import {useRef, useState} from 'react';
 import {cardIcons, icons} from '../assets';
 import {COLORS} from '../assets/theme/colors';
-import { Animated } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {Animated} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
 
 export type CardItemData = {
@@ -33,7 +33,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const [selectedTab, setSelectedTab] = useState<string>('login');
 
   const animateValue = useRef(new Animated.Value(0)).current;
-  console.log('heyyyy', animateValue);
   const currentValue = useRef(0);
 
   animateValue.addListener(({value}) => {
@@ -78,58 +77,58 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     {
       logo: cardIcons.benefits,
       name: 'Benefits',
-      image: icons.rightArrowRound,
+      image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       to: 'Benefits',
     },
     {
       logo: cardIcons.personal,
       name: 'Personal',
-      image: icons.rightArrowRound,
+      image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundRed,
       to: 'Personal',
     },
     {
       logo: cardIcons.lodgeClaim,
       name: 'Lodge A Claim',
-      image: icons.rightArrowRound,
+      image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       to: 'PriorApproval',
     },
     {
       logo: cardIcons.taskDone,
       name: 'Prior Approval',
-      image: icons.rightArrowRound,
+      image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       to: 'PriorApproval',
     },
     {
       logo: cardIcons.hospital,
       name: 'Hopsital Directory',
-      image: icons.rightArrowRound,
+      image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundRed,
       to: 'Hospitals',
     },
     {
       logo: cardIcons.discountedCenters,
       name: 'Discounted Centers',
-      image: icons.rightArrowRound,
+      image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       to: 'PanelHospitalList',
     },
     {
       logo: cardIcons.helpLine,
       name: 'Help Line',
-      image: icons.rightArrowRound,
+      image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       to: 'Helpline',
     },
   ];
 
   const onPressTab = (name: string) => setSelectedTab(name);
-  const toggleDrawer=()=>{
+  const toggleDrawer = () => {
     navigate.toggleDrawer();
-  }
+  };
 
   const onPressMenu = (route: string) => {
     navigate.navigate(route);
@@ -146,7 +145,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       onPressTab,
       animateCard,
       toggleDrawer,
-      onPressMenu
+      onPressMenu,
     },
   };
 };

@@ -125,9 +125,9 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               ]}
               onPress={() => onPressTab('DiscountedCenters')}>
               {selectedTab === 'DiscountedCenters' ? (
-                <Image source={icons.labsActive} />
+                <Image style={{width:vw*6 , height: vh*3}} source={icons.labsActive} />
               ) : (
-                <Image source={icons.labsInactive} />
+                <Image style={{width:vw*6 , height: vh*3}}  source={icons.labsInactive} />
               )}
 
               <AileronBold

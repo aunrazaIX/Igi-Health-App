@@ -1,7 +1,7 @@
 export const images = {
   backgroundImage: require('./images/loginBackground.png'),
   SignupBg: require('./images/SignupBg.png'),
-  logoWhite: require('./images/logoWhite.png'),
+  logoWhite: require('./images/IGIwhiteLogo.png'),
   flipCard: require('./images/flip-card.png'),
   maximumBenefits: require('./images/maximumBenefits.png'),
   Logo: require('./images/Logo.png'),
@@ -65,8 +65,8 @@ export const icons = {
   toggleBottom: require('./icons/arrow-down.png'),
   map: require('./icons/google-maps.png'),
   listIcon: require('./icons/list-icon.png'),
-  labsInactive: require('./icons/labs.png'),
-  labsActive: require('./icons/labWhite.png'),
+  labsInactive: require('./icons/labInactive.png'),
+  labsActive: require('./icons/labActive.png'),
   hospitalInactive: require('./icons/hospital-inactive.png'),
   mapInactive: require('./icons/map-inactive.png'),
   listActive: require('./icons/list-active.png'),
@@ -98,6 +98,9 @@ export const icons = {
   arrowDownNotification: require('./icons/arrowDownNotification.png'),
   notificationCheck: require('./icons/notificationCheck.png'),
   filter: require('./icons/Filter.png'),
+  forwardArrow: require('./icons/forwardArrow.png'),
+  flipCardRoom: require('./icons/flipCardRoom.png'),
+  flipCardMaternity: require('./icons/flipCardMaternity.png'),
 };
 
 export const drawerIcons = {
@@ -122,7 +125,7 @@ export const drawerIcons = {
 
 export const tabIcons = {
   home: require('./icons/home.png'),
-  note: require('./icons/note.png'),
+  note: require('./icons/LodgeClaim.png'),
   PriorApproval: require('./icons/PriorApproval.png'),
   customerSupport: require('./icons/customer-support.png'),
 };

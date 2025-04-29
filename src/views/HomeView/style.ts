@@ -5,8 +5,8 @@ import {COLORS} from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   gradient: {
     paddingBottom: vh * 2,
-    paddingHorizontal:vw*2.75,
-    backgroundColor:COLORS.white
+    paddingHorizontal: vw * 2.75,
+    backgroundColor: COLORS.white,
   },
   homeHeader: {
     marginTop: vh * 8,
@@ -15,8 +15,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerLogo: {
-    width: 24 * vw,
-    aspectRatio: 2,
+    width: 25 * vw,
+    height: vh * 6,
     resizeMode: 'contain',
   },
   headerIcons: {
@@ -24,18 +24,18 @@ export const styles = StyleSheet.create({
     gap: vw * 5,
   },
   homeInfoContainer: {
-    width:'100%',
+    width: '100%',
     marginTop: vh * 4,
     paddingHorizontal: vw * 5,
     paddingVertical: vh * 3,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
     elevation: 5,
-    backfaceVisibility: 'visible',
+    backfaceVisibility: 'hidden',
+    height: vh * 27,
   },
   flipCardContainer: {
     width: '100%',
-    height: vh * 30,
   },
   flipBackCard: {
     marginTop: -vh * 27,
@@ -49,23 +49,23 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backfaceVisibility: 'hidden',
-    height: vh * 7,
+    // borderWidth:2
   },
   text: {
     color: COLORS.textColor,
     fontSize: vh * 2,
   },
-  statisticsContainer:{
-    flexDirection:'row',justifyContent:'space-between' 
+  statisticsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  statisticsHeader:{
-    fontSize:vw*5,
-    alignSelf:'flex-start'
+  statisticsHeader: {
+    fontSize: vw * 5,
+    alignSelf: 'flex-start',
   },
-  graphContainer:{
-height:vh*20,
-width:'100%',
+  graphContainer: {
+    height: vh * 20,
+    width: '100%',
   },
   meterDetailTextEnd: {
     flexDirection: 'row',
@@ -134,42 +134,42 @@ width:'100%',
     color: COLORS.textGrayShade,
   },
   dashboardContainerCards: {
-    paddingHorizontal: vw * 2,
-
     marginVertical: vh * 2,
-
     justifyContent: 'space-between',
-
     borderRadius: vw * 4,
     backgroundColor: COLORS.cardBackgroundBlue,
-    width: vw * 40,
+    width: vw * 45,
     marginRight: vw * 4,
+    paddingHorizontal: vw * 3.5,
+    paddingVertical: vw * 2.5,
+    gap: vh * 0.5,
   },
   cardLogoContainer: {
     marginVertical: vh * 1,
-    borderWidth: 2,
-    // marginLeft: vw * 1,
     resizeMode: 'contain',
   },
   cardLogo: {
-    width: vw * 20,
-    height: vh * 12,
+    // marginVertical: vh*1.5,
+    width: vw * 18,
+    height: vh * 10,
     resizeMode: 'contain',
   },
   cardContent: {
-    marginBottom: vh*1.5,
+    marginBottom: vh,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderWidth: 2,
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   dashboardContainerCardText: {
     textAlign: 'left',
-    fontSize: vw * 5,
+    fontSize: vw * 5.5,
     color: COLORS.white,
   },
-  cardBackIcon:{
-  
+  cardsArrow: {
+    width: vw * 6,
+    height: vw * 6,
+    resizeMode: 'contain',
+    alignItems: 'flex-end',
   },
 
   dashboardMeterContent: {
@@ -202,14 +202,11 @@ width:'100%',
   },
 
   homeBackCardContainer: {
-    marginTop: vh * 4,
-    marginHorizontal: vw * 4,
-    paddingHorizontal: vw * 5,
-    paddingVertical: vh * 2,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
-    elevation: 5,
+
     gap: vh * 0.9,
+    height: vh * 24,
   },
   homeBackInfoContainerHeader: {
     flexDirection: 'row',
@@ -227,7 +224,7 @@ width:'100%',
     color: COLORS.cardBackgroundRed,
   },
   homeBackCardText: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3.7,
     textAlign: 'left',
     color: COLORS.textBlackShade,
   },
@@ -255,13 +252,13 @@ width:'100%',
   },
   backCardFooterText: {},
   backCardFooterIcon: {
-    width: vw * 8,
-    height: vh * 5,
+    width: vw * 10,
+    height: vh * 6,
     resizeMode: 'contain',
   },
   backCardFooterSecondIcon: {
-    width: vw * 7,
-    height: vh * 4,
+    width: vw * 10,
+    height: vh * 6,
     resizeMode: 'contain',
   },
   associatedContainer: {

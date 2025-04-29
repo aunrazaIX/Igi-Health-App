@@ -9,6 +9,7 @@ import PriorApproval from '../../screens/PriorApproval';
 import PanelHospitalList from '../../screens/PanelHospitalList';
 import Hospitals from '../../screens/Hospitals';
 import Helpline from '../../screens/Helpline';
+import Notification from '../../screens/Notification';
 
 const HomeStack = () => {
   const Stack = createStackNavigator();
@@ -25,6 +26,9 @@ const HomeStack = () => {
       <Stack.Screen name="Hospitals" component={Hospitals} />
       <Stack.Screen name="PanelHospitalList" component={PanelHospitalList} />
       <Stack.Screen name="Helpline" component={Helpline} />
+
+      <Stack.Screen name="Notifications" component={Notification} />
+
     </Stack.Navigator>
   );
 };

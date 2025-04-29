@@ -1,11 +1,13 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import NotificationView from '../../views/NotificationView'
+import {View, Text} from 'react-native';
+import React from 'react';
+import NotificationView from '../../views/NotificationView';
+import {useNotificationViewModel} from '../../viewmodels/useNotificationViewModel';
 
 const Notification = () => {
-  return (
-    <NotificationView />
-  )
-}
+  const {functions} = useNotificationViewModel();
+  const {goBack} = functions;
 
-export default Notification
+  return <NotificationView goBack={goBack} />;
+};
+
+export default Notification;

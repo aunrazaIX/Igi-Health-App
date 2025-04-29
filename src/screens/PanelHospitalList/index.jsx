@@ -5,7 +5,7 @@ const PanelHospitalList = ({navigation}) => {
   const {states, functions} = usePanelHospitalListViewModel({navigation});
 
   const {onPressTab, onPressRightTab , goBack} = functions;
-  console.log("goBack" , goBack)
+ 
   const {data, selectedTab, selectedTabRight} = states;
   return (
     <PanelHospitalListView
