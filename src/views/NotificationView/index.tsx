@@ -23,8 +23,9 @@ const renderNotifications = ({ item }: { item: Item, index: number }) => {
 }
 
 type Props = {
-  data: Item[];
-  selectData: SelectItem[];
+  NotificationData: Item[];
+  selectData: SelectData[];
+  goBack : ()=>void
 }
 
 type Item = {
@@ -33,18 +34,18 @@ type Item = {
   time: string;
 }
 
-type SelectItem = {
+type SelectData = {
   id: number;
   name: string;
 }
 
 
 
-const NotificationView: React.FC<Props> = ({ data, selectData }) => {
+const NotificationView: React.FC<Props> = ({ NotificationData, selectData , goBack }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
-  const handleSelect = (item: SelectItem) => {
+  const handleSelect = (item: SelectData) => {
     setSelectedItem(item.name);
     setDropdownVisible(false);
   };
@@ -53,7 +54,7 @@ const NotificationView: React.FC<Props> = ({ data, selectData }) => {
     <>
       <TopView
         title="Notification"
-        // onPressBack={goBack}
+        onPressBack={goBack}
         TopViewSideIcon={icons.notificationPlan}
         containerStyleIcon={styles.BellIcon}
       />
@@ -91,7 +92,7 @@ const NotificationView: React.FC<Props> = ({ data, selectData }) => {
           </View>
         </View>
         <FlatList
-          data={data}
+          data={NotificationData}
           keyExtractor={(item) => item.id.toString()}
           renderItem={renderNotifications}
         />

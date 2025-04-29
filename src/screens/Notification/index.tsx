@@ -1,20 +1,19 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import NotificationView from '../../views/NotificationView';
 import useNotificationViewModel from '../../viewmodels/useNotificationViewModel';
 
 
-  
+
 const Notification = () => {
-  const {states} = useNotificationViewModel();
+  const { states } = useNotificationViewModel();
 
-  // const {functions} = useNotificationViewModel();
-  // const {goBack} = functions;
+  const { functions } = useNotificationViewModel();
+  const { goBack } = functions;
 
-  const {data, selectData} = states;
+  const { data, SelectData } = states;
   return (
-    <NotificationView data={data} selectData={selectData} 
-    // goBack={goBack}
+    <NotificationView NotificationData={data} selectData={SelectData}
+    goBack={goBack}
     />
   )
 }
