@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   loginContainerText: {
     color: COLORS.textColorLight,
     marginTop: vh * 2,
-    fontSize: vw * 1.7,
+    fontSize: vw * 4,
     textAlign: 'left',
   },
   tabContainer: {
@@ -51,10 +51,10 @@ export const styles = StyleSheet.create({
     borderRadius: vw * 6,
   },
   tabText: {
-    fontSize: vw * 1.6,
+    fontSize: vw * 3,
   },
   forgetPassword: {
-    fontSize: vw * 1.5,
+    fontSize: vw * 3,
     color: COLORS.forgotPass,
   },
   loginButton: {
@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   orText: {
-    fontSize: vw * 1.7,
+    fontSize: vw * 4,
     marginVertical: vh * 2,
   },
 });
