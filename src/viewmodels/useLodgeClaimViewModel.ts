@@ -9,8 +9,8 @@ const useLodgeClaimViewModel = () => {
       label: 'Personal Details',
       key: 'personalDetails',
     },
-    {label: 'Claim', key: 'claim', data: []},
-    {label: 'Upload Doc', key: 'uploadDoc', data: []},
+    {label: 'Claim', key: 'claim'},
+    {label: 'Upload Doc', key: 'uploadDoc'},
   ];
   const personalData =  [
     {
@@ -34,37 +34,61 @@ const useLodgeClaimViewModel = () => {
           ],
         },
   ]
+
+  const claimsDetails = [
+    {
+      sectionTitle: 'Treatment Description',
+      icon: icons.stethoscope,
+      edit:true,
+      delete:true,
+      info: [
+        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
+        {label: 'Receipt Number:', value: '89876543'},
+        {label: 'Claim Status:', value: 'Description:'},
+        {label:'Amount:', value: '28827',total:true},
+      ],
+    },
+    {
+      sectionTitle: 'Treatment Description',
+      icon: icons.stethoscope,
+      edit:true,
+      delete:true,
+      info: [
+        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
+        {label: 'Receipt Number:', value: '89876543'},
+        {label: 'Claim Status:', value: 'Description:'},
+        {label:'Amount:', value: '28827',total:true},
+      ],
+    },
+    {
+      sectionTitle: 'Treatment Description',
+      icon: icons.stethoscope,
+      edit:true,
+      delete:true,
+      info: [
+        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
+        {label: 'Receipt Number:', value: '89876543'},
+        {label: 'Claim Status:', value: 'Description:'},
+        {label:'Amount:', value: '28827',total:true},
+      ],
+    },
+    {
+      sectionTitle: 'Treatment Description',
+      icon: icons.stethoscope,
+      edit:true,
+      delete:true,
+      info: [
+        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
+        {label: 'Receipt Number:', value: '89876543'},
+        {label: 'Claim Status:', value: 'Description:'},
+        {label:'Amount:', value: '28827',total:true},
+      ],
+    },
+  ]
   return {
-    states: {steps,personalData},
+    states: {steps,personalData,claimsDetails},
     functions: {},
   };
 };
 
 export default useLodgeClaimViewModel;
-
-
-const styles= StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  avatar: {
-    width: vh * 4.5,
-    height: vh * 4.5,
-    marginRight: 10,
-  },
-  headerText: {
-    flex: 1,
-    textAlign: 'left',
-    fontSize: vh * 1.8,
-    color: COLORS.insuredPrice,
-  },
-  details: {
-    marginTop: 10,
-    borderTopWidth: 2,
-    borderTopColor: COLORS.dependentBorder,
-    borderStyle: 'dashed',
-    paddingTop: vh * 1,
-    rowGap: vh,
-  },
-})

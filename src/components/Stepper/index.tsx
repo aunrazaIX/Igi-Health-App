@@ -1,24 +1,16 @@
 import React, {useState, ReactNode} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   StyleProp,
   ViewStyle,
-  FlatList,
-  Image,
-  ImageSourcePropType,
 } from 'react-native';
-import CurvedView from '../CurvedView';
-import TopView from '../TopView';
+
 import {vh, vw} from '../../assets/theme/dimension';
 import AileronSemiBold from '../AileronSemiBold';
 import {COLORS} from '../../assets/theme/colors';
-import AileronRegular from '../AileronRegular';
 import LinearGradient from 'react-native-linear-gradient';
-import DependentBox from '../DependentBox';
-import AileronBold from '../AileronBold';
 
 type Step = {
   label: string;
@@ -32,22 +24,7 @@ type StepperProps = {
   componentList: [];
 };
 
-type Item = {
-  icon: ImageSourcePropType;
-  sectionTitle: string;
-  info: [];
-};
-type _item = {
-  label: string;
-  value: string;
-};
-
-const Stepper: React.FC<StepperProps> = ({
-  steps,
-  containerStyle,
-  title,
-  componentList,
-}) => {
+const Stepper: React.FC<StepperProps> = ({steps, componentList}) => {
   const [activeStep, setActiveStep] = useState<number>(1);
 
   const renderStep = (stepIndex: number) => {
@@ -137,28 +114,40 @@ const Stepper: React.FC<StepperProps> = ({
     //   keyExtractor={(item, index) => Math.random().toString()}
     // />
     <View style={styles.container}>
-      <View style={styles.stepContainer}>
-        {steps.map((_, index) => renderStep(index))}
+      <View>
+        <View style={styles.stepContainer}>
+          {steps.map((_, index) => renderStep(index))}
+        </View>
+        <View style={styles.textContainer}>
+          {steps.map((_, index) => (
+            <AileronSemiBold
+              key={index}
+              style={styles.labelBelow}
+              name={steps[index]?.label}
+            />
+          ))}
+        </View>
+        <View style={styles.contentContainer}>
+          {componentList[steps[activeStep - 1]?.key]}
+        </View>
       </View>
-      <View style={styles.textContainer}>
-        {steps.map((_, index) => (
-          <AileronSemiBold
-            key={index}
-            style={styles.labelBelow}
-            name={steps[index]?.label}
-          />
-        ))}
-      </View>
-      <View style={styles.contentContainer}>
-        {componentList[steps[activeStep - 1]?.key]}
-      </View>
+      <LinearGradient
+        colors={COLORS.PriorGradient}
+        style={styles.priorGradient}>
+        <TouchableOpacity onPress={() => setActiveStep(activeStep + 1)}>
+          <AileronSemiBold style={styles.priorNext} name={'Next'} />
+        </TouchableOpacity>
+      </LinearGradient>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    // backgroundColor: 'COLORS.white',
+    justifyContent: 'space-between',
+    backgroundColor:'red',
+    flex:1
   },
   stepContainer: {
     flexDirection: 'row',
@@ -226,13 +215,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   flatListContainer: {
-    height:'100%',
+    height: '100%',
     backgroundColor: COLORS.white,
   },
   footerStyle: {
     padding: vw * 4,
   },
-  
+  priorGradient: {
+    // marginTop: vh * 1,
+    borderRadius: vh * 1.5,
+    padding: vh * 2,
+    alignContent:'flex-end'
+  },
+  priorNext: {
+    textAlign: 'center',
+    color: COLORS.white,
+    fontSize: vh * 2,
+  },
 });
 
 export default Stepper;

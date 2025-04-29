@@ -8,7 +8,6 @@ const DashboardStack = () => {
   return (
     <Stack.Navigator
       initialRouteName={'Dashboard'}
-      //   screenOptions={NavigationOptions}
     >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Benefits" component={Benefits} />

@@ -5,9 +5,9 @@ import useLodgeClaimViewModel from '../../viewmodels/useLodgeClaimViewModel';
 
 const LodgeClaim = () => {
     const {states,functions}= useLodgeClaimViewModel();
-    const {steps,personalData} = states;
+    const {steps,personalData,claimsDetails} = states;
   return (
-   <LodgeClaimView steps={steps} personalData={personalData}/>
+   <LodgeClaimView steps={steps} personalData={personalData} claimsDetails={claimsDetails}/>
   )
 }
 
