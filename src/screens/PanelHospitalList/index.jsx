@@ -1,10 +1,11 @@
 import PanelHospitalListView from '../../views/PanelHospitalListView';
 import usePanelHospitalListViewModel from '../../viewmodels/usePanelHospitalListViewModel';
 
-const PanelHospitalList = () => {
-  const {states, functions} = usePanelHospitalListViewModel();
+const PanelHospitalList = ({navigation}) => {
+  const {states, functions} = usePanelHospitalListViewModel({navigation});
 
-  const {onPressTab, onPressRightTab} = functions;
+  const {onPressTab, onPressRightTab , goBack} = functions;
+  console.log("goBack" , goBack)
   const {data, selectedTab, selectedTabRight} = states;
   return (
     <PanelHospitalListView
@@ -13,6 +14,7 @@ const PanelHospitalList = () => {
       onPressTab={onPressTab}
       onPressRightTab={onPressRightTab}
       data={data}
+      goBack={goBack}
     />
   );
 };

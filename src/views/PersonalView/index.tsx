@@ -16,7 +16,8 @@ import ConfimationModal from '../../components/Modal/confimationModal'
 type Props = {
     data: dependentDetail[];
     gender: personalDetail[];
-    relation: personalDetail[]
+    relation: personalDetail[];
+    goBack : ()=>void
 }
 
 type dependentDetail = {
@@ -32,7 +33,7 @@ type Item = {
 
 
 
-const PersonalView: React.FC<Props> = ({ data, gender, relation }) => {
+const PersonalView: React.FC<Props> = ({ data, gender, relation , goBack }) => {
 
     const [expanded, setExpanded] = useState(false);
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -56,7 +57,7 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation }) => {
 
     return (
         <Container>
-            <TopView title={'Personal'} TopViewSideIcon={images.AddNew} AddModal={manageUpdate}>
+            <TopView onPressBack={goBack} title={'Personal'} TopViewSideIcon={images.AddNew} AddModal={manageUpdate}>
 
             </TopView>
             <CurvedView>

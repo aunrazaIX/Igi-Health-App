@@ -21,6 +21,7 @@ type HomeViewProps = {
   selectedTabRight: string;
   onPressTab: (tab: string) => void;
   onPressRightTab: (tab: string) => void;
+  goBack: () => void;
 };
 
 const PanelHospitalListView: React.FC<HomeViewProps> = ({
@@ -29,6 +30,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   onPressTab,
   onPressRightTab,
   selectedTabRight,
+  goBack,
 }) => {
   return (
     <>
@@ -40,6 +42,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
         }
         HeaderIcon={icons.searchWhite}
         HeaderSecondIcon={null}
+        onPressBack={goBack}
       />
 
       <CurvedView>
@@ -93,7 +96,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
           <View style={styles.infoContainerHeaderTabs}>
             <TouchableOpacity
               style={[
-                styles.tab, 
+                styles.tab,
                 selectedTab === 'PanelHospitals' && styles.activeTab,
               ]}
               onPress={() => onPressTab('PanelHospitals')}>

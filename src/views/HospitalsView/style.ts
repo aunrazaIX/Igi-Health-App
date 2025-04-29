@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
 
-
   infoContainerHeaderRight: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -90,6 +89,7 @@ export const styles = StyleSheet.create({
   mapTextContainer: {
     flexDirection: 'row',
     gap: vw * 2,
+    justifyContent: 'space-between',
   },
   mapTabsContainer: {
     flexDirection: 'row',
@@ -120,5 +120,21 @@ export const styles = StyleSheet.create({
     borderRadius: vw * 8,
     gap: vw * 1.5,
     alignItems: 'center',
+  },
+  filterIcon: {
+    width: vw * 6,
+    height: vh * 3,
+    resizeMode: 'contain',
+    color: COLORS.black,
+  },
+  moreFilter: {
+    flexDirection: 'row',
+
+    alignItems: 'center',
+    gap: vw * 3,
+  },
+  moreFilterText: {
+    fontSize: vw * 4,
+    color: COLORS.black,
   },
 });

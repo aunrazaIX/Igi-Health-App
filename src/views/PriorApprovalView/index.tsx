@@ -12,11 +12,11 @@ import { TouchableOpacity, View } from 'react-native'
 //     { id: 3, name: 'Saad Imran Qureshi' },
 // ];
 
-const PriorApprovalView = ({ data, selectData }: any) => {
+const PriorApprovalView = ({ data, selectData , goBack }: any) => {
 
     return (
         <>
-            <TopView title='Prior Approval' />
+            <TopView onPressBack={goBack} title='Prior Approval' />
             <CurvedView>
                 <View style={styles.container}>
                     <View>
@@ -24,7 +24,6 @@ const PriorApprovalView = ({ data, selectData }: any) => {
 
                         <PatientsDetailView data={data} />
                     </View>
-
                     <View>
                         <LinearGradient
                             colors={COLORS.PriorGradient}

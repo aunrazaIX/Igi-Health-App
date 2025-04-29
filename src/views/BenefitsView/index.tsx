@@ -13,17 +13,18 @@ import styles from './styles';
 import {COLORS} from '../../assets/theme/colors';
 import {ImageSourcePropType} from 'react-native';
 
-type Props = {
-  data: Item[];
-};
-
 type Item = {
   title: string;
   price: string;
   image: ImageSourcePropType;
 };
 
-const BenefitsView: React.FC<Props> = ({data}) => {
+type Props = {
+  data: Item[];
+  goBack: () => void;
+};
+
+const BenefitsView: React.FC<Props> = ({data, goBack}) => {
   const RenderBenefits = ({item}: {item: Item}) => (
     <View style={styles.card}>
       <LinearGradient
@@ -41,7 +42,7 @@ const BenefitsView: React.FC<Props> = ({data}) => {
 
   const headerComponent = () => (
     <>
-      <TopView title={'Benefits'} />
+      <TopView title={'Benefits'} onPressBack={goBack} />
       <CurvedView containerStyle={styles.CurvedView}>
         <LinearGradient
           start={{x: 0, y: 0}}

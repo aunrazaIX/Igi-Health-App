@@ -1,3 +1,5 @@
+import {useNavigation} from '@react-navigation/native';
+
 export type ContactInfo = {
   name: string;
   tel: string;
@@ -33,8 +35,13 @@ type UseHelplineViewModelReturnType = {
     claimAssistance: ClaimAssistance[];
     hotlines: Hotlines;
   };
+  functions: {
+    goBack: () => void;
+  };
 };
+
 const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
+  const navigation = useNavigation();
   const contactInfo: ContactInfo = {
     name: 'Amber Inayat Ali',
     tel: '+92-21-35369626',
@@ -84,9 +91,9 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
   ];
   const hotlines: Hotlines = {
     cities: [
-      { city: 'Islamabad', mobile: '0302-5440150' },
-      { city: 'Karachi', mobile: '0300-9284674 | 0300-8266930' },
-      { city: 'Lahore', mobile: '0300-4748570' },
+      {city: 'Islamabad', mobile: '0302-5440150'},
+      {city: 'Karachi', mobile: '0300-9284674 | 0300-8266930'},
+      {city: 'Lahore', mobile: '0300-4748570'},
     ],
     emails: [
       {
@@ -104,11 +111,18 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
     ],
     website: 'www.igilife.com.pk',
   };
+
+  const goBack = () => {
+    navigation.goBack();
+  };
   return {
     states: {
       contactInfo,
       claimAssistance,
       hotlines,
+    },
+    functions: {
+      goBack,
     },
   };
 };

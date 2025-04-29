@@ -1,27 +1,43 @@
-import React from 'react'
-import { Container, CurvedView, TopView } from '../../components'
-import { ClaimAssistance, ContactInfo, Hotlines } from '../../viewmodels/useHelplineViewModel'
-import { ScrollView } from 'react-native';
-import { ClaimAssistanceView, ContactInfoView, SingleHelplineView } from './components';
+import React from 'react';
+import {Container, CurvedView, TopView} from '../../components';
+import {
+  ClaimAssistance,
+  ContactInfo,
+  Hotlines,
+} from '../../viewmodels/useHelplineViewModel';
+import {ScrollView} from 'react-native';
+import {
+  ClaimAssistanceView,
+  ContactInfoView,
+  SingleHelplineView,
+} from './components';
 import styles from './styles';
 
-const HelplineView = ({ contactInfo, claimAssistance, hotlines }: {
+const HelplineView = ({
+  contactInfo,
+  claimAssistance,
+  hotlines,
+  goBack,
+}: {
   contactInfo: ContactInfo;
   claimAssistance: ClaimAssistance[];
   hotlines: Hotlines;
+  goBack: () => void;
 }) => {
   return (
-    <Container>
-      <TopView title={'Helpline'} />
+    <ScrollView>
+      <TopView onPressBack={goBack} title={'Helpline'} />
       <CurvedView containerStyle={styles.container}>
-        <ScrollView>
-          <ContactInfoView data={contactInfo} />
-          <ClaimAssistanceView data={claimAssistance} />
-          <SingleHelplineView cities={hotlines?.cities} emails={hotlines?.emails} website={hotlines?.website} />
-        </ScrollView>
+        <ContactInfoView data={contactInfo} />
+        <ClaimAssistanceView data={claimAssistance} />
+        <SingleHelplineView
+          cities={hotlines?.cities}
+          emails={hotlines?.emails}
+          website={hotlines?.website}
+        />
       </CurvedView>
-    </Container>
-  )
-}
+    </ScrollView>
+  );
+};
 
-export default HelplineView
+export default HelplineView;

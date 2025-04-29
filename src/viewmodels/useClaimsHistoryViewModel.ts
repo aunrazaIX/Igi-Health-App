@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import {useState} from 'react';
 
 export type AmountStatus = 'paidAmount' | 'PendingAmount';
@@ -19,6 +20,7 @@ export type ClaimHistory = {
     onPressAmountStatusTab: (tab: AmountStatus) => void;
     onPressDaysStatusTab: (tab: daysStatus) => void;
     onPressHeaderIcon: () => void;
+    goBack: ()=>void
   };
 };
 
@@ -28,6 +30,8 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
 
   const [daysStatusTab, setDaysStatusTab] = useState<daysStatus>('Daily');
   const [isCalendarVisible, setIsCalendarVisible] = useState<boolean>(false);
+
+  const navigation = useNavigation();
 
   const onPressAmountStatusTab = (tab: AmountStatus) => {
     setAmountStatusTab(tab);
@@ -40,6 +44,12 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
   const onPressHeaderIcon = () => {
     setIsCalendarVisible(prev => !prev);
   };
+
+  const goBack = ()=>{
+  navigation.goBack();  
+  }
+  
+
 
   const data: ClaimHistory[][] = [
     [
@@ -77,6 +87,7 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
       onPressAmountStatusTab,
       onPressDaysStatusTab,
       onPressHeaderIcon,
+      goBack
     },
   };
 };

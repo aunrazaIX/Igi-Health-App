@@ -3,18 +3,13 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
-  homeContainer: {
-    // borderWidth: 2,
-    // flex: 1,
-    backgroundColor: COLORS.white,
-  },
   gradient: {
-    // height: '58%',
     paddingBottom: vh * 2,
+    paddingHorizontal:vw*2.75,
+    backgroundColor:COLORS.white
   },
   homeHeader: {
     marginTop: vh * 8,
-    marginHorizontal: vw * 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -29,23 +24,21 @@ export const styles = StyleSheet.create({
     gap: vw * 5,
   },
   homeInfoContainer: {
+    width:'100%',
     marginTop: vh * 4,
-    marginHorizontal: vw * 4,
     paddingHorizontal: vw * 5,
     paddingVertical: vh * 3,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
     elevation: 5,
-    backfaceVisibility: 'hidden',
-  },
-  rotateCard:{
+    backfaceVisibility: 'visible',
   },
   flipCardContainer: {
     width: '100%',
-    height: vh*30,
+    height: vh * 30,
   },
   flipBackCard: {
-   marginTop: -vh*27,
+    marginTop: -vh * 27,
   },
   logo: {
     width: 24 * vw,
@@ -56,10 +49,23 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backfaceVisibility: 'hidden',
+    height: vh * 7,
   },
   text: {
     color: COLORS.textColor,
     fontSize: vh * 2,
+  },
+  statisticsContainer:{
+    flexDirection:'row',justifyContent:'space-between' 
+  },
+  statisticsHeader:{
+    fontSize:vw*5,
+    alignSelf:'flex-start'
+  },
+  graphContainer:{
+height:vh*20,
+width:'100%',
   },
   meterDetailTextEnd: {
     flexDirection: 'row',
@@ -108,10 +114,6 @@ export const styles = StyleSheet.create({
   infoCardFooterRight: {
     alignItems: 'flex-end',
   },
-  dashboardContainer: {
-    marginHorizontal: vw * 4,
-    marginBottom: vh * 4,
-  },
   dashboardContainerHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -133,40 +135,41 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCards: {
     paddingHorizontal: vw * 2,
-   
-   
 
     marginVertical: vh * 2,
 
     justifyContent: 'space-between',
-    // height: '70%',
-    borderRadius: vw * 2,
+
+    borderRadius: vw * 4,
     backgroundColor: COLORS.cardBackgroundBlue,
     width: vw * 40,
     marginRight: vw * 4,
   },
   cardLogoContainer: {
-    marginVertical: vh * 2,
-
-    marginLeft: vw * 1,
+    marginVertical: vh * 1,
+    borderWidth: 2,
+    // marginLeft: vw * 1,
     resizeMode: 'contain',
   },
   cardLogo: {
-    width: vw * 14,
-    height: vh * 8,
+    width: vw * 20,
+    height: vh * 12,
     resizeMode: 'contain',
   },
   cardContent: {
-    marginBottom: vh,
+    marginBottom: vh*1.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
-
+    borderWidth: 2,
     alignItems: 'center',
   },
   dashboardContainerCardText: {
     textAlign: 'left',
-    fontSize: vw * 4,
+    fontSize: vw * 5,
     color: COLORS.white,
+  },
+  cardBackIcon:{
+  
   },
 
   dashboardMeterContent: {

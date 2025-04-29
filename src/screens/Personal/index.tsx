@@ -5,14 +5,15 @@ import usePersonalModalViewModel from '../../viewmodels/usePersonalModalViewMode
 
 
 const Personal = () => {
-    const { states } = usePersonalViewModal();
+    const { states , functions } = usePersonalViewModal();
     const { genderRelationStates } = usePersonalModalViewModel();
 
     const { data } = states;
     const { gender, relation } = genderRelationStates;
+    const {goBack} = functions
 
 
-    return <PersonalView data={data} gender={gender} relation={relation} />
+    return <PersonalView goBack={goBack} data={data} gender={gender} relation={relation} />
 }
 
 export default Personal

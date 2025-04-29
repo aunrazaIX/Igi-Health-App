@@ -1,5 +1,3 @@
-
-
 export const images = {
   backgroundImage: require('./images/loginBackground.png'),
   SignupBg: require('./images/SignupBg.png'),
@@ -13,7 +11,7 @@ export const images = {
   personalFrame: require('./images/personal-Popup-Frame.png'),
   taskDone: require('./images/taskDone.png'),
   LogoLife: require('./images/LogoLife.png'),
-  sehatKahani: require('./images/sehatKahani.png')
+  sehatKahani: require('./images/sehatKahani.png'),
 };
 
 export const icons = {
@@ -82,7 +80,7 @@ export const icons = {
   name: require('./icons/name.png'),
   cnic: require('./icons/cnic.png'),
   plus: require('./icons/plus.png'),
-  minus: require('./icons/minus.png'),  
+  minus: require('./icons/minus.png'),
   bellNotification: require('./icons/bellNotification.png'),
   friend: require('./icons/friend.png'),
   help: require('./icons/help.png'),
@@ -99,6 +97,7 @@ export const icons = {
   notificationPlan: require('./icons/notificationPlan.png'),
   arrowDownNotification: require('./icons/arrowDownNotification.png'),
   notificationCheck: require('./icons/notificationCheck.png'),
+  filter: require('./icons/Filter.png'),
 };
 
 export const drawerIcons = {
@@ -119,12 +118,21 @@ export const drawerIcons = {
   drawerProfile: require('./images/drawerProfile.png'),
   drawerClose: require('./icons/drawerClose.png'),
   drawerArrowRight: require('./icons/drawerArrowRight.png'),
-}
-
+};
 
 export const tabIcons = {
   home: require('./icons/home.png'),
   note: require('./icons/note.png'),
   PriorApproval: require('./icons/PriorApproval.png'),
   customerSupport: require('./icons/customer-support.png'),
+};
+
+export const cardIcons = {
+  benefits: require('./icons/healthcare.png'),
+  personal: require('./icons/location-user-02.png'),
+  lodgeClaim: require('./icons/note.png'),
+  taskDone: require('./icons/task-done-02.png'),
+  hospital: require('./icons/hospital-02.png'),
+  discountedCenters: require('./icons/labs.png'),
+  helpLine: require('./icons/helpline.png'),
 };

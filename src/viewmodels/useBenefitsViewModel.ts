@@ -1,9 +1,13 @@
+import {useNavigation} from '@react-navigation/native';
 import {icons} from '../assets';
 import {ImageSourcePropType} from 'react-native';
 
 type UseBenefitsViewModel = {
   states: {
     data: CoverageBenefit[];
+  };
+  functions: {
+    goBack: () => void;
   };
 };
 
@@ -14,6 +18,8 @@ type CoverageBenefit = {
 };
 
 const useBenefitsViewModel = (): UseBenefitsViewModel => {
+  const navigation = useNavigation();
+
   const data: CoverageBenefit[] = [
     {
       title: 'Per insured per disability',
@@ -57,9 +63,16 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
     },
   ];
 
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return {
     states: {
       data,
+    },
+    functions: {
+      goBack,
     },
   };
 };

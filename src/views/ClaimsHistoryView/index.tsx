@@ -1,9 +1,4 @@
-import {
-  View,
-  Image,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Image, FlatList, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {styles} from './style';
 import TopView from '../../components/TopView';
@@ -20,13 +15,13 @@ import Calender from './Component/Calender';
 
 type claimsHistoryViewProps = {
   data: ClaimHistory[][];
-  amountStatusTab: AmountStatus;  
+  amountStatusTab: AmountStatus;
   daysStatusTab: daysStatus;
   isCalendarVisible: boolean;
   onPressDaysStatusTab: (tab: daysStatus) => void;
   onPressHeaderIcon: () => void;
   onPressAmountStatusTab: (tab: AmountStatus) => void;
-
+  goBack: () => void;
 };
 
 const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
@@ -37,6 +32,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
   onPressAmountStatusTab,
   isCalendarVisible,
   onPressHeaderIcon,
+  goBack,
 }) => {
   return (
     <View style={styles.claimHistoryContainer}>
@@ -46,7 +42,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
           containerStyle={styles.containerStyle}
           TopViewSideIcon={icons.searchWhite}
           TopViewSecondIcon={icons.calender}
-          onPressBack={() => console.log('Back Pressed')}
+          onPressBack={goBack}
           AddModal={onPressHeaderIcon}
         />
       </View>

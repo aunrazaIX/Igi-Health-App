@@ -7,7 +7,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import React from 'react';
-import {AileronBold, CurvedView, TopView} from '../../components';
+import {
+  AileronBold,
+  AileronRegular,
+  CurvedView,
+  TopView,
+} from '../../components';
 import {icons} from '../../assets';
 import {styles} from './style';
 import DetailsContainer from '../../components/DetailsContainer';
@@ -22,6 +27,7 @@ type HospitalsViewProps = {
   onPressTab: (tab: string) => void;
   onPressRightTab: (tab: string) => void;
   onPressMapTab: (tab: string) => void;
+  goBack: () => void;
 };
 
 const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
@@ -31,6 +37,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
   selectedMapTab,
   selectedTabRight,
   onPressMapTab,
+  goBack,
 }) => {
   return (
     <>
@@ -39,107 +46,21 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
         HeaderIcon={icons.searchWhite}
         HeaderSecondIcon={null}
         headerStyle={styles.headerStyle}
+        onPressBack={goBack}
       />
 
       <CurvedView>
         <View>
-          <View style={styles.infoContainerHeaderRight}>
-            <TouchableOpacity
-              onPress={() => onPressRightTab('list')}
-              style={[
-                styles.rightTab,
-                selectedTabRight === 'list' && styles.activeTabRight,
-              ]}>
-              {selectedTabRight === 'list' ? (
-                <Image source={icons.listActive} />
-              ) : (
-                <Image source={icons.listIcon} />
-              )}
-
-              <AileronBold
-                style={[
-                  styles.infoContainerHeaderText,
-                  selectedTabRight === 'list' && styles.activeTabRightText,
-                ]}
-                name="List"
-                numberOfLines={1}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.rightTab,
-                selectedTabRight === 'map' && styles.activeTabRight,
-              ]}
-              onPress={() => onPressRightTab('map')}>
-              {selectedTabRight === 'map' ? (
-                <Image source={icons.map} />
-              ) : (
-                <Image source={icons.mapInactive} />
-              )}
-
-              <AileronBold
-                style={[
-                  styles.infoContainerHeaderText,
-                  selectedTabRight === 'map' && styles.activeTabRightText,
-                ]}
-                name="Map"
-                numberOfLines={1}
-              />
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.infoContainerHeaderTabs}>
-            <TouchableOpacity
-              style={[
-                styles.tab,
-                selectedTab === 'Panel Hospitals' && styles.activeTab,
-              ]}
-              onPress={() => onPressTab('Panel Hospitals')}>
-              {selectedTab === 'Panel Hospitals' ? (
-                <Image source={icons.hospital} />
-              ) : (
-                <Image source={icons.hospitalInactive} />
-              )}
-
-              <AileronBold
-                style={[
-                  styles.tabText,
-                  selectedTab === 'Panel Hospitals' && styles.activeTabText,
-                ]}
-                name="Panel Hospitals"
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.tab,
-                selectedTab === 'Discounted Centers' && styles.activeTab,
-              ]}
-              onPress={() => onPressTab('Discounted Centers')}>
-              {selectedTab === 'Discounted Centers' ? (
-                <Image source={icons.labsActive} />
-              ) : (
-                <Image source={icons.labsInactive} />
-              )}
-
-              <AileronBold
-                style={[
-                  styles.tabText,
-                  selectedTab === 'Discounted Centers' && styles.activeTabText,
-                ]}
-                name="Discounted Centers"
-              />
-            </TouchableOpacity>
-          </View>
-
           <View style={styles.mapTextContainer}>
-            <AileronBold style={style.mapText} name="Search By">
-              {' '}
-            </AileronBold>
-            <AileronBold style={style.mapTextColor} name="Provinces">
-              {' '}
-            </AileronBold>
+            <AileronBold style={style.mapText} name="Search By Provinces" />
+
+            <View style={styles.moreFilter}>
+              <Image style={styles.filterIcon} source={icons.filter} />
+              <AileronRegular
+                style={styles.moreFilterText}
+                name="More filters"
+              />
+            </View>
           </View>
 
           <View style={styles.mapTabsContainer}>

@@ -1,10 +1,14 @@
 import {ImageSourcePropType} from 'react-native';
 import {icons, images} from '../assets';
+import { useNavigation } from '@react-navigation/native';
 
 type UsePersonalViewModal = {
   states: {
     data: DependentDetail[];
-  };
+  },
+  functions: {
+    goBack : ()=>void
+  }
 };
 
 type labelValue = {
@@ -18,6 +22,8 @@ type DependentDetail = {
   dependentDetail: labelValue[];
 };
 
+
+
 const usePersonalViewModal = (): UsePersonalViewModal => {
   // const data: DependentDetail[] = [
   //   {label: 'Name:', value: 'Madiha Imran Qureshi'},
@@ -25,6 +31,8 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
   //   {label: 'Relationship:', value: 'Wife'},
   //   {label: 'Age:', value: '35 Years'},
   // ];
+
+  const navigation  = useNavigation()
 
   const data: DependentDetail[] = [
     {
@@ -59,10 +67,19 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
     },
   ];
 
+  const goBack = () => {
+    navigation.goBack();
+  };
+
+
+
   return {
     states: {
       data,
     },
+    functions:{
+      goBack
+    }
   };
 };
 

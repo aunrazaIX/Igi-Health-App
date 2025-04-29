@@ -1,6 +1,7 @@
 import { ImageSourcePropType } from 'react-native';
 import {icons} from '../assets';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 type UseSettingsViewModelReturnType = {
   states: {
@@ -9,6 +10,7 @@ type UseSettingsViewModelReturnType = {
   };
   functions: {
     toggleSwitch: () => void;
+    goBack: ()=>void;
   }
 };
 export type SettingsList = {
@@ -22,6 +24,8 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
   const toggleSwitch = (): void => {
     setIsToggle((previousState) => !previousState);
   };
+
+  const navigation = useNavigation();
   const data: SettingsList[] = [
     {
       id: 1,
@@ -69,12 +73,17 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
       icon: icons.friend,
     },
   ];
+
+  const goBack = ()=>{
+    navigation.goBack();
+  }
   return {
     states: {
       data, isToggle
     },
     functions: {
-        toggleSwitch
+        toggleSwitch,
+        goBack
     }
   };
 };

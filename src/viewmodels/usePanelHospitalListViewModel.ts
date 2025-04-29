@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 
 export type PanelHospitalList = {
@@ -14,6 +15,7 @@ type usePanelHospitalListViewModel = {
   functions: {
     onPressTab: (tab: string) => void;
     onPressRightTab: (tab: string) => void;
+    goBack: () => void;
   };
 };
 
@@ -21,12 +23,19 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
   const [selectedTab, setSelectedTab] = useState('PanelHospitals');
   const [selectedTabRight, setSelectedTabRight] = useState('list');
 
+  const navigation = useNavigation();
+
   const onPressTab = (tab: string) => {
     setSelectedTab(tab);
   };
 
   const onPressRightTab = (tab: string) => {
     setSelectedTabRight(tab);
+  };
+
+  const goBack = () => {
+    navigation.goBack();
+    console.log("go back pressed")
   };
 
   const data: PanelHospitalList[][] = [
@@ -92,6 +101,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
     functions: {
       onPressTab,
       onPressRightTab,
+      goBack,
     },
   };
 };

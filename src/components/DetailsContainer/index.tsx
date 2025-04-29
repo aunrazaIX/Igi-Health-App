@@ -88,7 +88,7 @@ export const styles = StyleSheet.create({
     borderRadius: vw * 5,
     backgroundColor: COLORS.white,
     paddingHorizontal: vw * 4,
-    paddingVertical: vh * 2,
+    paddingVertical: vh * 1.2,
 
     marginVertical: vh * 1.5,
     alignItems: 'center',

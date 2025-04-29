@@ -1,14 +1,14 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import LodgeClaimView from '../../views/LodgeClaim'
+import LodgeClaimView from '../../views/LodgeClaimView'
 import useLodgeClaimViewModel from '../../viewmodels/useLodgeClaimViewModel';
 
 const LodgeClaim = () => {
     const {states,functions}= useLodgeClaimViewModel();
-    const {steps} = states;
+    const {steps,personalData} = states;
   return (
-   <LodgeClaimView steps={steps}/>
+   <LodgeClaimView steps={steps} personalData={personalData}/>
   )
 }
 
-export default LodgeClaim
+export default LodgeClaim;

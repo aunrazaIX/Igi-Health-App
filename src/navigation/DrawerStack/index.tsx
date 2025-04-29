@@ -18,6 +18,13 @@ import {AileronBold} from '../../components';
 import Personal from '../../screens/Personal';
 import PriorApproval from '../../screens/PriorApproval';
 import Tabs from '../TabStack';
+import ClaimsHistory from '../../screens/ClaimsHistory';
+import Hospitals from '../../screens/Hospitals';
+import PanelHospitalList from '../../screens/PanelHospitalList';
+import Helpline from '../../screens/Helpline';
+import Notification from '../../screens/Notification';
+import FAQs from '../../screens/FAQs';
+import Settings from '../../screens/Settings';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
@@ -63,42 +70,44 @@ const DrawerStack = () => {
       id: 7,
       name: 'Claims History',
       icon: drawerIcons.drawerClaimHistory,
+      to: 'ClaimsHistory',
     },
     {
       id: 8,
       name: 'Hospital Directory',
       icon: drawerIcons.drawerHospitalDirectory,
-      to: 'Hospital',
+      to: 'Hospitals',
     },
     {
       id: 9,
       name: 'Discounted Centers',
       icon: drawerIcons.drawerDiscountedCenters,
+      to: 'PanelHospitalList',
     },
     {
       id: 10,
       name: 'Helpline',
       icon: drawerIcons.drawerHelpline,
+      to: 'Helpline',
     },
+
     {
       id: 11,
-      name: 'Invite A Friend',
-      icon: drawerIcons.drawerInviteFriend,
+      name: 'Notifications',
+      icon: drawerIcons.drawerNotification,
+      to: 'Notification',
     },
     {
       id: 12,
-      name: 'Notifications',
-      icon: drawerIcons.drawerNotification,
+      name: 'FAQs',
+      icon: drawerIcons.drawerFAQ,
+      to: 'FAQs',
     },
     {
       id: 13,
-      name: 'FAQ’s',
-      icon: drawerIcons.drawerFAQ,
-    },
-    {
-      id: 14,
       name: 'Settings',
       icon: drawerIcons.drawerSettings,
+      to: 'Settings',
     },
   ];
 
@@ -143,10 +152,20 @@ const DrawerStack = () => {
       }}
       initialRouteName="Tabs">
       <Drawer.Screen name="Tabs" component={Tabs} />
+
+      <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Benefits" component={Benefits} />
       <Drawer.Screen name="Personal" component={Personal} />
-      {/* <Drawer.Screen name="LodgeClaim" component={} /> */}
-      {/* <Drawer.Screen name="PriorApproval" component={PriorApproval} /> */}
+      <Drawer.Screen name="LodgeClaim" component={PriorApproval} />
+      <Drawer.Screen name="PriorApproval" component={PriorApproval} />
+      <Drawer.Screen name="AddDependent" component={Personal} />
+      <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
+      <Drawer.Screen name="Hospitals" component={Hospitals} />
+      <Drawer.Screen name="PanelHospitalList" component={PanelHospitalList} />
+      <Drawer.Screen name="Helpline" component={Helpline} />
+      <Drawer.Screen name="Notification" component={Notification} />
+      <Drawer.Screen name="FAQs" component={FAQs} />
+      <Drawer.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );
 };
@@ -167,7 +186,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: vh * 4,
-    
   },
   logo: {
     width: vw * 35,

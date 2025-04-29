@@ -24,15 +24,17 @@ const TopView = ({
   TopViewSecondIcon,
   containerStyle,
   containerStyleIcon,
+  goBack,
 }: {
   title: string;
-  onPressBack?: () => void,
+  onPressBack?: () => void;
   icon?: ImageSourcePropType | null;
   TopViewSideIcon?: ImageSourcePropType | null;
   TopViewSecondIcon?: ImageSourcePropType | null;
-  AddModal?: () => void,
+  AddModal?: () => void;
   containerStyle?: StyleObject | StyleObject[];
-  containerStyleIcon?: StyleObject | StyleObject[]
+  goBack?: () => void;
+  containerStyleIcon?: StyleObject | StyleObject[];
 }) => {
   return (
     <LinearGradient
@@ -46,21 +48,21 @@ const TopView = ({
         </TouchableOpacity>
         <AileronSemiBold style={styles.headerName} name={title} />
         <View style={styles.headerIcon}>
-
-
-          {TopViewSecondIcon &&
+          {TopViewSecondIcon && (
             <TouchableOpacity>
               <Image style={styles.TopViewIcon} source={TopViewSecondIcon} />
             </TouchableOpacity>
-          }
+          )}
 
-          {TopViewSideIcon &&
+          {TopViewSideIcon && (
             <TouchableOpacity onPress={AddModal}>
-              <Image style={[styles.TopViewIcon, containerStyleIcon]} source={TopViewSideIcon} />
+              <Image
+                style={[styles.TopViewIcon, containerStyleIcon]}
+                source={TopViewSideIcon}
+              />
             </TouchableOpacity>
-          }
+          )}
         </View>
-
       </View>
 
       <View style={styles.spacedView}>
@@ -113,13 +115,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     resizeMode: 'contain',
   },
-  TopViewIcon: {
-
-  },
+  TopViewIcon: {},
   headerIcon: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     width: vh * 8,
-    gap: vh * .5
-  }
+    gap: vh * 0.5,
+  },
 });
