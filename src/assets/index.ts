@@ -4,7 +4,7 @@ export const images = {
   logoWhite: require('./images/IGIwhiteLogo.png'),
   flipCard: require('./images/flip-card.png'),
   maximumBenefits: require('./images/maximumBenefits.png'),
-  Logo: require('./images/logo.png'),
+  Logo: require('./images/Logo.png'),
   SecureFuture: require('./images/secure-future.png'),
   AddNew: require('./images/Add-New.png'),
   priorUpload: require('./images/priorUpload.png'),
