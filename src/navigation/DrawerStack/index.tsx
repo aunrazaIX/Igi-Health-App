@@ -166,6 +166,8 @@ const DrawerStack = () => {
       <Drawer.Screen name="Notification" component={Notification} />
       <Drawer.Screen name="FAQs" component={FAQs} />
       <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="Hospital" component={PanelHospitalList} />
+
     </Drawer.Navigator>
   );
 };

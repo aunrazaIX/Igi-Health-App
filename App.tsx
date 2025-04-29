@@ -11,12 +11,13 @@ import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import Home from './src/screens/Home';
 import ClaimsHistory from './src/screens/ClaimsHistory';
 import Notification from './src/screens/Notification';
+import Helpline from './src/screens/Helpline';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <MainStack />
-      {/* <Notification /> */}
+      {/* <MainStack /> */}
+      <Helpline />
     </NavigationContainer>
   );
 };

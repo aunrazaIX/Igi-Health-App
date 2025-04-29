@@ -21,6 +21,8 @@ type ConfimationModalProps = {
     confirmationRequired?: boolean,
     claimSubmission?: boolean,
     containerStyle?: StyleObject | StyleObject[];
+    handleDelete?: () => void,
+
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({ ConfirmationModalVisible,
@@ -31,7 +33,9 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({ ConfirmationModalV
     deleteButton,
     confirmationRequired,
     claimSubmission,
-    containerStyle }) => {
+    containerStyle,
+    handleDelete,
+}) => {
     return (
         <Modal
             animationType="slide"
@@ -74,9 +78,11 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({ ConfirmationModalV
                                 <AileronBold name='Cancel' style={styles.cancelButtonText} />
                             </TouchableOpacity>
 
-                            <LinearGradient style={styles.deleteButton} colors={COLORS.deleteButtonGradient}>
-                                <AileronBold name='Delete' style={styles.deleteButtonText} />
-                            </LinearGradient>
+                            <TouchableOpacity style={styles.deleteButtonContainer} onPress={handleDelete}>
+                                <LinearGradient style={styles.deleteButton} colors={COLORS.deleteButtonGradient}>
+                                    <AileronBold name='Delete' style={styles.deleteButtonText} />
+                                </LinearGradient>
+                            </TouchableOpacity>
                         </View>
                     )}
 
@@ -161,8 +167,10 @@ const styles = StyleSheet.create({
         borderColor: COLORS.cancelButtonBorder,
         backgroundColor: COLORS.cancelBottonBackground,
     },
+    deleteButtonContainer: {
+        width: '48%'
+    },
     deleteButton: {
-        width: '48%',
         borderRadius: vh * 1.3,
         padding: vh * 2,
     },

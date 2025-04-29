@@ -55,6 +55,10 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation , goBack }) => {
         setModalVisible(true)
     }
 
+const deleteDepenedent = () => {
+    setConfimationModalVisible(false)
+}
+
     return (
         <Container>
             <TopView onPressBack={goBack} title={'Personal'} TopViewSideIcon={images.AddNew} AddModal={manageUpdate}>
@@ -125,6 +129,7 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation , goBack }) => {
             <ConfimationModal
                 ConfirmationModalVisible={ConfimationModalVisible}
                 setConfirmationModalVisible={setConfimationModalVisible}
+                handleDelete={deleteDepenedent}
                 frameImage={images.personalFrame}
                 confirmationMessage={'Are you sure you want to delete this dependent detail? This action cannot be undone, and it may affect other related data.'}
                 confirmationRequired={true}

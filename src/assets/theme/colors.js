@@ -43,5 +43,6 @@ export const COLORS = {
   faqsSubHeading: '#EE2560',
   toggleFalse: '#D3D3D3',
   borderColor: '#DDE0EB',
-  unread: 'rgba(158, 160, 170, 1)'
+  unread: 'rgba(158, 160, 170, 1)',
+  time:'rgba(165, 172, 184, 1)',
 };

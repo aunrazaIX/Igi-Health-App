@@ -29,20 +29,21 @@ const ContactInfoView = ({data}: {data: ContactInfo}) => {
         name={`For Claims Tel: ${data?.claimsTel}`}
       />
       <AileronBold style={styles.address} name={'Address:'} />
-      <AileronSemiBold name={data?.address} />
+      <AileronSemiBold name={data?.address} style={styles.addressDetail} />
 
       <View style={styles.buttonRow}>
         <TouchableOpacity style={styles.actionBtn}>
           <Image source={icons.call} style={styles.icon} />
-          <AileronRegular name="Call" />
+          <AileronRegular name="Call" style={styles.callTittle}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionBtn}>
           <Image source={icons.mail} style={styles.icon} />
-          <AileronRegular name="Mail" />
+          <AileronRegular name="Mail" style={styles.callTittle}/>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.actionBtn, {paddingHorizontal: 18}]}>
+        {/* <TouchableOpacity style={[styles.actionBtn, {paddingHorizontal: 18}]}> */}
+        <TouchableOpacity style={styles.actionBtn}>
           <Image source={icons.location} style={styles.icon} />
-          <AileronRegular name="Location" />
+          <AileronRegular name="Location" style={styles.callTittle}/>
         </TouchableOpacity>
       </View>
     </View>
