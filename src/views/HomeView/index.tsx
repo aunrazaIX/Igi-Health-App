@@ -58,7 +58,7 @@ const HomeView: React.FC<HomeViewProps> = ({
               <Image source={icons.search} />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={()=>onPressMenu('Notifications')}>
+            <TouchableOpacity onPress={() => onPressMenu('Notifications')}>
               <Image source={icons.notification} />
             </TouchableOpacity>
 
@@ -284,6 +284,7 @@ const HomeView: React.FC<HomeViewProps> = ({
         </View>
         <AileronBold style={styles.statisticsHeader} name="Claim Statistics" />
         <View style={styles.graphContainer}></View>
+
         <View style={styles.statisticsContainer}>
           <View style={styles.dashboardMeterDetail}>
             <AileronBold
