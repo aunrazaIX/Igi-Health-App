@@ -1,10 +1,10 @@
-import {View, ImageBackground, Image, TouchableOpacity} from 'react-native';
+import { View, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import React, { JSX } from 'react';
-import {images, icons} from '../../assets';
-import {styles} from './styles';
-import {COLORS} from '../../assets/theme/colors';
+import { images, icons } from '../../assets';
+import { styles } from './styles';
+import { COLORS } from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   AileronSemiBold,
 } from '../../components';
@@ -12,10 +12,11 @@ import { LoginForm, SignUpView } from './components';
 
 const LoginView = ({
   onPressTab,
-  selectedTab, tabs
+  selectedTab,
+  tabs
 }: {
   onPressTab: (name: string) => void;
-  selectedTab: string; 
+  selectedTab: string;
   tabs: string[];
 }) => {
   const Wrapper = (tab: string) =>
@@ -34,7 +35,7 @@ const LoginView = ({
           <Image source={icons.logo} style={styles.logo} />
           <View style={styles.loginContainer}>
             <View style={styles.tabContainer}>
-            {tabs.map(tab => {
+              {tabs.map(tab => {
                 const TabWrapper = Wrapper(tab);
                 return (
                   <TabWrapper
@@ -60,7 +61,7 @@ const LoginView = ({
               })}
             </View>
             {renderForm[selectedTab]}
-            
+
           </View>
         </View>
       </KeyboardAwareScrollView>

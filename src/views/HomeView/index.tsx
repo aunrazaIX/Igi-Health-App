@@ -8,14 +8,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {styles} from './style';
-import {icons, images} from '../../assets';
+import { styles } from './style';
+import { icons, images } from '../../assets';
 import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 
 type CardItem = {
   logo: any;
@@ -53,17 +53,17 @@ const HomeView: React.FC<HomeViewProps> = ({
             <Image style={styles.headerLogo} source={images.logoWhite} />
           </View>
 
-          <View style={styles.headerIcons}>
+          <View style={styles.headerIconsRow}>
             <TouchableOpacity>
-              <Image source={icons.search} />
+              <Image source={icons.search} style={styles.headerIcons} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => onPressMenu('Notifications')}>
-              <Image source={icons.notification} />
+              <Image source={icons.notification} style={styles.headerIcons} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={toggleDrawer}>
-              <Image source={icons.menu} />
+              <Image source={icons.menu} style={styles.headerIcons} />
             </TouchableOpacity>
           </View>
         </View>
@@ -79,7 +79,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                   <AileronBold
                     name={'Health Insurance'}
                     numberOfLines={1}
-                    style={styles.infoCardTextBold}></AileronBold>
+                    style={styles.infoCardTextBold} />
 
                   <AileronSemiBold
                     name={'User ID: 123450000123'}
@@ -107,7 +107,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                     />
                   </View>
                   <TouchableOpacity
-                    style={styles.rotateCard}
                     onPress={animateCard}>
                     <Image source={images.flipCard} />
                   </TouchableOpacity>
@@ -139,7 +138,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                   <AileronBold
                     name={'02/07/2025'}
                     style={styles.infoCardFooterTextBold}
-                    numberOfLines={1}></AileronBold>
+                    numberOfLines={1} />
                 </View>
               </View>
             </TouchableOpacity>
@@ -171,18 +170,18 @@ const HomeView: React.FC<HomeViewProps> = ({
 
                 <AileronRegular
                   name="Saad Imran Qureshi: 8"
-                  style={styles.homeBackCardText}></AileronRegular>
+                  style={styles.homeBackCardText} />
 
                 <View style={styles.homeBackCardRow}>
                   <View style={styles.homeBackCardRowText}>
                     <AileronRegular
                       style={styles.homeBackCardText}
-                      name="Tariq Imran Qureshi: 5"></AileronRegular>
+                      name="Tariq Imran Qureshi: 5" />
                     <AileronRegular
                       name="Emaan Imran Qureshi: 6"
-                      style={styles.homeBackCardText}></AileronRegular>
+                      style={styles.homeBackCardText} />
                   </View>
-                  <TouchableOpacity onPress={() => onPressCard(true)}>
+                  <TouchableOpacity onPress={animateCard}>
                     <Image source={images.flipCard} />
                   </TouchableOpacity>
                 </View>
@@ -258,17 +257,17 @@ const HomeView: React.FC<HomeViewProps> = ({
             data={cardData}
             keyExtractor={(_item, index) => index.toString()}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => onPressMenu(item?.to)}
                 style={[
                   styles.dashboardContainerCards,
-                  {backgroundColor: item.backgroundColor},
+                  { backgroundColor: item.backgroundColor },
                 ]}>
                 <Image style={styles.cardLogo} source={item.logo} />
 
                 <View style={styles.cardContent}>
-                  <View style={{width: '85%'}}>
+                  <View style={{ width: '85%' }}>
                     <AileronRegular
                       style={styles.dashboardContainerCardText}
                       name={item.name}
@@ -282,16 +281,22 @@ const HomeView: React.FC<HomeViewProps> = ({
             )}
           />
         </View>
-        <AileronBold style={styles.statisticsHeader} name="Claim Statistics" />
+        <View style={styles.claimStatistics}>
+          <Image source={icons.claimStatistics} style={styles.statisticsIcon} />
+          <AileronBold style={styles.statisticsHeader} name="Claim Statistics" />
+        </View>
         <View style={styles.graphContainer}></View>
 
         <View style={styles.statisticsContainer}>
           <View style={styles.dashboardMeterDetail}>
-            <AileronBold
-              style={styles.meterDetailTextLight}
-              name="Total Deducted"
-              numberOfLines={1}
-            />
+            <View style={styles.totalDeducted}>
+              <Image source={icons.totalDeducted} style={styles.meterIcon} />
+              <AileronBold
+                style={styles.meterDetailTextLight}
+                name="Total Deducted"
+                numberOfLines={1}
+              />
+            </View>
             <AileronBold
               name={'285, 000'}
               style={styles.meterDetailTextBold}
@@ -305,7 +310,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                 numberOfLines={1}
                 style={styles.textRed}
               />
-
               <AileronLight
                 name={'44.714'}
                 numberOfLines={1}
@@ -314,21 +318,18 @@ const HomeView: React.FC<HomeViewProps> = ({
             </View>
           </View>
           <View style={styles.dashboardMeterDetail}>
-            <View style={styles.dashboardMeterDetailTop}>
-              <View>
-                <Image style={styles.meterIcon} source={icons.chart} />
-              </View>
-
+            <View style={styles.totalDeducted}>
+              <Image style={styles.meterIcon} source={icons.totalPaid} />
               <AileronBold
                 style={styles.meterDetailTextLight}
                 name="Total Paid"
-                numberOfLines={1}></AileronBold>
+                numberOfLines={1} />
             </View>
 
             <AileronBold
               name={'855, 000'}
               style={styles.meterDetailTextBold}
-              numberOfLines={1}></AileronBold>
+              numberOfLines={1} />
 
             <View style={styles.meterDetailTextEnd}>
               <Image source={icons.arrowUp} style={styles.meterArrowUp} />

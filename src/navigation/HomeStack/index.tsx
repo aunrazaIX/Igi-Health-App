@@ -10,6 +10,7 @@ import PanelHospitalList from '../../screens/PanelHospitalList';
 import Hospitals from '../../screens/Hospitals';
 import Helpline from '../../screens/Helpline';
 import Notification from '../../screens/Notification';
+import LodgeClaim from '../../screens/LodgeClaim';
 
 const HomeStack = () => {
   const Stack = createStackNavigator();
@@ -23,6 +24,7 @@ const HomeStack = () => {
       <Stack.Screen name="Benefits" component={Benefits} />
       <Stack.Screen name="Personal" component={Personal} />
       <Stack.Screen name="PriorApproval" component={PriorApproval} />
+      <Stack.Screen name="lodgeClaim" component={LodgeClaim} />
       <Stack.Screen name="Hospitals" component={Hospitals} />
       <Stack.Screen name="PanelHospitalList" component={PanelHospitalList} />
       <Stack.Screen name="Helpline" component={Helpline} />

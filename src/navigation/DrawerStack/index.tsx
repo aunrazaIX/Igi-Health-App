@@ -25,6 +25,10 @@ import Notification from '../../screens/Notification';
 import FAQs from '../../screens/FAQs';
 import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
+import LodgeClaim from '../../screens/LodgeClaim';
+import { useNavigation } from '@react-navigation/native';
+import MainStack from '../MainStack';
+import { Screen } from 'react-native-screens';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
@@ -40,31 +44,42 @@ const DrawerStack = () => {
       id: 2,
       name: 'Benefits',
       icon: drawerIcons.drawerBenefits,
-      to: 'Benefits',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'Benefits',
     },
     {
       id: 3,
       name: 'Personal',
       icon: drawerIcons.drawerPersonal,
-      to: 'Personal',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'Personal',
     },
     {
       id: 4,
       name: 'Lodge Claim',
       icon: drawerIcons.drawerLodgeClaim,
-      to: 'LodgeClaim',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'lodgeClaim',
     },
     {
       id: 5,
       name: 'Prior Approval',
       icon: drawerIcons.drawerPriorApproval,
-      to: 'PriorApproval',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'PriorApproval',
+
     },
     {
       id: 6,
       name: 'Add Dependent',
       icon: drawerIcons.drawerAddDependent,
-      to: 'Personal',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'Personal',
     },
     {
       id: 7,
@@ -76,26 +91,34 @@ const DrawerStack = () => {
       id: 8,
       name: 'Hospital Directory',
       icon: drawerIcons.drawerHospitalDirectory,
-      to: 'Hospitals',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'Hospitals',
     },
     {
       id: 9,
       name: 'Discounted Centers',
       icon: drawerIcons.drawerDiscountedCenters,
-      to: 'PanelHospitalList',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'PanelHospitalList',
     },
     {
       id: 10,
       name: 'Helpline',
       icon: drawerIcons.drawerHelpline,
-      to: 'Helpline',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'Helpline',
     },
 
     {
       id: 11,
       name: 'Notifications',
       icon: drawerIcons.drawerNotification,
-      to: 'Notification',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'Notifications',
     },
     {
       id: 12,
@@ -111,13 +134,13 @@ const DrawerStack = () => {
     },
   ];
 
-  const DrawerContent = (props: DrawerContentComponentProps) => {
+  const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={images.LogoLife} style={styles.logo} />
 
-          <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
+          <TouchableOpacity onPress={() => navigation.closeDrawer()}>
             <Image source={drawerIcons.drawerClose} style={styles.drawerClose} />
           </TouchableOpacity>
         </View>
@@ -130,7 +153,17 @@ const DrawerStack = () => {
                   style={styles.row}
                   onPress={() => {
                     if (route.to) {
-                      props.navigation.navigate(route.to);
+                      navigation.navigate(route.to);
+                      return;
+                    }
+                    if (route?.mainParent && route?.stChild && route?.ndChild) {
+                      navigation.navigate(route?.mainParent, {
+                        screen: route?.stChild,
+                        params: {
+                          screen: route?.ndChild,
+                        },
+                      });
+                      return;
                     }
                   }}>
                   <Image style={styles.icon} source={route?.icon} />
@@ -169,18 +202,8 @@ const DrawerStack = () => {
       }}
       initialRouteName="Tabs">
       <Drawer.Screen name="Tabs" component={Tabs} />
-
       <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Benefits" component={Benefits} />
-      <Drawer.Screen name="Personal" component={Personal} />
-      <Drawer.Screen name="LodgeClaim" component={PriorApproval} />
-      <Drawer.Screen name="PriorApproval" component={PriorApproval} />
-      <Drawer.Screen name="AddDependent" component={Personal} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
-      <Drawer.Screen name="Hospitals" component={Hospitals} />
-      <Drawer.Screen name="PanelHospitalList" component={PanelHospitalList} />
-      <Drawer.Screen name="Helpline" component={Helpline} />
-      <Drawer.Screen name="Notification" component={Notification} />
       <Drawer.Screen name="FAQs" component={FAQs} />
       <Drawer.Screen name="Settings" component={Settings} />
       <Drawer.Screen name="Hospital" component={PanelHospitalList} />
