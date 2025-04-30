@@ -25,6 +25,7 @@ import Helpline from '../../screens/Helpline';
 import Notification from '../../screens/Notification';
 import FAQs from '../../screens/FAQs';
 import Settings from '../../screens/Settings';
+import LodgeClaim from '../../screens/LodgeClaim';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
@@ -156,7 +157,7 @@ const DrawerStack = () => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Benefits" component={Benefits} />
       <Drawer.Screen name="Personal" component={Personal} />
-      <Drawer.Screen name="LodgeClaim" component={PriorApproval} />
+      <Drawer.Screen name="LodgeClaim" component={LodgeClaim} />
       <Drawer.Screen name="PriorApproval" component={PriorApproval} />
       <Drawer.Screen name="AddDependent" component={Personal} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />

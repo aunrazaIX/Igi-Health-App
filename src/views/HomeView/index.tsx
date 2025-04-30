@@ -14,8 +14,6 @@ import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
 
 type CardItem = {
   logo: any;
@@ -79,7 +77,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                   <AileronBold
                     name={'Health Insurance'}
                     numberOfLines={1}
-                    style={styles.infoCardTextBold}></AileronBold>
+                    style={styles.infoCardTextBold}/>
 
                   <AileronSemiBold
                     name={'User ID: 123450000123'}
@@ -139,7 +137,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                   <AileronBold
                     name={'02/07/2025'}
                     style={styles.infoCardFooterTextBold}
-                    numberOfLines={1}></AileronBold>
+                    numberOfLines={1}/>
                 </View>
               </View>
             </TouchableOpacity>
@@ -322,13 +320,13 @@ const HomeView: React.FC<HomeViewProps> = ({
               <AileronBold
                 style={styles.meterDetailTextLight}
                 name="Total Paid"
-                numberOfLines={1}></AileronBold>
+                numberOfLines={1}/>
             </View>
 
             <AileronBold
               name={'855, 000'}
               style={styles.meterDetailTextBold}
-              numberOfLines={1}></AileronBold>
+              numberOfLines={1}/>
 
             <View style={styles.meterDetailTextEnd}>
               <Image source={icons.arrowUp} style={styles.meterArrowUp} />

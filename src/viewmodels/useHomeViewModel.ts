@@ -93,7 +93,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       name: 'Lodge A Claim',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
-      to: 'PriorApproval',
+      to: 'lodgeClaim',
     },
     {
       logo: cardIcons.taskDone,

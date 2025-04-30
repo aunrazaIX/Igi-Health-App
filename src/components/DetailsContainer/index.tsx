@@ -93,7 +93,6 @@ export const styles = StyleSheet.create({
     marginVertical: vh * 1.5,
     alignItems: 'center',
     gap: vh * 1,
-
     elevation: 2,
   },
 
