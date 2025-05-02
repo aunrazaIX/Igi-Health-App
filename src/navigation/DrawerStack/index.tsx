@@ -14,7 +14,7 @@ import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 import {drawerIcons, icons, images} from '../../assets';
-import {AileronBold} from '../../components';
+import {AileronBold, AileronSemiBold} from '../../components';
 import Personal from '../../screens/Personal';
 import PriorApproval from '../../screens/PriorApproval';
 import Tabs from '../TabStack';
@@ -69,7 +69,6 @@ const DrawerStack = () => {
       mainParent: 'Tabs',
       stChild: 'HomeStack',
       ndChild: 'PriorApproval',
-
     },
     {
       id: 6,
@@ -132,14 +131,17 @@ const DrawerStack = () => {
     },
   ];
 
-  const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
+  const DrawerContent = ({navigation}: DrawerContentComponentProps) => {
     return (
-      <View>
+      <View style={styles.container}>
         <View style={styles.logoContainer}>
-          <Image source={images.Logo} style={styles.logo} />
+          <Image source={images.LogoLife} style={styles.logo} />
 
           <TouchableOpacity onPress={() => navigation.closeDrawer()}>
-            <Image source={drawerIcons.drawerClose} style={styles.drawerClose} />
+            <Image
+              source={drawerIcons.drawerClose}
+              style={styles.drawerClose}
+            />
           </TouchableOpacity>
         </View>
         <ScrollView>
@@ -169,6 +171,33 @@ const DrawerStack = () => {
                 </TouchableOpacity>
               ))}
           </View>
+          <View style={styles.profileContainer}>
+            <View style={styles.profileRow}>
+              <Image
+                source={drawerIcons.drawerProfile}
+                style={styles.profileIcon}
+              />
+              <AileronSemiBold
+                name="Imran Naveed Qureshi"
+                style={styles.profileTittle}
+              />
+            </View>
+
+            <TouchableOpacity style={styles.ButtonContainer}>
+              <LinearGradient
+                colors={COLORS.PriorGradient}
+                style={styles.buttonGradient}>
+                <AileronSemiBold
+                  name="View Profile"
+                  style={styles.Buttontext}
+                />
+                <Image
+                  source={drawerIcons.drawerArrowRight}
+                  style={styles.buttonIcon}
+                />
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
     );
@@ -178,7 +207,7 @@ const DrawerStack = () => {
       drawerContent={DrawerContent}
       screenOptions={{
         drawerPosition: 'left',
-        drawerStyle: styles.container,
+        drawerStyle: styles.drawerContainer,
         headerShown: false,
       }}
       initialRouteName="Tabs">
@@ -194,7 +223,7 @@ const DrawerStack = () => {
 export default DrawerStack;
 
 const styles = StyleSheet.create({
-  container: {
+  drawerContainer: {
     backgroundColor: COLORS.white,
     borderTopRightRadius: vh * 3,
     borderBottomRightRadius: 0,
@@ -228,10 +257,51 @@ const styles = StyleSheet.create({
     color: COLORS.textBlackShade,
   },
   menuContainer: {
-    gap: vh * 3,
+    gap: vh * 4.5,
+    marginBottom: vh * 4.5,
   },
-  drawerClose:{
-    width : vw*7,
-    height: vw*7
-  }
+  drawerClose: {
+    width: vw * 7,
+    height: vw * 7,
+  },
+  profileContainer: {
+    gap: vh * 2,
+  },
+  profileRow: {
+    flexDirection: 'row',
+    gap: vw * 4,
+    alignItems: 'center',
+  },
+  profileIcon: {
+    width: vw * 15,
+    height: vw * 12,
+    borderRadius: vh * 1.5,
+  },
+  profileTittle: {
+    width: vw * 35,
+    fontSize: vw * 4,
+    textAlign: 'left',
+  },
+  Buttontext: {
+    fontSize: vw * 3.5,
+    color: COLORS.white,
+  },
+  ButtonContainer: {
+    width: '80%',
+  },
+  buttonGradient: {
+    borderRadius: vh * 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: vw * 2,
+    padding: vh * 1.7,
+  },
+  container: {
+    marginBottom: vh * 14,
+  },
+  buttonIcon: {
+    width: vw * 7,
+    height: vw * 5,
+  },
 });
