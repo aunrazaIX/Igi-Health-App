@@ -7,14 +7,14 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Benefits from '../../screens/Benefits';
 import Home from '../../screens/Home';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
-import {DrawerContentComponentProps} from '@react-navigation/drawer';
-import {drawerIcons, icons, images} from '../../assets';
-import {AileronBold, AileronSemiBold} from '../../components';
+import { COLORS } from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
+import { drawerIcons, icons, images } from '../../assets';
+import { AileronBold, AileronSemiBold } from '../../components';
 import Personal from '../../screens/Personal';
 import PriorApproval from '../../screens/PriorApproval';
 import Tabs from '../TabStack';
@@ -36,7 +36,8 @@ const DrawerStack = () => {
       id: 1,
       name: 'Home',
       icon: drawerIcons.drawerHome,
-      to: 'Home',
+      mainParent: "Tabs",
+      StChild: "Home"
     },
     {
       id: 2,
@@ -59,8 +60,8 @@ const DrawerStack = () => {
       name: 'Lodge Claim',
       icon: drawerIcons.drawerLodgeClaim,
       mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'lodgeClaim',
+      stChild: 'LodgeClaim',
+
     },
     {
       id: 5,
@@ -131,7 +132,7 @@ const DrawerStack = () => {
     },
   ];
 
-  const DrawerContent = ({navigation}: DrawerContentComponentProps) => {
+  const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
@@ -164,6 +165,9 @@ const DrawerStack = () => {
                         },
                       });
                       return;
+                    }
+                    else{
+                      
                     }
                   }}>
                   <Image style={styles.icon} source={route?.icon} />
@@ -212,7 +216,6 @@ const DrawerStack = () => {
       }}
       initialRouteName="Tabs">
       <Drawer.Screen name="Tabs" component={Tabs} />
-      <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
       <Drawer.Screen name="FAQs" component={FAQs} />
       <Drawer.Screen name="Settings" component={Settings} />
