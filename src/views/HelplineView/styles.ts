@@ -7,19 +7,20 @@ const styles = StyleSheet.create({
     paddingTop: vh * 3,
   },
   box: {
+    backgroundColor:COLORS.white,
     padding: vh * 2,
     borderRadius: vh * 2,
     marginVertical: vh,
     borderWidth: vh * 0.3,
     borderColor: COLORS.borderColor + 88,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    // width: 0,
-    // height: 1,
-    // },
-    // shadowOpacity: 0.08,
-    // shadowRadius: 1.5,
-    // elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+    width: 0,
+    height: 1,
+    },
+    shadowOpacity: 0.08,
+    shadowRadius: 1.5,
+    elevation: 5,
   },
   title: {
     fontSize: vw * 5.5,

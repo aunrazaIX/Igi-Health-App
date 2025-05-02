@@ -86,6 +86,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             placeholderTextColor={
               editable ? COLORS.placeholderColor + '88' : COLORS.black + '44'
             }
+            
             value={value}
             editable={editable}
             onSubmitEditing={onSubmitEditing}
@@ -135,16 +136,18 @@ const styles = StyleSheet.create({
     marginVertical: vh * 1.5,
     paddingHorizontal: vw * 2,
     flexDirection: 'row',
-    position: 'absolute',
+    // position: 'absolute',
   },
   inheritStyles: {
     height: '100%',
     width: '100%',
     flexDirection: 'row',
+    paddingHorizontal: vw * 1.5,
   },
   labelContainer: {
     top: vh * 1.5,
     paddingHorizontal: vw * 2,
+    // borderWidth:2,
   },
 
   label: {

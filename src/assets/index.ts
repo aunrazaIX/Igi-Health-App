@@ -12,6 +12,7 @@ export const images = {
   taskDone: require('./images/taskDone.png'),
   LogoLife: require('./images/LogoLife.png'),
   sehatKahani: require('./images/sehatKahani.png'),
+  loginBackground : require('./images/loginBackground.png'),
 };
 
 export const icons = {
@@ -102,6 +103,7 @@ export const icons = {
   flipCardRoom: require('./icons/flipCardRoom.png'),
   flipCardMaternity: require('./icons/flipCardMaternity.png'),
   notificationIcon: require('./icons/notificationIcon.png'),
+  loginArrow :  require('./icons/loginArrow.png'),
 };
 
 export const drawerIcons = {

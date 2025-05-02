@@ -1,11 +1,8 @@
-import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {ScrollView} from 'react-native';
 import React from 'react';
-import {AileronSemiBold, CurvedView, Stepper, TopView} from '../../components';
+import { CurvedView, Stepper, TopView} from '../../components';
 import {Claim, PersonalDetails, UploadDoc} from './components';
-import LinearGradient from 'react-native-linear-gradient';
-import {COLORS} from '../../assets/theme/colors';
-import styles from './styles';
-import { vh } from '../../assets/theme/dimension';
+
 
 type LodgeClaimViewProps = {
   steps: [];
@@ -26,7 +23,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   return (
     <ScrollView>
       <TopView title={'Logde A claim'} />
-      <CurvedView containerStyle={{backgroundColor:'black'}}>
+      <CurvedView>
         <Stepper steps={steps} componentList={renderStep} />
       </CurvedView>
     </ScrollView>

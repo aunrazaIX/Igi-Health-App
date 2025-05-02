@@ -5,82 +5,104 @@ import {COLORS} from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
+  
   },
   logo: {
-    marginVertical: vh * 3,
+    marginTop: vh * 7.5,
     height: vh * 10,
     width: vw * 60,
     resizeMode: 'contain',
   },
   curvedStyle: {
-    marginVertical: vh * 10,
+    width: '100%',
+    backgroundColor: '#FFFFFFE5',
   },
   loginContent: {
+    gap: vh * 6,
     flex: 1,
     paddingHorizontal: vw * 4,
     alignItems: 'center',
   },
   loginContainer: {
     width: '100%',
+
     borderRadius: vw * 5,
-    backgroundColor: COLORS.loginContainer,
-    paddingVertical: vh * 4,
-    paddingHorizontal: vw * 4,
+
+    paddingVertical: vh * 2,
+    // paddingHorizontal: vw * 3,
+
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   loginContainerText: {
     color: COLORS.textColorLight,
-    marginTop: vh * 2,
+
     fontSize: vw * 4,
     textAlign: 'left',
   },
+
   tabContainer: {
     width: '100%',
     backgroundColor: COLORS.white,
     alignItems: 'center',
     paddingHorizontal: vw * 3,
-    elevation: 5,
     paddingVertical: vh,
-    borderRadius: vw * 6,
+    borderRadius: vw * 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    borderWidth: 0.5,
+    elevation: 5,
+    borderColor: 'white',
+
+    marginBottom: vh * 2,
   },
   tab: {
     width: '47%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: vh * 1.5,
+    paddingVertical: vh * 0.7,
     borderRadius: vw * 6,
   },
   tabText: {
+    paddingVertical: vh * 0.4,
     fontSize: vw * 3,
   },
   forgetPassword: {
-    fontSize: vw * 3,
+    fontSize: vw * 3.4,
     color: COLORS.forgotPass,
   },
   loginButton: {
     marginTop: vh * 2,
+    paddingVertical: vh * 2.7,
   },
   loginOptionContainer: {
     flexDirection: 'row',
-    backgroundColor: COLORS.loginContainer,
+    backgroundColor: COLORS.white,
     borderRadius: vw * 6,
     paddingVertical: vh * 3,
-    width: '100%',
+    width: '110%',
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 2,
+    borderColor: COLORS.white,
+    elevation: 3,
+    gap: vw * 5,
+    marginTop: vh * 1,
   },
   loginOptionBox: {
     gap: vh * 1,
     alignItems: 'center',
   },
+  loginOptionContainerIcons: {
+    width: vw * 11,
+    height: vw * 11,
+  },
   verticalLine: {
-    width: 1,
-    height: vh * 4,
-    backgroundColor: COLORS.textColor,
+    width: 2.5,
+    height: vh * 5,
+    backgroundColor: COLORS.buttonBorder,
     marginHorizontal: 10,
   },
   row: {
@@ -89,7 +111,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   orText: {
-    fontSize: vw * 4,
-    marginVertical: vh * 2,
+    fontSize: vw * 5,
+    marginTop: vh * 4,
+    marginVertical: vh,
   },
 });

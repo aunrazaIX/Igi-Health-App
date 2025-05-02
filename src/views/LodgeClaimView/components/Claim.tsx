@@ -13,8 +13,8 @@ type ClaimProps = {
 const Claim: React.FC<ClaimProps> = ({claimsDetails}) => {
   return (
     <View style={styles.container}>
-      {claimsDetails?.map(data => (
-        <Box data={data} />
+      {claimsDetails?.map((data,index) => (
+        <Box data={data} key={index} />
       ))}  
       <LinearGradient
         colors={COLORS.PriorGradient}

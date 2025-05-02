@@ -6,9 +6,9 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import React from 'react';
-import { vh, vw } from '../../assets/theme/dimension';
-import { icons } from '../../assets';
-import { COLORS } from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
+import {icons} from '../../assets';
+import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -31,10 +31,9 @@ const Button: React.FC<ButtonProps> = ({
     <LinearGradient
       style={[styles.container, containerStyle]}
       // colors={COLORS.activeButtonGradient}
-      colors={gradientColors || COLORS.activeButtonGradient}
-    >
-      <TouchableOpacity onPress={onPress} >
-        {showIcon && <Image source={icons.eyeClosed} />}
+      colors={gradientColors || COLORS.activeButtonGradient}>
+      <TouchableOpacity style={styles.buttonContent} onPress={onPress}>
+        {showIcon && <Image style={styles.buttonIcon} source={showIcon} />}
         <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
       </TouchableOpacity>
     </LinearGradient>
@@ -55,5 +54,17 @@ const styles = StyleSheet.create({
 
   buttonText: {
     color: COLORS.buttonText,
+    fontWeight: 'bold',
+    fontSize: vw * 4,
+  },
+  buttonContent: {
+    flexDirection: 'row',
+
+    alignItems: 'center',
+    gap: vw * 3,
+  },
+  buttonIcon: {
+    width: vw * 7,
+    height: vw * 7,
   },
 });

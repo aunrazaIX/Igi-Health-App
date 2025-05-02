@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   container: {
     // backgroundColor: 'COLORS.white',
     justifyContent: 'space-between',
-    backgroundColor:'red',
+    // backgroundColor:'red',
     flex:1
   },
   stepContainer: {

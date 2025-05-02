@@ -1,4 +1,10 @@
-import {View, ImageBackground, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import React, {JSX} from 'react';
 import {images, icons} from '../../assets';
 import {styles} from './styles';
@@ -25,19 +31,15 @@ const LoginView = ({
     signup: <SignUpView />,
   };
   return (
-    <LinearGradient
-      colors={[
-        'rgba(72, 195, 255, 1)',
-        'rgba(255, 255, 255, 1)',
-        'rgba(255, 255, 255, 1)',
-      ]}
+    <ImageBackground
+      source={images.loginBackground}
       style={styles.imageContainer}>
-
       <KeyboardAwareScrollView enableOnAndroid>
+
         <View style={styles.loginContent}>
           <Image source={icons.logo} style={styles.logo} />
 
-          <CurvedView containerStyle={styles.curvedStyle} >
+          <CurvedView containerStyle={styles.curvedStyle}>
             <View style={styles.loginContainer}>
               <View style={styles.tabContainer}>
                 {tabs.map(tab => {
@@ -47,7 +49,8 @@ const LoginView = ({
                       key={tab}
                       onPress={() => onPressTab(tab)}
                       style={styles.tab}
-                      colors={COLORS.activeButtonGradient}>
+                      colors={COLORS.PriorGradient}
+                      >
                       <AileronSemiBold
                         style={[
                           styles.tabText,
@@ -65,12 +68,13 @@ const LoginView = ({
                   );
                 })}
               </View>
+
               {renderForm[selectedTab]}
             </View>
           </CurvedView>
         </View>
       </KeyboardAwareScrollView>
-    </LinearGradient>
+    </ImageBackground>
   );
 };
 

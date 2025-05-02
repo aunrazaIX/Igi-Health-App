@@ -26,6 +26,8 @@ type Props = {
 
 const BenefitsView: React.FC<Props> = ({data, goBack}) => {
   const RenderBenefits = ({item}: {item: Item}) => (
+
+  
     <View style={styles.card}>
       <LinearGradient
         colors={['#0B4A98', '#0f8dd7']}

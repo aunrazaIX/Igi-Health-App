@@ -9,6 +9,7 @@ import PriorApproval from '../../screens/PriorApproval';
 import PanelHospitalList from '../../screens/PanelHospitalList';
 import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
+import LodgeClaim from '../../screens/LodgeClaim';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +19,7 @@ const Tabs = () => {
       initialRouteName="HomeStack"
       screenOptions={{
         tabBarStyle: styles.tabBarStyle,
+      
         tabBarItemStyle: {
           paddingVertical: vh * 1,
         },
@@ -111,7 +113,7 @@ const Tabs = () => {
             ),
         }}
         name="lodge A Claim"
-        component={PriorApproval}
+        component={LodgeClaim}
       />
 
       <Tab.Screen
@@ -148,8 +150,7 @@ export default Tabs;
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    elevation: 0,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.UploadBorder,
     borderRadius: vh * 50,
     height: vh * 10,
     marginHorizontal: vw * 4,

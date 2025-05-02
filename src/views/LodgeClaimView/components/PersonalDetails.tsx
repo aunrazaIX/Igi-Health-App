@@ -26,8 +26,8 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
         selectLabel={'Patient Information'}
         selectPlaceholder={'-- Select Patient From List --'}
       />
-      {personalData?.map(data => (
-        <Box data={data}/>
+      {personalData?.map((data,index) => (
+        <Box data={data} key={index}/>
       ))}
     </View>
   );

@@ -1,19 +1,20 @@
 import {
   View,
+  Text,
   StyleSheet,
   Image,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import Benefits from '../../screens/Benefits';
 import Home from '../../screens/Home';
-import { COLORS } from '../../assets/theme/colors';
-import { vh, vw } from '../../assets/theme/dimension';
-import { DrawerContentComponentProps } from '@react-navigation/drawer';
-import { drawerIcons, icons, images } from '../../assets';
-import { AileronBold, AileronSemiBold } from '../../components';
+import {COLORS} from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
+import {DrawerContentComponentProps} from '@react-navigation/drawer';
+import {drawerIcons, icons, images} from '../../assets';
+import {AileronBold} from '../../components';
 import Personal from '../../screens/Personal';
 import PriorApproval from '../../screens/PriorApproval';
 import Tabs from '../TabStack';
@@ -25,6 +26,7 @@ import Notification from '../../screens/Notification';
 import FAQs from '../../screens/FAQs';
 import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
+import LodgeClaim from '../../screens/LodgeClaim';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
@@ -113,12 +115,12 @@ const DrawerStack = () => {
 
   const DrawerContent = (props: DrawerContentComponentProps) => {
     return (
-      <View style={styles.container}>
+      <View>
         <View style={styles.logoContainer}>
-          <Image source={images.LogoLife} style={styles.logo} />
+          <Image source={images.Logo} style={styles.logo} />
 
           <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
-            <Image source={drawerIcons.drawerClose} style={styles.drawerClose} />
+            <Image source={icons.CancelIcon} />
           </TouchableOpacity>
         </View>
         <ScrollView>
@@ -138,23 +140,6 @@ const DrawerStack = () => {
                 </TouchableOpacity>
               ))}
           </View>
-
-          <View style={styles.profileContainer}>
-            <View style={styles.profileRow}>
-              <Image source={drawerIcons.drawerProfile} style={styles.profileIcon} />
-              <AileronSemiBold name='Imran Naveed Qureshi' style={styles.profileTittle} />
-            </View>
-
-            <TouchableOpacity style={styles.ButtonContainer}>
-              <LinearGradient
-                colors={COLORS.PriorGradient}
-                style={styles.buttonGradient}
-              >
-                <AileronSemiBold name='View Profile' style={styles.Buttontext} />
-                <Image source={drawerIcons.drawerArrowRight} style={styles.buttonIcon} />
-              </LinearGradient>
-            </TouchableOpacity>
-          </View>
         </ScrollView>
       </View>
     );
@@ -164,17 +149,15 @@ const DrawerStack = () => {
       drawerContent={DrawerContent}
       screenOptions={{
         drawerPosition: 'left',
-        drawerStyle: styles.drawerContainer,
+        drawerStyle: styles.container,
         headerShown: false,
       }}
       initialRouteName="Tabs">
-        
-
       <Drawer.Screen name="Tabs" component={Tabs} />
-      <Drawer.Screen name="Home" component={Home} />
+      {/* <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Benefits" component={Benefits} />
       <Drawer.Screen name="Personal" component={Personal} />
-      <Drawer.Screen name="LodgeClaim" component={PriorApproval} />
+      <Drawer.Screen name="LodgeClaim" component={LodgeClaim} />
       <Drawer.Screen name="PriorApproval" component={PriorApproval} />
       <Drawer.Screen name="AddDependent" component={Personal} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
@@ -183,9 +166,7 @@ const DrawerStack = () => {
       <Drawer.Screen name="Helpline" component={Helpline} />
       <Drawer.Screen name="Notification" component={Notification} />
       <Drawer.Screen name="FAQs" component={FAQs} />
-      <Drawer.Screen name="Settings" component={Settings} />
-      <Drawer.Screen name="Hospital" component={PanelHospitalList} />
-
+      <Drawer.Screen name="Settings" component={Settings} /> */}
     </Drawer.Navigator>
   );
 };
@@ -193,14 +174,13 @@ const DrawerStack = () => {
 export default DrawerStack;
 
 const styles = StyleSheet.create({
-  drawerContainer: {
+  container: {
     backgroundColor: COLORS.white,
     borderTopRightRadius: vh * 3,
     borderBottomRightRadius: 0,
     width: vw * 70,
     paddingVertical: vh * 3,
     paddingHorizontal: vw * 6,
-    
   },
   logoContainer: {
     flexDirection: 'row',
@@ -228,52 +208,6 @@ const styles = StyleSheet.create({
     color: COLORS.textBlackShade,
   },
   menuContainer: {
-    gap: vh * 4.5,
-    marginBottom: vh * 4.5
+    gap: vh * 3,
   },
-  drawerClose: {
-    width: vw * 7,
-    height: vw * 7,
-  },
-  profileContainer: {
-    gap: vh * 2,
-
-  },
-  profileRow: {
-    flexDirection: 'row',
-    gap: vw * 4,
-    alignItems: 'center'
-  },
-  profileIcon: {
-    width: vw * 15,
-    height: vw * 12,
-    borderRadius: vh * 1.5
-  },
-  profileTittle: {
-    width: vw * 35,
-    fontSize: vw * 4,
-    textAlign: 'left'
-  },
-  Buttontext: {
-    fontSize: vw * 3.5,
-    color: COLORS.white
-  },
-  ButtonContainer: {
-    width: '80%',
-  },
-  buttonGradient: {
-    borderRadius: vh * 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: vw * 2,
-    padding: vh * 1.7
-  },
-  container: {
-    marginBottom: vh * 14
-  },
-  buttonIcon: {
-    width: vw * 7,
-    height: vw * 5
-  }
 });

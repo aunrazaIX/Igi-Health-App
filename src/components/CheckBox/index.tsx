@@ -4,6 +4,8 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 import AileronBold from '../AileronBold';
 import {icons} from '../../assets';
+import AileronRegular from '../AileronRegular';
+import AileronSemiBold from '../AileronSemiBold';
 
 type StyleObject = Record<string, string | number | boolean>;
 
@@ -21,7 +23,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({description, containerStyle}) => {
         style={styles.square}>
         {isChecked && <Image style={styles.tickIcon} source={icons.tickIcon} />}
       </TouchableOpacity>
-      <AileronBold style={styles.descriptionText} name={description} />
+      <AileronSemiBold style={styles.descriptionText} name={description} />
     </View>
   );
 };
@@ -36,14 +38,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: COLORS.black + '33',
-    height: vh * 1.7,
-    width: vw * 3.7,
+    borderRadius: vw*1,
+    borderColor: COLORS.black,
+    height: vh * 1.9,
+    width: vw * 3.9,
+
   },
   descriptionText: {
-    color: COLORS.textColorLight,
+    color: COLORS.textColor,
     marginLeft: vw * 2,
-    fontSize: vw * 1.7,
+    fontSize: vw * 3.5,
   },
   tickIcon: {
     height: '100%',
