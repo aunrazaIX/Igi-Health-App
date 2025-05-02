@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../../screens/Home';
 import Benefits from '../../screens/Benefits';
 import Personal from '../../screens/Personal';
@@ -18,16 +18,13 @@ const HomeStack = () => {
 
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
       initialRouteName={'Home'}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Benefits" component={Benefits} />
       <Stack.Screen name="Personal" component={Personal} />
       <Stack.Screen name="Hospitals" component={Hospitals} />
-     
       <Stack.Screen name="PanelHospitalList" component={PanelHospitalList} />
-    
-
       <Stack.Screen name="Notifications" component={Notification} />
     </Stack.Navigator>
   );
