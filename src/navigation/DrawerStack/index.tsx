@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   TouchableOpacity,
@@ -8,36 +7,27 @@ import {
 } from 'react-native';
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Benefits from '../../screens/Benefits';
 import Home from '../../screens/Home';
 import { COLORS } from '../../assets/theme/colors';
 import { vh, vw } from '../../assets/theme/dimension';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
-import { drawerIcons, icons, images } from '../../assets';
+import { drawerIcons, images } from '../../assets';
 import { AileronBold, AileronSemiBold } from '../../components';
-import Personal from '../../screens/Personal';
-import PriorApproval from '../../screens/PriorApproval';
 import Tabs from '../TabStack';
 import ClaimsHistory from '../../screens/ClaimsHistory';
-import Hospitals from '../../screens/Hospitals';
-import PanelHospitalList from '../../screens/PanelHospitalList';
-import Helpline from '../../screens/Helpline';
-import Notification from '../../screens/Notification';
 import FAQs from '../../screens/FAQs';
 import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
-import LodgeClaim from '../../screens/LodgeClaim';
-
+ 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
-
+ 
   const routes = [
     {
       id: 1,
       name: 'Home',
       icon: drawerIcons.drawerHome,
-      mainParent: "Tabs",
-      StChild: "Home"
+      to: 'Home',
     },
     {
       id: 2,
@@ -61,15 +51,13 @@ const DrawerStack = () => {
       icon: drawerIcons.drawerLodgeClaim,
       mainParent: 'Tabs',
       stChild: 'LodgeClaim',
-
     },
     {
       id: 5,
       name: 'Prior Approval',
       icon: drawerIcons.drawerPriorApproval,
       mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'PriorApproval',
+      stChild: 'PriorApproval',
     },
     {
       id: 6,
@@ -106,10 +94,9 @@ const DrawerStack = () => {
       name: 'Helpline',
       icon: drawerIcons.drawerHelpline,
       mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'Helpline',
+      stChild: 'Helpline',
     },
-
+ 
     {
       id: 11,
       name: 'Notifications',
@@ -131,13 +118,13 @@ const DrawerStack = () => {
       to: 'Settings',
     },
   ];
-
+ 
   const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={images.LogoLife} style={styles.logo} />
-
+ 
           <TouchableOpacity onPress={() => navigation.closeDrawer()}>
             <Image
               source={drawerIcons.drawerClose}
@@ -165,9 +152,11 @@ const DrawerStack = () => {
                         },
                       });
                       return;
-                    }
-                    else{
-                      
+                    } else {
+                      navigation.navigate(route?.mainParent, {
+                        screen: route?.stChild,
+                      });
+                      return;
                     }
                   }}>
                   <Image style={styles.icon} source={route?.icon} />
@@ -186,7 +175,7 @@ const DrawerStack = () => {
                 style={styles.profileTittle}
               />
             </View>
-
+ 
             <TouchableOpacity style={styles.ButtonContainer}>
               <LinearGradient
                 colors={COLORS.PriorGradient}
@@ -216,15 +205,16 @@ const DrawerStack = () => {
       }}
       initialRouteName="Tabs">
       <Drawer.Screen name="Tabs" component={Tabs} />
+      <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
       <Drawer.Screen name="FAQs" component={FAQs} />
       <Drawer.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );
 };
-
+ 
 export default DrawerStack;
-
+ 
 const styles = StyleSheet.create({
   drawerContainer: {
     backgroundColor: COLORS.white,
@@ -308,3 +298,5 @@ const styles = StyleSheet.create({
     height: vw * 5,
   },
 });
+ 
+ 
