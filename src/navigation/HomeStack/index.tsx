@@ -15,21 +15,20 @@ import LodgeClaim from '../../screens/LodgeClaim';
 const HomeStack = () => {
   const Stack = createStackNavigator();
 
+
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
       initialRouteName={'Home'}>
       <Stack.Screen name="Home" component={Home} />
-
       <Stack.Screen name="Benefits" component={Benefits} />
       <Stack.Screen name="Personal" component={Personal} />
-      <Stack.Screen name="lodgeClaim" component={LodgeClaim} />
-      <Stack.Screen name="PriorApproval" component={PriorApproval} />
       <Stack.Screen name="Hospitals" component={Hospitals} />
+     
       <Stack.Screen name="PanelHospitalList" component={PanelHospitalList} />
-      <Stack.Screen name="Helpline" component={Helpline} />
-      <Stack.Screen name="Notifications" component={Notification} />
+    
 
+      <Stack.Screen name="Notifications" component={Notification} />
     </Stack.Navigator>
   );
 };

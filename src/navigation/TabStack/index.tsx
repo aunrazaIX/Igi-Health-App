@@ -19,7 +19,7 @@ const Tabs = () => {
       initialRouteName="HomeStack"
       screenOptions={{
         tabBarStyle: styles.tabBarStyle,
-      
+
         tabBarItemStyle: {
           paddingVertical: vh * 1,
         },
@@ -112,7 +112,7 @@ const Tabs = () => {
               </View>
             ),
         }}
-        name="lodge A Claim"
+        name="LodgeClaim"
         component={LodgeClaim}
       />
 
@@ -140,7 +140,7 @@ const Tabs = () => {
               </View>
             ),
         }}
-        name="customer Support"
+        name="Helpline"
         component={Helpline}
       />
     </Tab.Navigator>
@@ -150,12 +150,12 @@ export default Tabs;
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    backgroundColor: COLORS.UploadBorder,
+    backgroundColor: COLORS.white,
     borderRadius: vh * 50,
     height: vh * 10,
     marginHorizontal: vw * 4,
     paddingHorizontal: vw * 2,
-    marginVertical: vh * 2,
+    marginVertical: vh * 5,
   },
   iconContainer: {
     padding: vh * 1,

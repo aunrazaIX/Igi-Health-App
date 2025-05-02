@@ -6,11 +6,13 @@ import {useNavigation} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
 
 export type CardItemData = {
-  logo: any;
+  logo: ImageSourcePropType;
   name: string;
-  image: any;
-  backgroundColor: any;
-  to: any;
+  image: ImageSourcePropType;
+  backgroundColor: string;
+  to?: string;
+  mainParent?: string;
+  stChild?: string;
 };
 
 type UseHomeViewModelReturn = {
@@ -24,7 +26,7 @@ type UseHomeViewModelReturn = {
     onPressTab: (name: string) => void;
     animateCard: () => void;
     toggleDrawer: () => void;
-    onPressMenu: (route: string) => void;
+    onPressMenu: (cardData: CardItemData) => void;
   };
 };
 
@@ -93,14 +95,16 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       name: 'Lodge A Claim',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
-      to: 'lodgeClaim',
+      mainParent: 'Tabs',
+      stChild: 'LodgeClaim',
     },
     {
       logo: cardIcons.taskDone,
       name: 'Prior Approval',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
-      to: 'PriorApproval',
+      mainParent: 'Tabs',
+      stChild: 'PriorApproval',
     },
     {
       logo: cardIcons.hospital,
@@ -121,7 +125,8 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       name: 'Help Line',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
-      to: 'Helpline',
+      mainParent: 'Tabs',
+      stChild: 'Helpline',
     },
   ];
 
@@ -130,8 +135,16 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     navigate.toggleDrawer();
   };
 
-  const onPressMenu = (route: string) => {
-    navigate.navigate(route);
+  const onPressMenu = (cardData: CardItemData) => {
+    if (cardData?.to) {
+      navigate.navigate(cardData.to);
+      return;
+    }
+    if (cardData?.mainParent) {
+      navigate.navigate(cardData?.mainParent, {
+        screen: cardData?.stChild,
+      });
+    }
   };
 
   return {

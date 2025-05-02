@@ -77,7 +77,8 @@ const HomeView: React.FC<HomeViewProps> = ({
                   <AileronBold
                     name={'Health Insurance'}
                     numberOfLines={1}
-                    style={styles.infoCardTextBold}/>
+                    style={styles.infoCardTextBold}
+                  />
 
                   <AileronSemiBold
                     name={'User ID: 123450000123'}
@@ -137,7 +138,8 @@ const HomeView: React.FC<HomeViewProps> = ({
                   <AileronBold
                     name={'02/07/2025'}
                     style={styles.infoCardFooterTextBold}
-                    numberOfLines={1}/>
+                    numberOfLines={1}
+                  />
                 </View>
               </View>
             </TouchableOpacity>
@@ -259,7 +261,7 @@ const HomeView: React.FC<HomeViewProps> = ({
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <TouchableOpacity
-                onPress={() => onPressMenu(item?.to)}
+                onPress={() => onPressMenu(item)}
                 style={[
                   styles.dashboardContainerCards,
                   {backgroundColor: item.backgroundColor},
@@ -281,8 +283,23 @@ const HomeView: React.FC<HomeViewProps> = ({
             )}
           />
         </View>
+
         <AileronBold style={styles.statisticsHeader} name="Claim Statistics" />
-        <View style={styles.graphContainer}></View>
+
+        <View style={styles.graphContainer}>
+
+
+<Image  style={styles.meterEllipseBlue} source={images.ellipseBlue}/>
+
+<Image style={styles.meterEllipseRed} source={images.ellipseRed}/>
+
+<Image style={styles.dashboardMeterIcon} source={icons.meterIcon}/> 
+
+<AileronLight  style={styles.meterLightText} name='Total Claim Amount'/>
+<AileronBold style={styles.meterBoldText} name={"570,000"}/>
+
+
+        </View>
 
         <View style={styles.statisticsContainer}>
           <View style={styles.dashboardMeterDetail}>
@@ -321,13 +338,15 @@ const HomeView: React.FC<HomeViewProps> = ({
               <AileronBold
                 style={styles.meterDetailTextLight}
                 name="Total Paid"
-                numberOfLines={1}/>
+                numberOfLines={1}
+              />
             </View>
 
             <AileronBold
               name={'855, 000'}
               style={styles.meterDetailTextBold}
-              numberOfLines={1}/>
+              numberOfLines={1}
+            />
 
             <View style={styles.meterDetailTextEnd}>
               <Image source={icons.arrowUp} style={styles.meterArrowUp} />

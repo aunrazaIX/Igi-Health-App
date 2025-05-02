@@ -7,14 +7,12 @@ export const styles = StyleSheet.create({
     paddingBottom: vh * 2,
     paddingHorizontal: vw * 2.75,
     backgroundColor: COLORS.white,
-   
   },
   homeHeader: {
     marginTop: vh * 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-
   },
   headerLogo: {
     width: 25 * vw,
@@ -68,7 +66,36 @@ export const styles = StyleSheet.create({
   },
   graphContainer: {
     height: vh * 20,
-    width: '100%',
+    marginTop: vh * 3.2,
+    marginBottom: vh * 2.5,
+    alignItems: 'center',
+    position: 'relative',
+  },
+  meterEllipseBlue: {
+    width: vw * 64,
+    height: vw * 64,
+  },
+  meterEllipseRed: {
+    width: vw * 50,
+    height: vw * 50,
+    position: 'absolute',
+    top: vh * 3.2,
+  },
+  dashboardMeterIcon: {
+    width: vw * 10,
+    height: vw * 10,
+    position: 'absolute',
+    top: vh * 8.2,
+  },
+  meterLightText: {
+    fontSize: vw * 3.4,
+    position: 'absolute',
+    top: vh * 13.3,
+  },
+  meterBoldText: {
+    fontSize: vw * 7.5,
+    position: 'absolute',
+    top: vh * 14.8,
   },
   meterDetailTextEnd: {
     flexDirection: 'row',

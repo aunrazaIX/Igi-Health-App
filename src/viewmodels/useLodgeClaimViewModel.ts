@@ -2,8 +2,13 @@ import { StyleSheet } from "react-native";
 import { icons } from "../assets";
 import { COLORS } from "../assets/theme/colors";
 import { vh } from "../assets/theme/dimension";
+import { useNavigation } from "@react-navigation/native";
 
-const useLodgeClaimViewModel = () => {
+
+const useLodgeClaimViewModel = ()  => {
+
+
+  const navigation = useNavigation();
   const steps = [
     {
       label: 'Personal Details',
@@ -85,9 +90,15 @@ const useLodgeClaimViewModel = () => {
       ],
     },
   ]
+
+  const goBack = () => {
+    navigation.goBack();
+  };
+
+
   return {
     states: {steps,personalData,claimsDetails},
-    functions: {},
+    functions: {goBack},
   };
 };
 

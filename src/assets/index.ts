@@ -13,6 +13,8 @@ export const images = {
   LogoLife: require('./images/LogoLife.png'),
   sehatKahani: require('./images/sehatKahani.png'),
   loginBackground : require('./images/loginBackground.png'),
+  ellipseBlue: require('./images/EllipseBlue.png'),
+  ellipseRed: require('./images/EllipseRed.png'),
 };
 
 export const icons = {
@@ -104,6 +106,7 @@ export const icons = {
   flipCardMaternity: require('./icons/flipCardMaternity.png'),
   notificationIcon: require('./icons/notificationIcon.png'),
   loginArrow :  require('./icons/loginArrow.png'),
+  meterIcon : require('./icons/meterIcon.png'),
 };
 
 export const drawerIcons = {
