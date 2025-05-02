@@ -8,14 +8,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { styles } from './style';
-import { icons, images } from '../../assets';
+import {styles} from './style';
+import {icons, images} from '../../assets';
 import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 type CardItem = {
   logo: any;
@@ -79,7 +79,8 @@ const HomeView: React.FC<HomeViewProps> = ({
                   <AileronBold
                     name={'Health Insurance'}
                     numberOfLines={1}
-                    style={styles.infoCardTextBold} />
+                    style={styles.infoCardTextBold}
+                  />
 
                   <AileronSemiBold
                     name={'User ID: 123450000123'}
@@ -106,8 +107,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                       numberOfLines={1}
                     />
                   </View>
-                  <TouchableOpacity
-                    onPress={animateCard}>
+                  <TouchableOpacity onPress={animateCard}>
                     <Image source={images.flipCard} />
                   </TouchableOpacity>
                 </View>
@@ -138,7 +138,8 @@ const HomeView: React.FC<HomeViewProps> = ({
                   <AileronBold
                     name={'02/07/2025'}
                     style={styles.infoCardFooterTextBold}
-                    numberOfLines={1} />
+                    numberOfLines={1}
+                  />
                 </View>
               </View>
             </TouchableOpacity>
@@ -170,16 +171,19 @@ const HomeView: React.FC<HomeViewProps> = ({
 
                 <AileronRegular
                   name="Saad Imran Qureshi: 8"
-                  style={styles.homeBackCardText} />
+                  style={styles.homeBackCardText}
+                />
 
                 <View style={styles.homeBackCardRow}>
                   <View style={styles.homeBackCardRowText}>
                     <AileronRegular
                       style={styles.homeBackCardText}
-                      name="Tariq Imran Qureshi: 5" />
+                      name="Tariq Imran Qureshi: 5"
+                    />
                     <AileronRegular
                       name="Emaan Imran Qureshi: 6"
-                      style={styles.homeBackCardText} />
+                      style={styles.homeBackCardText}
+                    />
                   </View>
                   <TouchableOpacity onPress={animateCard}>
                     <Image source={images.flipCard} />
@@ -257,17 +261,17 @@ const HomeView: React.FC<HomeViewProps> = ({
             data={cardData}
             keyExtractor={(_item, index) => index.toString()}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => onPressMenu(item)}
                 style={[
                   styles.dashboardContainerCards,
-                  { backgroundColor: item.backgroundColor },
+                  {backgroundColor: item.backgroundColor},
                 ]}>
                 <Image style={styles.cardLogo} source={item.logo} />
 
                 <View style={styles.cardContent}>
-                  <View style={{ width: '85%' }}>
+                  <View style={{width: '85%'}}>
                     <AileronRegular
                       style={styles.dashboardContainerCardText}
                       name={item.name}
@@ -282,27 +286,26 @@ const HomeView: React.FC<HomeViewProps> = ({
           />
         </View>
 
-        <AileronBold style={styles.statisticsHeader} name="Claim Statistics" />
-
-        <View style={styles.graphContainer}>
-
-
-<Image  style={styles.meterEllipseBlue} source={images.ellipseBlue}/>
-
-<Image style={styles.meterEllipseRed} source={images.ellipseRed}/>
-
-<Image style={styles.dashboardMeterIcon} source={icons.meterIcon}/> 
-
-<AileronLight  style={styles.meterLightText} name='Total Claim Amount'/>
-<AileronBold style={styles.meterBoldText} name={"570,000"}/>
-
-
-        </View>
         <View style={styles.claimStatistics}>
           <Image source={icons.claimStatistics} style={styles.statisticsIcon} />
-          <AileronBold style={styles.statisticsHeader} name="Claim Statistics" />
+          <AileronBold
+            style={styles.statisticsHeader}
+            name="Claim Statistics"
+          />
         </View>
-        <View style={styles.graphContainer}></View>
+        <View style={styles.graphContainer}>
+          <Image style={styles.meterEllipseBlue} source={images.ellipseBlue} />
+
+          <Image style={styles.meterEllipseRed} source={images.ellipseRed} />
+
+          <Image style={styles.dashboardMeterIcon} source={icons.meterIcon} />
+
+          <AileronLight
+            style={styles.meterLightText}
+            name="Total Claim Amount"
+          />
+          <AileronBold style={styles.meterBoldText} name={'570,000'} />
+        </View>
 
         <View style={styles.statisticsContainer}>
           <View style={styles.dashboardMeterDetail}>
@@ -340,13 +343,15 @@ const HomeView: React.FC<HomeViewProps> = ({
               <AileronBold
                 style={styles.meterDetailTextLight}
                 name="Total Paid"
-                numberOfLines={1} />
+                numberOfLines={1}
+              />
             </View>
 
             <AileronBold
               name={'855, 000'}
               style={styles.meterDetailTextBold}
-              numberOfLines={1} />
+              numberOfLines={1}
+            />
 
             <View style={styles.meterDetailTextEnd}>
               <Image source={icons.arrowUp} style={styles.meterArrowUp} />
