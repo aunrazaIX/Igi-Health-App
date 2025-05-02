@@ -17,7 +17,7 @@ type Props = {
     data: dependentDetail[];
     gender: personalDetail[];
     relation: personalDetail[];
-    goBack : ()=>void
+    goBack: () => void
 }
 
 type dependentDetail = {
@@ -33,7 +33,7 @@ type Item = {
 
 
 
-const PersonalView: React.FC<Props> = ({ data, gender, relation , goBack }) => {
+const PersonalView: React.FC<Props> = ({ data, gender, relation, goBack }) => {
 
     const [expanded, setExpanded] = useState(false);
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -55,9 +55,9 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation , goBack }) => {
         setModalVisible(true)
     }
 
-const deleteDepenedent = () => {
-    setConfimationModalVisible(false)
-}
+    const deleteDepenedent = () => {
+        setConfimationModalVisible(false)
+    }
 
     return (
         <Container>
@@ -85,7 +85,7 @@ const deleteDepenedent = () => {
                             <View style={styles.iconsROw}>
                                 {expandedIndex === index && (
                                     <View style={styles.deleteEditRow}>
-                                        <TouchableOpacity>
+                                        <TouchableOpacity onPress={() => setModalVisible(true)}>
                                             <Image source={icons.edit} style={styles.editIcon} />
                                         </TouchableOpacity>
                                         <TouchableOpacity onPress={() => setConfimationModalVisible(true)}>

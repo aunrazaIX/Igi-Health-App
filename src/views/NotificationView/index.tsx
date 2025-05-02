@@ -6,26 +6,12 @@ import styles from './styles'
 
 
 
-const renderNotifications = ({ item }: { item: Item, index: number }) => {
-  return (
-    <View style={[styles.notificationContainer,]}>
-      <View style={styles.notificationIconRow}>
-        <Image source={icons.notificationIcon} style={styles.icon} />
-        <View style={styles.claimRow}>
-          <AileronSemiBold style={styles.requestTittle} name={item.title} />
-        </View>
-      </View>
-      <View>
-        <AileronSemiBold style={styles.date} name={item.time} />
-      </View>
-    </View>
-  )
-}
+
 
 type Props = {
   NotificationData: Item[];
   selectData: SelectData[];
-  goBack : ()=>void
+  goBack: () => void
 }
 
 type Item = {
@@ -40,16 +26,36 @@ type SelectData = {
 }
 
 
-
-const NotificationView: React.FC<Props> = ({ NotificationData, selectData , goBack }) => {
+const NotificationView: React.FC<Props> = ({ NotificationData, selectData, goBack }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+
+
+  const renderNotifications = ({ item, index }: { item: Item, index: number }) => {
+    const lastIndex = index === NotificationData.length - 1
+    return (
+      <View
+        style={[styles.notificationContainer, lastIndex && { borderBottomWidth: 0 }]}
+
+      >
+        <View style={styles.notificationIconRow}>
+          <Image source={icons.notificationIcon} style={styles.icon} />
+          <View style={styles.claimRow}>
+            <AileronSemiBold style={styles.requestTittle} name={item.title} />
+          </View>
+        </View>
+        <View>
+          <AileronSemiBold style={styles.date} name={item.time} />
+        </View>
+      </View>
+    )
+  }
 
   const handleSelect = (item: SelectData) => {
     setSelectedItem(item.name);
     setDropdownVisible(false);
   };
-  console.log('selectedItem', selectedItem)
+
   return (
     <>
       <TopView

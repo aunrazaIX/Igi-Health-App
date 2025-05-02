@@ -32,13 +32,9 @@ const ProvinceTab: React.FC<ProvinceTabProps> = ({
 
       <View>
         {selectedMapTab === provinceName ? (
-          <AileronBold style={style.mapTabTextActive} name={provinceName}>
-            {' '}
-          </AileronBold>
+          <AileronBold style={style.mapTabTextActive} name={provinceName}/>
         ) : (
-          <AileronBold style={style.mapTabText} name={provinceName}>
-            {' '}
-          </AileronBold>
+          <AileronBold style={style.mapTabText} name={provinceName}/>
         )}
       </View>
     </TouchableOpacity>

@@ -12,13 +12,12 @@ export const styles = StyleSheet.create({
   },
   infoContainerTop: {
     flexDirection: 'row',
-
     borderWidth: 1,
     borderRadius: vw * 2.5,
     borderColor: COLORS.buttonBorder,
     backgroundColor: COLORS.buttonBackground,
-    paddingVertical: vh * 0.5,
-    paddingHorizontal: vw,
+    paddingVertical: vh * 0.3,
+    paddingHorizontal: vw * 0.5,
   },
 
   button: {

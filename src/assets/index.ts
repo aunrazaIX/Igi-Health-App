@@ -107,6 +107,8 @@ export const icons = {
   notificationIcon: require('./icons/notificationIcon.png'),
   loginArrow :  require('./icons/loginArrow.png'),
   meterIcon : require('./icons/meterIcon.png'),
+  totalDeducted: require('./icons/totalDeducted.png'),
+  totalPaid: require('./icons/totalPaid.png'),
 };
 
 export const drawerIcons = {

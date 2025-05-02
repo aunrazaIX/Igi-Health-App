@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     backgroundColor: COLORS.white,
+    paddingBottom: vh * 3
   },
   CurvedView:{
     marginBottom: -vh * 4,

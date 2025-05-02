@@ -5,7 +5,7 @@ import {COLORS} from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   gradient: {
     paddingBottom: vh * 2,
-    paddingHorizontal: vw * 2.75,
+    paddingHorizontal: vw * 3,
     backgroundColor: COLORS.white,
   },
   homeHeader: {
@@ -19,9 +19,13 @@ export const styles = StyleSheet.create({
     height: vh * 6,
     resizeMode: 'contain',
   },
-  headerIcons: {
+  headerIconsRow: {
     flexDirection: 'row',
     gap: vw * 5,
+  },
+  headerIcons:{
+    width: vw * 6,
+    height: vw * 6
   },
   homeInfoContainer: {
     width: '100%',
@@ -59,10 +63,10 @@ export const styles = StyleSheet.create({
   statisticsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingHorizontal :vw * 3
   },
   statisticsHeader: {
     fontSize: vw * 5,
-    alignSelf: 'flex-start',
   },
   graphContainer: {
     height: vh * 20,
@@ -168,11 +172,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: vw * 4,
     backgroundColor: COLORS.cardBackgroundBlue,
-    width: vw * 45,
-    marginRight: vw * 4,
+    width: vw * 40,
+    marginRight: vw * 3,
     paddingHorizontal: vw * 3.5,
     paddingVertical: vw * 2.5,
-    gap: vh * 0.5,
+    height:vw*40
   },
   cardLogoContainer: {
     marginVertical: vh * 1,
@@ -192,7 +196,7 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCardText: {
     textAlign: 'left',
-    fontSize: vw * 5.5,
+    fontSize: vw * 5,
     color: COLORS.white,
   },
   cardsArrow: {
@@ -210,19 +214,13 @@ export const styles = StyleSheet.create({
   dashboardMeterDetail: {
     gap: vh * 1,
   },
-  dashboardMeterDetailTop: {
-    flexDirection: 'row',
-    gap: vw * 1.8,
-    alignItems: 'center',
-  },
-
   meterIcon: {
-    height: vh * 2,
     width: vw * 4,
+    height: vh * 2,
     resizeMode: 'contain',
   },
   meterDetailTextBold: {
-    fontSize: vw * 9,
+    fontSize: vw * 7.5,
     textAlign: 'left',
     color: COLORS.black,
   },
@@ -329,4 +327,14 @@ export const styles = StyleSheet.create({
     fontSize: vw * 5,
     color: COLORS.textBlackShade,
   },
+  totalDeducted:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: vw * 2
+  },
+  claimStatistics:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: vw * 2
+  }
 });
