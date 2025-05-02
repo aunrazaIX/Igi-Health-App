@@ -59,16 +59,14 @@ const DrawerStack = () => {
       name: 'Lodge Claim',
       icon: drawerIcons.drawerLodgeClaim,
       mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'lodgeClaim',
+      stChild: 'LodgeClaim',
     },
     {
       id: 5,
       name: 'Prior Approval',
       icon: drawerIcons.drawerPriorApproval,
       mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'PriorApproval',
+      stChild: 'PriorApproval',
     },
     {
       id: 6,
@@ -105,8 +103,7 @@ const DrawerStack = () => {
       name: 'Helpline',
       icon: drawerIcons.drawerHelpline,
       mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'Helpline',
+      stChild: 'Helpline',
     },
 
     {
@@ -162,6 +159,11 @@ const DrawerStack = () => {
                         params: {
                           screen: route?.ndChild,
                         },
+                      });
+                      return;
+                    } else {
+                      navigation.navigate(route?.mainParent, {
+                        screen: route?.stChild,
                       });
                       return;
                     }
