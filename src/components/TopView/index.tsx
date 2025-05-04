@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { COLORS } from '../../assets/theme/colors';
+import {COLORS} from '../../assets/theme/colors';
 import AileronSemiBold from '../AileronSemiBold';
-import { vh, vw } from '../../assets/theme/dimension';
-import { icons } from '../../assets';
+import {vh, vw} from '../../assets/theme/dimension';
+import {icons} from '../../assets';
 
 type StyleObject = Record<string, string | number | boolean>;
 
@@ -37,9 +37,7 @@ const TopView = ({
   containerStyleIcon?: StyleObject | StyleObject[];
 }) => {
   return (
-    <LinearGradient
-      style={[styles.container]}
-      colors={COLORS.PriorGradient}>
+    <LinearGradient style={[styles.container]} colors={COLORS.PriorGradient}>
       <View style={[styles.row, , containerStyle]}>
         <TouchableOpacity
           onPress={onPressBack}
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: vh * 5,
+    marginTop: vh * 2.8,
   },
   backIconContainer: {
     height: vh * 4.7,
@@ -104,7 +102,7 @@ const styles = StyleSheet.create({
   headerName: {
     width: '65%',
     color: COLORS.white,
-    fontSize: vw * 4,
+    fontSize: vw * 4.5,
   },
   spacedView: {
     marginVertical: vh * 3,
@@ -117,7 +115,7 @@ const styles = StyleSheet.create({
   },
   TopViewIcon: {
     width: vw * 8,
-    height: vw * 8
+    height: vw * 8,
   },
   headerIcon: {
     flexDirection: 'row',

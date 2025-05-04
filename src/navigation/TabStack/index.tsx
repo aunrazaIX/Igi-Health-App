@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
     height: vh * 10,
     marginHorizontal: vw * 4,
     paddingHorizontal: vw * 2,
-    marginVertical: vh * 5,
+
+    marginVertical: vh * 2,
   },
   iconContainer: {
     padding: vh * 1,

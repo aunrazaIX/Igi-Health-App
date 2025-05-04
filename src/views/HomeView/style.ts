@@ -5,11 +5,11 @@ import {COLORS} from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   gradient: {
     paddingBottom: vh * 2,
-    paddingHorizontal: vw * 3,
+    paddingHorizontal: vw * 4,
     backgroundColor: COLORS.white,
   },
   homeHeader: {
-    marginTop: vh * 8,
+    marginTop: vh * 2,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -23,9 +23,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 5,
   },
-  headerIcons:{
+  headerIcons: {
     width: vw * 6,
-    height: vw * 6
+    height: vw * 6,
   },
   homeInfoContainer: {
     width: '100%',
@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
   statisticsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal :vw * 3
+    paddingHorizontal: vw * 3,
   },
   statisticsHeader: {
     fontSize: vw * 5,
@@ -176,7 +176,7 @@ export const styles = StyleSheet.create({
     marginRight: vw * 3,
     paddingHorizontal: vw * 3.5,
     paddingVertical: vw * 2.5,
-    height:vw*40
+    height: vw * 40,
   },
   cardLogoContainer: {
     marginVertical: vh * 1,
@@ -327,14 +327,14 @@ export const styles = StyleSheet.create({
     fontSize: vw * 5,
     color: COLORS.textBlackShade,
   },
-  totalDeducted:{
+  totalDeducted: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 2
+    gap: vw * 2,
   },
-  claimStatistics:{
+  claimStatistics: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 2
-  }
+    gap: vw * 2,
+  },
 });

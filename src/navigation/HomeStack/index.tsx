@@ -15,7 +15,6 @@ import LodgeClaim from '../../screens/LodgeClaim';
 const HomeStack = () => {
   const Stack = createStackNavigator();
 
-
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
@@ -24,9 +23,8 @@ const HomeStack = () => {
       <Stack.Screen name="Benefits" component={Benefits} />
       <Stack.Screen name="Personal" component={Personal} />
       <Stack.Screen name="Hospitals" component={Hospitals} />
-     
+
       <Stack.Screen name="PanelHospitalList" component={PanelHospitalList} />
-    
 
       <Stack.Screen name="Notifications" component={Notification} />
     </Stack.Navigator>
