@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import { StyleSheet } from 'react-native';
+import { vh, vw } from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
   gradient: {
@@ -9,11 +9,12 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   homeHeader: {
-  
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-   
+    marginTop: vh * 2
+
 
   },
   headerLogo: {
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 5,
   },
-  headerIcons:{
+  headerIcons: {
     width: vw * 6,
     height: vw * 6
   },
@@ -65,7 +66,7 @@ export const styles = StyleSheet.create({
   statisticsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal :vw * 3
+    paddingHorizontal: vw * 3
   },
   statisticsHeader: {
     fontSize: vw * 5,
@@ -178,7 +179,7 @@ export const styles = StyleSheet.create({
     marginRight: vw * 3,
     paddingHorizontal: vw * 3.5,
     paddingVertical: vw * 2.5,
-    height:vw*40
+    height: vw * 40
   },
   cardLogoContainer: {
     marginVertical: vh * 1,
@@ -329,12 +330,12 @@ export const styles = StyleSheet.create({
     fontSize: vw * 5,
     color: COLORS.textBlackShade,
   },
-  totalDeducted:{
+  totalDeducted: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: vw * 2
   },
-  claimStatistics:{
+  claimStatistics: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: vw * 2

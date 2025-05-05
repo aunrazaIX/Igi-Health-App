@@ -6,13 +6,16 @@ import {
   CheckBox,
   InputField,
 } from '../../../components';
-import {styles} from '../styles';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {icons} from '../../../assets';
-import {vh, vw} from '../../../assets/theme/dimension';
-import {COLORS} from '../../../assets/theme/colors';
+import { styles } from '../styles';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { icons } from '../../../assets';
+import { vh, vw } from '../../../assets/theme/dimension';
+import { COLORS } from '../../../assets/theme/colors';
 
-const LoginForm = () => {
+
+
+
+const LoginForm = ({ onPressforgotPassword }: { onPressforgotPassword: (to: string) => void }) => {
   return (
     <>
       <AileronSemiBold
@@ -41,12 +44,12 @@ const LoginForm = () => {
         />
       </View>
 
-      <View style={[styles.row, {justifyContent: 'space-between'}]}>
+      <View style={[styles.row, { justifyContent: 'space-between' }]}>
         <CheckBox
           description="Remember me"
         />
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => { onPressforgotPassword("ForgotPassword") }}>
           <AileronBold style={styles.forgetPassword} name="Forgot Password ?" />
         </TouchableOpacity>
       </View>

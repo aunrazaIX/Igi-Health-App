@@ -18,16 +18,18 @@ const LoginView = ({
   onPressTab,
   selectedTab,
   tabs,
+  onPressforgotPassword
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;
   tabs: string[];
+  onPressforgotPassword: (to : string)=>void
 }) => {
   const Wrapper = (tab: string) =>
     selectedTab === tab ? LinearGradient : TouchableOpacity;
 
   const renderForm: Record<string, JSX.Element> = {
-    login: <LoginForm />,
+    login: <LoginForm onPressforgotPassword={onPressforgotPassword} />,
     signup: <SignUpView />,
   };
   return (

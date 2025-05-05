@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: vh * 5,
+    marginTop: vh * 3,
   },
   backIconContainer: {
     height: vh * 4.7,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   headerName: {
     width: '65%',
     color: COLORS.white,
-    fontSize: vw * 4,
+    fontSize: vw * 5,
   },
   spacedView: {
     marginVertical: vh * 3,

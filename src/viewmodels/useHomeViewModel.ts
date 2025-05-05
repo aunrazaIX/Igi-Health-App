@@ -1,19 +1,25 @@
-import {useRef, useState} from 'react';
-import {cardIcons, icons} from '../assets';
-import {COLORS} from '../assets/theme/colors';
-import {Animated} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {ImageSourcePropType} from 'react-native';
+import { useRef, useState } from 'react';
+import { cardIcons, icons } from '../assets';
+import { COLORS } from '../assets/theme/colors';
+import { Animated } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ImageSourcePropType } from 'react-native';
 
 export type CardItemData = {
-  logo: ImageSourcePropType;
-  name: string;
-  image: ImageSourcePropType;
-  backgroundColor: string;
+  logo?: ImageSourcePropType;
+  name?: string;
+  image?: ImageSourcePropType;
+  backgroundColor?: string;
   to?: string;
   mainParent?: string;
   stChild?: string;
 };
+
+export type HomeHeaderData = {
+  logo: ImageSourcePropType,
+  name: string,
+  to: string
+}
 
 type UseHomeViewModelReturn = {
   states: {
@@ -27,6 +33,7 @@ type UseHomeViewModelReturn = {
     animateCard: () => void;
     toggleDrawer: () => void;
     onPressMenu: (cardData: CardItemData) => void;
+    onPressHeaderIcon: () => void
   };
 };
 
@@ -37,7 +44,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const animateValue = useRef(new Animated.Value(0)).current;
   const currentValue = useRef(0);
 
-  animateValue.addListener(({value}) => {
+  animateValue.addListener(({ value }) => {
     currentValue.current = value;
   });
 
@@ -68,11 +75,11 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   });
 
   const frontAnimatedStyle = {
-    transform: [{perspective: 1000}, {rotateY: rotateFront}],
+    transform: [{ perspective: 1000 }, { rotateY: rotateFront }],
   };
 
   const backAnimatedStyle = {
-    transform: [{perspective: 1000}, {rotateY: rotateBack}],
+    transform: [{ perspective: 1000 }, { rotateY: rotateBack }],
   };
 
   const cardData: CardItemData[] = [
@@ -90,10 +97,10 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       backgroundColor: COLORS.cardBackgroundRed,
       to: 'Personal',
     },
+
     {
       logo: cardIcons.lodgeClaim,
       name: 'Lodge A Claim',
-      image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       mainParent: 'Tabs',
       stChild: 'LodgeClaim',
@@ -128,7 +135,11 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       mainParent: 'Tabs',
       stChild: 'Helpline',
     },
+
+
+
   ];
+
 
   const onPressTab = (name: string) => setSelectedTab(name);
   const toggleDrawer = () => {
@@ -147,6 +158,13 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     }
   };
 
+
+  const onPressHeaderIcon = (to: string) => {
+    if (to) {
+      navigate.navigate(to);
+    }
+  };
+
   return {
     states: {
       selectedTab,
@@ -159,6 +177,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       animateCard,
       toggleDrawer,
       onPressMenu,
+      onPressHeaderIcon
     },
   };
 };

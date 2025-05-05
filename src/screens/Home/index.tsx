@@ -6,7 +6,7 @@ import useHomeViewModel from '../../viewmodels/useHomeViewModel';
 const Home = () => {
   const {states, functions} = useHomeViewModel();
   const {cardData, backAnimatedStyle, frontAnimatedStyle} = states;
-  const {onPressTab, animateCard, toggleDrawer, onPressMenu} = functions;
+  const {onPressTab, animateCard, toggleDrawer, onPressMenu , onPressHeaderIcon} = functions;
 
   return (
     <HomeView
@@ -16,6 +16,7 @@ const Home = () => {
       backAnimatedStyle={backAnimatedStyle}
       frontAnimatedStyle={frontAnimatedStyle}
       onPressMenu={onPressMenu}
+      onPressHeaderIcon = {onPressHeaderIcon}
     />
   );
 };

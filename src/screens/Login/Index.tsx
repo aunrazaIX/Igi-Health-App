@@ -5,9 +5,9 @@ import LoginView from '../../views/LoginView';
 const Login = () => {
   const {functions, states} = useLoginViewModel();
   const {selectedTab, tabs} = states;
-  const {onPressTab} = functions;
+  const {onPressTab , onPressforgotPassword} = functions;
   return (
-    <LoginView onPressTab={onPressTab} selectedTab={selectedTab} tabs={tabs} />
+    <LoginView onPressforgotPassword={onPressforgotPassword} onPressTab={onPressTab} selectedTab={selectedTab} tabs={tabs} />
   );
 };
 
