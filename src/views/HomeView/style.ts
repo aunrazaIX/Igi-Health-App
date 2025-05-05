@@ -9,10 +9,12 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   homeHeader: {
-    marginTop: vh * 8,
+  
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+   
+
   },
   headerLogo: {
     width: 25 * vw,

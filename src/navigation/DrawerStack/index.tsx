@@ -18,10 +18,10 @@ import ClaimsHistory from '../../screens/ClaimsHistory';
 import FAQs from '../../screens/FAQs';
 import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
- 
+
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
- 
+
   const routes = [
     {
       id: 1,
@@ -96,7 +96,7 @@ const DrawerStack = () => {
       mainParent: 'Tabs',
       stChild: 'Helpline',
     },
- 
+
     {
       id: 11,
       name: 'Notifications',
@@ -118,13 +118,13 @@ const DrawerStack = () => {
       to: 'Settings',
     },
   ];
- 
+
   const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={images.LogoLife} style={styles.logo} />
- 
+
           <TouchableOpacity onPress={() => navigation.closeDrawer()}>
             <Image
               source={drawerIcons.drawerClose}
@@ -175,7 +175,7 @@ const DrawerStack = () => {
                 style={styles.profileTittle}
               />
             </View>
- 
+
             <TouchableOpacity style={styles.ButtonContainer}>
               <LinearGradient
                 colors={COLORS.PriorGradient}
@@ -212,9 +212,9 @@ const DrawerStack = () => {
     </Drawer.Navigator>
   );
 };
- 
+
 export default DrawerStack;
- 
+
 const styles = StyleSheet.create({
   drawerContainer: {
     backgroundColor: COLORS.white,
@@ -298,5 +298,5 @@ const styles = StyleSheet.create({
     height: vw * 5,
   },
 });
- 
- 
+
+

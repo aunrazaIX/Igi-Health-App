@@ -5,6 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
+  SafeAreaView,
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -44,6 +45,7 @@ const HomeView: React.FC<HomeViewProps> = ({
 }) => {
   return (
     // <View style={styles.homeContainer}>
+    <SafeAreaView> 
     <ScrollView>
       <LinearGradient
         style={styles.gradient}
@@ -389,6 +391,7 @@ const HomeView: React.FC<HomeViewProps> = ({
         </View>
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
