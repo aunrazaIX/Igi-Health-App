@@ -19,7 +19,7 @@ const MainStack = () => {
   return (
 
     <Stack.Navigator
-    initialRouteName={'AuthStack'}
+    // initialRouteName={'AuthStack'}
     screenOptions={{headerShown: false}}>
       
       {token ?     <Stack.Screen name={'DrawerStack'} component={DrawerStack} />  :   <Stack.Screen name={'AuthStack'} component={AuthStack} /> }
