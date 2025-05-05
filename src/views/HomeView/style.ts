@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   homeHeader: {
-    marginTop: vh * 8,
+    marginTop: vh * 3,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

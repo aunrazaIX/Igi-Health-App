@@ -1,32 +1,23 @@
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import Benefits from '../../screens/Benefits';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from '../../screens/Home';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
-import {DrawerContentComponentProps} from '@react-navigation/drawer';
-import {drawerIcons, icons, images} from '../../assets';
-import {AileronBold, AileronSemiBold} from '../../components';
-import Personal from '../../screens/Personal';
-import PriorApproval from '../../screens/PriorApproval';
+import { COLORS } from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
+import { drawerIcons, images } from '../../assets';
+import { AileronBold, AileronSemiBold } from '../../components';
 import Tabs from '../TabStack';
 import ClaimsHistory from '../../screens/ClaimsHistory';
-import Hospitals from '../../screens/Hospitals';
-import PanelHospitalList from '../../screens/PanelHospitalList';
-import Helpline from '../../screens/Helpline';
-import Notification from '../../screens/Notification';
 import FAQs from '../../screens/FAQs';
 import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
-import LodgeClaim from '../../screens/LodgeClaim';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
@@ -59,16 +50,14 @@ const DrawerStack = () => {
       name: 'Lodge Claim',
       icon: drawerIcons.drawerLodgeClaim,
       mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'lodgeClaim',
+      stChild: 'LodgeClaim',
     },
     {
       id: 5,
       name: 'Prior Approval',
       icon: drawerIcons.drawerPriorApproval,
       mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'PriorApproval',
+      stChild: 'PriorApproval',
     },
     {
       id: 6,
@@ -105,8 +94,7 @@ const DrawerStack = () => {
       name: 'Helpline',
       icon: drawerIcons.drawerHelpline,
       mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'Helpline',
+      stChild: 'Helpline',
     },
 
     {
@@ -131,7 +119,7 @@ const DrawerStack = () => {
     },
   ];
 
-  const DrawerContent = ({navigation}: DrawerContentComponentProps) => {
+  const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
@@ -162,6 +150,11 @@ const DrawerStack = () => {
                         params: {
                           screen: route?.ndChild,
                         },
+                      });
+                      return;
+                    } else {
+                      navigation.navigate(route?.mainParent, {
+                        screen: route?.stChild,
                       });
                       return;
                     }

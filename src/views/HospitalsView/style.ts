@@ -122,8 +122,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   filterIcon: {
-    width: vw * 6,
-    height: vh * 3,
+    width: vw * 4,
+    height: vh * 2.3,
     resizeMode: 'contain',
     color: COLORS.black,
   },

@@ -18,9 +18,10 @@ type StyleObject = Record<string, string | number | boolean>;
 const TopView = ({
   title,
   icon,
-  TopViewSideIcon,
+  TopViewFirstIcon,
   onPressBack,
-  AddModal,
+  FirstOpenModal,
+  SecondOpenModal,
   TopViewSecondIcon,
   containerStyle,
   containerStyleIcon,
@@ -29,9 +30,10 @@ const TopView = ({
   title: string;
   onPressBack?: () => void;
   icon?: ImageSourcePropType | null;
-  TopViewSideIcon?: ImageSourcePropType | null;
+  TopViewFirstIcon?: ImageSourcePropType | null;
   TopViewSecondIcon?: ImageSourcePropType | null;
-  AddModal?: () => void;
+  FirstOpenModal?: () => void;
+  SecondOpenModal?: () => void;
   containerStyle?: StyleObject | StyleObject[];
   goBack?: () => void;
   containerStyleIcon?: StyleObject | StyleObject[];
@@ -49,16 +51,16 @@ const TopView = ({
         <AileronSemiBold style={styles.headerName} name={title} />
         <View style={styles.headerIcon}>
           {TopViewSecondIcon && (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={SecondOpenModal}>
               <Image style={styles.TopViewIcon} source={TopViewSecondIcon} />
             </TouchableOpacity>
           )}
 
-          {TopViewSideIcon && (
-            <TouchableOpacity onPress={AddModal}>
+          {TopViewFirstIcon && (
+            <TouchableOpacity onPress={FirstOpenModal}>
               <Image
                 style={[styles.TopViewIcon, containerStyleIcon]}
-                source={TopViewSideIcon}
+                source={TopViewFirstIcon}
               />
             </TouchableOpacity>
           )}
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: vh * 5,
+    marginTop: vh * 2,
   },
   backIconContainer: {
     height: vh * 4.7,

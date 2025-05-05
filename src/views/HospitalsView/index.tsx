@@ -13,11 +13,11 @@ import {
   CurvedView,
   TopView,
 } from '../../components';
-import {icons} from '../../assets';
-import {styles} from './style';
+import { icons } from '../../assets';
+import { styles } from './style';
 import DetailsContainer from '../../components/DetailsContainer';
-import {vh} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 import ProvinceTab from '../../components/provinceTab';
 
 type HospitalsViewProps = {
@@ -43,9 +43,10 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
     <>
       <TopView
         title="Hospitals"
-        HeaderIcon={icons.searchWhite}
-        HeaderSecondIcon={null}
-        headerStyle={styles.headerStyle}
+        TopViewFirstIcon={icons.searchWhite}
+        // HeaderIcon={icons.searchWhite}
+        // HeaderSecondIcon={null}
+        // headerStyle={styles.headerStyle}
         onPressBack={goBack}
       />
 
@@ -80,6 +81,11 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
               selectedMapTab={selectedMapTab}
               provinceName={'Baluchistan'}
             />
+            <ProvinceTab
+              onPressMapTab={onPressMapTab}
+              selectedMapTab={selectedMapTab}
+              provinceName={'KPK'}
+            />
           </View>
         </View>
       </CurvedView>
@@ -102,7 +108,7 @@ const style = StyleSheet.create({
 
   detailsText: {},
   mapText: {
-    fontSize: vh * 2.5,
+    fontSize: vw * 5,
     color: COLORS.black,
   },
   mapTextColor: {

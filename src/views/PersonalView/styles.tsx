@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
         color: COLORS.insuredPrice
     },
     icon: {
-        width: vh * 3,
-        height: vh * 3
+        width: vw * 6.6,
+        height: vw * 6.6,
+        resizeMode: 'contain',
     },
     details: {
         marginTop: 10,
@@ -62,14 +63,15 @@ const styles = StyleSheet.create({
         borderTopColor: COLORS.dependentBorder,
         borderStyle: 'dashed',
         paddingTop: vh * 1,
+        gap: vh * 1.5
     },
     detailRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    detailsListContainer: {
-        gap: vh * 1.5
-    },
+    // detailsListContainer: {
+    //     gap: vh * 1.5
+    // },
     iconsROw: {
         flexDirection: 'row',
         gap: vh * 1,
