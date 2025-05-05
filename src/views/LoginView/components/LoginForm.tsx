@@ -11,11 +11,34 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { icons } from '../../../assets';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { COLORS } from '../../../assets/theme/colors';
+import { useDispatch } from 'react-redux';
+import { setToken, setUser } from '../../../redux/authSlice';
+import {User} from '../../../viewmodels/useLoginViewModel'
+import { clampRGBA } from 'react-native-reanimated/lib/typescript/Colors';
 
 
 
 
-const LoginForm = ({ onPressforgotPassword }: { onPressforgotPassword: (to: string) => void }) => {
+
+
+
+
+
+const LoginForm = ({ onPressforgotPassword, user , setuser }: { onPressforgotPassword: (to: string) => void, user: User , setuser: React.Dispatch<React.SetStateAction<User>> }) => {
+
+  const dispatch = useDispatch();
+
+  const handleChange = (key, value) => {
+    setuser(prev => ({ ...prev, [key]: value }));
+  };
+  
+
+
+  const handleLogin = ()=>{
+    dispatch(setToken("usman"))
+  }
+
+
   return (
     <>
       <AileronSemiBold
@@ -32,6 +55,9 @@ const LoginForm = ({ onPressforgotPassword }: { onPressforgotPassword: (to: stri
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
+          value={user.userName}
+          onChangeText={(text) => handleChange('userName', text)}
+          
         />
 
         <InputField
@@ -39,9 +65,15 @@ const LoginForm = ({ onPressforgotPassword }: { onPressforgotPassword: (to: stri
           secureTextEntry
           placeholder="Enter Password"
           containerStyle={style.inputContainer}
+
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
+          value={user.password}
+
+          onChangeText={(text) => handleChange('password', text)}
+          
         />
+
       </View>
 
       <View style={[styles.row, { justifyContent: 'space-between' }]}>
@@ -54,7 +86,7 @@ const LoginForm = ({ onPressforgotPassword }: { onPressforgotPassword: (to: stri
         </TouchableOpacity>
       </View>
 
-      <Button showIcon={icons.loginArrow} containerStyle={styles.loginButton} name="Login" />
+      <Button onPress={handleLogin}   showIcon={icons.loginArrow} containerStyle={styles.loginButton} name="Login" />
 
       <AileronBold style={styles.orText} name="Or" />
 

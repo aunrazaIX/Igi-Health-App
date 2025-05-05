@@ -5,8 +5,16 @@ import DrawerStack from '../DrawerStack';
 import HomeStack from '../HomeStack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AuthStack from '../AuthStack';
+import { useSelector } from 'react-redux'
+import { clampRGBA } from 'react-native-reanimated/lib/typescript/Colors';
+
 
 const MainStack = () => {
+
+  const token = useSelector((state) => state.auth.token)
+
+
+
   const Stack = createStackNavigator();
   return (
 
@@ -14,8 +22,12 @@ const MainStack = () => {
     initialRouteName={'AuthStack'}
     screenOptions={{headerShown: false}}>
       
-      <Stack.Screen name={'AuthStack'} component={AuthStack} />
-      <Stack.Screen name={'DrawerStack'} component={DrawerStack} />
+      {token ?     <Stack.Screen name={'DrawerStack'} component={DrawerStack} />  :   <Stack.Screen name={'AuthStack'} component={AuthStack} /> }
+            
+
+    
+
+   
     </Stack.Navigator>
 
   );
