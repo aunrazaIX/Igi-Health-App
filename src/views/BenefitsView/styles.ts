@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     backgroundColor: COLORS.white,
-    paddingBottom: vh * 3
+    paddingBottom: vh * 3,
   },
   CurvedView:{
     marginBottom: -vh * 4,
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
   coverageCardImage: {
     height: vh * 4,
     width: vh * 4,
+    tintColor:COLORS.white
   },
 });
 

@@ -18,10 +18,12 @@ import ClaimsHistory from '../../screens/ClaimsHistory';
 import FAQs from '../../screens/FAQs';
 import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
- 
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/authSlice';
+
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
- 
+  const dispatch  = useDispatch();
   const routes = [
     {
       id: 1,
@@ -96,7 +98,7 @@ const DrawerStack = () => {
       mainParent: 'Tabs',
       stChild: 'Helpline',
     },
- 
+
     {
       id: 11,
       name: 'Notifications',
@@ -117,14 +119,25 @@ const DrawerStack = () => {
       icon: drawerIcons.drawerSettings,
       to: 'Settings',
     },
+
+    {
+      id: 14,
+      name: 'Logout',
+      icon: drawerIcons.drawerSettings,
+      to : "logout"
+      
+
+
+    },
   ];
- 
+
+
   const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={images.LogoLife} style={styles.logo} />
- 
+
           <TouchableOpacity onPress={() => navigation.closeDrawer()}>
             <Image
               source={drawerIcons.drawerClose}
@@ -140,6 +153,10 @@ const DrawerStack = () => {
                   key={index}
                   style={styles.row}
                   onPress={() => {
+                    if (route.to === 'logout') {
+                      dispatch(logout());
+                      return;
+                    }
                     if (route.to) {
                       navigation.navigate(route.to);
                       return;
@@ -175,7 +192,7 @@ const DrawerStack = () => {
                 style={styles.profileTittle}
               />
             </View>
- 
+
             <TouchableOpacity style={styles.ButtonContainer}>
               <LinearGradient
                 colors={COLORS.PriorGradient}
@@ -212,9 +229,9 @@ const DrawerStack = () => {
     </Drawer.Navigator>
   );
 };
- 
+
 export default DrawerStack;
- 
+
 const styles = StyleSheet.create({
   drawerContainer: {
     backgroundColor: COLORS.white,
@@ -298,5 +315,5 @@ const styles = StyleSheet.create({
     height: vw * 5,
   },
 });
- 
- 
+
+

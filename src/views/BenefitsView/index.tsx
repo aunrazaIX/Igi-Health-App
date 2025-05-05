@@ -24,8 +24,8 @@ type Props = {
 };
 
 const BenefitsView: React.FC<Props> = ({ data, goBack }) => {
-  
-  const RenderBenefits = ({ item, index }: { item: Item, index: any }) => (
+ 
+  const RenderBenefits = ({ item }: { item: Item }) => (
     <View style={styles.card}>
       <LinearGradient
         colors={['#0B4A98', '#0f8dd7']}
@@ -41,9 +41,7 @@ const BenefitsView: React.FC<Props> = ({ data, goBack }) => {
   );
 
   const headerComponent = () => (
-    <>
-      <TopView title={'Benefits'} onPressBack={goBack} />
-      <CurvedView containerStyle={styles.CurvedView}>
+    <View>
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 0.8, y: 0 }}
@@ -70,10 +68,14 @@ const BenefitsView: React.FC<Props> = ({ data, goBack }) => {
           <AileronBold name={'Coverage &'} style={styles.coverageTitle} />
           <AileronBold name={' Benefits!'} style={styles.benefitTitle} />
         </View>
-      </CurvedView>
-    </>
+
+    </View>
+    
   );
   return (
+    <>
+    <TopView title={'Benefits'} onPressBack={goBack} />
+    <CurvedView containerStyle={styles.CurvedView}>
     <FlatList
       ListHeaderComponent={headerComponent}
       data={data}
@@ -82,6 +84,8 @@ const BenefitsView: React.FC<Props> = ({ data, goBack }) => {
       numColumns={3}
       contentContainerStyle={styles.flatListContainer}
     />
+    </CurvedView>
+    </>
   );
 };
 
