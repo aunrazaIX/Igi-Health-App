@@ -13,15 +13,14 @@ import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 
 type Step = {
+  key: string; // ← Add this
   label: string;
-  componentList: ReactNode;
 };
 
 type StepperProps = {
   steps: Step[];
   containerStyle?: StyleProp<ViewStyle>;
-  title: string;
-  componentList: [];
+  componentList: Record<string, ReactNode>;
 };
 
 const Stepper: React.FC<StepperProps> = ({steps, componentList}) => {
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'COLORS.white',
     justifyContent: 'space-between',
     // backgroundColor:'red',
-    flex:1
+    flex: 1,
   },
   stepContainer: {
     flexDirection: 'row',
@@ -225,7 +224,7 @@ const styles = StyleSheet.create({
     // marginTop: vh * 1,
     borderRadius: vh * 1.5,
     padding: vh * 2,
-    alignContent:'flex-end'
+    alignContent: 'flex-end',
   },
   priorNext: {
     textAlign: 'center',

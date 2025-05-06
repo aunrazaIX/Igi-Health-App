@@ -1,22 +1,14 @@
-import {
-  View,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
-import React, { JSX } from 'react';
-import { images, icons } from '../../assets';
-import { styles } from './styles';
-import { COLORS } from '../../assets/theme/colors';
+import {View, ImageBackground, Image, TouchableOpacity} from 'react-native';
+import React, {JSX} from 'react';
+import {images, icons} from '../../assets';
+import {styles} from './styles';
+import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { AileronSemiBold, CurvedView } from '../../components';
-import { LoginForm, SignUpView } from './components';
-import { setUser } from '../../redux/authSlice';
-import { useDispatch } from 'react-redux';
-import { User } from '../../viewmodels/useLoginViewModel'
-
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {AileronSemiBold, CurvedView} from '../../components';
+import {LoginForm, SignUpView} from './components';
+import {User} from '../../viewmodels/useLoginViewModel';
+import {vh} from '../../assets/theme/dimension';
 
 const LoginView = ({
   onPressTab,
@@ -24,27 +16,26 @@ const LoginView = ({
   tabs,
   user,
   onPressforgotPassword,
-  Setuser
-
+  Setuser,
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;
   tabs: string[];
-  user: User,
-  onPressforgotPassword: (to: string) => void,
-  setuser: React.Dispatch<React.SetStateAction<User>>
+  user: User;
+  onPressforgotPassword: (to: string) => void;
+  setuser: React.Dispatch<React.SetStateAction<User>>;
 }) => {
-
-
-
-
   const Wrapper = (tab: string) =>
     selectedTab === tab ? LinearGradient : TouchableOpacity;
 
   const renderForm: Record<string, JSX.Element> = {
-    login: <LoginForm setuser={Setuser} user={user}
-
-      onPressforgotPassword={onPressforgotPassword} />,
+    login: (
+      <LoginForm
+        setuser={Setuser}
+        user={user}
+        onPressforgotPassword={onPressforgotPassword}
+      />
+    ),
     signup: <SignUpView />,
   };
   return (
@@ -52,7 +43,6 @@ const LoginView = ({
       source={images.loginBackground}
       style={styles.imageContainer}>
       <KeyboardAwareScrollView enableOnAndroid>
-
         <View style={styles.loginContent}>
           <Image source={icons.logo} style={styles.logo} />
 
@@ -66,21 +56,22 @@ const LoginView = ({
                       key={tab}
                       onPress={() => onPressTab(tab)}
                       style={styles.tab}
-                      colors={COLORS.PriorGradient}
-                    >
-                      <AileronSemiBold
-                        style={[
-                          styles.tabText,
-                          {
-                            color:
-                              selectedTab === tab
-                                ? COLORS.white
-                                : COLORS.textColor,
-                          },
-                        ]}
-                        numberOfLines={2}
-                        name={tab === 'login' ? 'Login' : 'Signup'}
-                      />
+                      colors={COLORS.PriorGradient}>
+                      <View style={{padding: vh * 0.7}}>
+                        <AileronSemiBold
+                          style={[
+                            styles.tabText,
+                            {
+                              color:
+                                selectedTab === tab
+                                  ? COLORS.white
+                                  : COLORS.textColor,
+                            },
+                          ]}
+                          numberOfLines={2}
+                          name={tab === 'login' ? 'Login' : 'Signup'}
+                        />
+                      </View>
                     </TabWrapper>
                   );
                 })}

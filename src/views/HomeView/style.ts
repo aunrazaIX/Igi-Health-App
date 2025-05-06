@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {StyleSheet} from 'react-native';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
   gradient: {
@@ -8,13 +8,15 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 4,
     backgroundColor: COLORS.white,
   },
+  wrapper: {
+    paddingBottom: vh * 2,
+    paddingHorizontal: vw * 4,
+  },
   homeHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: vh * 2
-
-
+    marginTop: vh * 2,
   },
   headerLogo: {
     width: 25 * vw,
@@ -39,6 +41,13 @@ export const styles = StyleSheet.create({
     elevation: 3,
     backfaceVisibility: 'hidden',
     height: vh * 27,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   },
 
   flipCardContainer: {
@@ -65,7 +74,7 @@ export const styles = StyleSheet.create({
   statisticsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: vw * 3
+    paddingHorizontal: vw * 3,
   },
   statisticsHeader: {
     fontSize: vw * 5,
@@ -178,7 +187,7 @@ export const styles = StyleSheet.create({
     marginRight: vw * 3,
     paddingHorizontal: vw * 3.5,
     paddingVertical: vw * 2.5,
-    height: vw * 40
+    height: vw * 40,
   },
   cardLogoContainer: {
     marginVertical: vh * 1,
@@ -309,6 +318,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   associatedImage: {
     width: vw * 30,

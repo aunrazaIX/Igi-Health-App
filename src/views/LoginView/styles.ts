@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
     width: '47%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: vh * 0.7,
+    // paddingVertical: vh * 0.7,
     borderRadius: vw * 6,
   },
   tabText: {
@@ -74,7 +74,6 @@ export const styles = StyleSheet.create({
   },
   loginButton: {
     marginTop: vh * 2,
-    paddingVertical: vh * 2.7,
   },
   loginOptionContainer: {
     flexDirection: 'row',

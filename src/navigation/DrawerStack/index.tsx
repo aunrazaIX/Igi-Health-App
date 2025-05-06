@@ -4,26 +4,27 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import Home from '../../screens/Home';
-import { COLORS } from '../../assets/theme/colors';
-import { vh, vw } from '../../assets/theme/dimension';
-import { DrawerContentComponentProps } from '@react-navigation/drawer';
-import { drawerIcons, images } from '../../assets';
-import { AileronBold, AileronSemiBold } from '../../components';
+import {COLORS} from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
+import {DrawerContentComponentProps} from '@react-navigation/drawer';
+import {drawerIcons, images} from '../../assets';
+import {AileronBold, AileronSemiBold} from '../../components';
 import Tabs from '../TabStack';
 import ClaimsHistory from '../../screens/ClaimsHistory';
 import FAQs from '../../screens/FAQs';
 import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/authSlice';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../redux/authSlice';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
-  const dispatch  = useDispatch();
+  const dispatch = useDispatch();
   const routes = [
     {
       id: 1,
@@ -124,15 +125,11 @@ const DrawerStack = () => {
       id: 14,
       name: 'Logout',
       icon: drawerIcons.drawerSettings,
-      to : "logout"
-      
-
-
+      to: 'logout',
     },
   ];
 
-
-  const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
+  const DrawerContent = ({navigation}: DrawerContentComponentProps) => {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
@@ -197,14 +194,16 @@ const DrawerStack = () => {
               <LinearGradient
                 colors={COLORS.PriorGradient}
                 style={styles.buttonGradient}>
-                <AileronSemiBold
-                  name="View Profile"
-                  style={styles.Buttontext}
-                />
-                <Image
-                  source={drawerIcons.drawerArrowRight}
-                  style={styles.buttonIcon}
-                />
+                <View style={styles.wrapper}>
+                  <AileronSemiBold
+                    name="View Profile"
+                    style={styles.Buttontext}
+                  />
+                  <Image
+                    source={drawerIcons.drawerArrowRight}
+                    style={styles.buttonIcon}
+                  />
+                </View>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -300,6 +299,9 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   buttonGradient: {
+    borderRadius: vw * 10,
+  },
+  wrapper: {
     borderRadius: vh * 4,
     flexDirection: 'row',
     alignItems: 'center',
@@ -308,12 +310,11 @@ const styles = StyleSheet.create({
     padding: vh * 1.7,
   },
   container: {
-    marginBottom: vh * 14,
+    flex: 1,
+    // marginBottom: vh * 14,
   },
   buttonIcon: {
     width: vw * 7,
     height: vw * 5,
   },
 });
-
-

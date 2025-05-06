@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import {vh, vw} from '../../assets/theme/dimension';
-import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -46,10 +45,6 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderRadius: vw * 4,
-    paddingVertical: vh * 2,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 
   buttonText: {
@@ -58,9 +53,11 @@ const styles = StyleSheet.create({
     fontSize: vw * 4,
   },
   buttonContent: {
-    flexDirection: 'row',
-
+    width:'100%',
+    justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: vh * 2,
+    flexDirection: 'row',
     gap: vw * 3,
   },
   buttonIcon: {

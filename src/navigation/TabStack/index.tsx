@@ -1,10 +1,10 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { StyleSheet, Image, View, TouchableWithoutFeedback } from 'react-native';
-import { icons, tabIcons } from '../../assets';
+import {StyleSheet, Image, View, TouchableWithoutFeedback} from 'react-native';
+import {icons, tabIcons} from '../../assets';
 import HomeStack from '../HomeStack';
-import { COLORS } from '../../assets/theme/colors';
-import { vh, vw } from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
 import PriorApproval from '../../screens/PriorApproval';
 import PanelHospitalList from '../../screens/PanelHospitalList';
 import Helpline from '../../screens/Helpline';
@@ -35,22 +35,24 @@ const Tabs = () => {
         options={{
           tabBarShowLabel: false,
 
-          tabBarIcon: ({ focused }) =>
+          tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
                 style={styles.gradientBorder}>
-                <Image
-                  style={[styles.iconStyle, { tintColor: 'white' }]}
-                  source={tabIcons.home}
-                />
+                <View style={styles.wrapper}>
+                  <Image
+                    style={[styles.iconStyle, {tintColor: 'white'}]}
+                    source={tabIcons.home}
+                  />
+                </View>
               </LinearGradient>
             ) : (
-              <View style={styles.iconContainer}>
+              <View style={[styles.gradientBorder,styles.wrapper]}>
                 <Image
-                  style={[styles.iconStyle, { tintColor: 'black' }]}
+                  style={[styles.iconStyle, {tintColor: 'black'}]}
                   source={tabIcons.home}
                 />
               </View>
@@ -63,20 +65,22 @@ const Tabs = () => {
       <Tab.Screen
         options={{
           tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) =>
+          tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
                 style={styles.gradientBorder}>
-                <Image
-                  style={[styles.iconStyle, { tintColor: 'white' }]}
-                  source={tabIcons.note}
-                />
+                <View style={styles.wrapper}>
+                  <Image
+                    style={[styles.iconStyle, {tintColor: 'white'}]}
+                    source={tabIcons.note}
+                  />
+                </View>
               </LinearGradient>
             ) : (
-              <View style={styles.iconContainer}>
+              <View style={[styles.gradientBorder,styles.wrapper]}>
                 <Image style={styles.iconStyle} source={tabIcons.note} />
               </View>
             ),
@@ -88,25 +92,27 @@ const Tabs = () => {
       <Tab.Screen
         options={{
           tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) =>
+          tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
                 style={styles.gradientBorder}>
-                <Image
-                  style={[
-                    styles.iconStyle,
-                    { tintColor: 'white', height: vh * 5, width: vw * 9 },
-                  ]}
-                  source={tabIcons.PriorApproval}
-                />
+                <View style={styles.wrapper}>
+                  <Image
+                    style={[
+                      styles.iconStyle,
+                      {tintColor: 'white'},
+                    ]}
+                    source={tabIcons.PriorApproval}
+                  />
+                </View>
               </LinearGradient>
             ) : (
-              <View style={styles.iconContainer}>
+              <View style={[styles.gradientBorder,styles.wrapper]}>
                 <Image
-                  style={[styles.iconStyle, { height: vh * 5, width: vw * 7 }]}
+                  style={[styles.iconStyle]}
                   source={tabIcons.PriorApproval}
                 />
               </View>
@@ -119,20 +125,22 @@ const Tabs = () => {
       <Tab.Screen
         options={{
           tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) =>
+          tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
                 style={styles.gradientBorder}>
-                <Image
-                  style={[styles.iconStyle, { tintColor: 'white' }]}
-                  source={tabIcons.customerSupport}
-                />
+                <View style={styles.wrapper}>
+                  <Image
+                    style={[styles.iconStyle, {tintColor: 'white'}]}
+                    source={tabIcons.customerSupport}
+                  />
+                </View>
               </LinearGradient>
             ) : (
-              <View style={styles.iconContainer}>
+              <View style={[styles.gradientBorder,styles.wrapper]}>
                 <Image
                   style={styles.iconStyle}
                   source={tabIcons.customerSupport}
@@ -151,35 +159,28 @@ export default Tabs;
 const styles = StyleSheet.create({
   tabBarStyle: {
     elevation: 0,
-    // position: "absolute",
-    // bottom: vh * 2,
     backgroundColor: COLORS.white,
     borderRadius: vh * 50,
     height: vh * 10,
     marginHorizontal: vw * 6,
     paddingHorizontal: vw * 2,
-    // marginVertical: vh * 2,
   },
-  iconContainer: {
-    padding: vh * 1,
-    borderRadius: vh * 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
+
   gradientBorder: {
+    borderRadius: vh * 50,
+  },
+  wrapper: {
     paddingHorizontal: vw * 4,
-    paddingVertical: vh * 2.5,
-    borderRadius: vh * 5,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingVertical: vw * 4,
   },
   iconStyle: {
-    height: vh * 4,
+    height: vw * 9,
     width: vw * 9,
+    resizeMode: 'contain',
   },
   iconStyleLarge: {
-    height: vh * 6,
+    height: vw * 8,
     width: vw * 8,
+    resizeMode: 'contain',
   },
 });

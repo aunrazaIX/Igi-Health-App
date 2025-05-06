@@ -40,33 +40,35 @@ const TopView = ({
 }) => {
   return (
     <LinearGradient style={[styles.container]} colors={COLORS.PriorGradient}>
-      <View style={[styles.row, , containerStyle]}>
-        <TouchableOpacity
-          onPress={onPressBack}
-          style={styles.backIconContainer}>
-          <Image style={styles.backIcon} source={icons.backArrow} />
-        </TouchableOpacity>
-        <AileronSemiBold style={styles.headerName} name={title} />
-        <View style={styles.headerIcon}>
-          {TopViewSecondIcon && (
-            <TouchableOpacity onPress={SecondOpenModal}>
-              <Image style={styles.TopViewIcon} source={TopViewSecondIcon} />
-            </TouchableOpacity>
-          )}
+      <View style={styles.wrapper}>
+        <View style={[styles.row, , containerStyle]}>
+          <TouchableOpacity
+            onPress={onPressBack}
+            style={styles.backIconContainer}>
+            <Image style={styles.backIcon} source={icons.backArrow} />
+          </TouchableOpacity>
+          <AileronSemiBold style={styles.headerName} name={title} />
+          <View style={styles.headerIcon}>
+            {TopViewSecondIcon && (
+              <TouchableOpacity onPress={SecondOpenModal}>
+                <Image style={styles.TopViewIcon} source={TopViewSecondIcon} />
+              </TouchableOpacity>
+            )}
 
-          {TopViewFirstIcon && (
-            <TouchableOpacity onPress={FirstOpenModal}>
-              <Image
-                style={[styles.TopViewIcon, containerStyleIcon]}
-                source={TopViewFirstIcon}
-              />
-            </TouchableOpacity>
-          )}
+            {TopViewFirstIcon && (
+              <TouchableOpacity onPress={FirstOpenModal}>
+                <Image
+                  style={[styles.TopViewIcon, containerStyleIcon]}
+                  source={TopViewFirstIcon}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
-      </View>
 
-      <View style={styles.spacedView}>
-        {icon && <Image style={styles.iconStyle} source={icon} />}
+        <View style={styles.spacedView}>
+          {icon && <Image style={styles.iconStyle} source={icon} />}
+        </View>
       </View>
     </LinearGradient>
   );
@@ -75,7 +77,12 @@ export default TopView;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: vw * 3,
+    flex: 1,
+    // paddingHorizontal: vw * 3,
+    // alignItems: 'center',
+  },
+  wrapper: {
+    // paddingHorizontal: vw * 3,
     alignItems: 'center',
   },
   headerIcons: {

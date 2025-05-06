@@ -7,31 +7,32 @@ type LodgeClaimViewProps = {
   steps: [];
   personalData: [];
   claimsDetails: [];
-  goBack : ()=>void};
+  goBack: () => void;
+};
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   steps,
   personalData,
   claimsDetails,
-  goBack
+  goBack,
+  selectData,
 }) => {
   const renderStep = {
-    personalDetails: <PersonalDetails personalData={personalData} />,
+    personalDetails: (
+      <PersonalDetails personalData={personalData} selectData={selectData} />
+    ),
     claim: <Claim claimsDetails={claimsDetails} />,
     uploadDoc: <UploadDoc />,
   };
   return (
     <>
       <TopView onPressBack={goBack} title={'Logde A claim'} />
-    <CurvedView>
-
-      <ScrollView >
-        <Stepper  steps={steps} componentList={renderStep} />
-      </ScrollView>
-      
-    </CurvedView>
+      <CurvedView>
+        <ScrollView>
+          <Stepper steps={steps} componentList={renderStep} />
+        </ScrollView>
+      </CurvedView>
     </>
-
   );
 };
 
