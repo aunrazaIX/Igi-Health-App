@@ -17,7 +17,6 @@ import Settings from '../../screens/Settings';
 const HomeStack = () => {
   const Stack = createStackNavigator();
 
-
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}

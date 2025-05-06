@@ -5,7 +5,7 @@ import { COLORS } from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   gradient: {
     paddingBottom: vh * 2,
-    paddingHorizontal: vw * 3,
+    paddingHorizontal: vw * 4,
     backgroundColor: COLORS.white,
   },
   homeHeader: {
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   },
   headerIcons: {
     width: vw * 6,
-    height: vw * 6
+    height: vw * 6,
   },
   homeInfoContainer: {
     width: '100%',
@@ -332,11 +332,11 @@ export const styles = StyleSheet.create({
   totalDeducted: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 2
+    gap: vw * 2,
   },
   claimStatistics: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 2
-  }
+    gap: vw * 2,
+  },
 });

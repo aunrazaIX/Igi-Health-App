@@ -12,10 +12,9 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: COLORS.white,
+    background: '#FFFFFFE5',
   },
 };
-
 const App = () => {
   return (
     <Provider store={store}>
