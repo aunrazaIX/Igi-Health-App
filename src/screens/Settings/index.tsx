@@ -5,9 +5,9 @@ import useSettingsViewModel from '../../viewmodels/useSettingsViewModel';
 const Settings = () => {
   const {states, functions} = useSettingsViewModel();
   const {data, isToggle} = states;
-  const {toggleSwitch , goBack} = functions;
+  const {toggleSwitch , goBack , onPressMenu} = functions;
   return (
-    <SettingsView goBack={goBack} data={data} isToggle={isToggle} toggleSwitch={toggleSwitch} />
+    <SettingsView onPressMenu={onPressMenu}  goBack={goBack} data={data} isToggle={isToggle} toggleSwitch={toggleSwitch} />
   );
 };
 

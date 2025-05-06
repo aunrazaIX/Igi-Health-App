@@ -28,15 +28,19 @@ const Button: React.FC<ButtonProps> = ({
   gradientColors,
 }) => {
   return (
+
+<TouchableOpacity style={styles.buttonContent} onPress={onPress}>
     <LinearGradient
       style={[styles.container, containerStyle]}
       // colors={COLORS.activeButtonGradient}
       colors={gradientColors || COLORS.activeButtonGradient}>
-      <TouchableOpacity style={styles.buttonContent} onPress={onPress}>
+      
         {showIcon && <Image style={styles.buttonIcon} source={showIcon} />}
         <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
-      </TouchableOpacity>
+    
+    
     </LinearGradient>
+    </TouchableOpacity>
   );
 };
 

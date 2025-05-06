@@ -1,6 +1,6 @@
-import React, {JSX} from 'react';
-import {CreateNewPassword, EnterEmailView, OtpView} from './components';
-import {icons} from '../../assets';
+import React, { JSX } from 'react';
+import { CreateNewPassword, EnterEmailView, OtpView } from './components';
+import { icons } from '../../assets';
 import {
   AileronBold,
   AileronRegular,
@@ -10,7 +10,7 @@ import {
   TopView,
 } from '../../components';
 import styles from './styles';
-import {ImageSourcePropType} from 'react-native';
+import { ImageSourcePropType } from 'react-native';
 
 const ForgotPasswordView = ({
   step,
@@ -67,6 +67,7 @@ const ForgotPasswordView = ({
           name={returnDescription[step]}
         />
         {returnComponent[step]}
+
 
         <Button
           onPress={() => handleStep(step)}

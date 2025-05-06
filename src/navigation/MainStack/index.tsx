@@ -19,15 +19,15 @@ const MainStack = () => {
   return (
 
     <Stack.Navigator
-    // initialRouteName={'AuthStack'}
-    screenOptions={{headerShown: false}}>
-      
-      {token ?     <Stack.Screen name={'DrawerStack'} component={DrawerStack} />  :   <Stack.Screen name={'AuthStack'} component={AuthStack} /> }
-            
+     
+      screenOptions={{ headerShown: false }}>
 
-    
+      {token ? <Stack.Screen name={'DrawerStack'} component={DrawerStack} /> : <Stack.Screen name={'AuthStack'} component={AuthStack} />}
 
-   
+
+
+
+
     </Stack.Navigator>
 
   );

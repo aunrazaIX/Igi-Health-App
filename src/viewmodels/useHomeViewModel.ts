@@ -156,6 +156,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
         screen: cardData?.stChild,
       });
     }
+    
   };
 
 

@@ -1,8 +1,12 @@
 import React, {Fragment} from 'react';
 import InputField from '../../../components/InputField';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import styles from '../styles';
 import AileronRegualr from '../../../components/AileronRegular';
+import { vh, vw } from '../../../assets/theme/dimension';
+import { COLORS } from '../../../assets/theme/colors';
+
+
 
 const CreateNewPassword = () => {
   return (
@@ -11,11 +15,20 @@ const CreateNewPassword = () => {
         secureTextEntry
         label="New Password"
         placeholder="Enter New Password"
+        labelStyle={style.labelStyle}
+        inputStyle={style.inputStyle}
+        containerStyle={style.inputContainer}
+
+        
+
       />
       <InputField
         secureTextEntry
         label="Confirm Password"
         placeholder="Enter Confirm Password"
+        labelStyle={style.labelStyle}
+        inputStyle={style.inputStyle}
+        containerStyle={style.inputContainer}
       />
       <View style={styles.simpleRow}>
         <View style={styles.bullet} />
@@ -42,3 +55,28 @@ const CreateNewPassword = () => {
   );
 };
 export default CreateNewPassword;
+
+
+const style = StyleSheet.create({
+  inputContainer: {
+    borderWidth: 2,
+    flexDirection: 'column',
+
+    paddingHorizontal: vw * 1,
+  },
+  labelStyle: {
+    fontSize: vw * 3,
+    color: COLORS.textGrayShade,
+  },
+  inputStyle: {
+    fontSize: vw * 3.5,
+    fontWeight: '700',
+  },
+  inputFeilds: {
+    marginTop: vh * 3,
+  },
+
+  style: {
+    fontSize: vw * 3.5,
+  },
+});

@@ -20,10 +20,11 @@ import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/authSlice';
+import SettingStack from '../SettingStack';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
-  const dispatch  = useDispatch();
+  const dispatch = useDispatch();
   const routes = [
     {
       id: 1,
@@ -39,6 +40,7 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'Benefits',
     },
+    
     {
       id: 3,
       name: 'Personal',
@@ -47,6 +49,7 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'Personal',
     },
+
     {
       id: 4,
       name: 'Lodge Claim',
@@ -117,15 +120,16 @@ const DrawerStack = () => {
       id: 13,
       name: 'Settings',
       icon: drawerIcons.drawerSettings,
-      to: 'Settings',
+      mainParent: 'SettingsStack',
+      stChild: 'Settings',
     },
 
     {
       id: 14,
       name: 'Logout',
       icon: drawerIcons.drawerSettings,
-      to : "logout"
-      
+      to: "logout"
+
 
 
     },
@@ -225,7 +229,7 @@ const DrawerStack = () => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
       <Drawer.Screen name="FAQs" component={FAQs} />
-      <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="SettingsStack" component={SettingStack} />
     </Drawer.Navigator>
   );
 };

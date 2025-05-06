@@ -16,18 +16,21 @@ const SettingsView = ({
   isToggle,
   toggleSwitch,
   goBack,
+  onPressMenu
 }: {
   data: SettingsList[];
   isToggle: boolean;
   toggleSwitch: () => void;
   goBack: () => void;
+  onPressMenu : (data : SettingsList)=>void
+
 }) => {
   return (
     <Container>
       <TopView onPressBack={goBack} title={'Settings'} />
       <CurvedView>
         {data?.map(item => (
-          <TouchableOpacity key={item?.id} style={styles.row}>
+          <TouchableOpacity onPress={()=>onPressMenu(item)} key={item?.id} style={styles.row}>
             <Image source={item?.icon} />
             <AileronSemiBold name={item?.label} style={styles.label} />
             {item?.id === 2 ? (
