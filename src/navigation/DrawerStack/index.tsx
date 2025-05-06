@@ -119,15 +119,11 @@ const DrawerStack = () => {
       icon: drawerIcons.drawerSettings,
       to: 'Settings',
     },
-
     {
       id: 14,
       name: 'Logout',
       icon: drawerIcons.drawerSettings,
       to : "logout"
-      
-
-
     },
   ];
 
