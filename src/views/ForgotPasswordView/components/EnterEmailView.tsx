@@ -17,6 +17,8 @@ const EnterEmailView = () => {
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         placeholder="Your Email"
+        label='Enter your email Address'
+        containerStyle={style.inputContainer}
 
       />
     </Fragment>

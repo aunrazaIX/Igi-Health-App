@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import React, { useState } from 'react';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { vh, vw } from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 import AileronBold from '../AileronBold';
-import {icons} from '../../assets';
+import { icons } from '../../assets';
 import AileronRegular from '../AileronRegular';
 import AileronSemiBold from '../AileronSemiBold';
 
@@ -14,7 +14,7 @@ interface CheckBoxProps {
   containerStyle?: StyleObject | StyleObject[];
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({description, containerStyle}) => {
+const CheckBox: React.FC<CheckBoxProps> = ({ description, containerStyle }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   return (
     <View style={[styles.container, containerStyle]}>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: vw*1,
+    borderRadius: vw * 1,
     borderColor: COLORS.black,
     height: vh * 1.9,
     width: vw * 3.9,

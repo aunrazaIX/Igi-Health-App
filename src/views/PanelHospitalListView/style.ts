@@ -25,11 +25,22 @@ export const styles = StyleSheet.create({
     paddingVertical: vh * 1.2,
     alignItems: 'center',
     backgroundColor: COLORS.buttonBorder,
-    gap: vw * 1,
+    gap: vw * 2,
   },
   activeTabRight: {
     backgroundColor: COLORS.cardBackgroundRed,
+    gap: vw * 2,
+
+    
+
   },
+  listIcon:{
+
+
+    width  : vw*4,
+    height : vw*5
+  },
+
   activeTabRightText: {
     color: COLORS.white,
   },
