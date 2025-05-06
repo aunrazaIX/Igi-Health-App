@@ -7,10 +7,10 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {vh, vw} from '../../../assets/theme/dimension';
-import {COLORS} from '../../../assets/theme/colors';
-import {AileronBold, AileronSemiBold} from '../../../components';
-import {icons} from '../../../assets';
+import { vh, vw } from '../../../assets/theme/dimension';
+import { COLORS } from '../../../assets/theme/colors';
+import { AileronBold, AileronSemiBold } from '../../../components';
+import { icons } from '../../../assets';
 
 type InfoItem = {
   label: string;
@@ -25,7 +25,7 @@ type BoxProps = {
   };
 };
 
-const Box: React.FC<BoxProps> = ({data}) => {
+const Box: React.FC<BoxProps> = ({ data }) => {
   return (
     <View style={styles.boxContainer}>
       <View style={styles.header}>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.black + 44,
     borderWidth: 1,
     borderRadius: vh * 2,
-    elevation:2,
+    elevation: 2,
     backgroundColor: COLORS.white,
   },
   avatar: {
@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center',
-    gap:vw*2
+    justifyContent: 'center',
+    gap: vw * 2
   },
   headerText: {
     flex: 1,
@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  button: {height: vw * 6, width: vw * 6},
-  buttonIcon:{
+  button: { height: vw * 6, width: vw * 6 },
+  buttonIcon: {
     height: vw * 6,
     width: vw * 6,
     resizeMode: 'contain',

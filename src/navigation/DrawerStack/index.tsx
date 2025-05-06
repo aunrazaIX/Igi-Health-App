@@ -123,15 +123,17 @@ const DrawerStack = () => {
       mainParent: 'SettingsStack',
       stChild: 'Settings',
     },
-
     {
       id: 14,
       name: 'Logout',
       icon: drawerIcons.drawerSettings,
       to: "logout"
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> b0494e1c0516702c90f20fd25a70e03fb9644dae
     },
   ];
 

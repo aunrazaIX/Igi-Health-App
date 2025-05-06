@@ -31,7 +31,7 @@ type HomeViewProps = {
   frontAnimatedStyle: {};
   toggleDrawer: () => void;
   onPressMenu: () => void;
-  onPressHeaderIcon : ()=>void
+  onPressHeaderIcon: () => void
 };
 
 const HomeView: React.FC<HomeViewProps> = ({
@@ -44,11 +44,9 @@ const HomeView: React.FC<HomeViewProps> = ({
   backAnimatedStyle,
 }) => {
   return (
-    // <View style={styles.homeContainer}>
-    <SafeAreaView>
+    <View>
       <ScrollView>
-        <LinearGradient
-          style={styles.gradient}
+        <LinearGradient style={styles.gradient}
           colors={['rgba(11, 74, 152, 1)', 'rgba(72, 195, 255, 1)']}>
           <View style={styles.homeHeader}>
             <View>
@@ -60,7 +58,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                 <Image source={icons.search} style={styles.headerIcons} />
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() =>onPressHeaderIcon("Notifications") }>
+              <TouchableOpacity onPress={() => onPressHeaderIcon("Notifications")}>
                 <Image source={icons.notification} style={styles.headerIcons} />
               </TouchableOpacity>
 
@@ -249,7 +247,7 @@ const HomeView: React.FC<HomeViewProps> = ({
             </Animated.View>
           </View>
         </LinearGradient>
-        <View style={styles.gradient}>
+        <View style={styles.BottomContainer}>
           <View>
             <View style={styles.dashboardContainerHeader}>
               <AileronBold
@@ -391,7 +389,7 @@ const HomeView: React.FC<HomeViewProps> = ({
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

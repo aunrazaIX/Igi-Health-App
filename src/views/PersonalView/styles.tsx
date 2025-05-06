@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         borderTopColor: COLORS.dependentBorder,
         borderStyle: 'dashed',
         paddingTop: vh * 1,
-        gap: vh * 1.5
+        gap: vh * 1.5,
     },
     detailRow: {
         flexDirection: 'row',
@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
         gap: vh * 1
     },
     dependentBoxStyle: {
-        padding: vw * 3.5
-    }
+        padding: vw * 3.5,
+    },
 })
 
 export default styles;

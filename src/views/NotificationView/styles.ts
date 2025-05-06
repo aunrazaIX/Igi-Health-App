@@ -104,6 +104,9 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: vh * 1.7,
   },
+  notificationStyles:{
+    paddingBottom: vh * 20
+  }
 });
 
 export default styles;

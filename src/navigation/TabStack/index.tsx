@@ -150,15 +150,15 @@ export default Tabs;
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    elevation: 0,
-    // position: "absolute",
-    // bottom: vh * 2,
+    position: "absolute",
+    bottom: vh * 1,
     backgroundColor: COLORS.white,
     borderRadius: vh * 50,
     height: vh * 10,
     marginHorizontal: vw * 6,
     paddingHorizontal: vw * 2,
-    // marginVertical: vh * 2,
+    marginVertical: vh * 2,
+    elevation: 3,
   },
   iconContainer: {
     padding: vh * 1,

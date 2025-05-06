@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
     borderTopColor: COLORS.dependentBorder,
     borderStyle: 'dashed',
     paddingTop: vh * 1,
+    gap: vh * 1.5,
+
   },
   detailsListContainer: {
     gap: vh * 1.5,
@@ -54,9 +56,13 @@ const styles = StyleSheet.create({
     fontSize: vh * 2,
   },
   container: {
-    height: '100%',
-    justifyContent: 'space-between',
+    // height: '100%',
+    // justifyContent: 'space-between',
+    // paddingBottom: vh * 30
   },
+  curvedStyles:{
+    paddingBottom: vh * 22
+  }
 });
 
 export default styles;
