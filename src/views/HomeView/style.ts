@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import { StyleSheet } from 'react-native';
+import { vh, vw } from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
   gradient: {
@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   BottomContainer: {
     paddingBottom: vh * 17,
     paddingHorizontal: vw * 4,
+    backgroundColor: COLORS.white + 20
   },
   homeHeader: {
     flexDirection: 'row',
