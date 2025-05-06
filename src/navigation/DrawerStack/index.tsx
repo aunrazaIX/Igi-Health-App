@@ -40,7 +40,7 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'Benefits',
     },
-    
+
     {
       id: 3,
       name: 'Personal',
@@ -123,17 +123,15 @@ const DrawerStack = () => {
       mainParent: 'SettingsStack',
       stChild: 'Settings',
     },
+
     {
       id: 14,
       name: 'Logout',
       icon: drawerIcons.drawerSettings,
       to: "logout"
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> b0494e1c0516702c90f20fd25a70e03fb9644dae
     },
   ];
 
@@ -231,6 +229,7 @@ const DrawerStack = () => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
       <Drawer.Screen name="FAQs" component={FAQs} />
+      
       <Drawer.Screen name="SettingsStack" component={SettingStack} />
     </Drawer.Navigator>
   );
