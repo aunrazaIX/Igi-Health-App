@@ -54,7 +54,7 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
     },
     {
       id: 4,
-      label: 'Reset Password',
+      label: 'Change Password',
       icon: icons.resetPasswordIcon,
       mainParent: "DrawerStack",
       stChild: "SettingsStack",

@@ -1,6 +1,6 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import InputField from '../../../components/InputField';
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import styles from '../styles';
 import AileronRegualr from '../../../components/AileronRegular';
 import { vh, vw } from '../../../assets/theme/dimension';
@@ -19,7 +19,7 @@ const CreateNewPassword = () => {
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
 
-        
+
 
       />
       <InputField
