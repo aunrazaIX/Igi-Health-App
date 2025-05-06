@@ -52,9 +52,9 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                 selectedTabRight === 'list' && styles.activeTabRight,
               ]}>
               {selectedTabRight === 'list' ? (
-                <Image source={icons.listActive} />
+                <Image style={styles.listIcon} source={icons.listActive} />
               ) : (
-                <Image source={icons.listIcon} />
+                <Image style={styles.listIcon} source={icons.listIcon} />
               )}
 
               <AileronBold
@@ -74,9 +74,9 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               ]}
               onPress={() => onPressRightTab('map')}>
               {selectedTabRight === 'map' ? (
-                <Image source={icons.map} />
+                <Image style={styles.listIcon}  source={icons.map} />
               ) : (
-                <Image source={icons.mapInactive} />
+                <Image style={styles.listIcon} source={icons.mapInactive} />
               )}
 
               <AileronBold

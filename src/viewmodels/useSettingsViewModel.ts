@@ -76,8 +76,8 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
       label: 'Help',
       icon: icons.help,
       mainParent: "Tabs",
-      stChild: "HomeStack",
-      ndChild: "Helpline"
+      stChild: "Helpline",
+
 
 
     },

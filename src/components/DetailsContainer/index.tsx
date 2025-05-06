@@ -43,7 +43,7 @@ const DetailsContainer: React.FC<Props> = ({
         <View style={styles.cardHeaderRight}>
           {isArrowUp ? (
             <>
-              {headerIcon && <Image source={headerIcon} />}
+              {headerIcon && <Image style={styles.headerArrow} source={headerIcon} />}
               <TouchableOpacity onPress={() => setIsArrowUp(!isArrowUp)}>
                 <Image source={icons.toggleTop} />
               </TouchableOpacity>
@@ -143,4 +143,8 @@ export const styles = StyleSheet.create({
     fontSize: vw * 3.5,
     color: COLORS.textBlackShade,
   },
+  headerArrow:{
+    width: vw*6,
+    height :vw*6
+  }
 });
