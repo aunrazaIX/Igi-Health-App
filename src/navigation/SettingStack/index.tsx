@@ -13,10 +13,10 @@ const SettingStack = () => {
 
             <Stack.Screen name="Settings" component={Settings} />
 
-          
+
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
 
-         
+
             <Stack.Screen name="Notifications" component={Notification} />
 
         </Stack.Navigator>
