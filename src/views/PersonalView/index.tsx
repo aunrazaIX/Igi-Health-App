@@ -11,6 +11,7 @@ import ModalCustom from '../../components/Modal'
 import { personalDetail } from '../../types/personalTypes'
 import ConfimationModal from '../../components/Modal/confimationModal'
 import { ScrollView } from 'react-native-gesture-handler'
+import { vh } from '../../assets/theme/dimension'
 
 
 type Props = {
@@ -64,62 +65,64 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation, goBack }) => {
             <TopView onPressBack={goBack} title={'Personal'} TopViewFirstIcon={images.AddNew} FirstOpenModal={manageUpdate} />
             <CurvedView>
                 <ScrollView>
-                    <ImageBackground source={images.SecureFuture} style={styles.personalImage}>
-                        <View style={styles.secureTextGrp}>
-                            <AileronSemiBold style={styles.secureText} name={'We\nSecure\nYour'} />
-                            <AileronSemiBold style={styles.futureText} name={'Future!'} />
-                        </View>
-                    </ImageBackground>
-
-                    <View style={styles.dependentBox}>
-                        <AileronBold name={'Dependent '} style={styles.dependentText} />
-                        <AileronBold name={'Details!'} style={styles.detailsText} />
-                    </View>
-
-                    {data.map((dependent, index) => (
-                        <DependentBox key={index} containerStyle={styles.dependentBoxStyle}>
-                            <View style={styles.header} >
-                                <Image source={dependent.image} style={styles.avatar} />
-                                <AileronBold style={styles.headerText} name={dependent.dependent} />
-                                <View style={styles.iconsROw}>
-                                    {expandedIndex === index && (
-                                        <View style={styles.deleteEditRow}>
-                                            <TouchableOpacity onPress={() => setModalVisible(true)}>
-                                                <Image source={icons.edit} style={styles.editIcon} />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => setConfimationModalVisible(true)}>
-                                                <Image source={icons.delete} style={styles.deleteIcon} />
-                                            </TouchableOpacity>
-                                        </View>
-                                    )}
-
-                                    <TouchableOpacity onPress={() => toggleExpand(index)}>
-                                        <Image
-                                            source={expandedIndex === index ? icons.selectArrowUp : icons.arrowDown}
-                                            style={styles.icon}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
+                    <View style={{ paddingBottom: vh * 21 }}>
+                        <ImageBackground source={images.SecureFuture} style={styles.personalImage}>
+                            <View style={styles.secureTextGrp}>
+                                <AileronSemiBold style={styles.secureText} name={'We\nSecure\nYour'} />
+                                <AileronSemiBold style={styles.futureText} name={'Future!'} />
                             </View>
+                        </ImageBackground>
 
-                            {expandedIndex === index && (
-                                <View style={styles.details}>
-                                    {dependent.dependentDetail.map((item, index) => (
-                                        <View style={styles.detailRow} key={index}>
-                                            <AileronSemiBold name={item.label} style={styles.detailLabel} />
-                                            <AileronSemiBold name={item.value} style={styles.detailvalue} />
-                                        </View>
-                                    ))}
-                                    {/* <FlatList
+                        <View style={styles.dependentBox}>
+                            <AileronBold name={'Dependent '} style={styles.dependentText} />
+                            <AileronBold name={'Details!'} style={styles.detailsText} />
+                        </View>
+
+                        {data.map((dependent, index) => (
+                            <DependentBox key={index} containerStyle={styles.dependentBoxStyle}>
+                                <View style={styles.header} >
+                                    <Image source={dependent.image} style={styles.avatar} />
+                                    <AileronBold style={styles.headerText} name={dependent.dependent} />
+                                    <View style={styles.iconsROw}>
+                                        {expandedIndex === index && (
+                                            <View style={styles.deleteEditRow}>
+                                                <TouchableOpacity onPress={() => setModalVisible(true)}>
+                                                    <Image source={icons.edit} style={styles.editIcon} />
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => setConfimationModalVisible(true)}>
+                                                    <Image source={icons.delete} style={styles.deleteIcon} />
+                                                </TouchableOpacity>
+                                            </View>
+                                        )}
+
+                                        <TouchableOpacity onPress={() => toggleExpand(index)}>
+                                            <Image
+                                                source={expandedIndex === index ? icons.selectArrowUp : icons.arrowDown}
+                                                style={styles.icon}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+
+                                {expandedIndex === index && (
+                                    <View style={styles.details}>
+                                        {dependent.dependentDetail.map((item, index) => (
+                                            <View style={styles.detailRow} key={index}>
+                                                <AileronSemiBold name={item.label} style={styles.detailLabel} />
+                                                <AileronSemiBold name={item.value} style={styles.detailvalue} />
+                                            </View>
+                                        ))}
+                                        {/* <FlatList
                                     data={dependent.dependentDetail}
                                     keyExtractor={(_, index) => index.toString()}
                                     contentContainerStyle={styles.detailsListContainer}
                                     renderItem={dependentRenders}
                                 /> */}
-                                </View>
-                            )}
-                        </DependentBox>
-                    ))}
+                                    </View>
+                                )}
+                            </DependentBox>
+                        ))}
+                    </View>
                 </ScrollView>
             </CurvedView>
 

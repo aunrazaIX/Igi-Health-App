@@ -63,6 +63,36 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
         {label: 'Age:', value: '35 Years'},
       ],
     },
+    {
+      dependent: 'Dependent Detail',
+      image: icons.frame,
+      dependentDetail: [
+        {label: 'Name:', value: 'Madiha Imran Qureshi'},
+        {label: 'Gender:', value: 'Female'},
+        {label: 'Relationship:', value: 'Wife'},
+        {label: 'Age:', value: '35 Years'},
+      ],
+    },
+    {
+      dependent: 'Dependent Detail',
+      image: icons.frame,
+      dependentDetail: [
+        {label: 'Name:', value: 'Madiha Imran Qureshi'},
+        {label: 'Gender:', value: 'Female'},
+        {label: 'Relationship:', value: 'Wife'},
+        {label: 'Age:', value: '35 Years'},
+      ],
+    },
+    {
+      dependent: 'Dependent Detail',
+      image: icons.frame,
+      dependentDetail: [
+        {label: 'Name:', value: 'Madiha Imran Qureshi'},
+        {label: 'Gender:', value: 'Female'},
+        {label: 'Relationship:', value: 'Wife'},
+        {label: 'Age:', value: '35 Years'},
+      ],
+    },
   ];
 
   const goBack = () => {

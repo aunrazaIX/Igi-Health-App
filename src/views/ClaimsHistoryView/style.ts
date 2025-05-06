@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   header: {},
   infoContainer: {
     flex: 1,
+    paddingBottom: vh * 6,
   },
   infoContainerTop: {
     flexDirection: 'row',

@@ -12,8 +12,6 @@ import { icons } from '../../assets';
 import { styles } from './style';
 import DetailsContainer from '../../components/DetailsContainer';
 import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
-import { fonts } from '../../assets/fonts';
 
 type HomeViewProps = {
   data: [][];
@@ -40,8 +38,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             ? 'Panel Hospital List'
             : 'Discounted Centers'
         }
-        HeaderIcon={icons.searchWhite}
-        HeaderSecondIcon={null}
+        TopViewFirstIcon={icons.searchWhite}
         onPressBack={goBack}
       />
 
@@ -166,7 +163,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               selectedTabRight === 'list')) && (
               <FlatList
                 data={data}
-                contentContainerStyle={{ paddingBottom: vh * 12 }}
+                contentContainerStyle={{ paddingBottom: vh * 35 }}
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => (
                   <DetailsContainer

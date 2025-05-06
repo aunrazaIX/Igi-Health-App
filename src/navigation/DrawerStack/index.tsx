@@ -23,7 +23,7 @@ import { logout } from '../../redux/authSlice';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
-  const dispatch  = useDispatch();
+  const dispatch = useDispatch();
   const routes = [
     {
       id: 1,
@@ -123,7 +123,7 @@ const DrawerStack = () => {
       id: 14,
       name: 'Logout',
       icon: drawerIcons.drawerSettings,
-      to : "logout"
+      to: "logout"
     },
   ];
 

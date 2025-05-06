@@ -89,7 +89,6 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     paddingHorizontal: vw * 4,
     paddingVertical: vh * 1.2,
-
     marginVertical: vh * 1.5,
     alignItems: 'center',
     gap: vh * 1,

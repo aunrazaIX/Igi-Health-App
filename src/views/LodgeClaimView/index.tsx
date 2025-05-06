@@ -1,13 +1,15 @@
-import {ScrollView} from 'react-native';
+import { ScrollView } from 'react-native';
 import React from 'react';
-import {CurvedView, Stepper, TopView} from '../../components';
-import {Claim, PersonalDetails, UploadDoc} from './components';
+import { CurvedView, Stepper, TopView } from '../../components';
+import { Claim, PersonalDetails, UploadDoc } from './components';
+import styles from './styles';
 
 type LodgeClaimViewProps = {
   steps: [];
   personalData: [];
   claimsDetails: [];
-  goBack : ()=>void};
+  goBack: () => void
+};
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   steps,
@@ -23,13 +25,11 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   return (
     <>
       <TopView onPressBack={goBack} title={'Logde A claim'} />
-    <CurvedView>
-
-      <ScrollView >
-        <Stepper  steps={steps} componentList={renderStep} />
-      </ScrollView>
-      
-    </CurvedView>
+      <CurvedView containerStyle={styles.curvedStyles}>
+        <ScrollView >
+          <Stepper steps={steps} componentList={renderStep} />
+        </ScrollView>
+      </CurvedView>
     </>
 
   );

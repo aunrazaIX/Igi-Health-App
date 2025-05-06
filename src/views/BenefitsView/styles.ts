@@ -81,20 +81,20 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     backgroundColor: COLORS.white,
-    paddingBottom: vh * 3,
+    paddingBottom: vh * 20,
   },
-  CurvedView:{
+  CurvedView: {
     marginBottom: -vh * 4,
   },
   benefitsImage: {
     resizeMode: 'contain',
-    height: "100%",
+    height: '100%',
     width: '100%',
   },
   coverageCardImage: {
     height: vh * 4,
     width: vh * 4,
-    tintColor:COLORS.white
+    tintColor: COLORS.white,
   },
 });
 
