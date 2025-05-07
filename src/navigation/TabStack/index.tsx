@@ -170,14 +170,10 @@ const styles = StyleSheet.create({
   gradientBorder: {
     paddingHorizontal: vw * 4,
     paddingVertical: vw * 6,
-    borderRadius: vh *5,
+    borderRadius: (vw * 25) / 2, 
     justifyContent: 'center',
     alignItems: 'center',
   },
-
-  
-
-
   iconStyle: {
     height: vw *9,
     width: vw * 9,
