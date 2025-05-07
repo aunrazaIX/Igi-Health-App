@@ -5,22 +5,20 @@ import {
   TouchableOpacity,
   ImageSourcePropType,
 } from 'react-native';
-import React, {useState} from 'react';
-import {COLORS} from '../../assets/theme/colors';
-import {icons} from '../../assets';
+import React, { useState } from 'react';
+import { COLORS } from '../../assets/theme/colors';
+import { icons } from '../../assets';
 import AileronBold from '../AileronBold';
-import {vh, vw} from '../../assets/theme/dimension';
+import { vh, vw } from '../../assets/theme/dimension';
+import { PanelHospitalGroup } from '../../viewmodels/usePanelHospitalListViewModel';
 
-type Item = {
-  label: string;
-  value: string;
-};
+
 type Props = {
-  data?: Item[];
+  data?: PanelHospitalGroup;
   detailsTextLabel?: {};
   detailsText?: {};
   detailsTextValue?: {};
-  headerIcon?: ImageSourcePropType | null;
+  headerIcon?: ImageSourcePropType | null | ImageSourcePropType[];
 };
 
 const DetailsContainer: React.FC<Props> = ({
@@ -36,21 +34,28 @@ const DetailsContainer: React.FC<Props> = ({
     <View style={[styles.card]}>
       <View style={styles.cardHeader}>
         <View style={styles.cardHeaderLeft}>
-          <Image source={icons.editTask} />
-          <AileronBold style={styles.cardHeaderLeftText} name={`Claim`} />
+          <Image style={styles.headerArrow} source={data?.headerIcon} />
+          <AileronBold style={styles.cardHeaderLeftText} name={data?.headerLabel} />
         </View>
 
         <View style={styles.cardHeaderRight}>
           {isArrowUp ? (
             <>
-              {headerIcon && <Image style={styles.headerArrow} source={headerIcon} />}
+              {headerIcon &&
+                (Array.isArray(headerIcon) ? (
+                  headerIcon.map((icon, idx) => (
+                    <Image key={idx} style={styles.headerArrow} source={icon} />
+                  ))
+                ) : (
+                  <Image style={styles.headerArrow} source={headerIcon} />
+                ))}
               <TouchableOpacity onPress={() => setIsArrowUp(!isArrowUp)}>
-                <Image source={icons.toggleTop} />
+                <Image style={styles.headerArrow} source={icons.toggleTop} />
               </TouchableOpacity>
             </>
           ) : (
             <TouchableOpacity onPress={() => setIsArrowUp(!isArrowUp)}>
-              <Image source={icons.toggleBottom} />
+              <Image style={styles.headerArrow} source={icons.toggleBottom} />
             </TouchableOpacity>
           )}
         </View>
@@ -60,19 +65,19 @@ const DetailsContainer: React.FC<Props> = ({
         <>
           <View style={styles.cardHorizontalLine} />
 
-          {data?.map((item, index) => (
+          {data?.items?.map((item, index) => (
             <View key={index} style={styles.cardDetails}>
               <AileronBold
                 style={[styles.detailsLabel, detailsTextLabel]}
                 name={item.label}
               />
-
               <AileronBold
                 style={[styles.detailsValue, detailsTextValue]}
                 name={item.value}
               />
             </View>
           ))}
+
         </>
       )}
     </View>
@@ -143,8 +148,8 @@ export const styles = StyleSheet.create({
     fontSize: vw * 3.5,
     color: COLORS.textBlackShade,
   },
-  headerArrow:{
-    width: vw*6,
-    height :vw*6
+  headerArrow: {
+    width: vw * 6,
+    height: vw * 6
   }
 });

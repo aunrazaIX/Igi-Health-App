@@ -10,7 +10,8 @@ export const styles = StyleSheet.create({
   BottomContainer: {
     paddingBottom: vh * 17,
     paddingHorizontal: vw * 4,
-    backgroundColor: COLORS.white + 20,
+    backgroundColor: COLORS.white,
+
   },
   homeHeader: {
     flexDirection: 'row',

@@ -12,9 +12,11 @@ import { icons } from '../../assets';
 import { styles } from './style';
 import DetailsContainer from '../../components/DetailsContainer';
 import { vh, vw } from '../../assets/theme/dimension';
+import { PanelHospitalGroup } from '../../viewmodels/usePanelHospitalListViewModel';
+
 
 type HomeViewProps = {
-  data: [][];
+  data: PanelHospitalGroup[];
   selectedTab: string;
   selectedTabRight: string;
   onPressTab: (tab: string) => void;
@@ -74,7 +76,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               ]}
               onPress={() => onPressRightTab('map')}>
               {selectedTabRight === 'map' ? (
-                <Image style={styles.listIcon}  source={icons.map} />
+                <Image style={styles.listIcon} source={icons.map} />
               ) : (
                 <Image style={styles.listIcon} source={icons.mapInactive} />
               )}
@@ -166,15 +168,20 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                 contentContainerStyle={{ paddingBottom: vh * 35 }}
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => (
-                  <DetailsContainer
-                    detailsText={styles.detailsText}
-                    detailsTextLabel={styles.detailsTextLabel}
-                    detailsTextValue={styles.detailsTextValue}
-                    headerIcon={
-                      selectedTab === 'PanelHospitals' && icons.arrowDirection
-                    }
-                    data={item}
-                  />
+
+                  <>
+                    {console.log(item , "ooooooooooooo")}
+
+                    <DetailsContainer
+                      detailsText={styles.detailsText}
+                      detailsTextLabel={styles.detailsTextLabel}
+                      detailsTextValue={styles.detailsTextValue}
+                      headerIcon={
+                        selectedTab === 'PanelHospitals' ? icons.arrowDirection :  [icons.discountCentersDirection, icons.discountCentersMultipleDirection]
+                      }
+                      data={item}
+                    />
+                  </>
                 )}
               />
             )}

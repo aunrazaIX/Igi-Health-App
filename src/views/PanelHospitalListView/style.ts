@@ -17,11 +17,11 @@ export const styles = StyleSheet.create({
     gap: vw * 2,
   },
   rightTab: {
+
     flexDirection: 'row',
-    borderWidth: 2,
     borderColor: COLORS.buttonBorder,
     borderRadius: vw * 5,
-    paddingHorizontal: vw * 2,
+    paddingHorizontal: vw * 4,
     paddingVertical: vh * 1.2,
     alignItems: 'center',
     backgroundColor: COLORS.buttonBorder,
@@ -37,8 +37,9 @@ export const styles = StyleSheet.create({
   listIcon:{
 
 
-    width  : vw*4,
-    height : vw*5
+    width  : vw*5,
+    height : vw*5,
+    resizeMode:"contain"
   },
 
   activeTabRightText: {

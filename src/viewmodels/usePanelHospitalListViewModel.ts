@@ -1,5 +1,15 @@
-import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import { ImageSourcePropType } from 'react-native';
+import { icons } from '../assets';
+
+
+
+export type PanelHospitalGroup = {
+  headerLabel: string;
+  headerIcon : ImageSourcePropType,
+  items: PanelHospitalList[];
+};
 
 export type PanelHospitalList = {
   label: string;
@@ -8,7 +18,7 @@ export type PanelHospitalList = {
 
 type usePanelHospitalListViewModel = {
   states: {
-    data: PanelHospitalList[][];
+    data: PanelHospitalGroup[];
     selectedTab: string;
     selectedTabRight: string;
   };
@@ -38,63 +48,62 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
     console.log("go back pressed")
   };
 
-  const data: PanelHospitalList[][] = [
-    [
-      {label: 'name:', value: 'Heart & General Hospital'},
-      {label: 'phone:', value: '81-2822408, 081-2822409'},
-      {
-        label: 'Address:',
-        value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-      },
-      {label: 'City:', value: 'Baluchistan, Quetta'},
+  const data: PanelHospitalGroup[] = [
+    {
+      headerLabel: 'Baluchistan',
+      headerIcon : icons.panelHospitalIcon,
+      items: [
+        {label: 'name:', value: 'Heart & General Hospital'},
+        {label: 'phone:', value: '81-2822408, 081-2822409'},
+        {label: 'Address:', value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta'},
+        {label: 'City:', value: 'Baluchistan, Quetta'},
+      ],
+    },
+
+
+
+
+   {
+    headerLabel: 'Larkana',
+    headerIcon : icons.panelHospitalIcon,
+    items: [
+      {label: 'name:', value: 'NICVD Larkana'},
+      {label: 'phone:', value: '---'},
+      {label: 'Address:', value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana'},
+      {label: 'City:', value: 'Larkana'},
     ],
-    [
-      {label: 'name:', value: '0071453'},
-      {label: 'phone:', value: '6140.0'},
-      {label: 'Address:', value: 'Imran Naveed Qureshi'},
-      {label: 'City:', value: '23/01/2021'},
+  },
+
+
+  {
+    headerLabel: 'Hyderabad',
+    headerIcon : icons.panelHospitalIcon,
+    items: [
+      {label: 'name:', value: 'NICVD Larkana'},
+      {label: 'phone:', value: '---'},
+      {label: 'Address:', value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana'},
+      {label: 'City:', value: 'Hyderabad'},
     ],
-    [
-      {label: 'name:', value: 'Heart & General Hospital'},
-      {label: 'phone:', value: '81-2822408, 081-2822409'},
-      {
-        label: 'Address:',
-        value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-      },
-      {label: 'City:', value: 'Baluchistan, Quetta'},
+  },
+  
+
+  {
+    headerLabel: 'Hyderabad',
+    headerIcon : icons.panelHospitalIcon,
+    items: [
+      {label: 'name:', value: 'NICVD Larkana'},
+      {label: 'phone:', value: '---'},
+      {label: 'Address:', value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana'},
+      {label: 'City:', value: 'Hyderabad'},
     ],
-    [
-      {label: 'name:', value: 'Heart & General Hospital'},
-      {label: 'phone:', value: '81-2822408, 081-2822409'},
-      {
-        label: 'Address:',
-        value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-      },
-      {label: 'City:', value: 'Baluchistan, Quetta'},
-    ],
-    [
-      {label: 'name:', value: 'Heart & General Hospital'},
-      {label: 'phone:', value: '81-2822408, 081-2822409'},
-      {
-        label: 'Address:',
-        value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-      },
-      {label: 'City:', value: 'Baluchistan, Quetta'},
-    ],
-    [
-      {label: 'name:', value: 'Heart & General Hospital'},
-      {label: 'phone:', value: '81-2822408, 081-2822409'},
-      {
-        label: 'Address:',
-        value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-      },
-      {label: 'City:', value: 'Baluchistan, Quetta'},
-    ],
+  },
+
+   
   ];
 
   return {
     states: {
-      data,
+     data, 
       selectedTab,
       selectedTabRight,
     },

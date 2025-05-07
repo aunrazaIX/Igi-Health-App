@@ -247,6 +247,7 @@ const HomeView: React.FC<HomeViewProps> = ({
             </Animated.View>
           </View>
         </LinearGradient>
+        
         <View style={styles.BottomContainer}>
           <View>
             <View style={styles.dashboardContainerHeader}>

@@ -24,7 +24,7 @@ const App = () => {
             backgroundColor={COLORS.activeButtonGradient[1]}
             barStyle="dark-content"
           />
-          <NavigationContainer theme={MyTheme}>
+          <NavigationContainer>
             <MainStack />
             {/* <Login /> */}
           </NavigationContainer>
