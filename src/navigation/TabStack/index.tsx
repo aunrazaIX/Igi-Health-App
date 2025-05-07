@@ -168,20 +168,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   gradientBorder: {
-    paddingHorizontal: vw * 2.9,
-    paddingVertical: vh * 2.3,
+    paddingHorizontal: vw * 4,
+    paddingVertical: vw * 6,
     borderRadius: vh *5,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
-  gradientBorderPriorApproval: {
-    paddingHorizontal: vw * 4,
-    paddingVertical: vh * 2.3,
-    borderRadius: vh * 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  
 
 
   iconStyle: {
