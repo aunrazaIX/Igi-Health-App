@@ -20,17 +20,17 @@ const TopView = ({
   icon: ImageSourcePropType | null;
 }) => {
   return (
-    <LinearGradient
-      style={styles.container}
-      colors={COLORS.activeButtonGradient}>
-      <View style={styles.row}>
-        <TouchableOpacity style={styles.backIconContainer}>
-          <Image style={styles.backIcon} source={icons.backArrow} />
-        </TouchableOpacity>
-        <AileronSemiBold style={styles.headerName} name={title} />
-      </View>
-      <View style={styles.spacedView}>
-        {icon && <Image style={styles.iconStyle} source={icon} />}
+    <LinearGradient colors={COLORS.activeButtonGradient}>
+      <View style={styles.wrapper}>
+        <View style={styles.row}>
+          <TouchableOpacity style={styles.backIconContainer}>
+            <Image style={styles.backIcon} source={icons.backArrow} />
+          </TouchableOpacity>
+          <AileronSemiBold style={styles.headerName} name={title} />
+        </View>
+        <View style={styles.spacedView}>
+          {icon && <Image style={styles.iconStyle} source={icon} />}
+        </View>
       </View>
     </LinearGradient>
   );
@@ -38,7 +38,7 @@ const TopView = ({
 export default TopView;
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     paddingVertical: vh * 3,
     paddingHorizontal: vw * 3,
   },

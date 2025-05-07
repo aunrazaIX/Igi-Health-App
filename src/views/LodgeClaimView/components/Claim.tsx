@@ -13,15 +13,17 @@ type ClaimProps = {
 const Claim: React.FC<ClaimProps> = ({claimsDetails}) => {
   return (
     <View style={styles.container}>
-      {claimsDetails?.map((data,index) => (
+      {claimsDetails?.map((data, index) => (
         <Box data={data} key={index} />
-      ))}  
+      ))}
       <LinearGradient
         colors={COLORS.PriorGradient}
         style={styles.priorGradient}>
-        <TouchableOpacity>
-          <AileronSemiBold style={styles.priorNext} name={'Add'} />
-        </TouchableOpacity>
+        <View style={styles.wrapper}>
+          <TouchableOpacity>
+            <AileronSemiBold style={styles.priorNext} name={'Add'} />
+          </TouchableOpacity>
+        </View>
       </LinearGradient>
     </View>
   );
@@ -39,8 +41,8 @@ const styles = StyleSheet.create({
   priorGradient: {
     // marginTop: vh * 1,
     borderRadius: vh * 1.5,
-    padding: vh * 2,
   },
+  wrapper: {padding: vh * 2},
   priorNext: {
     textAlign: 'center',
     color: COLORS.white,

@@ -1,12 +1,14 @@
-import { StyleSheet } from 'react-native';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {StyleSheet} from 'react-native';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 const styles = StyleSheet.create({
   accordion: {
-    padding: vh * 3.5,
-    marginBottom: vh * 2,
+    // marginBottom: vh * 2,
     borderRadius: vh * 4,
+  },
+  wrapper: {
+    padding: vh * 3.5,
   },
   headerRow: {
     flexDirection: 'row',
@@ -19,12 +21,12 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     width: '80%',
   },
-  headertitle:{
+  headertitle: {
     fontSize: vw * 4.5,
     color: COLORS.black,
     textAlign: 'left',
   },
-  faqsSubHeading:{
+  faqsSubHeading: {
     fontSize: vw * 4.5,
     color: COLORS.faqsSubHeading,
     marginBottom: vh * 2,
@@ -38,6 +40,7 @@ const styles = StyleSheet.create({
     marginTop: vh,
   },
   description: {
+    color: COLORS.black,
     fontSize: vw * 3.7,
     textAlign: 'left',
   },

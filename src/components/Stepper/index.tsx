@@ -133,7 +133,7 @@ const Stepper: React.FC<StepperProps> = ({steps, componentList}) => {
       <LinearGradient
         colors={COLORS.PriorGradient}
         style={styles.priorGradient}>
-        <TouchableOpacity onPress={() => setActiveStep(activeStep + 1)}>
+        <TouchableOpacity style={styles.wrapper} onPress={() => setActiveStep(activeStep + 1)}>
           <AileronSemiBold style={styles.priorNext} name={'Next'} />
         </TouchableOpacity>
       </LinearGradient>
@@ -200,6 +200,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.activeTab,
   },
   contentContainer: {
+    flex:1,
     alignItems: 'center',
   },
   textContainer: {
@@ -221,11 +222,10 @@ const styles = StyleSheet.create({
     padding: vw * 4,
   },
   priorGradient: {
-    // marginTop: vh * 1,
+    width:'100%',
     borderRadius: vh * 1.5,
-    padding: vh * 2,
-    alignContent: 'flex-end',
   },
+  wrapper: {padding: vh * 2},
   priorNext: {
     textAlign: 'center',
     color: COLORS.white,

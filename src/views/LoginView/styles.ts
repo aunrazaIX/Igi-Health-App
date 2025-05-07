@@ -53,6 +53,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderWidth: 0.5,
     elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+    width: 0,
+    height: 1,
+    },
+    shadowOpacity: 0.08,
+    shadowRadius: 1.5,
     borderColor: 'white',
 
     marginBottom: vh * 2,
@@ -89,6 +96,11 @@ export const styles = StyleSheet.create({
     elevation: 3,
     gap: vw * 5,
     marginTop: vh * 1,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 3,
+
   },
   loginOptionBox: {
     gap: vh * 1,

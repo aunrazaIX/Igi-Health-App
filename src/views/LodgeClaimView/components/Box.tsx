@@ -61,6 +61,10 @@ const styles = StyleSheet.create({
     borderRadius: vh * 2,
     elevation:2,
     backgroundColor: COLORS.white,
+    shadowColor: '#000',
+    shadowOpacity: 0.14,
+    shadowOffset: {width: 0, height: 1},
+    shadowRadius: 2,
   },
   avatar: {
     resizeMode: 'contain',
