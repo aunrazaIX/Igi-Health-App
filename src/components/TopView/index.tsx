@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {COLORS} from '../../assets/theme/colors';
+import { COLORS } from '../../assets/theme/colors';
 import AileronSemiBold from '../AileronSemiBold';
-import {vh, vw} from '../../assets/theme/dimension';
-import {icons} from '../../assets';
+import { vh, vw } from '../../assets/theme/dimension';
+import { icons } from '../../assets';
 
 type StyleObject = Record<string, string | number | boolean>;
 
@@ -107,12 +107,13 @@ const styles = StyleSheet.create({
     fontSize: vw * 5,
   },
   spacedView: {
-    marginVertical: vh * 3,
+marginVertical: vh*3.5
   },
   iconStyle: {
-    height: vh * 8,
-    width: vw * 8,
-    alignSelf: 'center',
+    height: vw * 32,
+    width: vw * 32,
+     marginTop: vh * 2,
+    marginBottom: vh * 5,
     resizeMode: 'contain',
   },
   TopViewIcon: {

@@ -6,9 +6,9 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import React from 'react';
-import {vh, vw} from '../../assets/theme/dimension';
-import {icons} from '../../assets';
-import {COLORS} from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
+import { icons } from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -29,17 +29,17 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
 
-<TouchableOpacity style={styles.buttonContent} onPress={onPress}>
-    <LinearGradient
-      style={[styles.container, containerStyle]}
-      // colors={COLORS.activeButtonGradient}
-      colors={gradientColors || COLORS.activeButtonGradient}>
-      
+    <TouchableOpacity style={styles.buttonContent} onPress={onPress}>
+      <LinearGradient
+        style={[styles.container, containerStyle]}
+        // colors={COLORS.activeButtonGradient}
+        colors={gradientColors || COLORS.activeButtonGradient}>
+
         {showIcon && <Image style={styles.buttonIcon} source={showIcon} />}
         <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
-    
-    
-    </LinearGradient>
+
+
+      </LinearGradient>
     </TouchableOpacity>
   );
 };
@@ -54,12 +54,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    gap: vw * 4
   },
 
   buttonText: {
     color: COLORS.buttonText,
     fontWeight: 'bold',
-    fontSize: vw * 4,
+    fontSize: vw * 4.5,
   },
   buttonContent: {
     flexDirection: 'row',

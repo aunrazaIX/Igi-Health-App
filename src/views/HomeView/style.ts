@@ -249,7 +249,7 @@ export const styles = StyleSheet.create({
   homeBackCardContainer: {
     backgroundColor: COLORS.white,
     justifyContent: 'space-between',
-    height: vh * 26,
+    height: vh * 27,
     
   },
   homeBackInfoContainerHeader: {
