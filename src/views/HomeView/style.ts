@@ -250,6 +250,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     justifyContent: 'space-between',
     height: vh * 27,
+    gap: vh 
     
   },
   homeBackInfoContainerHeader: {

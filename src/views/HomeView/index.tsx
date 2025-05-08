@@ -156,7 +156,7 @@ const HomeView: React.FC<HomeViewProps> = ({
 
               <TouchableOpacity onPress={animateCard}>
                 <View style={styles.homeBackCardContainer}>
-                  <View style={{ justifyContent: 'space-between', gap: vh }}>
+                  <View style={{justifyContent: 'space-between', gap: vh * .8 }}>
                     <View style={styles.homeBackCardHeading}>
                       <AileronBold
                         style={styles.homeBackCardHeadingBlack}

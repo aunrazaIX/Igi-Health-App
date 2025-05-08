@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: vw * 35,
-    height: vh * 7,
+    height: vh * 6,
     resizeMode: 'contain',
   },
   row: {

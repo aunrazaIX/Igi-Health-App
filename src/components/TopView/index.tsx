@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     width: vw * 14,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: vw * 4.5,
+    borderRadius: vw * 5,
     backgroundColor: COLORS.white,
   },
   backIcon: {
@@ -124,6 +124,6 @@ marginVertical: vh*3.5
     flexDirection: 'row',
     justifyContent: 'flex-end',
     width: vh * 8,
-    gap: vh * 0.5,
+    gap: vh * 1,
   },
 });

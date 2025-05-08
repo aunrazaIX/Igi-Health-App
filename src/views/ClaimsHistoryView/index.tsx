@@ -43,7 +43,6 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
           TopViewFirstIcon={icons.searchWhite}
           TopViewSecondIcon={icons.calender}
           onPressBack={goBack}
-          // AddModal={onPressHeaderIcon}
           SecondOpenModal={onPressHeaderIcon}
         />
       </View>

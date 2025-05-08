@@ -142,5 +142,4 @@ export const styles = StyleSheet.create({
   cardText: {
     fontSize: vh * 2,
   },
-
 });
