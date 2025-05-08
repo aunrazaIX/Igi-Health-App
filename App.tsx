@@ -22,7 +22,7 @@ const App = () => {
         <SafeAreaView style={{ flex: 1 }}>
           <StatusBar
             backgroundColor={COLORS.activeButtonGradient[1]}
-            barStyle="dark-content"
+            // barStyle="dark-content"
           />
           <NavigationContainer>
             <MainStack />

@@ -149,7 +149,7 @@ export const styles = StyleSheet.create({
     color: COLORS.textBlackShade,
   },
   headerArrow: {
-    width: vw * 6,
-    height: vw * 6
+    width: vw * 7.5,
+    height: vw * 7.5
   }
 });

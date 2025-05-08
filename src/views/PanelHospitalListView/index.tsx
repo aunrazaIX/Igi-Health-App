@@ -170,14 +170,14 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                 renderItem={({ item }) => (
 
                   <>
-                    {console.log(item , "ooooooooooooo")}
+                    
 
                     <DetailsContainer
                       detailsText={styles.detailsText}
                       detailsTextLabel={styles.detailsTextLabel}
                       detailsTextValue={styles.detailsTextValue}
                       headerIcon={
-                        selectedTab === 'PanelHospitals' ? icons.arrowDirection :  [icons.discountCentersDirection, icons.discountCentersMultipleDirection]
+                        selectedTab === 'PanelHospitals' ? icons.arrowDirection : [icons.discountCentersDirection, icons.discountCentersMultipleDirection]
                       }
                       data={item}
                     />

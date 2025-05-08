@@ -112,6 +112,7 @@ export const icons = {
   panelHospitalIcon: require('./icons/panelHospitalIcon.png'),
   discountCentersDirection: require('./icons/discountCentersDirection.png'),
   discountCentersMultipleDirection: require('./icons/discountCentersMultipleDirection.png'),
+  taskEdit : require('./icons/task-edit.png'),
 };
 
 export const drawerIcons = {
