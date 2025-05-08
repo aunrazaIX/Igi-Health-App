@@ -133,6 +133,7 @@ export const drawerIcons = {
   drawerProfile: require('./images/drawerProfile.png'),
   drawerClose: require('./icons/drawerClose.png'),
   drawerArrowRight: require('./icons/drawerArrowRight.png'),
+  drawerLogout: require('./icons/drawerLogout.png'),
 };
 
 export const tabIcons = {

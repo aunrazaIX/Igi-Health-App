@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 
   MaximumTitle: {
-    fontSize: vw * 6,
+    fontSize: vh * 2.7,
     textAlign: 'left',
     marginTop: vh * 1.5,
     color: '#004984',
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginBottom: -vh * 4,
   },
   benefitsImage: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     height: '100%',
     width: '100%',
   },
