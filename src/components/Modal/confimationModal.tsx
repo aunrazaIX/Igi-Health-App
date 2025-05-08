@@ -136,10 +136,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: vw * 6,
     borderTopLeftRadius: vw * 6,
     width: '100%',
-    height: '45%',
+    minHeight: '45%',
     paddingHorizontal: vh * 2,
     paddingTop: vh * 2.5,
-    paddingBottom: vh * 2,
+    paddingBottom: vh * 3,
     shadowColor: COLORS.black,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
@@ -196,8 +196,8 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     borderRadius: vh * 1.3,
+    padding: vh * 2,
   },
-  wrapper: {padding: vh * 2},
   cancelButtonText: {
     fontSize: vw * 4.4,
     color: COLORS.cancelButton,

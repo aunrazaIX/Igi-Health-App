@@ -12,7 +12,7 @@ export const images = {
   taskDone: require('./images/taskDone.png'),
   LogoLife: require('./images/LogoLife.png'),
   sehatKahani: require('./images/sehatKahani.png'),
-  loginBackground : require('./images/loginBackground.png'),
+  loginBackground: require('./images/loginBackground.png'),
   ellipseBlue: require('./images/EllipseBlue.png'),
   ellipseRed: require('./images/EllipseRed.png'),
 };
@@ -105,10 +105,14 @@ export const icons = {
   flipCardRoom: require('./icons/flipCardRoom.png'),
   flipCardMaternity: require('./icons/flipCardMaternity.png'),
   notificationIcon: require('./icons/notificationIcon.png'),
-  loginArrow :  require('./icons/loginArrow.png'),
-  meterIcon : require('./icons/meterIcon.png'),
+  loginArrow: require('./icons/loginArrow.png'),
+  meterIcon: require('./icons/meterIcon.png'),
   totalDeducted: require('./icons/totalDeducted.png'),
   totalPaid: require('./icons/totalPaid.png'),
+  panelHospitalIcon: require('./icons/panelHospitalIcon.png'),
+  discountCentersDirection: require('./icons/discountCentersDirection.png'),
+  discountCentersMultipleDirection: require('./icons/discountCentersMultipleDirection.png'),
+  taskEdit: require('./icons/task-edit.png'),
 };
 
 export const drawerIcons = {
@@ -129,6 +133,7 @@ export const drawerIcons = {
   drawerProfile: require('./images/drawerProfile.png'),
   drawerClose: require('./icons/drawerClose.png'),
   drawerArrowRight: require('./icons/drawerArrowRight.png'),
+  drawerLogout: require('./icons/drawerLogout.png'),
 };
 
 export const tabIcons = {

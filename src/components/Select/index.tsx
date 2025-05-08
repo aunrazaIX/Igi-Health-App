@@ -15,7 +15,7 @@ import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 
 type Patient = {
-  id: number;
+  value: number;
   name: string;
 };
 type SelectProps = {
@@ -59,7 +59,7 @@ const Select: React.FC<SelectProps> = ({
 
       {isDropdownVisible && (
         <View style={styles.dropdown}>
-          <FlatList
+          {/* <FlatList
             data={selectData}
             keyExtractor={item => item.id.toString()}
             renderItem={({item}) => (
@@ -69,7 +69,14 @@ const Select: React.FC<SelectProps> = ({
                 <AileronBold name={item.name} style={styles.listText} />
               </TouchableOpacity>
             )}
-          />
+          /> */}
+          {selectData?.map(item => (
+            <TouchableOpacity
+              style={styles.dropdownItem}
+              onPress={() => handleSelect(item)}>
+              <AileronBold name={item?.name} style={styles.listText} />
+            </TouchableOpacity>
+          ))}
         </View>
       )}
     </View>

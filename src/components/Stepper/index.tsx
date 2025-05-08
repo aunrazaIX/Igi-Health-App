@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleProp,
   ViewStyle,
+  ScrollView,
 } from 'react-native';
 
 import {vh, vw} from '../../assets/theme/dimension';
@@ -50,90 +51,33 @@ const Stepper: React.FC<StepperProps> = ({steps, componentList}) => {
     );
   };
 
-  // const headerComponent = () => {
-  //   return (
-  //       <View>
-  //         <View style={styles.stepContainer}>
-  //           {steps.map((_, index) => renderStep(index))}
-  //         </View>
-  //         <View style={styles.textContainer}>
-  //           {steps.map((_, index) => (
-  //             <AileronSemiBold
-  //               key={index}
-  //               style={styles.labelBelow}
-  //               name={steps[index]?.label}
-  //             />
-  //           ))}
-  //         </View>
-  //         <View style={styles.contentContainer}>
-  //           {componentList[steps[activeStep - 1]?.key]}
-  //         </View>
-  //       </View>
-  //   );
-  // };
-
-  // const footerComponent = () => {
-  //   return (
-  //     <LinearGradient
-  //       colors={COLORS.PriorGradient}
-  //       style={styles.priorGradient}>
-  //       <TouchableOpacity>
-  //         <AileronSemiBold style={styles.priorNext} name={'Next'} />
-  //       </TouchableOpacity>
-  //     </LinearGradient>
-  //   );
-  // };
-  // const renderItem = ({item}: {item: Item}) => {
-  //   return (
-  //     <DependentBox>
-  //       <View style={styles.header}>
-  //         <Image source={item?.icon} style={styles.avatar} />
-  //         <AileronBold style={styles.headerText} name={item?.sectionTitle} />
-  //       </View>
-  //       <View style={styles.details}>
-  //         {item?.info?.map((_item: _item, index: number) => (
-  //           <View style={styles.field} key={index}>
-  //             <AileronSemiBold name={_item?.label} style={styles.detailLabel} />
-  //             <AileronSemiBold name={_item?.value} style={styles.detailvalue} />
-  //           </View>
-  //         ))}
-  //       </View>
-  //     </DependentBox>
-  //   );
-  // };
-
   return (
-    // <FlatList
-    //   contentContainerStyle={styles.flatListContainer}
-    //   ListHeaderComponent={headerComponent}
-    //   ListFooterComponentStyle={styles.footerStyle}
-    //   ListFooterComponent={footerComponent}
-    //   renderItem={renderItem}
-    //   data={steps[activeStep - 1]?.data}
-    //   keyExtractor={(item, index) => Math.random().toString()}
-    // />
     <View style={styles.container}>
-      <View>
+      <View style={styles.contentWrapper}>
         <View style={styles.stepContainer}>
-          {steps.map((_, index) => renderStep(index))}
+          {steps?.map((_, index) => renderStep(index))}
         </View>
         <View style={styles.textContainer}>
-          {steps.map((_, index) => (
+          {steps?.map((_, index) => (
             <AileronSemiBold
-              key={index}
+              key={_.key}
               style={styles.labelBelow}
               name={steps[index]?.label}
             />
           ))}
         </View>
-        <View style={styles.contentContainer}>
-          {componentList[steps[activeStep - 1]?.key]}
-        </View>
+        <ScrollView>
+          <View style={styles.contentContainer}>
+            {componentList[steps[activeStep - 1]?.key]}
+          </View>
+        </ScrollView>
       </View>
       <LinearGradient
         colors={COLORS.PriorGradient}
         style={styles.priorGradient}>
-        <TouchableOpacity style={styles.wrapper} onPress={() => setActiveStep(activeStep + 1)}>
+        <TouchableOpacity
+          style={styles.wrapper}
+          onPress={() => setActiveStep(activeStep + 1)}>
           <AileronSemiBold style={styles.priorNext} name={'Next'} />
         </TouchableOpacity>
       </LinearGradient>
@@ -143,10 +87,12 @@ const Stepper: React.FC<StepperProps> = ({steps, componentList}) => {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: 'COLORS.white',
     justifyContent: 'space-between',
-    // backgroundColor:'red',
     flex: 1,
+  },
+  contentWrapper: {
+    flex: 1,
+    justifyContent: 'flex-start',
   },
   stepContainer: {
     flexDirection: 'row',
@@ -200,8 +146,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.activeTab,
   },
   contentContainer: {
-    flex:1,
     alignItems: 'center',
+    marginBottom: vh * 1,
   },
   textContainer: {
     flexDirection: 'row',
@@ -222,7 +168,7 @@ const styles = StyleSheet.create({
     padding: vw * 4,
   },
   priorGradient: {
-    width:'100%',
+    width: '100%',
     borderRadius: vh * 1.5,
   },
   wrapper: {padding: vh * 2},

@@ -35,6 +35,7 @@ const OtpView = () => {
       <AileronRegular style={styles.sendAgain} name="Send code again 00:58" />
       <TouchableOpacity>
         <AileronBold style={styles.resendCode} name="Resend Code" />
+        
       </TouchableOpacity>
     </Fragment>
   );

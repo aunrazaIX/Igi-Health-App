@@ -21,6 +21,7 @@ import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
 import {useDispatch} from 'react-redux';
 import {logout} from '../../redux/authSlice';
+import SettingStack from '../SettingStack';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
@@ -40,6 +41,7 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'Benefits',
     },
+
     {
       id: 3,
       name: 'Personal',
@@ -48,6 +50,7 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'Personal',
     },
+
     {
       id: 4,
       name: 'Lodge Claim',
@@ -118,13 +121,14 @@ const DrawerStack = () => {
       id: 13,
       name: 'Settings',
       icon: drawerIcons.drawerSettings,
-      to: 'Settings',
+      mainParent: 'SettingsStack',
+      stChild: 'Settings',
     },
 
     {
       id: 14,
       name: 'Logout',
-      icon: drawerIcons.drawerSettings,
+      icon: drawerIcons.drawerLogout,
       to: 'logout',
     },
   ];
@@ -224,7 +228,8 @@ const DrawerStack = () => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
       <Drawer.Screen name="FAQs" component={FAQs} />
-      <Drawer.Screen name="Settings" component={Settings} />
+
+      <Drawer.Screen name="SettingsStack" component={SettingStack} />
     </Drawer.Navigator>
   );
 };
@@ -248,7 +253,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: vw * 35,
-    height: vh * 7,
+    height: vh * 6,
     resizeMode: 'contain',
   },
   row: {

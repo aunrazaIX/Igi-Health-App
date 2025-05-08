@@ -1,11 +1,4 @@
-import {
-  Image,
-  ImageSourcePropType,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
@@ -19,9 +12,14 @@ type InfoItem = {
 
 type BoxProps = {
   data: {
-    icon: ImageSourcePropType;
+    edit: boolean;
+    delete: boolean;
     sectionTitle: string;
-    info: InfoItem[];
+    icon: any;
+    info: {
+      label: string;
+      value: string;
+    }[];
   };
 };
 
@@ -31,12 +29,16 @@ const Box: React.FC<BoxProps> = ({data}) => {
       <View style={styles.header}>
         <Image source={data?.icon} style={styles.avatar} />
         <AileronBold style={styles.headerText} name={data?.sectionTitle} />
-        <TouchableOpacity style={styles.button}>
-          <Image source={icons.edit} style={styles.buttonIcon} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Image source={icons.delete} style={styles.buttonIcon} />
-        </TouchableOpacity>
+        {data?.edit && (
+          <TouchableOpacity style={styles.button}>
+            <Image source={icons.edit} style={styles.buttonIcon} />
+          </TouchableOpacity>
+        )}
+        {data?.delete && (
+          <TouchableOpacity style={styles.button}>
+            <Image source={icons.delete} style={styles.buttonIcon} />
+          </TouchableOpacity>
+        )}
       </View>
       <View style={styles.details}>
         {data?.info?.map((_item: InfoItem, index: number) => (
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.black + 44,
     borderWidth: 1,
     borderRadius: vh * 2,
-    elevation:2,
+    elevation: 2,
     backgroundColor: COLORS.white,
     shadowColor: '#000',
     shadowOpacity: 0.14,
@@ -75,8 +77,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center',
-    gap:vw*2
+    justifyContent: 'center',
+    gap: vw * 2,
   },
   headerText: {
     flex: 1,
@@ -106,9 +108,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {height: vw * 6, width: vw * 6},
-  buttonIcon:{
+  buttonIcon: {
     height: vw * 6,
     width: vw * 6,
     resizeMode: 'contain',
-  }
+  },
 });

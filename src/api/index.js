@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {store} from '../redux';
 import {EventRegister} from 'react-native-event-listeners';
+
 const api = axios.create({
   baseURL: 'https://www.google.com',
   timeout: 60000,

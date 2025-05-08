@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
     marginLeft: vw * 2,
   },
   iconView: {
-    bottom: 0,
+   
+    
   },
 });
 

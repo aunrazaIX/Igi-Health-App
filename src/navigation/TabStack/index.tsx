@@ -6,7 +6,6 @@ import HomeStack from '../HomeStack';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import PriorApproval from '../../screens/PriorApproval';
-import PanelHospitalList from '../../screens/PanelHospitalList';
 import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaim from '../../screens/LodgeClaim';
@@ -50,7 +49,7 @@ const Tabs = () => {
                 </View>
               </LinearGradient>
             ) : (
-              <View style={[styles.gradientBorder,styles.wrapper]}>
+              <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image
                   style={[styles.iconStyle, {tintColor: 'black'}]}
                   source={tabIcons.home}
@@ -80,7 +79,7 @@ const Tabs = () => {
                 </View>
               </LinearGradient>
             ) : (
-              <View style={[styles.gradientBorder,styles.wrapper]}>
+              <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image style={styles.iconStyle} source={tabIcons.note} />
               </View>
             ),
@@ -101,16 +100,13 @@ const Tabs = () => {
                 style={styles.gradientBorder}>
                 <View style={styles.wrapper}>
                   <Image
-                    style={[
-                      styles.iconStyle,
-                      {tintColor: 'white'},
-                    ]}
+                    style={[styles.iconStyle, {tintColor: 'white'}]}
                     source={tabIcons.PriorApproval}
                   />
                 </View>
               </LinearGradient>
             ) : (
-              <View style={[styles.gradientBorder,styles.wrapper]}>
+              <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image
                   style={[styles.iconStyle]}
                   source={tabIcons.PriorApproval}
@@ -140,7 +136,7 @@ const Tabs = () => {
                 </View>
               </LinearGradient>
             ) : (
-              <View style={[styles.gradientBorder,styles.wrapper]}>
+              <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image
                   style={styles.iconStyle}
                   source={tabIcons.customerSupport}
@@ -158,12 +154,22 @@ export default Tabs;
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    elevation: 0,
+    position: 'absolute',
+    bottom: vh * 1,
     backgroundColor: COLORS.white,
     borderRadius: vh * 50,
-    height: vh * 10,
+    height: vw * 22,
     marginHorizontal: vw * 6,
     paddingHorizontal: vw * 2,
+    marginVertical: vh * 2,
+    elevation: 3,
+  },
+  iconContainer: {
+    padding: vh * 1,
+    borderRadius: vh * 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
   },
 
   gradientBorder: {

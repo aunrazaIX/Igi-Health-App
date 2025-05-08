@@ -12,11 +12,11 @@ import { icons } from '../../assets';
 import { styles } from './style';
 import DetailsContainer from '../../components/DetailsContainer';
 import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
-import { fonts } from '../../assets/fonts';
+import { PanelHospitalGroup } from '../../viewmodels/usePanelHospitalListViewModel';
+
 
 type HomeViewProps = {
-  data: [][];
+  data: PanelHospitalGroup[];
   selectedTab: string;
   selectedTabRight: string;
   onPressTab: (tab: string) => void;
@@ -40,8 +40,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             ? 'Panel Hospital List'
             : 'Discounted Centers'
         }
-        HeaderIcon={icons.searchWhite}
-        HeaderSecondIcon={null}
+        TopViewFirstIcon={icons.searchWhite}
         onPressBack={goBack}
       />
 
@@ -55,9 +54,9 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                 selectedTabRight === 'list' && styles.activeTabRight,
               ]}>
               {selectedTabRight === 'list' ? (
-                <Image source={icons.listActive} />
+                <Image style={styles.listIcon} source={icons.listActive} />
               ) : (
-                <Image source={icons.listIcon} />
+                <Image style={styles.listIcon} source={icons.listIcon} />
               )}
 
               <AileronBold
@@ -77,9 +76,9 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               ]}
               onPress={() => onPressRightTab('map')}>
               {selectedTabRight === 'map' ? (
-                <Image source={icons.map} />
+                <Image style={styles.listIcon} source={icons.map} />
               ) : (
-                <Image source={icons.mapInactive} />
+                <Image style={styles.listIcon} source={icons.mapInactive} />
               )}
 
               <AileronBold
@@ -166,18 +165,23 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               selectedTabRight === 'list')) && (
               <FlatList
                 data={data}
-                contentContainerStyle={{ paddingBottom: vh * 12 }}
+                contentContainerStyle={{ paddingBottom: vh * 35 }}
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => (
-                  <DetailsContainer
-                    detailsText={styles.detailsText}
-                    detailsTextLabel={styles.detailsTextLabel}
-                    detailsTextValue={styles.detailsTextValue}
-                    headerIcon={
-                      selectedTab === 'PanelHospitals' && icons.arrowDirection
-                    }
-                    data={item}
-                  />
+
+                  <>
+                    
+
+                    <DetailsContainer
+                      detailsText={styles.detailsText}
+                      detailsTextLabel={styles.detailsTextLabel}
+                      detailsTextValue={styles.detailsTextValue}
+                      headerIcon={
+                        selectedTab === 'PanelHospitals' ? icons.arrowDirection : [icons.discountCentersDirection, icons.discountCentersMultipleDirection]
+                      }
+                      data={item}
+                    />
+                  </>
                 )}
               />
             )}

@@ -46,7 +46,9 @@ const LoginView = ({
         <View style={styles.loginContent}>
           <Image source={icons.logo} style={styles.logo} />
 
-          <CurvedView containerStyle={styles.curvedStyle}>
+          <CurvedView
+            containerStyle={styles.curvedStyle}
+            backColor={{backgroundColor: 'transparent'}}>
             <View style={styles.loginContainer}>
               <View style={styles.tabContainer}>
                 {tabs.map(tab => {
@@ -57,7 +59,7 @@ const LoginView = ({
                       onPress={() => onPressTab(tab)}
                       style={styles.tab}
                       colors={COLORS.PriorGradient}>
-                      <View style={{padding: vh * 0.7}}>
+                      <View style={styles.wrapper}>
                         <AileronSemiBold
                           style={[
                             styles.tabText,

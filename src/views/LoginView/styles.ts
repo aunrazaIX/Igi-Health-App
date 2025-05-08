@@ -5,8 +5,8 @@ import {COLORS} from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
-  
   },
+  wrapper: {padding: vh * 0.7},
   logo: {
     marginTop: vh * 7.5,
     height: vh * 10,
@@ -55,8 +55,8 @@ export const styles = StyleSheet.create({
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: {
-    width: 0,
-    height: 1,
+      width: 0,
+      height: 1,
     },
     shadowOpacity: 0.08,
     shadowRadius: 1.5,
@@ -100,7 +100,6 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowOffset: {width: 0, height: 2},
     shadowRadius: 3,
-
   },
   loginOptionBox: {
     gap: vh * 1,

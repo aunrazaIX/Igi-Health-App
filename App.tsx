@@ -12,18 +12,23 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: '#FFFFFFE5',
+    // background: '#fff',
   },
 };
 const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer theme={MyTheme}>
-          <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={{flex: 1}}>
+          <StatusBar
+            backgroundColor={COLORS.activeButtonGradient[1]}
+            // barStyle="dark-content"
+          />
+          <NavigationContainer>
             <MainStack />
-          </SafeAreaView>
-        </NavigationContainer>
+            {/* <Login /> */}
+          </NavigationContainer>
+        </SafeAreaView>
       </PersistGate>
     </Provider>
   );

@@ -1,14 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {icons} from '../assets';
 import {ImageSourcePropType} from 'react-native';
 
 type PatientDetailsViewModel = {
   states: {
     data: PatientDetails[];
-  },
-  functions:{
-    goBack : ()=>void ;
-  }
+  };
+  functions: {
+    goBack: () => void;
+  };
 };
 
 type LabelValue = {
@@ -23,7 +23,6 @@ type PatientDetails = {
 };
 
 const patientDetailsViewModel = (): PatientDetailsViewModel => {
-
   const navigation = useNavigation();
 
   const data: PatientDetails[] = [
@@ -52,15 +51,14 @@ const patientDetailsViewModel = (): PatientDetailsViewModel => {
   const goBack = () => {
     navigation.goBack();
   };
-    
 
   return {
     states: {
       data,
     },
-    functions : {
-      goBack
-    }
+    functions: {
+      goBack,
+    },
   };
 };
 

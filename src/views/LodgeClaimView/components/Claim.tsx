@@ -5,9 +5,10 @@ import {vh} from '../../../assets/theme/dimension';
 import LinearGradient from 'react-native-linear-gradient';
 import {AileronSemiBold} from '../../../components';
 import {COLORS} from '../../../assets/theme/colors';
+import {ClaimDetailSection} from '../typeInterface';
 
 type ClaimProps = {
-  claimsDetails: [];
+  claimsDetails: ClaimDetailSection[];
 };
 
 const Claim: React.FC<ClaimProps> = ({claimsDetails}) => {

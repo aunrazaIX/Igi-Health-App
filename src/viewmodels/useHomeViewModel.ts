@@ -101,6 +101,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     {
       logo: cardIcons.lodgeClaim,
       name: 'Lodge A Claim',
+      image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       mainParent: 'Tabs',
       stChild: 'LodgeClaim',
@@ -156,6 +157,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
         screen: cardData?.stChild,
       });
     }
+
   };
 
 

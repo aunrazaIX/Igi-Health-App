@@ -5,7 +5,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
 interface AileronBoldProps extends TextProps {
-  name: string | number;
+  name: string | number ;
   style?: StyleProp<TextStyle>;
   numberOfLines?: number;
 }

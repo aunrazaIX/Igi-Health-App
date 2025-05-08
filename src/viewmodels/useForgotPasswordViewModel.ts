@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
 type UseForgotPasswordViewModelReturnType = {
@@ -12,7 +13,8 @@ type UseForgotPasswordViewModelReturnType = {
 };
 const useForgotPasswordViewModel = (): UseForgotPasswordViewModelReturnType => {
   const [step, setStep] = useState<number>(1);
-  
+  const navigation = useNavigation();
+
   const handleStep = (step: number): void => {
     if (step < 3) {
       setStep(step + 1);
@@ -23,6 +25,9 @@ const useForgotPasswordViewModel = (): UseForgotPasswordViewModelReturnType => {
   const onPressBack = (): void => {
     if (step > 1) {
       setStep(step - 1)
+    }
+    if (step == 1) {
+      navigation.goBack();
     }
   }
   return {

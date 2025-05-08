@@ -66,9 +66,7 @@ const TopView = ({
           </View>
         </View>
 
-        <View style={styles.spacedView}>
-          {icon && <Image style={styles.iconStyle} source={icon} />}
-        </View>
+        <View>{icon && <Image style={styles.iconStyle} source={icon} />}</View>
       </View>
     </LinearGradient>
   );
@@ -77,13 +75,12 @@ export default TopView;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // paddingHorizontal: vw * 3,
-    // alignItems: 'center',
+    width: '100%',
   },
   wrapper: {
-    // paddingHorizontal: vw * 3,
-    alignItems: 'center',
+    paddingTop: vh * 6,
+    paddingHorizontal: vw * 3,
+    paddingBottom: vw * 3,
   },
   headerIcons: {
     flexDirection: 'row',
@@ -93,14 +90,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: vh * 2,
   },
   backIconContainer: {
     height: vh * 4.7,
     width: vw * 14,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: vw * 4.5,
+    borderRadius: vw * 5,
     backgroundColor: COLORS.white,
   },
   backIcon: {
@@ -113,13 +109,11 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: vw * 5,
   },
-  spacedView: {
-    marginVertical: vh * 3,
-  },
   iconStyle: {
-    height: vh * 8,
-    width: vw * 8,
-    alignSelf: 'center',
+    height: vw * 32,
+    width: vw * 32,
+    marginTop: vh * 2,
+    marginBottom: vh * 5,
     resizeMode: 'contain',
   },
   TopViewIcon: {
@@ -130,6 +124,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     width: vh * 8,
-    gap: vh * 0.5,
+    gap: vh * 1,
   },
 });
