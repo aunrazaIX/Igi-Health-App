@@ -107,13 +107,15 @@ const styles = StyleSheet.create({
     fontSize: vw * 5,
   },
   spacedView: {
-    marginVertical: vh * 3,
+    marginTop : vh*6,
+   marginBottom : vh*9
   },
   iconStyle: {
-    height: vh * 8,
-    width: vw * 8,
-    alignSelf: 'center',
+    height: vw * 32,
+    width: vw * 32,
+
     resizeMode: 'contain',
+    // borderWidth:2
   },
   TopViewIcon: {
     width: vw * 8,

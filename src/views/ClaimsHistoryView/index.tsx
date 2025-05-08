@@ -167,12 +167,13 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
         </View>
       </CurvedView>
 
-      {isCalendarVisible && (
+      {/* {isCalendarVisible && (
         <Calender
           onPressHeaderIcon={onPressHeaderIcon}
           isCalendarVisible={isCalendarVisible}
         />
-      )}
+      )} */}
+
     </View>
   );
 };
