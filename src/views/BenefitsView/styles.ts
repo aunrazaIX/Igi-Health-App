@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 
   MaximumTitle: {
-    fontSize: vh * 2.7,
+    fontSize: vh*2.7,
     textAlign: 'left',
     marginTop: vh * 1.5,
     color: '#004984',

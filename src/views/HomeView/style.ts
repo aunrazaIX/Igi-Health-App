@@ -83,16 +83,19 @@ export const styles = StyleSheet.create({
     marginBottom: vh * 2.5,
     alignItems: 'center',
     position: 'relative',
+    
   },
   meterEllipseBlue: {
     width: vw * 64,
     height: vw * 64,
+    resizeMode:'contain'
   },
   meterEllipseRed: {
     width: vw * 50,
     height: vw * 50,
     position: 'absolute',
     top: vh * 3.2,
+    resizeMode:"contain"
   },
   dashboardMeterIcon: {
     width: vw * 10,
