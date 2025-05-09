@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   wrapper: {
     paddingTop: vh * 6,
     paddingHorizontal: vw * 3,
-    paddingBottom: vw * 3,
+    alignItems: 'center',
   },
   headerIcons: {
     flexDirection: 'row',
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    marginBottom: vh * 3,
   },
   backIconContainer: {
     height: vh * 4.7,

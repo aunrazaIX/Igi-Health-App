@@ -39,10 +39,10 @@ const LoginView = ({
     signup: <SignUpView />,
   };
   return (
-    <ImageBackground
-      source={images.loginBackground}
-      style={styles.imageContainer}>
-      <KeyboardAwareScrollView enableOnAndroid>
+    <KeyboardAwareScrollView enableOnAndroid>
+      <ImageBackground
+        source={images.loginBackground}
+        style={styles.imageContainer}>
         <View style={styles.loginContent}>
           <Image source={icons.logo} style={styles.logo} />
 
@@ -83,8 +83,8 @@ const LoginView = ({
             </View>
           </CurvedView>
         </View>
-      </KeyboardAwareScrollView>
-    </ImageBackground>
+      </ImageBackground>
+    </KeyboardAwareScrollView>
   );
 };
 

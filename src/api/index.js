@@ -23,10 +23,9 @@ api.interceptors.request.use(
     const data = store?.getState();
     if (data) {
       if (data?.auth) {
-        if (data?.auth?.token != null) {
-          if (data?.auth?.token) {
-            config.headers['Authorization'] = 'Bearer ' + data?.auth?.token;
-          }
+        const token = data?.auth?.token;
+        if (token) {
+          config.headers['Authorization'] = `Bearer ${token}`;
         }
       }
     }

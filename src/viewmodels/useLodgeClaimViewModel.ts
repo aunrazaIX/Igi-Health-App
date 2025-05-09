@@ -1,8 +1,57 @@
+import {useCallback, useState} from 'react';
 import {icons} from '../assets';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {get, post} from '../api';
+import endpoints from '../api/endspoints';
 
 const useLodgeClaimViewModel = () => {
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
+  const [files, setFiles] = useState(null);
+
+  // const fetchContactDetails = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const res = await get(
+  //       endpoints.bank.getBankDetails,
+  //       (params = {
+  //         CNIC: 14102 - 5322315 - 7,
+  //       }),
+  //     );
+  //     if (res) {
+  //     }
+  //   } catch (e) {
+  //     console.log('Error', e);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     fetchContactDetails();
+  //   }, []),
+  // );
+
+  // const sendAttachments = async () => {
+  //   let apiData = {
+  //     IFormFile: files,
+  //   };
+  //   const userId = '';
+  //   const myuuid = '';
+  //   const ClientCode = '';
+  //   try {
+  //     setLoading(true);
+  //     const res = await post(
+  //       endpoints.claimLogde.attachment(userId, myuuid, ClientCode),
+  //       apiData,
+  //     );
+  //   } catch (e) {
+  //     console.log('Error', e);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const steps = [
     {
       label: 'Personal Details',
@@ -75,18 +124,6 @@ const useLodgeClaimViewModel = () => {
         {label: 'Amount:', value: '28827', total: true},
       ],
     },
-    {
-      sectionTitle: 'Treatment Description',
-      icon: icons.stethoscope,
-      edit: true,
-      delete: true,
-      info: [
-        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
-        {label: 'Receipt Number:', value: '89876543'},
-        {label: 'Claim Status:', value: 'Description:'},
-        {label: 'Amount:', value: '28827', total: true},
-      ],
-    },
   ];
 
   const patientOptions = [
@@ -100,9 +137,19 @@ const useLodgeClaimViewModel = () => {
     navigation.goBack();
   };
 
+  const navigateTreatment = () => {
+    navigation.navigate('AddTreatment');
+  };
+
   return {
-    states: {steps, personalData, claimsDetails, patientOptions},
-    functions: {goBack},
+    states: {
+      steps,
+      personalData,
+      claimsDetails,
+      patientOptions,
+      loading,
+    },
+    functions: {goBack, navigateTreatment},
   };
 };
 

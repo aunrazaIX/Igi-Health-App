@@ -4,8 +4,9 @@ import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
   gradient: {
-    paddingBottom: vh * 2,
-    paddingHorizontal: vw * 4,
+    paddingBottom: vh * 15,
+    paddingHorizontal: vw * 5,
+    backgroundColor: COLORS.white,
   },
   BottomContainer: {
     paddingBottom: vh * 17,

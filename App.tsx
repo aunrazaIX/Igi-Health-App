@@ -19,16 +19,14 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaView style={{flex: 1}}>
+        <NavigationContainer theme={MyTheme}>
           <StatusBar
-            backgroundColor={COLORS.activeButtonGradient[1]}
-            // barStyle="dark-content"
+            translucent
+            barStyle={'light-content'}
+            backgroundColor={'transparent'}
           />
-          <NavigationContainer>
-            <MainStack />
-            {/* <Login /> */}
-          </NavigationContainer>
-        </SafeAreaView>
+          <MainStack />
+        </NavigationContainer>
       </PersistGate>
     </Provider>
   );

@@ -32,8 +32,8 @@ export default PersonalDetails;
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
     flex: 1,
+    width: '100%',
     rowGap: vh * 1.25,
   },
 });

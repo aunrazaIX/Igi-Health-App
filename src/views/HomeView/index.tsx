@@ -5,7 +5,6 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
-  SafeAreaView,
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -31,8 +30,8 @@ type HomeViewProps = {
   backAnimatedStyle: {};
   frontAnimatedStyle: {};
   toggleDrawer: () => void;
-  onPressMenu: () => void;
-  onPressHeaderIcon: () => void;
+  onPressMenu: (value: object) => void;
+  onPressHeaderIcon: (value: string) => void;
 };
 
 const HomeView: React.FC<HomeViewProps> = ({

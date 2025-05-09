@@ -1,4 +1,3 @@
-import {ScrollView} from 'react-native';
 import React from 'react';
 import {CurvedView, Stepper, TopView} from '../../components';
 import {Claim, PersonalDetails, UploadDoc} from './components';
@@ -15,6 +14,7 @@ type LodgeClaimViewProps = {
   claimsDetails: ClaimDetailSection[];
   goBack: () => void;
   patientOptions: PatientList[];
+  navigateTreatment: () => void;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -23,6 +23,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   claimsDetails,
   goBack,
   patientOptions,
+  navigateTreatment,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -31,7 +32,12 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         patientOptions={patientOptions}
       />
     ),
-    claim: <Claim claimsDetails={claimsDetails} />,
+    claim: (
+      <Claim
+        claimsDetails={claimsDetails}
+        navigateTreatment={navigateTreatment}
+      />
+    ),
     uploadDoc: <UploadDoc />,
   };
   return (

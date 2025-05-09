@@ -113,6 +113,7 @@ export const icons = {
   discountCentersDirection: require('./icons/discountCentersDirection.png'),
   discountCentersMultipleDirection: require('./icons/discountCentersMultipleDirection.png'),
   taskEdit: require('./icons/task-edit.png'),
+  heart: require('./icons/heart.png'),
 };
 
 export const drawerIcons = {

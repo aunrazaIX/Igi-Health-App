@@ -66,11 +66,10 @@ const Stepper: React.FC<StepperProps> = ({steps, componentList}) => {
             />
           ))}
         </View>
-        <ScrollView>
-          <View style={styles.contentContainer}>
-            {componentList[steps[activeStep - 1]?.key]}
-          </View>
-        </ScrollView>
+
+        <View style={styles.contentContainer}>
+          {componentList[steps[activeStep - 1]?.key]}
+        </View>
       </View>
       <LinearGradient
         colors={COLORS.PriorGradient}
@@ -87,8 +86,10 @@ const Stepper: React.FC<StepperProps> = ({steps, componentList}) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
     justifyContent: 'space-between',
     flex: 1,
+    paddingBottom: vh * 11,
   },
   contentWrapper: {
     flex: 1,
@@ -146,13 +147,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.activeTab,
   },
   contentContainer: {
-    alignItems: 'center',
+    flex: 1,
     marginBottom: vh * 1,
   },
   textContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
+    marginBottom: vh * 2,
   },
   labelBelow: {
     width: vw * 27,

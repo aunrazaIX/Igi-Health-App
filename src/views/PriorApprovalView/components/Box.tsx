@@ -1,4 +1,11 @@
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
@@ -12,14 +19,9 @@ type InfoItem = {
 
 type BoxProps = {
   data: {
-    edit: boolean;
-    delete: boolean;
+    icon: ImageSourcePropType;
     sectionTitle: string;
-    icon: any;
-    info: {
-      label: string;
-      value: string;
-    }[];
+    info: InfoItem[];
   };
 };
 
@@ -29,16 +31,12 @@ const Box: React.FC<BoxProps> = ({data}) => {
       <View style={styles.header}>
         <Image source={data?.icon} style={styles.avatar} />
         <AileronBold style={styles.headerText} name={data?.sectionTitle} />
-        {data?.edit && (
-          <TouchableOpacity style={styles.button}>
-            <Image source={icons.edit} style={styles.buttonIcon} />
-          </TouchableOpacity>
-        )}
-        {data?.delete && (
-          <TouchableOpacity style={styles.button}>
-            <Image source={icons.delete} style={styles.buttonIcon} />
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity style={styles.button}>
+          <Image source={icons.edit} style={styles.buttonIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Image source={icons.delete} style={styles.buttonIcon} />
+        </TouchableOpacity>
       </View>
       <View style={styles.details}>
         {data?.info?.map((_item: InfoItem, index: number) => (
@@ -58,9 +56,10 @@ const styles = StyleSheet.create({
   boxContainer: {
     padding: vh,
     width: '100%',
-    height: vh * 20,
+    borderColor: COLORS.black + 44,
+    borderWidth: 1,
     borderRadius: vh * 2,
-    elevation: 3,
+    elevation: 2,
     backgroundColor: COLORS.white,
     shadowColor: '#000',
     shadowOpacity: 0.14,
@@ -71,6 +70,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: vh * 4.5,
     height: vh * 4.5,
+    // marginRight: 5,
   },
   header: {
     flexDirection: 'row',

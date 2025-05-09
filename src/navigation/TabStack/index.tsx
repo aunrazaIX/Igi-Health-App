@@ -9,6 +9,7 @@ import PriorApproval from '../../screens/PriorApproval';
 import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaim from '../../screens/LodgeClaim';
+import LodgeClaimStack from '../LodgeClaimStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -115,7 +116,7 @@ const Tabs = () => {
             ),
         }}
         name="LodgeClaim"
-        component={LodgeClaim}
+        component={LodgeClaimStack}
       />
 
       <Tab.Screen
