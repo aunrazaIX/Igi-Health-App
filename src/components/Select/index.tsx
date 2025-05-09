@@ -14,7 +14,7 @@ type Patient = {
 };
 type SelectProps = {
     selectData: Patient[];
-    selectLabel?: string;
+    selectLabel: string
     selectPlaceholder: string
 };
 
@@ -37,7 +37,9 @@ const Select: React.FC<SelectProps> = ({ selectData, selectLabel, selectPlacehol
                         style={styles.selectBox}
                     >
 
-                        <AileronBold style={styles.selectText} name={selectedPatient?.name || selectPlaceholder} />
+                        <AileronBold
+                            style={[styles.selectText, { color: selectedPatient ? COLORS.personalValue : COLORS.selectPlaceholder }]}
+                            name={selectedPatient?.name || selectPlaceholder} />
                         <Image style={styles.arrow} source={isDropdownVisible ? icons.selectArrowUp : icons.arrowDown} />
 
                     </View>
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     selectText: {
-        color: COLORS.personalValue,
+        // color: COLORS.personalValue,
         fontSize: vh * 1.7,
     },
     arrow: {

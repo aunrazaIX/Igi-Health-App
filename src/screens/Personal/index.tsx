@@ -5,15 +5,29 @@ import usePersonalModalViewModel from '../../viewmodels/usePersonalModalViewMode
 
 
 const Personal = () => {
-    const { states , functions } = usePersonalViewModal();
+    const { states, functions } = usePersonalViewModal();
     const { genderRelationStates } = usePersonalModalViewModel();
 
-    const { data } = states;
+    const { data, modalVisible, confimationModalVisible, expandedIndex } = states;
     const { gender, relation } = genderRelationStates;
-    const {goBack} = functions
+    const { goBack, handleSubmit, manageUpdate, setModalVisible, deleteDepenedent, setConfimationModalVisible, toggleExpand } = functions
 
 
-    return <PersonalView goBack={goBack} data={data} gender={gender} relation={relation} />
+    return <PersonalView
+        goBack={goBack}
+        data={data}
+        gender={gender}
+        relation={relation}
+        handleSubmit={handleSubmit}
+        manageUpdate={manageUpdate}
+        setModalVisible={setModalVisible}
+        modalVisible={modalVisible}
+        deleteDepenedent={deleteDepenedent}
+        confimationModalVisible={confimationModalVisible}
+        setConfimationModalVisible={setConfimationModalVisible}
+        toggleExpand={toggleExpand}
+        expandedIndex={expandedIndex}
+    />
 }
 
 export default Personal

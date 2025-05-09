@@ -14,12 +14,12 @@ import { personalDetail } from '../../types/personalTypes'
 type ModalCustomProps = {
     modalVisible: boolean;
     setModalVisible: (val: boolean) => void;
-    expanded: boolean;
     gender: personalDetail[];
-    relation: personalDetail[]
+    relation: personalDetail[];
+    onPressSubmit?: (val: boolean) => void;
 };
 
-const ModalCustom: React.FC<ModalCustomProps> = ({ modalVisible, setModalVisible, gender, relation }) => {
+const AddModal: React.FC<ModalCustomProps> = ({ modalVisible, setModalVisible, gender, relation, onPressSubmit }) => {
     return (
         <Modal
             animationType="slide"
@@ -44,7 +44,7 @@ const ModalCustom: React.FC<ModalCustomProps> = ({ modalVisible, setModalVisible
 
                         <DependentBox containerStyle={styles.dependentOuterStyle}>
                             <AileronRegular name='Dependent Name' style={styles.selectLabel} />
-                            <TextInput style={styles.popupInput} />
+                            <TextInput style={styles.popupInput} placeholder='Enter Name' placeholderTextColor={COLORS.selectPlaceholder} />
                         </DependentBox>
 
                         <Select selectData={gender} selectLabel={'Gender'} selectPlaceholder={'-- Select Gender --'} />
@@ -53,12 +53,12 @@ const ModalCustom: React.FC<ModalCustomProps> = ({ modalVisible, setModalVisible
 
                         <DependentBox containerStyle={styles.dependentOuterStyle}>
                             <AileronRegular name='Age' style={styles.selectLabel} />
-                            <TextInput style={styles.popupInput} />
+                            <TextInput style={styles.popupInput} placeholder='Enter Age' placeholderTextColor={COLORS.selectPlaceholder} />
                         </DependentBox>
 
-                        <Button name='Submit' containerStyle={styles.modalAddButton} inputStyle={styles.modalAddText} />
+                        <Button name='Submit' containerStyle={styles.modalAddButton} inputStyle={styles.modalAddText} onPress={onPressSubmit} />
 
-                        <Button name='Cancel' containerStyle={styles.modalCancelButton} gradientColors={['#E1E3E6', '#E1E3E6']} inputStyle={styles.modalCancelText} />
+                        <Button name='Cancel' containerStyle={styles.modalCancelButton} gradientColors={['#E1E3E6', '#E1E3E6']} inputStyle={styles.modalCancelText} onPress={() => setModalVisible(false)} />
                     </View>
                 </View>
             </View>
@@ -66,7 +66,7 @@ const ModalCustom: React.FC<ModalCustomProps> = ({ modalVisible, setModalVisible
     )
 }
 
-export default ModalCustom
+export default AddModal
 
 
 const styles = StyleSheet.create({
