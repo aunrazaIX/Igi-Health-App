@@ -18,14 +18,11 @@ import {User} from '../../../viewmodels/useLoginViewModel'
 
 
 
-const LoginForm = ({ onPressforgotPassword, user , setuser }: { onPressforgotPassword: (to: string) => void, user: User , setuser: React.Dispatch<React.SetStateAction<User>> }) => {
+const LoginForm = ({ onPress}: { onPress: (to: string) => void }) => {
 
   const dispatch = useDispatch();
 
-  const handleChange = (key, value) => {
-    setuser(prev => ({ ...prev, [key]: value }));
-  };
-  
+
 
 
   const handleLogin = ()=>{
@@ -49,8 +46,8 @@ const LoginForm = ({ onPressforgotPassword, user , setuser }: { onPressforgotPas
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
-          value={user.userName}
-          onChangeText={(text) => handleChange('userName', text)}
+         
+ 
           
         />
 
@@ -58,13 +55,13 @@ const LoginForm = ({ onPressforgotPassword, user , setuser }: { onPressforgotPas
           label="Your Password"
           secureTextEntry
           placeholder="Enter Password"
-          containerStyle={style.inputContainer}
+          // containerStyle={style.inputContainer}
 
-          labelStyle={style.labelStyle}
-          inputStyle={style.inputStyle}
-          value={user.password}
+          // labelStyle={style.labelStyle}
+          // inputStyle={style.inputStyle}
+      
 
-          onChangeText={(text) => handleChange('password', text)}
+     
           
         />
 
@@ -75,7 +72,7 @@ const LoginForm = ({ onPressforgotPassword, user , setuser }: { onPressforgotPas
           description="Remember me"
         />
 
-        <TouchableOpacity onPress={() => { onPressforgotPassword("ForgotPassword") }}>
+        <TouchableOpacity onPress={() => { onPress("ForgotPassword") }}>
           <AileronBold style={styles.forgetPassword} name="Forgot Password ?" />
         </TouchableOpacity>
       </View>

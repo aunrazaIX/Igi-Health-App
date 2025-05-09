@@ -5,7 +5,6 @@ import {COLORS} from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
-  
   },
   logo: {
     marginTop: vh * 7.5,

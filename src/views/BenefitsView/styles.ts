@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import { StyleSheet } from 'react-native';
+import { vh, vw } from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 
 const styles = StyleSheet.create({
   BenefitsGradients: {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 
   MaximumTitle: {
-    fontSize: vh*2.7,
+    fontSize: vh * 2.7,
     textAlign: 'left',
     marginTop: vh * 1.5,
     color: '#004984',

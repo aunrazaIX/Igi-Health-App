@@ -55,9 +55,7 @@ const HomeView: React.FC<HomeViewProps> = ({
             </View>
 
             <View style={styles.headerIconsRow}>
-              <TouchableOpacity>
-                <Image source={icons.search} style={styles.headerIcons} />
-              </TouchableOpacity>
+           
 
               <TouchableOpacity onPress={() => onPressHeaderIcon("Notifications")}>
                 <Image source={icons.notification} style={styles.headerIcons} />

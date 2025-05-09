@@ -13,6 +13,7 @@ import Notification from '../../screens/Notification';
 import LodgeClaim from '../../screens/LodgeClaim';
 import ForgotPassword from '../../screens/ForgotPassword';
 import Settings from '../../screens/Settings';
+import Login from '../../screens/Login/Index';
 
 const HomeStack = () => {
   const Stack = createStackNavigator();
@@ -28,6 +29,8 @@ const HomeStack = () => {
       <Stack.Screen name="PanelHospitalList" component={PanelHospitalList} />
       <Stack.Screen name="Notifications" component={Notification} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+
+      <Stack.Screen name="Login" component={Login} />
       
 
     </Stack.Navigator>

@@ -23,15 +23,15 @@ const LoginView = ({
   selectedTab,
   tabs,
   user,
-  onPressforgotPassword,
-  Setuser
+  onPress,
+
 
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;
   tabs: string[];
   user: User,
-  onPressforgotPassword: (to: string) => void,
+  onPress: (to: string) => void,
   setuser: React.Dispatch<React.SetStateAction<User>>
 }) => {
 
@@ -42,21 +42,23 @@ const LoginView = ({
     selectedTab === tab ? LinearGradient : TouchableOpacity;
 
   const renderForm: Record<string, JSX.Element> = {
-    login: <LoginForm setuser={Setuser} user={user}
-
-      onPressforgotPassword={onPressforgotPassword} />,
-    signup: <SignUpView />,
+    login: <LoginForm onPress={onPress} />,
+    signup: <SignUpView onPress={onPress} onPressTab={onPressTab} />,
   };
   return (
-    <ImageBackground
-      source={images.loginBackground}
-      style={styles.imageContainer}>
-      <KeyboardAwareScrollView enableOnAndroid>
+
+    <KeyboardAwareScrollView  >
+
+      <ImageBackground
+        source={images.loginBackground}
+        style={styles.imageContainer}>
+
 
         <View style={styles.loginContent}>
           <Image source={icons.logo} style={styles.logo} />
 
           <CurvedView containerStyle={styles.curvedStyle}>
+
             <View style={styles.loginContainer}>
               <View style={styles.tabContainer}>
                 {tabs.map(tab => {
@@ -88,10 +90,13 @@ const LoginView = ({
 
               {renderForm[selectedTab]}
             </View>
+
           </CurvedView>
         </View>
-      </KeyboardAwareScrollView>
-    </ImageBackground>
+
+      </ImageBackground>
+    </KeyboardAwareScrollView>
+
   );
 };
 

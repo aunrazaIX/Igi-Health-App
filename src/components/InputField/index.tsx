@@ -1,4 +1,4 @@
-import React, {forwardRef, useState} from 'react';
+import React, { forwardRef, useState } from 'react';
 import {
   Image,
   StyleSheet,
@@ -8,11 +8,11 @@ import {
   TextInputProps,
   ImageSourcePropType,
 } from 'react-native';
-import {fonts} from '../../assets/fonts';
-import {icons} from '../../assets';
+import { fonts } from '../../assets/fonts';
+import { icons } from '../../assets';
 import MaskInput from 'react-native-mask-input';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
 import AileronBold from '../AileronBold';
 
 type StyleObject = Record<string, string | number | boolean>;
@@ -80,13 +80,13 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             style={[
               styles.textInput,
               inputStyle,
-              !editable && {color: COLORS.black + '55'},
+              !editable && { color: COLORS.black + '55' },
             ]}
             placeholder={placeholder}
             placeholderTextColor={
               editable ? COLORS.placeholderColor + '88' : COLORS.black + '44'
             }
-            
+
             value={value}
             editable={editable}
             onSubmitEditing={onSubmitEditing}
@@ -135,7 +135,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     marginVertical: vh * 1.5,
     paddingHorizontal: vw * 2,
-    flexDirection: 'row',
+
+    // flexDirection: 'row',
+
+    flexDirection: 'column',
     // position: 'absolute',
   },
   inheritStyles: {
@@ -152,14 +155,19 @@ const styles = StyleSheet.create({
 
   label: {
     textAlign: 'left',
-    color: COLORS.textColor,
+
+    fontSize: vw * 3,
+    color: COLORS.textGrayShade,
   },
   textInput: {
     width: '85%',
     height: '100%',
-    fontSize: vw * 1.55,
+    fontSize: vw * 3.55,
     color: COLORS.textBlackShade,
     fontFamily: fonts.Aileron.regular,
+
+
+    fontWeight: '700',
   },
   iconView: {
     width: '15%',

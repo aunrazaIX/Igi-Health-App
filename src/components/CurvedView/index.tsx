@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
     bottom: vh * 4,
     borderTopLeftRadius: vw * 8,
     borderTopRightRadius: vw * 8,
-    height:'100%',
+    flex:1
   },
 });

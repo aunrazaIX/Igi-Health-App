@@ -1,13 +1,13 @@
 import React from 'react';
-import {InputField, Button, AileronSemiBold} from '../../../components';
-import {styles} from '../styles';
-import {icons} from '../../../assets';
-import {vh, vw} from '../../../assets/theme/dimension';
-import {StyleSheet , View} from 'react-native';
-import {COLORS} from '../../../assets/theme/colors';
+import { InputField, Button, AileronSemiBold } from '../../../components';
+import { styles } from '../styles';
+import { icons } from '../../../assets';
+import { vh, vw } from '../../../assets/theme/dimension';
+import { StyleSheet, View } from 'react-native';
+import { COLORS } from '../../../assets/theme/colors';
 
 
-const SignUpView = () => {
+const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string) => void, onPressTab: () => void }) => {
   return (
     <>
       <AileronSemiBold
@@ -18,9 +18,7 @@ const SignUpView = () => {
         style={styles.loginContainerText}
       />
       <InputField
-        containerStyle={style.inputContainer}
-        labelStyle={style.labelStyle}
-        inputStyle={style.inputStyle}
+
         label="Your Name"
         placeholder="Enter Full Name"
         rightIcon={icons.name}
@@ -34,61 +32,61 @@ const SignUpView = () => {
         rightIcon={icons.email}
       />
       <InputField
-        containerStyle={style.inputContainer}
-        labelStyle={style.labelStyle}
-        inputStyle={style.inputStyle}
+
+
         label="CNIC Number"
         placeholder="12345-6789012-3"
         rightIcon={icons.cnic}
+
       />
 
- <View style={style.signupTextContainer} > 
+      <View style={style.signupTextContainer} >
 
- <View style={style.signupText}> 
-      <AileronSemiBold name='•'   style={styles.loginContainerText} />
+        <View style={style.signupText}>
+          <AileronSemiBold name='•' style={styles.loginContainerText} />
 
-      <AileronSemiBold
-        numberOfLines={3}
-        name={
-       "Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character."
-        }
-        style={styles.loginContainerText}
-      />
+          <AileronSemiBold
+            numberOfLines={3}
+            name={
+              "Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character."
+            }
+            style={styles.loginContainerText}
+          />
 
-</View>
+        </View>
 
-<View style={style.signupText}> 
-      <AileronSemiBold name='•'   style={styles.loginContainerText} />
+        <View style={style.signupText}>
+          <AileronSemiBold name='•' style={styles.loginContainerText} />
 
-      <AileronSemiBold
-        numberOfLines={3}
-        name={
-       "Special characters can include digits and punctuation (e.g., !@#$%^&*()_+|~-={}[]:;'<>?,./)."
-        }
-        style={styles.loginContainerText}
-      />
+          <AileronSemiBold
+            numberOfLines={3}
+            name={
+              "Special characters can include digits and punctuation (e.g., !@#$%^&*()_+|~-={}[]:;'<>?,./)."
+            }
+            style={styles.loginContainerText}
+          />
 
-</View>
+        </View>
 
-<View style={style.signupText}> 
-      <AileronSemiBold name='•'   style={styles.loginContainerText} />
+        <View style={style.signupText}>
+          <AileronSemiBold name='•' style={styles.loginContainerText} />
 
-      <AileronSemiBold
-        numberOfLines={3}
-        name={
-       "Case sensitivity is mandatory."
-        }
-        style={styles.loginContainerText}
-      />
+          <AileronSemiBold
+            numberOfLines={3}
+            name={
+              "Case sensitivity is mandatory."
+            }
+            style={styles.loginContainerText}
+          />
 
-</View>
-</View>
-
-
+        </View>
+      </View>
 
 
 
-      <Button containerStyle={styles.loginButton} name="Create Account" />
+
+
+      <Button onPress={() => { onPressTab('login'); { onPress('Login') } }} containerStyle={styles.loginButton} name="Create Account" />
     </>
   );
 };
@@ -97,18 +95,18 @@ export default SignUpView;
 
 const style = StyleSheet.create({
   inputContainer: {
-    borderWidth: 2,
-    flexDirection: 'column',
+    // borderWidth: 2,
+    // flexDirection: 'column',
 
-    paddingHorizontal: vw * 1,
+    // paddingHorizontal: vw * 1,
   },
   labelStyle: {
-    fontSize: vw * 3,
-    color: COLORS.textGrayShade,
+    // fontSize: vw * 3,
+    // color: COLORS.textGrayShade,
   },
   inputStyle: {
-    fontSize: vw * 3.5,
-    fontWeight: '700',
+    // fontSize: vw * 3.5,
+    // fontWeight: '700',
   },
   inputFeilds: {
     marginTop: vh * 3,
@@ -117,20 +115,20 @@ const style = StyleSheet.create({
   style: {
     fontSize: vw * 3.5,
   },
-  signupText:{
+  signupText: {
     flexDirection: "row",
-    gap:vw*2,
- 
-    width: "100%"
-  
-    
-  
-  
-  },
-  signupTextContainer:{
+    gap: vw * 2,
 
-    marginTop : vh*2,
-    
-    
+    width: "100%"
+
+
+
+
+  },
+  signupTextContainer: {
+
+    marginTop: vh * 2,
+
+
   }
 });
