@@ -98,6 +98,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: vh * 1,
     elevation: 2,
+    shadowColor: '#000',
+    shadowOpacity: 0.14,
+    shadowOffset: {width: 0, height: 1},
+    shadowRadius: 2,
   },
 
   cardHeader: {

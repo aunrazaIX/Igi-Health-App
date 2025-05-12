@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		0C80B921A6F3F58F76C31292 /* libPods-igihealth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-igihealth.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		30E7ED5F1426E828A28D31B2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		428F8FA979794847A7E6D245 /* Aileron-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F795F834212643FC9EAB17C3 /* Aileron-Bold.otf */; };
 		7354492F2775448FB69270B6 /* Aileron-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4BC5B6CAB2FA48DBA0C3D542 /* Aileron-Light.otf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9673AABE08AF45CE8511693D /* Aileron-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F49CDCF7FFAB4A92ABC762C8 /* Aileron-SemiBold.otf */; };
 		98995E0BD2C04C8BA543FE6D /* Aileron-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D07E081DE5A848E3AB3EA465 /* Aileron-Regular.otf */; };
+		B9DB52E9984C2F483ACCF696 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		E0233A2624884557A820B733 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 33C7D46A1BB3495CB367F99B /* index.ts */; };
 /* End PBXBuildFile section */
 
@@ -188,7 +188,7 @@
 				98995E0BD2C04C8BA543FE6D /* Aileron-Regular.otf in Resources */,
 				9673AABE08AF45CE8511693D /* Aileron-SemiBold.otf in Resources */,
 				E0233A2624884557A820B733 /* index.ts in Resources */,
-				30E7ED5F1426E828A28D31B2 /* PrivacyInfo.xcprivacy in Resources */,
+				B9DB52E9984C2F483ACCF696 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,7 +404,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -473,7 +476,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

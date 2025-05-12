@@ -6,32 +6,33 @@ import {
   CheckBox,
   InputField,
 } from '../../../components';
-import { styles } from '../styles';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { icons } from '../../../assets';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
-import { useDispatch } from 'react-redux';
-import { setToken, setUser } from '../../../redux/authSlice';
-import {User} from '../../../viewmodels/useLoginViewModel'
+import {styles} from '../styles';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {icons} from '../../../assets';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {COLORS} from '../../../assets/theme/colors';
+import {useDispatch} from 'react-redux';
+import {setToken} from '../../../redux/authSlice';
+import {User} from '../../../viewmodels/useLoginViewModel';
 
-
-
-
-const LoginForm = ({ onPressforgotPassword, user , setuser }: { onPressforgotPassword: (to: string) => void, user: User , setuser: React.Dispatch<React.SetStateAction<User>> }) => {
-
+const LoginForm = ({
+  onPressforgotPassword,
+  user,
+  setuser,
+}: {
+  onPressforgotPassword: (to: string) => void;
+  user: User;
+  setuser: React.Dispatch<React.SetStateAction<User>>;
+}) => {
   const dispatch = useDispatch();
 
   const handleChange = (key, value) => {
-    setuser(prev => ({ ...prev, [key]: value }));
+    setuser(prev => ({...prev, [key]: value}));
   };
-  
 
-
-  const handleLogin = ()=>{
-    dispatch(setToken("usman"))
-  }
-
+  const handleLogin = () => {
+    dispatch(setToken('usman'));
+  };
 
   return (
     <>
@@ -50,8 +51,7 @@ const LoginForm = ({ onPressforgotPassword, user , setuser }: { onPressforgotPas
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
           value={user.userName}
-          onChangeText={(text) => handleChange('userName', text)}
-          
+          onChangeText={text => handleChange('userName', text)}
         />
 
         <InputField
@@ -59,34 +59,34 @@ const LoginForm = ({ onPressforgotPassword, user , setuser }: { onPressforgotPas
           secureTextEntry
           placeholder="Enter Password"
           containerStyle={style.inputContainer}
-
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
           value={user.password}
-
-          onChangeText={(text) => handleChange('password', text)}
-          
+          onChangeText={text => handleChange('password', text)}
         />
-
       </View>
 
-      <View style={[styles.row, { justifyContent: 'space-between' }]}>
-        <CheckBox
-          description="Remember me"
-        />
+      <View style={[styles.row, {justifyContent: 'space-between'}]}>
+        <CheckBox description="Remember me" />
 
-        <TouchableOpacity onPress={() => { onPressforgotPassword("ForgotPassword") }}>
+        <TouchableOpacity
+          onPress={() => {
+            onPressforgotPassword('ForgotPassword');
+          }}>
           <AileronBold style={styles.forgetPassword} name="Forgot Password ?" />
         </TouchableOpacity>
       </View>
 
-      <Button onPress={handleLogin}   showIcon={icons.loginArrow} containerStyle={styles.loginButton} name="Login" />
+      <Button
+        onPress={handleLogin}
+        showIcon={icons.loginArrow}
+        containerStyle={styles.loginButton}
+        name="Login"
+      />
 
       <AileronBold style={styles.orText} name="Or" />
 
       <View style={styles.loginOptionContainer}>
-
-        
         <TouchableOpacity style={styles.loginOptionBox}>
           <Image
             style={styles.loginOptionContainerIcons}

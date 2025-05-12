@@ -1,32 +1,41 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {
   Asset,
   ImageLibraryOptions,
   launchImageLibrary,
 } from 'react-native-image-picker';
-import {AileronSemiBold} from '../../../components';
+import {AileronSemiBold, Button} from '../../../components';
 import {vh} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
 import {icons, images} from '../../../assets';
 
-type UploadDocProps = {
-  pickFile: () => void;
-};
-
-const UploadDoc: React.FC<UploadDocProps> = ({pickFile}) => {
+const UploadDoc = () => {
   const [selectedImages, setSelectedImages] = useState<Asset[]>([]);
   const [remarks, setRemarks] = useState('');
   const [confirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
 
+  const pickImage = () => {
+    const options: ImageLibraryOptions = {
+      mediaType: 'photo',
+      // mediaType: 'application/*',
+      // includeBase64: false,
+      quality: 1,
+      selectionLimit: 0,
+    };
+
+    launchImageLibrary(options, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.errorCode) {
+        console.log('ImagePicker Error:', response.errorMessage);
+      } else if (response.assets && response.assets.length > 0) {
+        console.log('response', response);
+        setSelectedImages(response.assets);
+      }
+    });
+  };
   return (
     <View style={styles.uploadFileContainer}>
       <View>
@@ -39,7 +48,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({pickFile}) => {
             name={'Uploading Supporting\nDocuments'}
             style={styles.supporting}
           />
-          <TouchableOpacity onPress={pickFile}>
+          <TouchableOpacity onPress={pickImage}>
             <AileronSemiBold
               name="Click to Upload"
               style={styles.ClickUpload}
@@ -101,12 +110,12 @@ const UploadDoc: React.FC<UploadDocProps> = ({pickFile}) => {
             />
           </View>
         </View>
-        {/* <Button
+        <Button
           name="Submit Approval"
           onPress={() => setConfirmationModalVisible(true)}
           containerStyle={styles.submitButton}
           inputStyle={styles.submitText}
-        /> */}
+        />
       </View>
     </View>
   );
@@ -213,15 +222,15 @@ const styles = StyleSheet.create({
     padding: vh * 1,
     borderRadius: vh * 2,
   },
-  addRemarks: {
-    marginVertical: vh * 3,
+  addRemarks:{
+    marginVertical: vh * 3
   },
-  remarksInput: {
+  remarksInput:{
     color: COLORS.placeholderColor,
     fontSize: vh * 1.5,
   },
-  confimationContainer: {
-    height: '52%',
+  confimationContainer:{
+    height: '52%'
   },
   submitButton: {
     borderRadius: vh * 1.5,
@@ -232,7 +241,7 @@ const styles = StyleSheet.create({
   },
   uploadFileContainer: {
     flex: 1,
-    // justifyContent: 'space-between',
-    minHeight: '100%',
+    justifyContent: 'space-between',
+    minHeight: '100%'
   },
 });

@@ -25,18 +25,20 @@ const HelplineView = ({
   goBack: () => void;
 }) => {
   return (
-    <ScrollView>
+    <>
       <TopView onPressBack={goBack} title={'Helpline'} />
       <CurvedView containerStyle={styles.container}>
-        <ContactInfoView data={contactInfo} />
-        <ClaimAssistanceView data={claimAssistance} />
-        <SingleHelplineView
-          cities={hotlines?.cities}
-          emails={hotlines?.emails}
-          website={hotlines?.website}
-        />
+        <ScrollView>
+          <ContactInfoView data={contactInfo} />
+          <ClaimAssistanceView data={claimAssistance} />
+          <SingleHelplineView
+            cities={hotlines?.cities}
+            emails={hotlines?.emails}
+            website={hotlines?.website}
+          />
+        </ScrollView>
       </CurvedView>
-    </ScrollView>
+    </>
   );
 };
 

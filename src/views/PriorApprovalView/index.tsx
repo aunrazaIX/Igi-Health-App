@@ -1,26 +1,40 @@
-import React from 'react'
-import { AileronSemiBold, CurvedView, Select, TopView } from '../../components'
-import PatientsDetailView from './components/patientsDetailView'
-import LinearGradient from 'react-native-linear-gradient'
-import { COLORS } from '../../assets/theme/colors'
-import styles from './styles'
-import { TouchableOpacity, View } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
-import { vh } from '../../assets/theme/dimension'
+import {ScrollView} from 'react-native';
+import React from 'react';
+import {CurvedView, Stepper, TopView} from '../../components';
+import {Claim, UploadDoc} from './components';
+import {PersonalDetails} from '../LodgeClaimView/components';
 
-const PriorApprovalView = ({ data, selectData, goBack }: any) => {
+type LodgeClaimViewProps = {
+  steps: [];
+  personalData: [];
+  claimsDetails: [];
+  goBack: () => void;
+};
 
-    return (
-        <>
-            <TopView onPressBack={goBack} title='Prior Approval' />
-            <CurvedView containerStyle={styles.curvedStyles}>
-                <View style={styles.container}>
-                    <Select selectData={selectData} selectLabel={'Patient Information'} selectPlaceholder={'-- Select Patient From List --'} />
-                    <PatientsDetailView data={data} />
-                </View>
-            </CurvedView>
-        </>
-    )
-}
+const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
+  steps,
+  personalData,
+  claimsDetails,
+  goBack,
+  selectData,
+}) => {
+  const renderStep = {
+    personalDetails: (
+      <PersonalDetails personalData={personalData} selectData={selectData} />
+    ),
+    claim: <Claim />,
+    uploadDoc: <UploadDoc />,
+  };
+  return (
+    <>
+      <TopView onPressBack={goBack} title={'Prior Approval'} />
+      <CurvedView>
+        <ScrollView>
+          <Stepper steps={steps} componentList={renderStep} />
+        </ScrollView>
+      </CurvedView>
+    </>
+  );
+};
 
-export default PriorApprovalView
+export default LodgeClaimView;
