@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     elevation: 3,
     backfaceVisibility: 'hidden',
-    height: vh * 27,
+    height: vh * 30,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
