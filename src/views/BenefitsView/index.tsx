@@ -6,7 +6,7 @@ import {
   TopView,
 } from '../../components';
 import {images} from '../../assets';
-import {FlatList, Image, Text, View} from 'react-native';
+import {FlatList, Image, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {COLORS} from '../../assets/theme/colors';

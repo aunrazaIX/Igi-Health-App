@@ -1,10 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useFocusEffect} from '@react-navigation/native';
 import {useCallback, useState} from 'react';
-import {get} from '../api';
+import {get, post} from '../api';
 
 type ApiHookParams = {
   apiEndpoint: string;
-  args?: Record<string, any>;
+  argsOrBody?: Record<string, any>;
+  method: string;
   refetchOnArgumentChange?: boolean;
 };
 
@@ -12,12 +14,13 @@ type ApiHookReturn<T> = {
   loading: boolean;
   data: T | null;
   error: Error | null;
-  refetch: () => Promise<void>;
+  trigger: () => Promise<void>;
 };
 
-const useGetApiHook = <T>({
+const useApiHook = <T>({
   apiEndpoint,
-  args = {},
+  method = 'get',
+  argsOrBody = {},
   refetchOnArgumentChange = false,
 }: ApiHookParams): ApiHookReturn<T> => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -27,7 +30,8 @@ const useGetApiHook = <T>({
   const apiCallingFunction = async () => {
     try {
       setLoading(true);
-      const res = await get(apiEndpoint, args);
+      let _method = method === 'get' ? get : post;
+      const res = await _method(apiEndpoint, argsOrBody);
       if (res?.data) {
         setData(res.data);
         return;
@@ -43,9 +47,11 @@ const useGetApiHook = <T>({
   useFocusEffect(
     useCallback(
       () => {
-        apiCallingFunction();
+        if (method === 'get') {
+          apiCallingFunction();
+        }
       },
-      refetchOnArgumentChange ? [args] : [],
+      refetchOnArgumentChange ? [argsOrBody] : [],
     ),
   );
 
@@ -53,8 +59,8 @@ const useGetApiHook = <T>({
     loading,
     data,
     error,
-    refetch: apiCallingFunction,
+    trigger: apiCallingFunction,
   };
 };
 
-export default useGetApiHook;
+export default useApiHook;

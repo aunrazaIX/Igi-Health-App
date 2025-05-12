@@ -20,7 +20,7 @@ type Patient = {
 };
 type SelectProps = {
   selectData: Patient[];
-  selectLabel?: string;
+  selectLabel: string;
   selectPlaceholder: string;
 };
 
@@ -59,17 +59,6 @@ const Select: React.FC<SelectProps> = ({
 
       {isDropdownVisible && (
         <View style={styles.dropdown}>
-          {/* <FlatList
-            data={selectData}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => (
-              <TouchableOpacity
-                style={styles.dropdownItem}
-                onPress={() => handleSelect(item)}>
-                <AileronBold name={item.name} style={styles.listText} />
-              </TouchableOpacity>
-            )}
-          /> */}
           {selectData?.map(item => (
             <TouchableOpacity
               key={item?.name}
