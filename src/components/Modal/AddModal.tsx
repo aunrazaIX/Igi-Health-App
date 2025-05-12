@@ -16,7 +16,7 @@ type ModalCustomProps = {
     setModalVisible: (val: boolean) => void;
     gender: personalDetail[];
     relation: personalDetail[];
-    onPressSubmit?: (val: boolean) => void;
+    onPressSubmit?: () => void;
 };
 
 const AddModal: React.FC<ModalCustomProps> = ({ modalVisible, setModalVisible, gender, relation, onPressSubmit }) => {

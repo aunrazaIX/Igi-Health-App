@@ -11,7 +11,7 @@ import { personalDetail } from '../../types/personalTypes'
 import ConfimationModal from '../../components/Modal/confimationModal'
 import { ScrollView } from 'react-native-gesture-handler'
 import { vh } from '../../assets/theme/dimension'
-import AddModal from '../../components/Modal'
+import AddModal from '../../components/Modal/AddModal'
 
 
 type Props = {

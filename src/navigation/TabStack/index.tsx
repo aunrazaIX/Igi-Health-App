@@ -1,12 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { StyleSheet, Image, View, TouchableWithoutFeedback } from 'react-native';
-import { icons, tabIcons } from '../../assets';
+import { StyleSheet, Image, View } from 'react-native';
+import { tabIcons } from '../../assets';
 import HomeStack from '../HomeStack';
 import { COLORS } from '../../assets/theme/colors';
 import { vh, vw } from '../../assets/theme/dimension';
 import PriorApproval from '../../screens/PriorApproval';
-import PanelHospitalList from '../../screens/PanelHospitalList';
 import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaim from '../../screens/LodgeClaim';
@@ -43,7 +42,7 @@ const Tabs = () => {
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
                 <Image
-                  style={[styles.iconStyle, { tintColor: 'white' ,  height: vw * 9, width: vw * 9 }]}
+                  style={[styles.iconStyle, { tintColor: 'white', height: vw * 9, width: vw * 9 }]}
                   source={tabIcons.home}
                 />
               </LinearGradient>
@@ -71,13 +70,13 @@ const Tabs = () => {
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
                 <Image
-                  style={[styles.iconStyle, { tintColor: 'white'  ,  }]}
+                  style={[styles.iconStyle, { tintColor: 'white', }]}
                   source={tabIcons.note}
                 />
               </LinearGradient>
             ) : (
               <View style={styles.iconContainer}>
-                <Image style={styles.iconStyle } source={tabIcons.note} />
+                <Image style={styles.iconStyle} source={tabIcons.note} />
               </View>
             ),
         }}
@@ -106,7 +105,7 @@ const Tabs = () => {
             ) : (
               <View style={styles.iconContainer}>
                 <Image
-                  style={[styles.iconStyle, { }]}
+                  style={[styles.iconStyle, {}]}
                   source={tabIcons.PriorApproval}
                 />
               </View>
@@ -151,13 +150,12 @@ export default Tabs;
 const styles = StyleSheet.create({
   tabBarStyle: {
     position: "absolute",
-    bottom: vh * 1,
+    bottom: vh * 2,
     backgroundColor: COLORS.white,
     borderRadius: vh * 50,
     height: vw * 22,
     marginHorizontal: vw * 6,
     paddingHorizontal: vw * 2,
-    marginVertical: vh * 2,
     elevation: 3,
   },
   iconContainer: {
@@ -170,18 +168,14 @@ const styles = StyleSheet.create({
   gradientBorder: {
     paddingHorizontal: vw * 4,
     paddingVertical: vw * 6,
-    borderRadius: (vw * 25) / 2, 
+    borderRadius: (vw * 25) / 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
   iconStyle: {
-    height: vw *9,
+    height: vw * 9,
     width: vw * 9,
-    resizeMode:"contain"
-    
+    resizeMode: "contain"
+
   },
-  // iconStyleLarge: {
-  //   height: vw * 8,
-  //   width: vw * 8,
-  // },
 });
