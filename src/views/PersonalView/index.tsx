@@ -121,6 +121,7 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation, goBack, handleS
                 confirmationMessage={'Are you sure you want to delete this dependent detail? This action cannot be undone, and it may affect other related data.'}
                 confirmationRequired={true}
                 deleteButton={true}
+                CloseButtonText={'Close'}
             />
         </Container>
     )

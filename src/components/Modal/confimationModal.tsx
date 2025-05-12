@@ -14,7 +14,7 @@ type StyleObject = Record<string, string | number | boolean>;
 type ConfimationModalProps = {
     ConfirmationModalVisible: boolean;
     setConfirmationModalVisible: (val: boolean) => void;
-    frameImage: ImageSourcePropType;
+    frameImage?: ImageSourcePropType;
     confirmationMessage: string,
     closeButton?: boolean,
     deleteButton?: boolean,
@@ -22,10 +22,12 @@ type ConfimationModalProps = {
     claimSubmission?: boolean,
     containerStyle?: StyleObject | StyleObject[];
     handleDelete?: () => void,
-
+    Successfull?: boolean,
+    CloseButtonText: string
 };
 
-const ConfirmationModal: React.FC<ConfimationModalProps> = ({ ConfirmationModalVisible,
+const ConfirmationModal: React.FC<ConfimationModalProps> = ({
+    ConfirmationModalVisible,
     setConfirmationModalVisible,
     frameImage,
     confirmationMessage,
@@ -35,6 +37,8 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({ ConfirmationModalV
     claimSubmission,
     containerStyle,
     handleDelete,
+    Successfull,
+    CloseButtonText
 }) => {
     return (
         <Modal
@@ -66,6 +70,12 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({ ConfirmationModalV
                             </View>
                         )}
 
+                        {Successfull && (
+                            <View style={styles.confirmationContainer}>
+                                <AileronBold name='Successful!' style={styles.confirmation} />
+                            </View>
+                        )}
+
                         <AileronSemiBold
                             name={confirmationMessage}
                             style={styles.confirmationDetail}
@@ -88,7 +98,12 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({ ConfirmationModalV
 
                     {closeButton && (
                         <View>
-                            <Button name='Close' inputStyle={styles.closeButton} onPress={(() => setConfirmationModalVisible(false))} />
+                            <Button
+                                name={CloseButtonText}
+                                inputStyle={styles.closeButton}
+                                onPress={(() => setConfirmationModalVisible(false))}
+                                gradientColors={COLORS.PriorGradient}
+                            />
                         </View>
                     )}
                 </View>
@@ -149,7 +164,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     confirmationDetail: {
-        fontSize: vw * 4.1,
+        fontSize: vw * 4.2,
         color: COLORS.confimationDetail,
         marginTop: vh * 1.5,
         marginBottom: vh * 2.5,

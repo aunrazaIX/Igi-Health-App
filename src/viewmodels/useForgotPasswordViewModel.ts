@@ -4,15 +4,20 @@ import { useState } from 'react';
 type UseForgotPasswordViewModelReturnType = {
   states: {
     step: number;
+    confirmationModal: boolean;
   };
   functions: {
     handleStep: (step: number) => void;
     onPressBack: () => void;
+    setConfirmationModal: (val: boolean) => void;
+    openConfimationModal: () => void;
 
   };
 };
 const useForgotPasswordViewModel = (): UseForgotPasswordViewModelReturnType => {
   const [step, setStep] = useState<number>(1);
+  const [confirmationModal, setConfirmationModal] = useState(false)
+
   const navigation = useNavigation();
 
   const handleStep = (step: number): void => {
@@ -30,13 +35,20 @@ const useForgotPasswordViewModel = (): UseForgotPasswordViewModelReturnType => {
       navigation.goBack();
     }
   }
+
+  const openConfimationModal = () => {
+    setConfirmationModal(true)
+  }
   return {
     states: {
       step,
+      confirmationModal
     },
     functions: {
       handleStep,
-      onPressBack
+      onPressBack,
+      setConfirmationModal,
+      openConfimationModal
     },
   };
 };
