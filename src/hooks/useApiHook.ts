@@ -1,0 +1,66 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import {useFocusEffect} from '@react-navigation/native';
+import {useCallback, useState} from 'react';
+import {get, post} from '../api';
+
+type ApiHookParams = {
+  apiEndpoint: string;
+  argsOrBody?: Record<string, any>;
+  method: string;
+  refetchOnArgumentChange?: boolean;
+};
+
+type ApiHookReturn<T> = {
+  loading: boolean;
+  data: T | null;
+  error: Error | null;
+  trigger: () => Promise<void>;
+};
+
+const useApiHook = <T>({
+  apiEndpoint,
+  method = 'get',
+  argsOrBody = {},
+  refetchOnArgumentChange = false,
+}: ApiHookParams): ApiHookReturn<T> => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+
+  const apiCallingFunction = async () => {
+    try {
+      setLoading(true);
+      let _method = method === 'get' ? get : post;
+      const res = await _method(apiEndpoint, argsOrBody);
+      if (res?.data) {
+        setData(res.data);
+        return;
+      }
+    } catch (e) {
+      setError(e as Error);
+      return;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(
+      () => {
+        if (method === 'get') {
+          apiCallingFunction();
+        }
+      },
+      refetchOnArgumentChange ? [argsOrBody] : [],
+    ),
+  );
+
+  return {
+    loading,
+    data,
+    error,
+    trigger: apiCallingFunction,
+  };
+};
+
+export default useApiHook;
