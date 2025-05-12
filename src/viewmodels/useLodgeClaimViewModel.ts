@@ -1,57 +1,19 @@
-import {useCallback, useState} from 'react';
 import {icons} from '../assets';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {get, post} from '../api';
+import {useNavigation} from '@react-navigation/native';
 import endpoints from '../api/endspoints';
 import {pick} from '@react-native-documents/picker';
+import useApiHook from '../hooks/useApiHook';
 
 const useLodgeClaimViewModel = () => {
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(false);
-  const [files, setFiles] = useState(null);
-
-  // const fetchContactDetails = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const res = await get(
-  //       endpoints.bank.getBankDetails,
-  //       (params = {
-  //         CNIC: 14102 - 5322315 - 7,
-  //       }),
-  //     );
-  //     if (res) {
-  //     }
-  //   } catch (e) {
-  //     console.log('Error', e);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     fetchContactDetails();
-  //   }, []),
-  // );
-
-  // const sendAttachments = async () => {
-  //   let apiData = {
-  //     IFormFile: files,
-  //   };
-  //   const userId = '';
-  //   const myuuid = '';
-  //   const ClientCode = '';
-  //   try {
-  //     setLoading(true);
-  //     const res = await post(
-  //       endpoints.claimLogde.attachment(userId, myuuid, ClientCode),
-  //       apiData,
-  //     );
-  //   } catch (e) {
-  //     console.log('Error', e);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const {data: dependants, loading} = useApiHook({
+    apiEndpoint: endpoints.dependants.getDependants,
+    method: 'get',
+    argsOrBody: {
+      cnic: '14102-5322315-7',
+      ClientCode: 'DEMO',
+    },
+  });
 
   const steps = [
     {
@@ -159,6 +121,7 @@ const useLodgeClaimViewModel = () => {
       claimsDetails,
       patientOptions,
       loading,
+      dependants: dependants,
     },
     functions: {goBack, navigateTreatment, pickFile},
   };

@@ -3,10 +3,10 @@ import React from 'react';
 import {Select} from '../../../components';
 import {vh} from '../../../assets/theme/dimension';
 import Box from './Box';
-import {PersonelDataSection} from '../typeInterface';
+import {DependantList, PersonelDataSection} from '../typeInterface';
 
 type PersonalDetailsProps = {
-  patientOptions: any[];
+  patientOptions: DependantList[];
   personalData: PersonelDataSection[];
 };
 

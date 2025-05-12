@@ -1,31 +1,26 @@
 import axios from 'axios';
-import {store} from '../redux';
 import {EventRegister} from 'react-native-event-listeners';
-
+import {store} from '../redux/store';
 const api = axios.create({
-  baseURL: 'https://www.google.com',
+  baseURL: 'http://10.9.0.55:8088/api/',
   timeout: 60000,
 });
 
 api.interceptors.request.use(
   config => {
-    config.auth = {
-      username: USER_NAME,
-      password: PASSWORD,
-    };
     const isFormData = config.data instanceof FormData;
     if (!isFormData) {
       config.headers['Content-Type'] = 'application/json';
     } else {
       config.headers['Content-Type'] = 'multipart/form-data';
     }
-    config.headers['X-Requested-With'] = 'x';
     const data = store?.getState();
     if (data) {
       if (data?.auth) {
-        const token = data?.auth?.token;
-        if (token) {
-          config.headers['Authorization'] = `Bearer ${token}`;
+        if (data?.auth?.token != null) {
+          if (data?.auth?.token) {
+            config.headers['Authorization'] = 'Bearer ' + data?.auth?.token;
+          }
         }
       }
     }

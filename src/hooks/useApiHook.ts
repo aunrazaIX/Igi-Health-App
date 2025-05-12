@@ -15,6 +15,7 @@ type ApiHookReturn<T> = {
   data: T | null;
   error: Error | null;
   trigger: () => Promise<void>;
+  transformResponse: (response: any) => void;
 };
 
 const useApiHook = <T>({
@@ -32,16 +33,18 @@ const useApiHook = <T>({
       setLoading(true);
       let _method = method === 'get' ? get : post;
       const res = await _method(apiEndpoint, argsOrBody);
-      if (res?.data) {
-        setData(res.data);
-        return;
-      }
+      setData(res);
+      return;
     } catch (e) {
       setError(e as Error);
       return;
     } finally {
       setLoading(false);
     }
+  };
+
+  const transformResponse = (response: any) => {
+    setData(response);
   };
 
   useFocusEffect(
@@ -60,6 +63,7 @@ const useApiHook = <T>({
     data,
     error,
     trigger: apiCallingFunction,
+    transformResponse,
   };
 };
 

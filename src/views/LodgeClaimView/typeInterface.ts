@@ -34,3 +34,19 @@ export interface StepItem {
   label: string;
   key: string;
 }
+export interface DependantList {
+  UNIQUE_NUMBER?: number;
+  CLNTNUM?: number;
+  SECUITYNO?: string;
+  LGIVNAME?: string;
+  CLTSEX?: string;
+  CLTDOB?: number;
+  DPNTNO?: string;
+  EMPNO?: string;
+  AGE?: number;
+  DPNTTYPE?: string;
+  CHDRNUM?: string;
+  PolicyType?: string;
+  value?: string;
+  label?: string;
+}
