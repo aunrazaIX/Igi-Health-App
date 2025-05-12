@@ -72,6 +72,7 @@ const Select: React.FC<SelectProps> = ({
           /> */}
           {selectData?.map(item => (
             <TouchableOpacity
+              key={item?.name}
               style={styles.dropdownItem}
               onPress={() => handleSelect(item)}>
               <AileronBold name={item?.name} style={styles.listText} />

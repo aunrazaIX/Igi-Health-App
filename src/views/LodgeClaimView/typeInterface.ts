@@ -21,6 +21,10 @@ export interface ClaimDetailSection {
   }[];
 }
 
+export interface UploadDocSection {
+  pickFile: () => void;
+}
+
 export interface PatientList {
   value: string | number;
   name: string;

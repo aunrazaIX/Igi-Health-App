@@ -17,32 +17,16 @@ import {vh} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
 import {icons, images} from '../../../assets';
 
-const UploadDoc = () => {
+type UploadDocProps = {
+  pickFile: () => void;
+};
+
+const UploadDoc: React.FC<UploadDocProps> = ({pickFile}) => {
   const [selectedImages, setSelectedImages] = useState<Asset[]>([]);
   const [remarks, setRemarks] = useState('');
   const [confirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
 
-  const pickImage = () => {
-    const options: ImageLibraryOptions = {
-      mediaType: 'photo',
-      // mediaType: 'application/*',
-      // includeBase64: false,
-      quality: 1,
-      selectionLimit: 0,
-    };
-
-    launchImageLibrary(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.errorCode) {
-        console.log('ImagePicker Error:', response.errorMessage);
-      } else if (response.assets && response.assets.length > 0) {
-        console.log('response', response);
-        setSelectedImages(response.assets);
-      }
-    });
-  };
   return (
     <View style={styles.uploadFileContainer}>
       <View>
@@ -55,7 +39,7 @@ const UploadDoc = () => {
             name={'Uploading Supporting\nDocuments'}
             style={styles.supporting}
           />
-          <TouchableOpacity onPress={pickImage}>
+          <TouchableOpacity onPress={pickFile}>
             <AileronSemiBold
               name="Click to Upload"
               style={styles.ClickUpload}

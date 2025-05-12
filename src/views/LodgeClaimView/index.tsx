@@ -6,6 +6,7 @@ import {
   PersonelDataSection,
   PatientList,
   StepItem,
+  UploadDocSection,
 } from './typeInterface';
 
 type LodgeClaimViewProps = {
@@ -15,6 +16,7 @@ type LodgeClaimViewProps = {
   goBack: () => void;
   patientOptions: PatientList[];
   navigateTreatment: () => void;
+  pickFile: () => void;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -24,6 +26,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   goBack,
   patientOptions,
   navigateTreatment,
+  pickFile,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -38,7 +41,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         navigateTreatment={navigateTreatment}
       />
     ),
-    uploadDoc: <UploadDoc />,
+    uploadDoc: <UploadDoc pickFile={pickFile} />,
   };
   return (
     <>

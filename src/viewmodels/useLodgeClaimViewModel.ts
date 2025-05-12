@@ -3,6 +3,7 @@ import {icons} from '../assets';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {get, post} from '../api';
 import endpoints from '../api/endspoints';
+import {pick} from '@react-native-documents/picker';
 
 const useLodgeClaimViewModel = () => {
   const navigation = useNavigation();
@@ -141,6 +142,16 @@ const useLodgeClaimViewModel = () => {
     navigation.navigate('AddTreatment');
   };
 
+  const pickFile = async () => {
+    try {
+      const [pickResult, type] = await pick();
+      // const [pickResult] = await pick({mode:'import'}) // equivalent
+      // do something with the picked file
+    } catch (err: unknown) {
+      // see error handling
+    }
+  };
+
   return {
     states: {
       steps,
@@ -149,7 +160,7 @@ const useLodgeClaimViewModel = () => {
       patientOptions,
       loading,
     },
-    functions: {goBack, navigateTreatment},
+    functions: {goBack, navigateTreatment, pickFile},
   };
 };
 
