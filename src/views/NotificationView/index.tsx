@@ -61,7 +61,7 @@ const NotificationView: React.FC<Props> = ({ NotificationData, selectData, goBac
       <TopView
         title="Notification"
         onPressBack={goBack}
-        TopViewSideIcon={icons.notificationPlan}
+        TopViewFirstIcon={icons.notificationPlan}
         containerStyleIcon={styles.BellIcon}
       />
       <CurvedView>
@@ -101,6 +101,7 @@ const NotificationView: React.FC<Props> = ({ NotificationData, selectData, goBac
           data={NotificationData}
           keyExtractor={(item) => item.id.toString()}
           renderItem={renderNotifications}
+          contentContainerStyle={styles.notificationStyles}
         />
       </CurvedView>
     </>

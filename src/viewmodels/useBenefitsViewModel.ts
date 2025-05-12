@@ -14,7 +14,7 @@ type UseBenefitsViewModel = {
 type CoverageBenefit = {
   title: string;
   price: string;
-  image?: ImageSourcePropType;
+  image: ImageSourcePropType;
 };
 
 const useBenefitsViewModel = (): UseBenefitsViewModel => {

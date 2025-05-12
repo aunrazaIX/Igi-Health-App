@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 
   MaximumTitle: {
-    fontSize: vw * 6,
+    fontSize: vh * 2.7,
     textAlign: 'left',
     marginTop: vh * 1.5,
     color: '#004984',
@@ -81,20 +81,20 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     backgroundColor: COLORS.white,
-    paddingBottom: vh * 3,
+    paddingBottom: vh * 20,
   },
-  CurvedView:{
+  CurvedView: {
     marginBottom: -vh * 4,
   },
   benefitsImage: {
-    resizeMode: 'contain',
-    height: "100%",
+    resizeMode: 'cover',
+    height: '100%',
     width: '100%',
   },
   coverageCardImage: {
     height: vh * 4,
     width: vh * 4,
-    tintColor:COLORS.white
+    tintColor: COLORS.white,
   },
 });
 

@@ -12,7 +12,7 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: '#FFFFFFE5',
+    // background: '#fff',
   },
 };
 const App = () => {
@@ -20,17 +20,14 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <SafeAreaView style={{ flex: 1 }}>
-
-
           <StatusBar
             backgroundColor={COLORS.activeButtonGradient[1]}
-            barStyle="dark-content"
+            // barStyle="dark-content"
           />
-          <NavigationContainer theme={MyTheme}>
+          <NavigationContainer>
             <MainStack />
             {/* <Login /> */}
           </NavigationContainer>
-
         </SafeAreaView>
       </PersistGate>
     </Provider>

@@ -69,6 +69,36 @@ const useNotificationViewModel = (): UseNotificationViewModel => {
       title: 'Claim Request: Your application status awaits, check now.',
       time: 'Today at 11:36 AM',
     },
+    {
+      id: 5,
+      title: 'Claim Request: Your application status awaits, check now.',
+      time: 'Today at 11:36 AM',
+    },
+    {
+      id: 6,
+      title: 'Claim Request: Your application status awaits, check now.',
+      time: 'Today at 11:36 AM',
+    },
+    {
+      id: 7,
+      title: 'Claim Request: Your application status awaits, check now.',
+      time: 'Today at 11:36 AM',
+    },
+    {
+      id: 8,
+      title: 'Claim Request: Your application status awaits, check now.',
+      time: 'Today at 11:36 AM',
+    },
+    {
+      id: 9,
+      title: 'Claim Request: Your application status awaits, check now.',
+      time: 'Today at 11:36 AM',
+    },
+    {
+      id: 10,
+      title: 'Claim Request: Your application status awaits, check now.',
+      time: 'Today at 11:36 AM',
+    },
   ];
 
   const SelectData: NotificatonSelect[] = [

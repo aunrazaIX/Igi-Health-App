@@ -43,7 +43,7 @@ const Tabs = () => {
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
                 <Image
-                  style={[styles.iconStyle, { tintColor: 'white' }]}
+                  style={[styles.iconStyle, { tintColor: 'white' ,  height: vw * 9, width: vw * 9 }]}
                   source={tabIcons.home}
                 />
               </LinearGradient>
@@ -71,13 +71,13 @@ const Tabs = () => {
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
                 <Image
-                  style={[styles.iconStyle, { tintColor: 'white' }]}
+                  style={[styles.iconStyle, { tintColor: 'white'  ,  }]}
                   source={tabIcons.note}
                 />
               </LinearGradient>
             ) : (
               <View style={styles.iconContainer}>
-                <Image style={styles.iconStyle} source={tabIcons.note} />
+                <Image style={styles.iconStyle } source={tabIcons.note} />
               </View>
             ),
         }}
@@ -98,7 +98,7 @@ const Tabs = () => {
                 <Image
                   style={[
                     styles.iconStyle,
-                    { tintColor: 'white', height: vh * 5, width: vw * 9 },
+                    { tintColor: 'white', },
                   ]}
                   source={tabIcons.PriorApproval}
                 />
@@ -106,7 +106,7 @@ const Tabs = () => {
             ) : (
               <View style={styles.iconContainer}>
                 <Image
-                  style={[styles.iconStyle, { height: vh * 5, width: vw * 7 }]}
+                  style={[styles.iconStyle, { }]}
                   source={tabIcons.PriorApproval}
                 />
               </View>
@@ -150,15 +150,15 @@ export default Tabs;
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    elevation: 0,
-    // position: "absolute",
-    // bottom: vh * 2,
+    position: "absolute",
+    bottom: vh * 1,
     backgroundColor: COLORS.white,
     borderRadius: vh * 50,
-    height: vh * 10,
+    height: vw * 22,
     marginHorizontal: vw * 6,
     paddingHorizontal: vw * 2,
-    // marginVertical: vh * 2,
+    marginVertical: vh * 2,
+    elevation: 3,
   },
   iconContainer: {
     padding: vh * 1,
@@ -169,17 +169,19 @@ const styles = StyleSheet.create({
   },
   gradientBorder: {
     paddingHorizontal: vw * 4,
-    paddingVertical: vh * 2.5,
-    borderRadius: vh * 5,
+    paddingVertical: vw * 6,
+    borderRadius: (vw * 25) / 2, 
     justifyContent: 'center',
     alignItems: 'center',
   },
   iconStyle: {
-    height: vh * 4,
+    height: vw *9,
     width: vw * 9,
+    resizeMode:"contain"
+    
   },
-  iconStyleLarge: {
-    height: vh * 6,
-    width: vw * 8,
-  },
+  // iconStyleLarge: {
+  //   height: vw * 8,
+  //   width: vw * 8,
+  // },
 });

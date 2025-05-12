@@ -6,15 +6,18 @@ export const styles = StyleSheet.create({
   gradient: {
     paddingBottom: vh * 2,
     paddingHorizontal: vw * 4,
+  },
+  BottomContainer: {
+    paddingBottom: vh * 17,
+    paddingHorizontal: vw * 4,
     backgroundColor: COLORS.white,
+
   },
   homeHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: vh * 2
-
-
+    marginTop: vh * 2,
   },
   headerLogo: {
     width: 25 * vw,
@@ -31,32 +34,36 @@ export const styles = StyleSheet.create({
   },
   homeInfoContainer: {
     width: '100%',
-    marginTop: vh * 2,
-    paddingHorizontal: vw * 5,
-    paddingVertical: vh * 3,
-    borderRadius: vw * 4,
+    paddingHorizontal: vw * 4,
+    paddingVertical: vh * 2,
+    borderRadius: vw * 6,
     backgroundColor: COLORS.white,
     elevation: 3,
     backfaceVisibility: 'hidden',
-    height: vh * 27,
+    height: vh * 30,
+    // borderWidth:2,
   },
 
   flipCardContainer: {
     width: '100%',
+    // borderWidth:2,
+    marginTop : vh*2,
+    minHeight: vh*30,
+  
   },
   flipBackCard: {
-    marginTop: -vh * 27,
+    marginTop: -vh * 30,
   },
   logo: {
-    width: 24 * vw,
-    height: 6 * vh,
+    width: 28 * vw,
+    height: 7 * vh,
     resizeMode: 'contain',
   },
   homeInfoContainerHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // borderWidth:2
+    // borderWidth: 2
   },
   text: {
     color: COLORS.textColor,
@@ -65,7 +72,7 @@ export const styles = StyleSheet.create({
   statisticsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: vw * 3
+    paddingHorizontal: vw * 3,
   },
   statisticsHeader: {
     fontSize: vw * 5,
@@ -123,13 +130,16 @@ export const styles = StyleSheet.create({
     gap: vh * 0.5,
   },
   homeInfoContainerMiddle: {
-    marginVertical: vh * 2,
+    // marginVertical: vh * 2,
+    justifyContent:"space-between",
+    // borderWidth: 2
+    gap: vh * .5
   },
   homeInfoContainerMiddleText: {
-    justifyContent: 'flex-start',
+    
   },
   infoCardMiddleTextlight: {
-    fontSize: vh * 1.8,
+    fontSize: vw * 5,
     color: COLORS.textColor,
     textAlign: 'left',
   },
@@ -141,14 +151,19 @@ export const styles = StyleSheet.create({
   infoCardFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    // borderWidth: 2
   },
   infoCardFooterTextBold: {
     fontSize: vh * 2.3,
     color: COLORS.textBlackShade,
   },
-  infoCardFooterLeft: {},
+  infoCardFooterLeft: {
+    gap: vh * .5
+  },
   infoCardFooterRight: {
     alignItems: 'flex-end',
+    gap: vh * .5
+    
   },
   dashboardContainerHeader: {
     flexDirection: 'row',
@@ -178,7 +193,7 @@ export const styles = StyleSheet.create({
     marginRight: vw * 3,
     paddingHorizontal: vw * 3.5,
     paddingVertical: vw * 2.5,
-    height: vw * 40
+    height: vw * 40,
   },
   cardLogoContainer: {
     marginVertical: vh * 1,
@@ -232,11 +247,11 @@ export const styles = StyleSheet.create({
   },
 
   homeBackCardContainer: {
-    borderRadius: vw * 4,
     backgroundColor: COLORS.white,
-
-    gap: vh * 0.9,
-    height: vh * 24,
+    justifyContent: 'space-between',
+    height: vh * 27,
+    gap: vh 
+    
   },
   homeBackInfoContainerHeader: {
     flexDirection: 'row',
@@ -308,7 +323,7 @@ export const styles = StyleSheet.create({
     borderRadius: vh * 2.5,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 5,
+    elevation: 1,
   },
   associatedImage: {
     width: vw * 30,

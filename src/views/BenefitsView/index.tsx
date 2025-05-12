@@ -24,7 +24,7 @@ type Props = {
 };
 
 const BenefitsView: React.FC<Props> = ({ data, goBack }) => {
- 
+
   const RenderBenefits = ({ item }: { item: Item }) => (
     <View style={styles.card}>
       <LinearGradient
@@ -42,49 +42,49 @@ const BenefitsView: React.FC<Props> = ({ data, goBack }) => {
 
   const headerComponent = () => (
     <View>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0.8, y: 0 }}
-          colors={COLORS.benefitsCardGradient}
-          style={styles.BenefitsGradients}>
-          <View style={styles.Maximum}>
-            <View style={styles.MaximumLeftBox}>
-              <Image source={images.Logo} style={styles.benefitsLogo} />
-              <AileronBold
-                name={'Maximum\nHospitalization'}
-                style={styles.MaximumTitle}
-              />
-              <AileronBold name={'Benefits!'} style={styles.BenefitsTitle} />
-            </View>
-            <View style={styles.MaximumRightBox}>
-              <Image
-                style={styles.benefitsImage}
-                source={images.maximumBenefits}
-              />
-            </View>
+      <LinearGradient
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
+        colors={COLORS.benefitsCardGradient}
+        style={styles.BenefitsGradients}>
+        <View style={styles.Maximum}>
+          <View style={styles.MaximumLeftBox}>
+            <Image source={images.Logo} style={styles.benefitsLogo} />
+            <AileronBold
+              name={'Maximum\nHospitalization'}
+              style={styles.MaximumTitle}
+            />
+            <AileronBold name={'Benefits!'} style={styles.BenefitsTitle} />
           </View>
-        </LinearGradient>
-        <View style={styles.coverage}>
-          <AileronBold name={'Coverage &'} style={styles.coverageTitle} />
-          <AileronBold name={' Benefits!'} style={styles.benefitTitle} />
+          <View style={styles.MaximumRightBox}>
+            <Image
+              style={styles.benefitsImage}
+              source={images.maximumBenefits}
+            />
+          </View>
         </View>
+      </LinearGradient>
+      <View style={styles.coverage}>
+        <AileronBold name={'Coverage &'} style={styles.coverageTitle} />
+        <AileronBold name={' Benefits!'} style={styles.benefitTitle} />
+      </View>
 
     </View>
-    
+
   );
   return (
     <>
-    <TopView title={'Benefits'} onPressBack={goBack} />
-    <CurvedView containerStyle={styles.CurvedView}>
-    <FlatList
-      ListHeaderComponent={headerComponent}
-      data={data}
-      renderItem={RenderBenefits}
-      keyExtractor={(_, index) => index.toString()}
-      numColumns={3}
-      contentContainerStyle={styles.flatListContainer}
-    />
-    </CurvedView>
+      <TopView title={'Benefits'} onPressBack={goBack} />
+      <CurvedView containerStyle={styles.CurvedView}>
+        <FlatList
+          ListHeaderComponent={headerComponent}
+          data={data}
+          renderItem={RenderBenefits}
+          keyExtractor={(_, index) => index.toString()}
+          numColumns={3}
+          contentContainerStyle={styles.flatListContainer}
+        />
+      </CurvedView>
     </>
   );
 };

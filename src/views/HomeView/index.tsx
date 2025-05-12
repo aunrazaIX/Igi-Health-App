@@ -15,6 +15,7 @@ import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
+import { vh } from '../../assets/theme/dimension';
 
 type CardItem = {
   logo: any;
@@ -31,7 +32,7 @@ type HomeViewProps = {
   frontAnimatedStyle: {};
   toggleDrawer: () => void;
   onPressMenu: () => void;
-  onPressHeaderIcon : ()=>void
+  onPressHeaderIcon: () => void
 };
 
 const HomeView: React.FC<HomeViewProps> = ({
@@ -44,11 +45,9 @@ const HomeView: React.FC<HomeViewProps> = ({
   backAnimatedStyle,
 }) => {
   return (
-    // <View style={styles.homeContainer}>
-    <SafeAreaView>
+    <View>
       <ScrollView>
-        <LinearGradient
-          style={styles.gradient}
+        <LinearGradient style={styles.gradient}
           colors={['rgba(11, 74, 152, 1)', 'rgba(72, 195, 255, 1)']}>
           <View style={styles.homeHeader}>
             <View>
@@ -60,7 +59,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                 <Image source={icons.search} style={styles.headerIcons} />
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() =>onPressHeaderIcon("Notifications") }>
+              <TouchableOpacity onPress={() => onPressHeaderIcon("Notifications")}>
                 <Image source={icons.notification} style={styles.headerIcons} />
               </TouchableOpacity>
 
@@ -69,9 +68,10 @@ const HomeView: React.FC<HomeViewProps> = ({
               </TouchableOpacity>
             </View>
           </View>
+
           <View style={styles.flipCardContainer}>
             <Animated.View style={[styles.homeInfoContainer, frontAnimatedStyle]}>
-              <TouchableOpacity onPress={animateCard}>
+              <TouchableOpacity onPress={animateCard} style={{ justifyContent: 'space-between', height: '100%' }}>
                 <View style={styles.homeInfoContainerHeader}>
                   <View>
                     <Image style={styles.logo} source={icons.logo} />
@@ -95,7 +95,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                 <View style={styles.homeInfoContainerMiddle}>
                   <View style={styles.homeInfoContainerMiddleText}>
                     <AileronSemiBold
-                      name={'Policy Number: 12345'}
+                      name={`Policy Number: ${"12345"}`}
                       style={styles.infoCardMiddleTextlight}
                       numberOfLines={1}
                     />
@@ -153,60 +153,62 @@ const HomeView: React.FC<HomeViewProps> = ({
                 backAnimatedStyle,
                 styles.flipBackCard,
               ]}>
+
               <TouchableOpacity onPress={animateCard}>
                 <View style={styles.homeBackCardContainer}>
-                  <View style={styles.homeBackCardHeading}>
-                    <AileronBold
-                      style={styles.homeBackCardHeadingBlack}
-                      name={'Dependent'}
-                    />
-                    <AileronBold
-                      style={styles.homeBackCardHeadingColor}
-                      name={'Details'}
-                    />
-                  </View>
-
-                  <AileronRegular
-                    name="Madhia Imran Qureshi: 36"
-                    style={styles.homeBackCardText}
-                  />
-
-                  <AileronRegular
-                    name="Saad Imran Qureshi: 8"
-                    style={styles.homeBackCardText}
-                  />
-
-                  <View style={styles.homeBackCardRow}>
-                    <View style={styles.homeBackCardRowText}>
-                      <AileronRegular
-                        style={styles.homeBackCardText}
-                        name="Tariq Imran Qureshi: 5"
+                  <View style={{ justifyContent: 'space-between', gap: vh*1.5 }}>
+                    <View style={styles.homeBackCardHeading}>
+                      <AileronBold
+                        style={styles.homeBackCardHeadingBlack}
+                        name={'Dependent'}
                       />
-                      <AileronRegular
-                        name="Emaan Imran Qureshi: 6"
-                        style={styles.homeBackCardText}
+                      <AileronBold
+                        style={styles.homeBackCardHeadingColor}
+                        name={'Details'}
                       />
                     </View>
-                    <TouchableOpacity onPress={animateCard}>
-                      <Image source={images.flipCard} />
-                    </TouchableOpacity>
-                  </View>
 
-                  <View style={styles.homeBackCardTextRow}>
-                    <AileronSemiBold
+                    <AileronRegular
+                      name="Madhia Imran Qureshi: 36"
                       style={styles.homeBackCardText}
-                      name="Class: 0000"
                     />
-                    <AileronSemiBold
-                      style={styles.homeBackCardText}
-                      name="Cert No: 491"
-                    />
-                    <AileronSemiBold
-                      style={styles.homeBackCardText}
-                      name="Age: 41"
-                    />
-                  </View>
 
+                    <AileronRegular
+                      name="Saad Imran Qureshi: 8"
+                      style={styles.homeBackCardText}
+                    />
+
+                    <View style={styles.homeBackCardRow}>
+                      <View style={styles.homeBackCardRowText}>
+                        <AileronRegular
+                          style={styles.homeBackCardText}
+                          name="Tariq Imran Qureshi: 5"
+                        />
+                        <AileronRegular
+                          name="Emaan Imran Qureshi: 6"
+                          style={styles.homeBackCardText}
+                        />
+                      </View>
+                      <TouchableOpacity onPress={animateCard}>
+                        <Image source={images.flipCard} />
+                      </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.homeBackCardTextRow}>
+                      <AileronSemiBold
+                        style={styles.homeBackCardText}
+                        name="Class: 0000"
+                      />
+                      <AileronSemiBold
+                        style={styles.homeBackCardText}
+                        name="Cert No: 491"
+                      />
+                      <AileronSemiBold
+                        style={styles.homeBackCardText}
+                        name="Age: 41"
+                      />
+                    </View>
+                  </View>
                   <View style={styles.backCardFooter}>
                     <View style={styles.backCardFooterBox}>
                       <Image
@@ -249,7 +251,8 @@ const HomeView: React.FC<HomeViewProps> = ({
             </Animated.View>
           </View>
         </LinearGradient>
-        <View style={styles.gradient}>
+
+        <View style={styles.BottomContainer}>
           <View>
             <View style={styles.dashboardContainerHeader}>
               <AileronBold
@@ -391,7 +394,7 @@ const HomeView: React.FC<HomeViewProps> = ({
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

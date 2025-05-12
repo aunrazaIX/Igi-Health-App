@@ -14,12 +14,6 @@ import { COLORS } from '../../../assets/theme/colors';
 import { useDispatch } from 'react-redux';
 import { setToken, setUser } from '../../../redux/authSlice';
 import {User} from '../../../viewmodels/useLoginViewModel'
-import { clampRGBA } from 'react-native-reanimated/lib/typescript/Colors';
-
-
-
-
-
 
 
 
@@ -91,23 +85,25 @@ const LoginForm = ({ onPressforgotPassword, user , setuser }: { onPressforgotPas
       <AileronBold style={styles.orText} name="Or" />
 
       <View style={styles.loginOptionContainer}>
-        <View style={styles.loginOptionBox}>
+
+        
+        <TouchableOpacity style={styles.loginOptionBox}>
           <Image
             style={styles.loginOptionContainerIcons}
             source={icons.faceID}
           />
           <AileronBold style={style.style} name={'Face ID'} />
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.verticalLine} />
 
-        <View style={styles.loginOptionBox}>
+        <TouchableOpacity style={styles.loginOptionBox}>
           <Image
             style={styles.loginOptionContainerIcons}
             source={icons.fingerprint}
           />
           <AileronBold style={style.style} name={'Biometric'} />
-        </View>
+        </TouchableOpacity>
       </View>
     </>
   );

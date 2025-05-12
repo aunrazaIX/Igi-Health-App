@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   header: {},
   infoContainer: {
     flex: 1,
+    paddingBottom: vh * 6,
   },
   infoContainerTop: {
     flexDirection: 'row',
@@ -18,6 +19,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.buttonBackground,
     paddingVertical: vh * 0.3,
     paddingHorizontal: vw * 0.5,
+    
   },
 
   button: {
@@ -27,7 +29,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: vw * 2.5,
-    paddingVertical: vh * 1.4,
+    // paddingVertical: vh,
     borderRadius: vw * 1,
     color: COLORS.textBlackShade,
   },
@@ -37,9 +39,24 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 2,
+    gap: vw * 2,  
     borderRadius: vw * 2.5,
     width: '50%',
+    // paddingVertical : vh*3
+    paddingVertical: vh,
+    
+   
+    
+    
+
+
+  },
+  paidAmountIcon:{
+
+    width : vw*7.5,
+    height  :vw*7.5,
+
+
   },
 
   infoContainerSecondTop: {
@@ -58,10 +75,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: vw * 2,
-    paddingHorizontal: vw * 8,
+   
     paddingVertical: vh * 1.4,
     borderRadius: vw * 2.5,
     width: '33%',
+
   },
 
   activeButton: {
@@ -75,6 +93,7 @@ export const styles = StyleSheet.create({
     borderRadius: vw * 2,
     color: COLORS.textBlackShade,
     width: '33%',
+    
   },
 
   calendarButtonsContainer: {
@@ -91,11 +110,30 @@ export const styles = StyleSheet.create({
   buttonTextActive: {
     color: COLORS.white,
     fontSize: vh * 1.7,
+   
   },
   infoContainerSecondTopButtonText: {
     color: COLORS.textGrayShade,
     fontSize: vh * 1.5,
   },
+
+  detailsTextLabel: {
+    width: '20%',
+    textAlign: 'left',
+  },
+
+  detailsTextValue: {
+    width: '60%',
+    textAlign: 'right',
+   
+  },
+
+  detailsText: {},
+  inputFeild: {
+    borderWidth: 2,
+    height: vh * 7,
+  },
+
   buttonText: {
     color: COLORS.textGrayShade,
     fontSize: vh * 1.7,
@@ -103,8 +141,5 @@ export const styles = StyleSheet.create({
 
   cardText: {
     fontSize: vh * 2,
-  },
-  containerStyle: {
-    paddingHorizontal: vw * 6,
   },
 });
