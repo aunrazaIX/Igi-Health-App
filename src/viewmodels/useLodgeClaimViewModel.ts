@@ -121,7 +121,7 @@ const useLodgeClaimViewModel = () => {
       claimsDetails,
       patientOptions,
       loading,
-      dependants,
+      dependants: dependants,
     },
     functions: {goBack, navigateTreatment, pickFile},
   };

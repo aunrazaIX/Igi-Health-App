@@ -7,12 +7,12 @@ import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 
-type Patient = {
+type Options = {
   value: number;
   label: string;
 };
 type SelectProps = {
-  selectData: Patient[];
+  selectData: Options[];
   selectLabel?: string;
   selectPlaceholder: string;
 };
@@ -22,10 +22,10 @@ const Select: React.FC<SelectProps> = ({
   selectLabel,
   selectPlaceholder,
 }) => {
-  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const [selectedPatient, setSelectedPatient] = useState<Options | null>(null);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
-  const handleSelect = (item: Patient) => {
+  const handleSelect = (item: Options) => {
     setSelectedPatient(item);
     setDropdownVisible(false);
   };
@@ -34,7 +34,6 @@ const Select: React.FC<SelectProps> = ({
     <View style={styles.selectContainer}>
       <DependentBox containerStyle={styles.dependentContainer}>
         <AileronRegular name={selectLabel} style={styles.Patient} />
-
         <TouchableOpacity
           onPress={() => setDropdownVisible(!isDropdownVisible)}>
           <View style={styles.selectBox}>
@@ -52,25 +51,15 @@ const Select: React.FC<SelectProps> = ({
 
       {isDropdownVisible && (
         <View style={styles.dropdown}>
-          {/* <FlatList
-            data={selectData}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => (
+          {selectData?.length > 0 &&
+            selectData?.map(item => (
               <TouchableOpacity
+                key={item?.label}
                 style={styles.dropdownItem}
                 onPress={() => handleSelect(item)}>
-                <AileronBold name={item.name} style={styles.listText} />
+                <AileronBold name={item?.label} style={styles.listText} />
               </TouchableOpacity>
-            )}
-          /> */}
-          {selectData?.map(item => (
-            <TouchableOpacity
-              key={item?.label}
-              style={styles.dropdownItem}
-              onPress={() => handleSelect(item)}>
-              <AileronBold name={item?.label} style={styles.listText} />
-            </TouchableOpacity>
-          ))}
+            ))}
         </View>
       )}
     </View>
