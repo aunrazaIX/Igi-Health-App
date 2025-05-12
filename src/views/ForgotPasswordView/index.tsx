@@ -1,6 +1,10 @@
 import React, { JSX } from 'react';
 import { CreateNewPassword, EnterEmailView, OtpView } from './components';
-import { icons } from '../../assets';
+import ConfirmationModal from '../../components/Modal/confimationModal';
+import { icons, images } from '../../assets';
+
+
+
 import {
   AileronBold,
   AileronRegular,
@@ -70,11 +74,24 @@ const ForgotPasswordView = ({
 
 
         <Button
-          onPress={() => handleStep(step)}
+          onPress={() => {
+
+            if (step === 3) {
+              console.log("heyyy")
+            }
+            else {
+
+              handleStep(step)
+            }
+
+          }}
           name={returnButtonName[step]}
           containerStyle={styles.button}
         />
       </CurvedView>
+
+
+
     </Container>
   );
 };

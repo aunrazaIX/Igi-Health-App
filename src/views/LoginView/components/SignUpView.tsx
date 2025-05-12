@@ -7,7 +7,8 @@ import { StyleSheet, View } from 'react-native';
 import { COLORS } from '../../../assets/theme/colors';
 
 
-const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string) => void, onPressTab: () => void }) => {
+
+const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string, step?: number) => void, onPressTab: () => void }) => {
   return (
     <>
       <AileronSemiBold
@@ -86,7 +87,7 @@ const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string) => void, on
 
 
 
-      <Button onPress={() => { onPressTab('login'); { onPress('Login') } }} containerStyle={styles.loginButton} name="Create Account" />
+      <Button onPress={() => { onPress('ForgotPassword', 2) }} containerStyle={styles.loginButton} name="Create Account" />
     </>
   );
 };

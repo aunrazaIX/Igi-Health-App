@@ -13,19 +13,19 @@ import { vh, vw } from '../../../assets/theme/dimension';
 import { COLORS } from '../../../assets/theme/colors';
 import { useDispatch } from 'react-redux';
 import { setToken, setUser } from '../../../redux/authSlice';
-import {User} from '../../../viewmodels/useLoginViewModel'
+import { User } from '../../../viewmodels/useLoginViewModel'
 
 
 
 
-const LoginForm = ({ onPress}: { onPress: (to: string) => void }) => {
+const LoginForm = ({ onPress }: { onPress: (to: string) => void }) => {
 
   const dispatch = useDispatch();
 
 
 
 
-  const handleLogin = ()=>{
+  const handleLogin = () => {
     dispatch(setToken("usman"))
   }
 
@@ -46,23 +46,23 @@ const LoginForm = ({ onPress}: { onPress: (to: string) => void }) => {
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
-         
- 
-          
+
+
+
         />
 
         <InputField
           label="Your Password"
           secureTextEntry
           placeholder="Enter Password"
-          // containerStyle={style.inputContainer}
+        // containerStyle={style.inputContainer}
 
-          // labelStyle={style.labelStyle}
-          // inputStyle={style.inputStyle}
-      
+        // labelStyle={style.labelStyle}
+        // inputStyle={style.inputStyle}
 
-     
-          
+
+
+
         />
 
       </View>
@@ -77,13 +77,13 @@ const LoginForm = ({ onPress}: { onPress: (to: string) => void }) => {
         </TouchableOpacity>
       </View>
 
-      <Button onPress={handleLogin}   showIcon={icons.loginArrow} containerStyle={styles.loginButton} name="Login" />
+      <Button onPress={handleLogin} showIcon={icons.loginArrow} containerStyle={styles.loginButton} name="Login" />
 
       <AileronBold style={styles.orText} name="Or" />
 
       <View style={styles.loginOptionContainer}>
 
-        
+
         <TouchableOpacity style={styles.loginOptionBox}>
           <Image
             style={styles.loginOptionContainerIcons}

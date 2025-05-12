@@ -25,11 +25,11 @@ const OtpView = () => {
   return (
     <Fragment>
       <OtpInput
-        numberOfDigits={6}
+        numberOfDigits={5}
         focusColor={COLORS.black}
         autoFocus={true}
         hideStick={true}
-        placeholder="------"
+        placeholder="-------"
         blurOnFilled={true}
         disabled={false}
         type="numeric"

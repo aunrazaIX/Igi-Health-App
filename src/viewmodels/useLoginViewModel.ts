@@ -27,17 +27,15 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
   const onPressTab = (name: string) => setSelectedTab(name);
 
-  const onPress = (to: string) => {
-    navigation.navigate(to)
+  const onPress = (to: string, step?: number) => {
+    navigation.navigate(to, step);
+  };
 
-  }
 
 
-  
 
-  
 
- 
+
 
 
   const [user, setuser] = useState<User>({
@@ -47,7 +45,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
 
 
-  console.log(user , "uuuuuuuu")
+  console.log(user, "uuuuuuuu")
 
 
   const tabs = ['login', 'signup']
@@ -55,7 +53,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
   return {
     states: {
-      selectedTab, tabs, user , 
+      selectedTab, tabs, user,
     },
     functions: {
       onPressTab,
