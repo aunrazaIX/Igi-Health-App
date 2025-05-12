@@ -9,7 +9,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 
 type Patient = {
   value: number;
-  name: string;
+  label: string;
 };
 type SelectProps = {
   selectData: Patient[];
@@ -65,10 +65,10 @@ const Select: React.FC<SelectProps> = ({
           /> */}
           {selectData?.map(item => (
             <TouchableOpacity
-              key={item?.name}
+              key={item?.label}
               style={styles.dropdownItem}
               onPress={() => handleSelect(item)}>
-              <AileronBold name={item?.name} style={styles.listText} />
+              <AileronBold name={item?.label} style={styles.listText} />
             </TouchableOpacity>
           ))}
         </View>

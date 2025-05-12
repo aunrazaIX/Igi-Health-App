@@ -32,10 +32,8 @@ const useApiHook = <T>({
       setLoading(true);
       let _method = method === 'get' ? get : post;
       const res = await _method(apiEndpoint, argsOrBody);
-      if (res?.data) {
-        setData(res.data);
-        return;
-      }
+      setData(res);
+      return;
     } catch (e) {
       setError(e as Error);
       return;

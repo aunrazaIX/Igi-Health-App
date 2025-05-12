@@ -2,9 +2,12 @@ const endpoints = {
   bank: {
     getBankDetails: 'Bank/GetBankDetails',
   },
+  dependants: {
+    getDependants: 'UserRelation/GetOPD',
+  },
   claimLogde: {
-    attachment: (userId, myuuid, ClientCode) =>
-      `Attachment/upload?userId=${userId}&UUID=${myuuid.ToString()}&ClientCode=${ClientCode}`,
+    attachment: (userId: string, myuuid: string, ClientCode: string) =>
+      `Attachment/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
   },
 };
 

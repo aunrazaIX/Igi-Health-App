@@ -7,11 +7,13 @@ import {
   PatientList,
   StepItem,
   UploadDocSection,
+  DependantList,
 } from './typeInterface';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
   personalData: PersonelDataSection[];
+  dependants: DependantList[];
   claimsDetails: ClaimDetailSection[];
   goBack: () => void;
   patientOptions: PatientList[];
@@ -23,8 +25,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   steps,
   personalData,
   claimsDetails,
+  dependants,
   goBack,
-  patientOptions,
   navigateTreatment,
   pickFile,
 }) => {
@@ -32,7 +34,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
     personalDetails: (
       <PersonalDetails
         personalData={personalData}
-        patientOptions={patientOptions}
+        patientOptions={dependants}
       />
     ),
     claim: (
