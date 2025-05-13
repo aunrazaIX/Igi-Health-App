@@ -1,15 +1,32 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-const initalState = {
+interface User {
+  // Define the user structure based on your app (adjust as needed)
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface AuthState {
+  user: User | null;
+  token: string | null;
+}
+
+const initialState: AuthState = {
   user: null,
   token: null,
 };
 
+interface SetUserDataPayload {
+  Token: string;
+  Data: User;
+}
+
 export const authSlice = createSlice({
   name: 'authSlice',
-  initialState: initalState,
+  initialState,
   reducers: {
-    setUserData: (state, action) => {
+    setUserData: (state, action: PayloadAction<SetUserDataPayload>) => {
       const {Token, Data} = action.payload;
       state.user = Data;
       state.token = Token;
@@ -20,5 +37,6 @@ export const authSlice = createSlice({
     },
   },
 });
+
 export const {setUserData, logout} = authSlice.actions;
 export const authReducer = authSlice.reducer;
