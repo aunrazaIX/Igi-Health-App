@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     paddingVertical: vh * 2,
+    paddingBottom: vh * 15,
     paddingHorizontal: vw * 5,
     backgroundColor: COLORS.white,
-    // bottom: vh * 4,
     borderTopLeftRadius: vw * 8,
     borderTopRightRadius: vw * 8,
     height: '100%',

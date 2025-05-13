@@ -1,11 +1,74 @@
 import {icons} from '../assets';
-import {useNavigation} from '@react-navigation/native';
 import endpoints from '../api/endspoints';
-import {pick} from '@react-native-documents/picker';
 import useApiHook from '../hooks/useApiHook';
+import {useCallback, useState} from 'react';
+import {
+  useFocusEffect,
+  NavigationProp,
+  RouteProp,
+} from '@react-navigation/native';
 
-const useLodgeClaimViewModel = () => {
-  const navigation = useNavigation();
+interface Treatment {
+  receiptNumber?: string;
+  description?: string;
+  amount?: string;
+  treatment?: {label: string; value: string};
+}
+
+interface ClaimDetail {
+  sectionTitle?: string;
+  icon: string;
+  info: {
+    label: string;
+    value: string;
+    total?: boolean;
+  }[];
+}
+
+interface Step {
+  label: string;
+  key: string;
+}
+
+interface PersonalInfoSection {
+  sectionTitle: string;
+  icon: string;
+  edit: boolean;
+  delete: boolean;
+  info: {
+    label: string;
+    value: string;
+  }[];
+}
+
+interface Props {
+  navigation: NavigationProp<any>;
+  route: RouteProp<any>;
+}
+
+const useLodgeClaimViewModel = ({navigation, route}: Props) => {
+  const {treatments, stepFromTreatment} = route?.params || {};
+  const [_treatments, setTreatments] = useState<Treatment[]>([]);
+  const [selectedPatient, setSelectedPatient] = useState<any>(null);
+  const [currentStep, setCurrentStep] = useState<number>(1);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (stepFromTreatment) {
+        setCurrentStep(stepFromTreatment);
+      }
+      if (treatments) {
+        setTreatments(treatments);
+      }
+
+      return () => {
+        setCurrentStep(1);
+        setTreatments([]);
+        setSelectedPatient(null);
+      };
+    }, [treatments, stepFromTreatment]),
+  );
+
   const {data: dependants, loading} = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
@@ -13,17 +76,20 @@ const useLodgeClaimViewModel = () => {
       cnic: '14102-5322315-7',
       ClientCode: 'DEMO',
     },
+    transform: {
+      keyToLoop: 'Data',
+      label: 'LGIVNAME',
+      value: 'CLNTNUM',
+    },
   });
 
-  const steps = [
-    {
-      label: 'Personal Details',
-      key: 'personalDetails',
-    },
+  const steps: Step[] = [
+    {label: 'Personal Details', key: 'personalDetails'},
     {label: 'Claim', key: 'claim'},
     {label: 'Upload Doc', key: 'uploadDoc'},
   ];
-  const personalData = [
+
+  const personalData: PersonalInfoSection[] = [
     {
       sectionTitle: 'Personal Details',
       icon: icons.personalDetail,
@@ -50,80 +116,47 @@ const useLodgeClaimViewModel = () => {
     },
   ];
 
-  const claimsDetails = [
-    {
-      sectionTitle: 'Treatment Description',
-      icon: icons.stethoscope,
-      edit: true,
-      delete: true,
-      info: [
-        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
-        {label: 'Receipt Number:', value: '89876543'},
-        {label: 'Claim Status:', value: 'Description:'},
-        {label: 'Amount:', value: '28827', total: true},
-      ],
-    },
-    {
-      sectionTitle: 'Treatment Description',
-      icon: icons.stethoscope,
-      edit: true,
-      delete: true,
-      info: [
-        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
-        {label: 'Receipt Number:', value: '89876543'},
-        {label: 'Claim Status:', value: 'Description:'},
-        {label: 'Amount:', value: '28827', total: true},
-      ],
-    },
-    {
-      sectionTitle: 'Treatment Description',
-      icon: icons.stethoscope,
-      edit: true,
-      delete: true,
-      info: [
-        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
-        {label: 'Receipt Number:', value: '89876543'},
-        {label: 'Claim Status:', value: 'Description:'},
-        {label: 'Amount:', value: '28827', total: true},
-      ],
-    },
-  ];
+  const claimsDetails: ClaimDetail[] = _treatments?.map((item: Treatment) => ({
+    sectionTitle: item?.treatment?.label,
+    icon: icons.stethoscope,
+    info: [
+      {label: 'Receipt Number:', value: item?.receiptNumber ?? '--'},
+      {label: 'Amount:', value: item?.amount ?? '--', total: true},
+      {label: 'Description:', value: item?.description ?? '--'},
+    ],
+  }));
 
-  const patientOptions = [
-    {
-      name: 'Imran Naveed Qureshi',
-      value: 'Imran',
-    },
-  ];
-
-  const goBack = () => {
-    navigation.goBack();
-  };
-
+  const goBack = () => navigation.goBack();
+  const onPressStep = (step: number) => setCurrentStep(step);
   const navigateTreatment = () => {
-    navigation.navigate('AddTreatment');
+    navigation.navigate('AddTreatment', {allTreatments: _treatments});
   };
-
-  const pickFile = async () => {
-    try {
-      const [pickResult, type] = await pick();
-      // const [pickResult] = await pick({mode:'import'}) // equivalent
-      // do something with the picked file
-    } catch (err: unknown) {
-      // see error handling
-    }
+  const onPressDelete = (index: number) => {
+    const temp = [..._treatments];
+    temp.splice(index, 1);
+    setTreatments(temp);
   };
+  const onSelectPatient = (patient: any) => setSelectedPatient(patient);
+  const onPressNext = () => setCurrentStep(currentStep + 1);
 
   return {
     states: {
       steps,
       personalData,
       claimsDetails,
-      patientOptions,
       loading,
-      dependants: dependants,
+      currentStep,
+      dependants,
+      selectedPatient,
     },
-    functions: {goBack, navigateTreatment, pickFile},
+    functions: {
+      goBack,
+      navigateTreatment,
+      onPressNext,
+      onPressDelete,
+      onPressStep,
+      onSelectPatient,
+    },
   };
 };
 
