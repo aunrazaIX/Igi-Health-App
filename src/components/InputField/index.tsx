@@ -63,7 +63,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
         style={[
           styles.container,
           containerStyle,
-          multiline && {height: vh * 10},
+          multiline && {height: vh * 11},
         ]}>
         {label && (
           <View style={styles.labelContainer}>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderWidth: 1,
     borderColor: COLORS.black + '22',
-    height: vh * 6.5,
+    height: vh * 8,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
     marginVertical: vh * 1.5,
@@ -169,8 +169,8 @@ const styles = StyleSheet.create({
     bottom: vh * 1.5,
   },
   eyeIcon: {
-    width: '100%',
-    height: '100%',
+    width: vw * 7,
+    height: vw * 7,
     resizeMode: 'contain',
     top: vh * 0.5,
   },

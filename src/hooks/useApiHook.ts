@@ -9,7 +9,7 @@ type ApiHookParams = {
   method: string;
   refetchOnArgumentChange?: boolean;
   transform?: any;
-  onSuccess?: () => any;
+  onSuccess?: (data: any) => void;
 };
 
 type ApiHookReturn<T> = {

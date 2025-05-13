@@ -20,16 +20,17 @@ import {personalDetail} from '../../types/personalTypes';
 type ModalCustomProps = {
   modalVisible: boolean;
   setModalVisible: (val: boolean) => void;
-  expanded: boolean;
   gender: personalDetail[];
   relation: personalDetail[];
+  onPressSubmit?: () => void;
 };
 
-const ModalCustom: React.FC<ModalCustomProps> = ({
+const AddModal: React.FC<ModalCustomProps> = ({
   modalVisible,
   setModalVisible,
   gender,
   relation,
+  onPressSubmit,
 }) => {
   return (
     <Modal
@@ -65,7 +66,11 @@ const ModalCustom: React.FC<ModalCustomProps> = ({
                 name="Dependent Name"
                 style={styles.selectLabel}
               />
-              <TextInput style={styles.popupInput} />
+              <TextInput
+                style={styles.popupInput}
+                placeholder="Enter Name"
+                placeholderTextColor={COLORS.selectPlaceholder}
+              />
             </DependentBox>
 
             <Select
@@ -82,13 +87,18 @@ const ModalCustom: React.FC<ModalCustomProps> = ({
 
             <DependentBox containerStyle={styles.dependentOuterStyle}>
               <AileronRegular name="Age" style={styles.selectLabel} />
-              <TextInput style={styles.popupInput} />
+              <TextInput
+                style={styles.popupInput}
+                placeholder="Enter Age"
+                placeholderTextColor={COLORS.selectPlaceholder}
+              />
             </DependentBox>
 
             <Button
               name="Submit"
               containerStyle={styles.modalAddButton}
               inputStyle={styles.modalAddText}
+              onPress={onPressSubmit}
             />
 
             <Button
@@ -96,6 +106,7 @@ const ModalCustom: React.FC<ModalCustomProps> = ({
               containerStyle={styles.modalCancelButton}
               gradientColors={['#E1E3E6', '#E1E3E6']}
               inputStyle={styles.modalCancelText}
+              onPress={() => setModalVisible(false)}
             />
           </View>
         </View>
@@ -104,7 +115,7 @@ const ModalCustom: React.FC<ModalCustomProps> = ({
   );
 };
 
-export default ModalCustom;
+export default AddModal;
 
 const styles = StyleSheet.create({
   centeredView: {
