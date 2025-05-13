@@ -72,7 +72,7 @@ const LoginForm = ({ onPress }: { onPress: (to: string) => void }) => {
           description="Remember me"
         />
 
-        <TouchableOpacity onPress={() => { onPress("ForgotPassword") }}>
+        <TouchableOpacity onPress={() => { onPress("ForgotPassword", 1) }}>
           <AileronBold style={styles.forgetPassword} name="Forgot Password ?" />
         </TouchableOpacity>
       </View>

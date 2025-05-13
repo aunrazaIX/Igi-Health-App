@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { InputField, Button, AileronSemiBold } from '../../../components';
 import { styles } from '../styles';
 import { icons } from '../../../assets';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { StyleSheet, View } from 'react-native';
 import { COLORS } from '../../../assets/theme/colors';
+import { clampRGBA } from 'react-native-reanimated/lib/typescript/Colors';
 
-
+type userDetails = {
+  name: string,
+  email: string,
+  cnicNum: string
+}
 
 const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string, step?: number) => void, onPressTab: () => void }) => {
+
+
+
+  const [userDetails, setUserDetails] = useState<userDetails>({
+
+    name: "",
+    email: "",
+    cnicNum: ""
+  })
+
+  console.log(userDetails, "details")
+
   return (
     <>
       <AileronSemiBold
@@ -23,6 +40,8 @@ const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string, step?: numb
         label="Your Name"
         placeholder="Enter Full Name"
         rightIcon={icons.name}
+        value={userDetails.name}
+        onChangeText={(text) => setUserDetails((prev) => ({ ...prev, name: text }))}
       />
       <InputField
         containerStyle={style.inputContainer}
@@ -31,13 +50,17 @@ const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string, step?: numb
         label="Your Email"
         placeholder="Enter Email Address"
         rightIcon={icons.email}
+        value={userDetails.email}
+        onChangeText={(text) => setUserDetails((prev) => ({ ...prev, email: text }))}
       />
+
       <InputField
-
-
         label="CNIC Number"
         placeholder="12345-6789012-3"
         rightIcon={icons.cnic}
+        value={userDetails.cnicNum}
+        onChangeText={(text) => setUserDetails((prev) => ({ ...prev, cnicNum: text }))}
+
 
       />
 
@@ -87,7 +110,7 @@ const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string, step?: numb
 
 
 
-      <Button onPress={() => { onPress('ForgotPassword', 2) }} containerStyle={styles.loginButton} name="Create Account" />
+      <Button onPress={() =>{ onPress('ForgotPassword', { stepNum:  2, type: 'signup' }) } } containerStyle={styles.loginButton} name="Create Account" />
     </>
   );
 };

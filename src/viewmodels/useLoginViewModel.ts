@@ -14,8 +14,9 @@ type UseLoginViewModelReturn = {
   };
   functions: {
     onPressTab: (name: string) => void;
-    onPress: (to: string) => void
+    onPress: (to: string, params?: { stepNum?: number; type?: string }) => void
     setuser: React.Dispatch<React.SetStateAction<User>>;
+
   };
 };
 
@@ -27,13 +28,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
   const onPressTab = (name: string) => setSelectedTab(name);
 
-  const onPress = (to: string, step?: number) => {
-    navigation.navigate(to, step);
+  const onPress = (to: string, params?: { stepNum?: number; type?: string }) => {
+    navigation.navigate(to, params);
   };
-
-
-
-
 
 
 
