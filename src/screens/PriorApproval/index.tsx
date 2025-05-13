@@ -1,16 +1,20 @@
+import {View, Text} from 'react-native';
 import React from 'react';
-import PriorApprovalView from '../../views/PriorApprovalView';
-import patientDetailsViewModal from '../../viewmodels/usePatientsDetailsViewModel';
-import patientSelectViewModal from '../../viewmodels/usePatientSelectViewModel';
+import LodgeClaimView from '../../views/LodgeClaimView';
+import useLodgeClaimViewModel from '../../viewmodels/useLodgeClaimViewModel';
 
 const PriorApproval = () => {
-  const {states , functions} = patientDetailsViewModal();
-  const {state} = patientSelectViewModal();
-
-  const {goBack} = functions
-  const {data} = states;
-  const {selectData} = state;
-  return <PriorApprovalView goBack={goBack} data={data} selectData={selectData} />;
+  const {states, functions} = useLodgeClaimViewModel();
+  const {steps, personalData, claimsDetails} = states;
+  const {goBack} = functions;
+  return (
+    <LodgeClaimView
+      goBack={goBack}
+      steps={steps}
+      personalData={personalData}
+      claimsDetails={claimsDetails}
+    />
+  );
 };
 
 export default PriorApproval;

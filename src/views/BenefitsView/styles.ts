@@ -57,15 +57,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: vh * 2.5,
     paddingBottom: vh * 2.5,
-    borderBottomColor: '#DADADA',
-    borderBottomWidth: 1.5,
+  },
+  seperator: {
+    width: '100%',
+    height: vh * 0.1,
     borderStyle: 'dashed',
+    backgroundColor: COLORS.black + 44,
   },
   CardBox: {
+    borderRadius: vh * 1.5,
+  },
+  wrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor:'white',
     paddingVertical: vh * 1.5,
     paddingHorizontal: vh * 2.8,
-    borderRadius: vh * 1.5,
-    alignItems: 'center',
   },
   insuredTitle: {
     fontSize: vh * 1.6,
@@ -95,6 +102,7 @@ const styles = StyleSheet.create({
     height: vh * 4,
     width: vh * 4,
     tintColor: COLORS.white,
+    resizeMode: 'contain',
   },
 });
 

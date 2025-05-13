@@ -64,7 +64,12 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
     const [showPassword, setShowPassword] = useState(secureTextEntry);
 
     return (
-      <View style={[styles.container, containerStyle]}>
+      <View
+        style={[
+          styles.container,
+          containerStyle,
+          multiline && {height: vh * 11},
+        ]}>
         {label && (
           <View style={styles.labelContainer}>
             <AileronBold style={[styles.label, labelStyle]} name={label} />
@@ -84,9 +89,12 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             ]}
             placeholder={placeholder}
             placeholderTextColor={
-              editable ? COLORS.placeholderColor + '88' : COLORS.black + '44'
+              multiline && editable
+                ? COLORS.black + '44'
+                : editable
+                ? COLORS.placeholderColor
+                : COLORS.black + '44'
             }
-            
             value={value}
             editable={editable}
             onSubmitEditing={onSubmitEditing}
@@ -130,36 +138,37 @@ const styles = StyleSheet.create({
     width: '100%',
     borderWidth: 1,
     borderColor: COLORS.black + '22',
-    height: vh * 6.5,
+    height: vh * 8,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
     marginVertical: vh * 1.5,
     paddingHorizontal: vw * 2,
-    flexDirection: 'row',
-    // position: 'absolute',
+    flexDirection: 'column',
+    paddingVertical: vh,
   },
   inheritStyles: {
-    height: '100%',
+    flex: 1,
     width: '100%',
     flexDirection: 'row',
     paddingHorizontal: vw * 1.5,
   },
   labelContainer: {
-    top: vh * 1.5,
     paddingHorizontal: vw * 2,
-    // borderWidth:2,
   },
 
   label: {
     textAlign: 'left',
-    color: COLORS.textColor,
+
+    fontSize: vw * 3,
+    color: COLORS.textGrayShade,
   },
   textInput: {
     width: '85%',
     height: '100%',
-    fontSize: vw * 1.55,
+    fontSize: vw * 3.55,
     color: COLORS.textBlackShade,
     fontFamily: fonts.Aileron.regular,
+    fontWeight: '700',
   },
   iconView: {
     width: '15%',
@@ -169,8 +178,9 @@ const styles = StyleSheet.create({
     bottom: vh * 1.5,
   },
   eyeIcon: {
-    width: '50%',
-    height: '50%',
+    width: vw * 7,
+    height: vw * 7,
     resizeMode: 'contain',
+    top: vh * 0.5,
   },
 });

@@ -1,12 +1,12 @@
 import React from 'react';
 import MainStack from './src/navigation/MainStack';
-import { StatusBar, StyleSheet } from 'react-native';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { COLORS } from './src/assets/theme/colors';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Provider } from 'react-redux';
-import { persistor, store } from './src/redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
+import {StatusBar, StyleSheet} from 'react-native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import {COLORS} from './src/assets/theme/colors';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Provider} from 'react-redux';
+import {persistor, store} from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -19,16 +19,14 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaView style={{ flex: 1 }}>
+        <NavigationContainer theme={MyTheme}>
           <StatusBar
-            backgroundColor={COLORS.activeButtonGradient[1]}
-            // barStyle="dark-content"
+            translucent
+            barStyle={'light-content'}
+            backgroundColor={'transparent'}
           />
-          <NavigationContainer>
-            <MainStack />
-            {/* <Login /> */}
-          </NavigationContainer>
-        </SafeAreaView>
+          <MainStack />
+        </NavigationContainer>
       </PersistGate>
     </Provider>
   );

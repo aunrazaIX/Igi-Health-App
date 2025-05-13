@@ -5,8 +5,8 @@ import {COLORS} from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
-  
   },
+  wrapper: {padding: vh * 0.7},
   logo: {
     marginTop: vh * 7.5,
     height: vh * 10,
@@ -53,6 +53,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderWidth: 0.5,
     elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.08,
+    shadowRadius: 1.5,
     borderColor: 'white',
 
     marginBottom: vh * 2,
@@ -61,7 +68,7 @@ export const styles = StyleSheet.create({
     width: '47%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: vh * 0.7,
+    // paddingVertical: vh * 0.7,
     borderRadius: vw * 6,
   },
   tabText: {
@@ -74,7 +81,6 @@ export const styles = StyleSheet.create({
   },
   loginButton: {
     marginTop: vh * 2,
-    paddingVertical: vh * 2.7,
   },
   loginOptionContainer: {
     flexDirection: 'row',
@@ -90,6 +96,10 @@ export const styles = StyleSheet.create({
     elevation: 3,
     gap: vw * 5,
     marginTop: vh * 1,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 3,
   },
   loginOptionBox: {
     gap: vh * 1,

@@ -1,9 +1,9 @@
-import { View, Image, FlatList, TouchableOpacity } from 'react-native';
+import {View, Image, FlatList, TouchableOpacity} from 'react-native';
 import React from 'react';
-import { styles } from './style';
+import {styles} from './style';
 import TopView from '../../components/TopView';
-import { icons } from '../../assets';
-import { AileronBold, CurvedView } from '../../components';
+import {icons} from '../../assets';
+import {AileronBold, CurvedView} from '../../components';
 import DetailsContainer from '../../components/DetailsContainer';
 
 import {
@@ -36,24 +36,20 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
   goBack,
 }) => {
   return (
-    <View style={styles.claimHistoryContainer}>
-      <View style={styles.header}>
-        <TopView
-          title="Claims History"
-          TopViewFirstIcon={icons.searchWhite}
-          TopViewSecondIcon={icons.calender}
-          onPressBack={goBack}
-          SecondOpenModal={onPressHeaderIcon}
-        />
-      </View>
-
+    <>
+      <TopView
+        title="Claims History"
+        TopViewFirstIcon={icons.searchWhite}
+        TopViewSecondIcon={icons.calender}
+        onPressBack={goBack}
+        // AddModal={onPressHeaderIcon}
+        SecondOpenModal={onPressHeaderIcon}
+      />
       <CurvedView>
-        <View style={styles.infoContainer}>|
-
+        <View style={styles.infoContainer}>
+          |
           <View style={styles.infoContainerTop}>
-
             <TouchableOpacity
-
               onPress={() => onPressAmountStatusTab('paidAmount')}
               style={
                 amountStatusTab === 'paidAmount'
@@ -99,9 +95,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
               />
             </TouchableOpacity>
           </View>
-
           <View style={styles.infoContainerSecondTop}>
-
             <TouchableOpacity
               onPress={() => onPressDaysStatusTab('Daily')}
               style={
@@ -159,9 +153,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
           <FlatList
             data={data}
             keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item }) => <DetailsContainer detailsText={styles.detailsText}
-              detailsTextLabel={styles.detailsTextLabel}
-              detailsTextValue={styles.detailsTextValue} data={item} />}
+            renderItem={({item}) => <DetailsContainer data={item} />}
           />
         </View>
       </CurvedView>
@@ -172,8 +164,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
           isCalendarVisible={isCalendarVisible}
         />
       )} */}
-
-    </View>
+    </>
   );
 };
 

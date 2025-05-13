@@ -1,11 +1,20 @@
-import {StyleSheet} from 'react-native';
 import {icons} from '../assets';
-import {COLORS} from '../assets/theme/colors';
-import {vh} from '../assets/theme/dimension';
 import {useNavigation} from '@react-navigation/native';
+import endpoints from '../api/endspoints';
+import {pick} from '@react-native-documents/picker';
+import useApiHook from '../hooks/useApiHook';
 
 const useLodgeClaimViewModel = () => {
   const navigation = useNavigation();
+  const {data: dependants, loading} = useApiHook({
+    apiEndpoint: endpoints.dependants.getDependants,
+    method: 'get',
+    argsOrBody: {
+      cnic: '14102-5322315-7',
+      ClientCode: 'DEMO',
+    },
+  });
+
   const steps = [
     {
       label: 'Personal Details',
@@ -18,6 +27,8 @@ const useLodgeClaimViewModel = () => {
     {
       sectionTitle: 'Personal Details',
       icon: icons.personalDetail,
+      edit: false,
+      delete: false,
       info: [
         {label: 'Name of Employee:', value: 'Imran Naveed Qureshi'},
         {label: 'Bank Name:', value: 'Bank Al Habib'},
@@ -28,6 +39,8 @@ const useLodgeClaimViewModel = () => {
     {
       sectionTitle: 'Claims Details',
       icon: icons.claimDetails,
+      edit: false,
+      delete: false,
       info: [
         {label: 'Services:', value: 'General OPD, Dental, Optical'},
         {label: 'Eligible Users:', value: 'Self, Spouse, Children'},
@@ -74,17 +87,12 @@ const useLodgeClaimViewModel = () => {
         {label: 'Amount:', value: '28827', total: true},
       ],
     },
+  ];
+
+  const patientOptions = [
     {
-      sectionTitle: 'Treatment Description',
-      icon: icons.stethoscope,
-      edit: true,
-      delete: true,
-      info: [
-        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
-        {label: 'Receipt Number:', value: '89876543'},
-        {label: 'Claim Status:', value: 'Description:'},
-        {label: 'Amount:', value: '28827', total: true},
-      ],
+      name: 'Imran Naveed Qureshi',
+      value: 'Imran',
     },
   ];
 
@@ -92,9 +100,30 @@ const useLodgeClaimViewModel = () => {
     navigation.goBack();
   };
 
+  const navigateTreatment = () => {
+    navigation.navigate('AddTreatment');
+  };
+
+  const pickFile = async () => {
+    try {
+      const [pickResult, type] = await pick();
+      // const [pickResult] = await pick({mode:'import'}) // equivalent
+      // do something with the picked file
+    } catch (err: unknown) {
+      // see error handling
+    }
+  };
+
   return {
-    states: {steps, personalData, claimsDetails},
-    functions: {goBack},
+    states: {
+      steps,
+      personalData,
+      claimsDetails,
+      patientOptions,
+      loading,
+      dependants: dependants,
+    },
+    functions: {goBack, navigateTreatment, pickFile},
   };
 };
 

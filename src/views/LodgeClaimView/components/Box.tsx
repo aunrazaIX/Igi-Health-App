@@ -1,16 +1,9 @@
-import {
-  Image,
-  ImageSourcePropType,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
-import { AileronBold, AileronSemiBold } from '../../../components';
-import { icons } from '../../../assets';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {COLORS} from '../../../assets/theme/colors';
+import {AileronBold, AileronSemiBold} from '../../../components';
+import {icons} from '../../../assets';
 
 type InfoItem = {
   label: string;
@@ -19,24 +12,33 @@ type InfoItem = {
 
 type BoxProps = {
   data: {
-    icon: ImageSourcePropType;
+    edit: boolean;
+    delete: boolean;
     sectionTitle: string;
-    info: InfoItem[];
+    icon: any;
+    info: {
+      label: string;
+      value: string;
+    }[];
   };
 };
 
-const Box: React.FC<BoxProps> = ({ data }) => {
+const Box: React.FC<BoxProps> = ({data}) => {
   return (
     <View style={styles.boxContainer}>
       <View style={styles.header}>
         <Image source={data?.icon} style={styles.avatar} />
         <AileronBold style={styles.headerText} name={data?.sectionTitle} />
-        <TouchableOpacity style={styles.button}>
-          <Image source={icons.edit} style={styles.buttonIcon} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Image source={icons.delete} style={styles.buttonIcon} />
-        </TouchableOpacity>
+        {data?.edit && (
+          <TouchableOpacity style={styles.button}>
+            <Image source={icons.edit} style={styles.buttonIcon} />
+          </TouchableOpacity>
+        )}
+        {data?.delete && (
+          <TouchableOpacity style={styles.button}>
+            <Image source={icons.delete} style={styles.buttonIcon} />
+          </TouchableOpacity>
+        )}
       </View>
       <View style={styles.details}>
         {data?.info?.map((_item: InfoItem, index: number) => (
@@ -56,23 +58,25 @@ const styles = StyleSheet.create({
   boxContainer: {
     padding: vh,
     width: '100%',
-    borderColor: COLORS.black + 44,
-    borderWidth: 1,
+    height: vh * 20,
     borderRadius: vh * 2,
-    elevation: 2,
+    elevation: 3,
     backgroundColor: COLORS.white,
+    shadowColor: '#000',
+    shadowOpacity: 0.14,
+    shadowOffset: {width: 0, height: 1},
+    shadowRadius: 2,
   },
   avatar: {
     resizeMode: 'contain',
     width: vh * 4.5,
     height: vh * 4.5,
-    // marginRight: 5,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: vw * 2
+    gap: vw * 2,
   },
   headerText: {
     flex: 1,
@@ -101,10 +105,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  button: { height: vw * 6, width: vw * 6 },
+  button: {height: vw * 6, width: vw * 6},
   buttonIcon: {
     height: vw * 6,
     width: vw * 6,
     resizeMode: 'contain',
-  }
+  },
 });

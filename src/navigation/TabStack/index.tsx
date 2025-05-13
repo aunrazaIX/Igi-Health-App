@@ -9,6 +9,7 @@ import PriorApproval from '../../screens/PriorApproval';
 import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaim from '../../screens/LodgeClaim';
+import LodgeClaimStack from '../LodgeClaimStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,13 +42,15 @@ const Tabs = () => {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
-                <Image
-                  style={[styles.iconStyle, { tintColor: 'white', height: vw * 9, width: vw * 9 }]}
-                  source={tabIcons.home}
-                />
+                <View style={styles.wrapper}>
+                  <Image
+                    style={[styles.iconStyle, { tintColor: 'white' }]}
+                    source={tabIcons.home}
+                  />
+                </View>
               </LinearGradient>
             ) : (
-              <View style={styles.iconContainer}>
+              <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image
                   style={[styles.iconStyle, { tintColor: 'black' }]}
                   source={tabIcons.home}
@@ -69,13 +72,15 @@ const Tabs = () => {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
-                <Image
-                  style={[styles.iconStyle, { tintColor: 'white', }]}
-                  source={tabIcons.note}
-                />
+                <View style={styles.wrapper}>
+                  <Image
+                    style={[styles.iconStyle, { tintColor: 'white' }]}
+                    source={tabIcons.note}
+                  />
+                </View>
               </LinearGradient>
             ) : (
-              <View style={styles.iconContainer}>
+              <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image style={styles.iconStyle} source={tabIcons.note} />
               </View>
             ),
@@ -94,25 +99,24 @@ const Tabs = () => {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
-                <Image
-                  style={[
-                    styles.iconStyle,
-                    { tintColor: 'white', },
-                  ]}
-                  source={tabIcons.PriorApproval}
-                />
+                <View style={styles.wrapper}>
+                  <Image
+                    style={[styles.iconStyle, { tintColor: 'white' }]}
+                    source={tabIcons.PriorApproval}
+                  />
+                </View>
               </LinearGradient>
             ) : (
-              <View style={styles.iconContainer}>
+              <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image
-                  style={[styles.iconStyle, {}]}
+                  style={[styles.iconStyle]}
                   source={tabIcons.PriorApproval}
                 />
               </View>
             ),
         }}
         name="LodgeClaim"
-        component={LodgeClaim}
+        component={LodgeClaimStack}
       />
 
       <Tab.Screen
@@ -125,13 +129,15 @@ const Tabs = () => {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
-                <Image
-                  style={[styles.iconStyle, { tintColor: 'white' }]}
-                  source={tabIcons.customerSupport}
-                />
+                <View style={styles.wrapper}>
+                  <Image
+                    style={[styles.iconStyle, { tintColor: 'white' }]}
+                    source={tabIcons.customerSupport}
+                  />
+                </View>
               </LinearGradient>
             ) : (
-              <View style={styles.iconContainer}>
+              <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image
                   style={styles.iconStyle}
                   source={tabIcons.customerSupport}
@@ -165,7 +171,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
+
   gradientBorder: {
+    borderRadius: vh * 50,
+  },
+  wrapper: {
     paddingHorizontal: vw * 4,
     paddingVertical: vw * 6,
     borderRadius: (vw * 25) / 2,
@@ -175,7 +185,11 @@ const styles = StyleSheet.create({
   iconStyle: {
     height: vw * 9,
     width: vw * 9,
-    resizeMode: "contain"
-
+    resizeMode: 'contain',
+  },
+  iconStyleLarge: {
+    height: vw * 8,
+    width: vw * 8,
+    resizeMode: 'contain',
   },
 });
