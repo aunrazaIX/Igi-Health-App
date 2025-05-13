@@ -16,14 +16,18 @@ const LoginView = ({
   tabs,
   user,
   onPressforgotPassword,
-  Setuser,
+  handleChange,
+  handleLogin,
+  loading,
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;
   tabs: string[];
   user: User;
   onPressforgotPassword: (to: string) => void;
-  setuser: React.Dispatch<React.SetStateAction<User>>;
+  handleChange: (field: keyof User, value: string) => void;
+  handleLogin: () => void;
+  loading: boolean;
 }) => {
   const Wrapper = (tab: string) =>
     selectedTab === tab ? LinearGradient : TouchableOpacity;
@@ -31,9 +35,11 @@ const LoginView = ({
   const renderForm: Record<string, JSX.Element> = {
     login: (
       <LoginForm
-        setuser={Setuser}
+        handleChange={handleChange}
         user={user}
         onPressforgotPassword={onPressforgotPassword}
+        handleLogin={handleLogin}
+        loading={loading}
       />
     ),
     signup: <SignUpView />,

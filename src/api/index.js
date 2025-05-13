@@ -33,6 +33,7 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   response => {
+    console.log('dsaij', response);
     return response?.data;
   },
   error => {

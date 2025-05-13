@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
     bottom: vh * 1.5,
   },
   eyeIcon: {
-    width: '100%',
-    height: '100%',
+    width: vw * 7,
+    height: vw * 7,
     resizeMode: 'contain',
     top: vh * 0.5,
   },

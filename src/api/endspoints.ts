@@ -1,4 +1,5 @@
 const endpoints = {
+  auth: {login: 'Login/Login'},
   bank: {
     getBankDetails: 'Bank/GetBankDetails',
   },

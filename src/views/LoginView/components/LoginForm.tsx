@@ -7,33 +7,26 @@ import {
   InputField,
 } from '../../../components';
 import {styles} from '../styles';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {icons} from '../../../assets';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
-import {useDispatch} from 'react-redux';
-import {setToken} from '../../../redux/authSlice';
+
 import {User} from '../../../viewmodels/useLoginViewModel';
 
 const LoginForm = ({
   onPressforgotPassword,
   user,
-  setuser,
+  handleChange,
+  handleLogin,
+  loading,
 }: {
   onPressforgotPassword: (to: string) => void;
   user: User;
-  setuser: React.Dispatch<React.SetStateAction<User>>;
+  handleChange: (field: keyof User, value: string) => void;
+  handleLogin: () => void;
+  loading: boolean;
 }) => {
-  const dispatch = useDispatch();
-
-  const handleChange = (key, value) => {
-    setuser(prev => ({...prev, [key]: value}));
-  };
-
-  const handleLogin = () => {
-    dispatch(setToken('usman'));
-  };
-
   return (
     <>
       <AileronSemiBold
@@ -50,7 +43,7 @@ const LoginForm = ({
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
-          value={user.userName}
+          value={user?.userName ?? undefined}
           onChangeText={text => handleChange('userName', text)}
         />
 
@@ -61,7 +54,7 @@ const LoginForm = ({
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
-          value={user.password}
+          value={user?.password ?? undefined}
           onChangeText={text => handleChange('password', text)}
         />
       </View>

@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 
 const MainStack = () => {
   const {token} = useSelector(state => state.auth);
+  console.log(token);
 
   const Stack = createStackNavigator();
   return (
