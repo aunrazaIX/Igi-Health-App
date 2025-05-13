@@ -75,6 +75,7 @@ const LoginForm = ({
         showIcon={icons.loginArrow}
         containerStyle={styles.loginButton}
         name="Login"
+        loading={loading}
       />
 
       <AileronBold style={styles.orText} name="Or" />
