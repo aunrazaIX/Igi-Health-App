@@ -4,9 +4,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: vh * 1.5,
+    flex: 1,
   },
   borderCircle: {
     height: vw * 10,
@@ -24,11 +22,11 @@ const styles = StyleSheet.create({
     height: vw * 18,
     width: vw * 18,
     resizeMode: 'contain',
+    alignSelf: 'center',
     marginBottom: vh * 2,
   },
   textContainer: {
     flexDirection: 'row',
-    gap: vw * 2,
     justifyContent: 'center',
     alignItems: 'center',
   },

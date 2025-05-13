@@ -20,6 +20,7 @@ const TopView = ({
   title,
   icon,
   TopViewFirstIcon,
+  tintColrorForTopViewFirstIcon,
   onPressBack,
   FirstOpenModal,
   SecondOpenModal,
@@ -38,6 +39,7 @@ const TopView = ({
   containerStyle?: StyleObject | StyleObject[];
   goBack?: () => void;
   containerStyleIcon?: StyleObject | StyleObject[];
+  tintColrorForTopViewFirstIcon?: string;
 }) => {
   const navigate = useNavigation();
 
@@ -61,7 +63,13 @@ const TopView = ({
             {TopViewFirstIcon && (
               <TouchableOpacity onPress={FirstOpenModal}>
                 <Image
-                  style={[styles.TopViewIcon, containerStyleIcon]}
+                  style={[
+                    styles.TopViewIcon,
+                    containerStyleIcon,
+                    tintColrorForTopViewFirstIcon && {
+                      tintColor: tintColrorForTopViewFirstIcon,
+                    },
+                  ]}
                   source={TopViewFirstIcon}
                 />
               </TouchableOpacity>

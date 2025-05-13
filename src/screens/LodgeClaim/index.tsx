@@ -1,12 +1,43 @@
 import React from 'react';
 import LodgeClaimView from '../../views/LodgeClaimView';
 import useLodgeClaimViewModel from '../../viewmodels/useLodgeClaimViewModel';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
 
-const LodgeClaim = () => {
-  const {states, functions} = useLodgeClaimViewModel();
-  const {steps, personalData, claimsDetails, patientOptions, dependants} =
-    states;
-  const {goBack, navigateTreatment, pickFile} = functions;
+type RootStackParamList = {
+  LodgeClaim: {
+    treatments?: any[];
+    stepFromTreatment?: number;
+  };
+};
+
+type LodgeClaimProps = {
+  navigation: StackNavigationProp<RootStackParamList, 'LodgeClaim'>;
+  route: RouteProp<RootStackParamList, 'LodgeClaim'>;
+};
+
+const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
+  const {states, functions} = useLodgeClaimViewModel({navigation, route});
+
+  const {
+    steps,
+    personalData,
+    claimsDetails,
+    patientOptions,
+    dependants,
+    currentStep,
+    selectedPatient,
+  } = states;
+
+  const {
+    goBack,
+    navigateTreatment,
+    onPressNext,
+    onPressDelete,
+    onPressStep,
+    onSelectPatient,
+  } = functions;
+
   return (
     <LodgeClaimView
       goBack={goBack}
@@ -14,9 +45,14 @@ const LodgeClaim = () => {
       personalData={personalData}
       dependants={dependants}
       claimsDetails={claimsDetails}
+      selectedPatient={selectedPatient}
+      onPressStep={onPressStep}
+      currentStep={currentStep}
+      onPressDelete={onPressDelete}
+      onPressNext={onPressNext}
       patientOptions={patientOptions}
       navigateTreatment={navigateTreatment}
-      pickFile={pickFile}
+      onSelectPatient={onSelectPatient}
     />
   );
 };

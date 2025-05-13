@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   View,
   TextInputProps,
-  ImageSourcePropType,
 } from 'react-native';
 import {fonts} from '../../assets/fonts';
 import {icons} from '../../assets';
@@ -18,7 +17,6 @@ import AileronBold from '../AileronBold';
 type StyleObject = Record<string, string | number | boolean>;
 
 interface InputFieldProps extends TextInputProps {
-  searchIcon?: ImageSourcePropType;
   searchFieldRight?: StyleObject;
   searchFieldRightIcon?: StyleObject;
   label?: string;
@@ -26,17 +24,14 @@ interface InputFieldProps extends TextInputProps {
   containerStyle?: object;
   inputStyle?: object;
   mask?: boolean;
-  lightBorder?: boolean;
   rightIcon?: any;
   iconViewStyle?: StyleObject | StyleObject[];
+  errorMessage?: string;
 }
 
 const InputField = forwardRef<TextInput, InputFieldProps>(
   (
     {
-      searchIcon,
-      searchFieldRight,
-      searchFieldRightIcon,
       label,
       labelStyle,
       placeholder,
@@ -54,8 +49,8 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
       autoFocus = false,
       editable = true,
       mask = false,
-      lightBorder = false,
       rightIcon = undefined,
+      errorMessage,
       ...rest
     },
     ref,
@@ -120,11 +115,8 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             </TouchableOpacity>
           )}
         </View>
-
-        {searchIcon && (
-          <View style={searchFieldRight}>
-            <Image style={searchFieldRightIcon} source={icons.searchBlack} />
-          </View>
+        {errorMessage && (
+          <AileronBold style={styles.errorText} name={errorMessage || ''} />
         )}
       </View>
     );
@@ -147,8 +139,8 @@ const styles = StyleSheet.create({
     paddingVertical: vh,
   },
   inheritStyles: {
-    flex: 1,
     width: '100%',
+    height: '100%',
     flexDirection: 'row',
     paddingHorizontal: vw * 1.5,
   },
@@ -158,7 +150,6 @@ const styles = StyleSheet.create({
 
   label: {
     textAlign: 'left',
-
     fontSize: vw * 3,
     color: COLORS.textGrayShade,
   },
@@ -167,8 +158,8 @@ const styles = StyleSheet.create({
     height: '100%',
     fontSize: vw * 3.55,
     color: COLORS.textBlackShade,
-    fontFamily: fonts.Aileron.regular,
-    fontWeight: '700',
+    fontFamily: fonts.Aileron.bold,
+    bottom: vh * 0.5,
   },
   iconView: {
     width: '15%',
@@ -182,5 +173,10 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'contain',
     top: vh * 0.5,
+  },
+  errorText: {
+    textAlign: 'left',
+    fontSize: vw * 3,
+    color: COLORS.benefitTitle,
   },
 });

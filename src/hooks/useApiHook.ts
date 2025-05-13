@@ -8,6 +8,8 @@ type ApiHookParams = {
   argsOrBody?: Record<string, any>;
   method: string;
   refetchOnArgumentChange?: boolean;
+  transform?: any;
+  onSuccess?: () => any;
 };
 
 type ApiHookReturn<T> = {
@@ -15,7 +17,6 @@ type ApiHookReturn<T> = {
   data: T | null;
   error: Error | null;
   trigger: () => Promise<void>;
-  transformResponse: (response: any) => void;
 };
 
 const useApiHook = <T>({
@@ -23,17 +24,42 @@ const useApiHook = <T>({
   method = 'get',
   argsOrBody = {},
   refetchOnArgumentChange = false,
+  transform,
+  onSuccess,
 }: ApiHookParams): ApiHookReturn<T> => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
   const apiCallingFunction = async () => {
+    setError(null);
+    setData(null);
     try {
+      let dataToSave = null;
       setLoading(true);
       let _method = method === 'get' ? get : post;
       const res = await _method(apiEndpoint, argsOrBody);
-      setData(res);
+      dataToSave = res;
+      if (transform) {
+        const {keyToLoop, ...mappings} = transform;
+        const list = res[keyToLoop];
+        if (Array.isArray(list)) {
+          const transformed = list.map(item => {
+            const transformedItem: Record<string, any> = {...item};
+            Object.entries(mappings).forEach(([newKey, sourceKey]) => {
+              transformedItem[newKey] = item[sourceKey];
+            });
+
+            return transformedItem;
+          });
+          dataToSave = transformed;
+        }
+      }
+      setData(dataToSave);
+      if (onSuccess) {
+        onSuccess(dataToSave);
+      }
+
       return;
     } catch (e) {
       setError(e as Error);

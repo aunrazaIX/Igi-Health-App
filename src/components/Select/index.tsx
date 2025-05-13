@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {View, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import DependentBox from '../DependentBox';
@@ -13,21 +14,26 @@ type Options = {
 };
 type SelectProps = {
   selectData: Options[];
-  selectLabel?: string;
+  selectLabel: string;
+  value: string;
   selectPlaceholder: string;
+  onSelectOption: (item: Options) => void;
 };
 
 const Select: React.FC<SelectProps> = ({
   selectData,
   selectLabel,
   selectPlaceholder,
+  value,
+  onSelectOption,
 }) => {
-  const [selectedPatient, setSelectedPatient] = useState<Options | null>(null);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   const handleSelect = (item: Options) => {
-    setSelectedPatient(item);
     setDropdownVisible(false);
+    if (typeof onSelectOption == 'function') {
+      onSelectOption(item);
+    }
   };
 
   return (
@@ -39,7 +45,7 @@ const Select: React.FC<SelectProps> = ({
           <View style={styles.selectBox}>
             <AileronBold
               style={styles.selectText}
-              name={selectedPatient?.name || selectPlaceholder}
+              name={value || selectPlaceholder}
             />
             <Image
               style={styles.arrow}
@@ -52,12 +58,18 @@ const Select: React.FC<SelectProps> = ({
       {isDropdownVisible && (
         <View style={styles.dropdown}>
           {selectData?.length > 0 &&
-            selectData?.map(item => (
+            selectData?.map((item, index) => (
               <TouchableOpacity
                 key={item?.label}
-                style={styles.dropdownItem}
+                style={[
+                  styles.dropdownItem,
+                  index !== selectData?.length - 1 && {
+                    borderBottomWidth: 1,
+                    borderColor: COLORS.black + '22',
+                  },
+                ]}
                 onPress={() => handleSelect(item)}>
-                <AileronBold name={item?.label} style={styles.listText} />
+                <AileronBold name={item?.label} style={[styles.listText]} />
               </TouchableOpacity>
             ))}
         </View>
@@ -88,10 +100,7 @@ const styles = StyleSheet.create({
     marginTop: -vh * 1.5,
   },
   dropdown: {
-    borderWidth: 1,
-    borderColor: 'transparent',
-    borderRadius: 12,
-    marginTop: 4,
+    borderRadius: vw * 2,
     backgroundColor: COLORS.white,
     elevation: 3,
     zIndex: 10,
@@ -101,9 +110,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   dropdownItem: {
-    padding: 12,
-    borderBottomWidth: 2,
-    borderBottomColor: COLORS.dependentBorder,
+    paddingVertical: vh * 1.5,
+    paddingHorizontal: vw * 3,
   },
   listText: {
     textAlign: 'left',

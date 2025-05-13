@@ -1,50 +1,53 @@
-import React, {useState, ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import {
   View,
   StyleSheet,
-  TouchableOpacity,
   StyleProp,
   ViewStyle,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 
 import {vh, vw} from '../../assets/theme/dimension';
 import AileronSemiBold from '../AileronSemiBold';
 import {COLORS} from '../../assets/theme/colors';
-import LinearGradient from 'react-native-linear-gradient';
 
 type Step = {
-  key: string; // ← Add this
+  key: string;
   label: string;
 };
 
 type StepperProps = {
   steps: Step[];
+  currentStep: number;
   containerStyle?: StyleProp<ViewStyle>;
   componentList: Record<string, ReactNode>;
+  onPressStep: (index: number) => void;
 };
 
-const Stepper: React.FC<StepperProps> = ({steps, componentList}) => {
-  const [activeStep, setActiveStep] = useState<number>(1);
-
+const Stepper: React.FC<StepperProps> = ({
+  currentStep,
+  steps,
+  componentList,
+  onPressStep,
+}) => {
   const renderStep = (stepIndex: number) => {
     const stepNumber = stepIndex + 1;
-    const isActive = activeStep >= stepNumber;
+    const isActive = currentStep >= stepNumber;
 
     return (
       <View key={stepNumber} style={styles.stepWrapper}>
         {stepIndex !== 0 && (
           <View style={[styles.line, isActive && styles.activeLine]} />
         )}
-        <TouchableOpacity onPress={() => setActiveStep(stepNumber)}>
-          <View
-            style={[styles.outerCircle, isActive && styles.outerActiveCircle]}>
-            <View style={[styles.circle, isActive && styles.activeCircle]}>
-              <AileronSemiBold
-                style={[styles.label, isActive && styles.activeLabel]}
-                name={`${stepNumber}`}
-              />
-            </View>
+        <TouchableOpacity
+          onPress={() => onPressStep(stepNumber)}
+          style={[styles.outerCircle, isActive && styles.outerActiveCircle]}>
+          <View style={[styles.circle, isActive && styles.activeCircle]}>
+            <AileronSemiBold
+              style={[styles.label, isActive && styles.activeLabel]}
+              name={`${stepNumber}`}
+            />
           </View>
         </TouchableOpacity>
       </View>
@@ -66,20 +69,12 @@ const Stepper: React.FC<StepperProps> = ({steps, componentList}) => {
             />
           ))}
         </View>
-
-        <View style={styles.contentContainer}>
-          {componentList[steps[activeStep - 1]?.key]}
-        </View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.contentContainer}>
+          {componentList[steps[currentStep - 1]?.key]}
+        </ScrollView>
       </View>
-      <LinearGradient
-        colors={COLORS.PriorGradient}
-        style={styles.priorGradient}>
-        <TouchableOpacity
-          style={styles.wrapper}
-          onPress={() => setActiveStep(activeStep + 1)}>
-          <AileronSemiBold style={styles.priorNext} name={'Next'} />
-        </TouchableOpacity>
-      </LinearGradient>
     </View>
   );
 };
@@ -89,7 +84,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     flex: 1,
-    paddingBottom: vh * 11,
   },
   contentWrapper: {
     flex: 1,
@@ -147,8 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.activeTab,
   },
   contentContainer: {
-    flex: 1,
-    marginBottom: vh * 1,
+    paddingBottom: vh * 4,
   },
   textContainer: {
     flexDirection: 'row',
