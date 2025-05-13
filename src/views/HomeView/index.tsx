@@ -16,6 +16,7 @@ import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
 import { vh } from '../../assets/theme/dimension';
+import ErrorModal from '../../components/Modal/ErrorModal';
 
 type CardItem = {
   logo: any;
@@ -55,9 +56,9 @@ const HomeView: React.FC<HomeViewProps> = ({
             </View>
 
             <View style={styles.headerIconsRow}>
-              <TouchableOpacity>
+              {/* <TouchableOpacity>
                 <Image source={icons.search} style={styles.headerIcons} />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               <TouchableOpacity onPress={() => onPressHeaderIcon("Notifications")}>
                 <Image source={icons.notification} style={styles.headerIcons} />
@@ -156,7 +157,7 @@ const HomeView: React.FC<HomeViewProps> = ({
 
               <TouchableOpacity onPress={animateCard}>
                 <View style={styles.homeBackCardContainer}>
-                  <View style={{ justifyContent: 'space-between', gap: vh*1.5 }}>
+                  <View style={{ justifyContent: 'space-between', gap: vh * 1.5 }}>
                     <View style={styles.homeBackCardHeading}>
                       <AileronBold
                         style={styles.homeBackCardHeadingBlack}
