@@ -6,10 +6,10 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import React from 'react';
-import { vh, vw } from '../../assets/theme/dimension';
-import { icons } from '../../assets';
-import { COLORS } from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
+import SimpleLoader from '../SimpleLoader';
 
 interface ButtonProps extends TouchableOpacityProps {
   name: string;
@@ -17,6 +17,7 @@ interface ButtonProps extends TouchableOpacityProps {
   inputStyle?: Record<string, string | number | boolean>;
   showIcon?: boolean;
   gradientColors?: string[];
+  loading?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -26,21 +27,21 @@ const Button: React.FC<ButtonProps> = ({
   showIcon,
   onPress,
   gradientColors,
+  loading,
 }) => {
   return (
-
-    <TouchableOpacity style={styles.buttonContent} onPress={onPress}>
-      <LinearGradient
-        style={[styles.container, containerStyle]}
-        // colors={COLORS.activeButtonGradient}
-        colors={gradientColors || COLORS.activeButtonGradient}>
-
+    <LinearGradient
+      style={[styles.container, containerStyle]}
+      colors={gradientColors || COLORS.activeButtonGradient}>
+      <TouchableOpacity style={styles.buttonContent} onPress={onPress}>
         {showIcon && <Image style={styles.buttonIcon} source={showIcon} />}
-        <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
-
-
-      </LinearGradient>
-    </TouchableOpacity>
+        {loading ? (
+          <SimpleLoader />
+        ) : (
+          <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
+        )}
+      </TouchableOpacity>
+    </LinearGradient>
   );
 };
 
@@ -50,11 +51,6 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderRadius: vw * 4,
-    paddingVertical: vh * 2,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: vw * 4
   },
 
   buttonText: {
@@ -63,9 +59,11 @@ const styles = StyleSheet.create({
     fontSize: vw * 4.5,
   },
   buttonContent: {
-    flexDirection: 'row',
-
+    width: '100%',
+    justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: vh * 2,
+    flexDirection: 'row',
     gap: vw * 3,
   },
   buttonIcon: {

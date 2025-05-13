@@ -1,37 +1,57 @@
-import { ScrollView } from 'react-native';
 import React from 'react';
-import { CurvedView, Stepper, TopView } from '../../components';
-import { Claim, PersonalDetails, UploadDoc } from './components';
-import styles from './styles';
+import {CurvedView, Stepper, TopView} from '../../components';
+import {Claim, PersonalDetails, UploadDoc} from './components';
+import {
+  ClaimDetailSection,
+  PersonelDataSection,
+  PatientList,
+  StepItem,
+  UploadDocSection,
+  DependantList,
+} from './typeInterface';
 
 type LodgeClaimViewProps = {
-  steps: [];
-  personalData: [];
-  claimsDetails: [];
-  goBack: () => void
+  steps: StepItem[];
+  personalData: PersonelDataSection[];
+  dependants: DependantList[];
+  claimsDetails: ClaimDetailSection[];
+  goBack: () => void;
+  patientOptions: PatientList[];
+  navigateTreatment: () => void;
+  pickFile: () => void;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   steps,
   personalData,
   claimsDetails,
-  goBack
+  dependants,
+  goBack,
+  navigateTreatment,
+  pickFile,
 }) => {
   const renderStep = {
-    personalDetails: <PersonalDetails personalData={personalData} />,
-    claim: <Claim claimsDetails={claimsDetails} />,
-    uploadDoc: <UploadDoc />,
+    personalDetails: (
+      <PersonalDetails
+        personalData={personalData}
+        patientOptions={dependants}
+      />
+    ),
+    claim: (
+      <Claim
+        claimsDetails={claimsDetails}
+        navigateTreatment={navigateTreatment}
+      />
+    ),
+    uploadDoc: <UploadDoc pickFile={pickFile} />,
   };
   return (
     <>
       <TopView onPressBack={goBack} title={'Logde A claim'} />
-      <CurvedView containerStyle={styles.curvedStyles}>
-        <ScrollView >
-          <Stepper steps={steps} componentList={renderStep} />
-        </ScrollView>
+      <CurvedView>
+        <Stepper steps={steps} componentList={renderStep} />
       </CurvedView>
     </>
-
   );
 };
 

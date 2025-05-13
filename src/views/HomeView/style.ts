@@ -1,23 +1,27 @@
-import { StyleSheet } from 'react-native';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {StyleSheet} from 'react-native';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
   gradient: {
-    paddingBottom: vh * 2,
-    paddingHorizontal: vw * 4,
+    paddingBottom: vh * 15,
+    paddingHorizontal: vw * 5,
+    backgroundColor: COLORS.white,
   },
   BottomContainer: {
     paddingBottom: vh * 17,
     paddingHorizontal: vw * 4,
     backgroundColor: COLORS.white,
-
+  },
+  wrapper: {
+    paddingBottom: vh * 2,
+    paddingHorizontal: vw * 4,
   },
   homeHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: vh * 2,
+    marginTop: vh * 8,
   },
   headerLogo: {
     width: 25 * vw,
@@ -41,15 +45,20 @@ export const styles = StyleSheet.create({
     elevation: 3,
     backfaceVisibility: 'hidden',
     height: vh * 30,
-    // borderWidth:2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   },
 
   flipCardContainer: {
     width: '100%',
     // borderWidth:2,
-    marginTop : vh*2,
-    minHeight: vh*30,
-  
+    marginTop: vh * 2,
+    minHeight: vh * 30,
   },
   flipBackCard: {
     marginTop: -vh * 30,
@@ -83,19 +92,18 @@ export const styles = StyleSheet.create({
     marginBottom: vh * 2.5,
     alignItems: 'center',
     position: 'relative',
-    
   },
   meterEllipseBlue: {
     width: vw * 64,
     height: vw * 64,
-    resizeMode:'contain'
+    resizeMode: 'contain',
   },
   meterEllipseRed: {
     width: vw * 50,
     height: vw * 50,
     position: 'absolute',
     top: vh * 3.2,
-    resizeMode:"contain"
+    resizeMode: 'contain',
   },
   dashboardMeterIcon: {
     width: vw * 10,
@@ -134,13 +142,11 @@ export const styles = StyleSheet.create({
   },
   homeInfoContainerMiddle: {
     // marginVertical: vh * 2,
-    justifyContent:"space-between",
+    justifyContent: 'space-between',
     // borderWidth: 2
-    gap: vh * .5
+    gap: vh * 0.5,
   },
-  homeInfoContainerMiddleText: {
-    
-  },
+  homeInfoContainerMiddleText: {},
   infoCardMiddleTextlight: {
     fontSize: vw * 5,
     color: COLORS.textColor,
@@ -161,12 +167,11 @@ export const styles = StyleSheet.create({
     color: COLORS.textBlackShade,
   },
   infoCardFooterLeft: {
-    gap: vh * .5
+    gap: vh * 0.5,
   },
   infoCardFooterRight: {
     alignItems: 'flex-end',
-    gap: vh * .5
-    
+    gap: vh * 0.5,
   },
   dashboardContainerHeader: {
     flexDirection: 'row',
@@ -253,8 +258,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     justifyContent: 'space-between',
     height: vh * 27,
-    gap: vh 
-    
+    gap: vh,
   },
   homeBackInfoContainerHeader: {
     flexDirection: 'row',
@@ -326,7 +330,14 @@ export const styles = StyleSheet.create({
     borderRadius: vh * 2.5,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 1,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   associatedImage: {
     width: vw * 30,

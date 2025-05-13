@@ -49,16 +49,15 @@ const Calender = ({
           <TouchableOpacity
             style={style.cancelButton}
             onPress={onPressHeaderIcon}>
-            <AileronBold name={'Cancel'}/>
+            <AileronBold name={'Cancel'} />
           </TouchableOpacity>
 
           <LinearGradient colors={COLORS.activeButtonGradient}>
-            {' '}
             <TouchableOpacity
               style={style.applyButton}
               onPress={() => console.log('Apply pressed')}>
-              <AileronBold name={'Select'}/>
-            </TouchableOpacity>{' '}
+              <AileronBold name={'Select'} />
+            </TouchableOpacity>
           </LinearGradient>
         </View>
       </View>

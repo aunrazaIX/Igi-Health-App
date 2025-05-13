@@ -1,27 +1,21 @@
 import {icons} from '../assets';
+import {useNavigation} from '@react-navigation/native';
 
-type UsePriorApprovalViewModal = {
-  states: {
-    data: PriorApproval[];
-  };
-};
-
-type PriorApproval = {
-  sectionTitle: string;
-  icon: string;
-  data: LabelValue[];
-};
-type LabelValue = {
-  label: string;
-  value: string;
-};
-
-const usePriorViewModel = (): UsePriorApprovalViewModal => {
-  const data: PriorApproval[] = [
+const usePriorApprovalViewModel = () => {
+  const navigation = useNavigation();
+  const steps = [
+    {
+      label: 'Personal Details',
+      key: 'personalDetails',
+    },
+    {label: 'Claim', key: 'claim'},
+    {label: 'Upload Doc', key: 'uploadDoc'},
+  ];
+  const personalData = [
     {
       sectionTitle: 'Personal Details',
       icon: icons.personalDetail,
-      data: [
+      info: [
         {label: 'Name of Employee:', value: 'Imran Naveed Qureshi'},
         {label: 'Bank Name:', value: 'Bank Al Habib'},
         {label: 'Account Number:', value: '1234-5678-9101112-3'},
@@ -31,7 +25,7 @@ const usePriorViewModel = (): UsePriorApprovalViewModal => {
     {
       sectionTitle: 'Claims Details',
       icon: icons.claimDetails,
-      data: [
+      info: [
         {label: 'Services:', value: 'General OPD, Dental, Optical'},
         {label: 'Eligible Users:', value: 'Self, Spouse, Children'},
         {label: 'Reimbursement:', value: '28827'},
@@ -40,11 +34,65 @@ const usePriorViewModel = (): UsePriorApprovalViewModal => {
     },
   ];
 
-  return {
-    states: {
-      data,
+  const claimsDetails = [
+    {
+      sectionTitle: 'Treatment Description',
+      icon: icons.stethoscope,
+      edit: true,
+      delete: true,
+      info: [
+        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
+        {label: 'Receipt Number:', value: '89876543'},
+        {label: 'Claim Status:', value: 'Description:'},
+        {label: 'Amount:', value: '28827', total: true},
+      ],
     },
+    {
+      sectionTitle: 'Treatment Description',
+      icon: icons.stethoscope,
+      edit: true,
+      delete: true,
+      info: [
+        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
+        {label: 'Receipt Number:', value: '89876543'},
+        {label: 'Claim Status:', value: 'Description:'},
+        {label: 'Amount:', value: '28827', total: true},
+      ],
+    },
+    {
+      sectionTitle: 'Treatment Description',
+      icon: icons.stethoscope,
+      edit: true,
+      delete: true,
+      info: [
+        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
+        {label: 'Receipt Number:', value: '89876543'},
+        {label: 'Claim Status:', value: 'Description:'},
+        {label: 'Amount:', value: '28827', total: true},
+      ],
+    },
+    {
+      sectionTitle: 'Treatment Description',
+      icon: icons.stethoscope,
+      edit: true,
+      delete: true,
+      info: [
+        {label: 'Patient Information:', value: 'Saad Imran Qureshi'},
+        {label: 'Receipt Number:', value: '89876543'},
+        {label: 'Claim Status:', value: 'Description:'},
+        {label: 'Amount:', value: '28827', total: true},
+      ],
+    },
+  ];
+
+  const goBack = () => {
+    navigation.goBack();
+  };
+
+  return {
+    states: {steps, personalData, claimsDetails},
+    functions: {goBack},
   };
 };
 
-export default usePriorViewModel;
+export default usePriorApprovalViewModel;

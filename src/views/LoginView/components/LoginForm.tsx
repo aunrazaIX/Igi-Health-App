@@ -7,29 +7,26 @@ import {
   InputField,
 } from '../../../components';
 import { styles } from '../styles';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { icons } from '../../../assets';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { COLORS } from '../../../assets/theme/colors';
-import { useDispatch } from 'react-redux';
-import { setToken, setUser } from '../../../redux/authSlice';
-import { User } from '../../../viewmodels/useLoginViewModel'
 
+import { User } from '../../../viewmodels/useLoginViewModel';
 
-
-
-const LoginForm = ({ onPress }: { onPress: (to: string) => void }) => {
-
-  const dispatch = useDispatch();
-
-
-
-
-  const handleLogin = () => {
-    dispatch(setToken("usman"))
-  }
-
-
+const LoginForm = ({
+  onPressforgotPassword,
+  user,
+  handleChange,
+  handleLogin,
+  loading,
+}: {
+  onPressforgotPassword: (to: string) => void;
+  user: User;
+  handleChange: (field: keyof User, value: string) => void;
+  handleLogin: () => void;
+  loading: boolean;
+}) => {
   return (
     <>
       <AileronSemiBold
@@ -46,44 +43,44 @@ const LoginForm = ({ onPress }: { onPress: (to: string) => void }) => {
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
-
-
-
+          value={user?.userName ?? undefined}
+          onChangeText={text => handleChange('userName', text)}
         />
 
         <InputField
           label="Your Password"
           secureTextEntry
           placeholder="Enter Password"
-        // containerStyle={style.inputContainer}
-
-        // labelStyle={style.labelStyle}
-        // inputStyle={style.inputStyle}
-
-
-
-
+          containerStyle={style.inputContainer}
+          labelStyle={style.labelStyle}
+          inputStyle={style.inputStyle}
+          value={user?.password ?? undefined}
+          onChangeText={text => handleChange('password', text)}
         />
-
       </View>
 
       <View style={[styles.row, { justifyContent: 'space-between' }]}>
-        <CheckBox
-          description="Remember me"
-        />
+        <CheckBox description="Remember me" />
 
-        <TouchableOpacity onPress={() => { onPress("ForgotPassword", 1) }}>
+        <TouchableOpacity
+          onPress={() => {
+            onPressforgotPassword('ForgotPassword');
+          }}>
           <AileronBold style={styles.forgetPassword} name="Forgot Password ?" />
         </TouchableOpacity>
       </View>
 
-      <Button onPress={handleLogin} showIcon={icons.loginArrow} containerStyle={styles.loginButton} name="Login" />
+      <Button
+        onPress={handleLogin}
+        showIcon={icons.loginArrow}
+        containerStyle={styles.loginButton}
+        name="Login"
+        loading={loading}
+      />
 
       <AileronBold style={styles.orText} name="Or" />
 
       <View style={styles.loginOptionContainer}>
-
-
         <TouchableOpacity style={styles.loginOptionBox}>
           <Image
             style={styles.loginOptionContainerIcons}

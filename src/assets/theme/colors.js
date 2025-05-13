@@ -15,6 +15,7 @@ export const COLORS = {
   forgotPass: 'rgba(41, 41, 39, 1)',
   activeButtonGradient: ['#0B4A98', '#48C3FF'],
   placeholderColor: "#292927",
+  selectPlaceholder: 'rgba(193, 193, 193, 1)',
   insuredPrice: 'rgba(18, 18, 18, 1)',
   benefitTitle: 'rgba(238, 37, 96, 1)',
   coverageTitle: 'rgba(0, 73, 132, 1)',

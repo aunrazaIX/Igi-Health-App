@@ -13,8 +13,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { AileronSemiBold, CurvedView } from '../../components';
 import { LoginForm, SignUpView } from './components';
-import { setUser } from '../../redux/authSlice';
-import { useDispatch } from 'react-redux';
 import { User } from '../../viewmodels/useLoginViewModel'
 
 

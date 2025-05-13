@@ -1,11 +1,11 @@
 import React from 'react';
-import {Container, CurvedView, TopView} from '../../components';
+import { CurvedView, TopView } from '../../components';
 import {
   ClaimAssistance,
   ContactInfo,
   Hotlines,
 } from '../../viewmodels/useHelplineViewModel';
-import {ScrollView} from 'react-native';
+
 import {
   ClaimAssistanceView,
   ContactInfoView,
@@ -24,10 +24,10 @@ const HelplineView = ({
   claimAssistance: ClaimAssistance[];
   hotlines: Hotlines;
   goBack: () => void;
-  onPress : ()=>void
+  onPress: () => void
 }) => {
   return (
-    <ScrollView>
+    <>
       <TopView onPressBack={goBack} title={'Helpline'} />
       <CurvedView containerStyle={styles.container}>
         <ContactInfoView onPress={onPress} data={contactInfo} />
@@ -38,7 +38,7 @@ const HelplineView = ({
           website={hotlines?.website}
         />
       </CurvedView>
-    </ScrollView>
+    </>
   );
 };
 
