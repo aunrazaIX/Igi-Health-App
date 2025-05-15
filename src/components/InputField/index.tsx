@@ -1,4 +1,4 @@
-import React, {forwardRef, useState} from 'react';
+import React, { forwardRef, useState } from 'react';
 import {
   Image,
   StyleSheet,
@@ -7,11 +7,11 @@ import {
   View,
   TextInputProps,
 } from 'react-native';
-import {fonts} from '../../assets/fonts';
-import {icons} from '../../assets';
+import { fonts } from '../../assets/fonts';
+import { icons } from '../../assets';
 import MaskInput from 'react-native-mask-input';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
 import AileronBold from '../AileronBold';
 
 type StyleObject = Record<string, string | number | boolean>;
@@ -63,7 +63,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
         style={[
           styles.container,
           containerStyle,
-          multiline && {height: vh * 11},
+          multiline && { height: vh * 11 },
         ]}>
         {label && (
           <View style={styles.labelContainer}>
@@ -80,20 +80,21 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             style={[
               styles.textInput,
               inputStyle,
-              !editable && {color: COLORS.black + '55'},
+              !editable && { color: COLORS.black + '55' },
             ]}
             placeholder={placeholder}
             placeholderTextColor={
               multiline && editable
                 ? COLORS.black + '44'
                 : editable
-                ? COLORS.placeholderColor
-                : COLORS.black + '44'
+                  ? COLORS.placeholderColor
+                  : COLORS.black + '44'
             }
             value={value}
             editable={editable}
             onSubmitEditing={onSubmitEditing}
             onChangeText={onChangeText}
+            autoCapitalize='none'
             secureTextEntry={showPassword}
             returnKeyType={returnKeyType}
             contextMenuHidden

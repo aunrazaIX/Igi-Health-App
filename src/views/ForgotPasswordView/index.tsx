@@ -19,8 +19,10 @@ const ForgotPasswordView = ({
   onPressBack,
   confirmationModal,
   setConfirmationModal,
-  openConfimationModal
-
+  openConfimationModal,
+  handleVerifyOtp,
+  setOtp,
+  verifyOtpLoading
 }: {
   step: number;
   onPressBack: () => void;
@@ -28,10 +30,13 @@ const ForgotPasswordView = ({
   confirmationModal: boolean;
   setConfirmationModal: (val: boolean) => void;
   openConfimationModal: () => void;
+  handleVerifyOtp: () => void;
+  setOtp: (otp: string) => void;
+  verifyOtpLoading: boolean
 }) => {
   const returnComponent: Record<number, JSX.Element> = {
     1: <EnterEmailView />,
-    2: <OtpView />,
+    2: <OtpView setOtp={setOtp} />,
     3: <CreateNewPassword />,
   };
 
@@ -78,15 +83,27 @@ const ForgotPasswordView = ({
 
 
         <Button
+          // onPress={() => {
+          //   if (step === 3) {
+          //     openConfimationModal()
+          //   } else {
+          //     handleStep(step)
+          //   }
+          // }}
           onPress={() => {
-            if (step === 3) {
-              openConfimationModal()
+            if (handleVerifyOtp) {
+              handleVerifyOtp()
             } else {
-              handleStep(step)
+              if (step === 3) {
+                openConfimationModal()
+              } else {
+                handleStep(step)
+              }
             }
           }}
           name={returnButtonName[step]}
           containerStyle={styles.button}
+          loading={verifyOtpLoading}
         />
       </CurvedView>
 

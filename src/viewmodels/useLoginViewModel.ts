@@ -29,6 +29,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState<string>('login');
+  const [verifiedUserData, setVerifiedUserData] = useState(null);
 
   const {
     setterForApiData: loginSetterForApiData,
@@ -51,15 +52,15 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     name: '',
   });
 
-  const {
-    checkForError: verifyOtpCheckForError,
-    setterForApiData: verifyOtpSetterForApiData,
-    apiData: verifyOtpApiData,
-  } = useErrorHandlingHook({
-    OtpNumber: '',
-  });
+  // const {
+  //   checkForError: verifyOtpCheckForError,
+  //   setterForApiData: verifyOtpSetterForApiData,
+  //   apiData: verifyOtpApiData,
+  // } = useErrorHandlingHook({
+  //   otp: '',
+  // });
 
-  const {data, loading, trigger, error} = useApiHook({
+  const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
     argsOrBody: loginApiData,
@@ -73,6 +74,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
+      setVerifiedUserData({...res?.Data, uuid: 'ASDADASDASDASDASDADAD'});
       let apiData = {
         userId: res?.Data?.UserID,
         uuid: 'ASDADASDASDASDASDADAD',
@@ -94,19 +96,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
-      console.log('REsss', res);
-      navigation.navigate('ForgotPassword', {step: 2});
+      navigation.navigate('ForgotPassword', {step: 2, verifiedUserData});
     },
   });
-
-  // const {trigger: triggerVerifyOtp, loading: verifyOtpLoading} = useApiHook({
-  //   apiEndpoint: endpoints.auth.verifyOTP,
-  //   method: 'post',
-  //   argsOrBody: otpData,
-  //   onSuccess: res => {
-  //     console.log('verify otp', res);
-  //   },
-  // });
 
   const handleLogin = () => {
     const filled = LoginCheckForError();
@@ -123,6 +115,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   };
 
   // const handleVerifyOtp = () => {
+  //   const filled = verifyOtpCheckForError();
+  //   if (!filled) return;
+
   //   triggerVerifyOtp();
   // };
 

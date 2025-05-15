@@ -1,24 +1,31 @@
 import {useNavigation} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
+import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
 
 type UseForgotPasswordViewModelReturnType = {
   states: {
     step: number;
     confirmationModal: boolean;
+    verifyOtpLoading: boolean;
   };
   functions: {
     handleStep: (step: number) => void;
     onPressBack: () => void;
     setConfirmationModal: (val: boolean) => void;
     openConfimationModal: () => void;
+    setOtp: (otp: string) => void;
+    handleVerifyOtp: () => void;
   };
 };
 const useForgotPasswordViewModel = ({
   route,
 }): UseForgotPasswordViewModelReturnType => {
-  const {step: _step} = route?.params || {};
+  const {step: _step, verifiedUserData} = route?.params || {};
   const [step, setStep] = useState<number>(1);
   const [confirmationModal, setConfirmationModal] = useState(false);
+  const [otp, setOtp] = useState<any>();
 
   useEffect(() => {
     setStep(_step);
@@ -44,16 +51,38 @@ const useForgotPasswordViewModel = ({
   const openConfimationModal = () => {
     setConfirmationModal(true);
   };
+
+  const {trigger: triggerVerifyOtp, loading: verifyOtpLoading} = useApiHook({
+    apiEndpoint: endpoints.auth.verifyOTP,
+    method: 'post',
+    argsOrBody: {
+      otp,
+      uuid: verifiedUserData?.uuid,
+      userId: verifiedUserData?.UserID,
+      ClientCode: verifiedUserData?.ClientCode,
+    },
+    onSuccess: () => {
+      setStep(3);
+    },
+  });
+
+  const handleVerifyOtp = () => {
+    triggerVerifyOtp();
+  };
+
   return {
     states: {
       step,
       confirmationModal,
+      verifyOtpLoading,
     },
     functions: {
       handleStep,
       onPressBack,
       setConfirmationModal,
       openConfimationModal,
+      setOtp,
+      handleVerifyOtp,
     },
   };
 };

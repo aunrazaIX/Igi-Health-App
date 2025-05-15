@@ -5,11 +5,11 @@ import styles from '../styles';
 import { AileronBold, AileronRegular } from '../../../components';
 import { TouchableOpacity } from 'react-native';
 
-const OtpView = () => {
+const OtpView = ({ setOtp }: { setOtp: (otp: string) => void; }) => {
   return (
     <Fragment>
       <OtpInput
-        numberOfDigits={5}
+        numberOfDigits={6}
         focusColor={COLORS.black}
         autoFocus={true}
         hideStick={true}
@@ -31,7 +31,9 @@ const OtpView = () => {
           containerStyle: styles.otpContainer,
           focusedPinCodeContainerStyle: styles.otpBoxView,
         }}
-      // onFilled={ }
+        onFilled={(text) => {
+          setOtp(text)
+        }}
       />
       <AileronRegular style={styles.sendAgain} name="Send code again 00:58" />
       <TouchableOpacity>
