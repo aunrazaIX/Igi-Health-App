@@ -6,11 +6,6 @@ export const styles = StyleSheet.create({
   claimHistoryContainer: {
     flex: 1,
   },
-  header: {},
-  infoContainer: {
-    flex: 1,
-    paddingBottom: vh * 6,
-  },
   infoContainerTop: {
     flexDirection: 'row',
     borderWidth: 1,
@@ -19,7 +14,6 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.buttonBackground,
     paddingVertical: vh * 0.3,
     paddingHorizontal: vw * 0.5,
-    
   },
 
   button: {
@@ -39,24 +33,15 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 2,  
+    gap: vw * 2,
     borderRadius: vw * 2.5,
     width: '50%',
     // paddingVertical : vh*3
     paddingVertical: vh,
-    
-   
-    
-    
-
-
   },
-  paidAmountIcon:{
-
-    width : vw*7.5,
-    height  :vw*7.5,
-
-
+  paidAmountIcon: {
+    width: vw * 7.5,
+    height: vw * 7.5,
   },
 
   infoContainerSecondTop: {
@@ -75,11 +60,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: vw * 2,
-   
+
     paddingVertical: vh * 1.4,
     borderRadius: vw * 2.5,
     width: '33%',
-
   },
 
   activeButton: {
@@ -93,7 +77,6 @@ export const styles = StyleSheet.create({
     borderRadius: vw * 2,
     color: COLORS.textBlackShade,
     width: '33%',
-    
   },
 
   calendarButtonsContainer: {
@@ -110,7 +93,6 @@ export const styles = StyleSheet.create({
   buttonTextActive: {
     color: COLORS.white,
     fontSize: vh * 1.7,
-   
   },
   infoContainerSecondTopButtonText: {
     color: COLORS.textGrayShade,
@@ -125,7 +107,6 @@ export const styles = StyleSheet.create({
   detailsTextValue: {
     width: '60%',
     textAlign: 'right',
-   
   },
 
   detailsText: {},

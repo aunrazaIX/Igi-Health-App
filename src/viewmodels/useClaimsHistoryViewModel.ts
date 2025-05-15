@@ -79,11 +79,9 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
     },
   });
 
-  const filterByClaimStatus = (
-    data: ClaimHistoryGroup[],
-    amountStatusTab: AmountStatus,
-  ): ClaimHistoryGroup[] => {
-    return data.filter(claim => {
+  const filterByClaimStatus = useMemo(() => {
+    return data?.filter(claim => {
+      console.log('sadkdoapsjioj', claim);
       const temp = claim?.items?.find(item => item?.label === 'Status:');
       if (!temp?.value) return false;
       const statusValue = temp?.value;
@@ -91,10 +89,10 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
         ? statusValue === 8
         : statusValue !== 8;
     });
-  };
+  }, [data, amountStatusTab]);
 
   const filterDataByTime = useMemo(() => {
-    return data.filter(claim => {
+    return filterByClaimStatus?.filter(claim => {
       const temp = claim?.items?.find(item => item.label === 'Services Date:');
       if (!temp?.value) return false;
       const claimDate = moment(temp?.value, 'YYYY-MM-DD');
@@ -107,7 +105,7 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
       }
       return true;
     });
-  }, [daysStatusTab, data]);
+  }, [daysStatusTab, filterByClaimStatus]);
 
   return {
     states: {
