@@ -1,5 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {useEffect, useState} from 'react';
 
 type UseForgotPasswordViewModelReturnType = {
   states: {
@@ -11,12 +11,18 @@ type UseForgotPasswordViewModelReturnType = {
     onPressBack: () => void;
     setConfirmationModal: (val: boolean) => void;
     openConfimationModal: () => void;
-
   };
 };
-const useForgotPasswordViewModel = (): UseForgotPasswordViewModelReturnType => {
+const useForgotPasswordViewModel = ({
+  route,
+}): UseForgotPasswordViewModelReturnType => {
+  const {step: _step} = route?.params || {};
   const [step, setStep] = useState<number>(1);
-  const [confirmationModal, setConfirmationModal] = useState(false)
+  const [confirmationModal, setConfirmationModal] = useState(false);
+
+  useEffect(() => {
+    setStep(_step);
+  }, [_step]);
 
   const navigation = useNavigation();
 
@@ -26,29 +32,28 @@ const useForgotPasswordViewModel = (): UseForgotPasswordViewModelReturnType => {
     }
   };
 
-
   const onPressBack = (): void => {
     if (step > 1) {
-      setStep(step - 1)
+      setStep(step - 1);
     }
     if (step == 1) {
       navigation.goBack();
     }
-  }
+  };
 
   const openConfimationModal = () => {
-    setConfirmationModal(true)
-  }
+    setConfirmationModal(true);
+  };
   return {
     states: {
       step,
-      confirmationModal
+      confirmationModal,
     },
     functions: {
       handleStep,
       onPressBack,
       setConfirmationModal,
-      openConfimationModal
+      openConfimationModal,
     },
   };
 };

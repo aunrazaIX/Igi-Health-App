@@ -16,7 +16,7 @@ type ApiHookReturn<T> = {
   loading: boolean;
   data: T | null;
   error: Error | null;
-  trigger: () => Promise<void>;
+  trigger: (data?: any) => Promise<void>;
 };
 
 const useApiHook = <T>({
@@ -31,14 +31,14 @@ const useApiHook = <T>({
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  const apiCallingFunction = async () => {
+  const apiCallingFunction = async (data?: any) => {
     setError(null);
     setData(null);
     try {
       let dataToSave = null;
       setLoading(true);
       let _method = method === 'get' ? get : post;
-      const res = await _method(apiEndpoint, argsOrBody);
+      const res = await _method(apiEndpoint, data ? data : argsOrBody);
       dataToSave = res;
       if (transform) {
         const {keyToLoop, ...mappings} = transform;

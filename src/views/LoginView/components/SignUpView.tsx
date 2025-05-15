@@ -1,13 +1,25 @@
 import React from 'react';
-import {InputField, Button, AileronSemiBold} from '../../../components';
-import {styles} from '../styles';
-import {icons} from '../../../assets';
-import {vh, vw} from '../../../assets/theme/dimension';
-import {StyleSheet , View} from 'react-native';
-import {COLORS} from '../../../assets/theme/colors';
+import { InputField, Button, AileronSemiBold } from '../../../components';
+import { styles } from '../styles';
+import { icons } from '../../../assets';
+import { vh, vw } from '../../../assets/theme/dimension';
+import { StyleSheet, View } from 'react-native';
+import { COLORS } from '../../../assets/theme/colors';
 
 
-const SignUpView = () => {
+const SignUpView = ({
+  handleSignup,
+  signupSetterForApiData,
+  signupApiData,
+  loadingSignup,
+}: {
+  handleSignup: () => void;
+  signupSetterForApiData: (key: string, value: string) => void;
+  signupApiData: any;
+  loadingSignup: boolean;
+}
+) => {
+
   return (
     <>
       <AileronSemiBold
@@ -24,6 +36,9 @@ const SignUpView = () => {
         label="Your Name"
         placeholder="Enter Full Name"
         rightIcon={icons.name}
+        onChangeText={(text) => signupSetterForApiData('name', text)}
+        value={signupApiData?.name}
+        errorMessage={signupApiData?.error_name}
       />
       <InputField
         containerStyle={style.inputContainer}
@@ -32,6 +47,9 @@ const SignUpView = () => {
         label="Your Email"
         placeholder="Enter Email Address"
         rightIcon={icons.email}
+        onChangeText={(text) => signupSetterForApiData('email', text)}
+        value={signupApiData?.email}
+        errorMessage={signupApiData?.error_email}
       />
       <InputField
         containerStyle={style.inputContainer}
@@ -40,55 +58,66 @@ const SignUpView = () => {
         label="CNIC Number"
         placeholder="12345-6789012-3"
         rightIcon={icons.cnic}
+        onChangeText={(text) => signupSetterForApiData('cnic', text)}
+        value={signupApiData?.cnic}
+        errorMessage={signupApiData?.error_cnic}
       />
 
- <View style={style.signupTextContainer} > 
-
- <View style={style.signupText}> 
-      <AileronSemiBold name='•'   style={styles.loginContainerText} />
-
-      <AileronSemiBold
-        numberOfLines={3}
-        name={
-       "Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character."
-        }
-        style={styles.loginContainerText}
+      <InputField
+        containerStyle={style.inputContainer}
+        labelStyle={style.labelStyle}
+        inputStyle={style.inputStyle}
+        label="Phone Number"
+        placeholder="Enter Phone Number"
+        rightIcon={icons.cnic}
+        onChangeText={(text) => signupSetterForApiData('cellNumber', text)}
+        value={signupApiData?.cellNumber}
+        errorMessage={signupApiData?.error_cellNumber}
       />
 
-</View>
+      <View style={style.signupTextContainer} >
 
-<View style={style.signupText}> 
-      <AileronSemiBold name='•'   style={styles.loginContainerText} />
+        <View style={style.signupText}>
+          <AileronSemiBold name='•' style={styles.loginContainerText} />
 
-      <AileronSemiBold
-        numberOfLines={3}
-        name={
-       "Special characters can include digits and punctuation (e.g., !@#$%^&*()_+|~-={}[]:;'<>?,./)."
-        }
-        style={styles.loginContainerText}
-      />
+          <AileronSemiBold
+            numberOfLines={3}
+            name={
+              "Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character."
+            }
+            style={styles.loginContainerText}
+          />
 
-</View>
+        </View>
 
-<View style={style.signupText}> 
-      <AileronSemiBold name='•'   style={styles.loginContainerText} />
+        <View style={style.signupText}>
+          <AileronSemiBold name='•' style={styles.loginContainerText} />
 
-      <AileronSemiBold
-        numberOfLines={3}
-        name={
-       "Case sensitivity is mandatory."
-        }
-        style={styles.loginContainerText}
-      />
+          <AileronSemiBold
+            numberOfLines={3}
+            name={
+              "Special characters can include digits and punctuation (e.g., !@#$%^&*()_+|~-={}[]:;'<>?,./)."
+            }
+            style={styles.loginContainerText}
+          />
 
-</View>
-</View>
+        </View>
 
+        <View style={style.signupText}>
+          <AileronSemiBold name='•' style={styles.loginContainerText} />
 
+          <AileronSemiBold
+            numberOfLines={3}
+            name={
+              "Case sensitivity is mandatory."
+            }
+            style={styles.loginContainerText}
+          />
 
+        </View>
+      </View>
 
-
-      <Button containerStyle={styles.loginButton} name="Create Account" />
+      <Button containerStyle={styles.loginButton} name="Create Account" onPress={handleSignup} loading={loadingSignup} />
     </>
   );
 };
@@ -117,20 +146,12 @@ const style = StyleSheet.create({
   style: {
     fontSize: vw * 3.5,
   },
-  signupText:{
+  signupText: {
     flexDirection: "row",
-    gap:vw*2,
- 
+    gap: vw * 2,
     width: "100%"
-  
-    
-  
-  
   },
-  signupTextContainer:{
-
-    marginTop : vh*2,
-    
-    
+  signupTextContainer: {
+    marginTop: vh * 2,
   }
 });

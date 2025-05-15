@@ -1,15 +1,15 @@
-import React, {Fragment} from 'react';
-import {OtpInput} from 'react-native-otp-entry';
-import {COLORS} from '../../../assets/theme/colors';
+import React, { Fragment } from 'react';
+import { OtpInput } from 'react-native-otp-entry';
+import { COLORS } from '../../../assets/theme/colors';
 import styles from '../styles';
-import {AileronBold, AileronRegular} from '../../../components';
-import {TouchableOpacity} from 'react-native';
+import { AileronBold, AileronRegular } from '../../../components';
+import { TouchableOpacity } from 'react-native';
 
 const OtpView = () => {
   return (
     <Fragment>
       <OtpInput
-        numberOfDigits={6}
+        numberOfDigits={5}
         focusColor={COLORS.black}
         autoFocus={true}
         hideStick={true}
@@ -31,11 +31,12 @@ const OtpView = () => {
           containerStyle: styles.otpContainer,
           focusedPinCodeContainerStyle: styles.otpBoxView,
         }}
+      // onFilled={ }
       />
       <AileronRegular style={styles.sendAgain} name="Send code again 00:58" />
       <TouchableOpacity>
         <AileronBold style={styles.resendCode} name="Resend Code" />
-        
+
       </TouchableOpacity>
     </Fragment>
   );
