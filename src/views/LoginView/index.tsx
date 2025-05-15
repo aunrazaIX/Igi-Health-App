@@ -8,7 +8,6 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {AileronSemiBold, CurvedView} from '../../components';
 import {LoginForm, SignUpView} from './components';
 import {User} from '../../viewmodels/useLoginViewModel';
-import {vh} from '../../assets/theme/dimension';
 
 const LoginView = ({
   onPressTab,

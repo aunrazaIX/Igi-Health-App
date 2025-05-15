@@ -1,13 +1,11 @@
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
-import { ImageSourcePropType } from 'react-native';
-import { icons } from '../assets';
-
-
+import {useNavigation} from '@react-navigation/native';
+import {useState} from 'react';
+import {ImageSourcePropType} from 'react-native';
+import {icons} from '../assets';
 
 export type PanelHospitalGroup = {
   headerLabel: string;
-  headerIcon : ImageSourcePropType,
+  headerIcon: ImageSourcePropType;
   items: PanelHospitalList[];
 };
 
@@ -45,65 +43,69 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
 
   const goBack = () => {
     navigation.goBack();
-    console.log("go back pressed")
   };
 
   const data: PanelHospitalGroup[] = [
     {
       headerLabel: 'Baluchistan',
-      headerIcon : icons.panelHospitalIcon,
+      headerIcon: icons.panelHospitalIcon,
       items: [
         {label: 'name:', value: 'Heart & General Hospital'},
         {label: 'phone:', value: '81-2822408, 081-2822409'},
-        {label: 'Address:', value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta'},
+        {
+          label: 'Address:',
+          value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
+        },
         {label: 'City:', value: 'Baluchistan, Quetta'},
       ],
     },
 
+    {
+      headerLabel: 'Larkana',
+      headerIcon: icons.panelHospitalIcon,
+      items: [
+        {label: 'name:', value: 'NICVD Larkana'},
+        {label: 'phone:', value: '---'},
+        {
+          label: 'Address:',
+          value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana',
+        },
+        {label: 'City:', value: 'Larkana'},
+      ],
+    },
 
+    {
+      headerLabel: 'Hyderabad',
+      headerIcon: icons.panelHospitalIcon,
+      items: [
+        {label: 'name:', value: 'NICVD Larkana'},
+        {label: 'phone:', value: '---'},
+        {
+          label: 'Address:',
+          value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana',
+        },
+        {label: 'City:', value: 'Hyderabad'},
+      ],
+    },
 
-
-   {
-    headerLabel: 'Larkana',
-    headerIcon : icons.panelHospitalIcon,
-    items: [
-      {label: 'name:', value: 'NICVD Larkana'},
-      {label: 'phone:', value: '---'},
-      {label: 'Address:', value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana'},
-      {label: 'City:', value: 'Larkana'},
-    ],
-  },
-
-
-  {
-    headerLabel: 'Hyderabad',
-    headerIcon : icons.panelHospitalIcon,
-    items: [
-      {label: 'name:', value: 'NICVD Larkana'},
-      {label: 'phone:', value: '---'},
-      {label: 'Address:', value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana'},
-      {label: 'City:', value: 'Hyderabad'},
-    ],
-  },
-  
-
-  {
-    headerLabel: 'Hyderabad',
-    headerIcon : icons.panelHospitalIcon,
-    items: [
-      {label: 'name:', value: 'NICVD Larkana'},
-      {label: 'phone:', value: '---'},
-      {label: 'Address:', value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana'},
-      {label: 'City:', value: 'Hyderabad'},
-    ],
-  },
-
-   
+    {
+      headerLabel: 'Hyderabad',
+      headerIcon: icons.panelHospitalIcon,
+      items: [
+        {label: 'name:', value: 'NICVD Larkana'},
+        {label: 'phone:', value: '---'},
+        {
+          label: 'Address:',
+          value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana',
+        },
+        {label: 'City:', value: 'Hyderabad'},
+      ],
+    },
   ];
 
   return {
     states: {
-     data, 
+      data,
       selectedTab,
       selectedTabRight,
     },

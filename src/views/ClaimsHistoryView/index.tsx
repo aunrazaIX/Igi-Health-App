@@ -47,7 +47,6 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
       />
       <CurvedView>
         <View style={styles.infoContainer}>
-          |
           <View style={styles.infoContainerTop}>
             <TouchableOpacity
               onPress={() => onPressAmountStatusTab('paidAmount')}
