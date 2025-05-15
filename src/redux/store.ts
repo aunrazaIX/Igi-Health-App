@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistStore, persistReducer} from 'redux-persist';
 import {authReducer} from './authSlice';
 import {lodegeReducer} from './lodgeSlice';
+import {generalReducer} from './generalSlice';
 
 const persistConfig = {
   key: 'root',
@@ -13,6 +14,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authReducer,
   lodge: lodegeReducer,
+  general: generalReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
