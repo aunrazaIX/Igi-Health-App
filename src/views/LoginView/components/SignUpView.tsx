@@ -5,26 +5,20 @@ import { icons } from '../../../assets';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { StyleSheet, View } from 'react-native';
 import { COLORS } from '../../../assets/theme/colors';
-import { clampRGBA } from 'react-native-reanimated/lib/typescript/Colors';
 
-type userDetails = {
-  name: string,
-  email: string,
-  cnicNum: string
+
+const SignUpView = ({
+  handleSignup,
+  signupSetterForApiData,
+  signupApiData,
+  loadingSignup,
+}: {
+  handleSignup: () => void;
+  signupSetterForApiData: (key: string, value: string) => void;
+  signupApiData: any;
+  loadingSignup: boolean;
 }
-
-const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string, step?: number) => void, onPressTab: () => void }) => {
-
-
-
-  const [userDetails, setUserDetails] = useState<userDetails>({
-
-    name: "",
-    email: "",
-    cnicNum: ""
-  })
-
-  console.log(userDetails, "details")
+) => {
 
   return (
     <>
@@ -37,11 +31,12 @@ const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string, step?: numb
       />
       <InputField
 
-        label="Your Name"
-        placeholder="Enter Full Name"
+        label="Mobile Number"
+        placeholder="Enter Mobile Number"
         rightIcon={icons.name}
-        value={userDetails.name}
-        onChangeText={(text) => setUserDetails((prev) => ({ ...prev, name: text }))}
+        onChangeText={(text) => signupSetterForApiData('name', text)}
+        value={signupApiData?.name}
+        errorMessage={signupApiData?.error_name}
       />
       <InputField
         containerStyle={style.inputContainer}
@@ -50,18 +45,30 @@ const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string, step?: numb
         label="Your Email"
         placeholder="Enter Email Address"
         rightIcon={icons.email}
-        value={userDetails.email}
-        onChangeText={(text) => setUserDetails((prev) => ({ ...prev, email: text }))}
+        onChangeText={(text) => signupSetterForApiData('email', text)}
+        value={signupApiData?.email}
+        errorMessage={signupApiData?.error_email}
       />
 
       <InputField
         label="CNIC Number"
         placeholder="12345-6789012-3"
         rightIcon={icons.cnic}
-        value={userDetails.cnicNum}
-        onChangeText={(text) => setUserDetails((prev) => ({ ...prev, cnicNum: text }))}
+        onChangeText={(text) => signupSetterForApiData('cnic', text)}
+        value={signupApiData?.cnic}
+        errorMessage={signupApiData?.error_cnic}
+      />
 
-
+      <InputField
+        containerStyle={style.inputContainer}
+        labelStyle={style.labelStyle}
+        inputStyle={style.inputStyle}
+        label="Phone Number"
+        placeholder="Enter Phone Number"
+        rightIcon={icons.cnic}
+        onChangeText={(text) => signupSetterForApiData('cellNumber', text)}
+        value={signupApiData?.cellNumber}
+        errorMessage={signupApiData?.error_cellNumber}
       />
 
       <View style={style.signupTextContainer} >
@@ -106,14 +113,12 @@ const SignUpView = ({ onPress, onPressTab }: { onPress: (to: string, step?: numb
         </View>
       </View>
 
-
-
-
-
-      <Button onPress={() =>{ onPress('ForgotPassword', { stepNum:  2, type: 'signup' }) } } containerStyle={styles.loginButton} name="Create Account" />
+      <Button containerStyle={styles.loginButton} name="Create Account" onPress={handleSignup} loading={loadingSignup} />
     </>
   );
 };
+
+// onPress={() => { onPress('ForgotPassword', { stepNum: 2, type: 'signup' }) }}
 
 export default SignUpView;
 
@@ -142,17 +147,9 @@ const style = StyleSheet.create({
   signupText: {
     flexDirection: "row",
     gap: vw * 2,
-
     width: "100%"
-
-
-
-
   },
   signupTextContainer: {
-
     marginTop: vh * 2,
-
-
   }
 });

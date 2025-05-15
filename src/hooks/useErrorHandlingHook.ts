@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 type ApiDataValue =
   | string
@@ -19,6 +19,7 @@ type UseErrorHandlingHookReturn = {
 };
 
 const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
+
   const [apiData, setApiData] = useState<ApiData>(data);
 
   const setterForApiData = (key: string, value: ApiDataValue) => {
@@ -27,6 +28,7 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
       [key]: value,
       [`error_${key}`]: value === '' ? `${key} is required` : '',
     }));
+
   };
 
   const resetStates = () => {
@@ -44,7 +46,7 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
   const checkForError = (): boolean => {
     let isAllowedForProceeding = true;
     setApiData(prevData => {
-      const updatedData = {...prevData};
+      const updatedData = { ...prevData };
       Object.keys(prevData).forEach(key => {
         if (
           !key.startsWith('error_') &&
@@ -70,3 +72,7 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
 };
 
 export default useErrorHandlingHook;
+
+
+
+

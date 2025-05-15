@@ -9,7 +9,7 @@ export {default as CheckBox} from './CheckBox';
 export {default as InputField} from './InputField';
 export {default as TopView} from './TopView';
 export {default as Select} from './Select';
-export {default as ModalCustom} from './Modal';
+export {default as ModalCustom} from './Modal/AddModal';
 export {default as Stepper} from './Stepper';
 export {default as DependentBox} from './DependentBox';
 export {default as ConfirmationModal} from './Modal/confimationModal';

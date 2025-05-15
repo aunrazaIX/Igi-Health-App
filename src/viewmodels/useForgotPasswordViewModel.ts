@@ -8,18 +8,25 @@ type routes = {
 type UseForgotPasswordViewModelReturnType = {
   states: {
     step: number;
-    confirmationVisible: boolean;
+    confirmationModal: boolean;
   };
   functions: {
     handleStep: (step: number) => void;
     onPressBack: () => void;
-    setConfirmationVisible: (val: boolean) => void;
+    setConfirmationModal: (val: boolean) => void;
+    openConfimationModal: () => void;
   };
 };
-
-const useForgotPasswordViewModel = ({ route }: { route: routes }): UseForgotPasswordViewModelReturnType => {
+const useForgotPasswordViewModel = ({
+  route,
+}): UseForgotPasswordViewModelReturnType => {
+  const { step: _step } = route?.params || {};
   const [step, setStep] = useState<number>(1);
-  const [confirmationVisible, setConfirmationVisible] = useState<boolean>(false);
+  const [confirmationModal, setConfirmationModal] = useState(false);
+
+  useEffect(() => {
+    setStep(_step);
+  }, [_step]);
 
   const navigation = useNavigation();
 
@@ -48,21 +55,19 @@ const useForgotPasswordViewModel = ({ route }: { route: routes }): UseForgotPass
     }
   };
 
-  useEffect(() => {
-    if (stepNum) {
-      setStep(stepNum);
-    }
-  }, [stepNum]);
-
+  const openConfimationModal = () => {
+    setConfirmationModal(true);
+  };
   return {
     states: {
       step,
-      confirmationVisible,
+      confirmationModal,
     },
     functions: {
       handleStep,
       onPressBack,
-      setConfirmationVisible,
+      setConfirmationModal,
+      openConfimationModal,
     },
   };
 };

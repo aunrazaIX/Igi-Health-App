@@ -4,20 +4,16 @@ import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewMo
 
 const ForgotPassword = ({ route }) => {
   const { states, functions } = useForgotPasswordViewModel({ route });
-  const { step, } = states;
-  const { handleStep, onPressBack, } = functions;
+  const { step, confirmationModal } = states;
+  const { handleStep, onPressBack, setConfirmationModal, openConfimationModal, } = functions;
   return (
     <ForgotPasswordView
       onPressBack={onPressBack}
       handleStep={handleStep}
       step={step}
-
-
-
-
-
-
-
+      confirmationModal={confirmationModal}
+      setConfirmationModal={setConfirmationModal}
+      openConfimationModal={openConfimationModal}
     />
   );
 };

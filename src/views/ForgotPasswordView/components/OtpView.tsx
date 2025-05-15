@@ -47,6 +47,7 @@ const OtpView = () => {
           containerStyle: styles.otpContainer,
           focusedPinCodeContainerStyle: styles.otpBoxView,
         }}
+      // onFilled={ }
       />
 
       <View style={{ flexDirection: 'row', justifyContent: "center", alignItems: "center", }}>

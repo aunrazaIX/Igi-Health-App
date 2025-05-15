@@ -7,27 +7,34 @@ import LinearGradient from 'react-native-linear-gradient';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { AileronSemiBold, CurvedView } from '../../components';
 import { LoginForm, SignUpView } from './components';
-import { User } from '../../viewmodels/useLoginViewModel';
-import { vh } from '../../assets/theme/dimension';
 
 const LoginView = ({
   onPressTab,
   selectedTab,
   tabs,
-  user,
   onPressforgotPassword,
-  handleChange,
   handleLogin,
   loading,
+  handleSignup,
+  signupSetterForApiData,
+  signupApiData,
+  loadingSignup,
+  loginApiData,
+  loginSetterForApiData
+
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;
   tabs: string[];
-  user: User;
   onPressforgotPassword: (to: string) => void;
-  handleChange: (field: keyof User, value: string) => void;
   handleLogin: () => void;
   loading: boolean;
+  handleSignup: () => void;
+  signupSetterForApiData: (key: string, value: any) => void;
+  signupApiData: any;
+  loadingSignup: boolean;
+  loginApiData: any;
+  loginSetterForApiData: (key: string, value: any) => void;
 }) => {
   const Wrapper = (tab: string) =>
     selectedTab === tab ? LinearGradient : TouchableOpacity;
@@ -35,14 +42,19 @@ const LoginView = ({
   const renderForm: Record<string, JSX.Element> = {
     login: (
       <LoginForm
-        handleChange={handleChange}
-        user={user}
         onPressforgotPassword={onPressforgotPassword}
         handleLogin={handleLogin}
         loading={loading}
+        loginApiData={loginApiData}
+        loginSetterForApiData={loginSetterForApiData}
       />
     ),
-    signup: <SignUpView />,
+    signup: <SignUpView
+      signupSetterForApiData={signupSetterForApiData}
+      signupApiData={signupApiData}
+      handleSignup={handleSignup}
+      loadingSignup={loadingSignup}
+    />,
   };
   return (
     <KeyboardAwareScrollView enableOnAndroid>

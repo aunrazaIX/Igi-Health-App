@@ -1,37 +1,28 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import Box from './Box';
 import {vh} from '../../../assets/theme/dimension';
-import LinearGradient from 'react-native-linear-gradient';
-import {AileronSemiBold} from '../../../components';
 import {COLORS} from '../../../assets/theme/colors';
 import {ClaimDetailSection} from '../typeInterface';
-import {ScrollView} from 'react-native-gesture-handler';
 
 type ClaimProps = {
   claimsDetails: ClaimDetailSection[];
   navigateTreatment: () => void;
+  onPressDelete: (index: number) => void;
 };
 
-const Claim: React.FC<ClaimProps> = ({claimsDetails, navigateTreatment}) => {
+const Claim: React.FC<ClaimProps> = ({claimsDetails, onPressDelete}) => {
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <View style={styles.list}>
-          {claimsDetails?.map((data, index) => (
-            <Box data={data} key={index} />
-          ))}
-        </View>
-      </ScrollView>
-      <LinearGradient
-        colors={COLORS.PriorGradient}
-        style={styles.priorGradient}>
-        <View style={styles.wrapper}>
-          <TouchableOpacity onPress={navigateTreatment}>
-            <AileronSemiBold style={styles.priorNext} name={'Add'} />
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
+      <View style={styles.list}>
+        {claimsDetails?.map((data, index) => (
+          <Box
+            onPressDelete={() => onPressDelete(index)}
+            data={data}
+            key={index}
+          />
+        ))}
+      </View>
     </View>
   );
 };

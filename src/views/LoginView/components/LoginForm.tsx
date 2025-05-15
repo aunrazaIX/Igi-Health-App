@@ -12,20 +12,19 @@ import { icons } from '../../../assets';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { COLORS } from '../../../assets/theme/colors';
 
-import { User } from '../../../viewmodels/useLoginViewModel';
-
 const LoginForm = ({
   onPressforgotPassword,
-  user,
-  handleChange,
   handleLogin,
   loading,
+  loginApiData,
+  loginSetterForApiData,
 }: {
   onPressforgotPassword: (to: string) => void;
-  user: User;
-  handleChange: (field: keyof User, value: string) => void;
   handleLogin: () => void;
   loading: boolean;
+  loginApiData: any;
+  loginSetterForApiData: (key: string, value: any) => void;
+
 }) => {
   return (
     <>
@@ -43,8 +42,10 @@ const LoginForm = ({
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
-          value={user?.userName ?? undefined}
-          onChangeText={text => handleChange('userName', text)}
+          value={loginApiData?.userName ?? undefined}
+          onChangeText={text => loginSetterForApiData('userName', text)}
+          errorMessage={loginApiData?.error_userName}
+
         />
 
         <InputField
@@ -54,8 +55,10 @@ const LoginForm = ({
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
-          value={user?.password ?? undefined}
-          onChangeText={text => handleChange('password', text)}
+          value={loginApiData?.password ?? undefined}
+          onChangeText={text => loginSetterForApiData('password', text)}
+          errorMessage={loginApiData?.error_password}
+
         />
       </View>
 
