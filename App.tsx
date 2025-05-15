@@ -2,8 +2,6 @@ import React from 'react';
 import MainStack from './src/navigation/MainStack';
 import {StatusBar, StyleSheet} from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
-import {COLORS} from './src/assets/theme/colors';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 import {persistor, store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';

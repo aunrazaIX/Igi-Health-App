@@ -10,6 +10,7 @@ type ApiHookParams = {
   refetchOnArgumentChange?: boolean;
   transform?: any;
   onSuccess?: (data: any) => void;
+  isFormData?: boolean;
 };
 
 type ApiHookReturn<T> = {
@@ -25,6 +26,7 @@ const useApiHook = <T>({
   argsOrBody = {},
   refetchOnArgumentChange = false,
   transform,
+  isFormData = false,
   onSuccess,
 }: ApiHookParams): ApiHookReturn<T> => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -38,7 +40,7 @@ const useApiHook = <T>({
       let dataToSave = null;
       setLoading(true);
       let _method = method === 'get' ? get : post;
-      const res = await _method(apiEndpoint, argsOrBody);
+      const res = await _method(apiEndpoint, argsOrBody, isFormData);
       dataToSave = res;
       if (transform) {
         const {keyToLoop, ...mappings} = transform;

@@ -7,6 +7,7 @@ import {
   NavigationProp,
   RouteProp,
 } from '@react-navigation/native';
+import {pick, types} from '@react-native-documents/picker';
 
 interface Treatment {
   receiptNumber?: string;
@@ -47,11 +48,27 @@ interface Props {
 }
 
 const useLodgeClaimViewModel = ({navigation, route}: Props) => {
+  const {
+    loading: uploadLoading,
+    data: claimObject,
+    trigger,
+  } = useApiHook({
+    method: 'post',
+    isFormData: true,
+    apiEndpoint: endpoints.claimLogde.attachment(
+      '776',
+      '1231231232131',
+      'DEMO',
+    ),
+    argsOrBody: {
+      files: selectedDocuments,
+    },
+  });
   const {treatments, stepFromTreatment} = route?.params || {};
   const [_treatments, setTreatments] = useState<Treatment[]>([]);
   const [selectedPatient, setSelectedPatient] = useState<any>(null);
   const [currentStep, setCurrentStep] = useState<number>(1);
-
+  const [selectedDocuments, setSelectedDocuments] = useState([]);
   useFocusEffect(
     useCallback(() => {
       if (stepFromTreatment) {
@@ -69,7 +86,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     }, [treatments, stepFromTreatment]),
   );
 
-  const {data: dependants, loading} = useApiHook({
+  const {data: dependants, loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
     argsOrBody: {
@@ -127,7 +144,24 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   }));
 
   const goBack = () => navigation.goBack();
-  const onPressStep = (step: number) => setCurrentStep(step);
+  const onPressStep = (step: number) => {
+    if (step === 1) {
+      if (!selectedPatient) {
+        return;
+      }
+    }
+    if (step === 2) {
+      if (!treatments?.length > 0) {
+        return;
+      }
+    }
+    if (step === 3) {
+      if (!selectedDocuments?.length > 0) {
+        return;
+      }
+    }
+    setCurrentStep(step);
+  };
   const navigateTreatment = () => {
     navigation.navigate('AddTreatment', {allTreatments: _treatments});
   };
@@ -137,17 +171,58 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     setTreatments(temp);
   };
   const onSelectPatient = (patient: any) => setSelectedPatient(patient);
-  const onPressNext = () => setCurrentStep(currentStep + 1);
+  const onPressNext = () => {
+    try {
+      if (currentStep === 1) {
+        if (!selectedPatient) {
+          throw new Error('Please Select Patient');
+        }
+      }
+      if (currentStep < 3) {
+        setCurrentStep(currentStep + 1);
+      }
+    } catch (e) {
+      console.log('Error', e);
+    }
+  };
+
+  const onSelectDocument = async () => {
+    try {
+      const res = await pick({
+        allowMultiSelection: true,
+        type: [types.docx, types.pdf],
+      });
+      let documents = [];
+      res?.forEach((item: any) => {
+        console.log(item);
+        documents.push({
+          uri: item?.uri,
+          type: item?.type,
+          name: item?.name,
+        });
+      });
+      setSelectedDocuments(documents);
+    } catch (e) {
+      console.log('Error', e);
+    }
+  };
+
+  console.log('claimObject', claimObject, uploadLoading);
+
+  const onPressUpload = () => {
+    trigger();
+  };
 
   return {
     states: {
       steps,
       personalData,
       claimsDetails,
-      loading,
+      dependantLoading,
       currentStep,
       dependants,
       selectedPatient,
+      selectedDocuments,
     },
     functions: {
       goBack,
@@ -156,6 +231,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       onPressDelete,
       onPressStep,
       onSelectPatient,
+      onSelectDocument,
+      onPressUpload,
     },
   };
 };

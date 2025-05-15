@@ -11,7 +11,7 @@ import { personalDetail } from '../../types/personalTypes'
 import ConfimationModal from '../../components/Modal/confimationModal'
 import { ScrollView } from 'react-native-gesture-handler'
 import { vh } from '../../assets/theme/dimension'
-import AddModal from '../../components/Modal'
+import AddModal from '../../components/Modal/AddModal'
 
 
 type Props = {
@@ -121,6 +121,7 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation, goBack, handleS
                 confirmationMessage={'Are you sure you want to delete this dependent detail? This action cannot be undone, and it may affect other related data.'}
                 confirmationRequired={true}
                 deleteButton={true}
+                CloseButtonText={'Close'}
             />
         </Container>
     )

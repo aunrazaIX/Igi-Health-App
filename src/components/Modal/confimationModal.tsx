@@ -7,9 +7,9 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import React from 'react';
-import {icons, images} from '../../assets';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
+import { icons, images } from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
 import AileronBold from '../AileronBold';
 import AileronSemiBold from '../AileronSemiBold';
 import LinearGradient from 'react-native-linear-gradient';
@@ -20,14 +20,16 @@ type StyleObject = Record<string, string | number | boolean>;
 type ConfimationModalProps = {
   ConfirmationModalVisible: boolean;
   setConfirmationModalVisible: (val: boolean) => void;
-  frameImage: ImageSourcePropType;
-  confirmationMessage: string;
-  closeButton?: boolean;
-  deleteButton?: boolean;
-  confirmationRequired?: boolean;
-  claimSubmission?: boolean;
+  frameImage?: ImageSourcePropType;
+  confirmationMessage: string,
+  closeButton?: boolean,
+  deleteButton?: boolean,
+  confirmationRequired?: boolean,
+  claimSubmission?: boolean,
   containerStyle?: StyleObject | StyleObject[];
-  handleDelete?: () => void;
+  handleDelete?: () => void,
+  Successfull?: boolean,
+  CloseButtonText: string
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -41,6 +43,8 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   claimSubmission,
   containerStyle,
   handleDelete,
+  Successfull,
+  CloseButtonText
 }) => {
   return (
     <Modal
@@ -73,6 +77,12 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                   style={styles.confirmation}
                 />
                 <AileronBold name="Confirmation" style={styles.required} />
+              </View>
+            )}
+
+            {Successfull && (
+              <View style={styles.confirmationContainer}>
+                <AileronBold name='Successful!' style={styles.confirmation} />
               </View>
             )}
 
@@ -141,7 +151,7 @@ const styles = StyleSheet.create({
     paddingTop: vh * 2.5,
     paddingBottom: vh * 2,
     shadowColor: COLORS.black,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 1,
     shadowRadius: vw * 6,
     elevation: vw * 7,
@@ -197,7 +207,7 @@ const styles = StyleSheet.create({
   deleteButton: {
     borderRadius: vh * 1.3,
   },
-  wrapper: {padding: vh * 2},
+  wrapper: { padding: vh * 2 },
   cancelButtonText: {
     fontSize: vw * 4.4,
     color: COLORS.cancelButton,

@@ -5,6 +5,7 @@ import {
   AileronBold,
   AileronRegular,
   Button,
+  ConfirmationModal,
   Container,
   CurvedView,
   TopView,
@@ -16,10 +17,17 @@ const ForgotPasswordView = ({
   step,
   handleStep,
   onPressBack,
+  confirmationModal,
+  setConfirmationModal,
+  openConfimationModal
+
 }: {
   step: number;
   onPressBack: () => void;
   handleStep: (step: number) => void;
+  confirmationModal: boolean;
+  setConfirmationModal: (val: boolean) => void;
+  openConfimationModal: () => void;
 }) => {
   const returnComponent: Record<number, JSX.Element> = {
     1: <EnterEmailView />,
@@ -70,11 +78,27 @@ const ForgotPasswordView = ({
 
 
         <Button
-          onPress={() => handleStep(step)}
+          onPress={() => {
+            if (step === 3) {
+              openConfimationModal()
+            } else {
+              handleStep(step)
+            }
+          }}
           name={returnButtonName[step]}
           containerStyle={styles.button}
         />
       </CurvedView>
+
+      <ConfirmationModal
+        ConfirmationModalVisible={confirmationModal}
+        setConfirmationModalVisible={setConfirmationModal}
+        frameImage={icons.ModalSuccessfull}
+        confirmationMessage={"Your password has been changed  successfully."}
+        closeButton={true}
+        Successfull={true}
+        CloseButtonText={'Continue To Login'}
+      />
     </Container>
   );
 };
