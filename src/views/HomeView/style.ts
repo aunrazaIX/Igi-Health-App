@@ -141,9 +141,8 @@ export const styles = StyleSheet.create({
     gap: vh * 0.5,
   },
   homeInfoContainerMiddle: {
-    // marginVertical: vh * 2,
+    marginTop: vh * 2.5,
     justifyContent: 'space-between',
-    // borderWidth: 2
     gap: vh * 0.5,
   },
   homeInfoContainerMiddleText: {},
@@ -160,6 +159,7 @@ export const styles = StyleSheet.create({
   infoCardFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: vh * 2.5,
     // borderWidth: 2
   },
   infoCardFooterTextBold: {
