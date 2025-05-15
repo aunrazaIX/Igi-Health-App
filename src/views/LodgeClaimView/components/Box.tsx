@@ -21,24 +21,22 @@ type BoxProps = {
       value: string;
     }[];
   };
+  onPressDelete: () => void;
 };
 
-const Box: React.FC<BoxProps> = ({data}) => {
+const Box: React.FC<BoxProps> = ({data, onPressDelete}) => {
   return (
     <View style={styles.boxContainer}>
       <View style={styles.header}>
         <Image source={data?.icon} style={styles.avatar} />
         <AileronBold style={styles.headerText} name={data?.sectionTitle} />
-        {data?.edit && (
-          <TouchableOpacity style={styles.button}>
-            <Image source={icons.edit} style={styles.buttonIcon} />
-          </TouchableOpacity>
-        )}
-        {data?.delete && (
-          <TouchableOpacity style={styles.button}>
-            <Image source={icons.delete} style={styles.buttonIcon} />
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity style={styles.button}>
+          <Image source={icons.edit} style={styles.buttonIcon} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onPressDelete} style={styles.button}>
+          <Image source={icons.delete} style={styles.buttonIcon} />
+        </TouchableOpacity>
       </View>
       <View style={styles.details}>
         {data?.info?.map((_item: InfoItem, index: number) => (
@@ -58,7 +56,8 @@ const styles = StyleSheet.create({
   boxContainer: {
     padding: vh,
     width: '100%',
-    height: vh * 20,
+    paddingVertical: vh * 2,
+    marginVertical: vh * 1.5,
     borderRadius: vh * 2,
     elevation: 3,
     backgroundColor: COLORS.white,

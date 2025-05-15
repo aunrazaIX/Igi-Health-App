@@ -1,14 +1,13 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {StyleSheet, Image, View, TouchableWithoutFeedback} from 'react-native';
-import {icons, tabIcons} from '../../assets';
+import {StyleSheet, Image, View} from 'react-native';
+import {tabIcons} from '../../assets';
 import HomeStack from '../HomeStack';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import PriorApproval from '../../screens/PriorApproval';
 import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
-import LodgeClaim from '../../screens/LodgeClaim';
 import LodgeClaimStack from '../LodgeClaimStack';
 
 const Tab = createBottomTabNavigator();
@@ -18,23 +17,21 @@ const Tabs = () => {
     <Tab.Navigator
       initialRouteName="HomeStack"
       screenOptions={{
+        popToTopOnBlur: true,
         tabBarStyle: styles.tabBarStyle,
-
         tabBarItemStyle: {
           paddingVertical: vh * 1,
         },
-
         headerShown: false,
         tabBarIconStyle: {
           marginVertical: vh * 2,
         },
-
         tabBarHideOnKeyboard: true,
       }}>
       <Tab.Screen
         options={{
           tabBarShowLabel: false,
-
+          popToTopOnBlur: true,
           tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
@@ -65,6 +62,7 @@ const Tabs = () => {
       <Tab.Screen
         options={{
           tabBarShowLabel: false,
+          popToTopOnBlur: true,
           tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
@@ -92,6 +90,7 @@ const Tabs = () => {
       <Tab.Screen
         options={{
           tabBarShowLabel: false,
+          popToTopOnBlur: true,
           tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
@@ -122,6 +121,7 @@ const Tabs = () => {
       <Tab.Screen
         options={{
           tabBarShowLabel: false,
+          popToTopOnBlur: true,
           tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient

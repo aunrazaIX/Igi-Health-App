@@ -17,7 +17,6 @@ type ApiHookReturn<T> = {
   data: T | null;
   error: Error | null;
   trigger: () => Promise<void>;
-  transformResponse: (response: any) => void;
 };
 
 const useApiHook = <T>({

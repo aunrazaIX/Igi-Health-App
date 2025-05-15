@@ -3,20 +3,24 @@ import React from 'react';
 import {Select} from '../../../components';
 import {vh} from '../../../assets/theme/dimension';
 import Box from './Box';
-import {DependantList, PersonelDataSection} from '../typeInterface';
+import {PersonelDataSection} from '../typeInterface';
 
 type PersonalDetailsProps = {
-  patientOptions: DependantList[];
+  patientOptions: any[];
   personalData: PersonelDataSection[];
 };
 
 const PersonalDetails: React.FC<PersonalDetailsProps> = ({
   patientOptions,
   personalData,
+  selectedPatient,
+  onSelectPatient,
 }) => {
   return (
     <View style={styles.container}>
       <Select
+        value={selectedPatient?.label}
+        onSelectOption={value => onSelectPatient(value)}
         selectData={patientOptions}
         selectLabel={'Patient Information'}
         selectPlaceholder={'-- Select Patient From List --'}
