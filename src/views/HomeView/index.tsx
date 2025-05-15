@@ -8,13 +8,13 @@ import {
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {styles} from './style';
-import {icons, images} from '../../assets';
+import { styles } from './style';
+import { icons, images } from '../../assets';
 import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import {vh} from '../../assets/theme/dimension';
+import { vh } from '../../assets/theme/dimension';
 
 type CardItem = {
   logo: any;
@@ -54,9 +54,9 @@ const HomeView: React.FC<HomeViewProps> = ({
             </View>
 
             <View style={styles.headerIconsRow}>
-              <TouchableOpacity>
+              {/* <TouchableOpacity>
                 <Image source={icons.search} style={styles.headerIcons} />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               <TouchableOpacity
                 onPress={() => onPressHeaderIcon('Notifications')}>
@@ -157,7 +157,7 @@ const HomeView: React.FC<HomeViewProps> = ({
               <TouchableOpacity onPress={animateCard}>
                 <View style={styles.homeBackCardContainer}>
                   <View
-                    style={{justifyContent: 'space-between', gap: vh * 1.5}}>
+                    style={{ justifyContent: 'space-between', gap: vh * 1.5 }}>
                     <View style={styles.homeBackCardHeading}>
                       <AileronBold
                         style={styles.homeBackCardHeadingBlack}
@@ -267,17 +267,17 @@ const HomeView: React.FC<HomeViewProps> = ({
             data={cardData}
             keyExtractor={(_item, index) => index.toString()}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => onPressMenu(item)}
                 style={[
                   styles.dashboardContainerCards,
-                  {backgroundColor: item.backgroundColor},
+                  { backgroundColor: item.backgroundColor },
                 ]}>
                 <Image style={styles.cardLogo} source={item.logo} />
 
                 <View style={styles.cardContent}>
-                  <View style={{width: '85%'}}>
+                  <View style={{ width: '85%' }}>
                     <AileronRegular
                       style={styles.dashboardContainerCardText}
                       name={item.name}

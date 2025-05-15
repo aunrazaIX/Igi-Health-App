@@ -27,6 +27,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     dependants,
     currentStep,
     selectedPatient,
+    selectedDocuments,
+    dependantLoading,
   } = states;
 
   const {
@@ -36,6 +38,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     onPressDelete,
     onPressStep,
     onSelectPatient,
+    onSelectDocument,
+    onPressUpload,
   } = functions;
 
   return (
@@ -46,6 +50,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       dependants={dependants}
       claimsDetails={claimsDetails}
       selectedPatient={selectedPatient}
+      selectedDocuments={selectedDocuments}
       onPressStep={onPressStep}
       currentStep={currentStep}
       onPressDelete={onPressDelete}
@@ -53,6 +58,9 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       patientOptions={patientOptions}
       navigateTreatment={navigateTreatment}
       onSelectPatient={onSelectPatient}
+      onSelectDocument={onSelectDocument}
+      onPressUpload={onPressUpload}
+      dependantLoading={dependantLoading}
     />
   );
 };

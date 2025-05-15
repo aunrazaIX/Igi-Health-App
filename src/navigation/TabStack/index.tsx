@@ -156,13 +156,12 @@ export default Tabs;
 const styles = StyleSheet.create({
   tabBarStyle: {
     position: 'absolute',
-    bottom: vh * 1,
+    bottom: vh * 2,
     backgroundColor: COLORS.white,
     borderRadius: vh * 50,
     height: vw * 22,
     marginHorizontal: vw * 6,
     paddingHorizontal: vw * 2,
-    marginVertical: vh * 2,
     elevation: 3,
   },
   iconContainer: {
@@ -178,7 +177,10 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     paddingHorizontal: vw * 4,
-    paddingVertical: vw * 4,
+    paddingVertical: vw * 6,
+    borderRadius: (vw * 25) / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   iconStyle: {
     height: vw * 9,
