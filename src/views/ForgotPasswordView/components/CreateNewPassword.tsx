@@ -18,7 +18,7 @@ const CreateNewPassword = () => {
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
-
+      // onChangeText={(text) => }
 
 
       />

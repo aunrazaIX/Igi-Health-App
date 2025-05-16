@@ -1,18 +1,16 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { useState } from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-import { useDispatch } from 'react-redux';
-import { setUserData } from '../redux/authSlice';
+import {useDispatch} from 'react-redux';
+import {setUserData} from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 
 export type UserDetails = {
-
-  name: string,
-  cnicNum: string,
-  email: string
-
-}
+  name: string;
+  cnicNum: string;
+  email: string;
+};
 
 type UseLoginViewModelReturn = {
   states: {
@@ -61,15 +59,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     name: '',
   });
 
-  // const {
-  //   checkForError: verifyOtpCheckForError,
-  //   setterForApiData: verifyOtpSetterForApiData,
-  //   apiData: verifyOtpApiData,
-  // } = useErrorHandlingHook({
-  //   otp: '',
-  // });
-
-  const { loading, trigger } = useApiHook({
+  const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
     argsOrBody: loginApiData,
@@ -78,12 +68,12 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     },
   });
 
-  const { trigger: triggerSignup, loading: loadingSignup } = useApiHook({
+  const {trigger: triggerSignup, loading: loadingSignup} = useApiHook({
     apiEndpoint: endpoints.auth.registerUser,
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      setVerifiedUserData({ ...res?.Data, uuid: 'ASDADASDASDASDASDADAD' });
+      setVerifiedUserData({...res?.Data, uuid: 'ASDADASDASDASDASDADAD'});
       let apiData = {
         userId: res?.Data?.UserID,
         uuid: 'ASDADASDASDASDASDADAD',
@@ -105,7 +95,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
-      navigation.navigate('ForgotPassword', { step: 2, verifiedUserData });
+      navigation.navigate('ForgotPassword', {step: 2, verifiedUserData});
     },
   });
 
@@ -123,17 +113,10 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     triggerSignup();
   };
 
-  // const handleVerifyOtp = () => {
-  //   const filled = verifyOtpCheckForError();
-  //   if (!filled) return;
-
-  //   triggerVerifyOtp();
-  // };
-
   const onPressTab = (name: string) => setSelectedTab(name);
 
   const onPressforgotPassword = (to: string) => {
-    navigation.navigate(to, { step: 1 });
+    navigation.navigate(to, {step: 1});
   };
 
   const tabs = ['login', 'signup'];

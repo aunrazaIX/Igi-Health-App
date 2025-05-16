@@ -9,7 +9,6 @@ import {
   AileronBold,
   AileronRegular,
   Button,
-
   Container,
   CurvedView,
   TopView,
@@ -94,34 +93,15 @@ const ForgotPasswordView = ({
 
 
         <Button
-          // onPress={() => {
-          //   if (step === 3) {
-          //     openConfimationModal()
-          //   } else {
-          //     handleStep(step)
-          //   }
-          // }}
           onPress={() => {
-
-            if (step === 3) {
-              openConfimationModal()
-
-              return;
-            }
-            if (step === 1) {
-
-              console.log("heyyyy")
-              handleForgotPassword()
-              return;
-            }
             if (handleVerifyOtp) {
               handleVerifyOtp()
-              return;
-            }
-            else {
+            } else {
               handleStep(step)
             }
-          }}
+          }
+          }
+
           name={returnButtonName[step]}
           containerStyle={styles.button}
           loading={verifyOtpLoading}
