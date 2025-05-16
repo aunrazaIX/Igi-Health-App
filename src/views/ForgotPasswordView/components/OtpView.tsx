@@ -8,7 +8,7 @@ import CountDown from 'react-native-countdown-component';
 
 
 
-const OtpView = () => {
+const OtpView = ({ setOtp }: { setOtp: (otp: string) => void; }) => {
   const [showResend, setShowResend] = useState(false);
   const [countdownKey, setCountdownKey] = useState(0);
 
@@ -25,7 +25,7 @@ const OtpView = () => {
   return (
     <Fragment>
       <OtpInput
-        numberOfDigits={5}
+        numberOfDigits={6}
         focusColor={COLORS.black}
         autoFocus={true}
         hideStick={true}
@@ -47,7 +47,9 @@ const OtpView = () => {
           containerStyle: styles.otpContainer,
           focusedPinCodeContainerStyle: styles.otpBoxView,
         }}
-      // onFilled={ }
+        onFilled={(text) => {
+          setOtp(text)
+        }}
       />
 
       <View style={{ flexDirection: 'row', justifyContent: "center", alignItems: "center", }}>

@@ -94,6 +94,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             editable={editable}
             onSubmitEditing={onSubmitEditing}
             onChangeText={onChangeText}
+            autoCapitalize='none'
             secureTextEntry={showPassword}
             returnKeyType={returnKeyType}
             contextMenuHidden
