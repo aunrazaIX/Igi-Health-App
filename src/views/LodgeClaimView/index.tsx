@@ -10,6 +10,7 @@ import {
 } from './typeInterface';
 import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
+import ModalLoading from '../../components/ModalLoading';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -41,7 +42,12 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   onPressDelete,
   onPressStep,
   onSelectPatient,
+  onSelectDocument,
+  selectedDocuments,
+  onPressUpload,
   selectedPatient,
+  dependantLoading,
+  uploadLoading,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -59,7 +65,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         navigateTreatment={navigateTreatment}
       />
     ),
-    uploadDoc: <UploadDoc pickFile={pickFile} />,
+    uploadDoc: (
+      <UploadDoc
+        selectedDocuments={selectedDocuments}
+        onSelectDocument={onSelectDocument}
+        onPressUpload={onPressUpload}
+      />
+    ),
   };
 
   return (
@@ -78,7 +90,25 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           onPressStep={onPressStep}
           componentList={renderStep}
         />
-        <Button onPress={onPressNext} name="Next" />
+
+        <Button
+          disabled={
+            currentStep === 1
+              ? !selectedPatient
+                ? true
+                : false
+              : currentStep === 2
+              ? claimsDetails?.length > 0
+                ? false
+                : true
+              : currentStep === 3 && selectedDocuments?.length > 0
+              ? false
+              : true
+          }
+          onPress={onPressNext}
+          name={currentStep === 3 ? 'Submit' : 'Next'}
+        />
+        <ModalLoading loading={dependantLoading || uploadLoading} />
       </CurvedView>
     </>
   );

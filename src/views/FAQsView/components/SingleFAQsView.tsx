@@ -19,7 +19,6 @@ const SingleFAQsView = ({
   index: number;
   toggleAccordion: (index: number, isClose: boolean) => void;
 }) => {
-  console.log(description);
   return (
     <TouchableOpacity onPress={() => toggleAccordion(index, false)}>
       <LinearGradient colors={COLORS.faqsGradient} style={styles.accordion}>

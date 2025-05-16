@@ -41,14 +41,20 @@ const TopView = ({
   containerStyleIcon?: StyleObject | StyleObject[];
   tintColrorForTopViewFirstIcon?: string;
 }) => {
-  const navigate = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <LinearGradient style={[styles.container]} colors={COLORS.PriorGradient}>
       <View style={styles.wrapper}>
         <View style={[styles.row, , containerStyle]}>
           <TouchableOpacity
-            onPress={() => navigate.goBack()}
+            onPress={() => {
+              if (onPressBack) {
+                onPressBack();
+              } else {
+                navigation.goBack();
+              }
+            }}
             style={styles.backIconContainer}>
             <Image style={styles.backIcon} source={icons.backArrow} />
           </TouchableOpacity>

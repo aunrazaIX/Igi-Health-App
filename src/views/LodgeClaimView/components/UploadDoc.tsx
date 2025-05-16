@@ -1,31 +1,27 @@
 import {
   Image,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {
-  Asset,
-  ImageLibraryOptions,
-  launchImageLibrary,
-} from 'react-native-image-picker';
 import {AileronSemiBold} from '../../../components';
 import {vh} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
 import {icons, images} from '../../../assets';
 
 type UploadDocProps = {
-  pickFile: () => void;
+  onSelectDocument: () => void;
 };
 
-const UploadDoc: React.FC<UploadDocProps> = ({pickFile}) => {
-  const [selectedImages, setSelectedImages] = useState<Asset[]>([]);
+const UploadDoc: React.FC<UploadDocProps> = ({
+  onSelectDocument,
+  selectedDocuments,
+  isUplaoded = false,
+  onPressUpload,
+}) => {
   const [remarks, setRemarks] = useState('');
-  const [confirmationModalVisible, setConfirmationModalVisible] =
-    useState(false);
 
   return (
     <View style={styles.uploadFileContainer}>
@@ -39,7 +35,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({pickFile}) => {
             name={'Uploading Supporting\nDocuments'}
             style={styles.supporting}
           />
-          <TouchableOpacity onPress={pickFile}>
+          <TouchableOpacity onPress={onSelectDocument}>
             <AileronSemiBold
               name="Click to Upload"
               style={styles.ClickUpload}
@@ -50,43 +46,34 @@ const UploadDoc: React.FC<UploadDocProps> = ({pickFile}) => {
             style={styles.maxFile}
           />
         </View>
-        {selectedImages?.map((item, index) => {
-          return (
-            <View style={styles.documentBox} key={index}>
-              <View style={styles.documentBoxInside}>
-                <View style={styles.documentNameRow}>
-                  <Image source={icons.document} style={styles.documentIcon} />
+        {selectedDocuments?.length > 0 &&
+          selectedDocuments?.map((item, index) => {
+            return (
+              <View style={styles.documentBox} key={index}>
+                <View style={styles.documentBoxInside}>
+                  <View style={styles.documentNameRow}>
+                    <Image
+                      source={icons.document}
+                      style={styles.documentIcon}
+                    />
+                    <View>
+                      <AileronSemiBold
+                        name={item?.name || ''}
+                        style={styles.documentText}
+                      />
+                    </View>
+                  </View>
                   <View>
-                    <AileronSemiBold
-                      name={item.fileName || ''}
-                      style={styles.documentText}
-                    />
-                    <AileronSemiBold
-                      name={`${item.fileSize} KB`}
-                      style={styles.documentSize}
-                    />
+                    {isUplaoded && (
+                      <Image source={icons.tick} style={styles.tick} />
+                    )}
                   </View>
                 </View>
-                <View>
-                  <Image source={icons.tick} style={styles.tick} />
-                </View>
               </View>
-
-              <View style={styles.downloadContainer}>
-                <View style={styles.downloadBackside}>
-                  <View style={styles.downloadUpSide}></View>
-                </View>
-                <View style={styles.downloadPercentage}>
-                  <AileronSemiBold
-                    name={'100%'}
-                    style={styles.PercentageNumber}
-                  />
-                </View>
-              </View>
-            </View>
-          );
-        })}
+            );
+          })}
       </View>
+
       <View>
         <View style={styles.addRemarks}>
           <AileronSemiBold name="Add Remarks" style={styles.remarks} />
@@ -101,12 +88,6 @@ const UploadDoc: React.FC<UploadDocProps> = ({pickFile}) => {
             />
           </View>
         </View>
-        {/* <Button
-          name="Submit Approval"
-          onPress={() => setConfirmationModalVisible(true)}
-          containerStyle={styles.submitButton}
-          inputStyle={styles.submitText}
-        /> */}
       </View>
     </View>
   );
@@ -156,7 +137,6 @@ const styles = StyleSheet.create({
   },
   documentNameRow: {
     flexDirection: 'row',
-    gap: vh * 1.5,
   },
   documentText: {
     textAlign: 'left',
@@ -175,7 +155,6 @@ const styles = StyleSheet.create({
   },
   downloadContainer: {
     flexDirection: 'row',
-    gap: vh * 2,
   },
   downloadBackside: {
     width: vh * 29,
@@ -234,5 +213,8 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'space-between',
     minHeight: '100%',
+  },
+  uploadButton: {
+    marginVertical: vh * 2,
   },
 });

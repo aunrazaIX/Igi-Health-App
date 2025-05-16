@@ -20,8 +20,7 @@ const LoginView = ({
   signupApiData,
   loadingSignup,
   loginApiData,
-  loginSetterForApiData
-
+  loginSetterForApiData,
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;

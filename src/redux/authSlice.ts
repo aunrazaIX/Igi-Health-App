@@ -1,10 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface User {
-  // Define the user structure based on your app (adjust as needed)
-  id: string;
-  name: string;
-  email: string;
+  ClientCode: string;
+  UserEmail: string;
+  cnic: string;
+  UserName: string;
 }
 
 interface AuthState {

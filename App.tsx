@@ -1,16 +1,16 @@
 import React from 'react';
 import MainStack from './src/navigation/MainStack';
-import { StatusBar, StyleSheet } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import { persistor, store } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import ErrorModal from './src/components/Modal/ErrorModal';
 
 const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    // background: '#fff',
   },
 };
 const App = () => {
@@ -24,6 +24,9 @@ const App = () => {
             backgroundColor={'transparent'}
           />
           <MainStack />
+          <View>
+            <ErrorModal />
+          </View>
         </NavigationContainer>
       </PersistGate>
     </Provider>
@@ -31,9 +34,3 @@ const App = () => {
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

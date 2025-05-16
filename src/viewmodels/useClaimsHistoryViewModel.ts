@@ -1,20 +1,21 @@
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
-import { icons } from '../assets';
-import { ImageSourcePropType } from 'react-native';
-
-
+import {useNavigation} from '@react-navigation/native';
+import {useMemo, useState} from 'react';
+import {icons} from '../assets';
+import {ImageSourcePropType} from 'react-native';
+import endpoints from '../api/endspoints';
+import {useSelector} from 'react-redux';
+import {RootState} from '../redux/store';
+import useApiHook from '../hooks/useApiHook';
+import moment from 'moment';
 
 export type AmountStatus = 'paidAmount' | 'PendingAmount';
 export type daysStatus = 'Daily' | 'Monthly' | 'Yearly';
 
-
-
 export type ClaimHistoryGroup = {
   headerLabel: string;
-  headerIcon: ImageSourcePropType,
+  headerIcon: ImageSourcePropType;
   items: ClaimHistory[];
-}
+};
 export type ClaimHistory = {
   label: string;
   value: string;
@@ -31,93 +32,84 @@ type UseClaimsHistoryViewModel = {
     onPressAmountStatusTab: (tab: AmountStatus) => void;
     onPressDaysStatusTab: (tab: daysStatus) => void;
     onPressHeaderIcon: () => void;
-    goBack: () => void
+    goBack: () => void;
   };
 };
 
 const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
+  const {user} = useSelector((state: RootState) => state.auth);
+  const navigation = useNavigation();
   const [amountStatusTab, setAmountStatusTab] =
     useState<AmountStatus>('paidAmount');
-
   const [daysStatusTab, setDaysStatusTab] = useState<daysStatus>('Daily');
   const [isCalendarVisible, setIsCalendarVisible] = useState<boolean>(false);
-
-  const navigation = useNavigation();
-
+  const [data, setData] = useState([]);
   const onPressAmountStatusTab = (tab: AmountStatus) => {
     setAmountStatusTab(tab);
   };
-
   const onPressDaysStatusTab = (tab: daysStatus) => {
     setDaysStatusTab(tab);
   };
-
   const onPressHeaderIcon = () => {
     setIsCalendarVisible(prev => !prev);
   };
-
   const goBack = () => {
     navigation.goBack();
-  }
+  };
 
-
-
-  const data: ClaimHistoryGroup[] = [
-    {
-      headerLabel: 'Claim #00714886',
-      headerIcon: icons.taskEdit,
-      items: [
-        { label: 'name:', value: 'Heart & General Hospital' },
-        { label: 'phone:', value: '81-2822408, 081-2822409' },
-        { label: 'Address:', value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta' },
-        { label: 'City:', value: 'Baluchistan, Quetta' },
-      ],
+  const {data: claimData, loading} = useApiHook({
+    apiEndpoint: endpoints.claimHistory.getAllClaim,
+    method: 'get',
+    argsOrBody: {userid: '776'},
+    onSuccess: res => {
+      setData(
+        res?.Data?.map(item => ({
+          headerLabel: `Claim #${item.ClaimID}`,
+          headerIcon: icons.taskEdit,
+          items: [
+            {label: 'Patient Name:', value: item?.RelationName},
+            {label: 'Services Date:', value: item?.ClaimSubmittedDate},
+            {label: 'Claim Type:', value: item?.ClaimsSubTypeName},
+            {label: 'Claims Description:', value: item?.ClaimsDescription},
+            {label: 'Claim Value:', value: item?.SubmiitedClaim},
+            {label: 'Status:', value: item?.ClaimStatus},
+          ],
+        })),
+      );
     },
+  });
 
+  const filterByClaimStatus = useMemo(() => {
+    return data?.filter(claim => {
+      console.log('sadkdoapsjioj', claim);
+      const temp = claim?.items?.find(item => item?.label === 'Status:');
+      if (!temp?.value) return false;
+      const statusValue = temp?.value;
+      return amountStatusTab === 'paidAmount'
+        ? statusValue === 8
+        : statusValue !== 8;
+    });
+  }, [data, amountStatusTab]);
 
-
-
-    {
-      headerLabel: 'Claim #00734894',
-      headerIcon: icons.taskEdit,
-      items: [
-        { label: 'name:', value: 'NICVD Larkana' },
-        { label: 'phone:', value: '---' },
-        { label: 'Address:', value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana' },
-        { label: 'City:', value: 'Larkana' },
-      ],
-    },
-
-
-    {
-      headerLabel: 'Claim #00714886',
-      headerIcon: icons.taskEdit,
-      items: [
-        { label: 'name:', value: 'NICVD Larkana' },
-        { label: 'phone:', value: '---' },
-        { label: 'Address:', value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana' },
-        { label: 'City:', value: 'Hyderabad' },
-      ],
-    },
-
-
-    {
-      headerLabel: 'Claim #00714886',
-      headerIcon: icons.taskEdit,
-      items: [
-        { label: 'name:', value: 'NICVD Larkana' },
-        { label: 'phone:', value: '---' },
-        { label: 'Address:', value: 'Department of Cardiology, Civil Hospital, VIP Road, Larkana' },
-        { label: 'City:', value: 'Hyderabad' },
-      ],
-    },
-
-
-  ];
+  const filterDataByTime = useMemo(() => {
+    return filterByClaimStatus?.filter(claim => {
+      const temp = claim?.items?.find(item => item.label === 'Services Date:');
+      if (!temp?.value) return false;
+      const claimDate = moment(temp?.value, 'YYYY-MM-DD');
+      if (daysStatusTab === 'Daily') {
+        return claimDate.isSame(moment(), 'day');
+      } else if (daysStatusTab === 'Monthly') {
+        return claimDate.isSame(moment(), 'month');
+      } else if (daysStatusTab === 'Yearly') {
+        return claimDate.isSame(moment(), 'year');
+      }
+      return true;
+    });
+  }, [daysStatusTab, filterByClaimStatus]);
 
   return {
     states: {
-      data,
+      data: filterDataByTime,
       amountStatusTab,
       daysStatusTab,
       isCalendarVisible,
@@ -126,7 +118,7 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
       onPressAmountStatusTab,
       onPressDaysStatusTab,
       onPressHeaderIcon,
-      goBack
+      goBack,
     },
   };
 };

@@ -33,10 +33,11 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   response => {
-    console.log('dsaij', response);
     return response?.data;
   },
+
   error => {
+    console.log(error);
     const {data, status} = error?.response || {};
     if (status == 401) {
       EventRegister.emit('logout');
@@ -70,7 +71,13 @@ export const jsonToFormdata = json => {
   var data = new FormData();
   const entries = Object.entries(json);
   entries.forEach(entry => {
-    data.append(entry[0], entry[1]);
+    if (Array.isArray(entry[1])) {
+      entry[1].forEach((item, index) =>
+        data.append(`${entry[0]}${entry[0] !== 'files' ? '[]' : ''}`, item),
+      );
+    } else {
+      data.append(entry[0], entry[1]);
+    }
   });
   return data;
 };

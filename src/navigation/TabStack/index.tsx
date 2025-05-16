@@ -155,7 +155,7 @@ export default Tabs;
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    position: "absolute",
+    position: 'absolute',
     bottom: vh * 2,
     backgroundColor: COLORS.white,
     borderRadius: vh * 50,
