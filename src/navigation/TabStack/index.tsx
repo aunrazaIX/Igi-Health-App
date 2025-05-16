@@ -1,10 +1,10 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {StyleSheet, Image, View} from 'react-native';
-import {tabIcons} from '../../assets';
+import { StyleSheet, Image, View } from 'react-native';
+import { tabIcons } from '../../assets';
 import HomeStack from '../HomeStack';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
 import PriorApproval from '../../screens/PriorApproval';
 import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
@@ -32,16 +32,16 @@ const Tabs = () => {
         options={{
           tabBarShowLabel: false,
           popToTopOnBlur: true,
-          tabBarIcon: ({focused}) =>
+          tabBarIcon: ({ focused }) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
                 <View style={styles.wrapper}>
                   <Image
-                    style={[styles.iconStyle, {tintColor: 'white'}]}
+                    style={[styles.iconStyle, { tintColor: 'white' }]}
                     source={tabIcons.home}
                   />
                 </View>
@@ -49,7 +49,7 @@ const Tabs = () => {
             ) : (
               <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image
-                  style={[styles.iconStyle, {tintColor: 'black'}]}
+                  style={[styles.iconStyle, { tintColor: 'black' }]}
                   source={tabIcons.home}
                 />
               </View>
@@ -63,16 +63,16 @@ const Tabs = () => {
         options={{
           tabBarShowLabel: false,
           popToTopOnBlur: true,
-          tabBarIcon: ({focused}) =>
+          tabBarIcon: ({ focused }) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
                 <View style={styles.wrapper}>
                   <Image
-                    style={[styles.iconStyle, {tintColor: 'white'}]}
+                    style={[styles.iconStyle, { tintColor: 'white' }]}
                     source={tabIcons.note}
                   />
                 </View>
@@ -91,16 +91,16 @@ const Tabs = () => {
         options={{
           tabBarShowLabel: false,
           popToTopOnBlur: true,
-          tabBarIcon: ({focused}) =>
+          tabBarIcon: ({ focused }) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
                 <View style={styles.wrapper}>
                   <Image
-                    style={[styles.iconStyle, {tintColor: 'white'}]}
+                    style={[styles.iconStyle, { tintColor: 'white' }]}
                     source={tabIcons.PriorApproval}
                   />
                 </View>
@@ -122,16 +122,16 @@ const Tabs = () => {
         options={{
           tabBarShowLabel: false,
           popToTopOnBlur: true,
-          tabBarIcon: ({focused}) =>
+          tabBarIcon: ({ focused }) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
                 style={styles.gradientBorder}>
                 <View style={styles.wrapper}>
                   <Image
-                    style={[styles.iconStyle, {tintColor: 'white'}]}
+                    style={[styles.iconStyle, { tintColor: 'white' }]}
                     source={tabIcons.customerSupport}
                   />
                 </View>

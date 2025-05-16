@@ -29,7 +29,10 @@ const ForgotPasswordView = ({
   setterForApiData,
   handleForgotPassword,
   apiData,
-  handleNext
+  handleNext,
+  setterForUpdatePasswordApiData,
+  updatePasswordApiData
+
 
 }: {
   step: number;
@@ -43,12 +46,16 @@ const ForgotPasswordView = ({
   verifyOtpLoading: boolean;
   setterForApiData: (key: string, value: string) => void;
   handleForgotPassword: () => void
-  apiData: any
+  apiData: any;
+  handleNext: any;
+  setterForUpdatePasswordApiData: (key: string, value: string) => void;
+  updatePasswordApiData: any
+
 }) => {
   const returnComponent: Record<number, JSX.Element> = {
     1: <EnterEmailView handleForgotPassword={handleForgotPassword} setterForApiData={setterForApiData} apiData={apiData} />,
     2: <OtpView setOtp={setOtp} />,
-    3: <CreateNewPassword />,
+    3: <CreateNewPassword setterForUpdatePasswordApiData={setterForUpdatePasswordApiData} updatePasswordApiData={updatePasswordApiData} />,
   };
 
   const returnTitle: Record<number, string> = {

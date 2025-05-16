@@ -8,7 +8,7 @@ import { COLORS } from '../../../assets/theme/colors';
 
 
 
-const CreateNewPassword = () => {
+const CreateNewPassword = ({ setterForUpdatePasswordApiData, updatePasswordApiData }: { setterForUpdatePasswordApiData: (key: string, value: string) => void, updatePasswordApiData: any }) => {
   return (
     <Fragment>
       <InputField
@@ -18,7 +18,8 @@ const CreateNewPassword = () => {
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
-      // onChangeText={(text) => }
+        onChangeText={(text) => setterForUpdatePasswordApiData("newPassword", text)}
+        value={updatePasswordApiData?.newPassword}
 
 
       />
@@ -29,6 +30,8 @@ const CreateNewPassword = () => {
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
+        onChangeText={(text) => setterForUpdatePasswordApiData("confirmPassword", text)}
+        value={updatePasswordApiData?.confirmPassword}
       />
       <View style={styles.simpleRow}>
         <View style={styles.bullet} />
