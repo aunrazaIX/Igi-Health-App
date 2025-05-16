@@ -1,13 +1,25 @@
-import React from 'react';
-import {InputField, Button, AileronSemiBold} from '../../../components';
-import {styles} from '../styles';
-import {icons} from '../../../assets';
-import {vh, vw} from '../../../assets/theme/dimension';
-import {StyleSheet , View} from 'react-native';
-import {COLORS} from '../../../assets/theme/colors';
+import React, { useState } from 'react';
+import { InputField, Button, AileronSemiBold } from '../../../components';
+import { styles } from '../styles';
+import { icons } from '../../../assets';
+import { vh, vw } from '../../../assets/theme/dimension';
+import { StyleSheet, View } from 'react-native';
+import { COLORS } from '../../../assets/theme/colors';
 
 
-const SignUpView = () => {
+const SignUpView = ({
+  handleSignup,
+  signupSetterForApiData,
+  signupApiData,
+  loadingSignup,
+}: {
+  handleSignup: () => void;
+  signupSetterForApiData: (key: string, value: string) => void;
+  signupApiData: any;
+  loadingSignup: boolean;
+}
+) => {
+
   return (
     <>
       <AileronSemiBold
@@ -18,12 +30,13 @@ const SignUpView = () => {
         style={styles.loginContainerText}
       />
       <InputField
-        containerStyle={style.inputContainer}
-        labelStyle={style.labelStyle}
-        inputStyle={style.inputStyle}
-        label="Your Name"
-        placeholder="Enter Full Name"
+
+        label="Mobile Number"
+        placeholder="Enter Mobile Number"
         rightIcon={icons.name}
+        onChangeText={(text) => signupSetterForApiData('name', text)}
+        value={signupApiData?.name}
+        errorMessage={signupApiData?.error_name}
       />
       <InputField
         containerStyle={style.inputContainer}
@@ -32,83 +45,97 @@ const SignUpView = () => {
         label="Your Email"
         placeholder="Enter Email Address"
         rightIcon={icons.email}
+        onChangeText={(text) => signupSetterForApiData('email', text)}
+        value={signupApiData?.email}
+        errorMessage={signupApiData?.error_email}
       />
+
+      <InputField
+        label="CNIC Number"
+        placeholder="12345-6789012-3"
+        rightIcon={icons.cnic}
+        onChangeText={(text) => signupSetterForApiData('cnic', text)}
+        value={signupApiData?.cnic}
+        errorMessage={signupApiData?.error_cnic}
+      />
+
       <InputField
         containerStyle={style.inputContainer}
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
-        label="CNIC Number"
-        placeholder="12345-6789012-3"
+        label="Phone Number"
+        placeholder="Enter Phone Number"
         rightIcon={icons.cnic}
+        onChangeText={(text) => signupSetterForApiData('cellNumber', text)}
+        value={signupApiData?.cellNumber}
+        errorMessage={signupApiData?.error_cellNumber}
       />
 
- <View style={style.signupTextContainer} > 
+      <View style={style.signupTextContainer} >
 
- <View style={style.signupText}> 
-      <AileronSemiBold name='•'   style={styles.loginContainerText} />
+        <View style={style.signupText}>
+          <AileronSemiBold name='•' style={styles.loginContainerText} />
 
-      <AileronSemiBold
-        numberOfLines={3}
-        name={
-       "Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character."
-        }
-        style={styles.loginContainerText}
-      />
+          <AileronSemiBold
+            numberOfLines={3}
+            name={
+              "Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character."
+            }
+            style={styles.loginContainerText}
+          />
 
-</View>
+        </View>
 
-<View style={style.signupText}> 
-      <AileronSemiBold name='•'   style={styles.loginContainerText} />
+        <View style={style.signupText}>
+          <AileronSemiBold name='•' style={styles.loginContainerText} />
 
-      <AileronSemiBold
-        numberOfLines={3}
-        name={
-       "Special characters can include digits and punctuation (e.g., !@#$%^&*()_+|~-={}[]:;'<>?,./)."
-        }
-        style={styles.loginContainerText}
-      />
+          <AileronSemiBold
+            numberOfLines={3}
+            name={
+              "Special characters can include digits and punctuation (e.g., !@#$%^&*()_+|~-={}[]:;'<>?,./)."
+            }
+            style={styles.loginContainerText}
+          />
 
-</View>
+        </View>
 
-<View style={style.signupText}> 
-      <AileronSemiBold name='•'   style={styles.loginContainerText} />
+        <View style={style.signupText}>
+          <AileronSemiBold name='•' style={styles.loginContainerText} />
 
-      <AileronSemiBold
-        numberOfLines={3}
-        name={
-       "Case sensitivity is mandatory."
-        }
-        style={styles.loginContainerText}
-      />
+          <AileronSemiBold
+            numberOfLines={3}
+            name={
+              "Case sensitivity is mandatory."
+            }
+            style={styles.loginContainerText}
+          />
 
-</View>
-</View>
+        </View>
+      </View>
 
-
-
-
-
-      <Button containerStyle={styles.loginButton} name="Create Account" />
+      <Button containerStyle={styles.loginButton} name="Create Account" onPress={handleSignup} loading={loadingSignup} />
     </>
   );
 };
+
+// onPress={() => { onPress('ForgotPassword', { stepNum: 2, type: 'signup' }) }}
 
 export default SignUpView;
 
 const style = StyleSheet.create({
   inputContainer: {
-    borderWidth: 2,
-    flexDirection: 'column',
+    // borderWidth: 2,
+    // flexDirection: 'column',
 
-    paddingHorizontal: vw * 1,
+    // paddingHorizontal: vw * 1,
   },
   labelStyle: {
-    fontSize: vw * 3,
-    color: COLORS.textGrayShade,
+    // fontSize: vw * 3,
+    // color: COLORS.textGrayShade,
   },
   inputStyle: {
-    fontSize: vw * 3.5,
-    fontWeight: '700',
+    // fontSize: vw * 3.5,
+    // fontWeight: '700',
   },
   inputFeilds: {
     marginTop: vh * 3,
@@ -117,20 +144,12 @@ const style = StyleSheet.create({
   style: {
     fontSize: vw * 3.5,
   },
-  signupText:{
+  signupText: {
     flexDirection: "row",
-    gap:vw*2,
- 
+    gap: vw * 2,
     width: "100%"
-  
-    
-  
-  
   },
-  signupTextContainer:{
-
-    marginTop : vh*2,
-    
-    
+  signupTextContainer: {
+    marginTop: vh * 2,
   }
 });

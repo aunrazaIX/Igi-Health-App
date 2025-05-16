@@ -49,11 +49,8 @@ const TopView = ({
         <View style={[styles.row, , containerStyle]}>
           <TouchableOpacity
             onPress={() => {
-              if (title === 'Lodge A Claim') {
-                navigation.reset({
-                  index: 0,
-                  routes: [{name: 'Home'}],
-                });
+              if (onPressBack) {
+                onPressBack();
               } else {
                 navigation.goBack();
               }

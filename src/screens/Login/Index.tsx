@@ -3,22 +3,27 @@ import useLoginViewModel from '../../viewmodels/useLoginViewModel';
 import LoginView from '../../views/LoginView';
 
 const Login = () => {
-  const {functions, states} = useLoginViewModel();
-  const {selectedTab, tabs, user, loading} = states;
-  const {onPressTab, onPressforgotPassword, handleChange, handleLogin} =
+  const { functions, states } = useLoginViewModel();
+  const { selectedTab, tabs, loading, signupApiData, loadingSignup, loginApiData } = states;
+  const { onPressTab, onPressforgotPassword, handleLogin, handleSignup, signupSetterForApiData, loginSetterForApiData } =
     functions;
+
+
   return (
     <LoginView
+      signupApiData={signupApiData}
+      loginApiData={loginApiData}
       loading={loading}
-      handleChange={handleChange}
-      user={user}
       onPressforgotPassword={onPressforgotPassword}
       onPressTab={onPressTab}
       selectedTab={selectedTab}
       tabs={tabs}
       handleLogin={handleLogin}
+      handleSignup={handleSignup}
+      signupSetterForApiData={signupSetterForApiData}
+      loadingSignup={loadingSignup}
+      loginSetterForApiData={loginSetterForApiData}
     />
   );
 };
-
 export default Login;

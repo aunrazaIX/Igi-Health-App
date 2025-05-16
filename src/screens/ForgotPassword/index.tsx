@@ -1,11 +1,13 @@
 import React from 'react';
 import ForgotPasswordView from '../../views/ForgotPasswordView';
 import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewModel';
+import useLoginViewModel from '../../viewmodels/useLoginViewModel';
 
-const ForgotPassword = () => {
-  const {states, functions} = useForgotPasswordViewModel();
-  const {step, confirmationModal} = states;
-  const {handleStep, onPressBack, setConfirmationModal, openConfimationModal} = functions;
+const ForgotPassword = ({ route }: { route: any }) => {
+  const { states, functions } = useForgotPasswordViewModel({ route });
+  const { step, confirmationModal, verifyOtpLoading, apiData } = states;
+  const { handleStep, onPressBack, setConfirmationModal, setOtp, handleVerifyOtp, handleForgotPassword, openConfimationModal, setterForApiData, handleNext } = functions;
+
   return (
     <ForgotPasswordView
       onPressBack={onPressBack}
@@ -14,6 +16,14 @@ const ForgotPassword = () => {
       confirmationModal={confirmationModal}
       setConfirmationModal={setConfirmationModal}
       openConfimationModal={openConfimationModal}
+      setOtp={setOtp}
+      handleVerifyOtp={handleVerifyOtp}
+      verifyOtpLoading={verifyOtpLoading}
+      setterForApiData={setterForApiData}
+      handleForgotPassword={handleForgotPassword}
+      handleNext={handleNext}
+      apiData={apiData}
+
     />
   );
 };

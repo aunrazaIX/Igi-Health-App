@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {AileronSemiBold, Button} from '../../../components';
+import {AileronSemiBold} from '../../../components';
 import {vh} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
 import {icons, images} from '../../../assets';
@@ -73,13 +73,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
             );
           })}
       </View>
-      {selectedDocuments?.length > 0 && (
-        <Button
-          onPress={onPressUpload}
-          name="Upload"
-          containerStyle={styles.uploadButton}
-        />
-      )}
+
       <View>
         <View style={styles.addRemarks}>
           <AileronSemiBold name="Add Remarks" style={styles.remarks} />

@@ -1,4 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { Alert, Linking } from 'react-native';
+
 
 export type ContactInfo = {
   name: string;
@@ -37,6 +39,7 @@ type UseHelplineViewModelReturnType = {
   };
   functions: {
     goBack: () => void;
+    onPress: () => void
   };
 };
 
@@ -51,6 +54,7 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
     address:
       'IGI Life Insurance Limited 7th Floor, The Forum, Suit No. 701-713, G-20 Khayaban-e-Jami, Block 9, Clifton Karachi 75600, Pakistan',
   };
+
   const claimAssistance: ClaimAssistance[] = [
     {
       title: 'For Claims Assistance',
@@ -91,9 +95,9 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
   ];
   const hotlines: Hotlines = {
     cities: [
-      {city: 'Islamabad', mobile: '0302-5440150'},
-      {city: 'Karachi', mobile: '0300-9284674 | 0300-8266930'},
-      {city: 'Lahore', mobile: '0300-4748570'},
+      { city: 'Islamabad', mobile: '0302-5440150' },
+      { city: 'Karachi', mobile: '0300-9284674 | 0300-8266930' },
+      { city: 'Lahore', mobile: '0300-4748570' },
     ],
     emails: [
       {
@@ -115,6 +119,31 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
   const goBack = () => {
     navigation.goBack();
   };
+
+  const onPress = (type: 'phone' | 'email' | 'map', value: string) => {
+    let url = '';
+
+    switch (type) {
+      case 'phone':
+        url = `tel:${value}`;
+        break;
+      case 'email':
+        url = `mailto:${value}`;
+        break;
+      case 'map':
+        url = `https://www.google.com/maps?q=${encodeURIComponent(value)}`;
+        break;
+      default:
+        Alert.alert('Invalid Action', 'Unsupported link type');
+        return;
+    }
+
+    Linking.openURL(url).catch(err => {
+      console.error('Error opening URL:', err);
+      Alert.alert('Error', 'Unable to open link');
+    });
+  };
+
   return {
     states: {
       contactInfo,
@@ -123,6 +152,7 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
     },
     functions: {
       goBack,
+      onPress
     },
   };
 };

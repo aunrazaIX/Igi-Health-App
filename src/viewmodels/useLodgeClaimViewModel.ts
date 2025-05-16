@@ -1,13 +1,22 @@
 import {icons} from '../assets';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import {useCallback, useState} from 'react';
+import {useCallback} from 'react';
 import {
   useFocusEffect,
   NavigationProp,
   RouteProp,
 } from '@react-navigation/native';
 import {pick, types} from '@react-native-documents/picker';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  setTreatments,
+  setSelectedPatient,
+  setStep,
+  setSelectedDocuments,
+  onDeleteTreatment,
+} from '../redux/lodgeSlice';
+import moment from 'moment';
 
 interface Treatment {
   receiptNumber?: string;
@@ -47,10 +56,15 @@ interface Props {
   route: RouteProp<any>;
 }
 
-const useLodgeClaimViewModel = ({navigation, route}: Props) => {
+const useLodgeClaimViewModel = ({navigation}: Props) => {
+  const dispatch = useDispatch();
+  const {selectedDocuments, currentStep, treatments, selectedPatient} =
+    useSelector(state => state.lodge);
+
   const {
     loading: uploadLoading,
     data: claimObject,
+    error: uploadError,
     trigger,
   } = useApiHook({
     method: 'post',
@@ -63,28 +77,52 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     argsOrBody: {
       files: selectedDocuments,
     },
-  });
-  const {treatments, stepFromTreatment} = route?.params || {};
-  const [_treatments, setTreatments] = useState<Treatment[]>([]);
-  const [selectedPatient, setSelectedPatient] = useState<any>(null);
-  const [currentStep, setCurrentStep] = useState<number>(1);
-  const [selectedDocuments, setSelectedDocuments] = useState([]);
-  useFocusEffect(
-    useCallback(() => {
-      if (stepFromTreatment) {
-        setCurrentStep(stepFromTreatment);
-      }
-      if (treatments) {
-        setTreatments(treatments);
-      }
-
-      return () => {
-        setCurrentStep(1);
-        setTreatments([]);
-        setSelectedPatient(null);
+    onSuccess: res => {
+      let apiData = {
+        UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
+        CLNTNUM: selectedPatient?.CLNTNUM?.toString(),
+        ClaimsData: treatments?.map(item => ({
+          ClaimSNO: '0',
+          ClaimID: res?.Data?.toString(),
+          userId: '776',
+          ClaimAmount: item?.amount?.toString(),
+          ClaimDescriptions: item?.description,
+          UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
+          ClaimReceipt: item?.receiptNumber,
+          ClaimsComments: item?.description,
+          ClaimsSubTypeID: item?.treatment?.value,
+          ClaimAddedDateTime: moment().format('YYYY-MM-DD'),
+          UUID: '1231231232131',
+          ClientCode: 'DEMO',
+        })),
+        ClaimsComments: 'asdasdasda',
+        userId: '776',
+        claimId: res?.Data?.toString(),
       };
-    }, [treatments, stepFromTreatment]),
-  );
+      console.log('apiData', apiData);
+      claimTrigger(apiData);
+    },
+  });
+
+  const {
+    loading: claimLoading,
+    trigger: claimTrigger,
+    error: addClaimError,
+  } = useApiHook({
+    method: 'post',
+    apiEndpoint: endpoints.claimLogde.lodge,
+    onSuccess: res => {
+      console.log('ASDAS@#QEQW', res);
+    },
+  });
+
+  console.log(addClaimError);
+  const resetStates = () => {
+    dispatch(setTreatments([]));
+    dispatch(setStep(1));
+    dispatch(setSelectedDocuments([]));
+    dispatch(setSelectedPatient(null));
+  };
 
   const {data: dependants, loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
@@ -133,7 +171,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   ];
 
-  const claimsDetails: ClaimDetail[] = _treatments?.map((item: Treatment) => ({
+  const claimsDetails: ClaimDetail[] = treatments?.map((item: Treatment) => ({
     sectionTitle: item?.treatment?.label,
     icon: icons.stethoscope,
     info: [
@@ -143,7 +181,13 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     ],
   }));
 
-  const goBack = () => navigation.goBack();
+  const goBack = () => {
+    resetStates();
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Home'}],
+    });
+  };
   const onPressStep = (step: number) => {
     if (step === 1) {
       if (!selectedPatient) {
@@ -160,17 +204,16 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         return;
       }
     }
-    setCurrentStep(step);
+    dispatch(setStep(step));
   };
   const navigateTreatment = () => {
-    navigation.navigate('AddTreatment', {allTreatments: _treatments});
+    navigation.navigate('AddTreatment');
   };
-  const onPressDelete = (index: number) => {
-    const temp = [..._treatments];
-    temp.splice(index, 1);
-    setTreatments(temp);
+  const onPressDelete = (index: number) => dispatch(onDeleteTreatment(index));
+
+  const onSelectPatient = (patient: any) => {
+    dispatch(setSelectedPatient(patient));
   };
-  const onSelectPatient = (patient: any) => setSelectedPatient(patient);
   const onPressNext = () => {
     try {
       if (currentStep === 1) {
@@ -179,7 +222,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         }
       }
       if (currentStep < 3) {
-        setCurrentStep(currentStep + 1);
+        dispatch(setStep(currentStep + 1));
       }
     } catch (e) {
       console.log('Error', e);
@@ -201,13 +244,11 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
           name: item?.name,
         });
       });
-      setSelectedDocuments(documents);
+      dispatch(setSelectedDocuments(documents));
     } catch (e) {
       console.log('Error', e);
     }
   };
-
-  console.log('claimObject', claimObject, uploadLoading);
 
   const onPressUpload = () => {
     trigger();
@@ -223,6 +264,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       dependants,
       selectedPatient,
       selectedDocuments,
+      uploadLoading,
     },
     functions: {
       goBack,

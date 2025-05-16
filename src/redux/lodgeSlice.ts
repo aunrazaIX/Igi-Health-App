@@ -2,12 +2,12 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState: {
   currentStep: number;
-  selectedPatinet: any | null;
+  selectedPatient: any | null;
   selectedDocuments: any[];
   treatments: any[];
 } = {
   currentStep: 1,
-  selectedPatinet: null,
+  selectedPatient: null,
   selectedDocuments: [],
   treatments: [],
 };
@@ -16,20 +16,42 @@ export const lodgeSlice = createSlice({
   name: 'lodgeSlice',
   initialState,
   reducers: {
-    setSelectedPatinet: (state, {payload}) => {
-      state.selectedPatinet = payload;
+    setSelectedPatient: (state, {payload}) => {
+      state.selectedPatient = payload;
     },
     setTreatments: (state, action) => {
-      state.treatments = [...state.treatments, action.payload];
+      if (action?.payload?.length > 0) {
+        state.treatments = [...state.treatments, ...action.payload];
+      } else {
+        state.treatments = [];
+      }
     },
     setStep: (state, action) => {
       state.currentStep = action.payload;
     },
     setSelectedDocuments: (state, action) => {
-      state.selectedDocuments = [...state.selectedDocuments, action.payload];
+      if (action?.payload?.length > 0) {
+        state.selectedDocuments = [
+          ...state.selectedDocuments,
+          ...action.payload,
+        ];
+      } else {
+        state.selectedDocuments = [];
+      }
+    },
+    onDeleteTreatment: (state, {payload}) => {
+      let temp = [...state.treatments];
+      temp.splice(payload, 1);
+      state.treatments = temp;
     },
   },
 });
 
-export const {setSelectedPatinet, setTreatments, setStep} = lodgeSlice.actions;
+export const {
+  setSelectedPatient,
+  setTreatments,
+  setStep,
+  setSelectedDocuments,
+  onDeleteTreatment,
+} = lodgeSlice.actions;
 export const lodegeReducer = lodgeSlice.reducer;

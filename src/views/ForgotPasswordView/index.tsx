@@ -1,11 +1,14 @@
 import React, { JSX } from 'react';
 import { CreateNewPassword, EnterEmailView, OtpView } from './components';
-import { icons } from '../../assets';
+import ConfirmationModal from '../../components/Modal/confimationModal';
+import { icons, images } from '../../assets';
+
+
+
 import {
   AileronBold,
   AileronRegular,
   Button,
-  ConfirmationModal,
   Container,
   CurvedView,
   TopView,
@@ -19,7 +22,14 @@ const ForgotPasswordView = ({
   onPressBack,
   confirmationModal,
   setConfirmationModal,
-  openConfimationModal
+  openConfimationModal,
+  handleVerifyOtp,
+  setOtp,
+  verifyOtpLoading,
+  setterForApiData,
+  handleForgotPassword,
+  apiData,
+  handleNext
 
 }: {
   step: number;
@@ -28,10 +38,16 @@ const ForgotPasswordView = ({
   confirmationModal: boolean;
   setConfirmationModal: (val: boolean) => void;
   openConfimationModal: () => void;
+  handleVerifyOtp: () => void;
+  setOtp: (otp: string) => void;
+  verifyOtpLoading: boolean;
+  setterForApiData: (key: string, value: string) => void;
+  handleForgotPassword: () => void
+  apiData: any
 }) => {
   const returnComponent: Record<number, JSX.Element> = {
-    1: <EnterEmailView />,
-    2: <OtpView />,
+    1: <EnterEmailView handleForgotPassword={handleForgotPassword} setterForApiData={setterForApiData} apiData={apiData} />,
+    2: <OtpView setOtp={setOtp} />,
     3: <CreateNewPassword />,
   };
 
@@ -78,16 +94,13 @@ const ForgotPasswordView = ({
 
 
         <Button
-          onPress={() => {
-            if (step === 3) {
-              openConfimationModal()
-            } else {
-              handleStep(step)
-            }
-          }}
+          onPress={handleNext}
           name={returnButtonName[step]}
           containerStyle={styles.button}
+          loading={verifyOtpLoading}
         />
+
+
       </CurvedView>
 
       <ConfirmationModal
@@ -99,7 +112,7 @@ const ForgotPasswordView = ({
         Successfull={true}
         CloseButtonText={'Continue To Login'}
       />
-    </Container>
+    </Container >
   );
 };
 export default ForgotPasswordView;

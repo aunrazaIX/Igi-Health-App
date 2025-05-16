@@ -1,4 +1,4 @@
-import {View, Text, Modal, StyleSheet, Image} from 'react-native';
+import {View, Modal, StyleSheet, Image} from 'react-native';
 import React, {useState} from 'react';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
@@ -48,7 +48,9 @@ const ErrorModal: React.FC<ErrorModalProps> = ({containerStyle}) => {
             <Button
               name={'Close'}
               inputStyle={styles.closeButton}
-              onPress={() => dispatch(setErrorModal({show: false}))}
+              onPress={() =>
+                dispatch(setErrorModal({show: false, errorMessage: null}))
+              }
               gradientColors={COLORS.PriorGradient}
             />
           </View>

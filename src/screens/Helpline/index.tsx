@@ -5,9 +5,9 @@ import HelplineView from '../../views/HelplineView';
 const Helpline = () => {
     const { states , functions} = useHelplineViewModel();
     const {contactInfo, claimAssistance, hotlines} = states;
-    const {goBack} = functions
+    const {goBack , onPress} = functions
   return (
-    <HelplineView goBack = {goBack} contactInfo={contactInfo} claimAssistance={claimAssistance} hotlines={hotlines}/>
+    <HelplineView onPress= {onPress} goBack = {goBack} contactInfo={contactInfo} claimAssistance={claimAssistance} hotlines={hotlines}/>
   )
 }
 

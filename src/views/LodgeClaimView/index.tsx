@@ -47,6 +47,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   onPressUpload,
   selectedPatient,
   dependantLoading,
+  uploadLoading,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -107,7 +108,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           onPress={onPressNext}
           name={currentStep === 3 ? 'Submit' : 'Next'}
         />
-        <ModalLoading loading={dependantLoading} />
+        <ModalLoading loading={dependantLoading || uploadLoading} />
       </CurvedView>
     </>
   );

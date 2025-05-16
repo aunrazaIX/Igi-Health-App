@@ -29,6 +29,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     selectedPatient,
     selectedDocuments,
     dependantLoading,
+    uploadLoading,
   } = states;
 
   const {
@@ -61,6 +62,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       onSelectDocument={onSelectDocument}
       onPressUpload={onPressUpload}
       dependantLoading={dependantLoading}
+      uploadLoading={uploadLoading}
     />
   );
 };
