@@ -28,7 +28,8 @@ const ForgotPasswordView = ({
   verifyOtpLoading,
   setterForApiData,
   handleForgotPassword,
-  apiData
+  apiData,
+  handleNext
 
 }: {
   step: number;
@@ -93,15 +94,7 @@ const ForgotPasswordView = ({
 
 
         <Button
-          onPress={() => {
-            if (handleVerifyOtp) {
-              handleVerifyOtp()
-            } else {
-              handleStep(step)
-            }
-          }
-          }
-
+          onPress={handleNext}
           name={returnButtonName[step]}
           containerStyle={styles.button}
           loading={verifyOtpLoading}

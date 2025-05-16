@@ -1,9 +1,9 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {useState} from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useState } from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-import {useDispatch} from 'react-redux';
-import {setUserData} from '../redux/authSlice';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 
 export type UserDetails = {
@@ -59,7 +59,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     name: '',
   });
 
-  const {loading, trigger} = useApiHook({
+  const { loading, trigger } = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
     argsOrBody: loginApiData,
@@ -68,12 +68,12 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     },
   });
 
-  const {trigger: triggerSignup, loading: loadingSignup} = useApiHook({
+  const { trigger: triggerSignup, loading: loadingSignup } = useApiHook({
     apiEndpoint: endpoints.auth.registerUser,
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      setVerifiedUserData({...res?.Data, uuid: 'ASDADASDASDASDASDADAD'});
+      setVerifiedUserData({ ...res?.Data, uuid: 'ASDADASDASDASDASDADAD' });
       let apiData = {
         userId: res?.Data?.UserID,
         uuid: 'ASDADASDASDASDASDADAD',
@@ -95,7 +95,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
-      navigation.navigate('ForgotPassword', {step: 2, verifiedUserData});
+      navigation.navigate('ForgotPassword', { step: 2, verifiedUserData, type: "signup" });
     },
   });
 
@@ -116,8 +116,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const onPressTab = (name: string) => setSelectedTab(name);
 
   const onPressforgotPassword = (to: string) => {
-    navigation.navigate(to, {step: 1});
+    navigation.navigate(to, { step: 1, type: "forgot" });
   };
+
 
   const tabs = ['login', 'signup'];
   return {
@@ -136,6 +137,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       handleSignup,
       signupSetterForApiData,
       loginSetterForApiData,
+
     },
   };
 };

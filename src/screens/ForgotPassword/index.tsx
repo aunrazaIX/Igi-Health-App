@@ -6,7 +6,7 @@ import useLoginViewModel from '../../viewmodels/useLoginViewModel';
 const ForgotPassword = ({ route }: { route: any }) => {
   const { states, functions } = useForgotPasswordViewModel({ route });
   const { step, confirmationModal, verifyOtpLoading, apiData } = states;
-  const { handleStep, onPressBack, setConfirmationModal, setOtp, handleVerifyOtp, handleForgotPassword, openConfimationModal, setterForApiData } = functions;
+  const { handleStep, onPressBack, setConfirmationModal, setOtp, handleVerifyOtp, handleForgotPassword, openConfimationModal, setterForApiData, handleNext } = functions;
 
   return (
     <ForgotPasswordView
@@ -21,6 +21,7 @@ const ForgotPassword = ({ route }: { route: any }) => {
       verifyOtpLoading={verifyOtpLoading}
       setterForApiData={setterForApiData}
       handleForgotPassword={handleForgotPassword}
+      handleNext={handleNext}
       apiData={apiData}
 
     />
