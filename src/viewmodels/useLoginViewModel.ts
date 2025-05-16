@@ -133,7 +133,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const onPressTab = (name: string) => setSelectedTab(name);
 
   const onPressforgotPassword = (to: string) => {
-    navigation.navigate(to);
+    navigation.navigate(to, { step: 1 });
   };
 
   const tabs = ['login', 'signup'];

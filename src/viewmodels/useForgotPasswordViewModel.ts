@@ -1,23 +1,26 @@
-<<<<<<< HEAD
+
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
+import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
+
 
 type routes = {
   route: {}
 }
-=======
-import {useNavigation} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
-import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
-import useApiHook from '../hooks/useApiHook';
-import endpoints from '../api/endspoints';
->>>>>>> b5ac490d395a3561410c4849f7217400afb21761
+
+
+
+
 
 type UseForgotPasswordViewModelReturnType = {
   states: {
     step: number;
     confirmationModal: boolean;
     verifyOtpLoading: boolean;
+    apiData: object
+
   };
   functions: {
     handleStep: (step: number) => void;
@@ -26,6 +29,8 @@ type UseForgotPasswordViewModelReturnType = {
     openConfimationModal: () => void;
     setOtp: (otp: string) => void;
     handleVerifyOtp: () => void;
+    setterForApiData: (key: string, value: String) => void
+    handleForgotPassword: () => void
   };
 };
 const useForgotPasswordViewModel = ({
@@ -67,6 +72,72 @@ const useForgotPasswordViewModel = ({
     }
   };
 
+  const {
+
+    setterForApiData,
+    checkForError,
+    apiData,
+  } = useErrorHandlingHook({
+
+    cellNumber: '',
+    email: '',
+    cnic: '',
+
+  });
+
+
+
+  const { data, trigger, error } = useApiHook({
+    apiEndpoint: endpoints.auth.registerUser,
+    method: 'post',
+    argsOrBody: apiData,
+    onSuccess: res => {
+
+      console.log("verify user api hit", res)
+      let apiData = {
+        userId: res?.Data?.UserID,
+        uuid: 'ASDADASDASDASDASDADAD',
+        user_email: res?.Data?.UserEmail,
+        user_cellnumber: res?.Data?.UserCellNumber,
+        opt_reason: 'for Forgot Password Request',
+        opt_typeID: '2',
+        ClientCode: res?.Data?.ClientCode,
+      };
+      sendOtp(apiData);
+
+    },
+  });
+
+
+
+  const {
+    trigger: sendOtp,
+  } = useApiHook({
+    apiEndpoint: endpoints.auth.sendOtp,
+    method: 'post',
+    onSuccess: res => {
+      console.log('otp ka res', res);
+      navigation.navigate('ForgotPassword', { step: 2 });
+    },
+  });
+
+
+
+
+
+
+
+
+
+  const handleForgotPassword = () => {
+
+    const filled = checkForError();
+    if (!filled) return;
+
+    trigger()
+
+  }
+
   const openConfimationModal = () => {
     setConfirmationModal(true);
   };
@@ -94,6 +165,7 @@ const useForgotPasswordViewModel = ({
       step,
       confirmationModal,
       verifyOtpLoading,
+      apiData
     },
     functions: {
       handleStep,
@@ -102,6 +174,8 @@ const useForgotPasswordViewModel = ({
       openConfimationModal,
       setOtp,
       handleVerifyOtp,
+      setterForApiData,
+      handleForgotPassword
     },
   };
 };
