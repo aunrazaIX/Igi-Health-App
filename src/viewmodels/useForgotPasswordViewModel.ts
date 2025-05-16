@@ -1,9 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {useEffect, useState} from 'react';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-
 
 type UseForgotPasswordViewModelReturnType = {
   states: {
@@ -11,7 +10,7 @@ type UseForgotPasswordViewModelReturnType = {
     confirmationModal: boolean;
     verifyOtpLoading: boolean;
     apiData: object;
-    updatePasswordApiData: any
+    updatePasswordApiData: any;
   };
   functions: {
     handleStep: (step: number) => void;
@@ -23,15 +22,16 @@ type UseForgotPasswordViewModelReturnType = {
     setterForApiData: (key: string, value: String) => void;
     handleForgotPassword: () => void;
     handleNext: () => void;
-    setterForUpdatePasswordApiData: (key: string, value: String) => void
+    setterForUpdatePasswordApiData: (key: string, value: String) => void;
   };
 };
 const useForgotPasswordViewModel = ({
   route,
 }): UseForgotPasswordViewModelReturnType => {
-  const { step: _step, verifiedUserData, type } = route?.params || {};
+  const {step: _step, verifiedUserData, type} = route?.params || {};
   const [step, setStep] = useState<number>(1);
-  const [savedDataForVerification, setSavedDataforVerification] = useState(null)
+  const [savedDataForVerification, setSavedDataforVerification] =
+    useState(null);
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [otp, setOtp] = useState<any>();
 
@@ -39,19 +39,15 @@ const useForgotPasswordViewModel = ({
     setStep(_step);
   }, [_step]);
 
-  const navigation = useNavigation()
+  console.log('verifiedUserData', verifiedUserData);
 
-
-
+  const navigation = useNavigation();
 
   const handleStep = (step: number): void => {
     if (step < 3) {
       setStep(step + 1);
     }
   };
-
-
-
 
   const onPressBack = (): void => {
     if (type === 'signup') {
@@ -68,24 +64,31 @@ const useForgotPasswordViewModel = ({
     }
   };
 
-  const { setterForApiData, checkForError, apiData } = useErrorHandlingHook({
+  const {setterForApiData, checkForError, apiData} = useErrorHandlingHook({
     cellNumber: '',
     email: '',
     cnic: '',
   });
 
   // state for updatePassword
-  const { setterForApiData: setterForUpdatePasswordApiData, checkForError: checkForErrorUpdatePasswordApiData, apiData: updatePasswordApiData } = useErrorHandlingHook({
+  const {
+    setterForApiData: setterForUpdatePasswordApiData,
+    checkForError: checkForErrorUpdatePasswordApiData,
+    apiData: updatePasswordApiData,
+  } = useErrorHandlingHook({
     newPassword: '',
     confirmPassword: '',
   });
 
-  const { data, trigger, error } = useApiHook({
+  const {data, trigger, error} = useApiHook({
     apiEndpoint: endpoints.auth.registerUser,
     method: 'post',
     argsOrBody: apiData,
     onSuccess: res => {
-      setSavedDataforVerification({ ...res?.Data, uuid: 'ASDADASDASDASDASDADAD' });
+      setSavedDataforVerification({
+        ...res?.Data,
+        uuid: 'ASDADASDASDASDASDADAD',
+      });
       console.log('verify user api hit', res);
       let apiData = {
         userId: res?.Data?.UserID,
@@ -101,118 +104,107 @@ const useForgotPasswordViewModel = ({
     },
   });
 
-  const { trigger: sendOtp } = useApiHook({
+  const {trigger: sendOtp} = useApiHook({
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
       console.log('otp ka res', res);
-      setStep(2)
+      setStep(2);
     },
   });
 
   const handleForgotPassword = () => {
-
     const filled = checkForError();
     if (!filled) return;
 
     trigger();
   };
 
-
-
-
-
   const openConfimationModal = () => {
     setConfirmationModal(true);
   };
-
-
-
-  const { trigger: triggerVerifyOtp, loading: verifyOtpLoading, error: errorVerify } = useApiHook({
+  const {
+    trigger: triggerVerifyOtp,
+    loading: verifyOtpLoading,
+    error: errorVerify,
+  } = useApiHook({
     apiEndpoint: endpoints.auth.verifyOTP,
     method: 'post',
-    argsOrBody: type == 'forgot' && step == 2 ? {
-      otp,
-      uuid: savedDataForVerification?.uuid,
-      userId: savedDataForVerification?.UserID,
-      ClientCode: savedDataForVerification?.ClientCode,
-    } : {
-      otp,
-      uuid: verifiedUserData?.uuid,
-      userId: verifiedUserData?.UserID,
-      ClientCode: verifiedUserData?.ClientCode,
-    },
+    argsOrBody:
+      type == 'forgot' && step == 2
+        ? {
+            otp,
+            uuid: savedDataForVerification?.uuid,
+            userId: savedDataForVerification?.UserID,
+            ClientCode: savedDataForVerification?.ClientCode,
+          }
+        : {
+            otp,
+            uuid: verifiedUserData?.uuid,
+            userId: verifiedUserData?.UserID,
+            ClientCode: verifiedUserData?.ClientCode,
+          },
     onSuccess: res => {
-      console.log("RESijhuygS", res)
-      if (res.Data) {
-        setStep(3);
-      }
+      console.log('RESS', res);
+      // if (res.Data) {
+      setStep(3);
+      // }
     },
   });
-
-
-
-
   // calling update password api
-  const { trigger: triggerUpdatePassword, loading: updatePasswordLoading, error: errorUpdatePassword } = useApiHook({
+  const {
+    trigger: triggerUpdatePassword,
+    loading: updatePasswordLoading,
+    error: errorUpdatePassword,
+  } = useApiHook({
     apiEndpoint: endpoints.auth.updatePassword,
     method: 'post',
 
-    argsOrBody: type == 'forgot' && step == 3 ? {
-      OldPassword: savedDataForVerification?.UserPassword,
-      userId: savedDataForVerification?.UserID,
-      isPassEncrypted: true,
-      NewPassword: updatePasswordApiData.confirmPassword
-    } : {
-      OldPassword: savedDataForVerification?.UserPassword,
-      userId: savedDataForVerification?.UserID,
-      isPassEncrypted: true,
-      NewPassword: updatePasswordApiData.confirmPassword
-    },
-
+    argsOrBody:
+      type == 'forgot' && step == 3
+        ? {
+            OldPassword: savedDataForVerification?.UserPassword,
+            userId: savedDataForVerification?.UserID,
+            isPassEncrypted: true,
+            NewPassword: updatePasswordApiData.confirmPassword,
+          }
+        : {
+            OldPassword: savedDataForVerification?.UserPassword,
+            userId: savedDataForVerification?.UserID,
+            isPassEncrypted: true,
+            NewPassword: updatePasswordApiData.confirmPassword,
+          },
 
     onSuccess: res => {
-      console.log("RESS", res)
+      console.log('RESS', res);
       if (res.Data) {
-        console.log("pass updated successfully")
-        openConfimationModal()
+        console.log('pass updated successfully');
+        openConfimationModal();
       }
     },
   });
 
-
-
-
-
-  console.log(errorVerify)
+  console.log(errorVerify);
 
   const handleVerifyOtp = () => {
     triggerVerifyOtp();
   };
 
-
-  console.log("type, step", type, step)
-
-
   const handleNext = () => {
-
     if (step == 1 && type == 'forgot') {
-      trigger()
-      return
+      trigger();
+      return;
     }
     if (step == 2 && type == 'forgot') {
-      triggerVerifyOtp()
-      return
+      triggerVerifyOtp();
+      return;
     }
 
     if (step == 3 && type == 'forgot') {
-
-
-      console.log("hey userPassword uodated")
-      triggerUpdatePassword()
+      console.log('hey userPassword uodated');
+      triggerUpdatePassword();
     }
-
-  }
+  };
 
   return {
     states: {
@@ -220,7 +212,7 @@ const useForgotPasswordViewModel = ({
       confirmationModal,
       verifyOtpLoading,
       apiData,
-      updatePasswordApiData
+      updatePasswordApiData,
     },
     functions: {
       handleStep,
@@ -232,7 +224,7 @@ const useForgotPasswordViewModel = ({
       setterForApiData,
       handleForgotPassword,
       handleNext,
-      setterForUpdatePasswordApiData
+      setterForUpdatePasswordApiData,
     },
   };
 };

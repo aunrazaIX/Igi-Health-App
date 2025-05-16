@@ -1,7 +1,7 @@
 import React, { JSX } from 'react';
 import { CreateNewPassword, EnterEmailView, OtpView } from './components';
 import ConfirmationModal from '../../components/Modal/confimationModal';
-import { icons, images } from '../../assets';
+import { icons } from '../../assets';
 
 
 
