@@ -29,7 +29,7 @@ const SignUpView = ({
         }
         style={styles.loginContainerText}
       />
-      <InputField
+      {/* <InputField
 
         label="Mobile Number"
         placeholder="Enter Mobile Number"
@@ -37,7 +37,21 @@ const SignUpView = ({
         onChangeText={(text) => signupSetterForApiData('name', text)}
         value={signupApiData?.name}
         errorMessage={signupApiData?.error_name}
+      /> */}
+
+      <InputField
+        containerStyle={style.inputContainer}
+        labelStyle={style.labelStyle}
+        inputStyle={style.inputStyle}
+        label="Mobile Number"
+        placeholder="Enter Mobile Number"
+        rightIcon={icons.cnic}
+        onChangeText={(text) => signupSetterForApiData('cellNumber', text)}
+        value={signupApiData?.cellNumber}
+        errorMessage={signupApiData?.error_cellNumber}
       />
+
+
       <InputField
         containerStyle={style.inputContainer}
         labelStyle={style.labelStyle}
@@ -59,17 +73,7 @@ const SignUpView = ({
         errorMessage={signupApiData?.error_cnic}
       />
 
-      <InputField
-        containerStyle={style.inputContainer}
-        labelStyle={style.labelStyle}
-        inputStyle={style.inputStyle}
-        label="Phone Number"
-        placeholder="Enter Phone Number"
-        rightIcon={icons.cnic}
-        onChangeText={(text) => signupSetterForApiData('cellNumber', text)}
-        value={signupApiData?.cellNumber}
-        errorMessage={signupApiData?.error_cellNumber}
-      />
+
 
       <View style={style.signupTextContainer} >
 
