@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
   curvedStyle: {
     width: '100%',
     backgroundColor: '#FFFFFFE5',
+    paddingBottom: vh * 2,
   },
   loginContent: {
     gap: vh * 6,
@@ -25,12 +26,8 @@ export const styles = StyleSheet.create({
   },
   loginContainer: {
     width: '100%',
-
     borderRadius: vw * 5,
-
     paddingVertical: vh * 2,
-    // paddingHorizontal: vw * 3,
-
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -6,8 +6,8 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import React from 'react';
-import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import SimpleLoader from '../SimpleLoader';
 
@@ -36,7 +36,7 @@ const Button: React.FC<ButtonProps> = ({
       style={[styles.container, containerStyle]}
       colors={
         disabled
-          ? [COLORS.textGrayShade, COLORS.textGrayShade]
+          ? [COLORS.disabled, COLORS.disabled]
           : gradientColors || COLORS.activeButtonGradient
       }>
       <TouchableOpacity

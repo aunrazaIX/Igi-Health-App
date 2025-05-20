@@ -100,6 +100,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             contextMenuHidden
             selectTextOnFocus={false}
             textAlignVertical={multiline ? 'top' : 'auto'}
+            mask={mask}
             {...rest}
           />
           {(secureTextEntry || rightIcon) && (

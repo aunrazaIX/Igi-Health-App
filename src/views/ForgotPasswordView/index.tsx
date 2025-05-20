@@ -23,17 +23,20 @@ const ForgotPasswordView = ({
   confirmationModal,
   setConfirmationModal,
   openConfimationModal,
-  handleVerifyOtp,
   setOtp,
   verifyOtpLoading,
   setterForApiData,
-  handleForgotPassword,
   apiData,
   handleNext,
   setterForUpdatePasswordApiData,
-  updatePasswordApiData
-
-
+  onPressResend,
+  updatePasswordApiData,
+  ForgotPasswordLoading,
+  otp,
+  sendOtp,
+  showResend,
+  countdownKey,
+  setShowResend
 }: {
   step: number;
   onPressBack: () => void;
@@ -41,20 +44,25 @@ const ForgotPasswordView = ({
   confirmationModal: boolean;
   setConfirmationModal: (val: boolean) => void;
   openConfimationModal: () => void;
-  handleVerifyOtp: () => void;
   setOtp: (otp: string) => void;
   verifyOtpLoading: boolean;
   setterForApiData: (key: string, value: string) => void;
-  handleForgotPassword: () => void
   apiData: any;
   handleNext: any;
   setterForUpdatePasswordApiData: (key: string, value: string) => void;
-  updatePasswordApiData: any
+  updatePasswordApiData: any,
+  ForgotPasswordLoading: boolean,
+  otp: number | string
+  sendOtp: () => void;
+  onPressResend: () => void;
+  showResend: boolean;
+  countdownKey: number;
+  setShowResend: () => void;
 
 }) => {
   const returnComponent: Record<number, JSX.Element> = {
-    1: <EnterEmailView handleForgotPassword={handleForgotPassword} setterForApiData={setterForApiData} apiData={apiData} />,
-    2: <OtpView setOtp={setOtp} />,
+    1: <EnterEmailView setterForApiData={setterForApiData} apiData={apiData} />,
+    2: <OtpView setOtp={setOtp} sendOtp={sendOtp} onPressResend={onPressResend} showResend={showResend} countdownKey={countdownKey} setShowResend={setShowResend} />,
     3: <CreateNewPassword setterForUpdatePasswordApiData={setterForUpdatePasswordApiData} updatePasswordApiData={updatePasswordApiData} />,
   };
 
@@ -98,13 +106,12 @@ const ForgotPasswordView = ({
           name={returnDescription[step]}
         />
         {returnComponent[step]}
-
-
         <Button
           onPress={handleNext}
+          disabled={step == 2 ? otp?.length == 6 ? false : true : false}
           name={returnButtonName[step]}
           containerStyle={styles.button}
-          loading={verifyOtpLoading}
+          loading={verifyOtpLoading || ForgotPasswordLoading}
         />
 
 

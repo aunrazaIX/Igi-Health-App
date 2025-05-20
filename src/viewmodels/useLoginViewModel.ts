@@ -1,10 +1,11 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-import {connect, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {setUserData} from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import {setErrorModal} from '../redux/generalSlice';
 
 export type UserDetails = {
   name: string;
@@ -49,7 +50,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
   const {
     checkForError: signupCheckForError,
-    resetStates,
+    resetStates: signupResetStates,
     setterForApiData: signupSetterForApiData,
     apiData: signupApiData,
   } = useErrorHandlingHook({
@@ -99,6 +100,10 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
         verifiedUserData,
         type: 'signup',
       });
+      signupResetStates();
+    },
+    onError: res => {
+      dispatch(setErrorModal({Show: true, message: 'Incorrect Data'}));
     },
   });
 
@@ -110,9 +115,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   };
 
   const handleSignup = () => {
-    console.log('ASDSADASD@#@!s');
     const filled = signupCheckForError();
-    console.log(filled);
     if (!filled) return;
 
     triggerSignup();

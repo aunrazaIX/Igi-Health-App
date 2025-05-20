@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { InputField, Button, AileronSemiBold } from '../../../components';
 import { styles } from '../styles';
 import { icons } from '../../../assets';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { StyleSheet, View } from 'react-native';
-import { COLORS } from '../../../assets/theme/colors';
+import { validateCNIC, validateEmail, validateMobileNumber } from '../../../validations/authValidations';
 
+
+const abc = () => {
+
+}
 
 const SignUpView = ({
   handleSignup,
@@ -29,16 +33,6 @@ const SignUpView = ({
         }
         style={styles.loginContainerText}
       />
-      {/* <InputField
-
-        label="Mobile Number"
-        placeholder="Enter Mobile Number"
-        rightIcon={icons.name}
-        onChangeText={(text) => signupSetterForApiData('name', text)}
-        value={signupApiData?.name}
-        errorMessage={signupApiData?.error_name}
-      /> */}
-
       <InputField
         containerStyle={style.inputContainer}
         labelStyle={style.labelStyle}
@@ -46,9 +40,28 @@ const SignUpView = ({
         label="Mobile Number"
         placeholder="Enter Mobile Number"
         rightIcon={icons.cnic}
-        onChangeText={(text) => signupSetterForApiData('cellNumber', text)}
+        onChangeText={(text) => {
+          signupSetterForApiData('cellNumber', text);
+          const errorMsg = validateMobileNumber(text);
+          signupSetterForApiData('error_cellNumber', errorMsg);
+        }}
         value={signupApiData?.cellNumber}
         errorMessage={signupApiData?.error_cellNumber}
+        keyboardType="numeric"
+        mask={[
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+        ]}
       />
 
 
@@ -59,7 +72,11 @@ const SignUpView = ({
         label="Your Email"
         placeholder="Enter Email Address"
         rightIcon={icons.email}
-        onChangeText={(text) => signupSetterForApiData('email', text)}
+        onChangeText={(text) => {
+          signupSetterForApiData('email', text);
+          const errorMsg = validateEmail(text);
+          signupSetterForApiData('error_email', errorMsg);
+        }}
         value={signupApiData?.email}
         errorMessage={signupApiData?.error_email}
       />
@@ -68,9 +85,30 @@ const SignUpView = ({
         label="CNIC Number"
         placeholder="12345-6789012-3"
         rightIcon={icons.cnic}
-        onChangeText={(text) => signupSetterForApiData('cnic', text)}
+        onChangeText={(text) => {
+          signupSetterForApiData('cnic', text);
+          const errorMsg = validateCNIC(text);
+          signupSetterForApiData('error_cnic', errorMsg);
+        }}
         value={signupApiData?.cnic}
         errorMessage={signupApiData?.error_cnic}
+        mask={[
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          '-',
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          '-',
+          /\d/,
+        ]}
       />
 
 

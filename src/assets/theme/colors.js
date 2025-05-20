@@ -46,4 +46,5 @@ export const COLORS = {
   borderColor: '#DDE0EB',
   unread: 'rgba(158, 160, 170, 1)',
   time: 'rgba(165, 172, 184, 1)',
+  disabled: '#84b3da',
 };

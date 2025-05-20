@@ -11,6 +11,7 @@ import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { icons } from '../../../assets';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { COLORS } from '../../../assets/theme/colors';
+import { validateEmail } from '../../../validations/authValidations';
 
 const LoginForm = ({
   onPressforgotPassword,
@@ -43,7 +44,12 @@ const LoginForm = ({
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
           value={loginApiData?.userName ?? undefined}
-          onChangeText={text => loginSetterForApiData('userName', text)}
+          // onChangeText={text => loginSetterForApiData('userName', text)}
+          onChangeText={(text) => {
+            loginSetterForApiData('userName', text);
+            const errorMsg = validateEmail(text);
+            loginSetterForApiData('error_userName', errorMsg);
+          }}
           errorMessage={loginApiData?.error_userName}
 
         />
