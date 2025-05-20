@@ -1,25 +1,46 @@
-import {Image, TouchableOpacity, View} from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import {
   AileronBold,
   AileronSemiBold,
+  ConfirmationModal,
   CurvedView,
   InputField,
   Select,
   TopView,
 } from '../../components';
 import styles from './styles';
-import {icons} from '../../assets';
-import {COLORS} from '../../assets/theme/colors';
+import { icons } from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+
+type AddTreatmentViewProps = {
+  opdTypes: any[];
+  setterForApiData: (key: string, value: any) => void;
+  apiData: any;
+  onPressAddTreatment: () => void;
+  isError: boolean;
+  treatmentIndex: number;
+  setConfirmationModal: (val: boolean) => void;
+  openConfimationModal: () => void,
+  confirmationModal: boolean
+
+};
 
 const AddTreatmentView = ({
   opdTypes,
   setterForApiData,
   apiData,
   onPressAddTreatment,
-}) => {
+  setConfirmationModal,
+  openConfimationModal,
+  confirmationModal,
+
+  isError,
+  treatmentIndex
+}: AddTreatmentViewProps) => {
   return (
     <>
       <TopView title={'Add A Treatment'} />
@@ -30,13 +51,14 @@ const AddTreatmentView = ({
             <View style={styles.textContainer}>
               <AileronBold
                 name="Add"
-                style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
+                style={[styles.text, { color: COLORS.cardBackgroundBlue }]}
               />
               <AileronBold
                 name="Treatment"
-                style={[styles.text, {color: COLORS.cardBackgroundRed}]}
+                style={[styles.text, { color: COLORS.cardBackgroundRed }]}
               />
             </View>
+
             <Select
               value={apiData?.treatment?.label}
               onSelectOption={option => setterForApiData('treatment', option)}
@@ -44,6 +66,7 @@ const AddTreatmentView = ({
               selectLabel={'-- Select Treatment --'}
               selectPlaceholder={'-- Select Treatment --'}
             />
+
             <InputField
               value={apiData?.receiptNumber}
               onChangeText={text => setterForApiData('receiptNumber', text)}
@@ -52,14 +75,14 @@ const AddTreatmentView = ({
               placeholder="Receipt Number"
             />
             <InputField
-              value={apiData?.Amount}
+              value={apiData?.amount}
               errorMessage={apiData?.error_amount}
               onChangeText={text => setterForApiData('amount', text)}
               label="Amount"
               placeholder="0"
             />
             <InputField
-              value={apiData?.Description}
+              value={apiData?.description}
               errorMessage={apiData?.error_description}
               onChangeText={text => setterForApiData('description', text)}
               multiline
@@ -70,16 +93,38 @@ const AddTreatmentView = ({
           <LinearGradient
             colors={COLORS.PriorGradient}
             style={styles.priorGradient}>
+
             <TouchableOpacity
               style={styles.wrapper}
               onPress={onPressAddTreatment}>
+
+
               <AileronSemiBold
                 style={styles.priorNext}
-                name={'Add Treatment'}
+                name={treatmentIndex !== undefined ? 'Update Treatment' : 'Add Treatment'}
               />
+
+
             </TouchableOpacity>
+
+
           </LinearGradient>
         </View>
+
+
+        <ConfirmationModal
+          ConfirmationModalVisible={confirmationModal}
+
+          setConfirmationModalVisible={setConfirmationModal}
+          frameImage={icons.errorPopup}
+          confirmationMessage={"You cant enter the same entry"}
+          closeButton={true}
+          Successfull={false}
+          CloseButtonText={'Continue To Login'}
+        />
+
+
+
       </CurvedView>
     </>
   );

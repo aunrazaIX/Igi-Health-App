@@ -18,10 +18,10 @@ import Button from '../Button';
 type StyleObject = Record<string, string | number | boolean>;
 
 type ConfimationModalProps = {
-  ConfirmationModalVisible: boolean;
-  setConfirmationModalVisible: (val: boolean) => void;
+  ConfirmationModalVisible?: boolean;
+  setConfirmationModalVisible?: (val: boolean) => void;
   frameImage?: ImageSourcePropType;
-  confirmationMessage: string,
+  confirmationMessage?: string,
   closeButton?: boolean,
   deleteButton?: boolean,
   confirmationRequired?: boolean,

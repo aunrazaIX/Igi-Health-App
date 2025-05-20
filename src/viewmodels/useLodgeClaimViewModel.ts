@@ -1,14 +1,14 @@
-import {icons} from '../assets';
+import { icons } from '../assets';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import {useCallback} from 'react';
+import { useCallback, useState } from 'react';
 import {
   useFocusEffect,
   NavigationProp,
   RouteProp,
 } from '@react-navigation/native';
-import {pick, types} from '@react-native-documents/picker';
-import {useDispatch, useSelector} from 'react-redux';
+import { pick, types } from '@react-native-documents/picker';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setTreatments,
   setSelectedPatient,
@@ -22,7 +22,7 @@ interface Treatment {
   receiptNumber?: string;
   description?: string;
   amount?: string;
-  treatment?: {label: string; value: string};
+  treatment?: { label: string; value: string };
 }
 
 interface ClaimDetail {
@@ -56,10 +56,15 @@ interface Props {
   route: RouteProp<any>;
 }
 
-const useLodgeClaimViewModel = ({navigation}: Props) => {
+const useLodgeClaimViewModel = ({ navigation }: Props) => {
   const dispatch = useDispatch();
-  const {selectedDocuments, currentStep, treatments, selectedPatient} =
+
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+
+
+  const { selectedDocuments, currentStep, treatments, selectedPatient } =
     useSelector(state => state.lodge);
+
 
   const {
     loading: uploadLoading,
@@ -124,7 +129,7 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
     dispatch(setSelectedPatient(null));
   };
 
-  const {data: dependants, loading: dependantLoading} = useApiHook({
+  const { data: dependants, loading: dependantLoading } = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
     argsOrBody: {
@@ -139,9 +144,9 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
   });
 
   const steps: Step[] = [
-    {label: 'Personal Details', key: 'personalDetails'},
-    {label: 'Claim', key: 'claim'},
-    {label: 'Upload Doc', key: 'uploadDoc'},
+    { label: 'Personal Details', key: 'personalDetails' },
+    { label: 'Claim', key: 'claim' },
+    { label: 'Upload Doc', key: 'uploadDoc' },
   ];
 
   const personalData: PersonalInfoSection[] = [
@@ -151,10 +156,10 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
       edit: false,
       delete: false,
       info: [
-        {label: 'Name of Employee:', value: 'Imran Naveed Qureshi'},
-        {label: 'Bank Name:', value: 'Bank Al Habib'},
-        {label: 'Account Number:', value: '1234-5678-9101112-3'},
-        {label: 'Bank IBAN:', value: 'PK47 XYZ 1234 5678 9101112 3 0'},
+        { label: 'Name of Employee:', value: 'Imran Naveed Qureshi' },
+        { label: 'Bank Name:', value: 'Bank Al Habib' },
+        { label: 'Account Number:', value: '1234-5678-9101112-3' },
+        { label: 'Bank IBAN:', value: 'PK47 XYZ 1234 5678 9101112 3 0' },
       ],
     },
     {
@@ -163,10 +168,10 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
       edit: false,
       delete: false,
       info: [
-        {label: 'Services:', value: 'General OPD, Dental, Optical'},
-        {label: 'Eligible Users:', value: 'Self, Spouse, Children'},
-        {label: 'Reimbursement:', value: '28827'},
-        {label: 'Total OPD:', value: '---'},
+        { label: 'Services:', value: 'General OPD, Dental, Optical' },
+        { label: 'Eligible Users:', value: 'Self, Spouse, Children' },
+        { label: 'Reimbursement:', value: '28827' },
+        { label: 'Total OPD:', value: '---' },
       ],
     },
   ];
@@ -175,17 +180,18 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
     sectionTitle: item?.treatment?.label,
     icon: icons.stethoscope,
     info: [
-      {label: 'Receipt Number:', value: item?.receiptNumber ?? '--'},
-      {label: 'Amount:', value: item?.amount ?? '--', total: true},
-      {label: 'Description:', value: item?.description ?? '--'},
+      { key: 'receiptNumber', label: 'Receipt Number:', value: item?.receiptNumber ?? '--' },
+      { key: 'amount', label: 'Amount:', value: item?.amount ?? '--', total: true },
+      { key: 'description', label: 'Description:', value: item?.description ?? '--' },
     ],
+    treatment: item?.treatment
   }));
 
   const goBack = () => {
     resetStates();
     navigation.reset({
       index: 0,
-      routes: [{name: 'Home'}],
+      routes: [{ name: 'Home' }],
     });
   };
   const onPressStep = (step: number) => {
@@ -206,14 +212,29 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
     }
     dispatch(setStep(step));
   };
+
+
+
   const navigateTreatment = () => {
     navigation.navigate('AddTreatment');
   };
+
+
+
+
   const onPressDelete = (index: number) => dispatch(onDeleteTreatment(index));
 
+  const onPressEdit = (data: object, index: number) => {
+    navigation.navigate('AddTreatment', {
+      treatmentData: data,
+      treatmentIndex: index,
+    });
+
+  }
   const onSelectPatient = (patient: any) => {
     dispatch(setSelectedPatient(patient));
   };
+
   const onPressNext = () => {
     try {
       if (currentStep === 1) {
@@ -221,9 +242,14 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
           throw new Error('Please Select Patient');
         }
       }
+
+
+
       if (currentStep < 3) {
         dispatch(setStep(currentStep + 1));
       }
+
+
     } catch (e) {
       console.log('Error', e);
     }
@@ -271,6 +297,7 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
       navigateTreatment,
       onPressNext,
       onPressDelete,
+      onPressEdit,
       onPressStep,
       onSelectPatient,
       onSelectDocument,

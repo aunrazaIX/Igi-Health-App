@@ -119,6 +119,8 @@ const ForgotPasswordView = ({
         Successfull={true}
         CloseButtonText={'Continue To Login'}
       />
+
+
     </Container >
   );
 };

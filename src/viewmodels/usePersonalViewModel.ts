@@ -1,7 +1,7 @@
-import {ImageSourcePropType} from 'react-native';
-import {icons} from '../assets';
-import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
+import { ImageSourcePropType } from 'react-native';
+import { icons } from '../assets';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
 type UsePersonalViewModal = {
   states: {
@@ -33,8 +33,11 @@ type DependentDetail = {
 };
 
 const usePersonalViewModal = (): UsePersonalViewModal => {
+
   const [modalVisible, setModalVisible] = useState(false);
+
   const [confimationModalVisible, setConfimationModalVisible] = useState(false);
+
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const navigation = useNavigation();
@@ -44,60 +47,60 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       dependent: 'Dependent Detail',
       image: icons.frame,
       dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
+        { label: 'Name:', value: 'Madiha Imran Qureshi' },
+        { label: 'Gender:', value: 'Female' },
+        { label: 'Relationship:', value: 'Wife' },
+        { label: 'Age:', value: '35 Years' },
       ],
     },
     {
       dependent: 'Dependent Detail',
       image: icons.frame,
       dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
+        { label: 'Name:', value: 'Madiha Imran Qureshi' },
+        { label: 'Gender:', value: 'Female' },
+        { label: 'Relationship:', value: 'Wife' },
+        { label: 'Age:', value: '35 Years' },
       ],
     },
     {
       dependent: 'Dependent Detail',
       image: icons.frame,
       dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
+        { label: 'Name:', value: 'Madiha Imran Qureshi' },
+        { label: 'Gender:', value: 'Female' },
+        { label: 'Relationship:', value: 'Wife' },
+        { label: 'Age:', value: '35 Years' },
       ],
     },
     {
       dependent: 'Dependent Detail',
       image: icons.frame,
       dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
+        { label: 'Name:', value: 'Madiha Imran Qureshi' },
+        { label: 'Gender:', value: 'Female' },
+        { label: 'Relationship:', value: 'Wife' },
+        { label: 'Age:', value: '35 Years' },
       ],
     },
     {
       dependent: 'Dependent Detail',
       image: icons.frame,
       dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
+        { label: 'Name:', value: 'Madiha Imran Qureshi' },
+        { label: 'Gender:', value: 'Female' },
+        { label: 'Relationship:', value: 'Wife' },
+        { label: 'Age:', value: '35 Years' },
       ],
     },
     {
       dependent: 'Dependent Detail',
       image: icons.frame,
       dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
+        { label: 'Name:', value: 'Madiha Imran Qureshi' },
+        { label: 'Gender:', value: 'Female' },
+        { label: 'Relationship:', value: 'Wife' },
+        { label: 'Age:', value: '35 Years' },
       ],
     },
   ];
