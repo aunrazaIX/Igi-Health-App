@@ -91,7 +91,7 @@ const useApiHook = <T>({
           apiCallingFunction();
         }
       },
-      refetchOnArgumentChange ? [argsOrBody] : [],
+      refetchOnArgumentChange ? [JSON.stringify(argsOrBody)] : [],
     ),
   );
 
