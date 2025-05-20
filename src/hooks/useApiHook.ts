@@ -33,6 +33,7 @@ const useApiHook = <T>({
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
+
   const apiCallingFunction = async (data?: any) => {
     setError(null);
     setData(null);

@@ -1,8 +1,8 @@
 import React from 'react';
 import LodgeClaimView from '../../views/LodgeClaimView';
 import useLodgeClaimViewModel from '../../viewmodels/useLodgeClaimViewModel';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RouteProp} from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 
 type RootStackParamList = {
   LodgeClaim: {
@@ -16,8 +16,8 @@ type LodgeClaimProps = {
   route: RouteProp<RootStackParamList, 'LodgeClaim'>;
 };
 
-const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
-  const {states, functions} = useLodgeClaimViewModel({navigation, route});
+const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
+  const { states, functions } = useLodgeClaimViewModel({ navigation, route });
 
   const {
     steps,
@@ -37,6 +37,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     navigateTreatment,
     onPressNext,
     onPressDelete,
+    onPressEdit,
     onPressStep,
     onSelectPatient,
     onSelectDocument,
@@ -55,6 +56,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       onPressStep={onPressStep}
       currentStep={currentStep}
       onPressDelete={onPressDelete}
+      onPressEdit={onPressEdit}
       onPressNext={onPressNext}
       patientOptions={patientOptions}
       navigateTreatment={navigateTreatment}

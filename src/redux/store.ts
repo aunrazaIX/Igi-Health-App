@@ -1,10 +1,10 @@
-import {configureStore} from '@reduxjs/toolkit';
-import {combineReducers} from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {persistStore, persistReducer} from 'redux-persist';
-import {authReducer} from './authSlice';
-import {lodegeReducer} from './lodgeSlice';
-import {generalReducer} from './generalSlice';
+import { persistStore, persistReducer } from 'redux-persist';
+import { authReducer } from './authSlice';
+import { lodegeReducer } from './lodgeSlice';
+import { generalReducer } from './generalSlice';
 
 const persistConfig = {
   key: 'root',

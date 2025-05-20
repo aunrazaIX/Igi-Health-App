@@ -1,9 +1,9 @@
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import {Select} from '../../../components';
-import {vh} from '../../../assets/theme/dimension';
+import { Select } from '../../../components';
+import { vh } from '../../../assets/theme/dimension';
 import Box from './Box';
-import {PersonelDataSection} from '../typeInterface';
+import { PersonelDataSection } from '../typeInterface';
 
 type PersonalDetailsProps = {
   patientOptions: any[];

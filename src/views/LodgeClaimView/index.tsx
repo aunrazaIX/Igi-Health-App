@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button, CurvedView, Stepper, TopView} from '../../components';
-import {Claim, PersonalDetails, UploadDoc} from './components';
+import { Button, CurvedView, Stepper, TopView } from '../../components';
+import { Claim, PersonalDetails, UploadDoc } from './components';
 import {
   ClaimDetailSection,
   PersonelDataSection,
@@ -8,8 +8,8 @@ import {
   StepItem,
   DependantList,
 } from './typeInterface';
-import {icons} from '../../assets';
-import {COLORS} from '../../assets/theme/colors';
+import { icons } from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 
 type LodgeClaimViewProps = {
@@ -24,6 +24,7 @@ type LodgeClaimViewProps = {
   currentStep: number;
   onPressNext: () => void;
   onPressDelete: (index: number) => void;
+  onPressEdit: (data: object, index: number) => void;
   onPressStep: (index: number) => void;
   selectedPatient: any; // You can replace 'any' with a specific patient type
   onSelectPatient: (option: any) => void; // Replace `any` with correct type if known
@@ -40,6 +41,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   pickFile,
   onPressNext,
   onPressDelete,
+  onPressEdit,
   onPressStep,
   onSelectPatient,
   onSelectDocument,
@@ -61,6 +63,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
     claim: (
       <Claim
         onPressDelete={onPressDelete}
+        onPressEdit={onPressEdit}
         claimsDetails={claimsDetails}
         navigateTreatment={navigateTreatment}
       />
@@ -98,16 +101,20 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
                 ? true
                 : false
               : currentStep === 2
-              ? claimsDetails?.length > 0
-                ? false
-                : true
-              : currentStep === 3 && selectedDocuments?.length > 0
-              ? false
-              : true
+                ? claimsDetails?.length > 0
+                  ? false
+                  : true
+                : currentStep === 3 && selectedDocuments?.length > 0
+                  ? false
+                  : true
           }
+
           onPress={onPressNext}
+
+
           name={currentStep === 3 ? 'Submit' : 'Next'}
         />
+
         <ModalLoading loading={dependantLoading || uploadLoading} />
       </CurvedView>
     </>
