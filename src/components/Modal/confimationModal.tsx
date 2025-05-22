@@ -29,7 +29,9 @@ type ConfimationModalProps = {
   containerStyle?: StyleObject | StyleObject[];
   handleDelete?: () => void,
   Successfull?: boolean,
-  CloseButtonText: string
+  CloseButtonText: string,
+  onClose: () => void;
+  closeIcon?: boolean;
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -44,8 +46,16 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   containerStyle,
   handleDelete,
   Successfull,
-  CloseButtonText
+  onClose,
+  closeIcon
 }) => {
+
+  const handleClose = () => {
+    setConfirmationModalVisible(false)
+    if (onClose) {
+      onClose()
+    }
+  }
   return (
     <Modal
       animationType="slide"
@@ -54,11 +64,13 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
       statusBarTranslucent>
       <View style={styles.centeredView}>
         <View style={[styles.modalView, containerStyle]}>
-          <TouchableOpacity
-            onPress={() => setConfirmationModalVisible(false)}
-            style={styles.modalClose}>
-            <Image source={icons.CancelIcon} />
-          </TouchableOpacity>
+          {closeIcon && (
+            <TouchableOpacity
+              onPress={() => setConfirmationModalVisible(false)}
+              style={styles.modalClose}>
+              <Image source={icons.CancelIcon} />
+            </TouchableOpacity>
+          )}
 
           <View style={styles.personalFrameContainer}>
             <Image source={frameImage} style={styles.personalFrameIMG} />
@@ -122,7 +134,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <Button
                 name="Close"
                 inputStyle={styles.closeButton}
-                onPress={() => setConfirmationModalVisible(false)}
+                onPress={handleClose}
               />
             </View>
           )}

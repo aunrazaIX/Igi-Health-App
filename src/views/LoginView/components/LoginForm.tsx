@@ -12,6 +12,8 @@ import { icons } from '../../../assets';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { COLORS } from '../../../assets/theme/colors';
 import { validateEmail } from '../../../validations/authValidations';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRememberMe } from '../../../redux/authSlice';
 
 const LoginForm = ({
   onPressforgotPassword,
@@ -19,13 +21,16 @@ const LoginForm = ({
   loading,
   loginApiData,
   loginSetterForApiData,
+  handleCheck,
+  rememberMe,
 }: {
   onPressforgotPassword: (to: string) => void;
   handleLogin: () => void;
   loading: boolean;
   loginApiData: any;
   loginSetterForApiData: (key: string, value: any) => void;
-
+  handleCheck: () => void;
+  rememberMe: boolean
 }) => {
   return (
     <>
@@ -44,7 +49,6 @@ const LoginForm = ({
           labelStyle={style.labelStyle}
           inputStyle={style.inputStyle}
           value={loginApiData?.userName ?? undefined}
-          // onChangeText={text => loginSetterForApiData('userName', text)}
           onChangeText={(text) => {
             loginSetterForApiData('userName', text);
             const errorMsg = validateEmail(text);
@@ -69,7 +73,14 @@ const LoginForm = ({
       </View>
 
       <View style={[styles.row, { justifyContent: 'space-between' }]}>
-        <CheckBox description="Remember me" />
+        <View style={style.checkboxContainer}>
+          <TouchableOpacity
+            onPress={handleCheck}
+            style={style.square}>
+            {rememberMe && <Image style={style.tickIcon} source={icons.tickIcon} />}
+          </TouchableOpacity>
+          <AileronSemiBold style={style.descriptionText} name={"Remember Me"} />
+        </View>
 
         <TouchableOpacity
           onPress={() => {
@@ -135,5 +146,29 @@ const style = StyleSheet.create({
 
   style: {
     fontSize: vw * 3.5,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  square: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: vw * 1,
+    borderColor: COLORS.black,
+    height: vh * 1.9,
+    width: vw * 3.9,
+
+  },
+  descriptionText: {
+    color: COLORS.textColor,
+    marginLeft: vw * 2,
+    fontSize: vw * 3.5,
+  },
+  tickIcon: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain',
   },
 });

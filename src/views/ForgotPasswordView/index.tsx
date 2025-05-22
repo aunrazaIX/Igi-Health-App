@@ -36,7 +36,9 @@ const ForgotPasswordView = ({
   sendOtp,
   showResend,
   countdownKey,
-  setShowResend
+  setShowResend,
+  onCloseSuccessModal,
+  updatePasswordLoading,
 }: {
   step: number;
   onPressBack: () => void;
@@ -58,6 +60,8 @@ const ForgotPasswordView = ({
   showResend: boolean;
   countdownKey: number;
   setShowResend: () => void;
+  disabled: () => void;
+  updatePasswordLoading: boolean;
 
 }) => {
   const returnComponent: Record<number, JSX.Element> = {
@@ -108,10 +112,10 @@ const ForgotPasswordView = ({
         {returnComponent[step]}
         <Button
           onPress={handleNext}
-          disabled={step == 2 ? otp?.length == 6 ? false : true : false}
+          disabled={ForgotPasswordLoading || verifyOtpLoading || (step == 2 ? otp?.length == 6 ? false : true : false)}
           name={returnButtonName[step]}
           containerStyle={styles.button}
-          loading={verifyOtpLoading || ForgotPasswordLoading}
+          loading={verifyOtpLoading || ForgotPasswordLoading || updatePasswordLoading}
         />
 
 
@@ -121,10 +125,10 @@ const ForgotPasswordView = ({
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
         frameImage={icons.ModalSuccessfull}
-        confirmationMessage={"Your password has been changed  successfully."}
-        closeButton={true}
-        Successfull={true}
-        CloseButtonText={'Continue To Login'}
+        confirmationMessage={"Your password has been changed successfully."}
+        closeButton
+        Successfull
+        onClose={onCloseSuccessModal}
       />
     </Container >
   );

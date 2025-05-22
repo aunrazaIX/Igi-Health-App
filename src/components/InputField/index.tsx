@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     height: vh * 8,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
-    marginVertical: vh * 1.5,
+    marginVertical: vh * 2,
     paddingHorizontal: vw * 2,
     flexDirection: 'column',
     paddingVertical: vh,

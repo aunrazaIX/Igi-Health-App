@@ -10,6 +10,7 @@ import { vh, vw } from '../../assets/theme/dimension';
 import { COLORS } from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import SimpleLoader from '../SimpleLoader';
+import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewModel';
 
 interface ButtonProps extends TouchableOpacityProps {
   name: string;
@@ -19,6 +20,8 @@ interface ButtonProps extends TouchableOpacityProps {
   gradientColors?: string[];
   loading?: boolean;
   disabled?: boolean;
+  ForgotPasswordLoading: boolean;
+  route: any
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -31,11 +34,12 @@ const Button: React.FC<ButtonProps> = ({
   loading,
   disabled,
 }) => {
+
   return (
     <LinearGradient
       style={[styles.container, containerStyle]}
       colors={
-        disabled
+        disabled && !loading
           ? [COLORS.disabled, COLORS.disabled]
           : gradientColors || COLORS.activeButtonGradient
       }>

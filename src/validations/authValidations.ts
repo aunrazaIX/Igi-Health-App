@@ -26,6 +26,6 @@ export const validatePassword = (text: string): string => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^+=])[A-Za-z\d@$!%*?&#^+=]{8,}$/;
   if (!text) return 'Password is required';
   if (!passwordRegex.test(text))
-    return 'Password must be at least 8 characters';
+    return 'Password must be at least 8 characters and Special Characters';
   return '';
 };

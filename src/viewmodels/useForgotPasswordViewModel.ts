@@ -12,6 +12,7 @@ type UseForgotPasswordViewModelReturnType = {
     confirmationModal: boolean;
     verifyOtpLoading: boolean;
     ForgotPasswordLoading: boolean;
+    updatePasswordLoading: boolean;
     apiData: object;
     updatePasswordApiData: any;
     otp: number | string;
@@ -38,7 +39,7 @@ const useForgotPasswordViewModel = ({
   route: any;
 }): UseForgotPasswordViewModelReturnType => {
   const {step: _step, verifiedUserData, type} = route?.params || {};
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState<number>(_step ? _step : 1);
   const [savedDataForVerification, setSavedDataforVerification] =
     useState(null);
   const [confirmationModal, setConfirmationModal] = useState(false);
@@ -47,9 +48,9 @@ const useForgotPasswordViewModel = ({
   const [showResend, setShowResend] = useState(false);
   const [countdownKey, setCountdownKey] = useState(0);
 
-  useEffect(() => {
-    setStep(_step);
-  }, [_step]);
+  // useEffect(() => {
+  //   setStep(_step);
+  // }, [_step]);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -71,6 +72,10 @@ const useForgotPasswordViewModel = ({
     }
     if (step == 1) {
       navigation.goBack();
+      return;
+    }
+    if (step == 3) {
+      navigation.navigate('Login');
       return;
     }
   };
@@ -95,6 +100,7 @@ const useForgotPasswordViewModel = ({
     newPassword: '',
     confirmPassword: '',
   });
+
   const {trigger: triggerForgotPassword, loading: ForgotPasswordLoading} =
     useApiHook({
       apiEndpoint: endpoints.auth.registerUser,
@@ -163,20 +169,6 @@ const useForgotPasswordViewModel = ({
   } = useApiHook({
     apiEndpoint: endpoints.auth.verifyOTP,
     method: 'post',
-    // argsOrBody:
-    //   type == 'forgot' && step == 2
-    //     ? {
-    //         otp: otp,
-    //         uuid: savedDataForVerification?.uuid,
-    //         userId: savedDataForVerification?.UserID,
-    //         ClientCode: savedDataForVerification?.ClientCode,
-    //       }
-    //     : {
-    //         otp: otp,
-    //         uuid: verifiedUserData?.uuid,
-    //         userId: verifiedUserData?.UserID,
-    //         ClientCode: verifiedUserData?.ClientCode,
-    //       },
     argsOrBody: {
       otp: otp,
       uuid: verifyUserData?.uuid,
@@ -190,13 +182,12 @@ const useForgotPasswordViewModel = ({
         dispatch(setErrorModal({Show: true, message: 'Invalid Or Expire Otp'}));
       }
     },
-    onError: res => {
+    onError: error => {
       setOtp('');
       dispatch(setErrorModal({Show: true, message: 'Incorrect OTP'}));
     },
   });
 
-  // calling update password api
   const {
     trigger: triggerUpdatePassword,
     loading: updatePasswordLoading,
@@ -204,20 +195,6 @@ const useForgotPasswordViewModel = ({
   } = useApiHook({
     apiEndpoint: endpoints.auth.updatePassword,
     method: 'post',
-    // argsOrBody:
-    //   type == 'forgot' && step == 3
-    //     ? {
-    //         OldPassword: savedDataForVerification?.UserPassword,
-    //         userId: savedDataForVerification?.UserID,
-    //         isPassEncrypted: true,
-    //         NewPassword: updatePasswordApiData.confirmPassword,
-    //       }
-    //     : {
-    //         OldPassword: savedDataForVerification?.UserPassword,
-    //         userId: savedDataForVerification?.UserID,
-    //         isPassEncrypted: true,
-    //         NewPassword: updatePasswordApiData.confirmPassword,
-    //       },
     argsOrBody: {
       OldPassword: savedDataForVerification?.UserPassword,
       userId: savedDataForVerification?.UserID,
@@ -226,15 +203,16 @@ const useForgotPasswordViewModel = ({
     },
 
     onSuccess: res => {
-      if (res.Data) {
+      if (!res?.Data) {
         updatePasswordResetStates();
-        openConfimationModal();
+        setConfirmationModal(true);
       }
     },
-    onError: res => {
-      updatePasswordResetStates();
+    onError: error => {
+      dispatch(setErrorModal({show: true, message: error}));
     },
   });
+
   const handleNext = () => {
     if (step == 1 && type == 'forgot') {
       if (!apiData.cellNumber || !apiData.email || !apiData.cnic) {
@@ -258,19 +236,24 @@ const useForgotPasswordViewModel = ({
     if (step == 3 && type == 'forgot') {
       if (
         !updatePasswordApiData.newPassword ||
-        !updatePasswordApiData.OldPassword
+        !updatePasswordApiData.confirmPassword
       ) {
         dispatch(setErrorModal({Show: true, message: 'Fill Both Password'}));
+        return;
       }
       if (
         updatePasswordApiData.newPassword !==
         updatePasswordApiData.confirmPassword
       ) {
         dispatch(setErrorModal({Show: true, message: 'Password Not Matched'}));
-      } else {
-        triggerUpdatePassword();
+        return;
       }
+      triggerUpdatePassword();
     }
+  };
+
+  const onCloseSuccessModal = () => {
+    navigation.navigate('Login');
   };
   return {
     states: {
@@ -280,6 +263,7 @@ const useForgotPasswordViewModel = ({
       apiData,
       updatePasswordApiData,
       ForgotPasswordLoading,
+      updatePasswordLoading,
       otp,
       showResend,
       countdownKey,
@@ -296,6 +280,7 @@ const useForgotPasswordViewModel = ({
       sendOtp,
       onPressResend,
       setShowResend,
+      onCloseSuccessModal,
     },
   };
 };

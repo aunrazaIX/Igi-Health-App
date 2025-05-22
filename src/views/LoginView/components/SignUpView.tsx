@@ -6,11 +6,6 @@ import { vh, vw } from '../../../assets/theme/dimension';
 import { StyleSheet, View } from 'react-native';
 import { validateCNIC, validateEmail, validateMobileNumber } from '../../../validations/authValidations';
 
-
-const abc = () => {
-
-}
-
 const SignUpView = ({
   handleSignup,
   signupSetterForApiData,
@@ -63,8 +58,6 @@ const SignUpView = ({
           /\d/,
         ]}
       />
-
-
       <InputField
         containerStyle={style.inputContainer}
         labelStyle={style.labelStyle}
@@ -110,9 +103,6 @@ const SignUpView = ({
           /\d/,
         ]}
       />
-
-
-
       <View style={style.signupTextContainer} >
 
         <View style={style.signupText}>
@@ -155,12 +145,10 @@ const SignUpView = ({
         </View>
       </View>
 
-      <Button containerStyle={styles.loginButton} name="Create Account" onPress={handleSignup} loading={loadingSignup} />
+      <Button containerStyle={styles.loginButton} name="Create Account" onPress={handleSignup} loading={loadingSignup} disabled={loadingSignup ? true : false} />
     </>
   );
 };
-
-// onPress={() => { onPress('ForgotPassword', { stepNum: 2, type: 'signup' }) }}
 
 export default SignUpView;
 
