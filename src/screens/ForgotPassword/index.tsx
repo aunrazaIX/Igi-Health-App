@@ -5,8 +5,8 @@ import useLoginViewModel from '../../viewmodels/useLoginViewModel';
 
 const ForgotPassword = ({ route }: { route: any }) => {
   const { states, functions } = useForgotPasswordViewModel({ route });
-  const { step, confirmationModal, verifyOtpLoading, apiData, updatePasswordApiData } = states;
-  const { handleStep, onPressBack, setConfirmationModal, setOtp, handleVerifyOtp, handleForgotPassword, openConfimationModal, setterForApiData, handleNext, setterForUpdatePasswordApiData } = functions;
+  const { step, confirmationModal, verifyOtpLoading, apiData, updatePasswordApiData, ForgotPasswordLoading, otp, showResend, countdownKey, updatePasswordLoading } = states;
+  const { handleStep, onPressBack, setConfirmationModal, setOtp, openConfimationModal, setterForApiData, handleNext, setterForUpdatePasswordApiData, sendOtp, onPressResend, setShowResend, disabled, onCloseSuccessModal } = functions;
 
   return (
     <ForgotPasswordView
@@ -17,17 +17,22 @@ const ForgotPassword = ({ route }: { route: any }) => {
       setConfirmationModal={setConfirmationModal}
       openConfimationModal={openConfimationModal}
       setOtp={setOtp}
-      handleVerifyOtp={handleVerifyOtp}
       verifyOtpLoading={verifyOtpLoading}
       setterForApiData={setterForApiData}
-      handleForgotPassword={handleForgotPassword}
       handleNext={handleNext}
       apiData={apiData}
       updatePasswordApiData={updatePasswordApiData}
       setterForUpdatePasswordApiData={setterForUpdatePasswordApiData}
-
-
-
+      ForgotPasswordLoading={ForgotPasswordLoading}
+      otp={otp}
+      sendOtp={sendOtp}
+      onPressResend={onPressResend}
+      showResend={showResend}
+      countdownKey={countdownKey}
+      setShowResend={setShowResend}
+      onCloseSuccessModal={onCloseSuccessModal}
+      disabled={disabled}
+      updatePasswordLoading={updatePasswordLoading}
     />
   );
 };

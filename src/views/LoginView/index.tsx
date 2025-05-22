@@ -21,6 +21,8 @@ const LoginView = ({
   loadingSignup,
   loginApiData,
   loginSetterForApiData,
+  handleCheck,
+  rememberMe,
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;
@@ -34,6 +36,8 @@ const LoginView = ({
   loadingSignup: boolean;
   loginApiData: any;
   loginSetterForApiData: (key: string, value: any) => void;
+  handleCheck: () => void;
+  rememberMe: boolean;
 }) => {
   const Wrapper = (tab: string) =>
     selectedTab === tab ? LinearGradient : TouchableOpacity;
@@ -46,6 +50,8 @@ const LoginView = ({
         loading={loading}
         loginApiData={loginApiData}
         loginSetterForApiData={loginSetterForApiData}
+        handleCheck={handleCheck}
+        rememberMe={rememberMe}
       />
     ),
     signup: <SignUpView

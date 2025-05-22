@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {StyleSheet} from 'react-native';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 const styles = StyleSheet.create({
   titleText: {
@@ -45,10 +45,9 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginLeft: vw * 2,
   },
-  iconView: {
-   
-    
-  },
+  iconView: {},
+  buttonDisabled: {},
+  buttonEnabled: {},
 });
 
 export default styles;

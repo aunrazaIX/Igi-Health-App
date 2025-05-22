@@ -3,24 +3,12 @@ import { OtpInput } from 'react-native-otp-entry';
 import { COLORS } from '../../../assets/theme/colors';
 import styles from '../styles';
 import { AileronBold, AileronRegular } from '../../../components';
-import { Alert, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
 
 
-const OtpView = ({ setOtp }: { setOtp: (otp: string) => void; }) => {
-  const [showResend, setShowResend] = useState(false);
-  const [countdownKey, setCountdownKey] = useState(0);
-
-
-  const handleResend = () => {
-    setShowResend(false);
-    setCountdownKey(prev => prev + 1);
-
-
-
-
-  };
+const OtpView = ({ setOtp, sendOtp, onPressResend, showResend, countdownKey, setShowResend }: { setOtp: (otp: string) => void; sendOtp: () => void; onPressResend: () => void; showResend: boolean; countdownKey: number; setShowResend: () => void; }) => {
 
   return (
     <Fragment>
@@ -47,7 +35,7 @@ const OtpView = ({ setOtp }: { setOtp: (otp: string) => void; }) => {
           containerStyle: styles.otpContainer,
           focusedPinCodeContainerStyle: styles.otpBoxView,
         }}
-        onFilled={(text) => {
+        onTextChange={(text) => {
           setOtp(text)
         }}
       />
@@ -73,10 +61,11 @@ const OtpView = ({ setOtp }: { setOtp: (otp: string) => void; }) => {
 
 
       {showResend && (
-        <TouchableOpacity onPress={handleResend}>
+        <TouchableOpacity onPress={onPressResend}>
           <AileronBold style={styles.resendCode} name="Resend Code" />
         </TouchableOpacity>
       )}
+
 
 
 

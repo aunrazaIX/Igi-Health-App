@@ -1,10 +1,12 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-import { connect, useDispatch } from 'react-redux';
-import { setUserData } from '../redux/authSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {setRememberMe, setUserData} from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import {setErrorModal} from '../redux/generalSlice';
+import {RootState} from '../redux/store';
 
 export type UserDetails = {
   name: string;
@@ -20,6 +22,7 @@ type UseLoginViewModelReturn = {
     signupApiData: any;
     loadingSignup: boolean;
     loginApiData: any;
+    rememberMe: boolean;
   };
   functions: {
     onPressTab: (name: string) => void;
@@ -28,15 +31,18 @@ type UseLoginViewModelReturn = {
     handleSignup: () => void;
     signupSetterForApiData: (key: string, value: any) => void;
     loginSetterForApiData: (key: string, value: any) => void;
+    handleCheck: () => void;
   };
 };
 
 const useLoginViewModel = (): UseLoginViewModelReturn => {
+  const [selectedTab, setSelectedTab] = useState<string>('login');
+  const [verifiedUserData, setVerifiedUserData] = useState(null);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const [selectedTab, setSelectedTab] = useState<string>('login');
-  const [verifiedUserData, setVerifiedUserData] = useState(null);
+  const rememberMe = useSelector((state: RootState) => state.auth.rememberMe);
 
   const {
     setterForApiData: loginSetterForApiData,
@@ -49,7 +55,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
   const {
     checkForError: signupCheckForError,
-    resetStates,
+    resetStates: signupResetStates,
     setterForApiData: signupSetterForApiData,
     apiData: signupApiData,
   } = useErrorHandlingHook({
@@ -58,21 +64,24 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     cnic: '',
   });
 
-  const { loading, trigger } = useApiHook({
+  const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
-    argsOrBody: loginApiData,
     onSuccess: res => {
       dispatch(setUserData(res));
     },
+    onError: res => {
+      console.log('Login Error', res);
+      dispatch(setErrorModal({Show: true, message: res.error}));
+    },
   });
 
-  const { trigger: triggerSignup, loading: loadingSignup } = useApiHook({
+  const {trigger: triggerSignup, loading: loadingSignup} = useApiHook({
     apiEndpoint: endpoints.auth.registerUser,
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      setVerifiedUserData({ ...res?.Data, uuid: 'ASDADASDASDASDASDADAD' });
+      setVerifiedUserData({...res?.Data, uuid: 'ASDADASDASDASDASDADAD'});
       let apiData = {
         userId: res?.Data?.UserID,
         uuid: 'ASDADASDASDASDASDADAD',
@@ -99,6 +108,10 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
         verifiedUserData,
         type: 'signup',
       });
+      signupResetStates();
+    },
+    onError: res => {
+      dispatch(setErrorModal({Show: true, message: 'Incorrect Data'}));
     },
   });
 
@@ -106,13 +119,18 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     const filled = LoginCheckForError();
     if (!filled) return;
 
-    trigger();
+    const Buffer = require('buffer').Buffer;
+    let encodedAuth = new Buffer(loginApiData?.password).toString('base64');
+    let apiData = {
+      userName: loginApiData?.userName,
+      password: encodedAuth,
+    };
+
+    trigger(apiData);
   };
 
   const handleSignup = () => {
-    console.log('ASDSADASD@#@!s');
     const filled = signupCheckForError();
-    console.log(filled);
     if (!filled) return;
 
     triggerSignup();
@@ -121,7 +139,11 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const onPressTab = (name: string) => setSelectedTab(name);
 
   const onPressforgotPassword = (to: string) => {
-    navigation.navigate(to, { step: 1, type: 'forgot' });
+    navigation.navigate(to, {step: 1, type: 'forgot'});
+  };
+
+  const handleCheck = () => {
+    dispatch(setRememberMe(!rememberMe));
   };
 
   const tabs = ['login', 'signup'];
@@ -133,6 +155,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       signupApiData,
       loadingSignup,
       loginApiData,
+      rememberMe,
     },
     functions: {
       onPressTab,
@@ -141,6 +164,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       handleSignup,
       signupSetterForApiData,
       loginSetterForApiData,
+      handleCheck,
     },
   };
 };

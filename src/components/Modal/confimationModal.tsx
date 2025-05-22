@@ -7,9 +7,9 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import React from 'react';
-import { icons, images } from '../../assets';
-import { COLORS } from '../../assets/theme/colors';
-import { vh, vw } from '../../assets/theme/dimension';
+import {icons} from '../../assets';
+import {COLORS} from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
 import AileronBold from '../AileronBold';
 import AileronSemiBold from '../AileronSemiBold';
 import LinearGradient from 'react-native-linear-gradient';
@@ -21,16 +21,17 @@ type ConfimationModalProps = {
   ConfirmationModalVisible?: boolean;
   setConfirmationModalVisible?: (val: boolean) => void;
   frameImage?: ImageSourcePropType;
-  confirmationMessage?: string,
-  closeButton?: boolean,
-  deleteButton?: boolean,
-  confirmationRequired?: boolean,
-  claimSubmission?: boolean,
+  confirmationMessage?: string;
+  closeButton?: boolean;
+  deleteButton?: boolean;
+  confirmationRequired?: boolean;
+  claimSubmission?: boolean;
   containerStyle?: StyleObject | StyleObject[];
-  handleDelete?: () => void,
-  Successfull?: boolean,
-  CloseButtonText: string,
-  onClose: () => void
+  handleDelete?: () => void;
+  Successfull?: boolean;
+  CloseButtonText: string;
+  onClose: () => void;
+  closeIcon?: boolean;
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -45,9 +46,15 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   containerStyle,
   handleDelete,
   Successfull,
-  CloseButtonText,
-  onClose
+  onClose,
+  closeIcon,
 }) => {
+  const handleClose = () => {
+    setConfirmationModalVisible(false);
+    if (onClose) {
+      onClose();
+    }
+  };
   return (
     <Modal
       animationType="slide"
@@ -56,14 +63,13 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
       statusBarTranslucent>
       <View style={styles.centeredView}>
         <View style={[styles.modalView, containerStyle]}>
-          <TouchableOpacity
-            onPress={() => {
-
-
-            }}
-            style={styles.modalClose}>
-            <Image source={icons.CancelIcon} />
-          </TouchableOpacity>
+          {closeIcon && (
+            <TouchableOpacity
+              onPress={() => setConfirmationModalVisible(false)}
+              style={styles.modalClose}>
+              <Image source={icons.CancelIcon} />
+            </TouchableOpacity>
+          )}
 
           <View style={styles.personalFrameContainer}>
             <Image source={frameImage} style={styles.personalFrameIMG} />
@@ -87,7 +93,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
 
             {Successfull && (
               <View style={styles.confirmationContainer}>
-                <AileronBold name='Successful!' style={styles.confirmation} />
+                <AileronBold name="Successful!" style={styles.confirmation} />
               </View>
             )}
 
@@ -101,9 +107,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
             <View style={styles.confirmationButtonContainer}>
               <TouchableOpacity
                 style={styles.cancelButton}
-
                 onPress={() => setConfirmationModalVisible(false)}>
-
                 <AileronBold name="Cancel" style={styles.cancelButtonText} />
               </TouchableOpacity>
 
@@ -129,12 +133,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <Button
                 name="Close"
                 inputStyle={styles.closeButton}
-                onPress={() => {
-                  if (onClose) {
-                    onClose();
-                  }
-                  setConfirmationModalVisible(false)
-                }}
+                onPress={handleClose}
               />
             </View>
           )}
@@ -163,7 +162,7 @@ const styles = StyleSheet.create({
     paddingTop: vh * 2.5,
     paddingBottom: vh * 2,
     shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
     shadowRadius: vw * 6,
     elevation: vw * 7,
@@ -219,7 +218,7 @@ const styles = StyleSheet.create({
   deleteButton: {
     borderRadius: vh * 1.3,
   },
-  wrapper: { padding: vh * 2 },
+  wrapper: {padding: vh * 2},
   cancelButtonText: {
     fontSize: vw * 4.4,
     color: COLORS.cancelButton,

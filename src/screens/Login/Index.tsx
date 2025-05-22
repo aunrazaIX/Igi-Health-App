@@ -4,8 +4,8 @@ import LoginView from '../../views/LoginView';
 
 const Login = () => {
   const { functions, states } = useLoginViewModel();
-  const { selectedTab, tabs, loading, signupApiData, loadingSignup, loginApiData } = states;
-  const { onPressTab, onPressforgotPassword, handleLogin, handleSignup, signupSetterForApiData, loginSetterForApiData } =
+  const { selectedTab, tabs, loading, signupApiData, loadingSignup, loginApiData, rememberMe } = states;
+  const { onPressTab, onPressforgotPassword, handleLogin, handleSignup, signupSetterForApiData, loginSetterForApiData, handleCheck } =
     functions;
 
 
@@ -23,6 +23,8 @@ const Login = () => {
       signupSetterForApiData={signupSetterForApiData}
       loadingSignup={loadingSignup}
       loginSetterForApiData={loginSetterForApiData}
+      handleCheck={handleCheck}
+      rememberMe={rememberMe}
     />
   );
 };

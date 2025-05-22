@@ -5,6 +5,7 @@ import styles from '../styles';
 import AileronRegualr from '../../../components/AileronRegular';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { COLORS } from '../../../assets/theme/colors';
+import { validatePassword } from '../../../validations/authValidations';
 
 
 
@@ -18,10 +19,13 @@ const CreateNewPassword = ({ setterForUpdatePasswordApiData, updatePasswordApiDa
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
-        onChangeText={(text) => setterForUpdatePasswordApiData("newPassword", text)}
         value={updatePasswordApiData?.newPassword}
-
-
+        onChangeText={(text) => {
+          setterForUpdatePasswordApiData('newPassword', text);
+          const errorMsg = validatePassword(text);
+          setterForUpdatePasswordApiData('error_newPassword', errorMsg);
+        }}
+        errorMessage={updatePasswordApiData?.error_newPassword}
       />
       <InputField
         secureTextEntry
@@ -30,8 +34,13 @@ const CreateNewPassword = ({ setterForUpdatePasswordApiData, updatePasswordApiDa
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
-        onChangeText={(text) => setterForUpdatePasswordApiData("confirmPassword", text)}
         value={updatePasswordApiData?.confirmPassword}
+        onChangeText={(text) => {
+          setterForUpdatePasswordApiData('confirmPassword', text);
+          const errorMsg = validatePassword(text);
+          setterForUpdatePasswordApiData('error_confirmPassword', errorMsg);
+        }}
+        errorMessage={updatePasswordApiData?.error_confirmPassword}
       />
       <View style={styles.simpleRow}>
         <View style={styles.bullet} />
