@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, CurvedView, Stepper, TopView } from '../../components';
+import { Button, ConfirmationModal, CurvedView, Stepper, TopView } from '../../components';
 import { Claim, PersonalDetails, UploadDoc } from './components';
 import {
   ClaimDetailSection,
@@ -11,6 +11,9 @@ import {
 import { icons } from '../../assets';
 import { COLORS } from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
+import { useSelector } from 'react-redux';
+
+
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -28,6 +31,14 @@ type LodgeClaimViewProps = {
   onPressStep: (index: number) => void;
   selectedPatient: any; // You can replace 'any' with a specific patient type
   onSelectPatient: (option: any) => void; // Replace `any` with correct type if known
+  handleCancelFile: (item: any, index: number) => void
+  confirmationModal: boolean,
+  setConfirmationModal: () => void,
+  resetStates: () => void,
+  claimData: any,
+  setterForclaimData: any
+
+
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -46,10 +57,16 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   onSelectPatient,
   onSelectDocument,
   selectedDocuments,
-  onPressUpload,
   selectedPatient,
   dependantLoading,
   uploadLoading,
+  handleCancelFile,
+  confirmationModal,
+  setConfirmationModal,
+  resetStates,
+  claimData,
+  setterForclaimData,
+  claimLoading
 }) => {
   const renderStep = {
     personalDetails: (
@@ -72,12 +89,26 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
       <UploadDoc
         selectedDocuments={selectedDocuments}
         onSelectDocument={onSelectDocument}
-        onPressUpload={onPressUpload}
+        handleCancelFile={handleCancelFile}
+        claimData={claimData}
+        setterForclaimData={setterForclaimData}
+
+
+
+
+
+
       />
     ),
   };
 
+
+
+
+
   return (
+
+
     <>
       <TopView
         TopViewFirstIcon={currentStep === 2 ? icons.addSquare : null}
@@ -85,6 +116,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         FirstOpenModal={navigateTreatment}
         onPressBack={goBack}
         title="Lodge A Claim"
+        resetStates={resetStates}
       />
       <CurvedView>
         <Stepper
@@ -104,9 +136,10 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
                 ? claimsDetails?.length > 0
                   ? false
                   : true
-                : currentStep === 3 && selectedDocuments?.length > 0
+                : currentStep === 3 && selectedDocuments?.length > 0 && claimData.claimComments?.length > 0
                   ? false
                   : true
+
           }
 
           onPress={onPressNext}
@@ -115,7 +148,25 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           name={currentStep === 3 ? 'Submit' : 'Next'}
         />
 
-        <ModalLoading loading={dependantLoading || uploadLoading} />
+
+
+
+        <ModalLoading loading={dependantLoading || uploadLoading || claimLoading} />
+
+
+
+        <ConfirmationModal
+          ConfirmationModalVisible={confirmationModal}
+          setConfirmationModalVisible={setConfirmationModal}
+          frameImage={icons.ModalSuccessfull}
+          confirmationMessage={"Your Claim Successfully Added"}
+          closeButton={true}
+          Successfull={true}
+          CloseButtonText={'Continue To Login'}
+          onClose={resetStates}
+        />
+
+
       </CurvedView>
     </>
   );

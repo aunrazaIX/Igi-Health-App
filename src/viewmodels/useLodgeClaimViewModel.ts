@@ -10,13 +10,24 @@ import {
 import { pick, types } from '@react-native-documents/picker';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  setTreatments,
+
   setSelectedPatient,
   setStep,
   setSelectedDocuments,
   onDeleteTreatment,
+  onDeleteDocuments,
+  _setTreatmentData,
+  _updateTreatmentData,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
+import { setErrorModal } from '../redux/generalSlice';
+import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+
+
+
+
+
+
 
 interface Treatment {
   receiptNumber?: string;
@@ -57,14 +68,37 @@ interface Props {
 }
 
 const useLodgeClaimViewModel = ({ navigation }: Props) => {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
+
+
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
+
 
 
   const { selectedDocuments, currentStep, treatments, selectedPatient } =
     useSelector(state => state.lodge);
 
+
+  console.log(selectedDocuments, "selectedDocuments")
+
+
+  const resetStates = () => {
+    dispatch(_setTreatmentData([]));
+
+    dispatch(setStep(1));
+    navigation.navigate("Home")
+    dispatch(setSelectedDocuments([]));
+    dispatch(setSelectedPatient(null));
+  };
+
+  const {
+    setterForApiData: setterForclaimData,
+    apiData: claimData,
+  } = useErrorHandlingHook({
+    claimComments: ""
+  });
 
   const {
     loading: uploadLoading,
@@ -100,11 +134,12 @@ const useLodgeClaimViewModel = ({ navigation }: Props) => {
           UUID: '1231231232131',
           ClientCode: 'DEMO',
         })),
-        ClaimsComments: 'asdasdasda',
+        ClaimsComments: claimData.claimComments,
         userId: '776',
         claimId: res?.Data?.toString(),
       };
-      console.log('apiData', apiData);
+
+
       claimTrigger(apiData);
     },
   });
@@ -117,17 +152,19 @@ const useLodgeClaimViewModel = ({ navigation }: Props) => {
     method: 'post',
     apiEndpoint: endpoints.claimLogde.lodge,
     onSuccess: res => {
-      console.log('ASDAS@#QEQW', res);
+
+      setConfirmationModal(true)
+
     },
+    onError: (e) => {
+      dispatch(setErrorModal({ show: true, message: e?.Title ?? 'Something went wrong' }))
+    }
   });
 
-  console.log(addClaimError);
-  const resetStates = () => {
-    dispatch(setTreatments([]));
-    dispatch(setStep(1));
-    dispatch(setSelectedDocuments([]));
-    dispatch(setSelectedPatient(null));
-  };
+
+
+
+
 
   const { data: dependants, loading: dependantLoading } = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
@@ -142,6 +179,11 @@ const useLodgeClaimViewModel = ({ navigation }: Props) => {
       value: 'CLNTNUM',
     },
   });
+
+
+
+
+
 
   const steps: Step[] = [
     { label: 'Personal Details', key: 'personalDetails' },
@@ -188,11 +230,14 @@ const useLodgeClaimViewModel = ({ navigation }: Props) => {
   }));
 
   const goBack = () => {
+
     resetStates();
+
     navigation.reset({
       index: 0,
       routes: [{ name: 'Home' }],
     });
+
   };
   const onPressStep = (step: number) => {
     if (step === 1) {
@@ -202,6 +247,7 @@ const useLodgeClaimViewModel = ({ navigation }: Props) => {
     }
     if (step === 2) {
       if (!treatments?.length > 0) {
+
         return;
       }
     }
@@ -250,6 +296,18 @@ const useLodgeClaimViewModel = ({ navigation }: Props) => {
       }
 
 
+      if (currentStep === 2) {
+
+
+      }
+
+      if (currentStep === 3) {
+
+        trigger()
+
+      }
+
+
     } catch (e) {
       console.log('Error', e);
     }
@@ -259,26 +317,43 @@ const useLodgeClaimViewModel = ({ navigation }: Props) => {
     try {
       const res = await pick({
         allowMultiSelection: true,
-        type: [types.docx, types.pdf],
+        type: [types.docx, types.pdf, types.images],
       });
+
       let documents = [];
+
       res?.forEach((item: any) => {
-        console.log(item);
-        documents.push({
-          uri: item?.uri,
-          type: item?.type,
-          name: item?.name,
-        });
+
+
+        const isDuplicate = selectedDocuments.some(
+          doc => doc.name === item.name
+        );
+
+        if (!isDuplicate) {
+          documents.push({
+            uri: item?.uri,
+            type: item?.type,
+            name: item?.name,
+          });
+        }
+        else {
+
+          console.log("same file cant be selected")
+
+        }
       });
+
       dispatch(setSelectedDocuments(documents));
     } catch (e) {
       console.log('Error', e);
     }
   };
 
-  const onPressUpload = () => {
-    trigger();
-  };
+  const handleCancelFile = (item, index) => {
+
+    dispatch(onDeleteDocuments(index))
+  }
+
 
   return {
     states: {
@@ -291,6 +366,10 @@ const useLodgeClaimViewModel = ({ navigation }: Props) => {
       selectedPatient,
       selectedDocuments,
       uploadLoading,
+      confirmationModal,
+      claimData,
+      claimLoading
+
     },
     functions: {
       goBack,
@@ -301,7 +380,10 @@ const useLodgeClaimViewModel = ({ navigation }: Props) => {
       onPressStep,
       onSelectPatient,
       onSelectDocument,
-      onPressUpload,
+      handleCancelFile,
+      setConfirmationModal,
+      resetStates,
+      setterForclaimData
     },
   };
 };

@@ -41,11 +41,13 @@ const Box: React.FC<BoxProps> = ({ data, onPressDelete, onPressEdit }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.details}>
+
         {data?.info?.map((_item: InfoItem, index: number) => (
           <View style={styles.field} key={index}>
             <AileronSemiBold name={_item?.label} style={styles.detailLabel} />
             <AileronSemiBold name={_item?.value} style={styles.detailvalue} />
           </View>
+
         ))}
       </View>
     </View>

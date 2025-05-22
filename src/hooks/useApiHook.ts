@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useFocusEffect} from '@react-navigation/native';
-import {useCallback, useState} from 'react';
-import {get, post} from '../api';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback, useState } from 'react';
+import { get, post } from '../api';
 
 type ApiHookParams = {
   apiEndpoint: string;
@@ -50,11 +50,11 @@ const useApiHook = <T>({
       );
       dataToSave = res;
       if (transform) {
-        const {keyToLoop, ...mappings} = transform;
+        const { keyToLoop, ...mappings } = transform;
         const list = res[keyToLoop];
         if (Array.isArray(list)) {
           const transformed = list.map(item => {
-            const transformedItem: Record<string, any> = {...item};
+            const transformedItem: Record<string, any> = { ...item };
             Object.entries(mappings).forEach(([newKey, sourceKey]) => {
               transformedItem[newKey] = item[sourceKey];
             });

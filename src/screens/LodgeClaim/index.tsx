@@ -30,6 +30,9 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     selectedDocuments,
     dependantLoading,
     uploadLoading,
+    confirmationModal,
+    claimData,
+    claimLoading
   } = states;
 
   const {
@@ -41,7 +44,11 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     onPressStep,
     onSelectPatient,
     onSelectDocument,
-    onPressUpload,
+    handleCancelFile,
+    setConfirmationModal,
+    resetStates,
+    setterForclaimData
+
   } = functions;
 
   return (
@@ -62,9 +69,18 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
       navigateTreatment={navigateTreatment}
       onSelectPatient={onSelectPatient}
       onSelectDocument={onSelectDocument}
-      onPressUpload={onPressUpload}
       dependantLoading={dependantLoading}
       uploadLoading={uploadLoading}
+      handleCancelFile={handleCancelFile}
+      confirmationModal={confirmationModal}
+      setConfirmationModal={setConfirmationModal}
+      resetStates={resetStates}
+      claimLoading={claimLoading}
+      claimData={claimData}
+      setterForclaimData={setterForclaimData}
+
+
+
     />
   );
 };

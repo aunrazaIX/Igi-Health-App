@@ -29,7 +29,8 @@ type ConfimationModalProps = {
   containerStyle?: StyleObject | StyleObject[];
   handleDelete?: () => void,
   Successfull?: boolean,
-  CloseButtonText: string
+  CloseButtonText: string,
+  onClose: () => void
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -44,7 +45,8 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   containerStyle,
   handleDelete,
   Successfull,
-  CloseButtonText
+  CloseButtonText,
+  onClose
 }) => {
   return (
     <Modal
@@ -55,7 +57,10 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
       <View style={styles.centeredView}>
         <View style={[styles.modalView, containerStyle]}>
           <TouchableOpacity
-            onPress={() => setConfirmationModalVisible(false)}
+            onPress={() => {
+
+
+            }}
             style={styles.modalClose}>
             <Image source={icons.CancelIcon} />
           </TouchableOpacity>
@@ -96,7 +101,9 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
             <View style={styles.confirmationButtonContainer}>
               <TouchableOpacity
                 style={styles.cancelButton}
+
                 onPress={() => setConfirmationModalVisible(false)}>
+
                 <AileronBold name="Cancel" style={styles.cancelButtonText} />
               </TouchableOpacity>
 
@@ -122,7 +129,12 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <Button
                 name="Close"
                 inputStyle={styles.closeButton}
-                onPress={() => setConfirmationModalVisible(false)}
+                onPress={() => {
+                  if (onClose) {
+                    onClose();
+                  }
+                  setConfirmationModalVisible(false)
+                }}
               />
             </View>
           )}

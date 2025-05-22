@@ -28,6 +28,7 @@ const TopView = ({
   containerStyle,
   containerStyleIcon,
   goBack,
+  resetStates
 }: {
   title: string;
   onPressBack?: () => void;
@@ -40,6 +41,7 @@ const TopView = ({
   goBack?: () => void;
   containerStyleIcon?: StyleObject | StyleObject[];
   tintColrorForTopViewFirstIcon?: string;
+  resetStates: () => void
 }) => {
   const navigation = useNavigation();
 
@@ -51,8 +53,10 @@ const TopView = ({
             onPress={() => {
               if (onPressBack) {
                 onPressBack();
+
               } else {
                 navigation.goBack();
+
               }
             }}
             style={styles.backIconContainer}>

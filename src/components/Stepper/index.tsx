@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 import {
   View,
   StyleSheet,
@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {vh, vw} from '../../assets/theme/dimension';
+import { vh, vw } from '../../assets/theme/dimension';
 import AileronSemiBold from '../AileronSemiBold';
-import {COLORS} from '../../assets/theme/colors';
+import { COLORS } from '../../assets/theme/colors';
 
 type Step = {
   key: string;
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: vh * 1.5,
   },
-  wrapper: {padding: vh * 2},
+  wrapper: { padding: vh * 2 },
   priorNext: {
     textAlign: 'center',
     color: COLORS.white,

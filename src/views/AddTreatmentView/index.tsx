@@ -69,20 +69,33 @@ const AddTreatmentView = ({
 
             <InputField
               value={apiData?.receiptNumber}
-              onChangeText={text => setterForApiData('receiptNumber', text)}
+              onChangeText={text => {
+                const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
+
+                setterForApiData('receiptNumber', text);
+
+              }}
+              maxLength={25}
               label="Receipt Number"
               errorMessage={apiData?.error_receiptNumber}
               placeholder="Receipt Number"
             />
+
             <InputField
+              maxLength={7}
               value={apiData?.amount}
               errorMessage={apiData?.error_amount}
-              onChangeText={text => setterForApiData('amount', text)}
+              onChangeText={text => {
+                const cleanedText = text.replace(/[^0-9]/g, '');
+                setterForApiData('amount', cleanedText);
+              }}
+
               label="Amount"
               placeholder="0"
             />
             <InputField
               value={apiData?.description}
+              maxLength={200}
               errorMessage={apiData?.error_description}
               onChangeText={text => setterForApiData('description', text)}
               multiline

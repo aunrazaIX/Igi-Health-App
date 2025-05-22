@@ -17,13 +17,16 @@ const Claim: React.FC<ClaimProps> = ({ claimsDetails, onPressDelete, onPressEdit
   return (
     <View style={styles.container}>
       <View style={styles.list}>
+
         {claimsDetails?.length > 0 && claimsDetails?.map((data, index) => (
+
           < Box
             onPressDelete={() => onPressDelete(index)}
             onPressEdit={() => onPressEdit(data, index)}
             data={data}
             key={index}
           />
+
         ))}
       </View>
     </View>

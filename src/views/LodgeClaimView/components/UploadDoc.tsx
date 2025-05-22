@@ -5,23 +5,44 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {AileronSemiBold} from '../../../components';
-import {vh} from '../../../assets/theme/dimension';
-import {COLORS} from '../../../assets/theme/colors';
-import {icons, images} from '../../../assets';
+import React, { useState } from 'react';
+import { AileronSemiBold, ConfirmationModal } from '../../../components';
+import { vh, vw } from '../../../assets/theme/dimension';
+import { COLORS } from '../../../assets/theme/colors';
+import { icons, images } from '../../../assets';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRemarks } from '../../../redux/lodgeSlice';
+
 
 type UploadDocProps = {
   onSelectDocument: () => void;
+  handleCancelFile: () => void,
+  claimData: any,
+  setterForclaimData: any
+
+
+
 };
 
 const UploadDoc: React.FC<UploadDocProps> = ({
   onSelectDocument,
   selectedDocuments,
+  handleCancelFile,
   isUplaoded = false,
-  onPressUpload,
+  claimData,
+  setterForclaimData
+
+
+
+
+
 }) => {
-  const [remarks, setRemarks] = useState('');
+
+
+
+
+
+
 
   return (
     <View style={styles.uploadFileContainer}>
@@ -46,22 +67,36 @@ const UploadDoc: React.FC<UploadDocProps> = ({
             style={styles.maxFile}
           />
         </View>
+
         {selectedDocuments?.length > 0 &&
           selectedDocuments?.map((item, index) => {
             return (
+
               <View style={styles.documentBox} key={index}>
                 <View style={styles.documentBoxInside}>
                   <View style={styles.documentNameRow}>
-                    <Image
-                      source={icons.document}
-                      style={styles.documentIcon}
-                    />
-                    <View>
-                      <AileronSemiBold
-                        name={item?.name || ''}
-                        style={styles.documentText}
+
+                    <View style={styles.docDetails}>
+                      <Image
+                        source={icons.document}
+                        style={styles.documentIcon}
                       />
+                      <View>
+                        <AileronSemiBold
+                          name={item?.name || ''}
+                          style={styles.documentText}
+                        />
+                      </View>
+
                     </View>
+
+                    <TouchableOpacity onPress={() => handleCancelFile(item, index)}>
+
+                      <Image style={styles.errorIcon} source={icons.errorPopup} />
+
+                    </TouchableOpacity>
+
+
                   </View>
                   <View>
                     {isUplaoded && (
@@ -80,15 +115,18 @@ const UploadDoc: React.FC<UploadDocProps> = ({
           <View style={styles.remarksBox}>
             <TextInput
               multiline={true}
-              value={remarks}
-              onChangeText={setRemarks}
+              value={claimData.claimComments}
+              onChangeText={(text) => setterForclaimData('claimComments', text)}
               style={styles.remarksInput}
               numberOfLines={4}
-              placeholder="Attached is the medical invoice with a breakdown of treatment expenses, including consultation and medications. Please let me know if additional documentation is needed."
+              placeholder="add remarks .."
             />
           </View>
         </View>
       </View>
+
+
+
     </View>
   );
 };
@@ -130,13 +168,21 @@ const styles = StyleSheet.create({
     marginTop: vh * 2,
     borderRadius: vh * 0.7,
     padding: vh * 2,
+
+
+
+
   },
   documentBoxInside: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+
   },
   documentNameRow: {
     flexDirection: 'row',
+    justifyContent: "space-between",
+
+    width: "100%"
   },
   documentText: {
     textAlign: 'left',
@@ -217,4 +263,12 @@ const styles = StyleSheet.create({
   uploadButton: {
     marginVertical: vh * 2,
   },
+  errorIcon: {
+    height: vw * 8,
+    width: vw * 8
+
+  },
+  docDetails: {
+    flexDirection: "row"
+  }
 });
