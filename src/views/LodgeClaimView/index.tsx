@@ -18,6 +18,7 @@ import { icons } from '../../assets';
 import { COLORS } from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 import { useSelector } from 'react-redux';
+import { View } from 'react-native';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -110,12 +111,14 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         resetStates={resetStates}
       />
       <CurvedView>
+
         <Stepper
           currentStep={currentStep}
           steps={steps}
           onPressStep={onPressStep}
           componentList={renderStep}
         />
+
 
         <Button
           disabled={

@@ -6,7 +6,7 @@ import { COLORS } from '../../../assets/theme/colors';
 import { ClaimDetailSection } from '../typeInterface';
 import LinearGradient from 'react-native-linear-gradient';
 import { AileronBold, AileronSemiBold } from '../../../components';
-import { images } from '../../../assets';
+import { icons, images } from '../../../assets';
 
 
 
@@ -36,33 +36,10 @@ const Claim: React.FC<ClaimProps> = ({ claimsDetails, onPressDelete, onPressEdit
 
         )) :
 
-          <View>
-            <LinearGradient
-              start={{ x: 0, y: 0 }}
-              end={{ x: 0.8, y: 0 }}
-              colors={COLORS.benefitsCardGradient}
-              style={styles.BenefitsGradients}>
-              <View style={styles.Maximum}>
-                <View style={styles.MaximumLeftBox}>
-                  <Image source={images.Logo} style={styles.benefitsLogo} />
-                  <AileronBold
-                    name={'NO CLAIM  '}
-                    style={styles.MaximumTitle}
-                  />
-                  <AileronBold name={'TO Display!'} style={styles.BenefitsTitle} />
-                </View>
-                <View style={styles.MaximumRightBox}>
-                  <Image
-                    style={styles.benefitsImage}
-                    source={images.maximumBenefits}
-                  />
-                </View>
-              </View>
-            </LinearGradient>
-            <View style={styles.coverage}>
-              <AileronBold name={'You can  '} style={styles.coverageTitle} />
-              <AileronBold name={'Add Claim from Top'} style={styles.benefitTitle} />
-            </View>
+
+          <View style={styles.noDataView}>
+            <Image style={styles.noDataIcon} source={icons.noData} />
+            <AileronBold style={styles.noDataText} name={"no Claim found"} />
           </View>
 
 
@@ -71,7 +48,7 @@ const Claim: React.FC<ClaimProps> = ({ claimsDetails, onPressDelete, onPressEdit
 
         }
       </View>
-    </View>
+    </View >
   );
 };
 
@@ -84,9 +61,14 @@ const styles = StyleSheet.create({
     marginTop: vh * 1.25,
     width: '100%',
     rowGap: vh * 1.25,
+
+
   },
   list: {
     rowGap: vh * 1.25,
+
+
+
   },
   priorGradient: {
     borderRadius: vh * 1.5,
@@ -190,4 +172,22 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
+  noDataIcon: {
+    width: vw * 30,
+    height: vw * 30
+  },
+  noDataText: {
+
+    fontSize: vw * 6
+
+  },
+  noDataView: {
+
+    justifyContent: "center",
+    alignItems: "center",
+    // flex: 1,
+    // height: "100%"
+
+
+  }
 });

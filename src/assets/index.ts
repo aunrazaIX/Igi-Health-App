@@ -115,6 +115,7 @@ export const icons = {
   ModalSuccessfull: require('./icons/ModalSuccessfull.png'),
   errorPopup: require('./icons/errorPopup.png'),
   heart: require('./icons/heart.png'),
+  noData: require('./icons/noData.png'),
 };
 
 export const drawerIcons = {

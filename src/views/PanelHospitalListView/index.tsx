@@ -41,7 +41,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             : 'Discounted Centers'
         }
         TopViewFirstIcon={icons.searchWhite}
-        onPressBack={goBack}
+
       />
 
       <CurvedView>
@@ -170,7 +170,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                 renderItem={({ item }) => (
 
                   <>
-                    
+
 
                     <DetailsContainer
                       detailsText={styles.detailsText}

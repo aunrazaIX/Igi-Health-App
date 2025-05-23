@@ -46,7 +46,7 @@ type Item = {
 const PersonalView: React.FC<Props> = ({ data, gender, relation, goBack, handleSubmit, manageUpdate, modalVisible, setModalVisible, deleteDepenedent, confimationModalVisible, setConfimationModalVisible, toggleExpand, expandedIndex }) => {
     return (
         <Container>
-            <TopView onPressBack={goBack} title={'Personal'} TopViewFirstIcon={images.AddNew} FirstOpenModal={manageUpdate} />
+            <TopView title={'Personal'} TopViewFirstIcon={images.AddNew} FirstOpenModal={manageUpdate} />
             <CurvedView>
                 <ScrollView>
                     <View style={{ paddingBottom: vh * 21 }}>

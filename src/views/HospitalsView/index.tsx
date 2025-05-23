@@ -44,10 +44,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
       <TopView
         title="Hospitals"
         TopViewFirstIcon={icons.searchWhite}
-        // HeaderIcon={icons.searchWhite}
-        // HeaderSecondIcon={null}
-        // headerStyle={styles.headerStyle}
-        onPressBack={goBack}
+
       />
 
       <CurvedView>

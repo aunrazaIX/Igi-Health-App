@@ -34,7 +34,7 @@ const FAQsView = ({
   };
   return (
     <Container>
-      <TopView onPressBack={goBack} title={'Frequently Asked Questions'} />
+      <TopView title={'Frequently Asked Questions'} />
       <CurvedView>
         <AileronRegular name={'Got Any question?'} style={styles.headertitle} />
         <AileronSemiBold
@@ -45,7 +45,7 @@ const FAQsView = ({
           data={faqsData}
           keyExtractor={item => item?.id?.toString()}
           renderItem={renderItem}
-          contentContainerStyle={{paddingBottom: vh * 6}}
+          contentContainerStyle={{ paddingBottom: vh * 6 }}
         />
       </CurvedView>
     </Container>
