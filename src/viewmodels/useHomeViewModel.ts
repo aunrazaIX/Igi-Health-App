@@ -13,6 +13,7 @@ export type CardItemData = {
   to?: string;
   mainParent?: string;
   stChild?: string;
+  type?: string
 };
 
 export type HomeHeaderData = {
@@ -105,6 +106,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       backgroundColor: COLORS.cardBackgroundBlue,
       mainParent: 'Tabs',
       stChild: 'LodgeClaim',
+      type: "lodgeClaim"
     },
     {
       logo: cardIcons.taskDone,
@@ -113,6 +115,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       backgroundColor: COLORS.cardBackgroundBlue,
       mainParent: 'Tabs',
       stChild: 'PriorApproval',
+      type: "PriorApproval"
     },
     {
       logo: cardIcons.hospital,
@@ -152,10 +155,13 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       navigate.navigate(cardData.to);
       return;
     }
+
+
     if (cardData?.mainParent) {
       navigate.navigate(cardData?.mainParent, {
         screen: cardData?.stChild,
       });
+
     }
 
   };

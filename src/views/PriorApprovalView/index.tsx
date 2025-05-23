@@ -1,8 +1,8 @@
-import {ScrollView} from 'react-native';
+import { ScrollView } from 'react-native';
 import React from 'react';
-import {CurvedView, Stepper, TopView} from '../../components';
-import {Claim, UploadDoc} from './components';
-import {PersonalDetails} from '../LodgeClaimView/components';
+import { CurvedView, Stepper, TopView } from '../../components';
+import { Claim, UploadDoc } from './components';
+import { PersonalDetails } from '../LodgeClaimView/components';
 
 type LodgeClaimViewProps = {
   steps: [];

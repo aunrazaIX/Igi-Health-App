@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     tintColor: COLORS.white,
     resizeMode: 'contain',
   },
+
 });
 
 export default styles;

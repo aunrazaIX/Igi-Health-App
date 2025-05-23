@@ -36,11 +36,13 @@ export const updateTreatments = createAsyncThunk(
       thunkApi.dispatch(setErrorModal({ message: 'Please enter all details' }));
       return;
     }
+
     if (data?.receiptNumber !== treatments[index]?.receiptNumber) {
       const isDuplicate = treatments?.some((item) => item?.receiptNumber == data?.receiptNumber)
       if (isDuplicate) {
         thunkApi.dispatch(setErrorModal({ message: 'Record Already Exist' }));
       }
+
       else {
         thunkApi.dispatch(_updateTreatmentData({ index, data, navigateOnSuccess }));
 

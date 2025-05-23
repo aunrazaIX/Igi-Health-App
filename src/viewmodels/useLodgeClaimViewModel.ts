@@ -67,7 +67,10 @@ interface Props {
   route: RouteProp<any>;
 }
 
-const useLodgeClaimViewModel = ({ navigation }: Props) => {
+const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
+
+
+  console.log(route, "lodgeclaism viewww wp armas")
 
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);

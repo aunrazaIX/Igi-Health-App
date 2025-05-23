@@ -1,12 +1,12 @@
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
 import LodgeClaimView from '../../views/LodgeClaimView';
 import useLodgeClaimViewModel from '../../viewmodels/useLodgeClaimViewModel';
 
 const PriorApproval = () => {
-  const {states, functions} = useLodgeClaimViewModel();
-  const {steps, personalData, claimsDetails} = states;
-  const {goBack} = functions;
+  const { states, functions } = useLodgeClaimViewModel();
+  const { steps, personalData, claimsDetails } = states;
+  const { goBack } = functions;
   return (
     <LodgeClaimView
       goBack={goBack}

@@ -5,12 +5,12 @@ import {
   CurvedView,
   TopView,
 } from '../../components';
-import {images} from '../../assets';
-import {FlatList, Image, View} from 'react-native';
+import { images } from '../../assets';
+import { FlatList, Image, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
-import {COLORS} from '../../assets/theme/colors';
-import {ImageSourcePropType} from 'react-native';
+import { COLORS } from '../../assets/theme/colors';
+import { ImageSourcePropType } from 'react-native';
 
 type Item = {
   title: string;
@@ -23,13 +23,13 @@ type Props = {
   goBack: () => void;
 };
 
-const BenefitsView: React.FC<Props> = ({data, goBack}) => {
-  const RenderBenefits = ({item}: {item: Item}) => (
+const BenefitsView: React.FC<Props> = ({ data, goBack }) => {
+  const RenderBenefits = ({ item }: { item: Item }) => (
     <View style={styles.card}>
       <LinearGradient
         colors={['#0B4A98', '#0f8dd7']}
-        start={{x: 1, y: 0}}
-        end={{x: 0, y: 1}}
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 1 }}
         style={styles.CardBox}>
         <View style={styles.wrapper}>
           <Image source={item.image} style={styles.coverageCardImage} />
@@ -44,8 +44,8 @@ const BenefitsView: React.FC<Props> = ({data, goBack}) => {
   const headerComponent = () => (
     <View>
       <LinearGradient
-        start={{x: 0, y: 0}}
-        end={{x: 0.8, y: 0}}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
         colors={COLORS.benefitsCardGradient}
         style={styles.BenefitsGradients}>
         <View style={styles.Maximum}>

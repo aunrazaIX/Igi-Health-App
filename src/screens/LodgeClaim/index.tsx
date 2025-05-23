@@ -17,6 +17,7 @@ type LodgeClaimProps = {
 };
 
 const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
+  console.log(route, 'test')
   const { states, functions } = useLodgeClaimViewModel({ navigation, route });
 
   const {
