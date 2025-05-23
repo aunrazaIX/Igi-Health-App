@@ -6,7 +6,7 @@ import {
   Stepper,
   TopView,
 } from '../../components';
-import {Claim, PersonalDetails, UploadDoc} from './components';
+import { Claim, PersonalDetails, UploadDoc } from './components';
 import {
   ClaimDetailSection,
   PersonelDataSection,
@@ -14,10 +14,10 @@ import {
   StepItem,
   DependantList,
 } from './typeInterface';
-import {icons} from '../../assets';
-import {COLORS} from '../../assets/theme/colors';
+import { icons } from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -124,14 +124,14 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
                 ? true
                 : false
               : currentStep === 2
-              ? claimsDetails?.length > 0
-                ? false
-                : true
-              : currentStep === 3 &&
-                selectedDocuments?.length > 0 &&
-                claimData.claimComments?.length > 0
-              ? false
-              : true
+                ? claimsDetails?.length > 0
+                  ? false
+                  : true
+                : currentStep === 3 &&
+                  selectedDocuments?.length > 0 &&
+                  claimData.claimComments?.length > 0
+                  ? false
+                  : true
           }
           onPress={onPressNext}
           name={currentStep === 3 ? 'Submit' : 'Next'}
