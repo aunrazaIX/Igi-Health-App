@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import {
   View,
   StyleSheet,
@@ -153,7 +154,7 @@ const DrawerStack = () => {
                   key={index}
                   style={styles.row}
                   onPress={() => {
-                    if (route.to === 'logout') {
+                    if (route.id === 14) {
                       dispatch(logout());
                       return;
                     }
@@ -227,7 +228,6 @@ const DrawerStack = () => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
       <Drawer.Screen name="FAQs" component={FAQs} />
-
       <Drawer.Screen name="SettingsStack" component={SettingStack} />
     </Drawer.Navigator>
   );

@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { COLORS } from '../../assets/theme/colors';
+import {COLORS} from '../../assets/theme/colors';
 import AileronSemiBold from '../AileronSemiBold';
-import { vh, vw } from '../../assets/theme/dimension';
-import { icons } from '../../assets';
-import { useNavigation } from '@react-navigation/native';
+import {vh, vw} from '../../assets/theme/dimension';
+import {icons} from '../../assets';
+import {CommonActions, useNavigation, useRoute} from '@react-navigation/native';
 
 type StyleObject = Record<string, string | number | boolean>;
 
@@ -28,7 +28,7 @@ const TopView = ({
   containerStyle,
   containerStyleIcon,
   goBack,
-  resetStates
+  resetStates,
 }: {
   title: string;
   onPressBack?: () => void;
@@ -41,8 +41,9 @@ const TopView = ({
   goBack?: () => void;
   containerStyleIcon?: StyleObject | StyleObject[];
   tintColrorForTopViewFirstIcon?: string;
-  resetStates: () => void
+  resetStates: () => void;
 }) => {
+  const route = useRoute();
   const navigation = useNavigation();
 
   return (
@@ -53,10 +54,20 @@ const TopView = ({
             onPress={() => {
               if (onPressBack) {
                 onPressBack();
-
+              }
+              const stackRoutes = navigation?.getState()?.routes;
+              const currentRouteIndex = stackRoutes?.findIndex(
+                _route => _route.name === route.name,
+              );
+              if (currentRouteIndex === 0) {
+                navigation?.dispatch(
+                  CommonActions.reset({
+                    index: 0,
+                    routes: [{name: 'HomeStack'}],
+                  }),
+                );
               } else {
-                navigation.goBack();
-
+                navigation?.goBack();
               }
             }}
             style={styles.backIconContainer}>

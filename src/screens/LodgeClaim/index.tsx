@@ -1,8 +1,8 @@
 import React from 'react';
 import LodgeClaimView from '../../views/LodgeClaimView';
 import useLodgeClaimViewModel from '../../viewmodels/useLodgeClaimViewModel';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
 
 type RootStackParamList = {
   LodgeClaim: {
@@ -16,9 +16,8 @@ type LodgeClaimProps = {
   route: RouteProp<RootStackParamList, 'LodgeClaim'>;
 };
 
-const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
-  console.log(route, 'test')
-  const { states, functions } = useLodgeClaimViewModel({ navigation, route });
+const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
+  const {states, functions} = useLodgeClaimViewModel({navigation, route});
 
   const {
     steps,
@@ -33,7 +32,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     uploadLoading,
     confirmationModal,
     claimData,
-    claimLoading
+    claimLoading,
+    type,
   } = states;
 
   const {
@@ -48,8 +48,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     handleCancelFile,
     setConfirmationModal,
     resetStates,
-    setterForclaimData
-
+    setterForclaimData,
   } = functions;
 
   return (
@@ -78,10 +77,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
       resetStates={resetStates}
       claimLoading={claimLoading}
       claimData={claimData}
+      type={type}
       setterForclaimData={setterForclaimData}
-
-
-
     />
   );
 };
