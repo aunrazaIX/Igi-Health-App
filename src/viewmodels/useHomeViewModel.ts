@@ -1,9 +1,9 @@
-import {useRef, useState} from 'react';
-import {cardIcons, icons} from '../assets';
-import {COLORS} from '../assets/theme/colors';
-import {Animated} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {ImageSourcePropType} from 'react-native';
+import { useRef, useState } from 'react';
+import { cardIcons, icons } from '../assets';
+import { COLORS } from '../assets/theme/colors';
+import { Animated } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ImageSourcePropType } from 'react-native';
 
 export type CardItemData = {
   logo?: ImageSourcePropType;
@@ -45,7 +45,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const animateValue = useRef(new Animated.Value(0)).current;
   const currentValue = useRef(0);
 
-  animateValue.addListener(({value}) => {
+  animateValue.addListener(({ value }) => {
     currentValue.current = value;
   });
 
@@ -76,11 +76,11 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   });
 
   const frontAnimatedStyle = {
-    transform: [{perspective: 1000}, {rotateY: rotateFront}],
+    transform: [{ perspective: 1000 }, { rotateY: rotateFront }],
   };
 
   const backAnimatedStyle = {
-    transform: [{perspective: 1000}, {rotateY: rotateBack}],
+    transform: [{ perspective: 1000 }, { rotateY: rotateBack }],
   };
 
   const cardData: CardItemData[] = [
@@ -148,12 +148,14 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const onPressMenu = (cardData: CardItemData) => {
     if (cardData?.to) {
       navigate.navigate(cardData.to);
+
       return;
     }
 
     if (cardData?.mainParent) {
       navigate.navigate(cardData?.mainParent, {
         screen: cardData?.stChild,
+
       });
     }
   };
