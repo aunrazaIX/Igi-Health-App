@@ -59,6 +59,7 @@ const TopView = ({
               const currentRouteIndex = stackRoutes?.findIndex(
                 _route => _route.name === route.name,
               );
+
               if (currentRouteIndex === 0) {
                 navigation?.dispatch(
                   CommonActions.reset({
@@ -66,6 +67,7 @@ const TopView = ({
                     routes: [{name: 'HomeStack'}],
                   }),
                 );
+                return;
               } else {
                 navigation?.goBack();
               }

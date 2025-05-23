@@ -1,5 +1,5 @@
 import React from 'react';
-import { CurvedView, TopView } from '../../components';
+import {CurvedView, TopView} from '../../components';
 import {
   ClaimAssistance,
   ContactInfo,
@@ -18,17 +18,17 @@ const HelplineView = ({
   claimAssistance,
   hotlines,
   goBack,
-  onPress
+  onPress,
 }: {
   contactInfo: ContactInfo;
   claimAssistance: ClaimAssistance[];
   hotlines: Hotlines;
   goBack: () => void;
-  onPress: () => void
+  onPress: () => void;
 }) => {
   return (
     <>
-      <TopView onPressBack={goBack} title={'Helpline'} />
+      <TopView title={'Helpline'} />
       <CurvedView containerStyle={styles.container}>
         <ContactInfoView onPress={onPress} data={contactInfo} />
         <ClaimAssistanceView data={claimAssistance} />
