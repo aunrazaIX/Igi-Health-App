@@ -29,12 +29,18 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     selectedPatient,
     selectedDocuments,
     dependantLoading,
+    dependantsData,
     uploadLoading,
     confirmationModal,
     claimData,
     claimLoading,
     type,
-    personalDetails
+    personalDetails,
+    personalDetailsLoading,
+    selectedType,
+    maternityTypeData,
+    selectedMaternityType
+
   } = states;
 
   const {
@@ -50,7 +56,9 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     setConfirmationModal,
     resetStates,
     setterForclaimData,
-    onSelectHospital
+    onSelectHospital,
+    onSelectType,
+    onSelectMaternityType
   } = functions;
 
   return (
@@ -58,7 +66,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
       goBack={goBack}
       steps={steps}
       personalData={personalData}
-      dependants={dependants}
+      dependantsData={dependantsData}
       claimsDetails={claimsDetails}
       selectedPatient={selectedPatient}
       selectedDocuments={selectedDocuments}
@@ -71,11 +79,12 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
       navigateTreatment={navigateTreatment}
       onSelectPatient={onSelectPatient}
       onSelectDocument={onSelectDocument}
-      dependantLoading={dependantLoading}
+      // dependantLoading={dependantLoading}
       uploadLoading={uploadLoading}
       handleCancelFile={handleCancelFile}
       confirmationModal={confirmationModal}
       setConfirmationModal={setConfirmationModal}
+      onSelectMaternityType={onSelectMaternityType}
       resetStates={resetStates}
       claimLoading={claimLoading}
       claimData={claimData}
@@ -83,6 +92,13 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
       setterForclaimData={setterForclaimData}
       onSelectHospital={onSelectHospital}
       personalDetails={personalDetails}
+      personalDetailsLoading={personalDetailsLoading}
+      dependants={dependants}
+      onSelectType={onSelectType}
+      selectedType={selectedType}
+      maternityTypeData={maternityTypeData}
+      selectedMaternityType={selectedMaternityType}
+
 
     />
   );

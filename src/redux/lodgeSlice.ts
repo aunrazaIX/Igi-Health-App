@@ -5,6 +5,8 @@ import { setErrorModal } from './generalSlice';
 const initialState: {
   currentStep: number;
   selectedPatient: any | null;
+  selectedType: any | null;
+  selectedMaternityType: any | null
   selectedHopsital: any | null
   selectedDocuments: any[];
   remarks: string
@@ -13,6 +15,7 @@ const initialState: {
 } = {
   currentStep: 1,
   selectedPatient: null,
+  selectedMaternityType: null,
   selectedHopsital: null,
   selectedDocuments: [],
   treatments: [],
@@ -99,6 +102,15 @@ export const lodgeSlice = createSlice({
     setSelectedPatient: (state, { payload }) => {
       state.selectedPatient = payload;
     },
+    setSelectedType: (state, { payload }) => {
+      state.selectedType = payload;
+    },
+    setSelectedMaternityType: (state, { payload }) => {
+      state.selectedMaternityType = payload;
+    },
+
+
+
     setSelectedHospital: (state, { payload }) => {
       state.selectedHopsital = payload;
     },
@@ -184,6 +196,8 @@ export const {
   onDeleteTreatment,
   onDeleteDocuments,
   setRemarks,
+  setSelectedType,
+  setSelectedMaternityType
 
 
 } = lodgeSlice.actions;

@@ -1,10 +1,10 @@
-import {configureStore} from '@reduxjs/toolkit';
-import {combineReducers} from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {persistStore, persistReducer} from 'redux-persist';
-import {authReducer} from './authSlice';
-import {lodegeReducer} from './lodgeSlice';
-import {generalReducer} from './generalSlice';
+import { persistStore, persistReducer } from 'redux-persist';
+import { authReducer } from './authSlice';
+import { lodegeReducer } from './lodgeSlice';
+import { generalReducer } from './generalSlice';
 import createTransform from 'redux-persist/es/createTransform';
 
 const authTransform = createTransform(
@@ -20,7 +20,7 @@ const authTransform = createTransform(
     }
   },
   outboundState => outboundState,
-  {whitelist: ['auth']},
+  { whitelist: ['auth'] },
 );
 
 const persistConfig = {

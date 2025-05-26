@@ -30,20 +30,16 @@ export default NoDataView;
 const styles = StyleSheet.create({
     noDataIcon: {
         width: vw * 30,
-        height: vw * 30
+        height: vh * 4,
+        resizeMode: "contain",
+        alignSelf: 'center'
     },
     noDataText: {
-
-        fontSize: vw * 6
-
+        fontSize: vw * 3
     },
     noDataView: {
 
-        justifyContent: "center",
-        alignItems: "center",
-        // flex: 1,
-        // height: "100%"
-
+        paddingVertical: vh
 
     }
 })

@@ -19,10 +19,13 @@ import {
   _updateTreatmentData,
   setRemarks,
   setSelectedHospital,
+  setSelectedType,
+  setSelectedMaternityType,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
 import { setErrorModal } from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+
 
 interface Treatment {
   receiptNumber?: string;
@@ -70,7 +73,7 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
-  const { selectedDocuments, currentStep, treatments, selectedPatient } =
+  const { selectedDocuments, currentStep, treatments, selectedPatient, selectedType, selectedMaternityType } =
     useSelector(state => state.lodge);
 
   const resetStates = () => {
@@ -184,6 +187,23 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
     },
   });
 
+  const dependantsData = [
+    { label: "Ipd", value: 0 },
+    { label: "Opd", value: 1 },
+    { label: "Maternity", value: 2 }
+  ]
+
+
+  const maternityTypeData = [
+    { label: "m1", value: 0 },
+    { label: "m2", value: 1 },
+    { label: "m3", value: 2 }
+  ]
+
+
+
+
+
 
   const steps: Step[] = [
     { label: 'Personal Details', key: 'personalDetails' },
@@ -272,8 +292,24 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
     });
   };
   const onSelectPatient = (patient: any) => {
+
     dispatch(setSelectedPatient(patient));
+
+
   };
+  const onSelectType
+    = (patient: any) => {
+      dispatch(setSelectedType(patient));
+
+    };
+
+  const onSelectMaternityType
+    = (patient: any) => {
+      dispatch(setSelectedMaternityType(patient));
+
+    };
+
+
 
   const onSelectHospital = (patient: any) => {
     dispatch(setSelectedHospital(patient));
@@ -342,15 +378,20 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
       claimsDetails,
       dependantLoading,
       currentStep,
-      dependants,
+      dependantsData,
       selectedPatient,
+      selectedType,
       selectedDocuments,
       uploadLoading,
       confirmationModal,
       claimData,
       claimLoading,
       type,
-      personalDetails
+      personalDetails,
+      personalDetailsLoading,
+      dependants,
+      maternityTypeData,
+      selectedMaternityType
     },
     functions: {
       goBack,
@@ -365,7 +406,9 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
       setConfirmationModal,
       resetStates,
       setterForclaimData,
-      onSelectHospital
+      onSelectHospital,
+      onSelectType,
+      onSelectMaternityType
     },
   };
 };

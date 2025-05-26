@@ -23,7 +23,7 @@ import { View } from 'react-native';
 type LodgeClaimViewProps = {
   steps: StepItem[];
   personalData: PersonelDataSection[];
-  dependants: DependantList[];
+  dependantsData: DependantList[];
   claimsDetails: ClaimDetailSection[] | undefined;
   goBack: () => void;
   patientOptions: PatientList[];
@@ -43,13 +43,21 @@ type LodgeClaimViewProps = {
   claimData: any;
   setterForclaimData: any;
   onSelectHospital: (option: any) => void
-  personalDetails: any
+  personalDetails: any,
+  personalDetailsLoading: any,
+  dependantLoading: any,
+  dependants: any,
+  onSelectType: () => void,
+  selectedType: any,
+  maternityTypeData: any
+  selectedMaternityType: any
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   steps,
   personalData,
   claimsDetails,
+  dependantsData,
   dependants,
   currentStep,
   goBack,
@@ -73,20 +81,28 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   setterForclaimData,
   claimLoading,
   type,
-  personalDetails
-
+  personalDetails,
+  personalDetailsLoading,
+  onSelectType,
+  selectedType,
+  maternityTypeData,
+  onSelectMaternityType,
+  selectedMaternityType
 }) => {
   const renderStep = {
     personalDetails: (
       <PersonalDetails
-
         selectedPatient={selectedPatient}
-
+        selectedType={selectedType}
         onSelectPatient={onSelectPatient}
         personalData={personalData}
-        patientOptions={dependants}
-        type={type}
+        patientOptions={dependantsData}
+        dependants={dependants}
         personalDetails={personalDetails}
+        onSelectType={onSelectType}
+        maternityTypeData={maternityTypeData}
+        onSelectMaternityType={onSelectMaternityType}
+        selectedMaternityType={selectedMaternityType}
 
       />
     ),
@@ -151,7 +167,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         />
 
         <ModalLoading
-          loading={dependantLoading || uploadLoading || claimLoading}
+          loading={uploadLoading || claimLoading || personalDetailsLoading}
         />
 
         <ConfirmationModal
