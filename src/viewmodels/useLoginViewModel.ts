@@ -70,9 +70,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     onSuccess: res => {
       dispatch(setUserData(res));
     },
-    onError: res => {
-      console.log('Login Error', res);
-      dispatch(setErrorModal({Show: true, message: res.error}));
+    onError: error => {
+      console.log('Login Error', error);
+      dispatch(setErrorModal({Show: true, message: error.error}));
     },
   });
 

@@ -55,7 +55,7 @@ const LoginForm = ({
             loginSetterForApiData('error_userName', errorMsg);
           }}
           errorMessage={loginApiData?.error_userName}
-
+          maxLength={50}
         />
 
         <InputField
@@ -68,7 +68,7 @@ const LoginForm = ({
           value={loginApiData?.password ?? undefined}
           onChangeText={text => loginSetterForApiData('password', text)}
           errorMessage={loginApiData?.error_password}
-
+          maxLength={25}
         />
       </View>
 

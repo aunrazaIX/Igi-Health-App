@@ -6,25 +6,27 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from '../../screens/Home';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
-import {DrawerContentComponentProps} from '@react-navigation/drawer';
-import {drawerIcons, images} from '../../assets';
-import {AileronBold, AileronSemiBold} from '../../components';
+import { COLORS } from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
+import { drawerIcons, images } from '../../assets';
+import { AileronBold, AileronSemiBold } from '../../components';
 import Tabs from '../TabStack';
 import ClaimsHistory from '../../screens/ClaimsHistory';
 import FAQs from '../../screens/FAQs';
-import Settings from '../../screens/Settings';
 import LinearGradient from 'react-native-linear-gradient';
-import {useDispatch} from 'react-redux';
-import {logout} from '../../redux/authSlice';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/authSlice';
 import SettingStack from '../SettingStack';
+import { useNavigation } from '@react-navigation/native';
+import Profile from '../../screens/Profile';
 
 const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const routes = [
     {
       id: 1,
@@ -132,7 +134,14 @@ const DrawerStack = () => {
     },
   ];
 
-  const DrawerContent = ({navigation}: DrawerContentComponentProps) => {
+
+  const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
+
+    const handleProfile = () => {
+      console.log("View Profile clicked")
+      navigation.navigate('Profile')
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
@@ -193,7 +202,9 @@ const DrawerStack = () => {
               />
             </View>
 
-            <TouchableOpacity style={styles.ButtonContainer}>
+            <TouchableOpacity style={styles.ButtonContainer}
+              onPress={handleProfile}
+            >
               <LinearGradient
                 colors={COLORS.PriorGradient}
                 style={styles.buttonGradient}>
@@ -227,8 +238,8 @@ const DrawerStack = () => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
       <Drawer.Screen name="FAQs" component={FAQs} />
-
       <Drawer.Screen name="SettingsStack" component={SettingStack} />
+      <Drawer.Screen name="Profile" component={Profile} />
     </Drawer.Navigator>
   );
 };
@@ -315,7 +326,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // marginBottom: vh * 14,
   },
   buttonIcon: {
     width: vw * 7,

@@ -20,8 +20,8 @@ interface ButtonProps extends TouchableOpacityProps {
   gradientColors?: string[];
   loading?: boolean;
   disabled?: boolean;
-  ForgotPasswordLoading: boolean;
-  route: any
+  ForgotPasswordLoading?: boolean;
+  route?: any
 }
 
 const Button: React.FC<ButtonProps> = ({
