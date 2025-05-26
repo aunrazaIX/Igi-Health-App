@@ -1,8 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
-import { fonts } from '../../assets/fonts';
-
+import {fonts} from '../../assets/fonts';
 
 export const styles = StyleSheet.create({
   infoContainer: {
@@ -17,7 +16,6 @@ export const styles = StyleSheet.create({
     gap: vw * 2,
   },
   rightTab: {
-
     flexDirection: 'row',
     borderColor: COLORS.buttonBorder,
     borderRadius: vw * 5,
@@ -30,16 +28,11 @@ export const styles = StyleSheet.create({
   activeTabRight: {
     backgroundColor: COLORS.cardBackgroundRed,
     gap: vw * 2,
-
-    
-
   },
-  listIcon:{
-
-
-    width  : vw*5,
-    height : vw*5,
-    resizeMode:"contain"
+  listIcon: {
+    width: vw * 5,
+    height: vw * 5,
+    resizeMode: 'contain',
   },
 
   activeTabRightText: {
@@ -78,8 +71,6 @@ export const styles = StyleSheet.create({
     width: '60%',
     textAlign: 'right',
   },
-
-  detailsText: {},
   inputFeild: {
     borderWidth: 2,
     height: vh * 7,
@@ -113,8 +104,4 @@ export const styles = StyleSheet.create({
   mapTabText: {
     fontSize: vw * 2,
   },
-
-  
- 
-
 });

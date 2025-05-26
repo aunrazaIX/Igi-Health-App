@@ -13,11 +13,11 @@ import {
   CurvedView,
   TopView,
 } from '../../components';
-import { icons } from '../../assets';
-import { styles } from './style';
+import {icons} from '../../assets';
+import {styles} from './style';
 import DetailsContainer from '../../components/DetailsContainer';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 import ProvinceTab from '../../components/provinceTab';
 
 type HospitalsViewProps = {
@@ -38,7 +38,9 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
   selectedTabRight,
   onPressMapTab,
   goBack,
+  data,
 }) => {
+  console.log(data);
   return (
     <>
       <TopView
@@ -49,7 +51,6 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
         // headerStyle={styles.headerStyle}
         onPressBack={goBack}
       />
-
       <CurvedView>
         <View>
           <View style={styles.mapTextContainer}>
@@ -63,14 +64,12 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
               />
             </View>
           </View>
-
           <View style={styles.mapTabsContainer}>
             <ProvinceTab
               onPressMapTab={onPressMapTab}
               selectedMapTab={selectedMapTab}
               provinceName={'Sindh'}
             />
-
             <ProvinceTab
               onPressMapTab={onPressMapTab}
               selectedMapTab={selectedMapTab}
@@ -79,7 +78,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
             <ProvinceTab
               onPressMapTab={onPressMapTab}
               selectedMapTab={selectedMapTab}
-              provinceName={'Baluchistan'}
+              provinceName={'Balochistan'}
             />
             <ProvinceTab
               onPressMapTab={onPressMapTab}
@@ -88,6 +87,22 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
             />
           </View>
         </View>
+        <FlatList
+          data={data}
+          contentContainerStyle={{paddingBottom: vh * 35}}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={({item}) => (
+            <>
+              <DetailsContainer
+                detailsText={styles.detailsText}
+                detailsTextLabel={styles.detailsTextLabel}
+                detailsTextValue={styles.detailsTextValue}
+                headerIcon={[icons.discountCentersDirection]}
+                data={item}
+              />
+            </>
+          )}
+        />
       </CurvedView>
     </>
   );

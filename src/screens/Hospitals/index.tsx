@@ -4,8 +4,8 @@ import useHospitalsViewModel from '../../viewmodels/useHospitalsViewModel';
 const Hospitals = () => {
   const {states, functions} = useHospitalsViewModel();
 
-  const {onPressTab, onPressRightTab, onPressMapTab ,goBack} = functions;
-  const {selectedTab, selectedTabRight, selectedMapTab} = states;
+  const {onPressTab, onPressRightTab, onPressMapTab, goBack} = functions;
+  const {selectedTab, selectedTabRight, selectedMapTab, data} = states;
   return (
     <HospitalsView
       selectedTabRight={selectedTabRight}
@@ -15,6 +15,7 @@ const Hospitals = () => {
       onPressRightTab={onPressRightTab}
       onPressMapTab={onPressMapTab}
       goBack={goBack}
+      data={data}
     />
   );
 };
