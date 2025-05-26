@@ -1,12 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, TouchableOpacity, Image, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
+import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
 import DependentBox from '../DependentBox';
 import AileronRegular from '../AileronRegular';
 import AileronBold from '../AileronBold';
-import {icons} from '../../assets';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
+import { icons } from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
 
 type Options = {
   value: number;
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     shadowColor: '#000',
     shadowOpacity: 0.2,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 3,
   },
   dropdownItem: {

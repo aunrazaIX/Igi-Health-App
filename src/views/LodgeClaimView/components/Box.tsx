@@ -11,16 +11,7 @@ type InfoItem = {
 };
 
 type BoxProps = {
-  data: {
-    edit: boolean;
-    delete: boolean;
-    sectionTitle: string;
-    icon: any;
-    info: {
-      label: string;
-      value: string;
-    }[];
-  };
+  data: any
   onPressDelete: () => void;
   onPressEdit: () => void;
 };

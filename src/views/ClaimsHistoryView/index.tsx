@@ -13,6 +13,7 @@ import {
   ClaimHistoryGroup,
 } from '../../viewmodels/useClaimsHistoryViewModel';
 import Calender from './Component/Calender';
+import NoDataView from '../../components/NoDataView';
 
 type claimsHistoryViewProps = {
   data: ClaimHistoryGroup[];
@@ -149,11 +150,15 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
               />
             </TouchableOpacity>
           </View>
-          <FlatList
+
+          {data ? <FlatList
             data={data}
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item }) => <DetailsContainer data={item} />}
           />
+            : <NoDataView name="No Claim Found" />}
+
+
         </View>
       </CurvedView>
 

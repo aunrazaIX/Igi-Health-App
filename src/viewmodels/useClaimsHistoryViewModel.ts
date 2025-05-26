@@ -1,10 +1,10 @@
-import {useNavigation} from '@react-navigation/native';
-import {useMemo, useState} from 'react';
-import {icons} from '../assets';
-import {ImageSourcePropType} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useMemo, useState } from 'react';
+import { icons } from '../assets';
+import { ImageSourcePropType } from 'react-native';
 import endpoints from '../api/endspoints';
-import {useSelector} from 'react-redux';
-import {RootState} from '../redux/store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import useApiHook from '../hooks/useApiHook';
 import moment from 'moment';
 
@@ -37,7 +37,7 @@ type UseClaimsHistoryViewModel = {
 };
 
 const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
-  const {user} = useSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
   const navigation = useNavigation();
   const [amountStatusTab, setAmountStatusTab] =
     useState<AmountStatus>('paidAmount');
@@ -57,22 +57,22 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
     navigation.goBack();
   };
 
-  const {data: claimData, loading} = useApiHook({
+  const { data: claimData, loading } = useApiHook({
     apiEndpoint: endpoints.claimHistory.getAllClaim,
     method: 'get',
-    argsOrBody: {userid: '776'},
+    argsOrBody: { userid: '776' },
     onSuccess: res => {
       setData(
         res?.Data?.map(item => ({
           headerLabel: `Claim #${item.ClaimID}`,
           headerIcon: icons.taskEdit,
           items: [
-            {label: 'Patient Name:', value: item?.RelationName},
-            {label: 'Services Date:', value: item?.ClaimSubmittedDate},
-            {label: 'Claim Type:', value: item?.ClaimsSubTypeName},
-            {label: 'Claims Description:', value: item?.ClaimsDescription},
-            {label: 'Claim Value:', value: item?.SubmiitedClaim},
-            {label: 'Status:', value: item?.ClaimStatus},
+            { label: 'Patient Name:', value: item?.RelationName },
+            { label: 'Services Date:', value: item?.ClaimSubmittedDate },
+            { label: 'Claim Type:', value: item?.ClaimsSubTypeName },
+            { label: 'Claims Description:', value: item?.ClaimsDescription },
+            { label: 'Claim Value:', value: item?.SubmiitedClaim },
+            { label: 'Status:', value: item?.ClaimStatus },
           ],
         })),
       );

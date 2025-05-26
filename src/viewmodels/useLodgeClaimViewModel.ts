@@ -17,6 +17,8 @@ import {
   onDeleteDocuments,
   _setTreatmentData,
   _updateTreatmentData,
+  setRemarks,
+  setSelectedHospital,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
 import { setErrorModal } from '../redux/generalSlice';
@@ -73,9 +75,15 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
 
   const resetStates = () => {
     dispatch(_setTreatmentData([]));
-    dispatch(setStep(1));
+
+    navigation.navigate('HomeStack')
     dispatch(setSelectedDocuments([]));
     dispatch(setSelectedPatient(null));
+    setterForclaimData("claimComments", "")
+
+    dispatch(setStep(1))
+
+
   };
 
   const { setterForApiData: setterForclaimData, apiData: claimData } =
@@ -126,6 +134,7 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
     },
   });
 
+
   const {
     loading: claimLoading,
     trigger: claimTrigger,
@@ -146,6 +155,21 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
     },
   });
 
+  const { data: personalDetails, loading: personalDetailsLoading } = useApiHook({
+    apiEndpoint: endpoints.bank.getBankDetails,
+    method: 'get',
+    argsOrBody: {
+      cnic: '14102-5322315-7',
+      ClientCode: 'DEMO',
+    },
+    transform: {
+      keyToLoop: 'Data',
+      label: 'LGIVNAME',
+      value: 'CLNTNUM',
+    },
+  });
+
+
   const { data: dependants, loading: dependantLoading } = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
@@ -160,11 +184,15 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
     },
   });
 
+
   const steps: Step[] = [
     { label: 'Personal Details', key: 'personalDetails' },
     { label: 'Claim', key: 'claim' },
     { label: 'Upload Doc', key: 'uploadDoc' },
   ];
+
+
+
 
   const personalData: PersonalInfoSection[] = [
     {
@@ -179,19 +207,10 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
         { label: 'Bank IBAN:', value: 'PK47 XYZ 1234 5678 9101112 3 0' },
       ],
     },
-    {
-      sectionTitle: 'Claims Details',
-      icon: icons.claimDetails,
-      edit: false,
-      delete: false,
-      info: [
-        { label: 'Services:', value: 'General OPD, Dental, Optical' },
-        { label: 'Eligible Users:', value: 'Self, Spouse, Children' },
-        { label: 'Reimbursement:', value: '28827' },
-        { label: 'Total OPD:', value: '---' },
-      ],
-    },
   ];
+
+
+
 
   const claimsDetails: ClaimDetail[] = treatments?.map((item: Treatment) => ({
     sectionTitle: item?.treatment?.label,
@@ -254,6 +273,10 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
   };
   const onSelectPatient = (patient: any) => {
     dispatch(setSelectedPatient(patient));
+  };
+
+  const onSelectHospital = (patient: any) => {
+    dispatch(setSelectedHospital(patient));
   };
 
   const onPressNext = () => {
@@ -327,6 +350,7 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
       claimData,
       claimLoading,
       type,
+      personalDetails
     },
     functions: {
       goBack,
@@ -341,6 +365,7 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
       setConfirmationModal,
       resetStates,
       setterForclaimData,
+      onSelectHospital
     },
   };
 };

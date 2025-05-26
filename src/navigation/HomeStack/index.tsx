@@ -31,7 +31,7 @@ const HomeStack = () => {
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
 
       <Stack.Screen name="Login" component={Login} />
-      
+
 
     </Stack.Navigator>
   );

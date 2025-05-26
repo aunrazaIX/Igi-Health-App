@@ -5,8 +5,12 @@ import { vh, vw } from '../../../assets/theme/dimension';
 import { COLORS } from '../../../assets/theme/colors';
 import { ClaimDetailSection } from '../typeInterface';
 import LinearGradient from 'react-native-linear-gradient';
-import { AileronBold, AileronSemiBold } from '../../../components';
+import { AileronBold, AileronSemiBold, } from '../../../components';
 import { icons, images } from '../../../assets';
+import NoDataView from '../../../components/NoDataView';
+
+
+
 
 
 
@@ -37,11 +41,7 @@ const Claim: React.FC<ClaimProps> = ({ claimsDetails, onPressDelete, onPressEdit
         )) :
 
 
-          <View style={styles.noDataView}>
-            <Image style={styles.noDataIcon} source={icons.noData} />
-            <AileronBold style={styles.noDataText} name={"no Claim found"} />
-          </View>
-
+          <NoDataView name={"no claim found"} />
 
 
 

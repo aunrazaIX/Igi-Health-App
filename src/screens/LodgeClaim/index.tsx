@@ -34,6 +34,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     claimData,
     claimLoading,
     type,
+    personalDetails
   } = states;
 
   const {
@@ -49,6 +50,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     setConfirmationModal,
     resetStates,
     setterForclaimData,
+    onSelectHospital
   } = functions;
 
   return (
@@ -79,6 +81,9 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
       claimData={claimData}
       type={type}
       setterForclaimData={setterForclaimData}
+      onSelectHospital={onSelectHospital}
+      personalDetails={personalDetails}
+
     />
   );
 };

@@ -42,6 +42,8 @@ type LodgeClaimViewProps = {
   resetStates: () => void;
   claimData: any;
   setterForclaimData: any;
+  onSelectHospital: (option: any) => void
+  personalDetails: any
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -71,14 +73,21 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   setterForclaimData,
   claimLoading,
   type,
+  personalDetails
+
 }) => {
   const renderStep = {
     personalDetails: (
       <PersonalDetails
+
         selectedPatient={selectedPatient}
+
         onSelectPatient={onSelectPatient}
         personalData={personalData}
         patientOptions={dependants}
+        type={type}
+        personalDetails={personalDetails}
+
       />
     ),
     claim: (
@@ -96,6 +105,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         handleCancelFile={handleCancelFile}
         claimData={claimData}
         setterForclaimData={setterForclaimData}
+
       />
     ),
   };

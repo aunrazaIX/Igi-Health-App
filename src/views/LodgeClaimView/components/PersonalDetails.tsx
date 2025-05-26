@@ -4,10 +4,12 @@ import { Select } from '../../../components';
 import { vh } from '../../../assets/theme/dimension';
 import Box from './Box';
 import { PersonelDataSection } from '../typeInterface';
+import NoDataView from '../../../components/NoDataView';
 
 type PersonalDetailsProps = {
   patientOptions: any[];
   personalData: PersonelDataSection[];
+  type: string
 };
 
 const PersonalDetails: React.FC<PersonalDetailsProps> = ({
@@ -15,16 +17,26 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
   personalData,
   selectedPatient,
   onSelectPatient,
+  type,
+
 }) => {
   return (
     <View style={styles.container}>
+
       <Select
         value={selectedPatient?.label}
         onSelectOption={value => onSelectPatient(value)}
-        selectData={patientOptions}
+        selectData={patientOptions ?? <NoDataView name={"no pateints"} />}
         selectLabel={'Patient Information'}
         selectPlaceholder={'-- Select Patient From List --'}
       />
+
+
+
+
+
+
+
       {personalData?.map((data, index) => (
         <Box data={data} key={index} />
       ))}
