@@ -2,6 +2,8 @@ import { ImageSourcePropType } from 'react-native';
 import { icons } from '../assets';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
 
 type UsePersonalViewModal = {
   states: {
@@ -114,7 +116,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
   };
 
   const manageUpdate = () => {
-    setModalVisible(true);
+    navigation.navigate('AddDependent');
   };
 
   const deleteDepenedent = () => {

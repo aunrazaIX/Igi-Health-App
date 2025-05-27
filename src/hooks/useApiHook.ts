@@ -51,7 +51,7 @@ const useApiHook = <T>({
       dataToSave = res;
       if (transform) {
         const { keyToLoop, ...mappings } = transform;
-        const list = res[keyToLoop];
+        const list = keyToLoop ? res[keyToLoop] : res;
         if (Array.isArray(list)) {
           const transformed = list.map(item => {
             const transformedItem: Record<string, any> = { ...item };

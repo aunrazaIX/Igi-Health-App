@@ -14,7 +14,6 @@ import DetailsContainer from '../../components/DetailsContainer';
 import { vh, vw } from '../../assets/theme/dimension';
 import { PanelHospitalGroup } from '../../viewmodels/usePanelHospitalListViewModel';
 
-
 type HomeViewProps = {
   data: PanelHospitalGroup[];
   selectedTab: string;
@@ -168,16 +167,17 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                 contentContainerStyle={{ paddingBottom: vh * 35 }}
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => (
-
                   <>
-
-
                     <DetailsContainer
-                      detailsText={styles.detailsText}
                       detailsTextLabel={styles.detailsTextLabel}
                       detailsTextValue={styles.detailsTextValue}
                       headerIcon={
-                        selectedTab === 'PanelHospitals' ? icons.arrowDirection : [icons.discountCentersDirection, icons.discountCentersMultipleDirection]
+                        selectedTab === 'PanelHospitals'
+                          ? icons.arrowDirection
+                          : [
+                            icons.discountCentersDirection,
+                            icons.discountCentersMultipleDirection,
+                          ]
                       }
                       data={item}
                     />

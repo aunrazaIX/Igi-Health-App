@@ -23,6 +23,17 @@ const endpoints = {
   claimHistory: {
     getAllClaim: 'Claims/getClaimsView',
   },
+  panelHospital: {
+    getPanelHospitals: 'PanelHospital/GetActivePanelHospitals',
+  },
+  discountedCenters: {
+    getDiscountedCenters: 'DiscountCenters/GetActiveDiscCenter',
+  },
+  dependent: {
+    getDependentType: 'Dependent/getAllDependentType',
+    getDependetRequestTypes: 'Dependent/getDependentRequestTypes',
+    addDependentRequest: 'Dependent/addDependentRequest',
+  },
 };
 
 export default endpoints;

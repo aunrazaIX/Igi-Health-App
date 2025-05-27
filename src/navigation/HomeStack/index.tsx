@@ -1,5 +1,4 @@
 import 'react-native-gesture-handler';
-import { View, Text } from 'react-native';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../../screens/Home';
@@ -14,6 +13,7 @@ import LodgeClaim from '../../screens/LodgeClaim';
 import ForgotPassword from '../../screens/ForgotPassword';
 import Settings from '../../screens/Settings';
 import Login from '../../screens/Login/Index';
+import DependentStack from '../DependentStack';
 
 const HomeStack = () => {
   const Stack = createStackNavigator();
@@ -24,15 +24,12 @@ const HomeStack = () => {
       initialRouteName={'Home'}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Benefits" component={Benefits} />
-      <Stack.Screen name="Personal" component={Personal} />
+      <Stack.Screen name="Personal" component={DependentStack} />
       <Stack.Screen name="Hospitals" component={Hospitals} />
       <Stack.Screen name="PanelHospitalList" component={PanelHospitalList} />
       <Stack.Screen name="Notifications" component={Notification} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-
       <Stack.Screen name="Login" component={Login} />
-
-
     </Stack.Navigator>
   );
 };
