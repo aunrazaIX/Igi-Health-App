@@ -33,6 +33,7 @@ const endpoints = {
     getDependentType: 'Dependent/getAllDependentType',
     getDependetRequestTypes: 'Dependent/getDependentRequestTypes',
     addDependentRequest: 'Dependent/addDependentRequest',
+    getDependentList: 'UserRelation/GetOPD',
   },
 };
 

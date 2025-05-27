@@ -13,13 +13,13 @@ import {
   CurvedView,
   TopView,
 } from '../../components';
-import { icons, images } from '../../assets';
+import {icons, images} from '../../assets';
 import styles from './styles';
 import DependentBox from '../../components/DependentBox';
-import { personalDetail } from '../../types/personalTypes';
+import {personalDetail} from '../../types/personalTypes';
 import ConfimationModal from '../../components/Modal/confimationModal';
-import { ScrollView } from 'react-native-gesture-handler';
-import { vh } from '../../assets/theme/dimension';
+import {ScrollView} from 'react-native-gesture-handler';
+import {vh} from '../../assets/theme/dimension';
 import AddModal from '../../components/Modal/AddModal';
 
 type Props = {
@@ -35,6 +35,7 @@ type Props = {
   setConfimationModalVisible: (val: boolean) => void;
   toggleExpand: (index: number) => void;
   expandedIndex: number | null;
+  openAddDependent: () => void;
 };
 
 type dependentDetail = {
@@ -57,6 +58,7 @@ const PersonalView: React.FC<Props> = ({
   setConfimationModalVisible,
   toggleExpand,
   expandedIndex,
+  openAddDependent,
 }) => {
   return (
     <Container>
@@ -64,11 +66,11 @@ const PersonalView: React.FC<Props> = ({
         onPressBack={goBack}
         title={'Personal'}
         TopViewFirstIcon={images.AddNew}
-        FirstOpenModal={manageUpdate}
+        FirstOpenModal={openAddDependent}
       />
       <CurvedView>
         <ScrollView>
-          <View style={{ paddingBottom: vh * 21 }}>
+          <View style={{paddingBottom: vh * 21}}>
             <ImageBackground
               source={images.SecureFuture}
               style={styles.personalImage}>
@@ -86,21 +88,22 @@ const PersonalView: React.FC<Props> = ({
               <AileronBold name={'Details!'} style={styles.detailsText} />
             </View>
 
-            {data.map((dependent, index) => (
+            {data?.map((dependent, index) => (
               <DependentBox
                 key={index}
                 containerStyle={styles.dependentBoxStyle}>
                 <TouchableOpacity onPress={() => toggleExpand(index)}>
                   <View style={styles.header}>
-                    <Image source={dependent.image} style={styles.avatar} />
+                    <Image source={dependent?.image} style={styles.avatar} />
                     <AileronBold
                       style={styles.headerText}
-                      name={dependent.dependent}
+                      name={dependent?.dependent}
                     />
                     <View style={styles.iconsROw}>
                       {expandedIndex === index && (
                         <View style={styles.deleteEditRow}>
-                          <TouchableOpacity onPress={manageUpdate}>
+                          <TouchableOpacity
+                            onPress={() => manageUpdate(dependent, index)}>
                             <Image
                               source={icons.edit}
                               style={styles.editIcon}
@@ -127,14 +130,14 @@ const PersonalView: React.FC<Props> = ({
 
                   {expandedIndex === index && (
                     <View style={styles.details}>
-                      {dependent.dependentDetail.map((item, index) => (
+                      {dependent?.dependentDetail?.map((item, index) => (
                         <View style={styles.detailRow} key={index}>
                           <AileronSemiBold
-                            name={item.label}
+                            name={item?.label}
                             style={styles.detailLabel}
                           />
                           <AileronSemiBold
-                            name={item.value}
+                            name={item?.value}
                             style={styles.detailvalue}
                           />
                         </View>

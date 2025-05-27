@@ -15,22 +15,27 @@ const Personal = () => {
     deleteDepenedent,
     setConfimationModalVisible,
     toggleExpand,
+    openAddDependent,
   } = functions;
 
   return (
-    <PersonalView
-      goBack={goBack}
-      data={data}
-      handleSubmit={handleSubmit}
-      manageUpdate={manageUpdate}
-      setModalVisible={setModalVisible}
-      modalVisible={modalVisible}
-      deleteDepenedent={deleteDepenedent}
-      confimationModalVisible={confimationModalVisible}
-      setConfimationModalVisible={setConfimationModalVisible}
-      toggleExpand={toggleExpand}
-      expandedIndex={expandedIndex}
-    />
+    <>
+      {console.log(data, 'dataaaa')}
+      <PersonalView
+        openAddDependent={openAddDependent}
+        goBack={goBack}
+        data={data}
+        handleSubmit={handleSubmit}
+        manageUpdate={manageUpdate}
+        setModalVisible={setModalVisible}
+        modalVisible={modalVisible}
+        deleteDepenedent={deleteDepenedent}
+        confimationModalVisible={confimationModalVisible}
+        setConfimationModalVisible={setConfimationModalVisible}
+        toggleExpand={toggleExpand}
+        expandedIndex={expandedIndex}
+      />
+    </>
   );
 };
 

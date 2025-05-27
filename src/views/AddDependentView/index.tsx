@@ -1,10 +1,7 @@
-import { View, Image, TextInput } from 'react-native';
+import {View, Image, TextInput} from 'react-native';
 import React from 'react';
-import { COLORS } from '../../assets/theme/colors';
-import { icons, images } from '../../assets';
-
-
-
+import {COLORS} from '../../assets/theme/colors';
+import {icons, images} from '../../assets';
 
 import {
   AileronBold,
@@ -38,10 +35,12 @@ type AddDependentViewProps = {
   onPressSubmit: () => void;
   dependentSetterForApiData: (key: keyof DependentApiData, value: any) => void;
   onPressCancel?: () => void;
-  setConfirmationModal: () => void,
-  confirmationModal: boolean,
-  resetStates: () => void,
-  addDependentLoading: any
+  setConfirmationModal: () => void;
+  confirmationModal: boolean;
+  resetStates: () => void;
+  addDependentLoading: any;
+  dependentIndex: any;
+  dependantsData: any;
 };
 
 const AddDependentView: React.FC<AddDependentViewProps> = ({
@@ -54,7 +53,9 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   onPressCancel,
   confirmationModal,
   resetStates,
-  addDependentLoading
+  addDependentLoading,
+  dependentIndex,
+  dependantsData,
 }) => {
   return (
     <>
@@ -72,6 +73,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               style={styles.DependentText}
             />
           </View>
+
           <DependentBox containerStyle={styles.dependentOuterStyle}>
             <AileronRegular name="Dependent Name" style={styles.selectLabel} />
             <TextInput
@@ -84,6 +86,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               }
             />
           </DependentBox>
+
           <Select
             selectData={genderOptions}
             selectLabel={'Gender'}
@@ -109,11 +112,11 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               placeholder="Enter Age"
               placeholderTextColor={COLORS.selectPlaceholder}
               onChangeText={text => dependentSetterForApiData('Age', text)}
-              value={dependentApiData?.age ?? null}
+              value={dependentApiData?.Age ?? null}
             />
           </DependentBox>
           <Button
-            name="Submit"
+            name={dependentIndex != undefined ? 'Update' : 'Submit'}
             containerStyle={styles.modalAddButton}
             inputStyle={styles.modalAddText}
             onPress={onPressSubmit}
@@ -126,11 +129,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
           />
         </View>
 
-
-        <ModalLoading
-          loading={addDependentLoading}
-        />
-
+        <ModalLoading loading={addDependentLoading} />
 
         <ConfirmationModal
           ConfirmationModalVisible={confirmationModal}
@@ -141,11 +140,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
           Successfull={true}
           CloseButtonText={'Continue To Login'}
           onClose={resetStates}
-
-
         />
-
-
       </CurvedView>
     </>
   );

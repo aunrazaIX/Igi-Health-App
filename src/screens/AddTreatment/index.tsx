@@ -2,7 +2,7 @@ import React from 'react';
 import AddTreatmentView from '../../views/AddTreatmentView';
 import useAddTreatmentModel from '../../viewmodels/useAddTreatmentModel';
 
-import {NavigationProp} from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
 
 const AddTreatment = ({
   navigation,
@@ -11,8 +11,8 @@ const AddTreatment = ({
   navigation: NavigationProp<any>;
   route: any;
 }) => {
-  const {states, functions} = useAddTreatmentModel({navigation, route});
-  const {treatmentTypes, apiData, treatmentIndex, isError, confirmationModal} =
+  const { states, functions } = useAddTreatmentModel({ navigation, route });
+  const { treatmentTypes, apiData, treatmentIndex, isError, confirmationModal } =
     states;
   const {
     setterForApiData,

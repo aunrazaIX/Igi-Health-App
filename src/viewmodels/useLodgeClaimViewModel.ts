@@ -1,14 +1,14 @@
-import {icons} from '../assets';
+import { icons } from '../assets';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import {useCallback, useState} from 'react';
+import { useCallback, useState } from 'react';
 import {
   useFocusEffect,
   NavigationProp,
   RouteProp,
 } from '@react-navigation/native';
-import {pick, types} from '@react-native-documents/picker';
-import {useDispatch, useSelector} from 'react-redux';
+import { pick, types } from '@react-native-documents/picker';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setSelectedPatient,
   setStep,
@@ -25,14 +25,14 @@ import {
   setResetTreaments,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
-import {setErrorModal} from '../redux/generalSlice';
+import { setErrorModal } from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 
 interface Treatment {
   receiptNumber?: string;
   description?: string;
   amount?: string;
-  treatment?: {label: string; value: string};
+  treatment?: { label: string; value: string };
 }
 
 interface ClaimDetail {
@@ -66,8 +66,8 @@ interface Props {
   route: RouteProp<any>;
 }
 
-const useLodgeClaimViewModel = ({navigation, route}: Props) => {
-  const {type} = route?.params || {};
+const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
+  const { type } = route?.params || {};
 
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -94,7 +94,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     dispatch(setStep(1));
   };
 
-  const {setterForApiData: setterForclaimData, apiData: claimData} =
+  const { setterForApiData: setterForclaimData, apiData: claimData } =
     useErrorHandlingHook({
       claimComments: '',
     });
@@ -162,7 +162,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   });
 
-  const {data: personalDetails, loading: personalDetailsLoading} = useApiHook({
+  const { data: personalDetails, loading: personalDetailsLoading } = useApiHook({
     apiEndpoint: endpoints.bank.getBankDetails,
     method: 'get',
     argsOrBody: {
@@ -176,7 +176,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   });
 
-  const {data: dependants, loading: dependantLoading} = useApiHook({
+  const { data: dependants, loading: dependantLoading } = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
     argsOrBody: {
@@ -191,21 +191,21 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   });
 
   const dependantsData = [
-    {label: 'Ipd', value: 0},
-    {label: 'Opd', value: 1},
-    {label: 'Maternity', value: 2},
+    { label: 'Ipd', value: 0 },
+    { label: 'Opd', value: 1 },
+    { label: 'Maternity', value: 2 },
   ];
 
   const maternityTypeData = [
-    {label: 'Normal', value: 0},
-    {label: 'C-Section', value: 1},
-    {label: 'MisCarriage', value: 2},
+    { label: 'Normal', value: 0 },
+    { label: 'C-Section', value: 1 },
+    { label: 'MisCarriage', value: 2 },
   ];
 
   const steps: Step[] = [
-    {label: 'Personal Details', key: 'personalDetails'},
-    {label: 'Claim', key: 'claim'},
-    {label: 'Upload Doc', key: 'uploadDoc'},
+    { label: 'Personal Details', key: 'personalDetails' },
+    { label: 'Claim', key: 'claim' },
+    { label: 'Upload Doc', key: 'uploadDoc' },
   ];
 
   const personalData: PersonalInfoSection[] = [
@@ -215,10 +215,10 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       edit: false,
       delete: false,
       info: [
-        {label: 'Name of Employee:', value: 'Imran Naveed Qureshi'},
-        {label: 'Bank Name:', value: 'Bank Al Habib'},
-        {label: 'Account Number:', value: '1234-5678-9101112-3'},
-        {label: 'Bank IBAN:', value: 'PK47 XYZ 1234 5678 9101112 3 0'},
+        { label: 'Name of Employee:', value: 'Imran Naveed Qureshi' },
+        { label: 'Bank Name:', value: 'Bank Al Habib' },
+        { label: 'Account Number:', value: '1234-5678-9101112-3' },
+        { label: 'Bank IBAN:', value: 'PK47 XYZ 1234 5678 9101112 3 0' },
       ],
     },
   ];
