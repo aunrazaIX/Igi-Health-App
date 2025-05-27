@@ -1,24 +1,22 @@
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import { Select } from '../../../components';
-import { vh } from '../../../assets/theme/dimension';
+import {Select} from '../../../components';
+import {vh} from '../../../assets/theme/dimension';
 import Box from './Box';
-import { PersonelDataSection } from '../typeInterface';
+import {PersonelDataSection} from '../typeInterface';
 import NoDataView from '../../../components/NoDataView';
-import { icons } from '../../../assets';
-
-
+import {icons} from '../../../assets';
 
 type PersonalDetailsProps = {
   patientOptions: any[];
   personalData: PersonelDataSection[];
-  type: string
-  personalDetails: any
-  dependants: any
-  onSelectType: any
-  maternityTypeData: any
-  onSelectMaternityType: any
-  selectedMaternityType: any
+  type: string;
+  personalDetails: any;
+  dependants: any;
+  onSelectType: any;
+  maternityTypeData: any;
+  onSelectMaternityType: any;
+  selectedMaternityType: any;
 };
 
 const PersonalDetails: React.FC<PersonalDetailsProps> = ({
@@ -34,13 +32,9 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
   personalDetails,
   type,
   dependants,
-  onSelectType
-
+  onSelectType,
 }) => {
-
-
   let data = [
-
     {
       sectionTitle: 'Personal Details',
       icon: icons.personalDetail,
@@ -48,27 +42,33 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
       delete: false,
       info: [
         {
-          label: 'Name of Employee:', value: personalDetails?.Data?.lgivname.trim() ?? "--"
+          label: 'Name of Employee:',
+          value: personalDetails?.Data?.lgivname.trim() ?? '--',
         },
         {
-          label: 'Bank Name:', value:
-
-            personalDetails?.Data?.Bankname?.trim() == '' ? '--' : personalDetails?.Data?.Bankname?.trim()
-
+          label: 'Bank Name:',
+          value:
+            personalDetails?.Data?.Bankname?.trim() == ''
+              ? '--'
+              : personalDetails?.Data?.Bankname?.trim(),
         },
         {
-          label: 'Account Number:', value: personalDetails?.Data?.
-            accountNumber ?? " -- "
+          label: 'Account Number:',
+          value: personalDetails?.Data?.accountNumber ?? ' -- ',
         },
-        { label: 'Bank IBAN:', value: personalDetails?.Data?.IBAN?.trim() == '' ? '--' : personalDetails?.Data?.IBAN?.trim() },
+        {
+          label: 'Bank IBAN:',
+          value:
+            personalDetails?.Data?.IBAN?.trim() == ''
+              ? '--'
+              : personalDetails?.Data?.IBAN?.trim(),
+        },
       ],
     },
-
-  ]
+  ];
 
   return (
     <View style={styles.container}>
-
       <Select
         value={selectedPatient?.label}
         onSelectOption={value => onSelectPatient(value)}
@@ -76,7 +76,6 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
         selectLabel={'Patient Information'}
         selectPlaceholder={'-- Select Patient From List --'}
       />
-
 
       <Select
         value={selectedType?.label}
@@ -86,9 +85,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
         selectPlaceholder={'-- Select Type From List --'}
       />
 
-      {
-        selectedType.label === "Maternity" &&
-
+      {/* {selectedType?.label === 'Maternity' && (
         <Select
           value={selectedMaternityType?.label}
           onSelectOption={value => onSelectMaternityType(value)}
@@ -96,15 +93,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
           selectLabel={'Select Maternity Type'}
           selectPlaceholder={'-- Select Type From List --'}
         />
-
-      }
-
-
-
-
-
-
-
+      )} */}
 
       {data?.map((data, index) => (
         <Box data={data} key={index} />

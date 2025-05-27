@@ -1,64 +1,58 @@
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
-import { useDispatch, useSelector } from 'react-redux';
-import { setTreatments, updateTreatments } from '../redux/lodgeSlice';
-import { useEffect, useMemo, useState } from 'react';
-import { RootState } from '../redux/store';
+import {useDispatch, useSelector} from 'react-redux';
+import {setTreatments, updateTreatments} from '../redux/lodgeSlice';
+import {useEffect, useMemo, useState} from 'react';
+import {RootState} from '../redux/store';
 
-
-
-
-
-const useAddTreatmentModel = ({ navigation, route }: { navigation: any, route: any }) => {
-
+const useAddTreatmentModel = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
   const dispatch = useDispatch();
 
   const isError = useSelector((state: RootState) => state.lodge.isError);
-  console.log(isError, " myeror")
 
-  const selectedType = useSelector((state) => state.lodge.selectedType)
-
+  const selectedType = useSelector(state => state.lodge.selectedType);
 
   const [confirmationModal, setConfirmationModal] = useState(false);
 
-
-
-
-  const { treatmentIndex, treatmentData } = route?.params || {}
+  const {treatmentIndex, treatmentData} = route?.params || {};
 
   const extractedData = {
     treatment: treatmentData?.treatment,
     receiptNumber: treatmentData?.info?.[0].value,
     amount: treatmentData?.info?.[1].value,
-    description: treatmentData?.info?.[2].value
+    description: treatmentData?.info?.[2].value,
   };
 
-  console.log("treatmentIndex", treatmentIndex)
-
-  const { setterForApiData, apiData } = useErrorHandlingHook({
+  const {setterForApiData, apiData} = useErrorHandlingHook({
     treatment: extractedData.treatment ?? {},
     receiptNumber: extractedData.receiptNumber ?? '',
     amount: extractedData.amount ?? '',
     description: extractedData.description ?? '',
   });
 
-  const apiParams = useMemo(() => ({
-    apiEndpoint: endpoints.treatments.getTypes,
-    method: 'get',
-    transform: {
-      keyToLoop: 'Data',
-      label: 'ClaimsSubTypeName',
-      value: 'ClaimsSubTypeID',
-    },
-  }), []);
+  const apiParams = useMemo(
+    () => ({
+      apiEndpoint: endpoints.treatments.getTypes,
+      method: 'get',
+      transform: {
+        keyToLoop: 'Data',
+        label: 'ClaimsSubTypeName',
+        value: 'ClaimsSubTypeID',
+      },
+    }),
+    [],
+  );
 
-
-  const { loading, data: opdTypes } = useApiHook(apiParams);
+  const {loading, data: opdTypes} = useApiHook(apiParams);
 
   const onPressAddTreatment = () => {
-
-
     const treatmentObj = {
       treatment: apiData?.treatment,
       receiptNumber: apiData?.receiptNumber,
@@ -66,57 +60,53 @@ const useAddTreatmentModel = ({ navigation, route }: { navigation: any, route: a
       description: apiData?.description,
     };
 
-
-    if (selectedType === "Opd") {
-
+    if (selectedType === 'Opd') {
     }
-
 
     if (typeof treatmentIndex === 'number') {
-
-      dispatch(updateTreatments({
-        index: treatmentIndex, data: apiData, navigateOnSuccess: () => {
-          navigation.goBack()
-        }
-      },));
-
-
+      dispatch(
+        updateTreatments({
+          index: treatmentIndex,
+          data: apiData,
+          navigateOnSuccess: () => {
+            navigation.goBack();
+          },
+        }),
+      );
     } else {
-
-      dispatch(setTreatments({
-        ...treatmentObj, navigateOnSuccess: () => {
-          navigation.goBack()
-        }
-      }));
+      dispatch(
+        setTreatments({
+          ...treatmentObj,
+          navigateOnSuccess: () => {
+            navigation.goBack();
+          },
+        }),
+      );
     }
-
-
     // navigation.navigate('LodgeClaimProcess');
-
   };
 
+  const maternityTypeData = [
+    {label: 'Normal', value: 0},
+    {label: 'C-Section', value: 1},
+    {label: 'MisCarriage', value: 2},
+  ];
 
-
-
-
-
-
-
+  let treatmentTypes = selectedType.value === 1 ? opdTypes : maternityTypeData;
 
   return {
     states: {
       loading,
-      opdTypes,
+      treatmentTypes,
       apiData,
       treatmentIndex,
       isError,
-      confirmationModal
+      confirmationModal,
     },
     functions: {
       setterForApiData,
       onPressAddTreatment,
       setConfirmationModal,
-
     },
   };
 };

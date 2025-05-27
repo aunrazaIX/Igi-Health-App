@@ -1,4 +1,4 @@
-import { Image, TouchableOpacity, View } from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {
   AileronBold,
@@ -10,27 +10,25 @@ import {
   TopView,
 } from '../../components';
 import styles from './styles';
-import { icons } from '../../assets';
-import { COLORS } from '../../assets/theme/colors';
+import {icons} from '../../assets';
+import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 type AddTreatmentViewProps = {
-  opdTypes: any[];
+  treatmentTypes: any[];
   setterForApiData: (key: string, value: any) => void;
   apiData: any;
   onPressAddTreatment: () => void;
   isError: boolean;
   treatmentIndex: number;
   setConfirmationModal: (val: boolean) => void;
-  openConfimationModal: () => void,
-  confirmationModal: boolean
-
+  openConfimationModal: () => void;
+  confirmationModal: boolean;
 };
 
 const AddTreatmentView = ({
-  opdTypes,
+  treatmentTypes,
   setterForApiData,
   apiData,
   onPressAddTreatment,
@@ -39,7 +37,7 @@ const AddTreatmentView = ({
   confirmationModal,
 
   isError,
-  treatmentIndex
+  treatmentIndex,
 }: AddTreatmentViewProps) => {
   return (
     <>
@@ -51,18 +49,18 @@ const AddTreatmentView = ({
             <View style={styles.textContainer}>
               <AileronBold
                 name="Add"
-                style={[styles.text, { color: COLORS.cardBackgroundBlue }]}
+                style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
               />
               <AileronBold
                 name="Treatment"
-                style={[styles.text, { color: COLORS.cardBackgroundRed }]}
+                style={[styles.text, {color: COLORS.cardBackgroundRed}]}
               />
             </View>
 
             <Select
               value={apiData?.treatment?.label}
               onSelectOption={option => setterForApiData('treatment', option)}
-              selectData={opdTypes}
+              selectData={treatmentTypes}
               selectLabel={'-- Select Treatment --'}
               selectPlaceholder={'-- Select Treatment --'}
             />
@@ -73,7 +71,6 @@ const AddTreatmentView = ({
                 const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
 
                 setterForApiData('receiptNumber', text);
-
               }}
               maxLength={25}
               label="Receipt Number"
@@ -89,7 +86,6 @@ const AddTreatmentView = ({
                 const cleanedText = text.replace(/[^0-9]/g, '');
                 setterForApiData('amount', cleanedText);
               }}
-
               label="Amount"
               placeholder="0"
             />
@@ -106,38 +102,30 @@ const AddTreatmentView = ({
           <LinearGradient
             colors={COLORS.PriorGradient}
             style={styles.priorGradient}>
-
             <TouchableOpacity
               style={styles.wrapper}
               onPress={onPressAddTreatment}>
-
-
               <AileronSemiBold
                 style={styles.priorNext}
-                name={treatmentIndex !== undefined ? 'Update Treatment' : 'Add Treatment'}
+                name={
+                  treatmentIndex !== undefined
+                    ? 'Update Treatment'
+                    : 'Add Treatment'
+                }
               />
-
-
             </TouchableOpacity>
-
-
           </LinearGradient>
         </View>
 
-
         <ConfirmationModal
           ConfirmationModalVisible={confirmationModal}
-
           setConfirmationModalVisible={setConfirmationModal}
           frameImage={icons.errorPopup}
-          confirmationMessage={"You cant enter the same entry"}
+          confirmationMessage={'You cant enter the same entry'}
           closeButton={true}
           Successfull={false}
           CloseButtonText={'Continue To Login'}
         />
-
-
-
       </CurvedView>
     </>
   );

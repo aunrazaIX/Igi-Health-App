@@ -6,7 +6,7 @@ import {
   Stepper,
   TopView,
 } from '../../components';
-import { Claim, PersonalDetails, UploadDoc } from './components';
+import {Claim, PersonalDetails, UploadDoc} from './components';
 import {
   ClaimDetailSection,
   PersonelDataSection,
@@ -14,11 +14,11 @@ import {
   StepItem,
   DependantList,
 } from './typeInterface';
-import { icons } from '../../assets';
-import { COLORS } from '../../assets/theme/colors';
+import {icons} from '../../assets';
+import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
-import { useSelector } from 'react-redux';
-import { View } from 'react-native';
+import {useSelector} from 'react-redux';
+import {View} from 'react-native';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -42,15 +42,15 @@ type LodgeClaimViewProps = {
   resetStates: () => void;
   claimData: any;
   setterForclaimData: any;
-  onSelectHospital: (option: any) => void
-  personalDetails: any,
-  personalDetailsLoading: any,
-  dependantLoading: any,
-  dependants: any,
-  onSelectType: () => void,
-  selectedType: any,
-  maternityTypeData: any
-  selectedMaternityType: any
+  onSelectHospital: (option: any) => void;
+  personalDetails: any;
+  personalDetailsLoading: any;
+  dependantLoading: any;
+  dependants: any;
+  onSelectType: () => void;
+  selectedType: any;
+  maternityTypeData: any;
+  selectedMaternityType: any;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -87,7 +87,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   selectedType,
   maternityTypeData,
   onSelectMaternityType,
-  selectedMaternityType
+  selectedMaternityType,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -103,7 +103,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         maternityTypeData={maternityTypeData}
         onSelectMaternityType={onSelectMaternityType}
         selectedMaternityType={selectedMaternityType}
-
       />
     ),
     claim: (
@@ -121,15 +120,21 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         handleCancelFile={handleCancelFile}
         claimData={claimData}
         setterForclaimData={setterForclaimData}
-
       />
     ),
   };
 
+  console.log(claimsDetails, selectedType);
+
   return (
     <>
       <TopView
-        TopViewFirstIcon={currentStep === 2 ? icons.addSquare : null}
+        TopViewFirstIcon={
+          (currentStep === 2 && selectedType?.value === 1) ||
+          (currentStep === 2 && claimsDetails?.length < 1)
+            ? icons.addSquare
+            : null
+        }
         tintColrorForTopViewFirstIcon={COLORS.white}
         FirstOpenModal={navigateTreatment}
         onPressBack={goBack}
@@ -137,14 +142,12 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         resetStates={resetStates}
       />
       <CurvedView>
-
         <Stepper
           currentStep={currentStep}
           steps={steps}
           onPressStep={onPressStep}
           componentList={renderStep}
         />
-
 
         <Button
           disabled={
@@ -153,14 +156,14 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
                 ? true
                 : false
               : currentStep === 2
-                ? claimsDetails?.length > 0
-                  ? false
-                  : true
-                : currentStep === 3 &&
-                  selectedDocuments?.length > 0 &&
-                  claimData.claimComments?.length > 0
-                  ? false
-                  : true
+              ? claimsDetails?.length > 0
+                ? false
+                : true
+              : currentStep === 3 &&
+                selectedDocuments?.length > 0 &&
+                claimData.claimComments?.length > 0
+              ? false
+              : true
           }
           onPress={onPressNext}
           name={currentStep === 3 ? 'Submit' : 'Next'}

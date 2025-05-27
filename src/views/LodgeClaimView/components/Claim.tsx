@@ -1,58 +1,41 @@
-import { Image, StyleSheet, View } from 'react-native';
-import React, { Fragment } from 'react';
+import {StyleSheet, View} from 'react-native';
+import React from 'react';
 import Box from './Box';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
-import { ClaimDetailSection } from '../typeInterface';
-import LinearGradient from 'react-native-linear-gradient';
-import { AileronBold, AileronSemiBold, } from '../../../components';
-import { icons, images } from '../../../assets';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {COLORS} from '../../../assets/theme/colors';
+import {ClaimDetailSection} from '../typeInterface';
+
 import NoDataView from '../../../components/NoDataView';
-
-
-
-
-
-
-
 
 type ClaimProps = {
   claimsDetails: ClaimDetailSection[];
   navigateTreatment: () => void;
   onPressDelete: (index: number) => void;
   onPressEdit: (data: object, index: number) => void;
-
 };
 
-const Claim: React.FC<ClaimProps> = ({ claimsDetails, onPressDelete, onPressEdit }) => {
+const Claim: React.FC<ClaimProps> = ({
+  claimsDetails,
+  onPressDelete,
+  onPressEdit,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.list}>
-
-
-
-        {claimsDetails?.length > 0 ? claimsDetails?.map((data, index) => (
-
-
-          < Box
-            onPressDelete={() => onPressDelete(index)}
-            onPressEdit={() => onPressEdit(data, index)}
-            data={data}
-            key={index}
-          />
-
-
-        )) :
-
-
-          <NoDataView name={"no claim found"} />
-
-
-
-
-        }
+        {claimsDetails?.length > 0 ? (
+          claimsDetails?.map((data, index) => (
+            <Box
+              onPressDelete={() => onPressDelete(index)}
+              onPressEdit={() => onPressEdit(data, index)}
+              data={data}
+              key={index}
+            />
+          ))
+        ) : (
+          <NoDataView name={'no claim found'} />
+        )}
       </View>
-    </View >
+    </View>
   );
 };
 
@@ -65,19 +48,14 @@ const styles = StyleSheet.create({
     marginTop: vh * 1.25,
     width: '100%',
     rowGap: vh * 1.25,
-
-
   },
   list: {
     rowGap: vh * 1.25,
-
-
-
   },
   priorGradient: {
     borderRadius: vh * 1.5,
   },
-  wrapper: { padding: vh * 2 },
+  wrapper: {padding: vh * 2},
   priorNext: {
     textAlign: 'center',
     color: COLORS.white,
@@ -170,7 +148,6 @@ const styles = StyleSheet.create({
     color: COLORS.benefitTitle,
   },
 
-
   benefitsImage: {
     resizeMode: 'cover',
     height: '100%',
@@ -178,20 +155,15 @@ const styles = StyleSheet.create({
   },
   noDataIcon: {
     width: vw * 30,
-    height: vw * 30
+    height: vw * 30,
   },
   noDataText: {
-
-    fontSize: vw * 6
-
+    fontSize: vw * 6,
   },
   noDataView: {
-
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     // flex: 1,
     // height: "100%"
-
-
-  }
+  },
 });
