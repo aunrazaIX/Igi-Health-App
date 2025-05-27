@@ -22,7 +22,7 @@ const LoginView = ({
   loginApiData,
   loginSetterForApiData,
   handleCheck,
-  rememberMe,
+  checked,
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;
@@ -51,7 +51,7 @@ const LoginView = ({
         loginApiData={loginApiData}
         loginSetterForApiData={loginSetterForApiData}
         handleCheck={handleCheck}
-        rememberMe={rememberMe}
+        checked={checked}
       />
     ),
     signup: <SignUpView

@@ -9,20 +9,14 @@ import createTransform from 'redux-persist/es/createTransform';
 
 const authTransform = createTransform(
   inboundState => {
-    if ((inboundState as any)?.rememberMe) {
-      return inboundState;
-    } else {
-      return {
-        user: null,
-        token: null,
-        rememberMe: false,
-      };
-    }
+    const {token, user, ...rest} = inboundState;
+    return rest;
   },
-  outboundState => outboundState,
+  outboundState => {
+    return outboundState;
+  },
   {whitelist: ['auth']},
 );
-
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
