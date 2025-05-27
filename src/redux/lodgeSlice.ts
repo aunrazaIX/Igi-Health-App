@@ -115,11 +115,7 @@ export const lodgeSlice = createSlice({
 
     _updateTreatmentData: (state, {payload}) => {
       const {index, data, navigateOnSuccess} = payload;
-
-      console.log(data, 'payload of update');
-
       navigateOnSuccess();
-
       state.treatments[index] = data;
     },
 

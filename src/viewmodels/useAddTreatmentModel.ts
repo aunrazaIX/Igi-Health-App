@@ -37,20 +37,29 @@ const useAddTreatmentModel = ({
     description: extractedData.description ?? '',
   });
 
-  const apiParams = useMemo(
-    () => ({
-      apiEndpoint: endpoints.treatments.getTypes,
+  const apiParams = useMemo(() => {
+    const typeValue = selectedType?.value;
+
+    const endpointKey =
+      typeValue === 0
+        ? 'getIPDTypes'
+        : typeValue === 1
+        ? 'getTypes'
+        : 'getMATTypes';
+
+    return {
+      apiEndpoint: endpoints.treatments[endpointKey],
       method: 'get',
       transform: {
         keyToLoop: 'Data',
         label: 'ClaimsSubTypeName',
         value: 'ClaimsSubTypeID',
       },
-    }),
-    [],
-  );
+    };
+  }, [selectedType?.value]);
 
-  const {loading, data: opdTypes} = useApiHook(apiParams);
+  const {loading, data: treatmentTypes, error} = useApiHook(apiParams);
+  console.log(error);
 
   const onPressAddTreatment = () => {
     const treatmentObj = {
@@ -74,6 +83,7 @@ const useAddTreatmentModel = ({
         }),
       );
     } else {
+      console.log('3');
       dispatch(
         setTreatments({
           ...treatmentObj,
@@ -91,8 +101,6 @@ const useAddTreatmentModel = ({
     {label: 'C-Section', value: 1},
     {label: 'MisCarriage', value: 2},
   ];
-
-  let treatmentTypes = selectedType.value === 1 ? opdTypes : maternityTypeData;
 
   return {
     states: {
