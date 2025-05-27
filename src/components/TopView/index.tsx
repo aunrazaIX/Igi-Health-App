@@ -41,7 +41,7 @@ const TopView = ({
   goBack?: () => void;
   containerStyleIcon?: StyleObject | StyleObject[];
   tintColrorForTopViewFirstIcon?: string;
-  resetStates: () => void;
+  resetStates?: () => void;
 }) => {
   const route = useRoute();
   const navigation = useNavigation();

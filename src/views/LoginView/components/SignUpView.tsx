@@ -76,7 +76,7 @@ const SignUpView = ({
 
       <InputField
         label="CNIC Number"
-        placeholder="12345-6789012-3"
+        placeholder="Enter cnic"
         rightIcon={icons.cnic}
         onChangeText={(text) => {
           signupSetterForApiData('cnic', text);

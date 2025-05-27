@@ -1,9 +1,10 @@
-import { useRef, useState } from 'react';
-import { cardIcons, icons } from '../assets';
-import { COLORS } from '../assets/theme/colors';
-import { Animated } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { ImageSourcePropType } from 'react-native';
+import {useRef, useState} from 'react';
+import {cardIcons, icons} from '../assets';
+import {COLORS} from '../assets/theme/colors';
+import {Animated} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {ImageSourcePropType} from 'react-native';
+import {useSelector} from 'react-redux';
 
 export type CardItemData = {
   logo?: ImageSourcePropType;
@@ -45,9 +46,10 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const animateValue = useRef(new Animated.Value(0)).current;
   const currentValue = useRef(0);
 
-  animateValue.addListener(({ value }) => {
+  animateValue.addListener(({value}) => {
     currentValue.current = value;
   });
+  // const {rememberMe, credentials} = useSelector(state => state.auth);
 
   const animateCard = () => {
     if (currentValue.current >= 90) {
@@ -76,11 +78,11 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   });
 
   const frontAnimatedStyle = {
-    transform: [{ perspective: 1000 }, { rotateY: rotateFront }],
+    transform: [{perspective: 1000}, {rotateY: rotateFront}],
   };
 
   const backAnimatedStyle = {
-    transform: [{ perspective: 1000 }, { rotateY: rotateBack }],
+    transform: [{perspective: 1000}, {rotateY: rotateBack}],
   };
 
   const cardData: CardItemData[] = [

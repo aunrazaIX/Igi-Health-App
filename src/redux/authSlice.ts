@@ -11,12 +11,20 @@ interface AuthState {
   user: User | null;
   token: string | null;
   rememberMe: boolean;
+  credentials: {
+    userName: string;
+    password: string;
+  };
 }
 
 const initialState: AuthState = {
   user: null,
   token: null,
   rememberMe: false,
+  credentials: {
+    userName: '',
+    password: '',
+  },
 };
 
 interface SetUserDataPayload {
@@ -35,12 +43,17 @@ export const authSlice = createSlice({
       state.token = Token;
     },
     setRememberMe: (state, action: PayloadAction<boolean>) => {
-      state.rememberMe = action.payload;
+      const {userName, rememberMe, password} = action.payload;
+      state.credentials = {
+        userName,
+        password,
+      };
+      state.rememberMe = rememberMe;
     },
     logout: state => {
       state.user = null;
       state.token = null;
-      state.rememberMe = false;
+      // state.rememberMe = false;
     },
   },
 });

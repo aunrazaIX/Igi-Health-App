@@ -1,12 +1,13 @@
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {useEffect, useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-import { useDispatch, useSelector } from 'react-redux';
-import { setRememberMe, setUserData } from '../redux/authSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {setRememberMe, setUserData} from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
-import { setErrorModal } from '../redux/generalSlice';
-import { RootState } from '../redux/store';
+import {setErrorModal} from '../redux/generalSlice';
+import {RootState} from '../redux/store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type UserDetails = {
   name: string;
@@ -36,24 +37,24 @@ type UseLoginViewModelReturn = {
 };
 
 const useLoginViewModel = (): UseLoginViewModelReturn => {
+  const {rememberMe, credentials} = useSelector(state => state.auth);
+  console.log('rememberMe', rememberMe);
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [verifiedUserData, setVerifiedUserData] = useState(null);
+  const [checked, setChecked] = useState(rememberMe);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
-  const rememberMe = useSelector((state: RootState) => state.auth.rememberMe);
 
   const {
     setterForApiData: loginSetterForApiData,
     apiData: loginApiData,
     checkForError: LoginCheckForError,
   } = useErrorHandlingHook({
-    userName: null,
-    password: null,
-
+    userName: rememberMe ? credentials.userName : null,
+    password: rememberMe ? credentials?.password : null,
   });
-
+  console.log('credentials', credentials);
   const {
     checkForError: signupCheckForError,
     resetStates: signupResetStates,
@@ -65,24 +66,24 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     cnic: '',
   });
 
-  const { loading, trigger } = useApiHook({
+  const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
     onSuccess: res => {
       dispatch(setUserData(res));
     },
-    onError: res => {
-      console.log('Login Error', res);
-      dispatch(setErrorModal({ Show: true, message: res.error ?? "Somtething went wrong" }));
+    onError: error => {
+      console.log('Login Error', error);
+      dispatch(setErrorModal({Show: true, message: error.error}));
     },
   });
 
-  const { trigger: triggerSignup, loading: loadingSignup } = useApiHook({
+  const {trigger: triggerSignup, loading: loadingSignup} = useApiHook({
     apiEndpoint: endpoints.auth.registerUser,
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      setVerifiedUserData({ ...res?.Data, uuid: 'ASDADASDASDASDASDADAD' });
+      setVerifiedUserData({...res?.Data, uuid: 'ASDADASDASDASDASDADAD'});
       let apiData = {
         userId: res?.Data?.UserID,
         uuid: 'ASDADASDASDASDASDADAD',
@@ -112,11 +113,11 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       signupResetStates();
     },
     onError: res => {
-      dispatch(setErrorModal({ Show: true, message: 'Incorrect Data' }));
+      dispatch(setErrorModal({Show: true, message: 'Incorrect Data'}));
     },
   });
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const filled = LoginCheckForError();
     if (!filled) return;
 
@@ -125,11 +126,18 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     let apiData = {
       userName: loginApiData?.userName,
       password: encodedAuth,
-      DeviceId: "21312321302138013203231",
-      LoginDeviceName: "Emulator"
-
+      DeviceId: '21312321302138013203231',
+      LoginDeviceName: 'Emulator',
     };
 
+    dispatch(
+      setRememberMe({
+        userName: loginApiData.userName,
+        password: loginApiData?.password,
+        rememberMe: checked,
+      }),
+    );
+    console.log('checkedsdadhjc', checked);
     trigger(apiData);
   };
 
@@ -143,11 +151,11 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const onPressTab = (name: string) => setSelectedTab(name);
 
   const onPressforgotPassword = (to: string) => {
-    navigation.navigate(to, { step: 1, type: 'forgot' });
+    navigation.navigate(to, {step: 1, type: 'forgot'});
   };
 
   const handleCheck = () => {
-    dispatch(setRememberMe(!rememberMe));
+    setChecked(!checked);
   };
 
   const tabs = ['login', 'signup'];
@@ -159,7 +167,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       signupApiData,
       loadingSignup,
       loginApiData,
-      rememberMe,
+      checked,
     },
     functions: {
       onPressTab,
