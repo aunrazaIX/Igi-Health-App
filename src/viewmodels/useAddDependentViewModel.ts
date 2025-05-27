@@ -1,12 +1,19 @@
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import {personalDetail, UsePersonalModalTypes} from '../types/personalTypes';
+import { personalDetail, UsePersonalModalTypes } from '../types/personalTypes';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
-import {RootState} from '../redux/store';
+import { RootState } from '../redux/store';
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+
 
 const useAddDependentViewModal = (): UsePersonalModalTypes => {
-  const {user} = useSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
+
+  const navigation = useNavigation();
+
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
   const {
     setterForApiData: dependentSetterForApiData,
@@ -26,11 +33,11 @@ const useAddDependentViewModal = (): UsePersonalModalTypes => {
   });
 
   const genderOptions: personalDetail[] = [
-    {value: 'Male', label: 'Male'},
-    {value: 'Female', label: 'Female'},
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
   ];
 
-  const {data: relationsOptions} = useApiHook({
+  const { data: relationsOptions } = useApiHook({
     apiEndpoint: endpoints.dependent.getDependentType,
     method: 'get',
     transform: {
@@ -39,10 +46,13 @@ const useAddDependentViewModal = (): UsePersonalModalTypes => {
     },
   });
 
-  const {trigger, loading} = useApiHook({
+  const { trigger, loading: addDependentLoading } = useApiHook({
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
-    onSuccess: res => console.log(res, 'koki'),
+    onSuccess: res => {
+      setConfirmationModal(true),
+        console.log("res", res)
+    }
   });
 
   const onPressSubmit = () => {
@@ -56,15 +66,26 @@ const useAddDependentViewModal = (): UsePersonalModalTypes => {
     trigger(_apiData);
   };
 
+  const resetStates = () => {
+
+
+    navigation.navigate('Personal')
+
+  }
+
   return {
     states: {
       genderOptions,
       relationsOptions,
       dependentApiData,
+      addDependentLoading,
+      confirmationModal
     },
     functions: {
       onPressSubmit,
       dependentSetterForApiData,
+      setConfirmationModal,
+      resetStates
     },
   };
 };

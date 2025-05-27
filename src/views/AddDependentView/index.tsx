@@ -1,18 +1,23 @@
-import {View, Image, TextInput} from 'react-native';
+import { View, Image, TextInput } from 'react-native';
 import React from 'react';
-import {COLORS} from '../../assets/theme/colors';
-import {images} from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
+import { icons, images } from '../../assets';
+
+
+
 
 import {
   AileronBold,
   AileronRegular,
   Button,
+  ConfirmationModal,
   CurvedView,
   DependentBox,
   Select,
   TopView,
 } from '../../components';
 import styles from './styles';
+import ModalLoading from '../../components/ModalLoading';
 
 type OptionType = {
   label: string;
@@ -33,6 +38,10 @@ type AddDependentViewProps = {
   onPressSubmit: () => void;
   dependentSetterForApiData: (key: keyof DependentApiData, value: any) => void;
   onPressCancel?: () => void;
+  setConfirmationModal: () => void,
+  confirmationModal: boolean,
+  resetStates: () => void,
+  addDependentLoading: any
 };
 
 const AddDependentView: React.FC<AddDependentViewProps> = ({
@@ -41,7 +50,11 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   relationsOptions,
   onPressSubmit,
   dependentSetterForApiData,
+  setConfirmationModal,
   onPressCancel,
+  confirmationModal,
+  resetStates,
+  addDependentLoading
 }) => {
   return (
     <>
@@ -112,6 +125,27 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             inputStyle={styles.modalCancelText}
           />
         </View>
+
+
+        <ModalLoading
+          loading={addDependentLoading}
+        />
+
+
+        <ConfirmationModal
+          ConfirmationModalVisible={confirmationModal}
+          setConfirmationModalVisible={setConfirmationModal}
+          frameImage={icons.ModalSuccessfull}
+          confirmationMessage={'Your request has been successfully applied'}
+          closeButton={true}
+          Successfull={true}
+          CloseButtonText={'Continue To Login'}
+          onClose={resetStates}
+
+
+        />
+
+
       </CurvedView>
     </>
   );

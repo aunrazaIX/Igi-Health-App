@@ -7,9 +7,9 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import React from 'react';
-import {icons} from '../../assets';
-import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
+import { icons } from '../../assets';
+import { COLORS } from '../../assets/theme/colors';
+import { vh, vw } from '../../assets/theme/dimension';
 import AileronBold from '../AileronBold';
 import AileronSemiBold from '../AileronSemiBold';
 import LinearGradient from 'react-native-linear-gradient';
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     paddingTop: vh * 2.5,
     paddingBottom: vh * 2,
     shadowColor: COLORS.black,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 1,
     shadowRadius: vw * 6,
     elevation: vw * 7,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   deleteButton: {
     borderRadius: vh * 1.3,
   },
-  wrapper: {padding: vh * 2},
+  wrapper: { padding: vh * 2 },
   cancelButtonText: {
     fontSize: vw * 4.4,
     color: COLORS.cancelButton,
