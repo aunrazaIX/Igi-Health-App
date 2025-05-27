@@ -17,6 +17,9 @@ const useAddTreatmentModel = ({ navigation, route }: { navigation: any, route: a
   const isError = useSelector((state: RootState) => state.lodge.isError);
   console.log(isError, " myeror")
 
+  const selectedType = useSelector((state) => state.lodge.selectedType)
+
+
   const [confirmationModal, setConfirmationModal] = useState(false);
 
 
@@ -55,12 +58,20 @@ const useAddTreatmentModel = ({ navigation, route }: { navigation: any, route: a
 
   const onPressAddTreatment = () => {
 
+
     const treatmentObj = {
       treatment: apiData?.treatment,
       receiptNumber: apiData?.receiptNumber,
       amount: apiData?.amount,
       description: apiData?.description,
     };
+
+
+    if (selectedType === "Opd") {
+
+    }
+
+
     if (typeof treatmentIndex === 'number') {
 
       dispatch(updateTreatments({
@@ -71,12 +82,14 @@ const useAddTreatmentModel = ({ navigation, route }: { navigation: any, route: a
 
 
     } else {
+
       dispatch(setTreatments({
         ...treatmentObj, navigateOnSuccess: () => {
           navigation.goBack()
         }
       }));
     }
+
 
     // navigation.navigate('LodgeClaimProcess');
 

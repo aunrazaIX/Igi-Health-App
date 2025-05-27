@@ -29,7 +29,10 @@ const Claim: React.FC<ClaimProps> = ({ claimsDetails, onPressDelete, onPressEdit
     <View style={styles.container}>
       <View style={styles.list}>
 
+
+
         {claimsDetails?.length > 0 ? claimsDetails?.map((data, index) => (
+
 
           < Box
             onPressDelete={() => onPressDelete(index)}
@@ -37,6 +40,7 @@ const Claim: React.FC<ClaimProps> = ({ claimsDetails, onPressDelete, onPressEdit
             data={data}
             key={index}
           />
+
 
         )) :
 

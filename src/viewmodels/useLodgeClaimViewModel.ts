@@ -138,6 +138,9 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
   });
 
 
+
+
+
   const {
     loading: claimLoading,
     trigger: claimTrigger,
@@ -347,7 +350,7 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
 
       res?.forEach((item: any) => {
         const isDuplicate = selectedDocuments.some(
-          doc => doc.name === item.name,
+          doc => doc?.name === item?.name,
         );
 
         if (!isDuplicate) {
@@ -356,12 +359,17 @@ const useLodgeClaimViewModel = ({ navigation, route }: Props) => {
             type: item?.type,
             name: item?.name,
           });
+          dispatch(setSelectedDocuments(documents));
         } else {
-          console.log('same file cant be selected');
+          dispatch(
+            setErrorModal({
+              show: true,
+              message: "same file can't be selected again",
+            }),
+          );
+          return
         }
       });
-
-      dispatch(setSelectedDocuments(documents));
     } catch (e) {
       console.log('Error', e);
     }

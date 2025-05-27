@@ -116,15 +116,28 @@ export const lodgeSlice = createSlice({
     },
 
     _setTreatmentData: (state, { payload }) => {
+
+
+
       if (payload?._data) {
         const { _data } = payload
+
         _data?.navigateOnSuccess()
         delete _data?.navigateOnSuccess
         state.treatments = [...state.treatments, _data];
+
       }
       else {
         state.treatments = []
       }
+
+
+
+
+
+
+
+
 
     },
 
