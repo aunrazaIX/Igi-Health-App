@@ -1,10 +1,10 @@
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
-import { useDispatch, useSelector } from 'react-redux';
-import { setTreatments, updateTreatments } from '../redux/lodgeSlice';
-import { useEffect, useMemo, useState } from 'react';
-import { RootState } from '../redux/store';
+import {useDispatch, useSelector} from 'react-redux';
+import {setTreatments, updateTreatments} from '../redux/lodgeSlice';
+import {useEffect, useMemo, useState} from 'react';
+import {RootState} from '../redux/store';
 
 const useAddTreatmentModel = ({
   navigation,
@@ -21,7 +21,7 @@ const useAddTreatmentModel = ({
 
   const [confirmationModal, setConfirmationModal] = useState(false);
 
-  const { treatmentIndex, treatmentData } = route?.params || {};
+  const {treatmentIndex, treatmentData} = route?.params || {};
 
   const extractedData = {
     treatment: treatmentData?.treatment,
@@ -30,27 +30,35 @@ const useAddTreatmentModel = ({
     description: treatmentData?.info?.[2].value,
   };
 
-  const { setterForApiData, apiData } = useErrorHandlingHook({
+  const {setterForApiData, apiData} = useErrorHandlingHook({
     treatment: extractedData.treatment ?? {},
     receiptNumber: extractedData.receiptNumber ?? '',
     amount: extractedData.amount ?? '',
     description: extractedData.description ?? '',
   });
 
-  const apiParams = useMemo(
-    () => ({
-      apiEndpoint: endpoints.treatments.getTypes,
+  const apiParams = useMemo(() => {
+    const typeValue = selectedType?.value;
+
+    const endpointKey =
+      typeValue === 0
+        ? 'getIPDTypes'
+        : typeValue === 1
+        ? 'getTypes'
+        : 'getMATTypes';
+
+    return {
+      apiEndpoint: endpoints.treatments[endpointKey],
       method: 'get',
       transform: {
         keyToLoop: 'Data',
         label: 'ClaimsSubTypeName',
         value: 'ClaimsSubTypeID',
       },
-    }),
-    [],
-  );
+    };
+  }, [selectedType?.value]);
 
-  const { loading, data: opdTypes } = useApiHook(apiParams);
+  const {loading, data: treatmentTypes, error} = useApiHook(apiParams);
 
   const onPressAddTreatment = () => {
     const treatmentObj = {
@@ -87,12 +95,10 @@ const useAddTreatmentModel = ({
   };
 
   const maternityTypeData = [
-    { label: 'Normal', value: 0 },
-    { label: 'C-Section', value: 1 },
-    { label: 'MisCarriage', value: 2 },
+    {label: 'Normal', value: 0},
+    {label: 'C-Section', value: 1},
+    {label: 'MisCarriage', value: 2},
   ];
-
-  let treatmentTypes = selectedType.value === 1 ? opdTypes : maternityTypeData;
 
   return {
     states: {
