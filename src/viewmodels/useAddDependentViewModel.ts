@@ -42,7 +42,6 @@ const useAddDependentViewModal = (): UsePersonalModalTypes => {
   const {trigger, loading} = useApiHook({
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
-    onSuccess: res => console.log(res, 'koki'),
   });
 
   const onPressSubmit = () => {

@@ -1,12 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-import { useDispatch, useSelector } from 'react-redux';
-import { setRememberMe, setUserData } from '../redux/authSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {setRememberMe, setUserData} from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
-import { setErrorModal } from '../redux/generalSlice';
-import { RootState } from '../redux/store';
+import {setErrorModal} from '../redux/generalSlice';
+import {RootState} from '../redux/store';
 
 export type UserDetails = {
   name: string;
@@ -51,7 +51,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   } = useErrorHandlingHook({
     userName: null,
     password: null,
-
   });
 
   const {
@@ -65,24 +64,28 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     cnic: '',
   });
 
-  const { loading, trigger } = useApiHook({
+  const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
     onSuccess: res => {
       dispatch(setUserData(res));
     },
     onError: res => {
-      console.log('Login Error', res);
-      dispatch(setErrorModal({ Show: true, message: res.error ?? "Somtething went wrong" }));
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: res.error ?? 'Somtething went wrong',
+        }),
+      );
     },
   });
 
-  const { trigger: triggerSignup, loading: loadingSignup } = useApiHook({
+  const {trigger: triggerSignup, loading: loadingSignup} = useApiHook({
     apiEndpoint: endpoints.auth.registerUser,
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      setVerifiedUserData({ ...res?.Data, uuid: 'ASDADASDASDASDASDADAD' });
+      setVerifiedUserData({...res?.Data, uuid: 'ASDADASDASDASDASDADAD'});
       let apiData = {
         userId: res?.Data?.UserID,
         uuid: 'ASDADASDASDASDASDADAD',
@@ -112,7 +115,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       signupResetStates();
     },
     onError: res => {
-      dispatch(setErrorModal({ Show: true, message: 'Incorrect Data' }));
+      dispatch(setErrorModal({Show: true, message: 'Incorrect Data'}));
     },
   });
 
@@ -125,9 +128,8 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     let apiData = {
       userName: loginApiData?.userName,
       password: encodedAuth,
-      DeviceId: "21312321302138013203231",
-      LoginDeviceName: "Emulator"
-
+      DeviceId: '21312321302138013203231',
+      LoginDeviceName: 'Emulator',
     };
 
     trigger(apiData);
@@ -143,7 +145,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const onPressTab = (name: string) => setSelectedTab(name);
 
   const onPressforgotPassword = (to: string) => {
-    navigation.navigate(to, { step: 1, type: 'forgot' });
+    navigation.navigate(to, {step: 1, type: 'forgot'});
   };
 
   const handleCheck = () => {

@@ -59,7 +59,6 @@ const useAddTreatmentModel = ({
   }, [selectedType?.value]);
 
   const {loading, data: treatmentTypes, error} = useApiHook(apiParams);
-  console.log(error);
 
   const onPressAddTreatment = () => {
     const treatmentObj = {
@@ -83,7 +82,6 @@ const useAddTreatmentModel = ({
         }),
       );
     } else {
-      console.log('3');
       dispatch(
         setTreatments({
           ...treatmentObj,
