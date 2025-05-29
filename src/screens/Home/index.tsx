@@ -3,9 +3,10 @@ import HomeView from '../../views/HomeView';
 import useHomeViewModel from '../../viewmodels/useHomeViewModel';
 
 const Home = () => {
-  const { states, functions } = useHomeViewModel();
-  const { cardData, backAnimatedStyle, frontAnimatedStyle } = states;
-  const { animateCard, toggleDrawer, onPressMenu, onPressHeaderIcon } = functions;
+  const {states, functions} = useHomeViewModel();
+  const {cardData, backAnimatedStyle, frontAnimatedStyle, homeCardData} =
+    states;
+  const {animateCard, toggleDrawer, onPressMenu, onPressHeaderIcon} = functions;
 
   return (
     <HomeView
@@ -16,6 +17,7 @@ const Home = () => {
       onPressHeaderIcon={onPressHeaderIcon}
       backAnimatedStyle={backAnimatedStyle}
       frontAnimatedStyle={frontAnimatedStyle}
+      homeCardData={homeCardData}
     />
   );
 };

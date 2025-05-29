@@ -39,7 +39,7 @@ const endpoints = {
   },
   policy: {
     getPolicyTypes: 'Policy/GetPolicyTypes',
-    getPolicyDetails: 'Policy/GetPolicyTypes',
+    getPolicyDetails: 'Policy/GetPolicyDetails',
   },
 };
 

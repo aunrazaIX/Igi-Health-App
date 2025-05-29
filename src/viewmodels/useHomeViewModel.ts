@@ -31,6 +31,7 @@ type UseHomeViewModelReturn = {
     cardData: CardItemData[];
     frontAnimatedStyle: {};
     backAnimatedStyle: {};
+    homeCardData: any;
   };
   functions: {
     onPressTab: (name: string) => void;
@@ -93,22 +94,30 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   // second APi Call
 
-  const {data, loading, trigger} = useApiHook({
+  const {
+    data: homeCardData,
+    loading: homeCardDataLoading,
+    trigger,
+  } = useApiHook({
     apiEndpoint: endpoints.policy.getPolicyDetails,
     method: 'get',
     skip: true,
 
     onSuccess: res => {
       console.log(res, 'yaehh raha second APi ka response');
+      console.log(data, 'second api ersponse another');
+    },
+    onError: e => {
+      console.log('error in seocnd APi ', e);
     },
   });
 
   // 1st api call
-  const {data: HomeCardData, loading: HomeCardDataLoading} = useApiHook({
+  const {data, loading: Loading} = useApiHook({
     apiEndpoint: endpoints.policy.getPolicyTypes,
     method: 'get',
     argsOrBody: {
-      ClientCode: 'ERC',
+      ClientCode: user?.ClientCode,
     },
 
     onSuccess: res => {
@@ -126,13 +135,10 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
       let apiData = {
         policyCode: policyNumber,
-        clientCode: user.ClientCode,
+        cnic: user.cnic,
       };
-
+      console.log('triggering second API');
       trigger(apiData);
-
-      console.log(apiData, 'API DATA..');
-      console.log(res, 'response of first APi');
     },
     onError: e => {
       console.log(e, 'Erorrrrrr');
@@ -227,6 +233,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       cardData,
       backAnimatedStyle,
       frontAnimatedStyle,
+      homeCardData,
     },
     functions: {
       onPressTab,

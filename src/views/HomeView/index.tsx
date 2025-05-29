@@ -15,6 +15,7 @@ import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
 import {vh} from '../../assets/theme/dimension';
+import {useSelector} from 'react-redux';
 
 type CardItem = {
   logo: any;
@@ -32,6 +33,7 @@ type HomeViewProps = {
   toggleDrawer: () => void;
   onPressMenu: (value: object) => void;
   onPressHeaderIcon: (value: string) => void;
+  homeCardData: any;
 };
 
 const HomeView: React.FC<HomeViewProps> = ({
@@ -42,7 +44,10 @@ const HomeView: React.FC<HomeViewProps> = ({
   onPressHeaderIcon,
   frontAnimatedStyle,
   backAnimatedStyle,
+  homeCardData,
 }) => {
+  const user = useSelector(state => state.auth.user);
+  console.log(user, 'pppp');
   return (
     <ScrollView>
       <LinearGradient
@@ -54,10 +59,6 @@ const HomeView: React.FC<HomeViewProps> = ({
             </View>
 
             <View style={styles.headerIconsRow}>
-              {/* <TouchableOpacity>
-                <Image source={icons.search} style={styles.headerIcons} />
-              </TouchableOpacity> */}
-
               <TouchableOpacity
                 onPress={() => onPressHeaderIcon('Notifications')}>
                 <Image source={icons.notification} style={styles.headerIcons} />
@@ -68,189 +69,211 @@ const HomeView: React.FC<HomeViewProps> = ({
               </TouchableOpacity>
             </View>
           </View>
-
-          <View style={styles.flipCardContainer}>
-            <Animated.View
-              style={[styles.homeInfoContainer, frontAnimatedStyle]}>
-              <TouchableOpacity onPress={animateCard}>
-                <View style={styles.homeInfoContainerHeader}>
-                  <View>
-                    <Image style={styles.logo} source={icons.logo} />
-                  </View>
-
-                  <View style={styles.homeInfoContainerHeaderText}>
-                    <AileronBold
-                      name={'Health Insurance'}
-                      numberOfLines={1}
-                      style={styles.infoCardTextBold}
-                    />
-
-                    <AileronSemiBold
-                      name={'User ID: 123450000123'}
-                      style={styles.infoCardTextlight}
-                      numberOfLines={1}
-                    />
-                  </View>
-                </View>
-
-                <View style={styles.homeInfoContainerMiddle}>
-                  <View style={styles.homeInfoContainerMiddleText}>
-                    <AileronSemiBold
-                      name={`Policy Number: ${'12345'}`}
-                      style={styles.infoCardMiddleTextlight}
-                      numberOfLines={1}
-                    />
-                  </View>
-
-                  <View style={styles.homeInfoContainerMiddleTextLogo}>
+          {homeCardData?.length > 0 && (
+            <View style={styles.flipCardContainer}>
+              <Animated.View
+                style={[styles.homeInfoContainer, frontAnimatedStyle]}>
+                <TouchableOpacity onPress={animateCard}>
+                  <View style={styles.homeInfoContainerHeader}>
                     <View>
+                      <Image style={styles.logo} source={icons.logo} />
+                    </View>
+
+                    <View style={styles.homeInfoContainerHeaderText}>
+                      <AileronBold
+                        name={'Health Insurance'}
+                        numberOfLines={1}
+                        style={styles.infoCardTextBold}
+                      />
+
                       <AileronSemiBold
-                        name={'CNIC: 12345-6789012-3'}
+                        name={`User ID: ${
+                          homeCardData[0]?.Policy_Number +
+                          homeCardData[0]?.Policy_Class +
+                          homeCardData[0]?.Policy_CertNo
+                        }`}
+                        style={styles.infoCardTextlight}
+                        numberOfLines={1}
+                      />
+                    </View>
+                  </View>
+
+                  <View style={styles.homeInfoContainerMiddle}>
+                    <View style={styles.homeInfoContainerMiddleText}>
+                      <AileronSemiBold
+                        name={`Policy Number ${homeCardData[0]?.Policy_Number}`}
                         style={styles.infoCardMiddleTextlight}
                         numberOfLines={1}
                       />
                     </View>
-                    <TouchableOpacity onPress={animateCard}>
-                      <Image source={images.flipCard} />
-                    </TouchableOpacity>
-                  </View>
-                </View>
 
-                <View style={styles.infoCardFooter}>
-                  <View style={styles.infoCardFooterLeft}>
-                    <AileronSemiBold
-                      name={'Card Holder Name'}
-                      style={styles.infoCardMiddleTextlight}
-                      numberOfLines={1}
-                    />
-
-                    <AileronBold
-                      name={'Imran Naveed Qureshi'}
-                      style={styles.infoCardTextBold}
-                      numberOfLines={1}
-                    />
-                  </View>
-
-                  <View style={styles.infoCardFooterRight}>
-                    <AileronSemiBold
-                      name={'Expiry Date'}
-                      style={styles.infoCardMiddleTextlight}
-                      numberOfLines={1}
-                    />
-
-                    <AileronBold
-                      name={'02/07/2025'}
-                      style={styles.infoCardFooterTextBold}
-                      numberOfLines={1}
-                    />
-                  </View>
-                </View>
-              </TouchableOpacity>
-            </Animated.View>
-
-            <Animated.View
-              style={[
-                styles.homeInfoContainer,
-                backAnimatedStyle,
-                styles.flipBackCard,
-              ]}>
-              <TouchableOpacity onPress={animateCard}>
-                <View style={styles.homeBackCardContainer}>
-                  <View
-                    style={{justifyContent: 'space-between', gap: vh * 1.5}}>
-                    <View style={styles.homeBackCardHeading}>
-                      <AileronBold
-                        style={styles.homeBackCardHeadingBlack}
-                        name={'Dependent'}
-                      />
-                      <AileronBold
-                        style={styles.homeBackCardHeadingColor}
-                        name={'Details'}
-                      />
-                    </View>
-
-                    <AileronRegular
-                      name="Madhia Imran Qureshi: 36"
-                      style={styles.homeBackCardText}
-                    />
-
-                    <AileronRegular
-                      name="Saad Imran Qureshi: 8"
-                      style={styles.homeBackCardText}
-                    />
-
-                    <View style={styles.homeBackCardRow}>
-                      <View style={styles.homeBackCardRowText}>
-                        <AileronRegular
-                          style={styles.homeBackCardText}
-                          name="Tariq Imran Qureshi: 5"
-                        />
-                        <AileronRegular
-                          name="Emaan Imran Qureshi: 6"
-                          style={styles.homeBackCardText}
+                    <View style={styles.homeInfoContainerMiddleTextLogo}>
+                      <View>
+                        <AileronSemiBold
+                          name={`CNIC: ${user?.cnic}`}
+                          style={styles.infoCardMiddleTextlight}
+                          numberOfLines={1}
                         />
                       </View>
                       <TouchableOpacity onPress={animateCard}>
                         <Image source={images.flipCard} />
                       </TouchableOpacity>
                     </View>
+                  </View>
 
-                    <View style={styles.homeBackCardTextRow}>
+                  <View style={styles.infoCardFooter}>
+                    <View style={styles.infoCardFooterLeft}>
                       <AileronSemiBold
-                        style={styles.homeBackCardText}
-                        name="Class: 0000"
+                        name={'Card Holder Name'}
+                        style={styles.infoCardMiddleTextlight}
+                        numberOfLines={1}
                       />
-                      <AileronSemiBold
-                        style={styles.homeBackCardText}
-                        name="Cert No: 491"
+
+                      <AileronBold
+                        name={homeCardData
+                          ?.find(
+                            item => item?.Policy_Insured_Relaion == 'Member',
+                          )
+                          ?.Policy_Insured_Name.trim('')}
+                        style={styles.infoCardTextBold}
+                        numberOfLines={1}
                       />
+                    </View>
+
+                    <View style={styles.infoCardFooterRight}>
                       <AileronSemiBold
-                        style={styles.homeBackCardText}
-                        name="Age: 41"
+                        name={'Expiry Date'}
+                        style={styles.infoCardMiddleTextlight}
+                        numberOfLines={1}
+                      />
+
+                      <AileronBold
+                        name={'02/07/2025'}
+                        style={styles.infoCardFooterTextBold}
+                        numberOfLines={1}
                       />
                     </View>
                   </View>
-                  <View style={styles.backCardFooter}>
-                    <View style={styles.backCardFooterBox}>
-                      <Image
-                        style={styles.backCardFooterIcon}
-                        source={icons.flipCardRoom}
-                      />
+                </TouchableOpacity>
+              </Animated.View>
 
-                      <View style={styles.backCardFooterText}>
+              <Animated.View
+                style={[
+                  styles.homeInfoContainer,
+                  backAnimatedStyle,
+                  styles.flipBackCard,
+                ]}>
+                <TouchableOpacity onPress={animateCard}>
+                  <View style={styles.homeBackCardContainer}>
+                    <View
+                      style={{justifyContent: 'space-between', gap: vh * 1.5}}>
+                      <View style={styles.homeBackCardHeading}>
+                        <AileronBold
+                          style={styles.homeBackCardHeadingBlack}
+                          name={'Dependent'}
+                        />
+                        <AileronBold
+                          style={styles.homeBackCardHeadingColor}
+                          name={'Details'}
+                        />
+                      </View>
+                      {homeCardData
+                        ?.filter(
+                          _item => _item?.Policy_Insured_Relaion !== 'Member',
+                        )
+                        .map((item, index) => (
+                          <AileronRegular
+                            key={index}
+                            name={`${item?.Policy_Insured_Name?.trim()}:${
+                              item?.Policy_Insured_Age
+                            }`}
+                            style={styles.homeBackCardText}
+                          />
+                        ))}
+
+                      {/* <View style={styles.homeBackCardRow}>
+                        <View style={styles.homeBackCardRowText}>
+                          <AileronRegular
+                            style={styles.homeBackCardText}
+                            name={`Tariq Imran Qureshi: ${
+                              homeCardData?.find(
+                                item =>
+                                  item?.Policy_Insured_Relaion == 'Member',
+                              )?.Policy_Insured_Age
+                            }`}
+                          />
+                          <AileronRegular
+                            name={`Emaan Imran Qureshi: ${
+                              homeCardData?.find(
+                                item =>
+                                  item?.Policy_Insured_Relaion == 'Member',
+                              )?.Policy_Insured_Age
+                            }`}
+                            style={styles.homeBackCardText}
+                          />
+                        </View>
+                        <TouchableOpacity onPress={animateCard}>
+                          <Image source={images.flipCard} />
+                        </TouchableOpacity>
+                      </View> */}
+
+                      <View style={styles.homeBackCardTextRow}>
                         <AileronSemiBold
                           style={styles.homeBackCardText}
-                          name="Max. Room & Board"
+                          name={`Class : ${homeCardData[0].Policy_CertNo}`}
                         />
                         <AileronSemiBold
                           style={styles.homeBackCardText}
-                          name="Rs. Per Day: 20,000"
+                          name={`Cert No: ${homeCardData[0].Policy_CertNo}`}
+                        />
+                        <AileronSemiBold
+                          style={styles.homeBackCardText}
+                          name={`Age : ${homeCardData[0]?.Policy_Insured_Age}`}
                         />
                       </View>
                     </View>
-
-                    <View style={styles.backCardFooterBox}>
-                      <Image
-                        style={styles.backCardFooterSecondIcon}
-                        source={icons.flipCardMaternity}
-                      />
-
-                      <View style={styles.backCardFooterText}>
-                        <AileronSemiBold
-                          style={styles.homeBackCardText}
-                          name="Maternity"
+                    <View style={styles.backCardFooter}>
+                      <View style={styles.backCardFooterBox}>
+                        <Image
+                          style={styles.backCardFooterIcon}
+                          source={icons.flipCardRoom}
                         />
-                        <AileronSemiBold
-                          style={styles.homeBackCardText}
-                          name="60,000"
+
+                        <View style={styles.backCardFooterText}>
+                          <AileronSemiBold
+                            style={styles.homeBackCardText}
+                            name="Max. Room & Board"
+                          />
+                          <AileronSemiBold
+                            style={styles.homeBackCardText}
+                            name={homeCardData[0]?.Policy_Daily_RoomLimit}
+                          />
+                        </View>
+                      </View>
+
+                      <View style={styles.backCardFooterBox}>
+                        <Image
+                          style={styles.backCardFooterSecondIcon}
+                          source={icons.flipCardMaternity}
                         />
+
+                        <View style={styles.backCardFooterText}>
+                          <AileronSemiBold
+                            style={styles.homeBackCardText}
+                            name="Maternity"
+                          />
+                          <AileronSemiBold
+                            style={styles.homeBackCardText}
+                            name={homeCardData[0]?.Policy_MatLimit}
+                          />
+                        </View>
                       </View>
                     </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            </Animated.View>
-          </View>
+                </TouchableOpacity>
+              </Animated.View>
+            </View>
+          )}
         </View>
       </LinearGradient>
       <View style={styles.gradient}>
