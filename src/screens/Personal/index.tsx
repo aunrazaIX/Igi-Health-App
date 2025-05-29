@@ -5,7 +5,13 @@ import usePersonalViewModal from '../../viewmodels/usePersonalViewModel';
 const Personal = () => {
   const {states, functions} = usePersonalViewModal();
 
-  const {data, modalVisible, confimationModalVisible, expandedIndex} = states;
+  const {
+    data,
+    modalVisible,
+    confimationModalVisible,
+    expandedIndex,
+    confirmationModal,
+  } = states;
 
   const {
     goBack,
@@ -16,11 +22,12 @@ const Personal = () => {
     setConfimationModalVisible,
     toggleExpand,
     openAddDependent,
+    setConfirmationModal,
+    resetStates,
   } = functions;
 
   return (
     <>
-      {console.log(data, 'dataaaa')}
       <PersonalView
         openAddDependent={openAddDependent}
         goBack={goBack}
@@ -34,6 +41,9 @@ const Personal = () => {
         setConfimationModalVisible={setConfimationModalVisible}
         toggleExpand={toggleExpand}
         expandedIndex={expandedIndex}
+        confirmationModal={confirmationModal}
+        setConfirmationModal={setConfirmationModal}
+        resetStates={resetStates}
       />
     </>
   );

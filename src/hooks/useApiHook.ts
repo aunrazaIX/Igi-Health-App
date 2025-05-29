@@ -12,6 +12,7 @@ type ApiHookParams = {
   onSuccess?: (data: any) => void;
   onError?: (data: any) => void;
   isFormData?: boolean;
+  skip?: boolean;
 };
 
 type ApiHookReturn<T> = {
@@ -31,6 +32,7 @@ const useApiHook = <T>({
   isFormData = false,
   onError,
   onSuccess,
+  skip = false,
 }: ApiHookParams): ApiHookReturn<T> => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<T | null>(null);
@@ -88,7 +90,7 @@ const useApiHook = <T>({
   useFocusEffect(
     useCallback(
       () => {
-        if (method === 'get') {
+        if (method === 'get' && !skip) {
           apiCallingFunction();
         }
       },

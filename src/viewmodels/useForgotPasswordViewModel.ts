@@ -115,6 +115,7 @@ const useForgotPasswordViewModel = ({
           ...res?.Data,
           uuid: 'ASDADASDASDASDASDADAD',
         });
+
         let apiData = {
           userId: res?.Data?.UserID,
           uuid: 'ASDADASDASDASDASDADAD',
@@ -124,6 +125,7 @@ const useForgotPasswordViewModel = ({
           opt_typeID: '2',
           ClientCode: res?.Data?.ClientCode,
         };
+
         setOtp('');
         sendOtp(apiData);
       },

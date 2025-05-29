@@ -4,11 +4,9 @@ import {COLORS} from '../assets/theme/colors';
 import {Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
+import {useSelector} from 'react-redux';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import formatCurrency from '../utils';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {DrawerStackParamList} from '../navigation/types';
 
 export type CardItemData = {
   logo?: ImageSourcePropType;
@@ -38,12 +36,7 @@ type UseHomeViewModelReturn = {
     cardData: CardItemData[];
     frontAnimatedStyle: {};
     backAnimatedStyle: {};
-    claimData: {
-      totalClaimAmount: string;
-      deductedAmount: string;
-      paidAmount: string;
-    };
-    loading: boolean;
+    homeCardData: any;
   };
   functions: {
     onPressTab: (name: string) => void;
@@ -60,7 +53,11 @@ type ClaimStats = {
 };
 
 const useHomeViewModel = (): UseHomeViewModelReturn => {
-  const navigate = useNavigation<DrawerNavigationProp<DrawerStackParamList>>();
+  const navigate = useNavigation();
+
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  console.log(user, 'userrrr');
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [data, setData] = useState<ClaimStats>({
     totalClaimAmount: '0',
@@ -109,6 +106,59 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const backAnimatedStyle = {
     transform: [{perspective: 1000}, {rotateY: rotateBack}],
   };
+
+  // second APi Call
+
+  const {
+    data: homeCardData,
+    loading: homeCardDataLoading,
+    trigger,
+  } = useApiHook({
+    apiEndpoint: endpoints.policy.getPolicyDetails,
+    method: 'get',
+    skip: true,
+
+    onSuccess: res => {
+      console.log(res, 'yaehh raha second APi ka response');
+      console.log(data, 'second api ersponse another');
+    },
+    onError: e => {
+      console.log('error in seocnd APi ', e);
+    },
+  });
+
+  // 1st api call
+  const {data, loading: Loading} = useApiHook({
+    apiEndpoint: endpoints.policy.getPolicyTypes,
+    method: 'get',
+    argsOrBody: {
+      ClientCode: user?.ClientCode,
+    },
+
+    onSuccess: res => {
+      let policyNumber;
+
+      if (res?.length > 1) {
+        res?.forEach(item => {
+          if (item?.PolicyCode?.startsWith('G' || 'g')) {
+            policyNumber = item?.PolicyCode;
+          }
+        });
+      } else if (res?.length == 1) {
+        policyNumber = res[0]?.PolicyCode;
+      }
+
+      let apiData = {
+        policyCode: policyNumber,
+        cnic: user.cnic,
+      };
+      console.log('triggering second API');
+      trigger(apiData);
+    },
+    onError: e => {
+      console.log(e, 'Erorrrrrr');
+    },
+  });
 
   const cardData: CardItemData[] = [
     {
@@ -227,8 +277,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       cardData,
       backAnimatedStyle,
       frontAnimatedStyle,
-      claimData: data,
-      loading,
+      homeCardData,
     },
     functions: {
       onPressTab,

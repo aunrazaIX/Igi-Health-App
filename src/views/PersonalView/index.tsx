@@ -9,6 +9,7 @@ import React from 'react';
 import {
   AileronBold,
   AileronSemiBold,
+  ConfirmationModal,
   Container,
   CurvedView,
   TopView,
@@ -36,8 +37,10 @@ type Props = {
   toggleExpand: (index: number) => void;
   expandedIndex: number | null;
   openAddDependent: () => void;
+  setConfirmationModal: () => void;
+  confirmationModal: boolean;
+  resetStates: () => void;
 };
-
 type dependentDetail = {
   dependent: string;
   image: ImageSourcePropType;
@@ -59,6 +62,9 @@ const PersonalView: React.FC<Props> = ({
   toggleExpand,
   expandedIndex,
   openAddDependent,
+  setConfirmationModal,
+  confirmationModal,
+  resetStates,
 }) => {
   return (
     <Container>
@@ -109,7 +115,9 @@ const PersonalView: React.FC<Props> = ({
                               style={styles.editIcon}
                             />
                           </TouchableOpacity>
-                          <TouchableOpacity onPress={() => deleteDepenedent()}>
+
+                          <TouchableOpacity
+                            onPress={() => deleteDepenedent(dependent, index)}>
                             <Image
                               source={icons.delete}
                               style={styles.deleteIcon}
@@ -159,17 +167,17 @@ const PersonalView: React.FC<Props> = ({
         onPressSubmit={handleSubmit}
       /> */}
 
-      <ConfimationModal
-        ConfirmationModalVisible={confimationModalVisible}
-        setConfirmationModalVisible={setConfimationModalVisible}
-        handleDelete={deleteDepenedent}
-        frameImage={images.personalFrame}
+      <ConfirmationModal
+        ConfirmationModalVisible={confirmationModal}
+        setConfirmationModalVisible={setConfirmationModal}
+        frameImage={icons.ModalSuccessfull}
         confirmationMessage={
-          'Are you sure you want to delete this dependent detail? This action cannot be undone, and it may affect other related data.'
+          'Your request of deletion has been successfully applied'
         }
-        confirmationRequired={true}
-        deleteButton={true}
-        CloseButtonText={'Close'}
+        closeButton={true}
+        Successfull={true}
+        CloseButtonText={'Continue To Login'}
+        onClose={resetStates}
       />
     </Container>
   );

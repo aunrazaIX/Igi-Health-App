@@ -4,7 +4,7 @@ import useHomeViewModel from '../../viewmodels/useHomeViewModel';
 
 const Home = () => {
   const {states, functions} = useHomeViewModel();
-  const {cardData, backAnimatedStyle, frontAnimatedStyle, claimData, loading} =
+  const {cardData, backAnimatedStyle, frontAnimatedStyle, homeCardData} =
     states;
   const {animateCard, toggleDrawer, onPressMenu, onPressHeaderIcon} = functions;
 
@@ -17,8 +17,7 @@ const Home = () => {
       onPressHeaderIcon={onPressHeaderIcon}
       backAnimatedStyle={backAnimatedStyle}
       frontAnimatedStyle={frontAnimatedStyle}
-      claimData={claimData}
-      loading={loading}
+      homeCardData={homeCardData}
     />
   );
 };
