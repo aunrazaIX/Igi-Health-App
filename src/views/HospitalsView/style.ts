@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {StyleSheet} from 'react-native';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
   infoContainer: {
@@ -91,7 +91,7 @@ export const styles = StyleSheet.create({
     gap: vw * 2,
     justifyContent: 'space-between',
 
-    marginTop: vh * 1.5
+    marginTop: vh * 1.5,
   },
   mapTabsContainer: {
     flexDirection: 'row',
@@ -138,5 +138,14 @@ export const styles = StyleSheet.create({
   moreFilterText: {
     fontSize: vw * 4,
     color: COLORS.black,
+  },
+  detailsTextLabel: {
+    width: '20%',
+    textAlign: 'left',
+  },
+
+  detailsTextValue: {
+    width: '60%',
+    textAlign: 'right',
   },
 });

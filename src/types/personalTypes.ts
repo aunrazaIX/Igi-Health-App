@@ -1,8 +1,22 @@
 export type UsePersonalModalTypes = {
-  genderRelationStates: {
-    gender: personalDetail[];
-    relation: personalDetail[];
-  };
+  states: {
+    genderOptions: any
+    relationsOptions: any
+    dependentApiData: any
+    addDependentLoading: any
+    confirmationModal: any
+    dependentData: any
+    dependentIndex: any
+  },
+  functions: {
+    onPressSubmit: any
+    dependentSetterForApiData: any
+    setConfirmationModal: any
+    resetStates: any
+  }
+
+
+
 };
 
 export type personalDetail = {

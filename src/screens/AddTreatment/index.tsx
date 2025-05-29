@@ -12,8 +12,14 @@ const AddTreatment = ({
   route: any;
 }) => {
   const { states, functions } = useAddTreatmentModel({ navigation, route });
-  const { opdTypes, apiData, treatmentIndex, isError, confirmationModal } = states;
-  const { setterForApiData, onPressAddTreatment, openConfimationModal, setConfirmationModal } = functions;
+  const { treatmentTypes, apiData, treatmentIndex, isError, confirmationModal } =
+    states;
+  const {
+    setterForApiData,
+    onPressAddTreatment,
+    openConfimationModal,
+    setConfirmationModal,
+  } = functions;
   return (
     <AddTreatmentView
       apiData={apiData}
@@ -21,13 +27,10 @@ const AddTreatment = ({
       onPressAddTreatment={onPressAddTreatment}
       treatmentIndex={treatmentIndex}
       isError={isError}
-      opdTypes={opdTypes}
+      treatmentTypes={treatmentTypes}
       confirmationModal={confirmationModal}
       openConfimationModal={openConfimationModal}
       setConfirmationModal={setConfirmationModal}
-
-
-
     />
   );
 };

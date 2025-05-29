@@ -17,11 +17,13 @@ import {
 import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
+import {useSelector} from 'react-redux';
+import {View} from 'react-native';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
   personalData: PersonelDataSection[];
-  dependants: DependantList[];
+  dependantsData: DependantList[];
   claimsDetails: ClaimDetailSection[] | undefined;
   goBack: () => void;
   patientOptions: PatientList[];
@@ -40,12 +42,22 @@ type LodgeClaimViewProps = {
   resetStates: () => void;
   claimData: any;
   setterForclaimData: any;
+  onSelectHospital: (option: any) => void;
+  personalDetails: any;
+  personalDetailsLoading: any;
+  dependantLoading: any;
+  dependants: any;
+  onSelectType: () => void;
+  selectedType: any;
+  maternityTypeData: any;
+  selectedMaternityType: any;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   steps,
   personalData,
   claimsDetails,
+  dependantsData,
   dependants,
   currentStep,
   goBack,
@@ -69,14 +81,28 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   setterForclaimData,
   claimLoading,
   type,
+  personalDetails,
+  personalDetailsLoading,
+  onSelectType,
+  selectedType,
+  maternityTypeData,
+  onSelectMaternityType,
+  selectedMaternityType,
 }) => {
   const renderStep = {
     personalDetails: (
       <PersonalDetails
         selectedPatient={selectedPatient}
+        selectedType={selectedType}
         onSelectPatient={onSelectPatient}
         personalData={personalData}
-        patientOptions={dependants}
+        patientOptions={dependantsData}
+        dependants={dependants}
+        personalDetails={personalDetails}
+        onSelectType={onSelectType}
+        maternityTypeData={maternityTypeData}
+        onSelectMaternityType={onSelectMaternityType}
+        selectedMaternityType={selectedMaternityType}
       />
     ),
     claim: (
@@ -98,10 +124,17 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
     ),
   };
 
+  console.log(claimsDetails, selectedType);
+
   return (
     <>
       <TopView
-        TopViewFirstIcon={currentStep === 2 ? icons.addSquare : null}
+        TopViewFirstIcon={
+          (currentStep === 2 && selectedType?.value === 1) ||
+          (currentStep === 2 && claimsDetails?.length < 1)
+            ? icons.addSquare
+            : null
+        }
         tintColrorForTopViewFirstIcon={COLORS.white}
         FirstOpenModal={navigateTreatment}
         onPressBack={goBack}
@@ -135,7 +168,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           name={currentStep === 3 ? 'Submit' : 'Next'}
         />
         <ModalLoading
-          loading={dependantLoading || uploadLoading || claimLoading}
+          loading={uploadLoading || claimLoading || personalDetailsLoading}
         />
         <ConfirmationModal
           ConfirmationModalVisible={confirmationModal}

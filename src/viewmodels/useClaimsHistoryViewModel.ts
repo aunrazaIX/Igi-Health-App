@@ -81,7 +81,7 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
 
   const filterByClaimStatus = useMemo(() => {
     return data?.filter(claim => {
-      const temp = claim?.items?.find(item => item?.label === 'Status:');
+      const temp = claim?.items[5];
       if (!temp?.value) return false;
       const statusValue = temp?.value;
       return amountStatusTab === 'paidAmount'
@@ -92,7 +92,7 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
 
   const filterDataByTime = useMemo(() => {
     return filterByClaimStatus?.filter(claim => {
-      const temp = claim?.items?.find(item => item.label === 'Services Date:');
+      const temp = claim?.items[1];
       if (!temp?.value) return false;
       const claimDate = moment(temp?.value, 'YYYY-MM-DD');
       if (daysStatusTab === 'Daily') {

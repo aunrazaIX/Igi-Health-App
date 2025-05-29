@@ -11,7 +11,7 @@ export const generalSlice = createSlice({
     setErrorModal: (state, { payload }) => {
       state.showErrorModal = payload?.show;
 
-      if (payload?.message) {
+      if (payload?.message !== undefined) {
         state.errorMessage = payload.message;
       }
     },

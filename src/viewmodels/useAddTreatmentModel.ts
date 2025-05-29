@@ -17,6 +17,8 @@ const useAddTreatmentModel = ({
 
   const isError = useSelector((state: RootState) => state.lodge.isError);
 
+  const selectedType = useSelector(state => state.lodge.selectedType);
+
   const [confirmationModal, setConfirmationModal] = useState(false);
 
   const {treatmentIndex, treatmentData} = route?.params || {};
@@ -35,20 +37,28 @@ const useAddTreatmentModel = ({
     description: extractedData.description ?? '',
   });
 
-  const apiParams = useMemo(
-    () => ({
-      apiEndpoint: endpoints.treatments.getTypes,
+  const apiParams = useMemo(() => {
+    const typeValue = selectedType?.value;
+
+    const endpointKey =
+      typeValue === 0
+        ? 'getIPDTypes'
+        : typeValue === 1
+        ? 'getTypes'
+        : 'getMATTypes';
+
+    return {
+      apiEndpoint: endpoints.treatments[endpointKey],
       method: 'get',
       transform: {
         keyToLoop: 'Data',
         label: 'ClaimsSubTypeName',
         value: 'ClaimsSubTypeID',
       },
-    }),
-    [],
-  );
+    };
+  }, [selectedType?.value]);
 
-  const {loading, data: opdTypes} = useApiHook(apiParams);
+  const {loading, data: treatmentTypes, error} = useApiHook(apiParams);
 
   const onPressAddTreatment = () => {
     const treatmentObj = {
@@ -57,6 +67,10 @@ const useAddTreatmentModel = ({
       amount: apiData?.amount,
       description: apiData?.description,
     };
+
+    if (selectedType === 'Opd') {
+    }
+
     if (typeof treatmentIndex === 'number') {
       dispatch(
         updateTreatments({
@@ -77,14 +91,19 @@ const useAddTreatmentModel = ({
         }),
       );
     }
-
     // navigation.navigate('LodgeClaimProcess');
   };
+
+  const maternityTypeData = [
+    {label: 'Normal', value: 0},
+    {label: 'C-Section', value: 1},
+    {label: 'MisCarriage', value: 2},
+  ];
 
   return {
     states: {
       loading,
-      opdTypes,
+      treatmentTypes,
       apiData,
       treatmentIndex,
       isError,

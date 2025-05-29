@@ -60,7 +60,7 @@ const NotificationView: React.FC<Props> = ({ NotificationData, selectData, goBac
     <>
       <TopView
         title="Notification"
-        onPressBack={goBack}
+
         TopViewFirstIcon={icons.notificationPlan}
         containerStyleIcon={styles.BellIcon}
       />

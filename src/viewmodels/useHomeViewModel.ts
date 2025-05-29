@@ -150,12 +150,14 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const onPressMenu = (cardData: CardItemData) => {
     if (cardData?.to) {
       navigate.navigate(cardData.to);
+
       return;
     }
 
     if (cardData?.mainParent) {
       navigate.navigate(cardData?.mainParent, {
         screen: cardData?.stChild,
+
       });
     }
   };

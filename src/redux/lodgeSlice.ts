@@ -5,6 +5,9 @@ import {setErrorModal} from './generalSlice';
 const initialState: {
   currentStep: number;
   selectedPatient: any | null;
+  selectedType: any | null;
+  selectedMaternityType: any | null;
+  selectedHopsital: any | null;
   selectedDocuments: any[];
   remarks: string;
   treatments: any[];
@@ -12,6 +15,8 @@ const initialState: {
 } = {
   currentStep: 1,
   selectedPatient: null,
+  selectedMaternityType: null,
+  selectedHopsital: null,
   selectedDocuments: [],
   treatments: [],
   isError: false,
@@ -83,10 +88,23 @@ export const lodgeSlice = createSlice({
     setSelectedPatient: (state, {payload}) => {
       state.selectedPatient = payload;
     },
+    setSelectedType: (state, {payload}) => {
+      state.selectedType = payload;
+    },
+    setSelectedMaternityType: (state, {payload}) => {
+      state.selectedMaternityType = payload;
+    },
+    setSelectedHospital: (state, {payload}) => {
+      state.selectedHopsital = payload;
+    },
 
+    setResetTreaments: state => {
+      state.treatments = [];
+    },
     _setTreatmentData: (state, {payload}) => {
       if (payload?._data) {
         const {_data} = payload;
+
         _data?.navigateOnSuccess();
         delete _data?.navigateOnSuccess;
         state.treatments = [...state.treatments, _data];
@@ -97,9 +115,7 @@ export const lodgeSlice = createSlice({
 
     _updateTreatmentData: (state, {payload}) => {
       const {index, data, navigateOnSuccess} = payload;
-
       navigateOnSuccess();
-
       state.treatments[index] = data;
     },
 
@@ -119,6 +135,7 @@ export const lodgeSlice = createSlice({
     },
 
     onDeleteDocuments: (state, {payload}) => {
+      console.log(payload, 'payload');
       let temp = [...state.selectedDocuments];
 
       temp.splice(payload, 1);
@@ -140,6 +157,7 @@ export const lodgeSlice = createSlice({
 
 export const {
   setSelectedPatient,
+  setSelectedHospital,
   _setTreatmentData,
   _updateTreatmentData,
   setStep,
@@ -147,5 +165,8 @@ export const {
   onDeleteTreatment,
   onDeleteDocuments,
   setRemarks,
+  setSelectedType,
+  setSelectedMaternityType,
+  setResetTreaments,
 } = lodgeSlice.actions;
 export const lodegeReducer = lodgeSlice.reducer;

@@ -17,6 +17,12 @@ import {
   onDeleteDocuments,
   _setTreatmentData,
   _updateTreatmentData,
+  setRemarks,
+  setSelectedHospital,
+  setSelectedType,
+  setSelectedMaternityType,
+  setTreatments,
+  setResetTreaments,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
@@ -60,21 +66,32 @@ interface Props {
   route: RouteProp<any>;
 }
 
-const useLodgeClaimViewModel = ({navigation}: Props) => {
+const useLodgeClaimViewModel = ({navigation, route}: Props) => {
+  const {type} = route?.params || {};
+
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
-  const {selectedDocuments, currentStep, treatments, selectedPatient} =
-    useSelector(state => state.lodge);
+  const {
+    selectedDocuments,
+    currentStep,
+    treatments,
+    selectedPatient,
+    selectedType,
+    selectedMaternityType,
+  } = useSelector(state => state.lodge);
 
   const resetStates = () => {
     dispatch(_setTreatmentData([]));
-    dispatch(setStep(1));
-    navigation.navigate('Home');
+
+    navigation.navigate('HomeStack');
     dispatch(setSelectedDocuments([]));
     dispatch(setSelectedPatient(null));
+    setterForclaimData('claimComments', '');
+
+    dispatch(setStep(1));
   };
 
   const {setterForApiData: setterForclaimData, apiData: claimData} =
@@ -145,6 +162,20 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
     },
   });
 
+  const {data: personalDetails, loading: personalDetailsLoading} = useApiHook({
+    apiEndpoint: endpoints.bank.getBankDetails,
+    method: 'get',
+    argsOrBody: {
+      cnic: '14102-5322315-7',
+      ClientCode: 'DEMO',
+    },
+    transform: {
+      keyToLoop: 'Data',
+      label: 'LGIVNAME',
+      value: 'CLNTNUM',
+    },
+  });
+
   const {data: dependants, loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
@@ -158,6 +189,18 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
       value: 'CLNTNUM',
     },
   });
+
+  const dependantsData = [
+    {label: 'Ipd', value: 0},
+    {label: 'Opd', value: 1},
+    {label: 'Maternity', value: 2},
+  ];
+
+  const maternityTypeData = [
+    {label: 'Normal', value: 0},
+    {label: 'C-Section', value: 1},
+    {label: 'MisCarriage', value: 2},
+  ];
 
   const steps: Step[] = [
     {label: 'Personal Details', key: 'personalDetails'},
@@ -176,18 +219,6 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
         {label: 'Bank Name:', value: 'Bank Al Habib'},
         {label: 'Account Number:', value: '1234-5678-9101112-3'},
         {label: 'Bank IBAN:', value: 'PK47 XYZ 1234 5678 9101112 3 0'},
-      ],
-    },
-    {
-      sectionTitle: 'Claims Details',
-      icon: icons.claimDetails,
-      edit: false,
-      delete: false,
-      info: [
-        {label: 'Services:', value: 'General OPD, Dental, Optical'},
-        {label: 'Eligible Users:', value: 'Self, Spouse, Children'},
-        {label: 'Reimbursement:', value: '28827'},
-        {label: 'Total OPD:', value: '---'},
       ],
     },
   ];
@@ -259,6 +290,20 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
   const onSelectPatient = (patient: any) => {
     dispatch(setSelectedPatient(patient));
   };
+  const onSelectType = (patient: any) => {
+    if (patient?.value !== selectedType?.value) {
+      dispatch(setResetTreaments());
+      dispatch(setSelectedType(patient));
+    }
+  };
+
+  const onSelectMaternityType = (patient: any) => {
+    dispatch(setSelectedMaternityType(patient));
+  };
+
+  const onSelectHospital = (patient: any) => {
+    dispatch(setSelectedHospital(patient));
+  };
 
   const onPressNext = () => {
     try {
@@ -270,9 +315,6 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
 
       if (currentStep < 3) {
         dispatch(setStep(currentStep + 1));
-      }
-
-      if (currentStep === 2) {
       }
 
       if (currentStep === 3) {
@@ -294,7 +336,7 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
 
       res?.forEach((item: any) => {
         const isDuplicate = selectedDocuments.some(
-          doc => doc.name === item.name,
+          doc => doc?.name === item?.name,
         );
 
         if (!isDuplicate) {
@@ -303,12 +345,17 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
             type: item?.type,
             name: item?.name,
           });
+          dispatch(setSelectedDocuments(documents));
         } else {
-          console.log('same file cant be selected');
+          dispatch(
+            setErrorModal({
+              show: true,
+              message: "same file can't be selected again",
+            }),
+          );
+          return;
         }
       });
-
-      dispatch(setSelectedDocuments(documents));
     } catch (e) {
       console.log('Error', e);
     }
@@ -325,13 +372,20 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
       claimsDetails,
       dependantLoading,
       currentStep,
-      dependants,
+      dependantsData,
       selectedPatient,
+      selectedType,
       selectedDocuments,
       uploadLoading,
       confirmationModal,
       claimData,
       claimLoading,
+      type,
+      personalDetails,
+      personalDetailsLoading,
+      dependants,
+      maternityTypeData,
+      selectedMaternityType,
     },
     functions: {
       goBack,
@@ -346,6 +400,9 @@ const useLodgeClaimViewModel = ({navigation}: Props) => {
       setConfirmationModal,
       resetStates,
       setterForclaimData,
+      onSelectHospital,
+      onSelectType,
+      onSelectMaternityType,
     },
   };
 };

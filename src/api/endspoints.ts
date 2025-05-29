@@ -14,6 +14,8 @@ const endpoints = {
   },
   treatments: {
     getTypes: 'ClaimsType/getOPDType',
+    getIPDTypes: 'ClaimsType/getIPDType',
+    getMATTypes: 'ClaimsType/getMATType',
   },
   claimLogde: {
     lodge: 'Claims/AddNewClaim',
@@ -22,6 +24,18 @@ const endpoints = {
   },
   claimHistory: {
     getAllClaim: 'Claims/getClaimsView',
+  },
+  panelHospital: {
+    getPanelHospitals: 'PanelHospital/GetActivePanelHospitals',
+  },
+  discountedCenters: {
+    getDiscountedCenters: 'DiscountCenters/GetActiveDiscCenter',
+  },
+  dependent: {
+    getDependentType: 'Dependent/getAllDependentType',
+    getDependetRequestTypes: 'Dependent/getDependentRequestTypes',
+    addDependentRequest: 'Dependent/addDependentRequest',
+    getDependentList: 'UserRelation/GetOPD',
   },
 };
 

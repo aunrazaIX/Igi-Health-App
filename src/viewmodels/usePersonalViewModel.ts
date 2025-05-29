@@ -2,6 +2,9 @@ import {ImageSourcePropType} from 'react-native';
 import {icons} from '../assets';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
+import {useSelector} from 'react-redux';
 
 type UsePersonalViewModal = {
   states: {
@@ -23,7 +26,7 @@ type UsePersonalViewModal = {
 
 type labelValue = {
   label: string;
-  value: string;
+  value: any;
 };
 
 type DependentDetail = {
@@ -34,6 +37,8 @@ type DependentDetail = {
 
 const usePersonalViewModal = (): UsePersonalViewModal => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [getData, setGetData] = useState([]);
+  let {user} = useSelector((state: RootState) => state.auth);
 
   const [confimationModalVisible, setConfimationModalVisible] = useState(false);
 
@@ -41,68 +46,30 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
 
   const navigation = useNavigation();
 
-  const data: DependentDetail[] = [
-    {
-      dependent: 'Dependent Detail',
-      image: icons.frame,
-      dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
-      ],
+  const {data, loading: dependantLoading} = useApiHook({
+    apiEndpoint: endpoints.dependent.getDependentList,
+    method: 'get',
+    argsOrBody: {
+      cnic: user?.cnic,
+      ClientCode: user?.ClientCode,
     },
-    {
-      dependent: 'Dependent Detail',
-      image: icons.frame,
-      dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
-      ],
-    },
-    {
-      dependent: 'Dependent Detail',
-      image: icons.frame,
-      dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
-      ],
-    },
-    {
-      dependent: 'Dependent Detail',
-      image: icons.frame,
-      dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
-      ],
-    },
-    {
-      dependent: 'Dependent Detail',
-      image: icons.frame,
-      dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
-      ],
-    },
-    {
-      dependent: 'Dependent Detail',
-      image: icons.frame,
-      dependentDetail: [
-        {label: 'Name:', value: 'Madiha Imran Qureshi'},
-        {label: 'Gender:', value: 'Female'},
-        {label: 'Relationship:', value: 'Wife'},
-        {label: 'Age:', value: '35 Years'},
-      ],
-    },
-  ];
+    onSuccess: res =>
+      setGetData(
+        res?.Data?.map((item, index) => ({
+          dependent: 'Dependent Detail',
+          image: icons.frame,
+          dependentDetail: [
+            {label: 'Name', value: item?.LGIVNAME.trim()},
+            {label: 'Gender', value: item?.CLTSEX ?? '--'},
+            {label: 'RelationShip', value: item?.DPNTTYPE ?? '--'},
+            {label: 'Age', value: item?.AGE},
+          ],
+        })),
+      ),
+  });
+
+  console.log(data, 'data');
+  console.log(getData, 'getDataaaaa');
 
   const goBack = () => {
     navigation.goBack();
@@ -112,8 +79,16 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
     setModalVisible(false);
   };
 
-  const manageUpdate = () => {
-    setModalVisible(true);
+  const openAddDependent = () => {
+    navigation.navigate('AddDependent');
+  };
+
+  const manageUpdate = (dependent, index) => {
+    console.log('usman ', dependent);
+    navigation.navigate('AddDependent', {
+      dependentData: dependent ?? null,
+      dependentIndex: index ?? null,
+    });
   };
 
   const deleteDepenedent = () => {
@@ -126,12 +101,13 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
 
   return {
     states: {
-      data,
+      data: getData,
       modalVisible,
       confimationModalVisible,
       expandedIndex,
     },
     functions: {
+      openAddDependent,
       goBack,
       handleSubmit,
       manageUpdate,

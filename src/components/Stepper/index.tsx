@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: vh * 2,
+
   },
   labelBelow: {
     width: vw * 27,

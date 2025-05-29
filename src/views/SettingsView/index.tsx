@@ -1,14 +1,14 @@
 import React from 'react';
-import {SettingsList} from '../../viewmodels/useSettingsViewModel';
+import { SettingsList } from '../../viewmodels/useSettingsViewModel';
 import {
   AileronSemiBold,
   Container,
   CurvedView,
   TopView,
 } from '../../components';
-import {Image, Switch, TouchableOpacity} from 'react-native';
-import {COLORS} from '../../assets/theme/colors';
-import {icons} from '../../assets';
+import { Image, Switch, TouchableOpacity } from 'react-native';
+import { COLORS } from '../../assets/theme/colors';
+import { icons } from '../../assets';
 import styles from './style';
 
 const SettingsView = ({
@@ -22,15 +22,15 @@ const SettingsView = ({
   isToggle: boolean;
   toggleSwitch: () => void;
   goBack: () => void;
-  onPressMenu : (data : SettingsList)=>void
+  onPressMenu: (data: SettingsList) => void
 
 }) => {
   return (
     <Container>
-      <TopView onPressBack={goBack} title={'Settings'} />
+      <TopView title={'Settings'} />
       <CurvedView>
         {data?.map(item => (
-          <TouchableOpacity onPress={()=>onPressMenu(item)} key={item?.id} style={styles.row}>
+          <TouchableOpacity onPress={() => onPressMenu(item)} key={item?.id} style={styles.row}>
             <Image source={item?.icon} />
             <AileronSemiBold name={item?.label} style={styles.label} />
             {item?.id === 2 ? (

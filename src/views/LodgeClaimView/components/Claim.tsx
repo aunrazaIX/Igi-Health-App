@@ -1,75 +1,39 @@
-import { Image, StyleSheet, View } from 'react-native';
-import React, { Fragment } from 'react';
+import {StyleSheet, View} from 'react-native';
+import React from 'react';
 import Box from './Box';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
-import { ClaimDetailSection } from '../typeInterface';
-import LinearGradient from 'react-native-linear-gradient';
-import { AileronBold, AileronSemiBold } from '../../../components';
-import { images } from '../../../assets';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {COLORS} from '../../../assets/theme/colors';
+import {ClaimDetailSection} from '../typeInterface';
 
-
-
-
+import NoDataView from '../../../components/NoDataView';
 
 type ClaimProps = {
   claimsDetails: ClaimDetailSection[];
   navigateTreatment: () => void;
   onPressDelete: (index: number) => void;
   onPressEdit: (data: object, index: number) => void;
-
 };
 
-const Claim: React.FC<ClaimProps> = ({ claimsDetails, onPressDelete, onPressEdit }) => {
+const Claim: React.FC<ClaimProps> = ({
+  claimsDetails,
+  onPressDelete,
+  onPressEdit,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.list}>
-
-        {claimsDetails?.length > 0 ? claimsDetails?.map((data, index) => (
-
-          < Box
-            onPressDelete={() => onPressDelete(index)}
-            onPressEdit={() => onPressEdit(data, index)}
-            data={data}
-            key={index}
-          />
-
-        )) :
-
-          <View>
-            <LinearGradient
-              start={{ x: 0, y: 0 }}
-              end={{ x: 0.8, y: 0 }}
-              colors={COLORS.benefitsCardGradient}
-              style={styles.BenefitsGradients}>
-              <View style={styles.Maximum}>
-                <View style={styles.MaximumLeftBox}>
-                  <Image source={images.Logo} style={styles.benefitsLogo} />
-                  <AileronBold
-                    name={'NO CLAIM  '}
-                    style={styles.MaximumTitle}
-                  />
-                  <AileronBold name={'TO Display!'} style={styles.BenefitsTitle} />
-                </View>
-                <View style={styles.MaximumRightBox}>
-                  <Image
-                    style={styles.benefitsImage}
-                    source={images.maximumBenefits}
-                  />
-                </View>
-              </View>
-            </LinearGradient>
-            <View style={styles.coverage}>
-              <AileronBold name={'You can  '} style={styles.coverageTitle} />
-              <AileronBold name={'Add Claim from Top'} style={styles.benefitTitle} />
-            </View>
-          </View>
-
-
-
-
-
-        }
+        {claimsDetails?.length > 0 ? (
+          claimsDetails?.map((data, index) => (
+            <Box
+              onPressDelete={() => onPressDelete(index)}
+              onPressEdit={() => onPressEdit(data, index)}
+              data={data}
+              key={index}
+            />
+          ))
+        ) : (
+          <NoDataView name={'no claim found'} />
+        )}
       </View>
     </View>
   );
@@ -91,7 +55,7 @@ const styles = StyleSheet.create({
   priorGradient: {
     borderRadius: vh * 1.5,
   },
-  wrapper: { padding: vh * 2 },
+  wrapper: {padding: vh * 2},
   priorNext: {
     textAlign: 'center',
     color: COLORS.white,
@@ -184,10 +148,22 @@ const styles = StyleSheet.create({
     color: COLORS.benefitTitle,
   },
 
-
   benefitsImage: {
     resizeMode: 'cover',
     height: '100%',
     width: '100%',
+  },
+  noDataIcon: {
+    width: vw * 30,
+    height: vw * 30,
+  },
+  noDataText: {
+    fontSize: vw * 6,
+  },
+  noDataView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    // flex: 1,
+    // height: "100%"
   },
 });

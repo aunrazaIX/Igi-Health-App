@@ -115,7 +115,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       });
       signupResetStates();
     },
-    onError: error => {
+    onError: res => {
       dispatch(setErrorModal({Show: true, message: 'Incorrect Data'}));
     },
   });
@@ -129,8 +129,8 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     let apiData = {
       userName: loginApiData?.userName,
       password: encodedAuth,
-      DeviceId: 'asdasd',
-      LoginDeviceName: 'asdasd',
+      DeviceId: '21312321302138013203231',
+      LoginDeviceName: 'Emulator',
     };
 
     dispatch(

@@ -15,6 +15,7 @@ const authTransform = createTransform(
   outboundState => {
     return outboundState;
   },
+  outboundState => outboundState,
   {whitelist: ['auth']},
 );
 const persistConfig = {

@@ -75,7 +75,7 @@ const BenefitsView: React.FC<Props> = ({ data, goBack }) => {
   const renderSeperator = () => <View style={styles.seperator} />;
   return (
     <>
-      <TopView title={'Benefits'} onPressBack={goBack} />
+      <TopView title={'Benefits'} />
       <CurvedView containerStyle={styles.CurvedView}>
         <FlatList
           ItemSeparatorComponent={renderSeperator}
