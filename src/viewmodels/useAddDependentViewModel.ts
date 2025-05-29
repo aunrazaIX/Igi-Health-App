@@ -10,8 +10,6 @@ import {useNavigation} from '@react-navigation/native';
 const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   let {user} = useSelector((state: RootState) => state.auth);
 
-  console.log(user, 'userrrrr');
-
   const {dependentData, dependentIndex} = route?.params || {};
 
   const navigation = useNavigation();
@@ -44,8 +42,15 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
     dependentRequestTypesID: dependentIndex ? 2 : 1,
     dependentRequestID: 0,
-    gender: {label: prefilledData.gender.label},
-    Age: prefilledData.age ?? null,
+    gender: {
+      label:
+        prefilledData.gender.label === 'M'
+          ? 'Male'
+          : prefilledData.gender.label === 'F'
+          ? 'Female'
+          : null,
+    },
+    Age: prefilledData?.age?.toString() ?? null,
     dependentRequestStatus: true,
     createdBy: 1,
   });
@@ -64,11 +69,18 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     },
   });
 
-  const {trigger, loading: addDependentLoading} = useApiHook({
+  const {
+    trigger,
+    loading: addDependentLoading,
+    error,
+  } = useApiHook({
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
     onSuccess: res => {
-      setConfirmationModal(true), console.log('res', res);
+      setConfirmationModal(true);
+    },
+    onError: e => {
+      console.log('cant update', e);
     },
   });
 

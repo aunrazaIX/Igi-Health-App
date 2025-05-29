@@ -5,6 +5,7 @@ import {useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useSelector} from 'react-redux';
+import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 
 type UsePersonalViewModal = {
   states: {
@@ -12,6 +13,7 @@ type UsePersonalViewModal = {
     modalVisible: boolean;
     confimationModalVisible: boolean;
     expandedIndex: number | null;
+    confirmationModal: boolean;
   };
   functions: {
     goBack: () => void;
@@ -40,7 +42,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
   const [getData, setGetData] = useState([]);
   let {user} = useSelector((state: RootState) => state.auth);
 
-  const [confimationModalVisible, setConfimationModalVisible] = useState(false);
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
@@ -68,8 +70,9 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       ),
   });
 
-  console.log(data, 'data');
-  console.log(getData, 'getDataaaaa');
+  const resetStates = () => {
+    navigation.navigate('Personal');
+  };
 
   const goBack = () => {
     navigation.goBack();
@@ -84,15 +87,49 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
   };
 
   const manageUpdate = (dependent, index) => {
-    console.log('usman ', dependent);
     navigation.navigate('AddDependent', {
       dependentData: dependent ?? null,
       dependentIndex: index ?? null,
     });
   };
 
-  const deleteDepenedent = () => {
-    setConfimationModalVisible(true);
+  const {
+    trigger,
+    loading: deleteDepenedentLoading,
+    error,
+  } = useApiHook({
+    apiEndpoint: endpoints.dependent.addDependentRequest,
+    method: 'post',
+    onSuccess: res => {
+      setConfirmationModal(true);
+    },
+    onError: e => {
+      console.log('error', e);
+    },
+  });
+
+  const deleteDepenedent = (dependent, index) => {
+    console.log(dependent, ' iiii');
+    let _apiData = {
+      dependentRequestID: 0,
+      dependentRequestTypesID: 3,
+      // dependentTypeID: dependent?.dependentDetail[2]?.value,
+      dependentTypeID: 3,
+      dependentName: dependent?.dependentDetail[0]?.value,
+      cnic: user?.cnic,
+      clientCode: user?.ClientCode,
+      gender:
+        dependent?.dependentDetail[1].value === 'M'
+          ? 'Male'
+          : dependent?.dependentDetail[1].value === 'F'
+          ? 'Female'
+          : null,
+      Age: dependent?.dependentDetail[3].value,
+      dependentRequestStatus: true,
+      createdAt: '2025-05-15T15:01:31.6552852+05:00',
+      createdBy: 1,
+    };
+    trigger(_apiData);
   };
 
   const toggleExpand = (index: number) => {
@@ -103,7 +140,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
     states: {
       data: getData,
       modalVisible,
-      confimationModalVisible,
+      confirmationModal,
       expandedIndex,
     },
     functions: {
@@ -111,10 +148,10 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       goBack,
       handleSubmit,
       manageUpdate,
-      setModalVisible,
       deleteDepenedent,
-      setConfimationModalVisible,
       toggleExpand,
+      setConfirmationModal,
+      resetStates,
     },
   };
 };

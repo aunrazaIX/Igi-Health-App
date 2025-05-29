@@ -7,21 +7,21 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import Home from '../../screens/Home';
-import { COLORS } from '../../assets/theme/colors';
-import { vh, vw } from '../../assets/theme/dimension';
-import { DrawerContentComponentProps } from '@react-navigation/drawer';
-import { drawerIcons, images } from '../../assets';
-import { AileronBold, AileronSemiBold } from '../../components';
+import {COLORS} from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
+import {DrawerContentComponentProps} from '@react-navigation/drawer';
+import {drawerIcons, images} from '../../assets';
+import {AileronBold, AileronSemiBold} from '../../components';
 import Tabs from '../TabStack';
 import ClaimsHistory from '../../screens/ClaimsHistory';
 import FAQs from '../../screens/FAQs';
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/authSlice';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../redux/authSlice';
 import SettingStack from '../SettingStack';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import Profile from '../../screens/Profile';
 
 const DrawerStack = () => {
@@ -135,13 +135,10 @@ const DrawerStack = () => {
     },
   ];
 
-
-  const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
-
+  const DrawerContent = ({navigation}: DrawerContentComponentProps) => {
     const handleProfile = () => {
-      console.log("View Profile clicked")
-      navigation.navigate('Profile')
-    }
+      navigation.navigate('Profile');
+    };
 
     return (
       <View style={styles.container}>
@@ -203,9 +200,9 @@ const DrawerStack = () => {
               />
             </View>
 
-            <TouchableOpacity style={styles.ButtonContainer}
-              onPress={handleProfile}
-            >
+            <TouchableOpacity
+              style={styles.ButtonContainer}
+              onPress={handleProfile}>
               <LinearGradient
                 colors={COLORS.PriorGradient}
                 style={styles.buttonGradient}>

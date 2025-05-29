@@ -5,6 +5,8 @@ import {Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
 import {useSelector} from 'react-redux';
+import endpoints from '../api/endspoints';
+import useApiHook from '../hooks/useApiHook';
 
 export type CardItemData = {
   logo?: ImageSourcePropType;
@@ -41,6 +43,10 @@ type UseHomeViewModelReturn = {
 
 const useHomeViewModel = (): UseHomeViewModelReturn => {
   const navigate = useNavigation();
+
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  console.log(user, 'userrrr');
   const [selectedTab, setSelectedTab] = useState<string>('login');
 
   const animateValue = useRef(new Animated.Value(0)).current;
@@ -84,6 +90,54 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const backAnimatedStyle = {
     transform: [{perspective: 1000}, {rotateY: rotateBack}],
   };
+
+  // second APi Call
+
+  const {data, loading, trigger} = useApiHook({
+    apiEndpoint: endpoints.policy.getPolicyDetails,
+    method: 'get',
+    skip: true,
+
+    onSuccess: res => {
+      console.log(res, 'yaehh raha second APi ka response');
+    },
+  });
+
+  // 1st api call
+  const {data: HomeCardData, loading: HomeCardDataLoading} = useApiHook({
+    apiEndpoint: endpoints.policy.getPolicyTypes,
+    method: 'get',
+    argsOrBody: {
+      ClientCode: 'ERC',
+    },
+
+    onSuccess: res => {
+      let policyNumber;
+
+      if (res?.length > 1) {
+        res?.forEach(item => {
+          if (item?.PolicyCode?.startsWith('G' || 'g')) {
+            policyNumber = item?.PolicyCode;
+          }
+        });
+      } else if (res?.length == 1) {
+        policyNumber = res[0]?.PolicyCode;
+      }
+
+      let apiData = {
+        policyCode: policyNumber,
+        clientCode: user.ClientCode,
+      };
+
+      trigger(apiData);
+
+      console.log(apiData, 'API DATA..');
+      console.log(res, 'response of first APi');
+    },
+    onError: e => {
+      console.log(e, 'Erorrrrrr');
+    },
+  });
 
   const cardData: CardItemData[] = [
     {
@@ -157,7 +211,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     if (cardData?.mainParent) {
       navigate.navigate(cardData?.mainParent, {
         screen: cardData?.stChild,
-
       });
     }
   };

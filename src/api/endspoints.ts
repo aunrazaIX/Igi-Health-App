@@ -37,6 +37,10 @@ const endpoints = {
     addDependentRequest: 'Dependent/addDependentRequest',
     getDependentList: 'UserRelation/GetOPD',
   },
+  policy: {
+    getPolicyTypes: 'Policy/GetPolicyTypes',
+    getPolicyDetails: 'Policy/GetPolicyTypes',
+  },
 };
 
 export default endpoints;

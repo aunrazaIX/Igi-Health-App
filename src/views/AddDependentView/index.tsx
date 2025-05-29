@@ -59,7 +59,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
 }) => {
   return (
     <>
-      <TopView title={'Add A Dependent'} />
+      <TopView title={'Add Dependent Request'} />
       <CurvedView>
         <View style={styles.personalFrameContainer}>
           <Image
