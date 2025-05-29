@@ -200,16 +200,16 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   };
 
   const sortClaimData = (item: ClaimItem[] = []) => {
-    const totalClaimAmount = item.reduce(
-      (acc, curr) => acc + (curr.SubmiitedClaim || 0),
+    const totalClaimAmount = item?.reduce(
+      (acc, curr) => acc + (curr?.SubmiitedClaim || 0),
       0,
     );
-    const deductedAmount = item.reduce(
-      (acc, curr) => acc + (curr.DeductedAmount || 0),
+    const deductedAmount = item?.reduce(
+      (acc, curr) => acc + (curr?.DeductedAmount || 0),
       0,
     );
-    const paidAmount = item.reduce(
-      (acc, curr) => acc + (curr.TotalPaid || 0),
+    const paidAmount = item?.reduce(
+      (acc, curr) => acc + (curr?.TotalPaid || 0),
       0,
     );
 
