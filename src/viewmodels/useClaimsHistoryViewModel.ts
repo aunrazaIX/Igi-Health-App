@@ -81,7 +81,6 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
 
   const filterByClaimStatus = useMemo(() => {
     return data?.filter(claim => {
-      console.log('sadkdoapsjioj', claim);
       const temp = claim?.items?.find(item => item?.label === 'Status:');
       if (!temp?.value) return false;
       const statusValue = temp?.value;

@@ -12,8 +12,6 @@ import { icons } from '../../../assets';
 import { vh, vw } from '../../../assets/theme/dimension';
 import { COLORS } from '../../../assets/theme/colors';
 import { validateEmail } from '../../../validations/authValidations';
-import { useDispatch, useSelector } from 'react-redux';
-import { setRememberMe } from '../../../redux/authSlice';
 
 const LoginForm = ({
   onPressforgotPassword,
@@ -22,7 +20,7 @@ const LoginForm = ({
   loginApiData,
   loginSetterForApiData,
   handleCheck,
-  rememberMe,
+  checked,
 }: {
   onPressforgotPassword: (to: string) => void;
   handleLogin: () => void;
@@ -30,7 +28,7 @@ const LoginForm = ({
   loginApiData: any;
   loginSetterForApiData: (key: string, value: any) => void;
   handleCheck: () => void;
-  rememberMe: boolean
+  checked: boolean
 }) => {
   return (
     <>
@@ -55,7 +53,7 @@ const LoginForm = ({
             loginSetterForApiData('error_userName', errorMsg);
           }}
           errorMessage={loginApiData?.error_userName}
-
+          maxLength={50}
         />
 
         <InputField
@@ -68,19 +66,12 @@ const LoginForm = ({
           value={loginApiData?.password ?? undefined}
           onChangeText={text => loginSetterForApiData('password', text)}
           errorMessage={loginApiData?.error_password}
-
+          maxLength={25}
         />
       </View>
 
       <View style={[styles.row, { justifyContent: 'space-between' }]}>
-        <View style={style.checkboxContainer}>
-          <TouchableOpacity
-            onPress={handleCheck}
-            style={style.square}>
-            {rememberMe && <Image style={style.tickIcon} source={icons.tickIcon} />}
-          </TouchableOpacity>
-          <AileronSemiBold style={style.descriptionText} name={"Remember Me"} />
-        </View>
+        <CheckBox description="Remeber Me" onPressCheckBox={handleCheck} isChecked={checked} />
 
         <TouchableOpacity
           onPress={() => {

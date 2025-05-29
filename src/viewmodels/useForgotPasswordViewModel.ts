@@ -62,15 +62,19 @@ const useForgotPasswordViewModel = ({
   };
 
   const onPressBack = (): void => {
-    if (type === 'signup') {
-      navigation.navigate('Login');
-      return;
-    }
-    if (step > 1) {
-      setStep(step - 1);
-      return;
-    }
+    // if (type === 'signup') {
+    //   navigation.navigate('Login');
+    //   return;
+    // }
+    // if (step > 1) {
+    //   setStep(step - 1);
+    //   return;
+    // }
     if (step == 1) {
+      navigation.goBack();
+      return;
+    }
+    if (step == 2) {
       navigation.goBack();
       return;
     }
@@ -148,7 +152,7 @@ const useForgotPasswordViewModel = ({
         ? savedDataForVerification
         : verifiedUserData;
     sendOtp({
-      userId: userData.UserID,
+      userId: userData?.UserID,
       uuid: 'ASDADASDASDASDASDADAD',
       user_email: userData?.UserEmail,
       user_cellnumber: userData?.UserCellNumber,
@@ -203,7 +207,7 @@ const useForgotPasswordViewModel = ({
     },
 
     onSuccess: res => {
-      if (!res?.Data) {
+      if (res?.Data) {
         updatePasswordResetStates();
         setConfirmationModal(true);
       }

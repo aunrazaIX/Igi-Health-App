@@ -60,9 +60,7 @@ interface Props {
   route: RouteProp<any>;
 }
 
-const useLodgeClaimViewModel = ({navigation, route}: Props) => {
-  const {type} = route?.params || {};
-
+const useLodgeClaimViewModel = ({navigation}: Props) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -74,6 +72,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const resetStates = () => {
     dispatch(_setTreatmentData([]));
     dispatch(setStep(1));
+    navigation.navigate('Home');
     dispatch(setSelectedDocuments([]));
     dispatch(setSelectedPatient(null));
   };
@@ -219,6 +218,11 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
 
   const goBack = () => {
     resetStates();
+
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Home'}],
+    });
   };
 
   const onPressStep = (step: number) => {
@@ -328,7 +332,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       confirmationModal,
       claimData,
       claimLoading,
-      type,
     },
     functions: {
       goBack,

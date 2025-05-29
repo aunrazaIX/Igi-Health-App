@@ -4,6 +4,7 @@ import {COLORS} from '../assets/theme/colors';
 import {Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
+import {useSelector} from 'react-redux';
 
 export type CardItemData = {
   logo?: ImageSourcePropType;
@@ -48,6 +49,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   animateValue.addListener(({value}) => {
     currentValue.current = value;
   });
+  // const {rememberMe, credentials} = useSelector(state => state.auth);
 
   const animateCard = () => {
     if (currentValue.current >= 90) {

@@ -11,15 +11,20 @@ type StyleObject = Record<string, string | number | boolean>;
 
 interface CheckBoxProps {
   description: string;
+  isChecked: boolean;
   containerStyle?: StyleObject | StyleObject[];
+  onPressCheckBox: any
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({ description, containerStyle }) => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+const CheckBox: React.FC<CheckBoxProps> = ({ onPressCheckBox, isChecked, description, containerStyle }) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <TouchableOpacity
-        onPress={() => setIsChecked(!isChecked)}
+        onPress={() => {
+          if (onPressCheckBox) {
+            onPressCheckBox()
+          }
+        }}
         style={styles.square}>
         {isChecked && <Image style={styles.tickIcon} source={icons.tickIcon} />}
       </TouchableOpacity>

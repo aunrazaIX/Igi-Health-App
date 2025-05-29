@@ -47,4 +47,7 @@ export const COLORS = {
   unread: 'rgba(158, 160, 170, 1)',
   time: 'rgba(165, 172, 184, 1)',
   disabled: '#84b3da',
+  labelDisabled: 'rgba(108, 108, 108, 1)',
+  valueDisabled: 'rgba(108, 108, 108, 1)',
+  inputBoxDisabled: 'rgba(243, 243, 243, 1)'
 };

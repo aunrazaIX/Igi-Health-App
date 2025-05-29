@@ -17,7 +17,6 @@ import {
 import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
-import {useSelector} from 'react-redux';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -116,7 +115,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           onPressStep={onPressStep}
           componentList={renderStep}
         />
-
         <Button
           disabled={
             currentStep === 1
@@ -136,11 +134,9 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           onPress={onPressNext}
           name={currentStep === 3 ? 'Submit' : 'Next'}
         />
-
         <ModalLoading
           loading={dependantLoading || uploadLoading || claimLoading}
         />
-
         <ConfirmationModal
           ConfirmationModalVisible={confirmationModal}
           setConfirmationModalVisible={setConfirmationModal}
