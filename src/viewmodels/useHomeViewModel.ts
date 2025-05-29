@@ -1,9 +1,14 @@
-import { useRef, useState } from 'react';
-import { cardIcons, icons } from '../assets';
-import { COLORS } from '../assets/theme/colors';
-import { Animated } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { ImageSourcePropType } from 'react-native';
+import {useRef, useState} from 'react';
+import {cardIcons, icons} from '../assets';
+import {COLORS} from '../assets/theme/colors';
+import {Animated} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {ImageSourcePropType} from 'react-native';
+import endpoints from '../api/endspoints';
+import useApiHook from '../hooks/useApiHook';
+import formatCurrency from '../utils';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {DrawerStackParamList} from '../navigation/types';
 
 export type CardItemData = {
   logo?: ImageSourcePropType;
@@ -21,6 +26,11 @@ export type HomeHeaderData = {
   name: string;
   to: string;
 };
+type ClaimItem = {
+  SubmiitedClaim?: number;
+  DeductedAmount?: number;
+  TotalPaid?: number;
+};
 
 type UseHomeViewModelReturn = {
   states: {
@@ -28,24 +38,40 @@ type UseHomeViewModelReturn = {
     cardData: CardItemData[];
     frontAnimatedStyle: {};
     backAnimatedStyle: {};
+    claimData: {
+      totalClaimAmount: string;
+      deductedAmount: string;
+      paidAmount: string;
+    };
+    loading: boolean;
   };
   functions: {
     onPressTab: (name: string) => void;
     animateCard: () => void;
     toggleDrawer: () => void;
     onPressMenu: (cardData: CardItemData) => void;
-    onPressHeaderIcon: () => void;
+    onPressHeaderIcon: (to: string) => void;
   };
+};
+type ClaimStats = {
+  totalClaimAmount: string;
+  deductedAmount: string;
+  paidAmount: string;
 };
 
 const useHomeViewModel = (): UseHomeViewModelReturn => {
-  const navigate = useNavigation();
+  const navigate = useNavigation<DrawerNavigationProp<DrawerStackParamList>>();
   const [selectedTab, setSelectedTab] = useState<string>('login');
+  const [data, setData] = useState<ClaimStats>({
+    totalClaimAmount: '0',
+    deductedAmount: '0',
+    paidAmount: '0',
+  });
 
   const animateValue = useRef(new Animated.Value(0)).current;
   const currentValue = useRef(0);
 
-  animateValue.addListener(({ value }) => {
+  animateValue.addListener(({value}) => {
     currentValue.current = value;
   });
 
@@ -76,11 +102,11 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   });
 
   const frontAnimatedStyle = {
-    transform: [{ perspective: 1000 }, { rotateY: rotateFront }],
+    transform: [{perspective: 1000}, {rotateY: rotateFront}],
   };
 
   const backAnimatedStyle = {
-    transform: [{ perspective: 1000 }, { rotateY: rotateBack }],
+    transform: [{perspective: 1000}, {rotateY: rotateBack}],
   };
 
   const cardData: CardItemData[] = [
@@ -140,6 +166,15 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
   ];
 
+  const {data: rawClaimData, loading} = useApiHook({
+    apiEndpoint: endpoints.claimHistory.getAllClaim,
+    method: 'get',
+    argsOrBody: {userid: '776'},
+    onSuccess: res => {
+      setData(sortClaimData(res?.Data));
+    },
+  });
+
   const onPressTab = (name: string) => setSelectedTab(name);
   const toggleDrawer = () => {
     navigate.toggleDrawer();
@@ -147,15 +182,13 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   const onPressMenu = (cardData: CardItemData) => {
     if (cardData?.to) {
-      navigate.navigate(cardData.to);
-
+      navigate.navigate(cardData?.to);
       return;
     }
 
     if (cardData?.mainParent) {
       navigate.navigate(cardData?.mainParent, {
         screen: cardData?.stChild,
-
       });
     }
   };
@@ -166,12 +199,35 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     }
   };
 
+  const sortClaimData = (item: ClaimItem[] = []) => {
+    const totalClaimAmount = item.reduce(
+      (acc, curr) => acc + (curr.SubmiitedClaim || 0),
+      0,
+    );
+    const deductedAmount = item.reduce(
+      (acc, curr) => acc + (curr.DeductedAmount || 0),
+      0,
+    );
+    const paidAmount = item.reduce(
+      (acc, curr) => acc + (curr.TotalPaid || 0),
+      0,
+    );
+
+    return {
+      totalClaimAmount: formatCurrency(totalClaimAmount),
+      deductedAmount: formatCurrency(deductedAmount),
+      paidAmount: formatCurrency(paidAmount),
+    };
+  };
+
   return {
     states: {
       selectedTab,
       cardData,
       backAnimatedStyle,
       frontAnimatedStyle,
+      claimData: data,
+      loading,
     },
     functions: {
       onPressTab,
