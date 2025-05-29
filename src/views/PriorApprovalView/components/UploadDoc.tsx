@@ -1,4 +1,11 @@
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import {
   Asset,
@@ -31,7 +38,6 @@ const UploadDoc = () => {
       } else if (response.errorCode) {
         console.log('ImagePicker Error:', response.errorMessage);
       } else if (response.assets && response.assets.length > 0) {
-        console.log('response', response);
         setSelectedImages(response.assets);
       }
     });
@@ -222,15 +228,15 @@ const styles = StyleSheet.create({
     padding: vh * 1,
     borderRadius: vh * 2,
   },
-  addRemarks:{
-    marginVertical: vh * 3
+  addRemarks: {
+    marginVertical: vh * 3,
   },
-  remarksInput:{
+  remarksInput: {
     color: COLORS.placeholderColor,
     fontSize: vh * 1.5,
   },
-  confimationContainer:{
-    height: '52%'
+  confimationContainer: {
+    height: '52%',
   },
   submitButton: {
     borderRadius: vh * 1.5,
@@ -242,6 +248,6 @@ const styles = StyleSheet.create({
   uploadFileContainer: {
     flex: 1,
     justifyContent: 'space-between',
-    minHeight: '100%'
+    minHeight: '100%',
   },
 });

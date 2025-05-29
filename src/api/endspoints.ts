@@ -15,7 +15,7 @@ const endpoints = {
   treatments: {
     getTypes: 'ClaimsType/getOPDType',
     getIPDTypes: 'ClaimsType/getIPDType',
-    getMATTypes: 'ClaimsType/getMATType',
+    getMATTypes: 'ClaimsType/getMaternityType',
   },
   claimLogde: {
     lodge: 'Claims/AddNewClaim',

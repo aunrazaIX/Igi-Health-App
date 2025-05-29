@@ -5,21 +5,23 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
+  ImageSourcePropType,
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { styles } from './style';
-import { icons, images } from '../../assets';
+import {styles} from './style';
+import {icons, images} from '../../assets';
 import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import { vh } from '../../assets/theme/dimension';
+import {vh} from '../../assets/theme/dimension';
+import ModalLoading from '../../components/ModalLoading';
 
 type CardItem = {
-  logo: any;
+  logo: ImageSourcePropType;
   name: string;
-  image: any;
+  image: ImageSourcePropType;
   backgroundColor: any;
   to: any;
 };
@@ -30,8 +32,14 @@ type HomeViewProps = {
   backAnimatedStyle: {};
   frontAnimatedStyle: {};
   toggleDrawer: () => void;
-  onPressMenu: (value: object) => void;
+  onPressMenu: (value: CardItem) => void;
   onPressHeaderIcon: (value: string) => void;
+  claimData: {
+    totalClaimAmount: string;
+    deductedAmount: string;
+    paidAmount: string;
+  };
+  loading: boolean;
 };
 
 const HomeView: React.FC<HomeViewProps> = ({
@@ -42,6 +50,8 @@ const HomeView: React.FC<HomeViewProps> = ({
   onPressHeaderIcon,
   frontAnimatedStyle,
   backAnimatedStyle,
+  claimData,
+  loading,
 }) => {
   return (
     <ScrollView>
@@ -157,7 +167,7 @@ const HomeView: React.FC<HomeViewProps> = ({
               <TouchableOpacity onPress={animateCard}>
                 <View style={styles.homeBackCardContainer}>
                   <View
-                    style={{ justifyContent: 'space-between', gap: vh * 1.5 }}>
+                    style={{justifyContent: 'space-between', gap: vh * 1.5}}>
                     <View style={styles.homeBackCardHeading}>
                       <AileronBold
                         style={styles.homeBackCardHeadingBlack}
@@ -265,19 +275,19 @@ const HomeView: React.FC<HomeViewProps> = ({
           <FlatList
             horizontal
             data={cardData}
-            keyExtractor={(_item, index) => index.toString()}
+            keyExtractor={_item => _item?.name}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => onPressMenu(item)}
                 style={[
                   styles.dashboardContainerCards,
-                  { backgroundColor: item.backgroundColor },
+                  {backgroundColor: item.backgroundColor},
                 ]}>
                 <Image style={styles.cardLogo} source={item.logo} />
 
                 <View style={styles.cardContent}>
-                  <View style={{ width: '85%' }}>
+                  <View style={{width: '85%'}}>
                     <AileronRegular
                       style={styles.dashboardContainerCardText}
                       name={item.name}
@@ -310,7 +320,10 @@ const HomeView: React.FC<HomeViewProps> = ({
             style={styles.meterLightText}
             name="Total Claim Amount"
           />
-          <AileronBold style={styles.meterBoldText} name={'570,000'} />
+          <AileronBold
+            style={styles.meterBoldText}
+            name={claimData?.totalClaimAmount}
+          />
         </View>
 
         <View style={styles.statisticsContainer}>
@@ -324,7 +337,7 @@ const HomeView: React.FC<HomeViewProps> = ({
               />
             </View>
             <AileronBold
-              name={'285, 000'}
+              name={claimData?.deductedAmount}
               style={styles.meterDetailTextBold}
               numberOfLines={1}
             />
@@ -354,7 +367,7 @@ const HomeView: React.FC<HomeViewProps> = ({
             </View>
 
             <AileronBold
-              name={'855, 000'}
+              name={claimData?.paidAmount}
               style={styles.meterDetailTextBold}
               numberOfLines={1}
             />
@@ -394,6 +407,7 @@ const HomeView: React.FC<HomeViewProps> = ({
           </View>
         </View>
       </View>
+      <ModalLoading loading={loading} />
     </ScrollView>
   );
 };

@@ -67,9 +67,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   const {trigger, loading: addDependentLoading} = useApiHook({
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
-    onSuccess: res => {
-      setConfirmationModal(true), console.log('res', res);
-    },
   });
 
   const onPressSubmit = () => {

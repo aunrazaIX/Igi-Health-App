@@ -246,7 +246,7 @@ export const styles = StyleSheet.create({
   },
   meterDetailTextBold: {
     fontSize: vw * 7.5,
-    textAlign: 'left',
+    textAlign: 'center',
     color: COLORS.black,
   },
   textRed: {
