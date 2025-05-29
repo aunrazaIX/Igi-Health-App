@@ -71,17 +71,7 @@ const LoginForm = ({
       </View>
 
       <View style={[styles.row, { justifyContent: 'space-between' }]}>
-        {/* <View style={style.checkboxContainer}>
-          <TouchableOpacity
-            onPress={handleCheck}
-            style={style.square}>
-            {rememberMe && <Image style={style.tickIcon} source={icons.tickIcon} />}
-          </TouchableOpacity>
-          <AileronSemiBold style={style.descriptionText} name={"Remember Me"} />
-        </View> */}
-
         <CheckBox description="Remeber Me" onPressCheckBox={handleCheck} isChecked={checked} />
-
 
         <TouchableOpacity
           onPress={() => {

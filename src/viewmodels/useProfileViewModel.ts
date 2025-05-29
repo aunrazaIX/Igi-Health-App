@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
+import {RootState} from '../redux/store';
 
 type UseProfileViewModel = {
   states: {
@@ -23,7 +24,7 @@ const useProfileViewModel = (): UseProfileViewModel => {
   const [inputDisable, setInputDisable] = useState(false);
   const [editable, setEditable] = useState(false);
 
-  const {user} = useSelector(state => state.auth);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const handleEdit = () => {
     setInputDisable(true);
@@ -34,35 +35,27 @@ const useProfileViewModel = (): UseProfileViewModel => {
     setInputDisable(false);
     setEditable(false);
   };
-  const ProfileData: Data[] = [
-    {
-      label: 'Full Name',
-      value: user.UserName,
-      placeholder: 'Enter Name',
-    },
-    {
-      label: 'CNIC Number',
-      value: user.cnic,
-      placeholder: 'Enter cnin',
-    },
-    {
-      label: 'Your Email',
-      value: user.UserEmail,
-      placeholder: 'Enter Email',
-    },
-    // {
-    //   label: 'Mobile Number',
-    //   value: '+920000000000',
-    // },
-    // {
-    //   label: 'Gender',
-    //   value: 'Male',
-    // },
-    // {
-    //   label: 'Date of Birth',
-    //   value: '23/12/1980',
-    // },
-  ];
+
+  const ProfileData: Data[] = user
+    ? [
+        {
+          label: 'Full Name',
+          value: user.UserName,
+          placeholder: 'Enter Name',
+        },
+        {
+          label: 'CNIC Number',
+          value: user.cnic,
+          placeholder: 'Enter CNIC',
+        },
+        {
+          label: 'Your Email',
+          value: user.UserEmail,
+          placeholder: 'Enter Email',
+        },
+      ]
+    : [];
+
   return {
     states: {
       ProfileData,

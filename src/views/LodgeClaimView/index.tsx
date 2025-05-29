@@ -11,7 +11,6 @@ import {
 import { icons } from '../../assets';
 import { COLORS } from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
-import { useSelector } from 'react-redux';
 
 
 
@@ -37,8 +36,6 @@ type LodgeClaimViewProps = {
   resetStates: () => void,
   claimData: any,
   setterForclaimData: any
-
-
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -92,23 +89,11 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         handleCancelFile={handleCancelFile}
         claimData={claimData}
         setterForclaimData={setterForclaimData}
-
-
-
-
-
-
       />
     ),
   };
 
-
-
-
-
   return (
-
-
     <>
       <TopView
         TopViewFirstIcon={currentStep === 2 ? icons.addSquare : null}
@@ -125,7 +110,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           onPressStep={onPressStep}
           componentList={renderStep}
         />
-
         <Button
           disabled={
             currentStep === 1
@@ -139,22 +123,11 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
                 : currentStep === 3 && selectedDocuments?.length > 0 && claimData.claimComments?.length > 0
                   ? false
                   : true
-
           }
-
           onPress={onPressNext}
-
-
           name={currentStep === 3 ? 'Submit' : 'Next'}
         />
-
-
-
-
         <ModalLoading loading={dependantLoading || uploadLoading || claimLoading} />
-
-
-
         <ConfirmationModal
           ConfirmationModalVisible={confirmationModal}
           setConfirmationModalVisible={setConfirmationModal}
@@ -165,8 +138,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           CloseButtonText={'Continue To Login'}
           onClose={resetStates}
         />
-
-
       </CurvedView>
     </>
   );

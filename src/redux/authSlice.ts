@@ -42,7 +42,14 @@ export const authSlice = createSlice({
       state.user = Data;
       state.token = Token;
     },
-    setRememberMe: (state, action: PayloadAction<boolean>) => {
+    setRememberMe: (
+      state,
+      action: PayloadAction<{
+        userName: string;
+        password: string;
+        rememberMe: boolean;
+      }>,
+    ) => {
       const {userName, rememberMe, password} = action.payload;
       state.credentials = {
         userName,
@@ -53,7 +60,6 @@ export const authSlice = createSlice({
     logout: state => {
       state.user = null;
       state.token = null;
-      // state.rememberMe = false;
     },
   },
 });

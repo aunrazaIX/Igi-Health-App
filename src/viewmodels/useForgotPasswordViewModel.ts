@@ -161,7 +161,6 @@ const useForgotPasswordViewModel = ({
       ClientCode: userData?.ClientCode,
     });
     setCountdownKey(prev => prev + 1);
-    console.log('userData', userData);
   };
 
   let verifyUserData =

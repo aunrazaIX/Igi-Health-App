@@ -25,6 +25,7 @@ const Login = () => {
       loginSetterForApiData={loginSetterForApiData}
       handleCheck={handleCheck}
       checked={checked}
+      rememberMe={rememberMe}
     />
   );
 };

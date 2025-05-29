@@ -38,6 +38,7 @@ const LoginView = ({
   loginSetterForApiData: (key: string, value: any) => void;
   handleCheck: () => void;
   rememberMe: boolean;
+  checked: boolean
 }) => {
   const Wrapper = (tab: string) =>
     selectedTab === tab ? LinearGradient : TouchableOpacity;

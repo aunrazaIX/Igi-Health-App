@@ -1,11 +1,11 @@
-import {View, Text, Modal, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
-import {Calendar} from 'react-native-calendars';
-import {AileronBold} from '../../../components';
-import {vh, vw} from '../../../assets/theme/dimension';
-import {styles} from '../style';
+import { Calendar } from 'react-native-calendars';
+import { AileronBold } from '../../../components';
+import { vh, vw } from '../../../assets/theme/dimension';
+import { styles } from '../style';
 import LinearGradient from 'react-native-linear-gradient';
-import {COLORS} from '../../../assets/theme/colors';
+import { COLORS } from '../../../assets/theme/colors';
 
 const Calender = ({
   onPressHeaderIcon,
@@ -31,7 +31,7 @@ const Calender = ({
             paddingHorizontal: vw * 4,
             paddingBottom: vh * 2,
           }}
-          dayComponent={({date, state}) => {
+          dayComponent={({ date, state }) => {
             return (
               <>
                 <View>

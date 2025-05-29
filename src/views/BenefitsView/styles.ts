@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {StyleSheet} from 'react-native';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 const styles = StyleSheet.create({
   BenefitsGradients: {
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     backgroundColor: COLORS.white,
-    paddingBottom: vh * 20,
   },
   CurvedView: {
     marginBottom: -vh * 4,

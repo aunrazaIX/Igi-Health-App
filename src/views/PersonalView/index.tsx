@@ -49,7 +49,7 @@ const PersonalView: React.FC<Props> = ({ data, gender, relation, goBack, handleS
             <TopView onPressBack={goBack} title={'Personal'} TopViewFirstIcon={images.AddNew} FirstOpenModal={manageUpdate} />
             <CurvedView>
                 <ScrollView>
-                    <View style={{ paddingBottom: vh * 21 }}>
+                    <View>
                         <ImageBackground source={images.SecureFuture} style={styles.personalImage}>
                             <View style={styles.secureTextGrp}>
                                 <AileronSemiBold style={styles.secureText} name={'We\nSecure\nYour'} />

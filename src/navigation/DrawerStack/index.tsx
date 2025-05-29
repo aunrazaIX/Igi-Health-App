@@ -138,7 +138,6 @@ const DrawerStack = () => {
   const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
 
     const handleProfile = () => {
-      console.log("View Profile clicked")
       navigation.navigate('Profile')
     }
 
