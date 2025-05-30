@@ -4,8 +4,15 @@ import useHomeViewModel from '../../viewmodels/useHomeViewModel';
 
 const Home = () => {
   const {states, functions} = useHomeViewModel();
-  const {cardData, backAnimatedStyle, frontAnimatedStyle, homeCardData} =
-    states;
+  const {
+    cardData,
+    backAnimatedStyle,
+    frontAnimatedStyle,
+    claimData,
+    loading,
+    homeCardData,
+    homeCardDataLoading,
+  } = states;
   const {animateCard, toggleDrawer, onPressMenu, onPressHeaderIcon} = functions;
 
   return (
@@ -18,6 +25,9 @@ const Home = () => {
       backAnimatedStyle={backAnimatedStyle}
       frontAnimatedStyle={frontAnimatedStyle}
       homeCardData={homeCardData}
+      claimData={claimData}
+      loading={loading}
+      homeCardDataLoading={homeCardDataLoading}
     />
   );
 };

@@ -40,14 +40,9 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
   goBack,
   data,
 }) => {
-  console.log(data);
   return (
     <>
-      <TopView
-        title="Hospitals"
-        TopViewFirstIcon={icons.searchWhite}
-
-      />
+      <TopView title="Hospitals" TopViewFirstIcon={icons.searchWhite} />
       <CurvedView>
         <View>
           <View style={styles.mapTextContainer}>

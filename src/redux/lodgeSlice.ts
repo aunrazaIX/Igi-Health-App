@@ -135,7 +135,6 @@ export const lodgeSlice = createSlice({
     },
 
     onDeleteDocuments: (state, {payload}) => {
-      console.log(payload, 'payload');
       let temp = [...state.selectedDocuments];
 
       temp.splice(payload, 1);

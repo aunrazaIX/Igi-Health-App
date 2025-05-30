@@ -1,13 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useDispatch, useSelector} from 'react-redux';
 import {setRememberMe, setUserData} from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {setErrorModal} from '../redux/generalSlice';
-import {RootState} from '../redux/store';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type UserDetails = {
   name: string;
@@ -38,7 +36,6 @@ type UseLoginViewModelReturn = {
 
 const useLoginViewModel = (): UseLoginViewModelReturn => {
   const {rememberMe, credentials} = useSelector(state => state.auth);
-  console.log('rememberMe', rememberMe);
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [verifiedUserData, setVerifiedUserData] = useState(null);
   const [checked, setChecked] = useState(rememberMe);
@@ -54,7 +51,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     userName: rememberMe ? credentials.userName : null,
     password: rememberMe ? credentials?.password : null,
   });
-  console.log('credentials', credentials);
   const {
     checkForError: signupCheckForError,
     resetStates: signupResetStates,
@@ -137,7 +133,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
         rememberMe: checked,
       }),
     );
-    console.log('checkedsdadhjc', checked);
     trigger(apiData);
   };
 

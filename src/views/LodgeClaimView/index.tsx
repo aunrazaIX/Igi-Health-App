@@ -124,8 +124,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
     ),
   };
 
-  console.log(claimsDetails, selectedType);
-
   return (
     <>
       <TopView
