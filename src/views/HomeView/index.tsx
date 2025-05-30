@@ -279,7 +279,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
                           <AileronSemiBold
                             style={styles.homeBackCardText}
-                            name={homeCardData[0]?.Policy_Daily_RoomLimit}
+                            name={`Rs. Per Day: ${homeCardData[0]?.Policy_Daily_RoomLimit}`}
                           />
                         </View>
                       </View>
