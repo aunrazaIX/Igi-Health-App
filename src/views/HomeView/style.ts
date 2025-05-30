@@ -44,21 +44,22 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     elevation: 3,
     backfaceVisibility: 'hidden',
-    height: vh * 30,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
     },
+    // borderWidth: 2,
+    // height: 30 * vh,
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
   },
 
   flipCardContainer: {
     width: '100%',
-    // borderWidth:2,
+    // borderWidth: 2,
     marginTop: vh * 2,
-    minHeight: vh * 30,
+    // borderWidth: 2,
   },
   flipBackCard: {
     marginTop: -vh * 30,
@@ -264,7 +265,7 @@ export const styles = StyleSheet.create({
   homeBackCardContainer: {
     backgroundColor: COLORS.white,
     justifyContent: 'space-between',
-    height: vh * 27,
+    // height: vh * 27,
     gap: vh,
   },
   homeBackInfoContainerHeader: {
