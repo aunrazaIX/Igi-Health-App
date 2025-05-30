@@ -46,6 +46,9 @@ const endpoints = {
   Benefits: {
     getBenefits: 'Benefits/GetActiveBenefits',
   },
+  coverage: {
+    getCoverage: 'Policy/GetPolicyCoverage',
+  },
 };
 
 export default endpoints;

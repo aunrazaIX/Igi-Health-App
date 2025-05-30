@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useDispatch, useSelector} from 'react-redux';
@@ -40,8 +40,11 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const [verifiedUserData, setVerifiedUserData] = useState(null);
   const [checked, setChecked] = useState(rememberMe);
 
+  const loginResponse = useRef(null);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  let user = useSelector((state: RootState) => state.auth);
 
   const {
     setterForApiData: loginSetterForApiData,
@@ -62,14 +65,42 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     cnic: '',
   });
 
+  const {
+    data: getCoverageData,
+    loading: getCoverageLoading,
+    trigger: getCovergaeApi,
+  } = useApiHook({
+    apiEndpoint: endpoints.coverage.getCoverage,
+    method: 'get',
+    skip: true,
+
+    onSuccess: res => {
+      let data = loginResponse.current;
+      data.Data.coverageType = res;
+      data.Data.showPriorApproval = res?.some(
+        item => item?.CoverageType === 'IPD',
+      );
+
+      dispatch(setUserData(data));
+    },
+    onError: e => {
+      console.log('error in seocnd APi ', e);
+    },
+  });
+
   const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
+
     onSuccess: res => {
-      dispatch(setUserData(res));
+      loginResponse.current = res;
+      let apiData = {
+        ClientCode: res?.Data?.ClientCode,
+      };
+
+      getCovergaeApi(apiData);
     },
     onError: error => {
-      console.log('Login Error', error);
       dispatch(setErrorModal({Show: true, message: error.error}));
     },
   });

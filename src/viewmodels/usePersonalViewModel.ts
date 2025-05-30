@@ -40,6 +40,7 @@ type DependentDetail = {
 const usePersonalViewModal = (): UsePersonalViewModal => {
   const [modalVisible, setModalVisible] = useState(false);
   const [getData, setGetData] = useState([]);
+
   let {user} = useSelector((state: RootState) => state.auth);
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
