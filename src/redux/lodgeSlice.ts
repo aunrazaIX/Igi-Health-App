@@ -7,7 +7,7 @@ const initialState: {
   selectedPatient: any | null;
   selectedType: any | null;
   selectedMaternityType: any | null;
-  selectedHopsital: any | null;
+  selectedHospital: any | null;
   selectedDocuments: any[];
   remarks: string;
   treatments: any[];
@@ -16,7 +16,7 @@ const initialState: {
   currentStep: 1,
   selectedPatient: null,
   selectedMaternityType: null,
-  selectedHopsital: null,
+  selectedHospital: null,
   selectedDocuments: [],
   treatments: [],
   isError: false,
@@ -95,7 +95,7 @@ export const lodgeSlice = createSlice({
       state.selectedMaternityType = payload;
     },
     setSelectedHospital: (state, {payload}) => {
-      state.selectedHopsital = payload;
+      state.selectedHospital = payload;
     },
 
     setResetTreaments: state => {

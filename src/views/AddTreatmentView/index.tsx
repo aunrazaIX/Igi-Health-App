@@ -1,4 +1,4 @@
-import { Image, TouchableOpacity, View } from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {
   AileronBold,
@@ -10,10 +10,10 @@ import {
   TopView,
 } from '../../components';
 import styles from './styles';
-import { icons } from '../../assets';
-import { COLORS } from '../../assets/theme/colors';
+import {icons} from '../../assets';
+import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 type AddTreatmentViewProps = {
   treatmentTypes: any[];
@@ -49,11 +49,11 @@ const AddTreatmentView = ({
             <View style={styles.textContainer}>
               <AileronBold
                 name="Add"
-                style={[styles.text, { color: COLORS.cardBackgroundBlue }]}
+                style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
               />
               <AileronBold
                 name="Treatment"
-                style={[styles.text, { color: COLORS.cardBackgroundRed }]}
+                style={[styles.text, {color: COLORS.cardBackgroundRed}]}
               />
             </View>
 
@@ -63,6 +63,7 @@ const AddTreatmentView = ({
               selectData={treatmentTypes}
               selectLabel={'-- Select Treatment --'}
               selectPlaceholder={'-- Select Treatment --'}
+              isSearch={true}
             />
 
             <InputField

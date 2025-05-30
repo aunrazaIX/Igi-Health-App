@@ -27,6 +27,7 @@ const Select: React.FC<SelectProps> = ({
   selectPlaceholder,
   value,
   onSelectOption,
+  isSearch,
 }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -56,6 +57,7 @@ const Select: React.FC<SelectProps> = ({
         </TouchableOpacity>
       </DependentBox>
       <SelectModal
+        showSearch={isSearch}
         visible={isDropdownVisible}
         data={selectData}
         onPressBackDrop={() => setDropdownVisible(false)}

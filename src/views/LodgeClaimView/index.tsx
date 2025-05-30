@@ -17,8 +17,6 @@ import {
 import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
-import {useSelector} from 'react-redux';
-import {View} from 'react-native';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -51,6 +49,9 @@ type LodgeClaimViewProps = {
   selectedType: any;
   maternityTypeData: any;
   selectedMaternityType: any;
+  onSelectHospital: () => void;
+  selectedHospital: any;
+  hospitalList: any;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -85,9 +86,10 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   personalDetailsLoading,
   onSelectType,
   selectedType,
-  maternityTypeData,
-  onSelectMaternityType,
   selectedMaternityType,
+  hospitalList,
+  onSelectHospital,
+  selectedHospital,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -100,9 +102,10 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         dependants={dependants}
         personalDetails={personalDetails}
         onSelectType={onSelectType}
-        maternityTypeData={maternityTypeData}
-        onSelectMaternityType={onSelectMaternityType}
-        selectedMaternityType={selectedMaternityType}
+        hospitalList={hospitalList}
+        onSelectHospital={onSelectHospital}
+        selectedHospital={selectedHospital}
+        type={type}
       />
     ),
     claim: (
@@ -129,7 +132,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
       <TopView
         TopViewFirstIcon={
           (currentStep === 2 && selectedType?.value === 1) ||
-          (currentStep === 2 && claimsDetails?.length < 1)
+          (currentStep === 2 && claimsDetails?.length < 1) ||
+          type === 'priorApproval'
             ? icons.addSquare
             : null
         }

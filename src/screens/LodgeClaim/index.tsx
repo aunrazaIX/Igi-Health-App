@@ -1,8 +1,8 @@
 import React from 'react';
 import LodgeClaimView from '../../views/LodgeClaimView';
 import useLodgeClaimViewModel from '../../viewmodels/useLodgeClaimViewModel';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
 
 type RootStackParamList = {
   LodgeClaim: {
@@ -16,8 +16,8 @@ type LodgeClaimProps = {
   route: RouteProp<RootStackParamList, 'LodgeClaim'>;
 };
 
-const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
-  const { states, functions } = useLodgeClaimViewModel({ navigation, route });
+const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
+  const {states, functions} = useLodgeClaimViewModel({navigation, route});
 
   const {
     steps,
@@ -38,9 +38,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     personalDetails,
     personalDetailsLoading,
     selectedType,
-    maternityTypeData,
-    selectedMaternityType
-
+    hospitalList,
+    selectedHospital,
   } = states;
 
   const {
@@ -58,7 +57,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
     setterForclaimData,
     onSelectHospital,
     onSelectType,
-    onSelectMaternityType
+    onSelectMaternityType,
   } = functions;
 
   return (
@@ -90,16 +89,14 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({ navigation, route }) => {
       claimData={claimData}
       type={type}
       setterForclaimData={setterForclaimData}
-      onSelectHospital={onSelectHospital}
       personalDetails={personalDetails}
       personalDetailsLoading={personalDetailsLoading}
       dependants={dependants}
       onSelectType={onSelectType}
       selectedType={selectedType}
-      maternityTypeData={maternityTypeData}
-      selectedMaternityType={selectedMaternityType}
-
-
+      hospitalList={hospitalList}
+      onSelectHospital={onSelectHospital}
+      selectedHospital={selectedHospital}
     />
   );
 };

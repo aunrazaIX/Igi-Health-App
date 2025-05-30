@@ -80,8 +80,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     treatments,
     selectedPatient,
     selectedType,
-    selectedMaternityType,
+    selectedHospital,
   } = useSelector(state => state.lodge);
+  const {user} = useSelector(state => state.auth);
 
   const resetStates = () => {
     dispatch(_setTreatmentData([]));
@@ -108,9 +109,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     method: 'post',
     isFormData: true,
     apiEndpoint: endpoints.claimLogde.attachment(
-      '776',
+      user?.UserId,
       '1231231232131',
-      'DEMO',
+      user?.ClientCode,
     ),
     argsOrBody: {
       files: selectedDocuments,
@@ -190,16 +191,19 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   });
 
+  const {data: hospitalData, loading: hospitalLoading} = useApiHook({
+    apiEndpoint: endpoints.panelHospital.getPanelHospitals,
+    method: 'get',
+    transform: {
+      label: 'HospitalName',
+      value: 'HospitalID',
+    },
+  });
+
   const dependantsData = [
     {label: 'Ipd', value: 0},
     {label: 'Opd', value: 1},
     {label: 'Maternity', value: 2},
-  ];
-
-  const maternityTypeData = [
-    {label: 'Normal', value: 0},
-    {label: 'C-Section', value: 1},
-    {label: 'MisCarriage', value: 2},
   ];
 
   const steps: Step[] = [
@@ -276,15 +280,15 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   };
 
   const navigateTreatment = () => {
-    navigation.navigate('AddTreatment');
+    navigation.navigate('AddTreatment', {claimType: type});
   };
 
   const onPressDelete = (index: number) => dispatch(onDeleteTreatment(index));
-
   const onPressEdit = (data: object, index: number) => {
     navigation.navigate('AddTreatment', {
       treatmentData: data,
       treatmentIndex: index,
+      claimType: type,
     });
   };
   const onSelectPatient = (patient: any) => {
@@ -301,8 +305,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     dispatch(setSelectedMaternityType(patient));
   };
 
-  const onSelectHospital = (patient: any) => {
-    dispatch(setSelectedHospital(patient));
+  const onSelectHospital = (hospital: any) => {
+    dispatch(setSelectedHospital(hospital));
   };
 
   const onPressNext = () => {
@@ -384,8 +388,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       personalDetails,
       personalDetailsLoading,
       dependants,
-      maternityTypeData,
-      selectedMaternityType,
+      hospitalList: hospitalData,
+      selectedHospital,
     },
     functions: {
       goBack,

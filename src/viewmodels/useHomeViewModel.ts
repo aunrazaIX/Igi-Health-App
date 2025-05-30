@@ -28,6 +28,11 @@ export type HomeHeaderData = {
   name: string;
   to: string;
 };
+type ClaimItem = {
+  SubmiitedClaim?: number;
+  DeductedAmount?: number;
+  TotalPaid?: number;
+};
 
 type UseHomeViewModelReturn = {
   states: {
@@ -49,8 +54,13 @@ type UseHomeViewModelReturn = {
     animateCard: () => void;
     toggleDrawer: () => void;
     onPressMenu: (cardData: CardItemData) => void;
-    onPressHeaderIcon: () => void;
+    onPressHeaderIcon: (to: string) => void;
   };
+};
+type ClaimStats = {
+  totalClaimAmount: string;
+  deductedAmount: string;
+  paidAmount: string;
 };
 
 const useHomeViewModel = (): UseHomeViewModelReturn => {
@@ -59,6 +69,11 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   console.log(user, 'userrrr');
   const navigate = useNavigation<DrawerNavigationProp<DrawerStackParamList>>();
   const [selectedTab, setSelectedTab] = useState<string>('login');
+  const [data, setData] = useState<ClaimStats>({
+    totalClaimAmount: '0',
+    deductedAmount: '0',
+    paidAmount: '0',
+  });
 
   const animateValue = useRef(new Animated.Value(0)).current;
   const currentValue = useRef(0);
@@ -212,6 +227,15 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
   ];
 
+  const {data: rawClaimData, loading} = useApiHook({
+    apiEndpoint: endpoints.claimHistory.getAllClaim,
+    method: 'get',
+    argsOrBody: {userid: '776'},
+    onSuccess: res => {
+      setData(sortClaimData(res?.Data));
+    },
+  });
+
   const onPressTab = (name: string) => setSelectedTab(name);
   const toggleDrawer = () => {
     navigate.toggleDrawer();
@@ -219,8 +243,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   const onPressMenu = (cardData: CardItemData) => {
     if (cardData?.to) {
-      navigate.navigate(cardData.to);
-
+      navigate.navigate(cardData?.to);
       return;
     }
 
@@ -235,6 +258,27 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     if (to) {
       navigate.navigate(to);
     }
+  };
+
+  const sortClaimData = (item: ClaimItem[] = []) => {
+    const totalClaimAmount = item?.reduce(
+      (acc, curr) => acc + (curr?.SubmiitedClaim || 0),
+      0,
+    );
+    const deductedAmount = item?.reduce(
+      (acc, curr) => acc + (curr?.DeductedAmount || 0),
+      0,
+    );
+    const paidAmount = item?.reduce(
+      (acc, curr) => acc + (curr?.TotalPaid || 0),
+      0,
+    );
+
+    return {
+      totalClaimAmount: formatCurrency(totalClaimAmount),
+      deductedAmount: formatCurrency(deductedAmount),
+      paidAmount: formatCurrency(paidAmount),
+    };
   };
 
   return {

@@ -1,3 +1,5 @@
+import PriorApproval from '../screens/PriorApproval';
+
 const endpoints = {
   auth: {
     login: 'Login/Login',
@@ -16,6 +18,7 @@ const endpoints = {
     getTypes: 'ClaimsType/getOPDType',
     getIPDTypes: 'ClaimsType/getIPDType',
     getMATTypes: 'ClaimsType/getMaternityType',
+    IPDTypesForPriorApproval: 'PriorApprovals/GetIPDTreatmentTypes',
   },
   claimLogde: {
     lodge: 'Claims/AddNewClaim',
@@ -41,6 +44,7 @@ const endpoints = {
     getPolicyTypes: 'Policy/GetPolicyTypes',
     getPolicyDetails: 'Policy/GetPolicyDetails',
   },
+  PriorApproval: {},
 };
 
 export default endpoints;
