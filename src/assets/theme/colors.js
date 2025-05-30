@@ -14,7 +14,7 @@ export const COLORS = {
   textColorLight: '#5C5E5A',
   forgotPass: 'rgba(41, 41, 39, 1)',
   activeButtonGradient: ['#0B4A98', '#48C3FF'],
-  placeholderColor: "#292927",
+  placeholderColor: '#292927',
   selectPlaceholder: 'rgba(193, 193, 193, 1)',
   insuredPrice: 'rgba(18, 18, 18, 1)',
   benefitTitle: 'rgba(238, 37, 96, 1)',
@@ -49,5 +49,6 @@ export const COLORS = {
   disabled: '#84b3da',
   labelDisabled: 'rgba(108, 108, 108, 1)',
   valueDisabled: 'rgba(108, 108, 108, 1)',
-  inputBoxDisabled: 'rgba(243, 243, 243, 1)'
+  inputBoxDisabled: 'rgba(243, 243, 243, 1)',
+  grey: '#E6EBEB',
 };

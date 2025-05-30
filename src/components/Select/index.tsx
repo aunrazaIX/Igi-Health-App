@@ -7,7 +7,7 @@ import AileronBold from '../AileronBold';
 import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
-import NoDataView from '../NoDataView';
+import SelectModal from './components/SelectModal';
 
 type Options = {
   value: number;
@@ -55,29 +55,12 @@ const Select: React.FC<SelectProps> = ({
           </View>
         </TouchableOpacity>
       </DependentBox>
-
-      {isDropdownVisible && (
-        <View style={styles.dropdown}>
-          {selectData?.length > 0 ? (
-            selectData?.map((item, index) => (
-              <TouchableOpacity
-                key={item?.label}
-                style={[
-                  styles.dropdownItem,
-                  index !== selectData?.length - 1 && {
-                    borderBottomWidth: 1,
-                    borderColor: COLORS.black + '22',
-                  },
-                ]}
-                onPress={() => handleSelect(item)}>
-                <AileronBold name={item?.label} style={[styles.listText]} />
-              </TouchableOpacity>
-            ))
-          ) : (
-            <NoDataView name={'No Options'} />
-          )}
-        </View>
-      )}
+      <SelectModal
+        visible={isDropdownVisible}
+        data={selectData}
+        onPressBackDrop={() => setDropdownVisible(false)}
+        handleSelect={handleSelect}
+      />
     </View>
   );
 };

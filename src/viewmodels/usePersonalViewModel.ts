@@ -62,7 +62,15 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
           image: icons.frame,
           dependentDetail: [
             {label: 'Name', value: item?.LGIVNAME.trim()},
-            {label: 'Gender', value: item?.CLTSEX ?? '--'},
+            {
+              label: 'Gender',
+              value:
+                item?.CLTSEX === 'M'
+                  ? 'Male'
+                  : item?.CLTSEX === 'F'
+                  ? 'Female'
+                  : null,
+            },
             {label: 'RelationShip', value: item?.DPNTTYPE ?? '--'},
             {label: 'Age', value: item?.AGE},
           ],
@@ -104,12 +112,14 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       setConfirmationModal(true);
     },
     onError: e => {
-      console.log('error', e);
+      console.log(
+        'error because of gender is going udenfined , gender select krne per gender jarha hai',
+        e,
+      );
     },
   });
 
   const deleteDepenedent = (dependent, index) => {
-    console.log(dependent, ' iiii');
     let _apiData = {
       dependentRequestID: 0,
       dependentRequestTypesID: 3,

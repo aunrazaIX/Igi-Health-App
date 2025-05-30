@@ -4,9 +4,13 @@ import {COLORS} from '../assets/theme/colors';
 import {Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
-import {useSelector} from 'react-redux';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
+import formatCurrency from '../utils';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {DrawerStackParamList} from '../navigation/types';
+import {useSelector} from 'react-redux';
+import {RootState} from '@reduxjs/toolkit/query';
 
 export type CardItemData = {
   logo?: ImageSourcePropType;
@@ -24,11 +28,6 @@ export type HomeHeaderData = {
   name: string;
   to: string;
 };
-type ClaimItem = {
-  SubmiitedClaim?: number;
-  DeductedAmount?: number;
-  TotalPaid?: number;
-};
 
 type UseHomeViewModelReturn = {
   states: {
@@ -37,33 +36,29 @@ type UseHomeViewModelReturn = {
     frontAnimatedStyle: {};
     backAnimatedStyle: {};
     homeCardData: any;
+    claimData: {
+      totalClaimAmount: string;
+      deductedAmount: string;
+      paidAmount: string;
+    };
+    loading: boolean;
+    homeCardDataLoading: any;
   };
   functions: {
     onPressTab: (name: string) => void;
     animateCard: () => void;
     toggleDrawer: () => void;
     onPressMenu: (cardData: CardItemData) => void;
-    onPressHeaderIcon: (to: string) => void;
+    onPressHeaderIcon: () => void;
   };
-};
-type ClaimStats = {
-  totalClaimAmount: string;
-  deductedAmount: string;
-  paidAmount: string;
 };
 
 const useHomeViewModel = (): UseHomeViewModelReturn => {
-  const navigate = useNavigation();
-
   const user = useSelector((state: RootState) => state.auth.user);
 
   console.log(user, 'userrrr');
+  const navigate = useNavigation<DrawerNavigationProp<DrawerStackParamList>>();
   const [selectedTab, setSelectedTab] = useState<string>('login');
-  const [data, setData] = useState<ClaimStats>({
-    totalClaimAmount: '0',
-    deductedAmount: '0',
-    paidAmount: '0',
-  });
 
   const animateValue = useRef(new Animated.Value(0)).current;
   const currentValue = useRef(0);
@@ -128,7 +123,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   });
 
   // 1st api call
-  const {data, loading: Loading} = useApiHook({
+  const {data: policyData, loading: Loading} = useApiHook({
     apiEndpoint: endpoints.policy.getPolicyTypes,
     method: 'get',
     argsOrBody: {
@@ -217,15 +212,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
   ];
 
-  const {data: rawClaimData, loading} = useApiHook({
-    apiEndpoint: endpoints.claimHistory.getAllClaim,
-    method: 'get',
-    argsOrBody: {userid: '776'},
-    onSuccess: res => {
-      setData(sortClaimData(res?.Data));
-    },
-  });
-
   const onPressTab = (name: string) => setSelectedTab(name);
   const toggleDrawer = () => {
     navigate.toggleDrawer();
@@ -233,7 +219,8 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   const onPressMenu = (cardData: CardItemData) => {
     if (cardData?.to) {
-      navigate.navigate(cardData?.to);
+      navigate.navigate(cardData.to);
+
       return;
     }
 
@@ -250,27 +237,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     }
   };
 
-  const sortClaimData = (item: ClaimItem[] = []) => {
-    const totalClaimAmount = item?.reduce(
-      (acc, curr) => acc + (curr?.SubmiitedClaim || 0),
-      0,
-    );
-    const deductedAmount = item?.reduce(
-      (acc, curr) => acc + (curr?.DeductedAmount || 0),
-      0,
-    );
-    const paidAmount = item?.reduce(
-      (acc, curr) => acc + (curr?.TotalPaid || 0),
-      0,
-    );
-
-    return {
-      totalClaimAmount: formatCurrency(totalClaimAmount),
-      deductedAmount: formatCurrency(deductedAmount),
-      paidAmount: formatCurrency(paidAmount),
-    };
-  };
-
   return {
     states: {
       selectedTab,
@@ -278,6 +244,9 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       backAnimatedStyle,
       frontAnimatedStyle,
       homeCardData,
+      claimData: data,
+      loading,
+      homeCardDataLoading,
     },
     functions: {
       onPressTab,

@@ -72,7 +72,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // borderWidth: 2
+    // borderWidth: 2,
   },
   text: {
     color: COLORS.textColor,
@@ -132,13 +132,18 @@ export const styles = StyleSheet.create({
   infoCardTextBold: {
     fontSize: vh * 2,
     color: COLORS.textBlackShade,
+    // textAlign: 'left',
+    // borderWidth: 2,
   },
   infoCardTextlight: {
     fontSize: vh * 1.6,
     color: COLORS.textColor,
+    width: vw * 40,
   },
   homeInfoContainerHeaderText: {
     gap: vh * 0.5,
+
+    alignItems: 'flex-end',
   },
   homeInfoContainerMiddle: {
     marginTop: vh * 2.5,
@@ -168,6 +173,8 @@ export const styles = StyleSheet.create({
   },
   infoCardFooterLeft: {
     gap: vh * 0.5,
+
+    alignItems: 'flex-start',
   },
   infoCardFooterRight: {
     alignItems: 'flex-end',
@@ -279,6 +286,7 @@ export const styles = StyleSheet.create({
     fontSize: vw * 3.7,
     textAlign: 'left',
     color: COLORS.textBlackShade,
+    // borderWidth: 2,
   },
   homeBackCardRow: {
     flexDirection: 'row',

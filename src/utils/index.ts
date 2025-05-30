@@ -10,4 +10,17 @@ const formatCurrency = amount => {
   return 'PKR 0';
 };
 
+export const universalSearch = (query, searchableFields, data) => {
+  const lowerQuery = typeof query === 'string' ? query.toLowerCase() : '';
+
+  return data?.filter(item =>
+    searchableFields.some(field => {
+      const value = item[field];
+      return (
+        typeof value === 'string' && value.toLowerCase().includes(lowerQuery)
+      );
+    }),
+  );
+};
+
 export default formatCurrency;

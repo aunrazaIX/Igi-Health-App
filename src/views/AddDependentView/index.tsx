@@ -89,7 +89,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
 
           <Select
             selectData={genderOptions}
-            selectLabel={'Gender'}
+            selectLabel={dependentApiData?.gender?.label ?? null}
             selectPlaceholder={'-- Select Gender --'}
             onSelectOption={option =>
               dependentSetterForApiData('gender', option)

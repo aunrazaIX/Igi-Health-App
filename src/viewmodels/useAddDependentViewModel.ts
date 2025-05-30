@@ -11,6 +11,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   let {user} = useSelector((state: RootState) => state.auth);
 
   const {dependentData, dependentIndex} = route?.params || {};
+  console.log(dependentData);
 
   const navigation = useNavigation();
 
@@ -29,6 +30,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
     age: dependentData?.dependentDetail[3]?.value,
   };
+  console.log(prefilledData, 'prefilled');
 
   const {
     setterForApiData: dependentSetterForApiData,
@@ -43,12 +45,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     dependentRequestTypesID: dependentIndex ? 2 : 1,
     dependentRequestID: 0,
     gender: {
-      label:
-        prefilledData.gender.label === 'M'
-          ? 'Male'
-          : prefilledData.gender.label === 'F'
-          ? 'Female'
-          : null,
+      label: prefilledData.gender.label,
     },
     Age: prefilledData?.age?.toString() ?? null,
     dependentRequestStatus: true,
@@ -85,13 +82,16 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   });
 
   const onPressSubmit = () => {
+    console.log(dependentApiData, 'dependApiddat');
     const filled = dependentCheckForError();
+
     if (!filled) return;
     let _apiData = {
       ...dependentApiData,
       dependentTypeID: dependentApiData?.dependentTypeID?.value,
-      gender: dependentApiData?.gender?.value,
+      gender: dependentApiData?.gender?.label,
     };
+    console.log(_apiData);
     trigger(_apiData);
   };
 

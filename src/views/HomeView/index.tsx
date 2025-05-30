@@ -17,6 +17,7 @@ import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
 import {vh} from '../../assets/theme/dimension';
 import {useSelector} from 'react-redux';
+import ModalLoading from '../../components/ModalLoading';
 
 type CardItem = {
   logo: ImageSourcePropType;
@@ -35,6 +36,13 @@ type HomeViewProps = {
   onPressMenu: (value: CardItem) => void;
   onPressHeaderIcon: (value: string) => void;
   homeCardData: any;
+  claimData: {
+    totalClaimAmount: string;
+    deductedAmount: string;
+    paidAmount: string;
+  };
+  loading: boolean;
+  homeCardDataLoading: any;
 };
 
 const HomeView: React.FC<HomeViewProps> = ({
@@ -46,8 +54,12 @@ const HomeView: React.FC<HomeViewProps> = ({
   frontAnimatedStyle,
   backAnimatedStyle,
   homeCardData,
+  claimData,
+  loading,
+  homeCardDataLoading,
 }) => {
   const user = useSelector(state => state.auth.user);
+
   console.log(user, 'pppp');
   return (
     <ScrollView>
@@ -70,6 +82,7 @@ const HomeView: React.FC<HomeViewProps> = ({
               </TouchableOpacity>
             </View>
           </View>
+
           {homeCardData?.length > 0 && (
             <View style={styles.flipCardContainer}>
               <Animated.View
@@ -94,7 +107,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                           homeCardData[0]?.Policy_CertNo
                         }`}
                         style={styles.infoCardTextlight}
-                        numberOfLines={1}
+                        numberOfLines={2}
                       />
                     </View>
                   </View>
@@ -135,7 +148,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                           ?.find(
                             item => item?.Policy_Insured_Relaion == 'Member',
                           )
-                          ?.Policy_Insured_Name.trim('')}
+                          ?.Policy_Insured_Name.trim()}
                         style={styles.infoCardTextBold}
                         numberOfLines={1}
                       />
@@ -178,19 +191,38 @@ const HomeView: React.FC<HomeViewProps> = ({
                           name={'Details'}
                         />
                       </View>
-                      {homeCardData
-                        ?.filter(
-                          _item => _item?.Policy_Insured_Relaion !== 'Member',
-                        )
-                        .map((item, index) => (
-                          <AileronRegular
-                            key={index}
-                            name={`${item?.Policy_Insured_Name?.trim()}:${
-                              item?.Policy_Insured_Age
-                            }`}
-                            style={styles.homeBackCardText}
-                          />
-                        ))}
+
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          alignItems: 'flex-end',
+                        }}>
+                        <View
+                          style={{
+                            flexDirection: 'col',
+                            gap: vh * 1.2,
+                          }}>
+                          {homeCardData
+                            ?.filter(
+                              _item =>
+                                _item?.Policy_Insured_Relaion !== 'Member',
+                            )
+                            .map((item, index) => (
+                              <AileronRegular
+                                key={index}
+                                name={`${item?.Policy_Insured_Name?.trim()}: ${
+                                  item?.Policy_Insured_Age
+                                }`}
+                                style={styles.homeBackCardText}
+                              />
+                            ))}
+                        </View>
+
+                        <TouchableOpacity onPress={animateCard}>
+                          <Image source={images.flipCard} />
+                        </TouchableOpacity>
+                      </View>
 
                       {/* <View style={styles.homeBackCardRow}>
                         <View style={styles.homeBackCardRowText}>
@@ -421,7 +453,7 @@ const HomeView: React.FC<HomeViewProps> = ({
           </View>
         </View>
       </View>
-      <ModalLoading loading={loading} />
+      <ModalLoading loading={homeCardDataLoading} />
     </ScrollView>
   );
 };
