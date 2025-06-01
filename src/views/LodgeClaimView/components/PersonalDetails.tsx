@@ -64,8 +64,6 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
     },
   ];
 
-  console.log(type);
-
   return (
     <View style={styles.container}>
       <Select

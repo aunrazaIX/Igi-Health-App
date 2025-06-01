@@ -66,7 +66,6 @@ type ClaimStats = {
 const useHomeViewModel = (): UseHomeViewModelReturn => {
   const user = useSelector((state: RootState) => state.auth.user);
 
-  console.log(user, 'userrrr');
   const navigate = useNavigation<DrawerNavigationProp<DrawerStackParamList>>();
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [data, setData] = useState<ClaimStats>({
@@ -127,14 +126,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     apiEndpoint: endpoints.policy.getPolicyDetails,
     method: 'get',
     skip: true,
-
-    onSuccess: res => {
-      console.log(res, 'yaehh raha second APi ka response');
-      console.log(data, 'second api ersponse another');
-    },
-    onError: e => {
-      console.log('error in seocnd APi ', e);
-    },
   });
 
   // 1st api call
@@ -162,11 +153,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
         policyCode: policyNumber,
         cnic: user.cnic,
       };
-      console.log('triggering second API');
       trigger(apiData);
-    },
-    onError: e => {
-      console.log(e, 'Erorrrrrr');
     },
   });
 
