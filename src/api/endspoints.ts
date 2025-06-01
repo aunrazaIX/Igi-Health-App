@@ -44,7 +44,11 @@ const endpoints = {
     getPolicyTypes: 'Policy/GetPolicyTypes',
     getPolicyDetails: 'Policy/GetPolicyDetails',
   },
-  PriorApproval: {},
+  priorApproval: {
+    addPriorApproval: 'PriorApprovals/AddPriorApproval',
+    attachment: (userId: string, myuuid: string, ClientCode: string) =>
+      `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
+  },
 };
 
 export default endpoints;

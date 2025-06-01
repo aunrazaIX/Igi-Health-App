@@ -32,7 +32,7 @@ export const updateTreatments = createAsyncThunk(
       !data?.receiptNumber ||
       !data?.amount ||
       !data?.description ||
-      !data?.treatment?.ClaimsSubTypeName
+      !data?.treatment
     ) {
       thunkApi.dispatch(setErrorModal({message: 'Please enter all details'}));
       return;
@@ -67,7 +67,7 @@ export const setTreatments = createAsyncThunk(
       !_data?.receiptNumber ||
       !_data?.amount ||
       !_data?.description ||
-      !_data?.treatment?.ClaimsSubTypeName
+      !_data?.treatment
     ) {
       thunkApi.dispatch(setErrorModal({message: 'Please enter all details'}));
       return;

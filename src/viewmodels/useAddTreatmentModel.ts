@@ -62,7 +62,6 @@ const useAddTreatmentModel = ({
   }, [selectedType?.value]);
 
   const {loading, data: treatmentTypes, error} = useApiHook(apiParams);
-  console.log(claimType, treatmentTypes);
 
   const onPressAddTreatment = () => {
     const treatmentObj = {
@@ -74,7 +73,6 @@ const useAddTreatmentModel = ({
 
     if (selectedType === 'Opd') {
     }
-
     if (typeof treatmentIndex === 'number') {
       dispatch(
         updateTreatments({
@@ -97,12 +95,6 @@ const useAddTreatmentModel = ({
     }
     // navigation.navigate('LodgeClaimProcess');
   };
-
-  const maternityTypeData = [
-    {label: 'Normal', value: 0},
-    {label: 'C-Section', value: 1},
-    {label: 'MisCarriage', value: 2},
-  ];
 
   return {
     states: {

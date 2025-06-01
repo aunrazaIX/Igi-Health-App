@@ -68,7 +68,7 @@ interface Props {
 
 const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const {type} = route?.params || {};
-
+  const randomId = Math.random().toString().substr(2, 6);
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -94,12 +94,11 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
 
     dispatch(setStep(1));
   };
-
+  console.log(user);
   const {setterForApiData: setterForclaimData, apiData: claimData} =
     useErrorHandlingHook({
       claimComments: '',
     });
-
   const {
     loading: uploadLoading,
     data: claimObject,
@@ -108,40 +107,56 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   } = useApiHook({
     method: 'post',
     isFormData: true,
-    apiEndpoint: endpoints.claimLogde.attachment(
-      user?.UserId,
-      '1231231232131',
-      user?.ClientCode,
-    ),
+    apiEndpoint: endpoints[
+      type === 'priorAprroval' ? 'priorApproval' : 'claimLogde'
+    ]?.attachment(user?.UserId, randomId, user?.ClientCode),
     argsOrBody: {
       files: selectedDocuments,
     },
     onSuccess: res => {
-      let apiData = {
-        UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
-        CLNTNUM: selectedPatient?.CLNTNUM?.toString(),
-        ClaimsData: treatments?.map(item => ({
-          ClaimSNO: '0',
-          ClaimID: res?.Data?.toString(),
-          userId: '776',
-          ClaimAmount: item?.amount?.toString(),
-          ClaimDescriptions: item?.description,
-          UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
-          ClaimReceipt: item?.receiptNumber,
-          ClaimsComments: item?.description,
-          ClaimsSubTypeID: item?.treatment?.value,
-          ClaimAddedDateTime: moment().format('YYYY-MM-DD'),
-          UUID: '1231231232131',
-          ClientCode: 'DEMO',
-        })),
-        ClaimsComments: claimData.claimComments,
-        userId: '776',
-        claimId: res?.Data?.toString(),
-      };
-
+      let apiData =
+        type === 'priorApproval'
+          ? treatments?.map(item => ({
+              requestSNO: 0,
+              userId: user?.UserId,
+              requestID: res?.Data,
+              userRelationCode: selectedPatient?.CLNTNUM?.toString(),
+              requestComments: item?.description,
+              amount: item.amount,
+              hospitalID: selectedHospital.value,
+              treatmentTypeID: item?.treatment?.IPDTreatmentTypesID,
+              dxcCode: item?.treatment?.value,
+              uuid: randomId,
+              clientCode: user?.ClientCode,
+              requestAddedDateTime: new Date().toISOString(),
+            }))
+          : {
+              UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
+              CLNTNUM: selectedPatient?.CLNTNUM?.toString(),
+              ClaimsData: treatments?.map(item => ({
+                ClaimSNO: '0',
+                ClaimID: res?.Data?.toString(),
+                userId: user?.UserId,
+                ClaimAmount: item?.amount?.toString(),
+                ClaimDescriptions: item?.description,
+                UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
+                ClaimReceipt: item?.receiptNumber,
+                ClaimsComments: item?.description,
+                ClaimsSubTypeID: item?.treatment?.value,
+                ClaimAddedDateTime: moment().format('YYYY-MM-DD'),
+                UUID: randomId,
+                ClientCode: user?.ClientCode,
+              })),
+              ClaimsComments: claimData.claimComments,
+              userId: user?.UserId,
+              claimId: res?.Data?.toString(),
+            };
+      console.log(apiData, 'apiData');
       claimTrigger(apiData);
     },
   });
+
+  console.log(uploadError);
 
   const {
     loading: claimLoading,
@@ -149,11 +164,16 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     error: addClaimError,
   } = useApiHook({
     method: 'post',
-    apiEndpoint: endpoints.claimLogde.lodge,
+    apiEndpoint:
+      type === 'priorApproval'
+        ? endpoints.priorApproval.addPriorApproval
+        : endpoints.claimLogde.lodge,
     onSuccess: res => {
+      console.log(res, 'tesutnin');
       setConfirmationModal(true);
     },
     onError: e => {
+      console.log(e, 'error');
       dispatch(
         setErrorModal({
           show: true,
@@ -162,6 +182,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       );
     },
   });
+
+  console.log(addClaimError);
 
   const {data: personalDetails, loading: personalDetailsLoading} = useApiHook({
     apiEndpoint: endpoints.bank.getBankDetails,
