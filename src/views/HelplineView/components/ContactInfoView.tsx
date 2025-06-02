@@ -1,15 +1,21 @@
 import React from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import {
   AileronBold,
   AileronRegular,
   AileronSemiBold,
 } from '../../../components';
-import { icons } from '../../../assets';
+import {icons} from '../../../assets';
 import styles from '../styles';
-import { ContactInfo } from '../../../viewmodels/useHelplineViewModel';
+import {ContactInfo} from '../../../viewmodels/useHelplineViewModel';
 
-const ContactInfoView = ({ data, onPress }: { data: ContactInfo, onPress: () => void }) => {
+const ContactInfoView = ({
+  data,
+  onPress,
+}: {
+  data: ContactInfo;
+  onPress: () => void;
+}) => {
   return (
     <View style={styles.box}>
       <AileronSemiBold style={styles.title} name="Contact information" />
@@ -32,27 +38,26 @@ const ContactInfoView = ({ data, onPress }: { data: ContactInfo, onPress: () => 
       <AileronSemiBold name={data?.address} style={styles.addressDetail} />
 
       <View style={styles.buttonRow}>
-
-        <TouchableOpacity  onPress={()=>onPress("+92 42 34503333")}  style={styles.actionBtn}>
+        <TouchableOpacity
+          onPress={() => onPress('call', '+924234503333')}
+          style={styles.actionBtn}>
           <Image source={icons.call} style={styles.icon} />
-          <AileronRegular name="Call" style={styles.callTittle}/>
+          <AileronRegular name="Call" style={styles.callTittle} />
         </TouchableOpacity>
 
-        <TouchableOpacity  style={styles.actionBtn}>
+        <TouchableOpacity
+          onPress={() => onPress('mail', 'iusmanhanif09@gmail.com')}
+          style={styles.actionBtn}>
           <Image source={icons.email} style={styles.icon} />
-          <AileronRegular name="Email" style={styles.callTittle}/>
+          <AileronRegular name="Email" style={styles.callTittle} />
         </TouchableOpacity>
 
-        <TouchableOpacity  style={styles.actionBtn}>
+        <TouchableOpacity
+          onPress={() => onPress('map', 'IGI Life Karachi')}
+          style={styles.actionBtn}>
           <Image source={icons.location} style={styles.icon} />
-          <AileronRegular name="Location" style={styles.callTittle}/>
+          <AileronRegular name="Location" style={styles.callTittle} />
         </TouchableOpacity>
-
-
-      
-
-
-
       </View>
     </View>
   );

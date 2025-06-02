@@ -1,10 +1,17 @@
-import React from 'react'
-import { View } from 'react-native'
-import styles from '../styles'
-import { AileronBold, AileronSemiBold } from '../../../components'
-import { HotlineCity, HotlineEmail } from '../../../viewmodels/useHelplineViewModel'
+import React from 'react';
+import {View} from 'react-native';
+import styles from '../styles';
+import {AileronBold, AileronSemiBold} from '../../../components';
+import {
+  HotlineCity,
+  HotlineEmail,
+} from '../../../viewmodels/useHelplineViewModel';
 
-const SingleHelplineView = ({ cities, emails, website }: {
+const SingleHelplineView = ({
+  cities,
+  emails,
+  website,
+}: {
   cities: HotlineCity[];
   emails: HotlineEmail[];
   website: string;
@@ -13,14 +20,17 @@ const SingleHelplineView = ({ cities, emails, website }: {
     <View style={styles.box}>
       <AileronSemiBold style={styles.title} name="24/7 Medical Hotlines" />
       {cities?.map((item, index) => (
-        <View key={index} style={{ marginBottom: 15 }}>
+        <View key={index} style={{marginBottom: 15}}>
           <AileronSemiBold style={styles.subtitle} name={item?.city} />
-          <AileronSemiBold style={styles.subtitle} name={`Mobile: ${item?.mobile}`} />
+          <AileronSemiBold
+            style={styles.subtitle}
+            name={`Mobile: ${item?.mobile}`}
+          />
         </View>
       ))}
       <AileronBold style={styles.subtitle} name={'Email:'} />
       {emails?.map((email, i) => (
-        <View key={i} style={{ marginBottom: 10 }}>
+        <View key={i} style={{marginBottom: 10}}>
           <AileronSemiBold style={styles.label} name={email?.label} />
           <AileronSemiBold style={styles.email} name={email?.email} />
         </View>
@@ -28,7 +38,7 @@ const SingleHelplineView = ({ cities, emails, website }: {
       <AileronSemiBold style={styles.subtitle} name={'Website'} />
       <AileronSemiBold style={styles.email} name={website} />
     </View>
-  )
-}
+  );
+};
 
-export default SingleHelplineView
+export default SingleHelplineView;

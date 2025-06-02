@@ -1,6 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
-import { Alert, Linking } from 'react-native';
-
+import {useNavigation} from '@react-navigation/native';
+import {Alert, Linking, Platform} from 'react-native';
 
 export type ContactInfo = {
   name: string;
@@ -39,7 +38,7 @@ type UseHelplineViewModelReturnType = {
   };
   functions: {
     goBack: () => void;
-    onPress: () => void
+    onPress: () => void;
   };
 };
 
@@ -95,9 +94,9 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
   ];
   const hotlines: Hotlines = {
     cities: [
-      { city: 'Islamabad', mobile: '0302-5440150' },
-      { city: 'Karachi', mobile: '0300-9284674 | 0300-8266930' },
-      { city: 'Lahore', mobile: '0300-4748570' },
+      {city: 'Islamabad', mobile: '0302-5440150'},
+      {city: 'Karachi', mobile: '0300-9284674 | 0300-8266930'},
+      {city: 'Lahore', mobile: '0300-4748570'},
     ],
     emails: [
       {
@@ -120,28 +119,24 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
     navigation.goBack();
   };
 
-  const onPress = (type: 'phone' | 'email' | 'map', value: string) => {
-    let url = '';
-
-    switch (type) {
-      case 'phone':
-        url = `tel:${value}`;
-        break;
-      case 'email':
-        url = `mailto:${value}`;
-        break;
-      case 'map':
-        url = `https://www.google.com/maps?q=${encodeURIComponent(value)}`;
-        break;
-      default:
-        Alert.alert('Invalid Action', 'Unsupported link type');
-        return;
+  const onPress = (type: 'call' | 'mail' | 'map', value: string) => {
+    let url;
+    if (type == 'call') {
+      console.log('first');
+      url = `tel:${value}`;
+    } else if (type == 'mail') {
+      url = `mailto:${value}`;
+    } else if (type == 'map') {
+      url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        value,
+      )}`;
     }
 
-    Linking.openURL(url).catch(err => {
-      console.error('Error opening URL:', err);
-      Alert.alert('Error', 'Unable to open link');
-    });
+    if (url) {
+      Linking.openURL(url).catch(err => Alert.alert('Error', err.message));
+    } else {
+      Alert.alert('Error', 'Invalid action type');
+    }
   };
 
   return {
@@ -152,7 +147,7 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
     },
     functions: {
       goBack,
-      onPress
+      onPress,
     },
   };
 };
