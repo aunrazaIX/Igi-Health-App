@@ -223,15 +223,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
   });
 
-  const {data: rawClaimData, loading} = useApiHook({
-    apiEndpoint: endpoints.claimHistory.getAllClaim,
-    method: 'get',
-    argsOrBody: {userid: '776'},
-    onSuccess: res => {
-      setData(sortClaimData(res?.Data));
-    },
-  });
-
   const onPressTab = (name: string) => setSelectedTab(name);
   const toggleDrawer = () => {
     navigate.toggleDrawer();
