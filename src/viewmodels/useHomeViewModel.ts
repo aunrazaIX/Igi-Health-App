@@ -66,7 +66,6 @@ type ClaimStats = {
 const useHomeViewModel = (): UseHomeViewModelReturn => {
   const user = useSelector((state: RootState) => state.auth.user);
 
-  console.log(user, 'userrrr');
   const navigate = useNavigation<DrawerNavigationProp<DrawerStackParamList>>();
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [data, setData] = useState<ClaimStats>({
@@ -194,7 +193,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       mainParent: 'Tabs',
       stChild: 'LodgeClaim',
     },
-    {
+    user?.showPriorApproval && {
       logo: cardIcons.taskDone,
       name: 'Prior Approval',
       image: icons.forwardArrow,
@@ -225,7 +224,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       mainParent: 'Tabs',
       stChild: 'Helpline',
     },
-  ];
+  ].filter(Boolean);
 
   const {data: rawClaimData, loading} = useApiHook({
     apiEndpoint: endpoints.claimHistory.getAllClaim,

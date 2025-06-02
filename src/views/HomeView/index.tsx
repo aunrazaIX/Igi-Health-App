@@ -209,13 +209,15 @@ const HomeView: React.FC<HomeViewProps> = ({
                                 _item?.Policy_Insured_Relaion !== 'Member',
                             )
                             .map((item, index) => (
-                              <AileronRegular
-                                key={index}
-                                name={`${item?.Policy_Insured_Name?.trim()}: ${
-                                  item?.Policy_Insured_Age
-                                }`}
-                                style={styles.homeBackCardText}
-                              />
+                              <>
+                                <AileronRegular
+                                  key={index}
+                                  name={`${item?.Policy_Insured_Name?.trim()}: ${
+                                    item?.Policy_Insured_Age
+                                  }`}
+                                  style={styles.homeBackCardText}
+                                />
+                              </>
                             ))}
                         </View>
 
@@ -279,7 +281,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
                           <AileronSemiBold
                             style={styles.homeBackCardText}
-                            name={homeCardData[0]?.Policy_Daily_RoomLimit}
+                            name={`Rs. Per Day: ${homeCardData[0]?.Policy_Daily_RoomLimit}`}
                           />
                         </View>
                       </View>

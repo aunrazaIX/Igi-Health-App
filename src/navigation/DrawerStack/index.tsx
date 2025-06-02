@@ -18,13 +18,14 @@ import Tabs from '../TabStack';
 import ClaimsHistory from '../../screens/ClaimsHistory';
 import FAQs from '../../screens/FAQs';
 import LinearGradient from 'react-native-linear-gradient';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../redux/authSlice';
 import SettingStack from '../SettingStack';
 import {useNavigation} from '@react-navigation/native';
 import Profile from '../../screens/Profile';
 
 const DrawerStack = () => {
+  const {user} = useSelector(state => state.auth);
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -60,7 +61,7 @@ const DrawerStack = () => {
       mainParent: 'Tabs',
       stChild: 'LodgeClaim',
     },
-    {
+    user?.showPriorApproval && {
       id: 5,
       name: 'Prior Approval',
       icon: drawerIcons.drawerPriorApproval,
@@ -133,7 +134,7 @@ const DrawerStack = () => {
       icon: drawerIcons.drawerLogout,
       to: 'logout',
     },
-  ];
+  ].filter(Boolean);
 
   const DrawerContent = ({navigation}: DrawerContentComponentProps) => {
     const handleProfile = () => {

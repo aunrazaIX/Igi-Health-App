@@ -11,6 +11,7 @@ const Personal = () => {
     confimationModalVisible,
     expandedIndex,
     confirmationModal,
+    deleteDepenedentLoading,
   } = states;
 
   const {
@@ -29,6 +30,7 @@ const Personal = () => {
   return (
     <>
       <PersonalView
+        deleteDepenedentLoading={deleteDepenedentLoading}
         openAddDependent={openAddDependent}
         goBack={goBack}
         data={data}

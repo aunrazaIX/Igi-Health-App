@@ -22,9 +22,11 @@ import ConfimationModal from '../../components/Modal/confimationModal';
 import {ScrollView} from 'react-native-gesture-handler';
 import {vh} from '../../assets/theme/dimension';
 import AddModal from '../../components/Modal/AddModal';
+import ModalLoading from '../../components/ModalLoading';
 
 type Props = {
   data: dependentDetail[];
+  deleteDepenedentLoading: any;
   relationshipOptions: personalDetail[];
   goBack: () => void;
   handleSubmit?: () => void;
@@ -65,6 +67,7 @@ const PersonalView: React.FC<Props> = ({
   setConfirmationModal,
   confirmationModal,
   resetStates,
+  deleteDepenedentLoading,
 }) => {
   return (
     <Container>
@@ -157,6 +160,8 @@ const PersonalView: React.FC<Props> = ({
             ))}
           </View>
         </ScrollView>
+
+        <ModalLoading loading={deleteDepenedentLoading} />
       </CurvedView>
 
       {/* <AddModal

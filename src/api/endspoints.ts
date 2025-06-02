@@ -1,3 +1,5 @@
+import Benefits from '../screens/Benefits';
+
 const endpoints = {
   auth: {
     login: 'Login/Login',
@@ -40,6 +42,12 @@ const endpoints = {
   policy: {
     getPolicyTypes: 'Policy/GetPolicyTypes',
     getPolicyDetails: 'Policy/GetPolicyDetails',
+  },
+  Benefits: {
+    getBenefits: 'Benefits/GetActiveBenefits',
+  },
+  coverage: {
+    getCoverage: 'Policy/GetPolicyCoverage',
   },
 };
 

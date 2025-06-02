@@ -40,6 +40,7 @@ type DependentDetail = {
 const usePersonalViewModal = (): UsePersonalViewModal => {
   const [modalVisible, setModalVisible] = useState(false);
   const [getData, setGetData] = useState([]);
+
   let {user} = useSelector((state: RootState) => state.auth);
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
@@ -112,10 +113,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       setConfirmationModal(true);
     },
     onError: e => {
-      console.log(
-        'error because of gender is going udenfined , gender select krne per gender jarha hai',
-        e,
-      );
+      console.log('error', e);
     },
   });
 
@@ -128,17 +126,15 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       dependentName: dependent?.dependentDetail[0]?.value,
       cnic: user?.cnic,
       clientCode: user?.ClientCode,
-      gender:
-        dependent?.dependentDetail[1].value === 'M'
-          ? 'Male'
-          : dependent?.dependentDetail[1].value === 'F'
-          ? 'Female'
-          : null,
+      gender: dependent?.dependentDetail[1].value,
+
       Age: dependent?.dependentDetail[3].value,
       dependentRequestStatus: true,
       createdAt: '2025-05-15T15:01:31.6552852+05:00',
       createdBy: 1,
     };
+
+    console.log(_apiData, 'myAPi DATA');
     trigger(_apiData);
   };
 
@@ -152,6 +148,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       modalVisible,
       confirmationModal,
       expandedIndex,
+      deleteDepenedentLoading,
     },
     functions: {
       openAddDependent,

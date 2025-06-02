@@ -10,6 +10,7 @@ interface User {
 interface AuthState {
   user: User | null;
   token: string | null;
+
   rememberMe: boolean;
   credentials: {
     userName: string;

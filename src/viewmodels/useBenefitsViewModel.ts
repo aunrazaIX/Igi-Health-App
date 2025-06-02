@@ -1,10 +1,16 @@
 import {useNavigation} from '@react-navigation/native';
 import {icons} from '../assets';
 import {ImageSourcePropType} from 'react-native';
+import {useSelector} from 'react-redux';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
+import {useState} from 'react';
 
 type UseBenefitsViewModel = {
   states: {
     data: CoverageBenefit[];
+
+    benefitsloading: any;
   };
   functions: {
     goBack: () => void;
@@ -18,50 +24,30 @@ type CoverageBenefit = {
 };
 
 const useBenefitsViewModel = (): UseBenefitsViewModel => {
+  let {user} = useSelector((state: RootState) => state.auth);
+
+  const [data, setData] = useState([]);
+
   const navigation = useNavigation();
 
-  const data: CoverageBenefit[] = [
-    {
-      title: 'Per insured per disability',
-      price: 'Rs. 550,000/-',
-      image: icons.Insured,
+  const {data: benefitsData, loading: benefitsloading} = useApiHook({
+    apiEndpoint: endpoints.Benefits.getBenefits,
+    method: 'get',
+    argsOrBody: {
+      ClientCode: user?.ClientCode,
     },
-    {
-      title: 'Daily Room & Board Limit',
-      price: 'Rs. 20,000/-',
-      image: icons.meetingRoom,
+    onSuccess: res => {
+      const formattedData = res.map(
+        (item: any): CoverageBenefit => ({
+          title: item.BenefitDetails,
+          price: item?.EntitlementLimits,
+          image: icons.medicalList,
+        }),
+      );
+
+      setData(formattedData);
     },
-    {
-      title: 'Dental/Optical & Psychiatric',
-      price: 'Not Covered in IPD',
-      image: icons.doctor,
-    },
-    {
-      title: 'Pre-Admission Testing',
-      price: 'Covered upto 30 days',
-      image: icons.stethoscope,
-    },
-    {
-      title: 'Post-\nHospitalization Expenses',
-      price: 'Covered upto 30 days Rs. 3,000/-',
-      image: icons.hospital,
-    },
-    {
-      title: 'Day Care Surgery',
-      price: 'Covered as per schedule',
-      image: icons.hospitalBed,
-    },
-    {
-      title: 'Congenital Birth Defects',
-      price: 'Covered',
-      image: icons.baby,
-    },
-    {
-      title: 'Pre Existing Conditions',
-      price: 'Covered',
-      image: icons.medicalList,
-    },
-  ];
+  });
 
   const goBack = () => {
     navigation.goBack();
@@ -70,6 +56,8 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
   return {
     states: {
       data,
+
+      benefitsloading,
     },
     functions: {
       goBack,

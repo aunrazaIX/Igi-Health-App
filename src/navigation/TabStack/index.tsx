@@ -1,20 +1,23 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
-import { tabIcons } from '../../assets';
+import {StyleSheet, Image, View} from 'react-native';
+import {tabIcons} from '../../assets';
 import HomeStack from '../HomeStack';
-import { COLORS } from '../../assets/theme/colors';
-import { vh, vw } from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
 import PriorApproval from '../../screens/PriorApproval';
 import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaimStack from '../LodgeClaimStack';
+import {useSelector} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
+  const {user} = useSelector(state => state.auth);
+
   return (
     <Tab.Navigator
       initialRouteName="HomeStack"
@@ -34,16 +37,16 @@ const Tabs = () => {
         options={{
           tabBarShowLabel: false,
           popToTopOnBlur: true,
-          tabBarIcon: ({ focused }) =>
+          tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
                 style={styles.gradientBorder}>
                 <View style={styles.wrapper}>
                   <Image
-                    style={[styles.iconStyle, { tintColor: 'white' }]}
+                    style={[styles.iconStyle, {tintColor: 'white'}]}
                     source={tabIcons.home}
                   />
                 </View>
@@ -51,7 +54,7 @@ const Tabs = () => {
             ) : (
               <View style={[styles.gradientBorder, styles.wrapper]}>
                 <Image
-                  style={[styles.iconStyle, { tintColor: 'black' }]}
+                  style={[styles.iconStyle, {tintColor: 'black'}]}
                   source={tabIcons.home}
                 />
               </View>
@@ -60,50 +63,51 @@ const Tabs = () => {
         name="HomeStack"
         component={HomeStack}
       />
-
-      <Tab.Screen
-        options={{
-          tabBarShowLabel: false,
-          popToTopOnBlur: true,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <LinearGradient
-                colors={['#48C3FF', '#0B4A98']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.gradientBorder}>
-                <View style={styles.wrapper}>
-                  <Image
-                    style={[styles.iconStyle, { tintColor: 'white' }]}
-                    source={tabIcons.note}
-                  />
+      {user?.showPriorApproval && (
+        <Tab.Screen
+          options={{
+            tabBarShowLabel: false,
+            popToTopOnBlur: true,
+            tabBarIcon: ({focused}) =>
+              focused ? (
+                <LinearGradient
+                  colors={['#48C3FF', '#0B4A98']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
+                  style={styles.gradientBorder}>
+                  <View style={styles.wrapper}>
+                    <Image
+                      style={[styles.iconStyle, {tintColor: 'white'}]}
+                      source={tabIcons.note}
+                    />
+                  </View>
+                </LinearGradient>
+              ) : (
+                <View style={[styles.gradientBorder, styles.wrapper]}>
+                  <Image style={styles.iconStyle} source={tabIcons.note} />
                 </View>
-              </LinearGradient>
-            ) : (
-              <View style={[styles.gradientBorder, styles.wrapper]}>
-                <Image style={styles.iconStyle} source={tabIcons.note} />
-              </View>
-            ),
-        }}
-        name="PriorApproval"
-        initialParams={{ type: 'priorApproval' }}
-        component={LodgeClaimStack}
-      />
+              ),
+          }}
+          name="PriorApproval"
+          initialParams={{type: 'priorApproval'}}
+          component={LodgeClaimStack}
+        />
+      )}
 
       <Tab.Screen
         options={{
           tabBarShowLabel: false,
           popToTopOnBlur: true,
-          tabBarIcon: ({ focused }) =>
+          tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
                 style={styles.gradientBorder}>
                 <View style={styles.wrapper}>
                   <Image
-                    style={[styles.iconStyle, { tintColor: 'white' }]}
+                    style={[styles.iconStyle, {tintColor: 'white'}]}
                     source={tabIcons.PriorApproval}
                   />
                 </View>
@@ -117,7 +121,7 @@ const Tabs = () => {
               </View>
             ),
         }}
-        initialParams={{ type: 'lodgeClaim' }}
+        initialParams={{type: 'lodgeClaim'}}
         name="LodgeClaim"
         component={LodgeClaimStack}
       />
@@ -126,16 +130,16 @@ const Tabs = () => {
         options={{
           tabBarShowLabel: false,
           popToTopOnBlur: true,
-          tabBarIcon: ({ focused }) =>
+          tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient
                 colors={['#48C3FF', '#0B4A98']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
                 style={styles.gradientBorder}>
                 <View style={styles.wrapper}>
                   <Image
-                    style={[styles.iconStyle, { tintColor: 'white' }]}
+                    style={[styles.iconStyle, {tintColor: 'white'}]}
                     source={tabIcons.customerSupport}
                   />
                 </View>
