@@ -133,7 +133,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         TopViewFirstIcon={
           (currentStep === 2 && selectedType?.value === 1) ||
           (currentStep === 2 && claimsDetails?.length < 1) ||
-          type === 'priorApproval'
+          (type === 'priorApproval' && currentStep === 2)
             ? icons.addSquare
             : null
         }
