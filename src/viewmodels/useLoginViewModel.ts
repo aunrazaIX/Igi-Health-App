@@ -58,7 +58,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     apiData: loginApiData,
     checkForError: LoginCheckForError,
   } = useErrorHandlingHook({
-    userName: rememberMe ? credentials.userName : null,
+    userName: rememberMe ? credentials?.userName : null,
     password: rememberMe ? credentials?.password : null,
   });
   const {

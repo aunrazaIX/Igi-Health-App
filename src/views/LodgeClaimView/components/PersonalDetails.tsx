@@ -4,7 +4,6 @@ import {Select} from '../../../components';
 import {vh} from '../../../assets/theme/dimension';
 import Box from './Box';
 import {PersonelDataSection} from '../typeInterface';
-import NoDataView from '../../../components/NoDataView';
 import {icons} from '../../../assets';
 
 type PersonalDetailsProps = {
@@ -14,25 +13,23 @@ type PersonalDetailsProps = {
   personalDetails: any;
   dependants: any;
   onSelectType: any;
-  maternityTypeData: any;
-  onSelectMaternityType: any;
-  selectedMaternityType: any;
+  hospitalList: any;
+  onSelectHospital: () => void;
+  selectedHospital: any;
 };
 
 const PersonalDetails: React.FC<PersonalDetailsProps> = ({
   patientOptions,
-  personalData,
   selectedPatient,
   selectedType,
-  maternityTypeData,
-  onSelectMaternityType,
-  selectedMaternityType,
-
   onSelectPatient,
   personalDetails,
   type,
   dependants,
   onSelectType,
+  hospitalList,
+  onSelectHospital,
+  selectedHospital,
 }) => {
   let data = [
     {
@@ -76,24 +73,25 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
         selectLabel={'Patient Information'}
         selectPlaceholder={'-- Select Patient From List --'}
       />
-
-      <Select
-        value={selectedType?.label}
-        onSelectOption={value => onSelectType(value)}
-        selectData={patientOptions}
-        selectLabel={'Select Type'}
-        selectPlaceholder={'-- Select Type From List --'}
-      />
-
-      {/* {selectedType?.label === 'Maternity' && (
+      {type !== 'priorApproval' && (
         <Select
-          value={selectedMaternityType?.label}
-          onSelectOption={value => onSelectMaternityType(value)}
-          selectData={maternityTypeData}
-          selectLabel={'Select Maternity Type'}
+          value={selectedType?.label}
+          onSelectOption={value => onSelectType(value)}
+          selectData={patientOptions}
+          selectLabel={'Select Type'}
           selectPlaceholder={'-- Select Type From List --'}
         />
-      )} */}
+      )}
+
+      {type === 'priorApproval' && (
+        <Select
+          value={selectedHospital?.label}
+          onSelectOption={value => onSelectHospital(value)}
+          selectData={hospitalList}
+          selectLabel={'Select Hospital'}
+          selectPlaceholder={'-- Select Hospital From List --'}
+        />
+      )}
 
       {data?.map((data, index) => (
         <Box data={data} key={index} />

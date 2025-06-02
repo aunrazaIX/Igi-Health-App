@@ -68,7 +68,7 @@ interface Props {
 
 const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const {type} = route?.params || {};
-
+  const randomId = Math.random().toString().substr(2, 6);
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -80,8 +80,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     treatments,
     selectedPatient,
     selectedType,
-    selectedMaternityType,
+    selectedHospital,
   } = useSelector(state => state.lodge);
+  const {user} = useSelector(state => state.auth);
 
   const resetStates = () => {
     dispatch(_setTreatmentData([]));
@@ -93,12 +94,11 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
 
     dispatch(setStep(1));
   };
-
+  console.log(user);
   const {setterForApiData: setterForclaimData, apiData: claimData} =
     useErrorHandlingHook({
       claimComments: '',
     });
-
   const {
     loading: uploadLoading,
     data: claimObject,
@@ -107,40 +107,56 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   } = useApiHook({
     method: 'post',
     isFormData: true,
-    apiEndpoint: endpoints.claimLogde.attachment(
-      '776',
-      '1231231232131',
-      'DEMO',
-    ),
+    apiEndpoint: endpoints[
+      type === 'priorAprroval' ? 'priorApproval' : 'claimLogde'
+    ]?.attachment(user?.UserId, randomId, user?.ClientCode),
     argsOrBody: {
       files: selectedDocuments,
     },
     onSuccess: res => {
-      let apiData = {
-        UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
-        CLNTNUM: selectedPatient?.CLNTNUM?.toString(),
-        ClaimsData: treatments?.map(item => ({
-          ClaimSNO: '0',
-          ClaimID: res?.Data?.toString(),
-          userId: '776',
-          ClaimAmount: item?.amount?.toString(),
-          ClaimDescriptions: item?.description,
-          UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
-          ClaimReceipt: item?.receiptNumber,
-          ClaimsComments: item?.description,
-          ClaimsSubTypeID: item?.treatment?.value,
-          ClaimAddedDateTime: moment().format('YYYY-MM-DD'),
-          UUID: '1231231232131',
-          ClientCode: 'DEMO',
-        })),
-        ClaimsComments: claimData.claimComments,
-        userId: '776',
-        claimId: res?.Data?.toString(),
-      };
-
+      let apiData =
+        type === 'priorApproval'
+          ? treatments?.map(item => ({
+              requestSNO: 0,
+              userId: user?.UserId,
+              requestID: res?.Data,
+              userRelationCode: selectedPatient?.CLNTNUM?.toString(),
+              requestComments: item?.description,
+              amount: item.amount,
+              hospitalID: selectedHospital.value,
+              treatmentTypeID: item?.treatment?.IPDTreatmentTypesID,
+              dxcCode: item?.treatment?.value,
+              uuid: randomId,
+              clientCode: user?.ClientCode,
+              requestAddedDateTime: new Date().toISOString(),
+            }))
+          : {
+              UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
+              CLNTNUM: selectedPatient?.CLNTNUM?.toString(),
+              ClaimsData: treatments?.map(item => ({
+                ClaimSNO: '0',
+                ClaimID: res?.Data?.toString(),
+                userId: user?.UserId,
+                ClaimAmount: item?.amount?.toString(),
+                ClaimDescriptions: item?.description,
+                UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
+                ClaimReceipt: item?.receiptNumber,
+                ClaimsComments: item?.description,
+                ClaimsSubTypeID: item?.treatment?.value,
+                ClaimAddedDateTime: moment().format('YYYY-MM-DD'),
+                UUID: randomId,
+                ClientCode: user?.ClientCode,
+              })),
+              ClaimsComments: claimData.claimComments,
+              userId: user?.UserId,
+              claimId: res?.Data?.toString(),
+            };
+      console.log(apiData, 'apiData');
       claimTrigger(apiData);
     },
   });
+
+  console.log(uploadError);
 
   const {
     loading: claimLoading,
@@ -148,11 +164,16 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     error: addClaimError,
   } = useApiHook({
     method: 'post',
-    apiEndpoint: endpoints.claimLogde.lodge,
+    apiEndpoint:
+      type === 'priorApproval'
+        ? endpoints.priorApproval.addPriorApproval
+        : endpoints.claimLogde.lodge,
     onSuccess: res => {
+      console.log(res, 'tesutnin');
       setConfirmationModal(true);
     },
     onError: e => {
+      console.log(e, 'error');
       dispatch(
         setErrorModal({
           show: true,
@@ -161,6 +182,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       );
     },
   });
+
+  console.log(addClaimError);
 
   const {data: personalDetails, loading: personalDetailsLoading} = useApiHook({
     apiEndpoint: endpoints.bank.getBankDetails,
@@ -190,16 +213,19 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   });
 
+  const {data: hospitalData, loading: hospitalLoading} = useApiHook({
+    apiEndpoint: endpoints.panelHospital.getPanelHospitals,
+    method: 'get',
+    transform: {
+      label: 'HospitalName',
+      value: 'HospitalID',
+    },
+  });
+
   const dependantsData = [
     {label: 'Ipd', value: 0},
     {label: 'Opd', value: 1},
     {label: 'Maternity', value: 2},
-  ];
-
-  const maternityTypeData = [
-    {label: 'Normal', value: 0},
-    {label: 'C-Section', value: 1},
-    {label: 'MisCarriage', value: 2},
   ];
 
   const steps: Step[] = [
@@ -276,15 +302,15 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   };
 
   const navigateTreatment = () => {
-    navigation.navigate('AddTreatment');
+    navigation.navigate('AddTreatment', {claimType: type});
   };
 
   const onPressDelete = (index: number) => dispatch(onDeleteTreatment(index));
-
   const onPressEdit = (data: object, index: number) => {
     navigation.navigate('AddTreatment', {
       treatmentData: data,
       treatmentIndex: index,
+      claimType: type,
     });
   };
   const onSelectPatient = (patient: any) => {
@@ -301,8 +327,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     dispatch(setSelectedMaternityType(patient));
   };
 
-  const onSelectHospital = (patient: any) => {
-    dispatch(setSelectedHospital(patient));
+  const onSelectHospital = (hospital: any) => {
+    dispatch(setSelectedHospital(hospital));
   };
 
   const onPressNext = () => {
@@ -384,8 +410,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       personalDetails,
       personalDetailsLoading,
       dependants,
-      maternityTypeData,
-      selectedMaternityType,
+      hospitalList: hospitalData,
+      selectedHospital,
     },
     functions: {
       goBack,

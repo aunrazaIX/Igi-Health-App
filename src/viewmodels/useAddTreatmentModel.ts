@@ -21,7 +21,7 @@ const useAddTreatmentModel = ({
 
   const [confirmationModal, setConfirmationModal] = useState(false);
 
-  const {treatmentIndex, treatmentData} = route?.params || {};
+  const {treatmentIndex, treatmentData, claimType} = route?.params || {};
 
   const extractedData = {
     treatment: treatmentData?.treatment,
@@ -41,7 +41,9 @@ const useAddTreatmentModel = ({
     const typeValue = selectedType?.value;
 
     const endpointKey =
-      typeValue === 0
+      claimType === 'priorApproval'
+        ? 'IPDTypesForPriorApproval'
+        : typeValue === 0
         ? 'getIPDTypes'
         : typeValue === 1
         ? 'getTypes'
@@ -51,9 +53,10 @@ const useAddTreatmentModel = ({
       apiEndpoint: endpoints.treatments[endpointKey],
       method: 'get',
       transform: {
-        keyToLoop: 'Data',
-        label: 'ClaimsSubTypeName',
-        value: 'ClaimsSubTypeID',
+        keyToLoop: claimType === 'priorApproval' ? null : 'Data',
+        label:
+          claimType === 'priorApproval' ? 'TreatmentName' : 'ClaimsSubTypeName',
+        value: claimType === 'priorApproval' ? 'DXCCode' : 'ClaimsSubTypeID',
       },
     };
   }, [selectedType?.value]);
@@ -70,7 +73,6 @@ const useAddTreatmentModel = ({
 
     if (selectedType === 'Opd') {
     }
-
     if (typeof treatmentIndex === 'number') {
       dispatch(
         updateTreatments({
@@ -93,12 +95,6 @@ const useAddTreatmentModel = ({
     }
     // navigation.navigate('LodgeClaimProcess');
   };
-
-  const maternityTypeData = [
-    {label: 'Normal', value: 0},
-    {label: 'C-Section', value: 1},
-    {label: 'MisCarriage', value: 2},
-  ];
 
   return {
     states: {

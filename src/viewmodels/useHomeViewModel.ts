@@ -126,14 +126,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     apiEndpoint: endpoints.policy.getPolicyDetails,
     method: 'get',
     skip: true,
-
-    onSuccess: res => {
-      console.log(res, 'yaehh raha second APi ka response');
-      console.log(data, 'second api ersponse another');
-    },
-    onError: e => {
-      console.log('error in seocnd APi ', e);
-    },
   });
 
   // 1st api call
@@ -161,11 +153,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
         policyCode: policyNumber,
         cnic: user.cnic,
       };
-      console.log('triggering second API');
       trigger(apiData);
-    },
-    onError: e => {
-      console.log(e, 'Erorrrrrr');
     },
   });
 
@@ -225,6 +213,15 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       stChild: 'Helpline',
     },
   ].filter(Boolean);
+
+  const {data: rawClaimData, loading} = useApiHook({
+    apiEndpoint: endpoints.claimHistory.getAllClaim,
+    method: 'get',
+    argsOrBody: {userid: '776'},
+    onSuccess: res => {
+      setData(sortClaimData(res?.Data));
+    },
+  });
 
   const {data: rawClaimData, loading} = useApiHook({
     apiEndpoint: endpoints.claimHistory.getAllClaim,

@@ -7,7 +7,7 @@ const initialState: {
   selectedPatient: any | null;
   selectedType: any | null;
   selectedMaternityType: any | null;
-  selectedHopsital: any | null;
+  selectedHospital: any | null;
   selectedDocuments: any[];
   remarks: string;
   treatments: any[];
@@ -16,7 +16,7 @@ const initialState: {
   currentStep: 1,
   selectedPatient: null,
   selectedMaternityType: null,
-  selectedHopsital: null,
+  selectedHospital: null,
   selectedDocuments: [],
   treatments: [],
   isError: false,
@@ -32,7 +32,7 @@ export const updateTreatments = createAsyncThunk(
       !data?.receiptNumber ||
       !data?.amount ||
       !data?.description ||
-      !data?.treatment?.ClaimsSubTypeName
+      !data?.treatment
     ) {
       thunkApi.dispatch(setErrorModal({message: 'Please enter all details'}));
       return;
@@ -67,7 +67,7 @@ export const setTreatments = createAsyncThunk(
       !_data?.receiptNumber ||
       !_data?.amount ||
       !_data?.description ||
-      !_data?.treatment?.ClaimsSubTypeName
+      !_data?.treatment
     ) {
       thunkApi.dispatch(setErrorModal({message: 'Please enter all details'}));
       return;
@@ -95,7 +95,7 @@ export const lodgeSlice = createSlice({
       state.selectedMaternityType = payload;
     },
     setSelectedHospital: (state, {payload}) => {
-      state.selectedHopsital = payload;
+      state.selectedHospital = payload;
     },
 
     setResetTreaments: state => {

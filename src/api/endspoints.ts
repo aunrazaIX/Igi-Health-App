@@ -1,5 +1,3 @@
-import Benefits from '../screens/Benefits';
-
 const endpoints = {
   auth: {
     login: 'Login/Login',
@@ -18,6 +16,7 @@ const endpoints = {
     getTypes: 'ClaimsType/getOPDType',
     getIPDTypes: 'ClaimsType/getIPDType',
     getMATTypes: 'ClaimsType/getMaternityType',
+    IPDTypesForPriorApproval: 'PriorApprovals/GetIPDTreatmentTypes',
   },
   claimLogde: {
     lodge: 'Claims/AddNewClaim',
@@ -48,6 +47,11 @@ const endpoints = {
   },
   coverage: {
     getCoverage: 'Policy/GetPolicyCoverage',
+  },
+  priorApproval: {
+    addPriorApproval: 'PriorApprovals/AddPriorApproval',
+    attachment: (userId: string, myuuid: string, ClientCode: string) =>
+      `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
   },
 };
 

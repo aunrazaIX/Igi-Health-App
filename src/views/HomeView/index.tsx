@@ -60,7 +60,6 @@ const HomeView: React.FC<HomeViewProps> = ({
 }) => {
   const user = useSelector(state => state.auth.user);
 
-  console.log(user, 'pppp');
   return (
     <ScrollView>
       <LinearGradient
