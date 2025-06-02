@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { EventRegister } from 'react-native-event-listeners';
-import { store } from '../redux/store';
+import {EventRegister} from 'react-native-event-listeners';
+import {store} from '../redux/store';
 const api = axios.create({
   baseURL: 'http://10.9.0.55:8088/api/',
   timeout: 60000,
@@ -37,13 +37,11 @@ api.interceptors.response.use(
   },
 
   error => {
-    const { data, status } = error?.response || {};
+    const {data, status} = error?.response || {};
     if (status == 401) {
       EventRegister.emit('logout');
     }
-    return Promise.reject(
-      data ?? error,
-    );
+    return Promise.reject(data ?? error);
   },
 );
 
@@ -86,6 +84,6 @@ const post = (endpoint, data = {}, isFormData = false) =>
   api.post(endpoint, isFormData ? jsonToFormdata(data) : data);
 const put = (endpoint, data = {}) => api.put(endpoint, data);
 const patch = (endpoint, data = {}) => api.patch(endpoint, data);
-const del = (endpoint, data = {}) => api.delete(endpoint, { data });
+const del = (endpoint, data = {}) => api.delete(endpoint, {data});
 
-export { get, post, put, patch, del };
+export {get, post, put, patch, del};
