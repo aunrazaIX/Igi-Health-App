@@ -3,10 +3,35 @@ import ForgotPasswordView from '../../views/ForgotPasswordView';
 import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewModel';
 import useLoginViewModel from '../../viewmodels/useLoginViewModel';
 
-const ForgotPassword = ({ route }: { route: any }) => {
-  const { states, functions } = useForgotPasswordViewModel({ route });
-  const { step, confirmationModal, verifyOtpLoading, apiData, updatePasswordApiData, ForgotPasswordLoading, otp, showResend, countdownKey, updatePasswordLoading } = states;
-  const { handleStep, onPressBack, setConfirmationModal, setOtp, openConfimationModal, setterForApiData, handleNext, setterForUpdatePasswordApiData, sendOtp, onPressResend, setShowResend, disabled, onCloseSuccessModal } = functions;
+const ForgotPassword = ({route}: {route: any}) => {
+  const {states, functions} = useForgotPasswordViewModel({route});
+  const {
+    step,
+    confirmationModal,
+    verifyOtpLoading,
+    apiData,
+    updatePasswordApiData,
+    ForgotPasswordLoading,
+    otp,
+    showResend,
+    countdownKey,
+    updatePasswordLoading,
+  } = states;
+  const {
+    handleStep,
+    onPressBack,
+    setConfirmationModal,
+    setOtp,
+    openConfimationModal,
+    setterForApiData,
+    handleNext,
+    setterForUpdatePasswordApiData,
+    sendOtp,
+    onPressResend,
+    setShowResend,
+    disabled,
+    onCloseSuccessModal,
+  } = functions;
 
   return (
     <ForgotPasswordView

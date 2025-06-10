@@ -54,7 +54,6 @@ const useApiHook = <T>({
       if (transform) {
         const {keyToLoop, ...mappings} = transform;
         const list = keyToLoop ? res[keyToLoop] : res;
-        console.log(keyToLoop, 'list');
         if (Array.isArray(list)) {
           const transformed = list.map(item => {
             const transformedItem: Record<string, any> = {...item};

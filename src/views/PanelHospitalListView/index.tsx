@@ -7,12 +7,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import React from 'react';
-import { AileronBold, CurvedView, InputField, TopView } from '../../components';
-import { icons } from '../../assets';
-import { styles } from './style';
+import {AileronBold, CurvedView, InputField, TopView} from '../../components';
+import {icons} from '../../assets';
+import {styles} from './style';
 import DetailsContainer from '../../components/DetailsContainer';
-import { vh, vw } from '../../assets/theme/dimension';
-import { PanelHospitalGroup } from '../../viewmodels/usePanelHospitalListViewModel';
+import {vh, vw} from '../../assets/theme/dimension';
+import {PanelHospitalGroup} from '../../viewmodels/usePanelHospitalListViewModel';
 
 type HomeViewProps = {
   data: PanelHospitalGroup[];
@@ -40,7 +40,6 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             : 'Discounted Centers'
         }
         TopViewFirstIcon={icons.searchWhite}
-
       />
 
       <CurvedView>
@@ -101,10 +100,13 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               {selectedTab === 'PanelHospitals' ? (
                 <Image
                   source={icons.hospital}
-                  style={{ width: vw * 7, height: vw * 7 }}
+                  style={{width: vw * 7, height: vw * 7}}
                 />
               ) : (
-                <Image source={icons.hospitalInactive} />
+                <Image
+                  style={{width: vw * 7, height: vw * 7}}
+                  source={icons.hospitalInactive}
+                />
               )}
 
               <AileronBold
@@ -124,12 +126,12 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               onPress={() => onPressTab('DiscountedCenters')}>
               {selectedTab === 'DiscountedCenters' ? (
                 <Image
-                  style={{ width: vw * 6, height: vh * 3 }}
+                  style={{width: vw * 6, height: vh * 3}}
                   source={icons.labsActive}
                 />
               ) : (
                 <Image
-                  style={{ width: vw * 6, height: vh * 3 }}
+                  style={{width: vw * 6, height: vh * 3}}
                   source={icons.labsInactive}
                 />
               )}
@@ -146,45 +148,41 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
 
           {/*rendering list card based on list tab active  */}
           {selectedTabRight === 'map' && (
-            <View>
-              <View>
-                <InputField
-                  searchFieldRight={styles.searchFieldRight}
-                  searchFieldRightIcon={styles.searchFieldRightIcon}
-                  inputStyle={styles.inputStyle}
-                  searchIcon={icons.searchBlack}
-                  containerStyle={styles.inputFeild}
-                />
-              </View>
-            </View>
+            <InputField
+              searchFieldRight={styles.searchFieldRight}
+              searchFieldRightIcon={styles.searchFieldRightIcon}
+              inputStyle={styles.inputStyle}
+              searchIcon={icons.searchBlack}
+              containerStyle={styles.inputFeild}
+            />
           )}
 
           {((selectedTab === 'PanelHospitals' && selectedTabRight === 'list') ||
             (selectedTab === 'DiscountedCenters' &&
               selectedTabRight === 'list')) && (
-              <FlatList
-                data={data}
-                contentContainerStyle={{ paddingBottom: vh * 35 }}
-                keyExtractor={(_, index) => index.toString()}
-                renderItem={({ item }) => (
-                  <>
-                    <DetailsContainer
-                      detailsTextLabel={styles.detailsTextLabel}
-                      detailsTextValue={styles.detailsTextValue}
-                      headerIcon={
-                        selectedTab === 'PanelHospitals'
-                          ? icons.arrowDirection
-                          : [
+            <FlatList
+              data={data}
+              contentContainerStyle={{paddingBottom: vh * 35}}
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={({item}) => (
+                <>
+                  <DetailsContainer
+                    detailsTextLabel={styles.detailsTextLabel}
+                    detailsTextValue={styles.detailsTextValue}
+                    headerIcon={
+                      selectedTab === 'PanelHospitals'
+                        ? icons.arrowDirection
+                        : [
                             icons.discountCentersDirection,
                             icons.discountCentersMultipleDirection,
                           ]
-                      }
-                      data={item}
-                    />
-                  </>
-                )}
-              />
-            )}
+                    }
+                    data={item}
+                  />
+                </>
+              )}
+            />
+          )}
         </View>
       </CurvedView>
     </>

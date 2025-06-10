@@ -5,23 +5,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
-import { AileronSemiBold, ConfirmationModal } from '../../../components';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
-import { icons, images } from '../../../assets';
-import { useDispatch, useSelector } from 'react-redux';
-import { setRemarks } from '../../../redux/lodgeSlice';
-
+import React, {useState} from 'react';
+import {AileronSemiBold, ConfirmationModal} from '../../../components';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {COLORS} from '../../../assets/theme/colors';
+import {icons, images} from '../../../assets';
+import {useDispatch, useSelector} from 'react-redux';
+import {setRemarks} from '../../../redux/lodgeSlice';
 
 type UploadDocProps = {
   onSelectDocument: () => void;
-  handleCancelFile: () => void,
-  claimData: any,
-  setterForclaimData: any
-
-
-
+  handleCancelFile: () => void;
+  claimData: any;
+  setterForclaimData: any;
 };
 
 const UploadDoc: React.FC<UploadDocProps> = ({
@@ -30,20 +26,8 @@ const UploadDoc: React.FC<UploadDocProps> = ({
   handleCancelFile,
   isUplaoded = false,
   claimData,
-  setterForclaimData
-
-
-
-
-
+  setterForclaimData,
 }) => {
-
-
-
-
-
-
-
   return (
     <View style={styles.uploadFileContainer}>
       <View>
@@ -71,11 +55,9 @@ const UploadDoc: React.FC<UploadDocProps> = ({
         {selectedDocuments?.length > 0 &&
           selectedDocuments?.map((item, index) => {
             return (
-
               <View style={styles.documentBox} key={index}>
                 <View style={styles.documentBoxInside}>
                   <View style={styles.documentNameRow}>
-
                     <View style={styles.docDetails}>
                       <Image
                         source={icons.document}
@@ -87,16 +69,15 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                           style={styles.documentText}
                         />
                       </View>
-
                     </View>
 
-                    <TouchableOpacity onPress={() => handleCancelFile(item, index)}>
-
-                      <Image style={styles.errorIcon} source={icons.errorPopup} />
-
+                    <TouchableOpacity
+                      onPress={() => handleCancelFile(item, index)}>
+                      <Image
+                        style={styles.errorIcon}
+                        source={icons.errorPopup}
+                      />
                     </TouchableOpacity>
-
-
                   </View>
                   <View>
                     {isUplaoded && (
@@ -116,17 +97,14 @@ const UploadDoc: React.FC<UploadDocProps> = ({
             <TextInput
               multiline={true}
               value={claimData.claimComments}
-              onChangeText={(text) => setterForclaimData('claimComments', text)}
+              onChangeText={text => setterForclaimData('claimComments', text)}
               style={styles.remarksInput}
               numberOfLines={4}
-              placeholder="add remarks .."
+              placeholder="add remarks"
             />
           </View>
         </View>
       </View>
-
-
-
     </View>
   );
 };
@@ -168,27 +146,25 @@ const styles = StyleSheet.create({
     marginTop: vh * 2,
     borderRadius: vh * 0.7,
     padding: vh * 2,
-
-
-
-
   },
   documentBoxInside: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-
   },
   documentNameRow: {
     flexDirection: 'row',
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
 
-    width: "100%"
+    width: '100%',
   },
   documentText: {
     textAlign: 'left',
     color: COLORS.maxFile,
     fontSize: vh * 1.7,
     lineHeight: vh * 3,
+    flexShrink: 1,
+    flexWrap: 'wrap',
+    maxWidth: vw * 65, // adjust as per your layout
   },
   documentSize: {
     textAlign: 'left',
@@ -265,10 +241,10 @@ const styles = StyleSheet.create({
   },
   errorIcon: {
     height: vw * 8,
-    width: vw * 8
-
+    width: vw * 8,
   },
   docDetails: {
-    flexDirection: "row"
-  }
+    flexDirection: 'row',
+    gap: vw * 1.2,
+  },
 });

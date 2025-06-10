@@ -16,6 +16,13 @@ interface AuthState {
     userName: string;
     password: string;
   };
+  deviceId: null | string;
+  biometrics: {
+    userName: string | number | null;
+    password: any;
+    DeviceId: any;
+    LoginDeviceName: any;
+  };
 }
 
 const initialState: AuthState = {
@@ -25,6 +32,13 @@ const initialState: AuthState = {
   credentials: {
     userName: '',
     password: '',
+  },
+  deviceId: null,
+  biometrics: {
+    userName: null,
+    password: null,
+    DeviceId: null,
+    LoginDeviceName: null,
   },
 };
 
@@ -59,11 +73,18 @@ export const authSlice = createSlice({
       state.rememberMe = rememberMe;
     },
     logout: state => {
-      state.user = null;
+      // state.user = null;
       state.token = null;
+    },
+    setBiometrics: (state, {payload}) => {
+      state.biometrics = {
+        ...state.biometrics,
+        ...payload,
+      };
     },
   },
 });
 
-export const {setUserData, logout, setRememberMe} = authSlice.actions;
+export const {setUserData, logout, setRememberMe, setBiometrics} =
+  authSlice.actions;
 export const authReducer = authSlice.reducer;

@@ -122,7 +122,6 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
   const onPress = (type: 'call' | 'mail' | 'map', value: string) => {
     let url;
     if (type == 'call') {
-      console.log('first');
       url = `tel:${value}`;
     } else if (type == 'mail') {
       url = `mailto:${value}`;

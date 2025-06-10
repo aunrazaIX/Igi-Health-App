@@ -1,7 +1,7 @@
 import {useRef, useState} from 'react';
 import {cardIcons, icons} from '../assets';
 import {COLORS} from '../assets/theme/colors';
-import {Animated} from 'react-native';
+import {Animated, Linking} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
 import endpoints from '../api/endspoints';
@@ -55,6 +55,7 @@ type UseHomeViewModelReturn = {
     toggleDrawer: () => void;
     onPressMenu: (cardData: CardItemData) => void;
     onPressHeaderIcon: (to: string) => void;
+    handleAssociatedApps: (url: string) => void;
   };
 };
 type ClaimStats = {
@@ -95,6 +96,14 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
         duration: 1000,
         useNativeDriver: true,
       }).start();
+    }
+  };
+
+  const handleAssociatedApps = url => {
+    if (url) {
+      Linking.openURL(url).catch(err =>
+        console.error('Failed to open URL:', err),
+      );
     }
   };
 
@@ -185,7 +194,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       logo: cardIcons.taskDone,
       name: 'Prior Approval',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundBlue,
+      backgroundColor: COLORS.cardBackgroundLightBlue,
       mainParent: 'Tabs',
       stChild: 'PriorApproval',
       type: 'PriorApproval',
@@ -208,7 +217,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       logo: cardIcons.helpLine,
       name: 'Help Line',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundBlue,
+      backgroundColor: COLORS.cardBackgroundLightBlue,
       mainParent: 'Tabs',
       stChild: 'Helpline',
     },
@@ -285,6 +294,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       toggleDrawer,
       onPressMenu,
       onPressHeaderIcon,
+      handleAssociatedApps,
     },
   };
 };

@@ -1,13 +1,17 @@
-import { View, Text } from 'react-native';
+import {View, Text} from 'react-native';
 import React from 'react';
 import ClaimsHistoryView from '../../views/ClaimsHistoryView';
 import useClaimsHistoryViewModel from '../../viewmodels/useClaimsHistoryViewModel';
 
 const ClaimsHistory = () => {
-  const { states, functions } = useClaimsHistoryViewModel();
-  const { data, amountStatusTab, daysStatusTab, isCalendarVisible } = states;
-  const { onPressAmountStatusTab, onPressDaysStatusTab, onPressHeaderIcon, goBack } =
-    functions;
+  const {states, functions} = useClaimsHistoryViewModel();
+  const {data, amountStatusTab, daysStatusTab, isCalendarVisible} = states;
+  const {
+    onPressAmountStatusTab,
+    onPressDaysStatusTab,
+    onPressHeaderIcon,
+    goBack,
+  } = functions;
 
   return (
     <ClaimsHistoryView
@@ -19,7 +23,6 @@ const ClaimsHistory = () => {
       onPressDaysStatusTab={onPressDaysStatusTab}
       onPressAmountStatusTab={onPressAmountStatusTab}
       goBack={goBack}
-
     />
   );
 };

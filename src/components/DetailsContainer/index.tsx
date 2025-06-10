@@ -62,6 +62,7 @@ const DetailsContainer: React.FC<Props> = ({
       {isArrowUp && (
         <>
           <View style={styles.cardHorizontalLine} />
+
           {data?.items?.map((item, index) => (
             <View key={index} style={styles.cardDetails}>
               <AileronBold

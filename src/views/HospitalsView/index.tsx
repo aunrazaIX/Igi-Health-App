@@ -56,26 +56,21 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
               />
             </View>
           </View>
+
           <View style={styles.mapTabsContainer}>
-            <ProvinceTab
-              onPressMapTab={onPressMapTab}
-              selectedMapTab={selectedMapTab}
-              provinceName={'Sindh'}
-            />
-            <ProvinceTab
-              onPressMapTab={onPressMapTab}
-              selectedMapTab={selectedMapTab}
-              provinceName={'Punjab'}
-            />
-            <ProvinceTab
-              onPressMapTab={onPressMapTab}
-              selectedMapTab={selectedMapTab}
-              provinceName={'Balochistan'}
-            />
-            <ProvinceTab
-              onPressMapTab={onPressMapTab}
-              selectedMapTab={selectedMapTab}
-              provinceName={'KPK'}
+            <FlatList
+              data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.mapTabsContainer}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <ProvinceTab
+                  onPressMapTab={onPressMapTab}
+                  selectedMapTab={selectedMapTab}
+                  provinceName={item}
+                />
+              )}
             />
           </View>
         </View>
@@ -89,7 +84,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
                 detailsText={styles.detailsText}
                 detailsTextLabel={styles.detailsTextLabel}
                 detailsTextValue={styles.detailsTextValue}
-                headerIcon={[icons.discountCentersDirection]}
+                headerIcon={[icons.arrowDirection]}
                 data={item}
               />
             </>

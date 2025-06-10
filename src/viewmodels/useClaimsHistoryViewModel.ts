@@ -38,6 +38,7 @@ type UseClaimsHistoryViewModel = {
 
 const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
   const {user} = useSelector((state: RootState) => state.auth);
+  const {treatments} = useSelector((state: RootState) => state.lodge);
   const navigation = useNavigation();
   const [amountStatusTab, setAmountStatusTab] =
     useState<AmountStatus>('paidAmount');
@@ -67,10 +68,10 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
           headerLabel: `Claim #${item.ClaimID}`,
           headerIcon: icons.taskEdit,
           items: [
-            {label: 'Patient Name:', value: item?.RelationName},
+            {label: 'Patient Name:', value: item?.RelationName.trim('')},
             {label: 'Services Date:', value: item?.ClaimSubmittedDate},
             {label: 'Claim Type:', value: item?.ClaimsSubTypeName},
-            {label: 'Claims Description:', value: item?.ClaimsDescription},
+            {label: 'Claims Remarks:', value: item?.ClaimsDescription},
             {label: 'Claim Value:', value: item?.SubmiitedClaim},
             {label: 'Status:', value: item?.ClaimStatus},
           ],

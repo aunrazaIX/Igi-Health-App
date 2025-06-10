@@ -1,9 +1,9 @@
-import { View, Image, FlatList, TouchableOpacity } from 'react-native';
+import {View, Image, FlatList, TouchableOpacity} from 'react-native';
 import React from 'react';
-import { styles } from './style';
+import {styles} from './style';
 import TopView from '../../components/TopView';
-import { icons } from '../../assets';
-import { AileronBold, CurvedView } from '../../components';
+import {icons} from '../../assets';
+import {AileronBold, CurvedView} from '../../components';
 import DetailsContainer from '../../components/DetailsContainer';
 
 import {
@@ -38,14 +38,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
 }) => {
   return (
     <>
-      <TopView
-        title="Claims History"
-        TopViewFirstIcon={icons.searchWhite}
-        TopViewSecondIcon={icons.calender}
-
-
-        SecondOpenModal={onPressHeaderIcon}
-      />
+      <TopView title="Claims History" SecondOpenModal={onPressHeaderIcon} />
       <CurvedView>
         <View>
           <View style={styles.infoContainerTop}>
@@ -151,14 +144,15 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
             </TouchableOpacity>
           </View>
 
-          {data ? <FlatList
-            data={data}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item }) => <DetailsContainer data={item} />}
-          />
-            : <NoDataView name="No Claim Found" />}
-
-
+          {data ? (
+            <FlatList
+              data={data}
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={({item}) => <DetailsContainer data={item} />}
+            />
+          ) : (
+            <NoDataView name="No Claim Found" />
+          )}
         </View>
       </CurvedView>
 

@@ -96,7 +96,8 @@ export const styles = StyleSheet.create({
   mapTabsContainer: {
     flexDirection: 'row',
     gap: vw * 1.5,
-    marginVertical: vh * 3,
+    marginBottom: vh,
+    marginTop: vh * 2,
   },
   mapTabIcon: {
     height: vh * 3,

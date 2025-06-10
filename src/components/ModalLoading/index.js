@@ -1,15 +1,11 @@
 import React from 'react';
-import { Modal, StyleSheet, View } from 'react-native';
-import { COLORS } from '../../assets/theme/colors';
+import {Modal, StyleSheet, View} from 'react-native';
+import {COLORS} from '../../assets/theme/colors';
 import SimpleLoader from '../SimpleLoader';
 
-const ModalLoading = ({ loading = false }) => {
+const ModalLoading = ({loading = false}) => {
   return (
-    <Modal
-      animationType="slide"
-      visible={loading}
-      transparent
-      statusBarTranslucent>
+    <Modal visible={loading} transparent statusBarTranslucent>
       <View style={styles.container}>
         <SimpleLoader color={COLORS.white} />
       </View>

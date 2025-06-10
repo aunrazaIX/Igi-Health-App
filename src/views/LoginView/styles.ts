@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
   },
   tabText: {
     paddingVertical: vh * 0.4,
-    fontSize: vw * 3,
+    fontSize: vw * 3.6,
   },
   forgetPassword: {
     fontSize: vw * 3.4,
@@ -114,7 +114,7 @@ export const styles = StyleSheet.create({
   },
   row: {
     width: '100%',
-    marginVertical: vh,
+    marginVertical: vh * 1.5,
     flexDirection: 'row',
   },
   orText: {

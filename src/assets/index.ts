@@ -117,6 +117,8 @@ export const icons = {
   heart: require('./icons/heart.png'),
   noData: require('./icons/noData.png'),
   editIcon: require('./icons/editIcon.png'),
+  mobNumber: require('./icons/mobNumber.png'),
+  modelSuccessful: require('./icons/modelSuccessful.png'),
 };
 
 export const drawerIcons = {

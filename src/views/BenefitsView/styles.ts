@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     paddingLeft: vh * 2.5,
   },
   MaximumRightBox: {
-    width: '45%',
+    width: '53%',
+    height: vh * 22,
   },
   benefitsLogo: {
     width: vh * 15,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     width: vh * 12,
   },
   insuredPrice: {
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.67,
     color: COLORS.insuredPrice,
     width: vh * 11,
   },
@@ -93,9 +94,9 @@ const styles = StyleSheet.create({
     marginBottom: -vh * 4,
   },
   benefitsImage: {
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     height: '100%',
-    width: '100%',
+    width: '90%',
   },
   coverageCardImage: {
     height: vh * 4,
@@ -103,7 +104,6 @@ const styles = StyleSheet.create({
     tintColor: COLORS.white,
     resizeMode: 'contain',
   },
-
 });
 
 export default styles;

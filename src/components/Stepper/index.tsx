@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, {ReactNode} from 'react';
 import {
   View,
   StyleSheet,
@@ -8,9 +8,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { vh, vw } from '../../assets/theme/dimension';
+import {vh, vw} from '../../assets/theme/dimension';
 import AileronSemiBold from '../AileronSemiBold';
-import { COLORS } from '../../assets/theme/colors';
+import {COLORS} from '../../assets/theme/colors';
+import {useSelector} from 'react-redux';
 
 type Step = {
   key: string;
@@ -32,8 +33,11 @@ const Stepper: React.FC<StepperProps> = ({
   onPressStep,
 }) => {
   const renderStep = (stepIndex: number) => {
+    const treatments = useSelector((state: any) => state.lodge.treatments);
     const stepNumber = stepIndex + 1;
-    const isActive = currentStep >= stepNumber;
+    const isActive =
+      currentStep >= stepNumber ||
+      (currentStep === 2 && treatments?.length > 0);
 
     return (
       <View key={stepNumber} style={styles.stepWrapper}>
@@ -148,7 +152,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: vh * 2,
-
   },
   labelBelow: {
     width: vw * 27,
@@ -167,7 +170,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: vh * 1.5,
   },
-  wrapper: { padding: vh * 2 },
+  wrapper: {padding: vh * 2},
   priorNext: {
     textAlign: 'center',
     color: COLORS.white,

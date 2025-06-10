@@ -60,7 +60,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
           latitude: item?.HospitalLat,
           items: [
             // {label: 'name:', value: item?.HospitalName},
-            {label: 'phone:', value: item?.HospitalContact},
+            {label: 'Phone:', value: item?.HospitalContact},
             {
               label: 'Address:',
               value: item?.HospitalAddress,

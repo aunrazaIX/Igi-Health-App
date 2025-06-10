@@ -51,7 +51,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
         },
         {
           label: 'Account Number:',
-          value: personalDetails?.Data?.accountNumber ?? ' -- ',
+          value: personalDetails?.Data?.accountNumber ?? '--',
         },
         {
           label: 'Bank IBAN:',
@@ -78,8 +78,8 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
           value={selectedType?.label}
           onSelectOption={value => onSelectType(value)}
           selectData={patientOptions}
-          selectLabel={'Select Type'}
-          selectPlaceholder={'-- Select Type From List --'}
+          selectLabel={'Coverage Type'}
+          selectPlaceholder={'-- Select Covergae Type  --'}
         />
       )}
 

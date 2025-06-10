@@ -32,6 +32,7 @@ type ConfimationModalProps = {
   CloseButtonText: string;
   onClose?: () => void;
   closeIcon?: boolean;
+  confirmationType: any;
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -48,6 +49,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   Successfull,
   onClose,
   closeIcon,
+  confirmationType,
 }) => {
   const handleClose = () => {
     setConfirmationModalVisible(false);
@@ -57,7 +59,6 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   };
   return (
     <Modal
-      animationType="slide"
       transparent={true}
       visible={ConfirmationModalVisible}
       statusBarTranslucent>
@@ -113,7 +114,11 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
 
               <TouchableOpacity
                 style={styles.deleteButtonContainer}
-                onPress={handleDelete}>
+                onPress={() => {
+                  if (handleDelete) handleDelete();
+                  if (setConfirmationModalVisible)
+                    setConfirmationModalVisible(false);
+                }}>
                 <LinearGradient
                   style={styles.deleteButton}
                   colors={COLORS.deleteButtonGradient}>

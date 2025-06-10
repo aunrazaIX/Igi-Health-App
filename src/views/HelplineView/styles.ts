@@ -5,10 +5,11 @@ import {COLORS} from '../../assets/theme/colors';
 const styles = StyleSheet.create({
   container: {
     paddingTop: vh * 3,
-    paddingBottom: vh * 10,
+    paddingBottom: vh * 13,
   },
   box: {
     backgroundColor: COLORS.white,
+
     padding: vh * 2,
     borderRadius: vh * 2,
     marginVertical: vh,
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 1,
     },
+
     shadowOpacity: 0.08,
     shadowRadius: 1.5,
     elevation: 5,

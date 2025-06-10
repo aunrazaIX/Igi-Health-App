@@ -1,10 +1,14 @@
 import React from 'react';
-import { InputField, Button, AileronSemiBold } from '../../../components';
-import { styles } from '../styles';
-import { icons } from '../../../assets';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { StyleSheet, View } from 'react-native';
-import { validateCNIC, validateEmail, validateMobileNumber } from '../../../validations/authValidations';
+import {InputField, Button, AileronSemiBold} from '../../../components';
+import {styles} from '../styles';
+import {icons} from '../../../assets';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {StyleSheet, View} from 'react-native';
+import {
+  validateCNIC,
+  validateEmail,
+  validateMobileNumber,
+} from '../../../validations/authValidations';
 
 const SignUpView = ({
   handleSignup,
@@ -16,9 +20,7 @@ const SignUpView = ({
   signupSetterForApiData: (key: string, value: string) => void;
   signupApiData: any;
   loadingSignup: boolean;
-}
-) => {
-
+}) => {
   return (
     <>
       <AileronSemiBold
@@ -34,14 +36,17 @@ const SignUpView = ({
         inputStyle={style.inputStyle}
         label="Mobile Number"
         placeholder="Enter Mobile Number"
-        rightIcon={icons.cnic}
-        onChangeText={(text) => {
+        rightIcon={icons.mobNumber}
+        onChangeText={text => {
           signupSetterForApiData('cellNumber', text);
           const errorMsg = validateMobileNumber(text);
           signupSetterForApiData('error_cellNumber', errorMsg);
         }}
         value={signupApiData?.cellNumber}
-        errorMessage={signupApiData?.error_cellNumber}
+        errorMessage={
+          signupApiData?.error_cellNumber?.charAt(0).toUpperCase() +
+          signupApiData?.error_cellNumber?.slice(1)
+        }
         keyboardType="numeric"
         mask={[
           /\d/,
@@ -65,26 +70,32 @@ const SignUpView = ({
         label="Your Email"
         placeholder="Enter Email Address"
         rightIcon={icons.email}
-        onChangeText={(text) => {
+        onChangeText={text => {
           signupSetterForApiData('email', text);
           const errorMsg = validateEmail(text);
           signupSetterForApiData('error_email', errorMsg);
         }}
         value={signupApiData?.email}
-        errorMessage={signupApiData?.error_email}
+        errorMessage={
+          signupApiData?.error_email?.charAt(0).toUpperCase() +
+          signupApiData?.error_email?.slice(1)
+        }
       />
 
       <InputField
         label="CNIC Number"
         placeholder="Enter cnic"
         rightIcon={icons.cnic}
-        onChangeText={(text) => {
+        onChangeText={text => {
           signupSetterForApiData('cnic', text);
           const errorMsg = validateCNIC(text);
           signupSetterForApiData('error_cnic', errorMsg);
         }}
         value={signupApiData?.cnic}
-        errorMessage={signupApiData?.error_cnic}
+        errorMessage={
+          signupApiData?.error_cnic?.charAt(0).toUpperCase() +
+          signupApiData?.error_cnic?.slice(1)
+        }
         mask={[
           /\d/,
           /\d/,
@@ -103,23 +114,21 @@ const SignUpView = ({
           /\d/,
         ]}
       />
-      <View style={style.signupTextContainer} >
-
+      <View style={style.signupTextContainer}>
         <View style={style.signupText}>
-          <AileronSemiBold name='•' style={styles.loginContainerText} />
+          <AileronSemiBold name="•" style={styles.loginContainerText} />
 
           <AileronSemiBold
             numberOfLines={3}
             name={
-              "Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character."
+              'Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character.'
             }
             style={styles.loginContainerText}
           />
-
         </View>
 
         <View style={style.signupText}>
-          <AileronSemiBold name='•' style={styles.loginContainerText} />
+          <AileronSemiBold name="•" style={styles.loginContainerText} />
 
           <AileronSemiBold
             numberOfLines={3}
@@ -128,24 +137,26 @@ const SignUpView = ({
             }
             style={styles.loginContainerText}
           />
-
         </View>
 
         <View style={style.signupText}>
-          <AileronSemiBold name='•' style={styles.loginContainerText} />
+          <AileronSemiBold name="•" style={styles.loginContainerText} />
 
           <AileronSemiBold
             numberOfLines={3}
-            name={
-              "Case sensitivity is mandatory."
-            }
+            name={'Case sensitivity is mandatory.'}
             style={styles.loginContainerText}
           />
-
         </View>
       </View>
 
-      <Button containerStyle={styles.loginButton} name="Create Account" onPress={handleSignup} loading={loadingSignup} disabled={loadingSignup ? true : false} />
+      <Button
+        containerStyle={styles.loginButton}
+        name="Create Account"
+        onPress={handleSignup}
+        loading={loadingSignup}
+        disabled={loadingSignup ? true : false}
+      />
     </>
   );
 };
@@ -156,7 +167,6 @@ const style = StyleSheet.create({
   inputContainer: {
     // borderWidth: 2,
     // flexDirection: 'column',
-
     // paddingHorizontal: vw * 1,
   },
   labelStyle: {
@@ -175,11 +185,11 @@ const style = StyleSheet.create({
     fontSize: vw * 3.5,
   },
   signupText: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: vw * 2,
-    width: "100%"
+    width: '100%',
   },
   signupTextContainer: {
     marginTop: vh * 2,
-  }
+  },
 });

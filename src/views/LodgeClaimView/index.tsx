@@ -14,7 +14,7 @@ import {
   StepItem,
   DependantList,
 } from './typeInterface';
-import {icons} from '../../assets';
+import {icons, images} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 
@@ -52,6 +52,9 @@ type LodgeClaimViewProps = {
   onSelectHospital: () => void;
   selectedHospital: any;
   hospitalList: any;
+  confirmationType: any;
+  handleDeleteClaim: any;
+  deletedIndex: any;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -85,11 +88,14 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   personalDetails,
   personalDetailsLoading,
   onSelectType,
+  deletedIndex,
   selectedType,
   selectedMaternityType,
   hospitalList,
   onSelectHospital,
   selectedHospital,
+  confirmationType,
+  handleDeleteClaim,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -150,6 +156,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           onPressStep={onPressStep}
           componentList={renderStep}
         />
+
         <Button
           disabled={
             currentStep === 1
@@ -172,15 +179,28 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         <ModalLoading
           loading={uploadLoading || claimLoading || personalDetailsLoading}
         />
+
         <ConfirmationModal
           ConfirmationModalVisible={confirmationModal}
           setConfirmationModalVisible={setConfirmationModal}
-          frameImage={icons.ModalSuccessfull}
-          confirmationMessage={'Your Claim Successfully Added'}
-          closeButton={true}
-          Successfull={true}
+          frameImage={icons.modelSuccessful}
+          confirmationMessage={
+            confirmationType === 'delete'
+              ? 'Are you sure you want to delete this claim?'
+              : 'hank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims. Please make a note of your [Claim No: 13159 ].'
+          }
+          claimSubmission={true}
+          deleteButton={confirmationType === 'delete' ? true : false}
+          closeButton={confirmationType === 'delete' ? false : true}
+          confirmationRequired={confirmationType === 'delete' ? true : false}
           CloseButtonText={'Continue To Login'}
           onClose={resetStates}
+          confirmationType={confirmationType}
+          handleDelete={
+            confirmationType === 'delete'
+              ? () => handleDeleteClaim(deletedIndex)
+              : null
+          }
         />
       </CurvedView>
     </>

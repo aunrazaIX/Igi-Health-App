@@ -13,7 +13,13 @@ const Home = () => {
     homeCardData,
     homeCardDataLoading,
   } = states;
-  const {animateCard, toggleDrawer, onPressMenu, onPressHeaderIcon} = functions;
+  const {
+    animateCard,
+    toggleDrawer,
+    onPressMenu,
+    onPressHeaderIcon,
+    handleAssociatedApps,
+  } = functions;
 
   return (
     <HomeView
@@ -28,6 +34,7 @@ const Home = () => {
       claimData={claimData}
       loading={loading}
       homeCardDataLoading={homeCardDataLoading}
+      handleAssociatedApps={handleAssociatedApps}
     />
   );
 };

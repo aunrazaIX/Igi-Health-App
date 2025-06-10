@@ -3,15 +3,19 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
 const styles = StyleSheet.create({
+  curvedViewContent: {
+    marginTop: vh * 1.5,
+    marginLeft: vw,
+  },
   titleText: {
-    fontSize: vh * 2.3,
+    fontSize: vh * 2.4,
     textAlign: 'left',
     color: COLORS.placeholderColor,
   },
   description: {
     textAlign: 'left',
-    fontSize: vh * 1.7,
-    marginTop: vh,
+    fontSize: vh * 2,
+    marginTop: vh * 2,
   },
   button: {
     marginVertical: vh * 2.5,

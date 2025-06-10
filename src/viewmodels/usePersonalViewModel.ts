@@ -62,9 +62,9 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
           dependent: 'Dependent Detail',
           image: icons.frame,
           dependentDetail: [
-            {label: 'Name', value: item?.LGIVNAME.trim()},
+            {label: 'Name :', value: item?.LGIVNAME.trim()},
             {
-              label: 'Gender',
+              label: 'Gender :',
               value:
                 item?.CLTSEX === 'M'
                   ? 'Male'
@@ -72,8 +72,8 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
                   ? 'Female'
                   : null,
             },
-            {label: 'RelationShip', value: item?.DPNTTYPE ?? '--'},
-            {label: 'Age', value: item?.AGE},
+            {label: 'RelationShip :', value: item?.DPNTTYPE ?? '--'},
+            {label: 'Age :', value: item?.AGE},
           ],
         })),
       ),

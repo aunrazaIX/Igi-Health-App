@@ -76,28 +76,28 @@ const TopView = ({
             <Image style={styles.backIcon} source={icons.backArrow} />
           </TouchableOpacity>
           <AileronSemiBold style={styles.headerName} name={title} />
-          <View style={styles.headerIcon}>
-            {TopViewSecondIcon && (
+          {(TopViewSecondIcon || TopViewFirstIcon) && (
+            <View style={styles.headerIcon}>
               <TouchableOpacity onPress={SecondOpenModal}>
                 <Image style={styles.TopViewIcon} source={TopViewSecondIcon} />
               </TouchableOpacity>
-            )}
 
-            {TopViewFirstIcon && (
-              <TouchableOpacity onPress={FirstOpenModal}>
-                <Image
-                  style={[
-                    styles.TopViewIcon,
-                    containerStyleIcon,
-                    tintColrorForTopViewFirstIcon && {
-                      tintColor: tintColrorForTopViewFirstIcon,
-                    },
-                  ]}
-                  source={TopViewFirstIcon}
-                />
-              </TouchableOpacity>
-            )}
-          </View>
+              {TopViewFirstIcon && (
+                <TouchableOpacity onPress={FirstOpenModal}>
+                  <Image
+                    style={[
+                      styles.TopViewIcon,
+                      containerStyleIcon,
+                      tintColrorForTopViewFirstIcon && {
+                        tintColor: tintColrorForTopViewFirstIcon,
+                      },
+                    ]}
+                    source={TopViewFirstIcon}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
         </View>
 
         <View>{icon && <Image style={styles.iconStyle} source={icon} />}</View>
@@ -122,9 +122,10 @@ const styles = StyleSheet.create({
   },
   row: {
     alignItems: 'center',
-    justifyContent: 'center',
+
     flexDirection: 'row',
     marginBottom: vh * 3,
+    width: '100%',
   },
   backIconContainer: {
     height: vh * 4.7,
@@ -143,6 +144,9 @@ const styles = StyleSheet.create({
     width: '65%',
     color: COLORS.white,
     fontSize: vw * 5,
+    textAlign: 'center',
+    marginLeft: vw * 2.2,
+    // borderWidth: 2,
   },
   iconStyle: {
     height: vw * 32,

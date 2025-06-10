@@ -1,12 +1,12 @@
-import { View, ImageBackground, Image, TouchableOpacity } from 'react-native';
-import React, { JSX } from 'react';
-import { images, icons } from '../../assets';
-import { styles } from './styles';
-import { COLORS } from '../../assets/theme/colors';
+import {View, ImageBackground, Image, TouchableOpacity} from 'react-native';
+import React, {JSX} from 'react';
+import {images, icons} from '../../assets';
+import {styles} from './styles';
+import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { AileronSemiBold, CurvedView } from '../../components';
-import { LoginForm, SignUpView } from './components';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {AileronSemiBold, CurvedView} from '../../components';
+import {LoginForm, SignUpView} from './components';
 
 const LoginView = ({
   onPressTab,
@@ -23,6 +23,8 @@ const LoginView = ({
   loginSetterForApiData,
   handleCheck,
   checked,
+  onPressToucdId,
+  onPressFaceId,
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;
@@ -38,7 +40,9 @@ const LoginView = ({
   loginSetterForApiData: (key: string, value: any) => void;
   handleCheck: () => void;
   rememberMe: boolean;
-  checked: boolean
+  checked: boolean;
+  onPressToucdId: any;
+  onPressFaceId: any;
 }) => {
   const Wrapper = (tab: string) =>
     selectedTab === tab ? LinearGradient : TouchableOpacity;
@@ -53,14 +57,18 @@ const LoginView = ({
         loginSetterForApiData={loginSetterForApiData}
         handleCheck={handleCheck}
         checked={checked}
+        onPressToucdId={onPressToucdId}
+        onPressFaceId={onPressFaceId}
       />
     ),
-    signup: <SignUpView
-      signupSetterForApiData={signupSetterForApiData}
-      signupApiData={signupApiData}
-      handleSignup={handleSignup}
-      loadingSignup={loadingSignup}
-    />,
+    signup: (
+      <SignUpView
+        signupSetterForApiData={signupSetterForApiData}
+        signupApiData={signupApiData}
+        handleSignup={handleSignup}
+        loadingSignup={loadingSignup}
+      />
+    ),
   };
   return (
     <KeyboardAwareScrollView enableOnAndroid>
@@ -72,7 +80,7 @@ const LoginView = ({
 
           <CurvedView
             containerStyle={styles.curvedStyle}
-            backColor={{ backgroundColor: 'transparent' }}>
+            backColor={{backgroundColor: 'transparent'}}>
             <View style={styles.loginContainer}>
               <View style={styles.tabContainer}>
                 {tabs.map(tab => {
@@ -91,7 +99,7 @@ const LoginView = ({
                               color:
                                 selectedTab === tab
                                   ? COLORS.white
-                                  : COLORS.textColor,
+                                  : COLORS.black,
                             },
                           ]}
                           numberOfLines={2}
@@ -113,4 +121,3 @@ const LoginView = ({
 };
 
 export default LoginView;
-

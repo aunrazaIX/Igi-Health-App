@@ -1,8 +1,8 @@
 import React from 'react';
-import { FlatList } from 'react-native';
-import { SingleFAQsView } from './components';
+import {FlatList} from 'react-native';
+import {SingleFAQsView} from './components';
 import styles from './styles';
-import { Data } from '../../viewmodels/useFAQsViewModel';
+import {Data} from '../../viewmodels/useFAQsViewModel';
 import {
   AileronRegular,
   AileronSemiBold,
@@ -10,7 +10,7 @@ import {
   CurvedView,
   TopView,
 } from '../../components';
-import { vh } from '../../assets/theme/dimension';
+import {vh} from '../../assets/theme/dimension';
 
 const FAQsView = ({
   faqsData,
@@ -21,7 +21,7 @@ const FAQsView = ({
   goBack: () => void;
   toggleAccordion: (index: number, isClose: boolean) => void;
 }) => {
-  const renderItem = ({ item, index }: { item: Data; index: number }) => {
+  const renderItem = ({item, index}: {item: Data; index: number}) => {
     return (
       <SingleFAQsView
         ques={item?.ques}
@@ -45,7 +45,7 @@ const FAQsView = ({
           data={faqsData}
           keyExtractor={item => item?.id?.toString()}
           renderItem={renderItem}
-          contentContainerStyle={{ paddingBottom: vh * 6 }}
+          contentContainerStyle={{paddingVertical: vh * 1.5}}
         />
       </CurvedView>
     </Container>
