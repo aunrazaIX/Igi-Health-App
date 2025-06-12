@@ -11,6 +11,7 @@ import {
   AileronBold,
   AileronRegular,
   CurvedView,
+  InputField,
   TopView,
 } from '../../components';
 import {icons} from '../../assets';
@@ -19,6 +20,7 @@ import DetailsContainer from '../../components/DetailsContainer';
 import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 import ProvinceTab from '../../components/provinceTab';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 type HospitalsViewProps = {
   selectedTab: string;
@@ -28,6 +30,9 @@ type HospitalsViewProps = {
   onPressRightTab: (tab: string) => void;
   onPressMapTab: (tab: string) => void;
   goBack: () => void;
+  searchText: any;
+  setSearchText: any;
+  data: any;
 };
 
 const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
@@ -38,58 +43,65 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
   selectedTabRight,
   onPressMapTab,
   goBack,
+  searchText,
   data,
+  setSearchText,
 }) => {
   return (
     <>
-      <TopView title="Hospitals" TopViewFirstIcon={icons.searchWhite} />
+      <TopView title="Hospitals" />
       <CurvedView>
-        <View>
-          <View style={styles.mapTextContainer}>
-            <AileronBold style={style.mapText} name="Search By Provinces" />
+        <KeyboardAwareScrollView>
+          <View>
+            <View style={styles.mapTextContainer}>
+              <View style={styles.moreFilter}>
+                <InputField
+                  value={searchText}
+                  placeholder="search city / address / town .."
+                  placeholderTextColor={COLORS.textGrayShade}
+                  onChangeText={text => setSearchText(text)}
+                  searchFieldRight={styles.searchFieldRight}
+                  searchFieldRightIcon={styles.searchFieldRightIcon}
+                  inputStyle={styles.inputStyle}
+                  containerStyle={styles.inputFeild}
+                />
+              </View>
+            </View>
 
-            <View style={styles.moreFilter}>
-              <Image style={styles.filterIcon} source={icons.filter} />
-              <AileronRegular
-                style={styles.moreFilterText}
-                name="More filters"
+            <View style={styles.mapTabsContainer}>
+              <FlatList
+                data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.mapTabsContainer}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({item}) => (
+                  <ProvinceTab
+                    onPressMapTab={onPressMapTab}
+                    selectedMapTab={selectedMapTab}
+                    provinceName={item}
+                  />
+                )}
               />
             </View>
           </View>
-
-          <View style={styles.mapTabsContainer}>
-            <FlatList
-              data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.mapTabsContainer}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({item}) => (
-                <ProvinceTab
-                  onPressMapTab={onPressMapTab}
-                  selectedMapTab={selectedMapTab}
-                  provinceName={item}
+          <FlatList
+            data={data}
+            // contentContainerStyle={{paddingBottom: vh * 2}}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({item}) => (
+              <>
+                <DetailsContainer
+                  detailsText={styles.detailsText}
+                  detailsTextLabel={styles.detailsTextLabel}
+                  detailsTextValue={styles.detailsTextValue}
+                  headerIcon={[icons.arrowDirection]}
+                  data={item}
                 />
-              )}
-            />
-          </View>
-        </View>
-        <FlatList
-          data={data}
-          contentContainerStyle={{paddingBottom: vh * 35}}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({item}) => (
-            <>
-              <DetailsContainer
-                detailsText={styles.detailsText}
-                detailsTextLabel={styles.detailsTextLabel}
-                detailsTextValue={styles.detailsTextValue}
-                headerIcon={[icons.arrowDirection]}
-                data={item}
-              />
-            </>
-          )}
-        />
+              </>
+            )}
+          />
+        </KeyboardAwareScrollView>
       </CurvedView>
     </>
   );

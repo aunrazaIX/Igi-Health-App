@@ -4,11 +4,11 @@ import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
   imageContainer: {
-    flex: 1,
+    // flex: 1,
   },
   wrapper: {padding: vh * 0.7},
   logo: {
-    marginTop: vh * 7.5,
+    marginTop: vh * 6.5,
     height: vh * 10,
     width: vw * 60,
     resizeMode: 'contain',
@@ -16,10 +16,10 @@ export const styles = StyleSheet.create({
   curvedStyle: {
     width: '100%',
     backgroundColor: '#FFFFFFE5',
-    paddingBottom: vh * 2,
+    paddingBottom: vh,
   },
   loginContent: {
-    gap: vh * 6,
+    gap: vh * 4,
     flex: 1,
     paddingHorizontal: vw * 4,
     alignItems: 'center',
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   loginContainer: {
     width: '100%',
     borderRadius: vw * 5,
-    paddingVertical: vh * 2,
+    // paddingVertical: vh * 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -78,6 +78,7 @@ export const styles = StyleSheet.create({
   },
   loginButton: {
     marginTop: vh * 2,
+    height: vh * 7.8,
   },
   loginOptionContainer: {
     flexDirection: 'row',
@@ -92,7 +93,6 @@ export const styles = StyleSheet.create({
     borderColor: COLORS.white,
     elevation: 3,
     gap: vw * 5,
-    marginTop: vh * 1,
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowOffset: {width: 0, height: 2},
@@ -120,6 +120,6 @@ export const styles = StyleSheet.create({
   orText: {
     fontSize: vw * 5,
     marginTop: vh * 4,
-    marginVertical: vh,
+    // marginVertical: vh,
   },
 });

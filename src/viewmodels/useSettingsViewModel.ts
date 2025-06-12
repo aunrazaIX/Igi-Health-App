@@ -3,6 +3,8 @@ import {icons} from '../assets';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import Notification from '../screens/Notification';
+import {useDispatch, useSelector} from 'react-redux';
+import {SetIsToggle} from '../redux/authSlice';
 
 type UseSettingsViewModelReturnType = {
   states: {
@@ -26,10 +28,11 @@ export type SettingsList = {
   ndChild?: string;
 };
 const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
-  const [isToggle, setIsToggle] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const isToggle = useSelector(state => state.auth.isToggle);
 
   const toggleSwitch = (): void => {
-    setIsToggle(previousState => !previousState);
+    dispatch(SetIsToggle(!isToggle));
   };
 
   const navigation = useNavigation();

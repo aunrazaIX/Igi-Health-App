@@ -27,7 +27,7 @@ const SettingsView = ({
 }) => {
   return (
     <Container>
-      <TopView title={'Settings'} goBack={goBack} />
+      <TopView title={'Settings'} type={'settings'} />
       <CurvedView>
         {data?.map(item => (
           <TouchableOpacity

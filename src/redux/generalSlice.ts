@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 const initalState = {
   showErrorModal: false,
@@ -8,7 +8,7 @@ export const generalSlice = createSlice({
   name: 'generalSlice',
   initialState: initalState,
   reducers: {
-    setErrorModal: (state, { payload }) => {
+    setErrorModal: (state, {payload}) => {
       state.showErrorModal = payload?.show;
 
       if (payload?.message !== undefined) {
@@ -17,5 +17,5 @@ export const generalSlice = createSlice({
     },
   },
 });
-export const { setErrorModal } = generalSlice.actions;
+export const {setErrorModal} = generalSlice.actions;
 export const generalReducer = generalSlice.reducer;

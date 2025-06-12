@@ -19,6 +19,7 @@ const AddDependent = ({navigation, route}: {navigation: any; route: any}) => {
     dependentSetterForApiData,
     setConfirmationModal,
     resetStates,
+    handleCancel,
   } = functions;
 
   return (
@@ -36,6 +37,7 @@ const AddDependent = ({navigation, route}: {navigation: any; route: any}) => {
         dependentData={dependentData}
         dependentIndex={dependentIndex}
         dependantsData={dependantsData}
+        handleCancel={handleCancel}
       />
     </>
   );

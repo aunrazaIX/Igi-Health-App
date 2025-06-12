@@ -13,6 +13,7 @@ import {styles} from './style';
 import DetailsContainer from '../../components/DetailsContainer';
 import {vh, vw} from '../../assets/theme/dimension';
 import {PanelHospitalGroup} from '../../viewmodels/usePanelHospitalListViewModel';
+import {COLORS} from '../../assets/theme/colors';
 
 type HomeViewProps = {
   data: PanelHospitalGroup[];
@@ -21,6 +22,8 @@ type HomeViewProps = {
   onPressTab: (tab: string) => void;
   onPressRightTab: (tab: string) => void;
   goBack: () => void;
+  searchText: any;
+  setSearchText: any;
 };
 
 const PanelHospitalListView: React.FC<HomeViewProps> = ({
@@ -30,6 +33,8 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   onPressRightTab,
   selectedTabRight,
   goBack,
+  searchText,
+  setSearchText,
 }) => {
   return (
     <>
@@ -39,11 +44,19 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             ? 'Panel Hospital List'
             : 'Discounted Centers'
         }
-        TopViewFirstIcon={icons.searchWhite}
       />
 
       <CurvedView>
         <View style={styles.infoContainerHeader}>
+          <InputField
+            placeholder="search Name / Phone / City / Address .."
+            placeholderTextColor={COLORS.textGrayShade}
+            inputStyle={styles.inputStyle}
+            containerStyle={styles.inputFeild}
+            value={searchText}
+            onChangeText={text => setSearchText(text)}
+          />
+
           <View style={styles.infoContainerHeaderRight}>
             <TouchableOpacity
               onPress={() => onPressRightTab('list')}
@@ -162,7 +175,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               selectedTabRight === 'list')) && (
             <FlatList
               data={data}
-              contentContainerStyle={{paddingBottom: vh * 35}}
+              contentContainerStyle={{paddingBottom: vh * 22}}
               keyExtractor={(_, index) => index.toString()}
               renderItem={({item}) => (
                 <>

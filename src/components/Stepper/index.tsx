@@ -35,9 +35,7 @@ const Stepper: React.FC<StepperProps> = ({
   const renderStep = (stepIndex: number) => {
     const treatments = useSelector((state: any) => state.lodge.treatments);
     const stepNumber = stepIndex + 1;
-    const isActive =
-      currentStep >= stepNumber ||
-      (currentStep === 2 && treatments?.length > 0);
+    const isActive = currentStep >= stepNumber;
 
     return (
       <View key={stepNumber} style={styles.stepWrapper}>

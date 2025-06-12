@@ -82,23 +82,33 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   const onPressSubmit = () => {
     const filled = dependentCheckForError();
 
-    if (!filled) return;
+    // if (!filled) return;
 
     let _apiData = {
       ...dependentApiData,
       dependentTypeID: dependentApiData?.dependentTypeID?.value,
       gender: dependentApiData?.gender?.label,
     };
+
     if (
       !dependentApiData?.dependentName ||
       !dependentApiData?.gender?.label ||
       !dependentApiData?.dependentTypeID?.value ||
       !dependentApiData?.Age
     ) {
-      dispatch(setErrorModal('E'));
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Please fill all required fields',
+        }),
+      );
     } else {
       trigger(_apiData);
     }
+  };
+
+  const handleCancel = () => {
+    navigation.navigate('Personal');
   };
 
   const resetStates = () => {
@@ -120,6 +130,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       dependentSetterForApiData,
       setConfirmationModal,
       resetStates,
+      handleCancel,
     },
   };
 };

@@ -29,6 +29,7 @@ const TopView = ({
   containerStyleIcon,
   goBack,
   resetStates,
+  type,
 }: {
   title: string;
   onPressBack?: () => void;
@@ -42,6 +43,7 @@ const TopView = ({
   containerStyleIcon?: StyleObject | StyleObject[];
   tintColrorForTopViewFirstIcon?: string;
   resetStates?: () => void;
+  type: string;
 }) => {
   const route = useRoute();
   const navigation = useNavigation();
@@ -55,12 +57,13 @@ const TopView = ({
               if (onPressBack) {
                 onPressBack();
               }
+
               const stackRoutes = navigation?.getState()?.routes;
               const currentRouteIndex = stackRoutes?.findIndex(
                 _route => _route.name === route.name,
               );
 
-              if (currentRouteIndex === 0) {
+              if (currentRouteIndex === 0 && type != 'settings') {
                 navigation?.dispatch(
                   CommonActions.reset({
                     index: 0,

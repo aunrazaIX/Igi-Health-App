@@ -42,6 +42,7 @@ type AddDependentViewProps = {
   addDependentLoading: any;
   dependentIndex: any;
   dependantsData: any;
+  handleCancel: any;
 };
 
 const AddDependentView: React.FC<AddDependentViewProps> = ({
@@ -49,6 +50,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   genderOptions,
   relationsOptions,
   onPressSubmit,
+  handleCancel,
   dependentSetterForApiData,
   setConfirmationModal,
   onPressCancel,
@@ -135,6 +137,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               containerStyle={styles.modalCancelButton}
               gradientColors={['#E1E3E6', '#E1E3E6']}
               inputStyle={styles.modalCancelText}
+              onPress={handleCancel}
             />
           </View>
 

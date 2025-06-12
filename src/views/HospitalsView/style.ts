@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
+import {fonts} from '../../assets/fonts';
 
 export const styles = StyleSheet.create({
   infoContainer: {
@@ -54,6 +55,11 @@ export const styles = StyleSheet.create({
     borderColor: COLORS.buttonBorder,
     backgroundColor: COLORS.buttonBorder,
   },
+  inputFeild: {
+    borderWidth: 2,
+    height: vh * 6,
+    width: '80%',
+  },
 
   tabText: {
     color: COLORS.black,
@@ -87,11 +93,8 @@ export const styles = StyleSheet.create({
     fontSize: vh * 1.5,
   },
   mapTextContainer: {
-    flexDirection: 'row',
     gap: vw * 2,
-    justifyContent: 'space-between',
-
-    marginTop: vh * 1.5,
+    justifyContent: 'center',
   },
   mapTabsContainer: {
     flexDirection: 'row',
@@ -133,9 +136,27 @@ export const styles = StyleSheet.create({
   moreFilter: {
     flexDirection: 'row',
 
-    alignItems: 'center',
-    gap: vw * 3,
+    justifyContent: 'center',
   },
+  searchFieldRight: {
+    position: 'relative',
+    top: vh * 2,
+    right: vw * 6,
+  },
+  searchFieldRightIcon: {
+    height: vh * 2,
+    width: vw * 4,
+  },
+  inputStyle: {
+    fontSize: vw * 3.8,
+    height: vh * 4.2,
+
+    // backgroundColor: 'yellow',
+    color: COLORS.textBlackShade,
+
+    // fontFamily: fonts.Aileron.bold,
+  },
+
   moreFilterText: {
     fontSize: vw * 4,
     color: COLORS.black,

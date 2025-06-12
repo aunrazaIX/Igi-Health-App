@@ -15,31 +15,35 @@ interface AuthState {
   credentials: {
     userName: string;
     password: string;
-  };
-  deviceId: null | string;
+    rememberMe: boolean;
+  } | null;
+  deviceId: string | null;
   biometrics: {
-    userName: string | number | null;
-    password: any;
-    DeviceId: any;
-    LoginDeviceName: any;
-  };
+    userName: string;
+    password: string;
+    deviceId: string;
+    LoginDeviceName: string;
+  } | null;
+
+  faceIdCredentials: {
+    userName: string;
+    password: string;
+    deviceId: string;
+    LoginDeviceName: string;
+  } | null;
+
+  isToggle: boolean;
 }
 
 const initialState: AuthState = {
   user: null,
   token: null,
   rememberMe: false,
-  credentials: {
-    userName: '',
-    password: '',
-  },
+  credentials: null,
   deviceId: null,
-  biometrics: {
-    userName: null,
-    password: null,
-    DeviceId: null,
-    LoginDeviceName: null,
-  },
+  biometrics: null,
+  faceIdCredentials: null,
+  isToggle: false,
 };
 
 interface SetUserDataPayload {
@@ -57,34 +61,35 @@ export const authSlice = createSlice({
       state.user = Data;
       state.token = Token;
     },
-    setRememberMe: (
-      state,
-      action: PayloadAction<{
-        userName: string;
-        password: string;
-        rememberMe: boolean;
-      }>,
-    ) => {
-      const {userName, rememberMe, password} = action.payload;
-      state.credentials = {
-        userName,
-        password,
-      };
-      state.rememberMe = rememberMe;
+    setRememberMe: (state, action: PayloadAction<AuthState['credentials']>) => {
+      state.credentials = action.payload;
+      state.rememberMe = action.payload?.rememberMe || false;
     },
     logout: state => {
-      // state.user = null;
+      state.user = null;
       state.token = null;
     },
-    setBiometrics: (state, {payload}) => {
-      state.biometrics = {
-        ...state.biometrics,
-        ...payload,
-      };
+    setBiometrics: (state, action: PayloadAction<AuthState['biometrics']>) => {
+      state.biometrics = action.payload;
+    },
+    setFaceIdCredentials: (
+      state,
+      action: PayloadAction<AuthState['faceIdCredentials']>,
+    ) => {
+      state.faceIdCredentials = action.payload;
+    },
+    SetIsToggle: (state, {payload}) => {
+      state.isToggle = payload;
     },
   },
 });
 
-export const {setUserData, logout, setRememberMe, setBiometrics} =
-  authSlice.actions;
+export const {
+  setUserData,
+  logout,
+  setRememberMe,
+  setBiometrics,
+  setFaceIdCredentials,
+  SetIsToggle,
+} = authSlice.actions;
 export const authReducer = authSlice.reducer;

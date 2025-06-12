@@ -6,12 +6,15 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Home from '../../screens/Home';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
-import {DrawerContentComponentProps} from '@react-navigation/drawer';
+import {
+  DrawerContentComponentProps,
+  useDrawerStatus,
+} from '@react-navigation/drawer';
 import {drawerIcons, images} from '../../assets';
 import {AileronBold, AileronSemiBold} from '../../components';
 import Tabs from '../TabStack';
@@ -29,6 +32,10 @@ const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  if (!user) {
+    return null;
+  }
   const routes = [
     {
       id: 1,
@@ -141,6 +148,15 @@ const DrawerStack = () => {
       navigation.navigate('Profile');
     };
 
+    const scrollRef = useRef<ScrollView>(null);
+    const isDrawerOpen = useDrawerStatus() === 'open';
+
+    useEffect(() => {
+      if (isDrawerOpen && scrollRef.current) {
+        scrollRef.current.scrollTo({y: 0, animated: false});
+      }
+    }, [isDrawerOpen]);
+
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
@@ -153,7 +169,7 @@ const DrawerStack = () => {
             />
           </TouchableOpacity>
         </View>
-        <ScrollView>
+        <ScrollView ref={scrollRef}>
           <View style={styles.menuContainer}>
             {routes?.length > 0 &&
               routes?.map((route, index) => (

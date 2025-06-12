@@ -116,15 +116,19 @@ const LoginForm = ({
 
       <AileronBold style={styles.orText} name="Or" />
       <View style={styles.loginOptionContainer}>
-        <TouchableOpacity onPress={onPressFaceId} style={styles.loginOptionBox}>
-          <Image
-            style={styles.loginOptionContainerIcons}
-            source={icons.faceID}
-          />
-          <AileronBold style={style.style} name={'Face ID'} />
-        </TouchableOpacity>
+        {Platform.OS === 'ios' && (
+          <TouchableOpacity
+            onPress={onPressFaceId}
+            style={styles.loginOptionBox}>
+            <Image
+              style={styles.loginOptionContainerIcons}
+              source={icons.faceID}
+            />
+            <AileronBold style={style.style} name={'Face ID'} />
+          </TouchableOpacity>
+        )}
 
-        <View style={styles.verticalLine} />
+        {/* <View style={styles.verticalLine} /> */}
 
         {Platform.OS === 'android' && (
           <TouchableOpacity
@@ -160,7 +164,7 @@ const style = StyleSheet.create({
     fontWeight: '700',
   },
   inputFeilds: {
-    marginTop: vh * 3,
+    marginTop: vh,
   },
 
   style: {

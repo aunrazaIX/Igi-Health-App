@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {icons} from '../assets';
@@ -11,120 +11,79 @@ export type PanelHospitalList = {
 
 type usePanelHospitalListViewModel = {
   states: {
-    data: PanelHospitalList[][];
+    data: PanelHospitalList[];
     selectedTab: string;
     selectedTabRight: string;
     selectedMapTab: string;
+    searchText: string;
   };
   functions: {
     onPressTab: (tab: string) => void;
     onPressRightTab: (tab: string) => void;
     onPressMapTab: (tab: string) => void;
     goBack: () => void;
+    setSearchText: (text: string) => void;
   };
 };
 
 const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
+  const navigation = useNavigation();
+
   const [selectedTab, setSelectedTab] = useState('Panel Hospitals');
   const [selectedTabRight, setSelectedTabRight] = useState('list');
   const [selectedMapTab, setSelectedMapTab] = useState('Sindh');
+  const [searchText, setSearchText] = useState('');
+  const [allData, setAllData] = useState([]);
   const [data, setData] = useState([]);
 
-  const navigation = useNavigation();
+  const onPressTab = (tab: string) => setSelectedTab(tab);
+  const onPressRightTab = (tab: string) => setSelectedTabRight(tab);
+  const onPressMapTab = (tab: string) => setSelectedMapTab(tab);
+  const goBack = () => navigation.goBack();
 
-  const onPressTab = (tab: string) => {
-    setSelectedTab(tab);
-  };
+  useEffect(() => {
+    const lowerText = searchText.toLowerCase();
 
-  const onPressRightTab = (tab: string) => {
-    setSelectedTabRight(tab);
-  };
+    let filtered = allData;
 
-  const onPressMapTab = (tab: string) => {
-    setSelectedMapTab(tab);
-  };
+    if (selectedMapTab) {
+      filtered = filtered.filter(item => item.ProvinceName === selectedMapTab);
+    }
 
-  const goBack = () => {
-    navigation.goBack();
-  };
+    if (searchText.trim()) {
+      filtered = filtered.filter(
+        item =>
+          item.headerLabel?.toLowerCase().includes(lowerText) ||
+          item.items?.some(subItem =>
+            subItem.value?.toLowerCase().includes(lowerText),
+          ),
+      );
+    }
+
+    setData(filtered);
+  }, [searchText, selectedMapTab, allData]);
 
   const {loading} = useApiHook({
     apiEndpoint: endpoints.panelHospital.getPanelHospitals,
     method: 'get',
     onSuccess: res => {
-      setData(
+      const formattedData =
         res?.map(item => ({
           headerLabel: item?.HospitalName,
           headerIcon: icons.taskEdit,
           longitude: item?.HospitalLong,
           latitude: item?.HospitalLat,
+          ProvinceName: item?.ProvinceName,
           items: [
-            // {label: 'name:', value: item?.HospitalName},
             {label: 'Phone:', value: item?.HospitalContact},
-            {
-              label: 'Address:',
-              value: item?.HospitalAddress,
-            },
+            {label: 'Address:', value: item?.HospitalAddress},
             {label: 'City:', value: item?.CityName},
           ],
-        })),
-      );
+        })) || [];
+
+      setAllData(formattedData);
     },
   });
-
-  // const data: PanelHospitalList[][] = [
-  //   [
-  //     {label: 'name:', value: 'Heart & General Hospital'},
-  //     {label: 'phone:', value: '81-2822408, 081-2822409'},
-  //     {
-  //       label: 'Address:',
-  //       value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-  //     },
-  //     {label: 'City:', value: 'Baluchistan, Quetta'},
-  //   ],
-  //   [
-  //     {label: 'name:', value: '0071453'},
-  //     {label: 'phone:', value: '6140.0'},
-  //     {label: 'Address:', value: 'Imran Naveed Qureshi'},
-  //     {label: 'City:', value: '23/01/2021'},
-  //   ],
-  //   [
-  //     {label: 'name:', value: 'Heart & General Hospital'},
-  //     {label: 'phone:', value: '81-2822408, 081-2822409'},
-  //     {
-  //       label: 'Address:',
-  //       value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-  //     },
-  //     {label: 'City:', value: 'Baluchistan, Quetta'},
-  //   ],
-  //   [
-  //     {label: 'name:', value: 'Heart & General Hospital'},
-  //     {label: 'phone:', value: '81-2822408, 081-2822409'},
-  //     {
-  //       label: 'Address:',
-  //       value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-  //     },
-  //     {label: 'City:', value: 'Baluchistan, Quetta'},
-  //   ],
-  //   [
-  //     {label: 'name:', value: 'Heart & General Hospital'},
-  //     {label: 'phone:', value: '81-2822408, 081-2822409'},
-  //     {
-  //       label: 'Address:',
-  //       value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-  //     },
-  //     {label: 'City:', value: 'Baluchistan, Quetta'},
-  //   ],
-  //   [
-  //     {label: 'name:', value: 'Heart & General Hospital'},
-  //     {label: 'phone:', value: '81-2822408, 081-2822409'},
-  //     {
-  //       label: 'Address:',
-  //       value: '15D, 16D, Model Town, Old Pishin Bus Stop, Quetta',
-  //     },
-  //     {label: 'City:', value: 'Baluchistan, Quetta'},
-  //   ],
-  // ];
 
   return {
     states: {
@@ -132,12 +91,14 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       selectedTab,
       selectedTabRight,
       selectedMapTab,
+      searchText,
     },
     functions: {
       onPressTab,
       onPressRightTab,
       onPressMapTab,
       goBack,
+      setSearchText,
     },
   };
 };

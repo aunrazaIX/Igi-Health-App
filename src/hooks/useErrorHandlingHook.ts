@@ -25,7 +25,12 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
     setApiData(prevData => ({
       ...prevData,
       [key]: value,
-      [`error_${key}`]: value === '' ? `${key} is required` : '',
+      [`error_${key}`]:
+        value === ''
+          ? key === 'userName'
+            ? 'email address is required'
+            : `${key} is required`
+          : '',
     }));
   };
 
@@ -52,7 +57,10 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
             prevData[key] === '' ||
             prevData[key] === undefined)
         ) {
-          updatedData[`error_${key}`] = `${key} is required`;
+          updatedData[`error_${key}`] =
+            key === 'userName'
+              ? 'email address is required'
+              : `${key} is required`;
           isAllowedForProceeding = false;
         }
       });

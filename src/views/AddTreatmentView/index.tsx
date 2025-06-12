@@ -44,10 +44,8 @@ const AddTreatmentView = ({
     <>
       <TopView title={'Add A Treatment'} />
       <CurvedView>
-        <View style={styles.container}>
-          <KeyboardAwareScrollView
-            showsVerticalScrollIndicator={false}
-            enableOnAndroid>
+        <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>
               <AileronBold
@@ -119,8 +117,8 @@ const AddTreatmentView = ({
                 />
               </TouchableOpacity>
             </LinearGradient>
-          </KeyboardAwareScrollView>
-        </View>
+          </View>
+        </KeyboardAwareScrollView>
 
         <ConfirmationModal
           ConfirmationModalVisible={confirmationModal}

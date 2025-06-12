@@ -3,7 +3,12 @@ import {useRef, useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useDispatch, useSelector} from 'react-redux';
-import {setBiometrics, setRememberMe, setUserData} from '../redux/authSlice';
+import {
+  setBiometrics,
+  setRememberMe,
+  setUserData,
+  setFaceIdCredentials,
+} from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {setErrorModal} from '../redux/generalSlice';
 import ReactNativeBiometrics from 'react-native-biometrics';
@@ -14,13 +19,7 @@ export type UserDetails = {
   cnicNum: string;
   email: string;
 };
-// type VerifiedUserData = {
-//   UserID: string;
-//   UserEmail: string;
-//   UserCellNumber: string;
-//   ClientCode: string;
-//   uuid: string;
-// };
+
 type UseLoginViewModelReturn = {
   states: {
     selectedTab: string;
@@ -46,18 +45,24 @@ type UseLoginViewModelReturn = {
 };
 
 const useLoginViewModel = (): UseLoginViewModelReturn => {
-  const {rememberMe, credentials, deviceId, biometrics, user} = useSelector(
-    (state: RootState) => state.auth,
-  );
-  console.log(user);
-  // console.log(biometrics, deviceId, 'biomertriccc');
+  const {
+    rememberMe,
+    credentials,
+    deviceId,
+    biometrics,
+    user,
+    isToggle,
+    faceIdCredentials,
+  } = useSelector((state: RootState) => state.auth);
+
+  console.log(biometrics, 'bioemtrics ');
+  console.log(faceIdCredentials, 'faceiDDDDD');
+  console.log(user, ' userrrrrr ');
 
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [verifiedUserData, setVerifiedUserData] = useState(null);
   const [checked, setChecked] = useState(rememberMe);
-
   const loginResponse = useRef(null);
-
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -95,7 +100,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       data.Data.showPriorApproval = res?.some(
         item => item?.CoverageType === 'IPD',
       );
-
       dispatch(setUserData(data));
     },
     onError: e => {
@@ -106,14 +110,12 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
-
     onSuccess: res => {
       loginResponse.current = res;
       let apiData = {
         // ClientCode: res?.Data?.ClientCode,
         ClientCode: 'ERC',
       };
-
       getCovergaeApi(apiData);
     },
     onError: error => {
@@ -163,7 +165,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const handleLogin = async () => {
     const filled = LoginCheckForError();
     if (!filled) return;
-
     const Buffer = require('buffer').Buffer;
     let encodedAuth = new Buffer(loginApiData?.password).toString('base64');
     let apiData = {
@@ -172,7 +173,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       DeviceId: '21312321302138013203231',
       LoginDeviceName: 'Emulator',
     };
-
     dispatch(
       setRememberMe({
         userName: loginApiData.userName,
@@ -180,87 +180,81 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
         rememberMe: checked,
       }),
     );
+    if (isToggle) {
+      try {
+        const rnBiometrics = new ReactNativeBiometrics({
+          allowDeviceCredentials: true,
+        });
 
-    // try {
-    //   const rnBiometrics = new ReactNativeBiometrics({
-    //     allowDeviceCredentials: true,
-    //   });
+        const {available, biometryType} =
+          await rnBiometrics.isSensorAvailable();
+        if (available) {
+          await rnBiometrics.deleteKeys();
+          await rnBiometrics.createKeys();
 
-    //   const {available} = await rnBiometrics.isSensorAvailable();
-    //   await rnBiometrics.deleteKeys();
-    //   if (available) {
-    //     const {keysExist} = await rnBiometrics.biometricKeysExist();
-    //     if (!keysExist) {
-    //       await rnBiometrics.createKeys();
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.log('Biometric setup error:', error);
-    // }
-
-    dispatch(
-      setBiometrics({
-        userName: loginApiData.userName,
-        password: loginApiData?.password,
-        deviceId: '23232323232',
-        LoginDeviceName: 'Mobile',
-      }),
-    );
-
+          dispatch(
+            setBiometrics({
+              userName: loginApiData.userName,
+              password: loginApiData?.password,
+              deviceId: '23232323232',
+              LoginDeviceName: 'Mobile',
+            }),
+          );
+        }
+      } catch (error) {
+        console.log('Biometric setup error:', error);
+      }
+    }
     trigger(apiData);
   };
 
+  // face ID func
   const onPressFaceId = async () => {
     try {
+      if (!isToggle) {
+        throw new Error('Please enable FaceId login from settings first');
+      }
       const rnBiometrics = new ReactNativeBiometrics({
         allowDeviceCredentials: true,
       });
 
       const {available, biometryType} = await rnBiometrics.isSensorAvailable();
 
-      if (!available || biometryType !== ReactNativeBiometrics.FaceID) {
+      if (!available || biometryType !== ReactNativeBiometrics.FaceId) {
         throw new Error('Face ID is not available on this device');
       }
 
+      // Generate keys if they don't exist
       const {keysExist} = await rnBiometrics.biometricKeysExist();
       if (!keysExist) {
-        throw new Error(
-          'Face ID keys not found. Please login manually once to enable Face ID login.',
-        );
+        await rnBiometrics.createKeys();
       }
 
       const {success} = await rnBiometrics.createSignature({
         promptMessage: 'Confirm Face ID to login',
-        payload: 'face_id_auth',
+        payload: '22',
       });
-
       if (!success) {
         throw new Error('Face ID authentication failed');
       }
-
-      if (!biometrics?.id || !biometrics?.password || !deviceId) {
+      if (
+        !faceIdCredentials?.userName ||
+        !faceIdCredentials?.password ||
+        !deviceId
+      ) {
         throw new Error('Missing stored Face ID credentials');
       }
-
       const Buffer = require('buffer').Buffer;
-      let encodedAuth = new Buffer(biometrics.password).toString('base64');
-
-      const apiData = {
-        userName: biometrics.id,
-        password: encodedAuth,
-        DeviceId: deviceId,
-        LoginDeviceName: 'FaceIDDevice',
-      };
-
-      dispatch(
-        setRememberMe({
-          userName: biometrics.id,
-          password: biometrics.password,
-          rememberMe: true,
-        }),
+      let encodedAuth = new Buffer(faceIdCredentials.password).toString(
+        'base64',
       );
-
-      trigger(apiData);
+      const apiData = {
+        userName: faceIdCredentials.userName,
+        password: encodedAuth,
+        DeviceId: faceIdCredentials.deviceId,
+        LoginDeviceName: 'Mobile',
+      };
+      await trigger(apiData);
     } catch (e) {
       console.log(e?.message || e, 'face id login error');
       dispatch(
@@ -272,13 +266,17 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     }
   };
 
+  // Fngprnt func
   const onPressToucdId = async () => {
-    console.log('Touch ID is running...');
     try {
+      if (!isToggle) {
+        throw new Error(
+          'Please enable biometric login from App settings first',
+        );
+      }
       const rnBiometrics = new ReactNativeBiometrics({
         allowDeviceCredentials: true,
       });
-
       const {available} = await rnBiometrics.isSensorAvailable();
       if (!available) {
         throw new Error('Biometric sensor not available on this device');
@@ -286,28 +284,25 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
       const {keysExist} = await rnBiometrics.biometricKeysExist();
       if (!keysExist) {
-        throw new Error(
-          'Please login manually first to enable biometric login',
-        );
+        await rnBiometrics.createKeys();
       }
 
-      const {success, signature} = await rnBiometrics.createSignature({
+      const {success} = await rnBiometrics.createSignature({
         promptMessage: 'Confirm your identity to login',
         payload: '22',
       });
-
-      if (success) {
-        console.log(signature, 'dsjaoij');
-        // verifySignatureWithServer(signature, payload);
-      }
 
       if (!success) {
         throw new Error('Biometric authentication failed');
       }
 
-      if (!biometrics?.userName || !biometrics?.password || !deviceId) {
+      if (
+        !biometrics?.userName ||
+        !biometrics?.password ||
+        !biometrics?.deviceId
+      ) {
         throw new Error(
-          'Missing stored biometric credentials. Please login manually first.',
+          'Missing stored biometric credentials. Please login manually first...',
         );
       }
 
@@ -317,22 +312,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       const apiData = {
         userName: biometrics.userName,
         password: encodedAuth,
-        DeviceId: deviceId,
-        LoginDeviceName: 'BiometricDevice',
+        DeviceId: biometrics.deviceId,
+        LoginDeviceName: 'mobile',
       };
-
-      if (
-        credentials?.userName !== biometrics.userName ||
-        credentials?.password !== biometrics.password
-      ) {
-        dispatch(
-          setRememberMe({
-            userName: biometrics.userName,
-            password: biometrics.password,
-            rememberMe: true,
-          }),
-        );
-      }
 
       await trigger(apiData);
     } catch (error: any) {
@@ -346,8 +328,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       );
     }
   };
-
-  ///// end of biometric function
 
   const handleSignup = () => {
     const filled = signupCheckForError();

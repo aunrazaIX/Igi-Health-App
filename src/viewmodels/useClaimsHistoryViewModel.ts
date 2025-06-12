@@ -73,7 +73,7 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
             {label: 'Claim Type:', value: item?.ClaimsSubTypeName},
             {label: 'Claims Remarks:', value: item?.ClaimsDescription},
             {label: 'Claim Value:', value: item?.SubmiitedClaim},
-            {label: 'Status:', value: item?.ClaimStatus},
+            {label: 'Status:', value: item?.ClaimStatusName},
           ],
         })),
       );

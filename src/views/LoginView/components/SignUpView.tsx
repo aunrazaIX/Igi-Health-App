@@ -9,6 +9,7 @@ import {
   validateEmail,
   validateMobileNumber,
 } from '../../../validations/authValidations';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const SignUpView = ({
   handleSignup,
