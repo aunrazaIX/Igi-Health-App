@@ -13,6 +13,7 @@ type ApiHookParams = {
   onError?: (data: any) => void;
   isFormData?: boolean;
   skip?: boolean;
+  onUnmount?: () => void;
 };
 
 type ApiHookReturn<T> = {
@@ -33,6 +34,7 @@ const useApiHook = <T>({
   onError,
   onSuccess,
   skip = false,
+  onUnmount,
 }: ApiHookParams): ApiHookReturn<T> => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<T | null>(null);
@@ -93,6 +95,11 @@ const useApiHook = <T>({
         if (method === 'get' && !skip) {
           apiCallingFunction();
         }
+        return () => {
+          if (onUnmount) {
+            onUnmount();
+          }
+        };
       },
       refetchOnArgumentChange ? [JSON.stringify(argsOrBody)] : [],
     ),

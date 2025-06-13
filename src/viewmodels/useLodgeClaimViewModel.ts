@@ -206,6 +206,14 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       label: 'LGIVNAME',
       value: 'CLNTNUM',
     },
+    onUnmount: () => {
+      const state = navigation.getState();
+      const routes = state.routes;
+      const currentRoute = routes[routes.length - 1];
+      if (currentRoute?.name !== 'AddTreatment') {
+        resetStates();
+      }
+    },
   });
 
   const {data: hospitalData, loading: hospitalLoading} = useApiHook({
