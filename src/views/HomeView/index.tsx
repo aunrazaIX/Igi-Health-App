@@ -42,6 +42,7 @@ type HomeViewProps = {
     paidAmount: string;
   };
   loading: boolean;
+  handleAssociatedApps: any;
   homeCardDataLoading: any;
 };
 
@@ -57,6 +58,7 @@ const HomeView: React.FC<HomeViewProps> = ({
   claimData,
   loading,
   homeCardDataLoading,
+  handleAssociatedApps,
 }) => {
   const user = useSelector(state => state.auth.user);
 
@@ -129,7 +131,10 @@ const HomeView: React.FC<HomeViewProps> = ({
                         />
                       </View>
                       <TouchableOpacity onPress={animateCard}>
-                        <Image source={images.flipCard} />
+                        <Image
+                          style={styles.flipCardIcon}
+                          source={images.flipCard}
+                        />
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -208,20 +213,21 @@ const HomeView: React.FC<HomeViewProps> = ({
                                 _item?.Policy_Insured_Relaion !== 'Member',
                             )
                             .map((item, index) => (
-                              <>
-                                <AileronRegular
-                                  key={index}
-                                  name={`${item?.Policy_Insured_Name?.trim()}: ${
-                                    item?.Policy_Insured_Age
-                                  }`}
-                                  style={styles.homeBackCardText}
-                                />
-                              </>
+                              <AileronRegular
+                                key={index}
+                                name={`${item?.Policy_Insured_Name?.trim()}: ${
+                                  item?.Policy_Insured_Age
+                                }`}
+                                style={styles.homeBackCardText}
+                              />
                             ))}
                         </View>
 
                         <TouchableOpacity onPress={animateCard}>
-                          <Image source={images.flipCard} />
+                          <Image
+                            style={styles.flipCardIcon}
+                            source={images.flipCard}
+                          />
                         </TouchableOpacity>
                       </View>
 
@@ -441,15 +447,34 @@ const HomeView: React.FC<HomeViewProps> = ({
             name={'Associated Apps'}
             style={styles.associatedTittle}
           />
+
           <View style={styles.associatedContainer}>
             <View style={styles.associatedImageContainer}>
-              <Image source={images.LogoLife} style={styles.associatedImage} />
+              <TouchableOpacity
+                onPress={() =>
+                  handleAssociatedApps(
+                    'https://play.google.com/store/apps/details?id=com.vitalityactive.igi&hl=en-US ',
+                  )
+                }>
+                <Image
+                  source={images.LogoLife}
+                  style={styles.associatedImage}
+                />
+              </TouchableOpacity>
             </View>
+
             <View style={styles.associatedImageContainer}>
-              <Image
-                source={images.sehatKahani}
-                style={styles.associatedImage}
-              />
+              <TouchableOpacity
+                onPress={() =>
+                  handleAssociatedApps(
+                    'https://play.google.com/store/apps/details?id=com.sehatkahani.app&hl=en ',
+                  )
+                }>
+                <Image
+                  source={images.sehatKahani}
+                  style={styles.associatedImage}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </View>

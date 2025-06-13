@@ -72,6 +72,7 @@ const SelectModal = ({
                 value={search}
                 onChangeText={setSearch}
                 containerStyle={styles.inputContainer}
+                inputStyle={styles.inputStyle}
                 placeholder="Search here"
               />
             )}
@@ -120,5 +121,12 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 0,
     height: vh * 6,
+  },
+  inputStyle: {
+    // textAlign: 'center',
+    textAlignVertical: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: vh * 6.8,
   },
 });

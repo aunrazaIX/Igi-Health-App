@@ -1,4 +1,4 @@
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
 import {personalDetail, UsePersonalModalTypes} from '../types/personalTypes';
@@ -6,9 +6,11 @@ import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {RootState} from '../redux/store';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {setErrorModal} from '../redux/generalSlice';
 
 const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   let {user} = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
 
   const {dependentData, dependentIndex} = route?.params || {};
 
@@ -35,7 +37,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     apiData: dependentApiData,
     checkForError: dependentCheckForError,
   } = useErrorHandlingHook({
-    dependentName: prefilledData.dependentName ?? '',
+    dependentName: prefilledData.dependentName ?? null,
     cnic: user?.cnic,
     clientCode: user?.ClientCode,
     dependentTypeID: {label: prefilledData.relationship.label},
@@ -44,6 +46,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     dependentRequestID: 0,
     gender: {
       label: prefilledData.gender.label,
+      Value: prefilledData.gender.value,
     },
     Age: prefilledData?.age?.toString() ?? null,
     dependentRequestStatus: true,
@@ -79,13 +82,33 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   const onPressSubmit = () => {
     const filled = dependentCheckForError();
 
-    if (!filled) return;
+    // if (!filled) return;
+
     let _apiData = {
       ...dependentApiData,
       dependentTypeID: dependentApiData?.dependentTypeID?.value,
       gender: dependentApiData?.gender?.label,
     };
-    trigger(_apiData);
+
+    if (
+      !dependentApiData?.dependentName ||
+      !dependentApiData?.gender?.label ||
+      !dependentApiData?.dependentTypeID?.value ||
+      !dependentApiData?.Age
+    ) {
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Please fill all required fields',
+        }),
+      );
+    } else {
+      trigger(_apiData);
+    }
+  };
+
+  const handleCancel = () => {
+    navigation.navigate('Personal');
   };
 
   const resetStates = () => {
@@ -107,6 +130,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       dependentSetterForApiData,
       setConfirmationModal,
       resetStates,
+      handleCancel,
     },
   };
 };

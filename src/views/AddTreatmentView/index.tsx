@@ -44,8 +44,8 @@ const AddTreatmentView = ({
     <>
       <TopView title={'Add A Treatment'} />
       <CurvedView>
-        <View style={styles.container}>
-          <KeyboardAwareScrollView enableOnAndroid>
+        <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>
               <AileronBold
@@ -71,10 +71,9 @@ const AddTreatmentView = ({
               value={apiData?.receiptNumber}
               onChangeText={text => {
                 const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
-
-                setterForApiData('receiptNumber', text);
+                setterForApiData('receiptNumber', alphanumericOnly);
               }}
-              maxLength={25}
+              maxLength={20}
               label="Receipt Number"
               errorMessage={apiData?.error_receiptNumber}
               placeholder="Receipt Number"
@@ -89,8 +88,9 @@ const AddTreatmentView = ({
                 setterForApiData('amount', cleanedText);
               }}
               label="Amount"
-              placeholder="0"
+              placeholder="enter amount"
             />
+
             <InputField
               value={apiData?.description}
               maxLength={200}
@@ -98,26 +98,27 @@ const AddTreatmentView = ({
               onChangeText={text => setterForApiData('description', text)}
               multiline
               label="Description"
+              editable={true}
               placeholder="Write a short description"
             />
-          </KeyboardAwareScrollView>
-          <LinearGradient
-            colors={COLORS.PriorGradient}
-            style={styles.priorGradient}>
-            <TouchableOpacity
-              style={styles.wrapper}
-              onPress={onPressAddTreatment}>
-              <AileronSemiBold
-                style={styles.priorNext}
-                name={
-                  treatmentIndex !== undefined
-                    ? 'Update Treatment'
-                    : 'Add Treatment'
-                }
-              />
-            </TouchableOpacity>
-          </LinearGradient>
-        </View>
+            <LinearGradient
+              colors={COLORS.PriorGradient}
+              style={styles.priorGradient}>
+              <TouchableOpacity
+                style={styles.wrapper}
+                onPress={onPressAddTreatment}>
+                <AileronSemiBold
+                  style={styles.priorNext}
+                  name={
+                    treatmentIndex !== undefined
+                      ? 'Update Treatment'
+                      : 'Add Treatment'
+                  }
+                />
+              </TouchableOpacity>
+            </LinearGradient>
+          </View>
+        </KeyboardAwareScrollView>
 
         <ConfirmationModal
           ConfirmationModalVisible={confirmationModal}

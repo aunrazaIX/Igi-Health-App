@@ -73,6 +73,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
+  const [confirmationType, setConfirmationType] = useState<string>('');
+  const [deletedIndex, setDeletedIndex] = useState<any>(null);
 
   const {
     selectedDocuments,
@@ -94,7 +96,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
 
     dispatch(setStep(1));
   };
-  console.log(user);
   const {setterForApiData: setterForclaimData, apiData: claimData} =
     useErrorHandlingHook({
       claimComments: '',
@@ -151,12 +152,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               userId: user?.UserId,
               claimId: res?.Data?.toString(),
             };
-      console.log(apiData, 'apiData');
       claimTrigger(apiData);
     },
   });
-
-  console.log(uploadError);
 
   const {
     loading: claimLoading,
@@ -169,7 +167,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         ? endpoints.priorApproval.addPriorApproval
         : endpoints.claimLogde.lodge,
     onSuccess: res => {
-      console.log(res, 'tesutnin');
       setConfirmationModal(true);
     },
     onError: e => {
@@ -182,8 +179,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       );
     },
   });
-
-  console.log(addClaimError);
 
   const {data: personalDetails, loading: personalDetailsLoading} = useApiHook({
     apiEndpoint: endpoints.bank.getBankDetails,
@@ -305,7 +300,15 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     navigation.navigate('AddTreatment', {claimType: type});
   };
 
-  const onPressDelete = (index: number) => dispatch(onDeleteTreatment(index));
+  const handleDeleteClaim = (index: number) =>
+    dispatch(onDeleteTreatment(index));
+
+  const onPressDelete = (index: number) => {
+    setConfirmationType('delete');
+    setDeletedIndex(index);
+    setConfirmationModal(true);
+  };
+
   const onPressEdit = (data: object, index: number) => {
     navigation.navigate('AddTreatment', {
       treatmentData: data,
@@ -365,6 +368,23 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
           doc => doc?.name === item?.name,
         );
 
+        const fileSizeInMB = item?.size / (1024 * 1024);
+
+        if (fileSizeInMB > 25) {
+          console.log(
+            `File "${item?.name}" exceeds 25MB (${fileSizeInMB.toFixed(
+              2,
+            )} MB). Skipped.`,
+          );
+          dispatch(
+            setErrorModal({
+              show: true,
+              message: 'File size should not exceed 25MB',
+            }),
+          );
+          return;
+        }
+
         if (!isDuplicate) {
           documents.push({
             uri: item?.uri,
@@ -412,6 +432,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       dependants,
       hospitalList: hospitalData,
       selectedHospital,
+      confirmationType,
+      deletedIndex,
     },
     functions: {
       goBack,
@@ -429,6 +451,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       onSelectHospital,
       onSelectType,
       onSelectMaternityType,
+      handleDeleteClaim,
     },
   };
 };

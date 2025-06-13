@@ -32,6 +32,7 @@ const endpoints = {
   discountedCenters: {
     getDiscountedCenters: 'DiscountCenters/GetActiveDiscCenter',
   },
+
   dependent: {
     getDependentType: 'Dependent/getAllDependentType',
     getDependetRequestTypes: 'Dependent/getDependentRequestTypes',

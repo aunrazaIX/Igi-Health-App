@@ -1,27 +1,36 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import InputField from '../../../components/InputField';
-import { icons } from '../../../assets';
+import {icons} from '../../../assets';
 import styles from '../styles';
-import { StyleSheet } from 'react-native';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
-import { validateCNIC, validateEmail, validateMobileNumber } from '../../../validations/authValidations';
+import {StyleSheet} from 'react-native';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {COLORS} from '../../../assets/theme/colors';
+import {
+  validateCNIC,
+  validateEmail,
+  validateMobileNumber,
+} from '../../../validations/authValidations';
 
-
-
-const EnterEmailView = ({ setterForApiData, apiData }: { setterForApiData: (key: string, value: string) => void, apiData: any }) => {
+const EnterEmailView = ({
+  setterForApiData,
+  apiData,
+}: {
+  setterForApiData: (key: string, value: string) => void;
+  apiData: any;
+}) => {
   return (
     <Fragment>
       <InputField
         iconViewStyle={styles.iconView}
-        rightIcon={icons.email}
+        rightIcon={icons.mobNumber}
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
-        label='Mobile Number'
+        label="Mobile Number"
         placeholder="Enter your mobile number"
         containerStyle={style.inputContainer}
         value={apiData?.cellNumber}
-        onChangeText={(text) => {
+        keyboardType="phone-pad"
+        onChangeText={text => {
           setterForApiData('cellNumber', text);
           const errorMsg = validateMobileNumber(text);
           setterForApiData('error_cellNumber', errorMsg);
@@ -49,29 +58,28 @@ const EnterEmailView = ({ setterForApiData, apiData }: { setterForApiData: (key:
         rightIcon={icons.email}
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
-        label='Your Email'
+        label="Your Email"
         placeholder="Enter your email address"
         containerStyle={style.inputContainer}
         value={apiData?.email}
-        onChangeText={(text) => {
+        onChangeText={text => {
           setterForApiData('email', text);
           const errorMsg = validateEmail(text);
           setterForApiData('error_email', errorMsg);
         }}
         errorMessage={apiData?.error_email}
-
       />
 
       <InputField
         iconViewStyle={styles.iconView}
-        rightIcon={icons.email}
+        rightIcon={icons.cnic}
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
-        label='CNIC Number'
+        label="CNIC Number"
         placeholder="Enter your CNIC number"
         containerStyle={style.inputContainer}
         value={apiData?.cnic}
-        onChangeText={(text) => {
+        onChangeText={text => {
           setterForApiData('cnic', text);
           const errorMsg = validateCNIC(text);
           setterForApiData('error_cnic', errorMsg);
@@ -95,8 +103,6 @@ const EnterEmailView = ({ setterForApiData, apiData }: { setterForApiData: (key:
           /\d/,
         ]}
       />
-
-
     </Fragment>
   );
 };

@@ -1,15 +1,19 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import InputField from '../../../components/InputField';
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import styles from '../styles';
 import AileronRegualr from '../../../components/AileronRegular';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
-import { validatePassword } from '../../../validations/authValidations';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {COLORS} from '../../../assets/theme/colors';
+import {validatePassword} from '../../../validations/authValidations';
 
-
-
-const CreateNewPassword = ({ setterForUpdatePasswordApiData, updatePasswordApiData }: { setterForUpdatePasswordApiData: (key: string, value: string) => void, updatePasswordApiData: any }) => {
+const CreateNewPassword = ({
+  setterForUpdatePasswordApiData,
+  updatePasswordApiData,
+}: {
+  setterForUpdatePasswordApiData: (key: string, value: string) => void;
+  updatePasswordApiData: any;
+}) => {
   return (
     <Fragment>
       <InputField
@@ -20,13 +24,14 @@ const CreateNewPassword = ({ setterForUpdatePasswordApiData, updatePasswordApiDa
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
         value={updatePasswordApiData?.newPassword}
-        onChangeText={(text) => {
+        onChangeText={text => {
           setterForUpdatePasswordApiData('newPassword', text);
           const errorMsg = validatePassword(text);
           setterForUpdatePasswordApiData('error_newPassword', errorMsg);
         }}
         errorMessage={updatePasswordApiData?.error_newPassword}
       />
+
       <InputField
         secureTextEntry
         label="Confirm Password"
@@ -35,7 +40,7 @@ const CreateNewPassword = ({ setterForUpdatePasswordApiData, updatePasswordApiDa
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
         value={updatePasswordApiData?.confirmPassword}
-        onChangeText={(text) => {
+        onChangeText={text => {
           setterForUpdatePasswordApiData('confirmPassword', text);
           const errorMsg = validatePassword(text);
           setterForUpdatePasswordApiData('error_confirmPassword', errorMsg);
@@ -67,7 +72,6 @@ const CreateNewPassword = ({ setterForUpdatePasswordApiData, updatePasswordApiDa
   );
 };
 export default CreateNewPassword;
-
 
 const style = StyleSheet.create({
   inputContainer: {

@@ -37,6 +37,8 @@ export const COLORS = {
   placeholderColor: '#292927',
   cardBackgroundBlue: 'rgba(34, 78, 162, 1)',
   cardBackgroundRed: 'rgba(238, 37, 96, 1)',
+  cardBackgroundLightBlue: '#0157C9',
+
   placeholderColor: '#292927',
   buttonBorder: 'rgba(230, 231, 235, 1)',
   buttonBackground: 'rgba(248, 248, 248, 1)',

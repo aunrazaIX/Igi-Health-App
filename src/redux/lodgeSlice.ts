@@ -73,6 +73,12 @@ export const setTreatments = createAsyncThunk(
       return;
     }
 
+    if (_data?.amount <= 0) {
+      thunkApi.dispatch(
+        setErrorModal({message: 'Amount must be greater than zero'}),
+      );
+      return;
+    }
     if (isDuplicate) {
       thunkApi.dispatch(setErrorModal({message: 'Record Already Exist'}));
     } else {

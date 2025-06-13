@@ -22,10 +22,33 @@ export const validateCNIC = (text: string): string => {
 };
 
 export const validatePassword = (text: string): string => {
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^+=])[A-Za-z\d@$!%*?&#^+=]{8,}$/;
   if (!text) return 'Password is required';
-  if (!passwordRegex.test(text))
-    return 'Password must be at least 8 characters and Special Characters';
+
+  const minLength = 8;
+
+  const allowedSpecialChars = `!@#$%^&*()_\\-+=\\{\\}\\[\\]:;"'?/.,|`;
+  const allowedSpecialCharRegex = new RegExp(`[${allowedSpecialChars}]`);
+  const disallowedCharsRegex = new RegExp(`[^a-zA-Z0-9${allowedSpecialChars}]`);
+
+  if (text.length < minLength) {
+    return 'Password must be at least 8 characters long.';
+  }
+
+  if (!/[A-Z]/.test(text)) {
+    return 'Password must contain at least one uppercase letter.';
+  }
+
+  if (!/[0-9]/.test(text)) {
+    return 'Password must contain at least one number.';
+  }
+
+  if (!allowedSpecialCharRegex.test(text)) {
+    return 'Password must include at least one allowed special character.';
+  }
+
+  if (disallowedCharsRegex.test(text)) {
+    return 'Password contains invalid special characters.';
+  }
+
   return '';
 };

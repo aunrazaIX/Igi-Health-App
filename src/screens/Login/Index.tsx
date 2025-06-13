@@ -3,11 +3,28 @@ import useLoginViewModel from '../../viewmodels/useLoginViewModel';
 import LoginView from '../../views/LoginView';
 
 const Login = () => {
-  const { functions, states } = useLoginViewModel();
-  const { selectedTab, tabs, loading, signupApiData, loadingSignup, loginApiData, rememberMe, checked } = states;
-  const { onPressTab, onPressforgotPassword, handleLogin, handleSignup, signupSetterForApiData, loginSetterForApiData, handleCheck } =
-    functions;
-
+  const {functions, states} = useLoginViewModel();
+  const {
+    selectedTab,
+    tabs,
+    loading,
+    signupApiData,
+    loadingSignup,
+    loginApiData,
+    rememberMe,
+    checked,
+  } = states;
+  const {
+    onPressTab,
+    onPressforgotPassword,
+    handleLogin,
+    handleSignup,
+    signupSetterForApiData,
+    loginSetterForApiData,
+    handleCheck,
+    onPressToucdId,
+    onPressFaceId,
+  } = functions;
 
   return (
     <LoginView
@@ -26,6 +43,8 @@ const Login = () => {
       handleCheck={handleCheck}
       checked={checked}
       rememberMe={rememberMe}
+      onPressFaceId={onPressFaceId}
+      onPressToucdId={onPressToucdId}
     />
   );
 };

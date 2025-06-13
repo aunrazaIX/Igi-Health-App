@@ -15,6 +15,7 @@ import {
 } from '../../components';
 import styles from './styles';
 import ModalLoading from '../../components/ModalLoading';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 type OptionType = {
   label: string;
@@ -41,6 +42,7 @@ type AddDependentViewProps = {
   addDependentLoading: any;
   dependentIndex: any;
   dependantsData: any;
+  handleCancel: any;
 };
 
 const AddDependentView: React.FC<AddDependentViewProps> = ({
@@ -48,6 +50,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   genderOptions,
   relationsOptions,
   onPressSubmit,
+  handleCancel,
   dependentSetterForApiData,
   setConfirmationModal,
   onPressCancel,
@@ -61,86 +64,96 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
     <>
       <TopView title={'Add Dependent Request'} />
       <CurvedView>
-        <View style={styles.personalFrameContainer}>
-          <Image
-            source={images.personalFrame}
-            style={styles.personalFrameIMG}
-          />
-          <View style={styles.manageContainer}>
-            <AileronBold name={'Manage Update'} style={styles.manageText} />
-            <AileronBold
-              name={'Dependent Details'}
-              style={styles.DependentText}
+        <KeyboardAwareScrollView enableAutomaticScroll>
+          <View style={styles.personalFrameContainer}>
+            <Image
+              source={images.personalFrame}
+              style={styles.personalFrameIMG}
+            />
+            <View style={styles.manageContainer}>
+              <AileronBold name={'Manage Update'} style={styles.manageText} />
+              <AileronBold
+                name={'Dependent Details'}
+                style={styles.DependentText}
+              />
+            </View>
+
+            <DependentBox containerStyle={styles.dependentOuterStyle}>
+              <AileronRegular
+                name="Dependent Name"
+                style={styles.selectLabel}
+              />
+              <TextInput
+                value={dependentApiData.dependentName ?? null}
+                style={styles.popupInput}
+                placeholder="Enter Name"
+                placeholderTextColor={COLORS.selectPlaceholder}
+                onChangeText={text =>
+                  dependentSetterForApiData('dependentName', text)
+                }
+              />
+            </DependentBox>
+
+            <Select
+              selectData={genderOptions}
+              selectLabel={dependentApiData?.gender?.label ?? 'Gender'}
+              selectPlaceholder={'-- Select Gender --'}
+              onSelectOption={option =>
+                dependentSetterForApiData('gender', option)
+              }
+              value={dependentApiData?.gender?.label ?? null}
+            />
+            <Select
+              selectData={relationsOptions}
+              selectLabel={'Relationship'}
+              selectPlaceholder={'-- Select Relation --'}
+              onSelectOption={option =>
+                dependentSetterForApiData('dependentTypeID', option)
+              }
+              value={dependentApiData?.dependentTypeID?.label ?? null}
+            />
+            <DependentBox containerStyle={styles.dependentOuterStyle}>
+              <AileronRegular name="Age" style={styles.selectLabel} />
+
+              <TextInput
+                style={styles.popupInput}
+                placeholder="Enter Age"
+                placeholderTextColor={COLORS.selectPlaceholder}
+                onChangeText={text => {
+                  const digitsOnly = text.replace(/[^0-9]/g, '');
+                  dependentSetterForApiData('Age', digitsOnly);
+                }}
+                value={dependentApiData?.Age ?? null}
+              />
+            </DependentBox>
+            <Button
+              name={dependentIndex != undefined ? 'Update' : 'Submit'}
+              containerStyle={styles.modalAddButton}
+              inputStyle={styles.modalAddText}
+              onPress={onPressSubmit}
+            />
+            <Button
+              name="Cancel"
+              containerStyle={styles.modalCancelButton}
+              gradientColors={['#E1E3E6', '#E1E3E6']}
+              inputStyle={styles.modalCancelText}
+              onPress={handleCancel}
             />
           </View>
 
-          <DependentBox containerStyle={styles.dependentOuterStyle}>
-            <AileronRegular name="Dependent Name" style={styles.selectLabel} />
-            <TextInput
-              value={dependentApiData.dependentName ?? ''}
-              style={styles.popupInput}
-              placeholder="Enter Name"
-              placeholderTextColor={COLORS.selectPlaceholder}
-              onChangeText={text =>
-                dependentSetterForApiData('dependentName', text)
-              }
-            />
-          </DependentBox>
+          <ModalLoading loading={addDependentLoading} />
 
-          <Select
-            selectData={genderOptions}
-            selectLabel={dependentApiData?.gender?.label ?? null}
-            selectPlaceholder={'-- Select Gender --'}
-            onSelectOption={option =>
-              dependentSetterForApiData('gender', option)
-            }
-            value={dependentApiData?.gender?.label ?? null}
+          <ConfirmationModal
+            ConfirmationModalVisible={confirmationModal}
+            setConfirmationModalVisible={setConfirmationModal}
+            frameImage={icons.ModalSuccessfull}
+            confirmationMessage={'Your request has been successfully applied'}
+            closeButton={true}
+            Successfull={true}
+            CloseButtonText={'Continue To Login'}
+            onClose={resetStates}
           />
-          <Select
-            selectData={relationsOptions}
-            selectLabel={'Relationship'}
-            selectPlaceholder={'-- Select Relation --'}
-            onSelectOption={option =>
-              dependentSetterForApiData('dependentTypeID', option)
-            }
-            value={dependentApiData?.dependentTypeID?.label}
-          />
-          <DependentBox containerStyle={styles.dependentOuterStyle}>
-            <AileronRegular name="Age" style={styles.selectLabel} />
-            <TextInput
-              style={styles.popupInput}
-              placeholder="Enter Age"
-              placeholderTextColor={COLORS.selectPlaceholder}
-              onChangeText={text => dependentSetterForApiData('Age', text)}
-              value={dependentApiData?.Age ?? null}
-            />
-          </DependentBox>
-          <Button
-            name={dependentIndex != undefined ? 'Update' : 'Submit'}
-            containerStyle={styles.modalAddButton}
-            inputStyle={styles.modalAddText}
-            onPress={onPressSubmit}
-          />
-          <Button
-            name="Cancel"
-            containerStyle={styles.modalCancelButton}
-            gradientColors={['#E1E3E6', '#E1E3E6']}
-            inputStyle={styles.modalCancelText}
-          />
-        </View>
-
-        <ModalLoading loading={addDependentLoading} />
-
-        <ConfirmationModal
-          ConfirmationModalVisible={confirmationModal}
-          setConfirmationModalVisible={setConfirmationModal}
-          frameImage={icons.ModalSuccessfull}
-          confirmationMessage={'Your request has been successfully applied'}
-          closeButton={true}
-          Successfull={true}
-          CloseButtonText={'Continue To Login'}
-          onClose={resetStates}
-        />
+        </KeyboardAwareScrollView>
       </CurvedView>
     </>
   );

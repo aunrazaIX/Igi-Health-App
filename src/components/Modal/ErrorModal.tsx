@@ -23,11 +23,7 @@ const ErrorModal: React.FC<ErrorModalProps> = ({containerStyle}) => {
   );
   const dispatch = useDispatch();
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={showErrorModal}
-      statusBarTranslucent>
+    <Modal transparent={true} visible={showErrorModal} statusBarTranslucent>
       <View style={styles.centeredView}>
         <View style={[styles.modalView, containerStyle]}>
           <View style={styles.personalFrameContainer}>

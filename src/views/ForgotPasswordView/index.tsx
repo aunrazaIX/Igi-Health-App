@@ -1,9 +1,7 @@
-import React, { JSX } from 'react';
-import { CreateNewPassword, EnterEmailView, OtpView } from './components';
+import React, {JSX} from 'react';
+import {CreateNewPassword, EnterEmailView, OtpView} from './components';
 import ConfirmationModal from '../../components/Modal/confimationModal';
-import { icons } from '../../assets';
-
-
+import {icons} from '../../assets';
 
 import {
   AileronBold,
@@ -14,7 +12,8 @@ import {
   TopView,
 } from '../../components';
 import styles from './styles';
-import { ImageSourcePropType } from 'react-native';
+import {ImageSourcePropType, KeyboardAvoidingView, View} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const ForgotPasswordView = ({
   step,
@@ -52,9 +51,9 @@ const ForgotPasswordView = ({
   apiData: any;
   handleNext: any;
   setterForUpdatePasswordApiData: (key: string, value: string) => void;
-  updatePasswordApiData: any,
-  ForgotPasswordLoading: boolean,
-  otp: number | string
+  updatePasswordApiData: any;
+  ForgotPasswordLoading: boolean;
+  otp: number | string;
   sendOtp: () => void;
   onPressResend: () => void;
   showResend: boolean;
@@ -62,12 +61,25 @@ const ForgotPasswordView = ({
   setShowResend: () => void;
   disabled: () => void;
   updatePasswordLoading: boolean;
-
 }) => {
   const returnComponent: Record<number, JSX.Element> = {
     1: <EnterEmailView setterForApiData={setterForApiData} apiData={apiData} />,
-    2: <OtpView setOtp={setOtp} sendOtp={sendOtp} onPressResend={onPressResend} showResend={showResend} countdownKey={countdownKey} setShowResend={setShowResend} />,
-    3: <CreateNewPassword setterForUpdatePasswordApiData={setterForUpdatePasswordApiData} updatePasswordApiData={updatePasswordApiData} />,
+    2: (
+      <OtpView
+        setOtp={setOtp}
+        sendOtp={sendOtp}
+        onPressResend={onPressResend}
+        showResend={showResend}
+        countdownKey={countdownKey}
+        setShowResend={setShowResend}
+      />
+    ),
+    3: (
+      <CreateNewPassword
+        setterForUpdatePasswordApiData={setterForUpdatePasswordApiData}
+        updatePasswordApiData={updatePasswordApiData}
+      />
+    ),
   };
 
   const returnTitle: Record<number, string> = {
@@ -104,35 +116,44 @@ const ForgotPasswordView = ({
         title={returnHeaderName[step]}
       />
       <CurvedView>
-        <AileronBold style={styles.titleText} name={returnTitle[step]} />
-        <AileronRegular
-          style={styles.description}
-          name={returnDescription[step]}
-        />
-        {returnComponent[step]}
-        <Button
-          onPress={handleNext}
-          disabled={ForgotPasswordLoading || verifyOtpLoading || (step == 2 ? otp?.length == 6 ? false : true : false)}
-          name={returnButtonName[step]}
-          containerStyle={styles.button}
-          loading={verifyOtpLoading || ForgotPasswordLoading || updatePasswordLoading}
-        />
+        <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll>
+          <View style={styles.curvedViewContent}>
+            <AileronBold style={styles.titleText} name={returnTitle[step]} />
+            <AileronRegular
+              style={styles.description}
+              name={returnDescription[step]}
+            />
+            {returnComponent[step]}
 
-
+            <Button
+              onPress={handleNext}
+              disabled={
+                ForgotPasswordLoading ||
+                verifyOtpLoading ||
+                (step == 2 ? (otp?.length == 6 ? false : true) : false)
+              }
+              name={returnButtonName[step]}
+              containerStyle={styles.button}
+              loading={
+                verifyOtpLoading ||
+                ForgotPasswordLoading ||
+                updatePasswordLoading
+              }
+            />
+          </View>
+        </KeyboardAwareScrollView>
       </CurvedView>
 
       <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
         frameImage={icons.ModalSuccessfull}
-        confirmationMessage={"Your password has been changed successfully."}
+        confirmationMessage={'Your password has been changed successfully.'}
         closeButton
         Successfull
         onClose={onCloseSuccessModal}
       />
-
-
-    </Container >
+    </Container>
   );
 };
 export default ForgotPasswordView;

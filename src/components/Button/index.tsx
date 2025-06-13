@@ -6,8 +6,8 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import React from 'react';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import SimpleLoader from '../SimpleLoader';
 import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewModel';
@@ -21,7 +21,7 @@ interface ButtonProps extends TouchableOpacityProps {
   loading?: boolean;
   disabled?: boolean;
   ForgotPasswordLoading?: boolean;
-  route?: any
+  route?: any;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -34,7 +34,6 @@ const Button: React.FC<ButtonProps> = ({
   loading,
   disabled,
 }) => {
-
   return (
     <LinearGradient
       style={[styles.container, containerStyle]}
@@ -49,7 +48,7 @@ const Button: React.FC<ButtonProps> = ({
         onPress={onPress}>
         {showIcon && <Image style={styles.buttonIcon} source={showIcon} />}
         {loading ? (
-          <SimpleLoader />
+          <SimpleLoader size={'small'} />
         ) : (
           <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
         )}

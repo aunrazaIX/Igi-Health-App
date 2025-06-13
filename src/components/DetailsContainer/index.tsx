@@ -62,6 +62,7 @@ const DetailsContainer: React.FC<Props> = ({
       {isArrowUp && (
         <>
           <View style={styles.cardHorizontalLine} />
+
           {data?.items?.map((item, index) => (
             <View key={index} style={styles.cardDetails}>
               <AileronBold
@@ -88,10 +89,10 @@ export const styles = StyleSheet.create({
     borderColor: COLORS.buttonBorder,
     borderRadius: vw * 5,
     backgroundColor: COLORS.white,
-    paddingHorizontal: vw * 4,
+    paddingHorizontal: vw * 2,
     paddingVertical: vh * 1.2,
     marginVertical: vh * 1.5,
-    alignItems: 'center',
+    // alignItems: 'center',
     gap: vh * 1,
     elevation: 2,
     shadowColor: '#000',
@@ -103,8 +104,8 @@ export const styles = StyleSheet.create({
   cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
     paddingVertical: vh * 0.5,
+    // borderWidth: 2,
   },
 
   cardHeaderLeft: {
@@ -114,7 +115,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardHeaderLeftText: {
-    fontSize: vw * 4,
+    fontSize: vw * 3,
     color: COLORS.black,
   },
   cardHeaderRight: {

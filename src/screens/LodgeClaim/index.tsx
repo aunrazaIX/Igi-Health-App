@@ -40,6 +40,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     selectedType,
     hospitalList,
     selectedHospital,
+    confirmationType,
+    deletedIndex,
   } = states;
 
   const {
@@ -58,6 +60,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     onSelectHospital,
     onSelectType,
     onSelectMaternityType,
+    handleDeleteClaim,
   } = functions;
 
   return (
@@ -97,6 +100,9 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       hospitalList={hospitalList}
       onSelectHospital={onSelectHospital}
       selectedHospital={selectedHospital}
+      confirmationType={confirmationType}
+      handleDeleteClaim={handleDeleteClaim}
+      deletedIndex={deletedIndex}
     />
   );
 };

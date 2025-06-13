@@ -1,6 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
-import { drawerIcons, icons } from '../assets';
-import { ImageSourcePropType } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {drawerIcons, icons} from '../assets';
+import {ImageSourcePropType} from 'react-native';
 
 type UseDrawerViewModel = {
   states: {
@@ -16,11 +16,9 @@ type routesData = {
   mainParent?: string;
   stChild?: string;
   ndChild?: string;
-
 };
 
 const useDrawerViewModel = (): UseDrawerViewModel => {
-
   const routes: routesData[] = [
     {
       id: 1,
@@ -124,7 +122,7 @@ const useDrawerViewModel = (): UseDrawerViewModel => {
       id: 14,
       name: 'Logout',
       icon: drawerIcons.drawerLogout,
-      to: "logout"
+      to: 'logout',
     },
   ];
   return {

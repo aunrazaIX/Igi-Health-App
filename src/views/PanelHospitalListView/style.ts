@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
   infoContainerHeaderRight: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-
     gap: vw * 2,
   },
   rightTab: {
@@ -73,7 +72,7 @@ export const styles = StyleSheet.create({
   },
   inputFeild: {
     borderWidth: 2,
-    height: vh * 7,
+    height: vh * 6,
   },
   searchFieldRight: {
     position: 'relative',
@@ -85,9 +84,11 @@ export const styles = StyleSheet.create({
     width: vw * 4,
   },
   inputStyle: {
-    fontSize: vw * 4,
+    fontSize: vw * 3.5,
+    height: vh * 4.4,
     color: COLORS.textBlackShade,
     fontFamily: fonts.Aileron.bold,
+    alignItems: 'center',
   },
   tabText: {
     color: COLORS.black,

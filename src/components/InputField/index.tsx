@@ -80,6 +80,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             style={[
               styles.textInput,
               inputStyle,
+              !label && {bottom: 0},
               !editable && {color: COLORS.black + '55'},
             ]}
             placeholder={placeholder}
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     height: vh * 8,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
-    marginVertical: vh * 2,
+    marginVertical: vh * 1.5,
     paddingHorizontal: vw * 2,
     flexDirection: 'column',
     paddingVertical: vh,

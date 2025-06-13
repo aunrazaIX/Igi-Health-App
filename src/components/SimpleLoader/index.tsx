@@ -5,8 +5,8 @@ import {
   StyleSheet,
   ViewStyle,
 } from 'react-native';
-import { vh } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import {vh} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 interface SimpleLoaderProps {
   color?: string;
@@ -14,7 +14,7 @@ interface SimpleLoaderProps {
   style?: ViewStyle;
 }
 
-const SimpleLoader: React.FC<SimpleLoaderProps> = ({ color, size, style }) => {
+const SimpleLoader: React.FC<SimpleLoaderProps> = ({color, size, style}) => {
   return (
     <ActivityIndicator
       style={[styles.container, style]}

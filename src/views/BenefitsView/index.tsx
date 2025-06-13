@@ -41,7 +41,7 @@ const BenefitsView: React.FC<Props> = ({data, goBack, benefitsloading}) => {
       </LinearGradient>
 
       <AileronSemiBold name={item.title} style={styles.insuredTitle} />
-      <AileronBold name={item.price} style={styles.insuredPrice} />
+      <AileronBold name={`${item.price}/- `} style={styles.insuredPrice} />
     </View>
   );
 

@@ -162,6 +162,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  flipCardIcon: {
+    width: vw * 16,
+    height: vh * 6,
+    resizeMode: 'contain',
+  },
   infoCardFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -300,6 +305,7 @@ export const styles = StyleSheet.create({
   homeBackCardTextRow: {
     flexDirection: 'row',
     gap: vw * 7,
+    marginTop: vh * -0.5,
   },
 
   backCardFooter: {

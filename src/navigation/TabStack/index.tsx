@@ -185,10 +185,10 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     paddingHorizontal: vw * 4,
-    paddingVertical: vw * 6,
+    paddingVertical: vw * 4,
     borderRadius: (vw * 25) / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   iconStyle: {
     height: vw * 9,
