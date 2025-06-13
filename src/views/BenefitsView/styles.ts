@@ -61,9 +61,10 @@ const styles = StyleSheet.create({
   },
   seperator: {
     width: '100%',
-    height: vh * 0.1,
+    borderBottomWidth: 1,
     borderStyle: 'dashed',
-    backgroundColor: COLORS.black + 44,
+    borderBottomColor: COLORS.black + '44',
+    marginVertical: vh * 1,
   },
   CardBox: {
     borderRadius: vh * 1.5,

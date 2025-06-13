@@ -16,6 +16,7 @@ import {
 import styles from './styles';
 import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {vh} from '../../assets/theme/dimension';
 
 type OptionType = {
   label: string;
@@ -64,7 +65,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
     <>
       <TopView title={'Add Dependent Request'} />
       <CurvedView>
-        <KeyboardAwareScrollView enableAutomaticScroll>
+        <KeyboardAwareScrollView enableOnAndroid>
           <View style={styles.personalFrameContainer}>
             <Image
               source={images.personalFrame}
