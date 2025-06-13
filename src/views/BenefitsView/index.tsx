@@ -41,7 +41,10 @@ const BenefitsView: React.FC<Props> = ({data, goBack, benefitsloading}) => {
       </LinearGradient>
 
       <AileronSemiBold name={item.title} style={styles.insuredTitle} />
-      <AileronBold name={`${item.price}/- `} style={styles.insuredPrice} />
+      <AileronBold
+        name={`${item.price}${!isNaN(Number(item.price)) ? ' /-' : ''}`}
+        style={styles.insuredPrice}
+      />
     </View>
   );
 
@@ -77,6 +80,7 @@ const BenefitsView: React.FC<Props> = ({data, goBack, benefitsloading}) => {
   );
 
   const renderSeperator = () => <View style={styles.seperator} />;
+
   return (
     <>
       <TopView title={'Benefits'} />
