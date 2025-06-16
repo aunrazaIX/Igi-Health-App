@@ -18,6 +18,7 @@ import {icons, images} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {useNavigation} from '@react-navigation/native';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -134,6 +135,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
     ),
   };
 
+  const navigation = useNavigation();
+
   return (
     <>
       <TopView
@@ -198,7 +201,10 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         closeButton={confirmationType === 'delete' ? false : true}
         confirmationRequired={confirmationType === 'delete' ? true : false}
         CloseButtonText={'Continue To Login'}
-        onClose={resetStates}
+        onClose={() => {
+          resetStates;
+          navigation.navigate('HomeStack');
+        }}
         confirmationType={confirmationType}
         handleDelete={
           confirmationType === 'delete'
