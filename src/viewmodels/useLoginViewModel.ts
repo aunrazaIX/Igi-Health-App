@@ -198,6 +198,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
               password: loginApiData?.password,
               deviceId: '23232323232',
               LoginDeviceName: 'Mobile',
+              biometryType: biometryType,
             }),
           );
         }
@@ -278,9 +279,18 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
         allowDeviceCredentials: true,
       });
 
-      const {available} = await rnBiometrics.isSensorAvailable();
+      const {available, biometryType} = await rnBiometrics.isSensorAvailable();
+
       if (!available) {
-        throw new Error('Biometric sensor not available on this device');
+        throw new Error('No biometric sensor available on this device');
+      }
+
+      if (biometryType === ReactNativeBiometrics.FaceID && !available) {
+        throw new Error('Face ID is not available on this device');
+      }
+
+      if (biometryType === ReactNativeBiometrics.TouchID && !available) {
+        throw new Error('Fingerprint sensor is not available on this device');
       }
 
       const {keysExist} = await rnBiometrics.biometricKeysExist();
@@ -289,12 +299,21 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       }
 
       const {success} = await rnBiometrics.createSignature({
-        promptMessage: 'Confirm your identity to login',
+        promptMessage:
+          biometryType === ReactNativeBiometrics.FaceID
+            ? 'Confirm Face ID to login'
+            : 'Confirm your fingerprint to login',
         payload: '22',
       });
 
       if (!success) {
-        throw new Error('Biometric authentication failed');
+        throw new Error(
+          `${
+            biometryType === ReactNativeBiometrics.FaceID
+              ? 'Face ID'
+              : 'Fingerprint'
+          } authentication failed`,
+        );
       }
 
       if (
