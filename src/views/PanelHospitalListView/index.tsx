@@ -179,6 +179,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               data={data}
               contentContainerStyle={{paddingBottom: vh * 22}}
               keyExtractor={(_, index) => index.toString()}
+              showsVerticalScrollIndicator={false}
               renderItem={({item}) => (
                 <>
                   <DetailsContainer

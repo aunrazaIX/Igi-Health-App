@@ -169,7 +169,7 @@ const DrawerStack = () => {
             />
           </TouchableOpacity>
         </View>
-        <ScrollView ref={scrollRef}>
+        <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
           <View style={styles.menuContainer}>
             {routes?.length > 0 &&
               routes?.map((route, index) => (

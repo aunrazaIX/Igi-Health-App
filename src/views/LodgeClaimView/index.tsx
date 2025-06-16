@@ -19,6 +19,7 @@ import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
+import styles from './styles';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -153,8 +154,10 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge Claim'}
         resetStates={resetStates}
       />
-      <KeyboardAwareScrollView enableOnAndroid>
-        <CurvedView>
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        enableOnAndroid>
+        <CurvedView containerStyle={styles.oppo}>
           <Stepper
             currentStep={currentStep}
             steps={steps}

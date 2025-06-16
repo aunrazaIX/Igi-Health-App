@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'contain',
   },
+  oppo: {
+    minHeight: 88 * vh,
+  },
 });
 
 export default styles;
