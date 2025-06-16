@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: vh * 2,
   },
+  curveStyle: {
+    paddingBottom: vh * 3,
+  },
   textContainer: {
     flexDirection: 'row',
     justifyContent: 'center',

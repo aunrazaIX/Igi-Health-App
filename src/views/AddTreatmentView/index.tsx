@@ -43,7 +43,7 @@ const AddTreatmentView = ({
   return (
     <>
       <TopView title={'Add A Treatment'} />
-      <CurvedView>
+      <CurvedView containerStyle={styles.curveStyle}>
         <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
@@ -118,18 +118,18 @@ const AddTreatmentView = ({
               </TouchableOpacity>
             </LinearGradient>
           </View>
-        </KeyboardAwareScrollView>
 
-        <ConfirmationModal
-          ConfirmationModalVisible={confirmationModal}
-          setConfirmationModalVisible={setConfirmationModal}
-          frameImage={icons.errorPopup}
-          confirmationMessage={'You cant enter the same entry'}
-          closeButton={true}
-          Successfull={false}
-          CloseButtonText={'Continue To Login'}
-        />
-        <ModalLoading loading={loading} />
+          <ConfirmationModal
+            ConfirmationModalVisible={confirmationModal}
+            setConfirmationModalVisible={setConfirmationModal}
+            frameImage={icons.errorPopup}
+            confirmationMessage={'You cant enter the same entry'}
+            closeButton={true}
+            Successfull={false}
+            CloseButtonText={'Continue To Login'}
+          />
+          <ModalLoading loading={loading} />
+        </KeyboardAwareScrollView>
       </CurvedView>
     </>
   );

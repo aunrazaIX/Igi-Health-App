@@ -22,7 +22,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   oppo: {
-    minHeight: 88 * vh,
+    minHeight: 81 * vh,
+    // paddingBottom: vh * 15,
+    // borderWidth: 2,
   },
 });
 
