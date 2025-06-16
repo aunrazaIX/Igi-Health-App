@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     paddingVertical: vh * 2,
-    paddingBottom: vh * 15,
+    paddingBottom: vh * 10,
     paddingHorizontal: vw * 5,
     backgroundColor: COLORS.white,
     borderTopLeftRadius: vw * 8,
