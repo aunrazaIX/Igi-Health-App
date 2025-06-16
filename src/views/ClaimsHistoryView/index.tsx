@@ -14,6 +14,7 @@ import {
 } from '../../viewmodels/useClaimsHistoryViewModel';
 import Calender from './Component/Calender';
 import NoDataView from '../../components/NoDataView';
+import ModalLoading from '../../components/ModalLoading';
 
 type claimsHistoryViewProps = {
   data: ClaimHistoryGroup[];
@@ -24,6 +25,7 @@ type claimsHistoryViewProps = {
   onPressHeaderIcon: () => void;
   onPressAmountStatusTab: (tab: AmountStatus) => void;
   goBack: () => void;
+  claimDataLoading: boolean;
 };
 
 const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
@@ -34,6 +36,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
   onPressAmountStatusTab,
   isCalendarVisible,
   onPressHeaderIcon,
+  claimDataLoading,
   goBack,
 }) => {
   return (
@@ -154,6 +157,8 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
             <NoDataView name="No Claim Found" />
           )}
         </View>
+
+        <ModalLoading loading={claimDataLoading} />
       </CurvedView>
 
       {/* {isCalendarVisible && (

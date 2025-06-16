@@ -6,7 +6,7 @@ const PanelHospitalList = ({navigation}) => {
 
   const {onPressTab, onPressRightTab, goBack, setSearchText} = functions;
 
-  const {data, selectedTab, selectedTabRight, searchText} = states;
+  const {data, selectedTab, selectedTabRight, searchText, loading} = states;
   return (
     <PanelHospitalListView
       selectedTabRight={selectedTabRight}
@@ -17,6 +17,7 @@ const PanelHospitalList = ({navigation}) => {
       goBack={goBack}
       searchText={searchText}
       setSearchText={setSearchText}
+      loading={loading}
     />
   );
 };

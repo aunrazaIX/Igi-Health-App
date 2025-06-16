@@ -42,6 +42,7 @@ type Props = {
   setConfirmationModal: () => void;
   confirmationModal: boolean;
   resetStates: () => void;
+  dependantLoading: boolean;
 };
 type dependentDetail = {
   dependent: string;
@@ -68,6 +69,7 @@ const PersonalView: React.FC<Props> = ({
   confirmationModal,
   resetStates,
   deleteDepenedentLoading,
+  dependantLoading,
 }) => {
   return (
     <Container>
@@ -161,7 +163,7 @@ const PersonalView: React.FC<Props> = ({
           </View>
         </ScrollView>
 
-        <ModalLoading loading={deleteDepenedentLoading} />
+        <ModalLoading loading={deleteDepenedentLoading || dependantLoading} />
       </CurvedView>
 
       {/* <AddModal

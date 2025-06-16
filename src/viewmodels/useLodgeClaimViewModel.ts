@@ -86,14 +86,15 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   } = useSelector(state => state.lodge);
   const {user} = useSelector(state => state.auth);
 
+  console.log(selectedType, 'selectedType');
+
   const resetStates = () => {
     dispatch(_setTreatmentData([]));
-
-    navigation.navigate('HomeStack');
+    // navigation.navigate('HomeStack');
     dispatch(setSelectedDocuments([]));
     dispatch(setSelectedPatient(null));
+    dispatch(setSelectedType(null));
     setterForclaimData('claimComments', '');
-
     dispatch(setStep(1));
   };
   const {setterForApiData: setterForclaimData, apiData: claimData} =
@@ -194,6 +195,29 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   });
 
+  const {data: covergaeTypesData, loading: covergaeTypesDataLoading} =
+    useApiHook({
+      apiEndpoint: endpoints.coverage.getCoverage,
+      method: 'get',
+      argsOrBody: {
+        ClientCode: 'ERC',
+      },
+      onSuccess: res => {
+        console.log(res, 'coverage ka response');
+      },
+    });
+
+  const dependantsData =
+    covergaeTypesData?.map((item: any) => ({
+      label:
+        item?.CoverageType?.charAt(0).toUpperCase() +
+        item?.CoverageType?.slice(1).toLowerCase(),
+      value: item?.CoverageId,
+    })) ?? [];
+
+  console.log(dependantsData);
+  console.log();
+
   const {data: dependants, loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
@@ -224,12 +248,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       value: 'HospitalID',
     },
   });
-
-  const dependantsData = [
-    {label: 'Ipd', value: 0},
-    {label: 'Opd', value: 1},
-    {label: 'Maternity', value: 2},
-  ];
 
   const steps: Step[] = [
     {label: 'Personal Details', key: 'personalDetails'},

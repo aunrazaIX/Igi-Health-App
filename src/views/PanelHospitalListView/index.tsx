@@ -14,6 +14,7 @@ import DetailsContainer from '../../components/DetailsContainer';
 import {vh, vw} from '../../assets/theme/dimension';
 import {PanelHospitalGroup} from '../../viewmodels/usePanelHospitalListViewModel';
 import {COLORS} from '../../assets/theme/colors';
+import ModalLoading from '../../components/ModalLoading';
 
 type HomeViewProps = {
   data: PanelHospitalGroup[];
@@ -24,6 +25,7 @@ type HomeViewProps = {
   goBack: () => void;
   searchText: any;
   setSearchText: any;
+  loading: any;
 };
 
 const PanelHospitalListView: React.FC<HomeViewProps> = ({
@@ -35,6 +37,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   goBack,
   searchText,
   setSearchText,
+  loading,
 }) => {
   return (
     <>
@@ -159,7 +162,6 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             </TouchableOpacity>
           </View>
 
-          {/*rendering list card based on list tab active  */}
           {selectedTabRight === 'map' && (
             <InputField
               searchFieldRight={styles.searchFieldRight}
@@ -197,6 +199,8 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             />
           )}
         </View>
+
+        <ModalLoading loading={loading} />
       </CurvedView>
     </>
   );

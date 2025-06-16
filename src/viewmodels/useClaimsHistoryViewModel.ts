@@ -27,6 +27,7 @@ type UseClaimsHistoryViewModel = {
     amountStatusTab: AmountStatus;
     daysStatusTab: daysStatus;
     isCalendarVisible: boolean;
+    claimDataLoading: boolean;
   };
   functions: {
     onPressAmountStatusTab: (tab: AmountStatus) => void;
@@ -58,7 +59,7 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
     navigation.goBack();
   };
 
-  const {data: claimData, loading} = useApiHook({
+  const {data: claimData, loading: claimDataLoading} = useApiHook({
     apiEndpoint: endpoints.claimHistory.getAllClaim,
     method: 'get',
     argsOrBody: {userid: '776'},
@@ -113,6 +114,7 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
       amountStatusTab,
       daysStatusTab,
       isCalendarVisible,
+      claimDataLoading,
     },
     functions: {
       onPressAmountStatusTab,

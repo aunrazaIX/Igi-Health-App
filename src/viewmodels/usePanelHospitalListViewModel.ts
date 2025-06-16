@@ -46,8 +46,15 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
 
   const navigation = useNavigation();
 
-  const onPressTab = (tab: string) => setSelectedTab(tab);
-  const onPressRightTab = (tab: string) => setSelectedTabRight(tab);
+  const onPressTab = (tab: string) => {
+    setSelectedTab(tab);
+    setData([]);
+  };
+
+  const onPressRightTab = (tab: string) => {
+    setSelectedTabRight(tab);
+  };
+
   const goBack = () => navigation.goBack();
 
   useEffect(() => {

@@ -12,6 +12,7 @@ const Personal = () => {
     expandedIndex,
     confirmationModal,
     deleteDepenedentLoading,
+    dependantLoading,
   } = states;
 
   const {
@@ -46,6 +47,7 @@ const Personal = () => {
         confirmationModal={confirmationModal}
         setConfirmationModal={setConfirmationModal}
         resetStates={resetStates}
+        dependantLoading={dependantLoading}
       />
     </>
   );

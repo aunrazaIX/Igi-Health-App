@@ -43,7 +43,7 @@ const useAddTreatmentModel = ({
     const endpointKey =
       claimType === 'priorApproval'
         ? 'IPDTypesForPriorApproval'
-        : typeValue === 0
+        : typeValue === 2
         ? 'getIPDTypes'
         : typeValue === 1
         ? 'getTypes'

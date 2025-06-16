@@ -14,6 +14,7 @@ type UsePersonalViewModal = {
     confimationModalVisible: boolean;
     expandedIndex: number | null;
     confirmationModal: boolean;
+    dependantLoading: boolean;
   };
   functions: {
     goBack: () => void;
@@ -149,6 +150,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       confirmationModal,
       expandedIndex,
       deleteDepenedentLoading,
+      dependantLoading,
     },
     functions: {
       openAddDependent,

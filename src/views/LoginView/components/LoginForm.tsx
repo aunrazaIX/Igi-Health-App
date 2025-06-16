@@ -29,7 +29,6 @@ const LoginForm = ({
   handleCheck,
   checked,
   onPressToucdId,
-  onPressFaceId,
 }: {
   onPressforgotPassword: (to: string) => void;
   handleLogin: () => void;
@@ -39,7 +38,6 @@ const LoginForm = ({
   handleCheck: () => void;
   checked: boolean;
   onPressToucdId: any;
-  onPressFaceId: any;
 }) => {
   return (
     <>
@@ -118,7 +116,7 @@ const LoginForm = ({
       <View style={styles.loginOptionContainer}>
         {Platform.OS === 'ios' && (
           <TouchableOpacity
-            onPress={onPressFaceId}
+            onPress={onPressToucdId}
             style={styles.loginOptionBox}>
             <Image
               style={styles.loginOptionContainerIcons}

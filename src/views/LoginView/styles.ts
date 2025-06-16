@@ -4,7 +4,9 @@ import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
   imageContainer: {
-    // flex: 1,
+    flex: 1,
+    // borderWidth: 2,
+    height: vh * 100,
   },
   wrapper: {padding: vh * 0.7},
   logo: {

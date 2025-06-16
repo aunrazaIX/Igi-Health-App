@@ -6,8 +6,14 @@ const Hospitals = () => {
 
   const {onPressTab, onPressRightTab, onPressMapTab, goBack, setSearchText} =
     functions;
-  const {selectedTab, selectedTabRight, selectedMapTab, data, searchText} =
-    states;
+  const {
+    selectedTab,
+    selectedTabRight,
+    selectedMapTab,
+    data,
+    searchText,
+    hospitalLoading,
+  } = states;
   return (
     <HospitalsView
       selectedTabRight={selectedTabRight}
@@ -20,6 +26,7 @@ const Hospitals = () => {
       data={data}
       searchText={searchText}
       setSearchText={setSearchText}
+      hospitalLoading={hospitalLoading}
     />
   );
 };

@@ -21,6 +21,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 import ProvinceTab from '../../components/provinceTab';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import ModalLoading from '../../components/ModalLoading';
 
 type HospitalsViewProps = {
   selectedTab: string;
@@ -33,6 +34,8 @@ type HospitalsViewProps = {
   searchText: any;
   setSearchText: any;
   data: any;
+  hospitalLoading: boolean;
+  tabChanging: boolean;
 };
 
 const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
@@ -46,6 +49,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
   searchText,
   data,
   setSearchText,
+  hospitalLoading,
 }) => {
   return (
     <>
@@ -102,6 +106,8 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
             )}
           />
         </KeyboardAwareScrollView>
+
+        <ModalLoading loading={hospitalLoading} />
       </CurvedView>
     </>
   );

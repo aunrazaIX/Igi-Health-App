@@ -5,7 +5,13 @@ import useClaimsHistoryViewModel from '../../viewmodels/useClaimsHistoryViewMode
 
 const ClaimsHistory = () => {
   const {states, functions} = useClaimsHistoryViewModel();
-  const {data, amountStatusTab, daysStatusTab, isCalendarVisible} = states;
+  const {
+    data,
+    amountStatusTab,
+    daysStatusTab,
+    isCalendarVisible,
+    claimDataLoading,
+  } = states;
   const {
     onPressAmountStatusTab,
     onPressDaysStatusTab,
@@ -23,6 +29,7 @@ const ClaimsHistory = () => {
       onPressDaysStatusTab={onPressDaysStatusTab}
       onPressAmountStatusTab={onPressAmountStatusTab}
       goBack={goBack}
+      claimDataLoading={claimDataLoading}
     />
   );
 };

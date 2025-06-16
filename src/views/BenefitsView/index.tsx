@@ -88,11 +88,14 @@ const BenefitsView: React.FC<Props> = ({data, goBack, benefitsloading}) => {
         <FlatList
           ItemSeparatorComponent={renderSeperator}
           ListHeaderComponent={headerComponent}
+          showsVerticalScrollIndicator={false}
           data={data}
           ListEmptyComponent={
-            <View style={{alignItems: 'center', marginTop: 20}}>
-              <NoDataView name={'No benefits Found'} />
-            </View>
+            !benefitsloading ? (
+              <View style={{alignItems: 'center', marginTop: 20}}>
+                <NoDataView name={'No benefits Found'} />
+              </View>
+            ) : null
           }
           renderItem={RenderBenefits}
           keyExtractor={(_, index) => index.toString()}

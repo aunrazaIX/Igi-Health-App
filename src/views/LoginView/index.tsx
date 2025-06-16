@@ -25,7 +25,6 @@ const LoginView = ({
   handleCheck,
   checked,
   onPressToucdId,
-  onPressFaceId,
 }: {
   onPressTab: (name: string) => void;
   selectedTab: string;
@@ -43,7 +42,6 @@ const LoginView = ({
   rememberMe: boolean;
   checked: boolean;
   onPressToucdId: any;
-  onPressFaceId: any;
 }) => {
   const Wrapper = (tab: string) =>
     selectedTab === tab ? LinearGradient : TouchableOpacity;
@@ -59,7 +57,6 @@ const LoginView = ({
         handleCheck={handleCheck}
         checked={checked}
         onPressToucdId={onPressToucdId}
-        onPressFaceId={onPressFaceId}
       />
     ),
     signup: (

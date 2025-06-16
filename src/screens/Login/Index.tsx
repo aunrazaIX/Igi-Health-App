@@ -23,7 +23,6 @@ const Login = () => {
     loginSetterForApiData,
     handleCheck,
     onPressToucdId,
-    onPressFaceId,
   } = functions;
 
   return (
@@ -43,7 +42,6 @@ const Login = () => {
       handleCheck={handleCheck}
       checked={checked}
       rememberMe={rememberMe}
-      onPressFaceId={onPressFaceId}
       onPressToucdId={onPressToucdId}
     />
   );
