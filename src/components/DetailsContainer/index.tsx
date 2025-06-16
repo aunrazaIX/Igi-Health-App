@@ -115,8 +115,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardHeaderLeftText: {
-    fontSize: vw * 3,
+    fontSize: vw * 4,
     color: COLORS.black,
+    // borderWidth: 2,
+    width: vw * 47,
+    textAlign: 'left',
+    marginLeft: vw,
   },
   cardHeaderRight: {
     alignItems: 'center',

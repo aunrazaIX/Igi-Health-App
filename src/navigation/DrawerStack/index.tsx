@@ -207,14 +207,10 @@ const DrawerStack = () => {
           </View>
           <View style={styles.profileContainer}>
             <View style={styles.profileRow}>
-              <Image
+              {/* <Image
                 source={drawerIcons.drawerProfile}
                 style={styles.profileIcon}
-              />
-              <AileronSemiBold
-                name="Imran Naveed Qureshi"
-                style={styles.profileTittle}
-              />
+              /> */}
             </View>
 
             <TouchableOpacity
