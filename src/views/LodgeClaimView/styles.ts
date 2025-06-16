@@ -21,9 +21,10 @@ const styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'contain',
   },
-  oppo: {
+  curveStyle: {
     minHeight: 81 * vh,
-    // paddingBottom: vh * 15,
+    // paddingBottom: vh * 3,
+
     // borderWidth: 2,
   },
 });
