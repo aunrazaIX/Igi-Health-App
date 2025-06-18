@@ -119,7 +119,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       getCovergaeApi(apiData);
     },
     onError: error => {
-      dispatch(setErrorModal({Show: true, message: error.error}));
+      const errorMessage = error?.error || error?.message || '';
+
+      dispatch(setErrorModal({Show: true, message: errorMessage}));
     },
   });
 
@@ -272,7 +274,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     try {
       if (!isToggle) {
         throw new Error(
-          'Please enable biometric login from App settings first',
+          'Please enable Fingerprint/FaceId from App  settings first',
         );
       }
       const rnBiometrics = new ReactNativeBiometrics({

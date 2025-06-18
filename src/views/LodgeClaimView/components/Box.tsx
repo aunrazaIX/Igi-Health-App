@@ -1,9 +1,9 @@
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
-import { AileronBold, AileronSemiBold } from '../../../components';
-import { icons } from '../../../assets';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {COLORS} from '../../../assets/theme/colors';
+import {AileronBold, AileronSemiBold} from '../../../components';
+import {icons} from '../../../assets';
 
 type InfoItem = {
   label: string;
@@ -11,40 +11,36 @@ type InfoItem = {
 };
 
 type BoxProps = {
-  data: any
+  data: any;
   onPressDelete: () => void;
   onPressEdit: () => void;
 };
 
-const Box: React.FC<BoxProps> = ({ data, onPressDelete, onPressEdit }) => {
+const Box: React.FC<BoxProps> = ({data, onPressDelete, onPressEdit}) => {
   return (
     <View style={styles.boxContainer}>
       <View style={styles.header}>
         <Image source={data?.icon} style={styles.avatar} />
         <AileronBold style={styles.headerText} name={data?.sectionTitle} />
 
-        {
-          onPressDelete && <TouchableOpacity onPress={onPressEdit} style={styles.button}>
+        {onPressDelete && (
+          <TouchableOpacity onPress={onPressEdit} style={styles.button}>
             <Image source={icons.edit} style={styles.buttonIcon} />
           </TouchableOpacity>
-        }
+        )}
 
-
-        {
-          onPressEdit && <TouchableOpacity onPress={onPressDelete} style={styles.button}>
+        {onPressEdit && (
+          <TouchableOpacity onPress={onPressDelete} style={styles.button}>
             <Image source={icons.delete} style={styles.buttonIcon} />
           </TouchableOpacity>
-        }
-
+        )}
       </View>
       <View style={styles.details}>
-
         {data?.info?.map((_item: InfoItem, index: number) => (
           <View style={styles.field} key={index}>
             <AileronSemiBold name={_item?.label} style={styles.detailLabel} />
             <AileronSemiBold name={_item?.value} style={styles.detailvalue} />
           </View>
-
         ))}
       </View>
     </View>
@@ -64,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     shadowColor: '#000',
     shadowOpacity: 0.14,
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowRadius: 2,
   },
   avatar: {
@@ -99,13 +95,15 @@ const styles = StyleSheet.create({
   detailvalue: {
     fontSize: vh * 1.6,
     color: COLORS.personalValue,
+    // borderWidth: 2,
+    maxWidth: vw * 50,
   },
   field: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  button: { height: vw * 6, width: vw * 6 },
+  button: {height: vw * 6, width: vw * 6},
   buttonIcon: {
     height: vw * 6,
     width: vw * 6,

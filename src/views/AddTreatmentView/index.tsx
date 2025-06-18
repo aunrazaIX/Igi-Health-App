@@ -44,7 +44,9 @@ const AddTreatmentView = ({
     <>
       <TopView title={'Add A Treatment'} />
       <CurvedView containerStyle={styles.curveStyle}>
-        <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+        <KeyboardAwareScrollView
+          showsVerticalScrollIndicator={false}
+          enableOnAndroid>
           <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>

@@ -130,7 +130,8 @@ export const styles = StyleSheet.create({
   },
 
   cardHorizontalLine: {
-    borderWidth: vw * 0.2,
+    borderBottomWidth: vw * 0.4,
+    // height: vh * 0.4,
     borderStyle: 'dashed',
     width: '100%',
 

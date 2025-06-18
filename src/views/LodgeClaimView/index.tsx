@@ -154,7 +154,9 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge Claim'}
         resetStates={resetStates}
       />
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        enableOnAndroid>
         <CurvedView containerStyle={styles.curveStyle}>
           <Stepper
             currentStep={currentStep}
@@ -195,7 +197,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         confirmationMessage={
           confirmationType === 'delete'
             ? 'Are you sure you want to delete this claim?'
-            : 'hank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims. Please make a note of your [Claim No: 13159 ].'
+            : 'thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims'
         }
         claimSubmission={true}
         deleteButton={confirmationType === 'delete' ? true : false}

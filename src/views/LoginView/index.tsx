@@ -69,7 +69,7 @@ const LoginView = ({
     ),
   };
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView enableOnAndroid>
       <ImageBackground
         source={images.loginBackground}
         style={styles.imageContainer}>
