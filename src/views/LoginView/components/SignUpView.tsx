@@ -31,10 +31,12 @@ const SignUpView = ({
         }
         style={styles.loginContainerText}
       />
+
       <InputField
         containerStyle={style.inputContainer}
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
+        allowCopyPaste={true}
         label="Mobile Number"
         placeholder="Enter Mobile Number"
         rightIcon={icons.mobNumber}
@@ -64,12 +66,14 @@ const SignUpView = ({
           /\d/,
         ]}
       />
+
       <InputField
         containerStyle={style.inputContainer}
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         label="Your Email"
         placeholder="Enter Email Address"
+        allowCopyPaste={true}
         rightIcon={icons.email}
         onChangeText={text => {
           signupSetterForApiData('email', text);
@@ -86,6 +90,7 @@ const SignUpView = ({
       <InputField
         label="CNIC Number"
         placeholder="Enter cnic"
+        allowCopyPaste={true}
         rightIcon={icons.cnic}
         onChangeText={text => {
           signupSetterForApiData('cnic', text);
@@ -115,7 +120,8 @@ const SignUpView = ({
           /\d/,
         ]}
       />
-      <View style={style.signupTextContainer}>
+
+      {/* <View style={style.signupTextContainer}>
         <View style={style.signupText}>
           <AileronSemiBold name="•" style={styles.loginContainerText} />
 
@@ -149,7 +155,7 @@ const SignUpView = ({
             style={styles.loginContainerText}
           />
         </View>
-      </View>
+      </View> */}
 
       <Button
         containerStyle={styles.loginButton}

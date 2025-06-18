@@ -96,15 +96,6 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             </DependentBox>
 
             <Select
-              selectData={genderOptions}
-              selectLabel={dependentApiData?.gender?.label ?? 'Gender'}
-              selectPlaceholder={'-- Select Gender --'}
-              onSelectOption={option =>
-                dependentSetterForApiData('gender', option)
-              }
-              value={dependentApiData?.gender?.label ?? null}
-            />
-            <Select
               selectData={relationsOptions}
               selectLabel={'Relationship'}
               selectPlaceholder={'-- Select Relation --'}
@@ -113,6 +104,22 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               }
               value={dependentApiData?.dependentTypeID?.label ?? null}
             />
+
+            <Select
+              selectData={genderOptions}
+              selectLabel={dependentApiData?.gender?.label ?? 'Gender'}
+              selectPlaceholder={'-- Select Gender --'}
+              onSelectOption={option =>
+                dependentSetterForApiData('gender', option)
+              }
+              value={
+                dependentApiData?.dependentTypeID?.label === 'Son' ||
+                dependentApiData?.dependentTypeID?.label === 'Father'
+                  ? 'Male'
+                  : 'Female'
+              }
+            />
+
             <DependentBox containerStyle={styles.dependentOuterStyle}>
               <AileronRegular name="Age" style={styles.selectLabel} />
 

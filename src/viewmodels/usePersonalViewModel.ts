@@ -64,6 +64,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
           image: icons.frame,
           dependentDetail: [
             {label: 'Name :', value: item?.LGIVNAME.trim()},
+
             {
               label: 'Gender :',
               value:

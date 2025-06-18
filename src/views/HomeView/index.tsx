@@ -115,20 +115,29 @@ const HomeView: React.FC<HomeViewProps> = ({
 
                   <View style={styles.homeInfoContainerMiddle}>
                     <View style={styles.homeInfoContainerMiddleText}>
-                      <AileronSemiBold
+                      {/* <AileronSemiBold
                         name={`Policy Number ${homeCardData[0]?.Policy_Number}`}
                         style={styles.infoCardMiddleTextlight}
                         numberOfLines={1}
-                      />
+                      /> */}
                     </View>
 
                     <View style={styles.homeInfoContainerMiddleTextLogo}>
-                      <View>
-                        <AileronSemiBold
-                          name={`CNIC: ${user?.cnic}`}
-                          style={styles.infoCardMiddleTextlight}
-                          numberOfLines={1}
-                        />
+                      <View style={styles.homeCardMainDetails}>
+                        <View>
+                          <AileronSemiBold
+                            name={`Policy Number ${homeCardData[0]?.Policy_Number}`}
+                            style={styles.infoCardMiddleTextlight}
+                            numberOfLines={1}
+                          />
+                        </View>
+                        <View>
+                          <AileronSemiBold
+                            name={`CNIC: ${user?.cnic}`}
+                            style={styles.infoCardMiddleTextlight}
+                            numberOfLines={1}
+                          />
+                        </View>
                       </View>
                       <TouchableOpacity onPress={animateCard}>
                         <Image

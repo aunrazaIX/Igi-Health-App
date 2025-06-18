@@ -176,7 +176,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
     {
       logo: cardIcons.personal,
-      name: 'Personal',
+      name: 'Family Details',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundRed,
       to: 'Personal',
@@ -201,7 +201,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
     {
       logo: cardIcons.hospital,
-      name: 'Hopsital Directory',
+      name: 'Hospital Directory',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundRed,
       to: 'Hospitals',
@@ -214,8 +214,15 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       to: 'PanelHospitalList',
     },
     {
+      logo: cardIcons.lodgeClaim,
+      name: 'Claim History',
+      image: icons.forwardArrow,
+      backgroundColor: COLORS.cardBackgroundBlue,
+      to: 'ClaimHistory',
+    },
+    {
       logo: cardIcons.helpLine,
-      name: 'Help Line',
+      name: 'HelpLines',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundLightBlue,
       mainParent: 'Tabs',

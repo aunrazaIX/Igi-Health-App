@@ -95,70 +95,88 @@ const PersonalView: React.FC<Props> = ({
             </ImageBackground>
 
             <View style={styles.dependentBox}>
-              <AileronBold name={'Dependent '} style={styles.dependentText} />
-              <AileronBold name={'Details!'} style={styles.detailsText} />
+              <AileronBold name={'Covered '} style={styles.dependentText} />
+              <AileronBold
+                name={'Family Members!'}
+                style={styles.detailsText}
+              />
             </View>
 
             {data?.map((dependent, index) => (
-              <DependentBox
-                key={index}
-                containerStyle={styles.dependentBoxStyle}>
-                <TouchableOpacity onPress={() => toggleExpand(index)}>
-                  <View style={styles.header}>
-                    <Image source={dependent?.image} style={styles.avatar} />
-                    <AileronBold
-                      style={styles.headerText}
-                      name={dependent?.dependent}
-                    />
-                    <View style={styles.iconsROw}>
-                      {expandedIndex === index && (
-                        <View style={styles.deleteEditRow}>
-                          <TouchableOpacity
-                            onPress={() => manageUpdate(dependent, index)}>
-                            <Image
-                              source={icons.edit}
-                              style={styles.editIcon}
-                            />
-                          </TouchableOpacity>
-
-                          <TouchableOpacity
-                            onPress={() => deleteDepenedent(dependent, index)}>
-                            <Image
-                              source={icons.delete}
-                              style={styles.deleteIcon}
-                            />
-                          </TouchableOpacity>
-                        </View>
-                      )}
-                      <Image
-                        source={
-                          expandedIndex === index
-                            ? icons.selectArrowUp
-                            : icons.arrowDown
-                        }
-                        style={styles.icon}
+              <>
+                {console.log('depende', dependent)}
+                <DependentBox
+                  key={index}
+                  containerStyle={styles.dependentBoxStyle}>
+                  <TouchableOpacity onPress={() => toggleExpand(index)}>
+                    <View style={styles.header}>
+                      <Image source={dependent?.image} style={styles.avatar} />
+                      <AileronBold
+                        style={styles.headerText}
+                        name={dependent.dependentDetail[0].value}
                       />
-                    </View>
-                  </View>
 
-                  {expandedIndex === index && (
-                    <View style={styles.details}>
-                      {dependent?.dependentDetail?.map((item, index) => (
-                        <View style={styles.detailRow} key={index}>
-                          <AileronSemiBold
-                            name={item?.label}
-                            style={styles.detailLabel}
-                          />
-                          <AileronSemiBold
-                            name={item?.value}
-                            style={styles.detailvalue}
-                          />
-                        </View>
-                      ))}
+                      <View style={styles.iconsROw}>
+                        {expandedIndex === index && (
+                          <View style={styles.deleteEditRow}>
+                            <TouchableOpacity
+                              onPress={() => manageUpdate(dependent, index)}>
+                              <Image
+                                source={icons.edit}
+                                style={styles.editIcon}
+                              />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                              onPress={() =>
+                                deleteDepenedent(dependent, index)
+                              }>
+                              <Image
+                                source={icons.delete}
+                                style={styles.deleteIcon}
+                              />
+                            </TouchableOpacity>
+                          </View>
+                        )}
+                        <Image
+                          source={
+                            expandedIndex === index
+                              ? icons.selectArrowUp
+                              : icons.arrowDown
+                          }
+                          style={styles.icon}
+                        />
+                      </View>
                     </View>
-                  )}
-                </TouchableOpacity>
-              </DependentBox>
+
+                    {expandedIndex === index && (
+                      <View style={styles.details}>
+                        {dependent?.dependentDetail?.map((item, index) => (
+                          <>
+                            {console.log(item, 'pppp')}
+
+                            <View style={styles.detailRow} key={index}>
+                              {item.label !== 'Name :' && (
+                                <>
+                                  <AileronSemiBold
+                                    name={item?.label}
+                                    style={styles.detailLabel}
+                                  />
+
+                                  <AileronSemiBold
+                                    name={item?.value}
+                                    style={styles.detailvalue}
+                                  />
+                                </>
+                              )}
+                            </View>
+                          </>
+                        ))}
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                </DependentBox>
+              </>
             ))}
           </View>
         </ScrollView>

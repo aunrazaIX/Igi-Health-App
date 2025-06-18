@@ -352,10 +352,14 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   };
 
   const handleSignup = () => {
-    const filled = signupCheckForError();
-    if (!filled) return;
+    // const filled = signupCheckForError();
+    // if (!filled) return;
 
-    triggerSignup();
+    if (signupApiData.email && signupApiData.cellNumber && signupApiData.cnic) {
+      triggerSignup();
+    } else {
+      dispatch(setErrorModal({Show: true, message: 'Please fill all feilds'}));
+    }
   };
 
   const onPressTab = (name: string) => setSelectedTab(name);

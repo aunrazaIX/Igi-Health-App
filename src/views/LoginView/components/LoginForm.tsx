@@ -54,6 +54,8 @@ const LoginForm = ({
           rightIcon={icons.email}
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
+          editable={true}
+          allowCopyPaste={true}
           inputStyle={style.inputStyle}
           value={loginApiData?.userName ?? undefined}
           onChangeText={text => {

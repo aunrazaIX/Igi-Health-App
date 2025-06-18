@@ -83,12 +83,12 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'Personal',
     },
-    {
-      id: 7,
-      name: 'Claims History',
-      icon: drawerIcons.drawerClaimHistory,
-      to: 'ClaimsHistory',
-    },
+    // {
+    //   id: 7,
+    //   name: 'Claims History',
+    //   icon: drawerIcons.drawerClaimHistory,
+    //   to: 'ClaimsHistory',
+    // },
     {
       id: 8,
       name: 'Hospital Directory',
@@ -169,8 +169,28 @@ const DrawerStack = () => {
             />
           </TouchableOpacity>
         </View>
+
         <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
           <View style={styles.menuContainer}>
+            <TouchableOpacity
+              style={styles.ButtonContainer}
+              onPress={handleProfile}>
+              <LinearGradient
+                colors={COLORS.PriorGradient}
+                style={styles.buttonGradient}>
+                <View style={styles.wrapper}>
+                  <AileronSemiBold
+                    name="View Profile"
+                    style={styles.Buttontext}
+                  />
+                  <Image
+                    source={drawerIcons.drawerArrowRight}
+                    style={styles.buttonIcon}
+                  />
+                </View>
+              </LinearGradient>
+            </TouchableOpacity>
+
             {routes?.length > 0 &&
               routes?.map((route, index) => (
                 <TouchableOpacity
@@ -213,7 +233,7 @@ const DrawerStack = () => {
               /> */}
             </View>
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.ButtonContainer}
               onPress={handleProfile}>
               <LinearGradient
@@ -230,7 +250,7 @@ const DrawerStack = () => {
                   />
                 </View>
               </LinearGradient>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </ScrollView>
       </View>
@@ -247,7 +267,7 @@ const DrawerStack = () => {
       initialRouteName="Tabs">
       <Drawer.Screen name="Tabs" component={Tabs} />
       <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} />
+      {/* <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} /> */}
       <Drawer.Screen name="FAQs" component={FAQs} />
       <Drawer.Screen name="SettingsStack" component={SettingStack} />
       <Drawer.Screen name="Profile" component={Profile} />

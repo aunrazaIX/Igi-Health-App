@@ -54,6 +54,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
 
         {selectedDocuments?.length > 0 &&
           selectedDocuments?.map((item, index) => {
+            console.log(item, 'oooooooo');
             return (
               <View style={styles.documentBox} key={index}>
                 <View style={styles.documentBoxInside}>
@@ -79,11 +80,21 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                       />
                     </TouchableOpacity>
                   </View>
+
                   <View>
                     {isUplaoded && (
                       <Image source={icons.tick} style={styles.tick} />
                     )}
                   </View>
+                </View>
+
+                <View>
+                  <AileronSemiBold
+                    name={`file size : ${
+                      item?.fileSizeInMB?.toFixed(3) || ''
+                    } MB`}
+                    style={styles.fileSizeText}
+                  />
                 </View>
               </View>
             );
@@ -164,7 +175,15 @@ const styles = StyleSheet.create({
     lineHeight: vh * 3,
     flexShrink: 1,
     flexWrap: 'wrap',
-    maxWidth: vw * 65, // adjust as per your layout
+    maxWidth: vw * 55, // adjust as per your layout
+  },
+  fileSizeText: {
+    // borderWidth: 2,
+    // backgroundColor: 'red',
+    fontSize: vh * 1.4,
+    color: COLORS.cardBackgroundRed,
+    // textAlign: 'left',
+    marginTop: vh,
   },
   documentSize: {
     textAlign: 'left',

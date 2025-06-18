@@ -199,7 +199,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? 'Are you sure you want to delete this claim?'
             : 'thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims'
         }
-        claimSubmission={true}
+        claimSubmission={confirmationType === 'delete' ? false : true}
         deleteButton={confirmationType === 'delete' ? true : false}
         closeButton={confirmationType === 'delete' ? false : true}
         confirmationRequired={confirmationType === 'delete' ? true : false}

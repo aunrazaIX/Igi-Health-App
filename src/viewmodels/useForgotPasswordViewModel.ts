@@ -223,7 +223,7 @@ const useForgotPasswordViewModel = ({
     if (step == 1 && type == 'forgot') {
       if (!apiData.cellNumber || !apiData.email || !apiData.cnic) {
         dispatch(
-          setErrorModal({Show: true, message: 'Please Fill All Fields'}),
+          setErrorModal({Show: true, message: 'Please fill all fields'}),
         );
         return;
       } else {

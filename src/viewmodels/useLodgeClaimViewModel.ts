@@ -409,23 +409,24 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
             }),
           );
           return;
-        }
-
-        if (!isDuplicate) {
-          documents.push({
-            uri: item?.uri,
-            type: item?.type,
-            name: item?.name,
-          });
-          dispatch(setSelectedDocuments(documents));
         } else {
-          dispatch(
-            setErrorModal({
-              show: true,
-              message: "same file can't be selected again",
-            }),
-          );
-          return;
+          if (!isDuplicate) {
+            documents.push({
+              uri: item?.uri,
+              type: item?.type,
+              name: item?.name,
+              fileSizeInMB: fileSizeInMB,
+            });
+            dispatch(setSelectedDocuments(documents));
+          } else {
+            dispatch(
+              setErrorModal({
+                show: true,
+                message: "same file can't be selected again",
+              }),
+            );
+            return;
+          }
         }
       });
     } catch (e) {

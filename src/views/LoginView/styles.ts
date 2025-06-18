@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
   loginContainer: {
     width: '100%',
     borderRadius: vw * 5,
+
     // paddingVertical: vh * 2,
     justifyContent: 'center',
     alignItems: 'center',

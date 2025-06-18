@@ -107,7 +107,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
           </View>
 
           <View style={styles.infoContainerHeaderTabs}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={[
                 styles.tab,
                 selectedTab === 'PanelHospitals' && styles.activeTab,
@@ -132,8 +132,8 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                 ]}
                 name="Panel Hospitals"
               />
-            </TouchableOpacity>
-
+            </TouchableOpacity> */}
+            {/* 
             <TouchableOpacity
               style={[
                 styles.tab,
@@ -159,7 +159,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                 ]}
                 name="Discounted Centers"
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
 
           {selectedTabRight === 'map' && (

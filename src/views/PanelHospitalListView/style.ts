@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: vh * 2,
 
-    justifyContent: 'center',
+    // justifyContent: 'center',
     gap: vw * 2,
     borderColor: COLORS.buttonBorder,
   },

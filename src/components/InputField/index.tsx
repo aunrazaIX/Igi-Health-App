@@ -27,6 +27,7 @@ interface InputFieldProps extends TextInputProps {
   rightIcon?: any;
   iconViewStyle?: StyleObject | StyleObject[];
   errorMessage?: string;
+  allowCopyPaste?: boolean;
 }
 
 const InputField = forwardRef<TextInput, InputFieldProps>(
@@ -51,6 +52,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
       mask = false,
       rightIcon = undefined,
       errorMessage,
+      allowCopyPaste = true,
       ...rest
     },
     ref,
@@ -98,8 +100,8 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             autoCapitalize="none"
             secureTextEntry={showPassword}
             returnKeyType={returnKeyType}
-            contextMenuHidden
-            selectTextOnFocus={false}
+            contextMenuHidden={!allowCopyPaste}
+            selectTextOnFocus={allowCopyPaste}
             textAlignVertical={multiline ? 'top' : 'auto'}
             mask={mask}
             {...rest}

@@ -83,7 +83,7 @@ const BenefitsView: React.FC<Props> = ({data, goBack, benefitsloading}) => {
 
   return (
     <>
-      <TopView title={'Benefits'} />
+      <TopView title={'Entitled Benefits'} />
       <CurvedView containerStyle={styles.CurvedView}>
         <FlatList
           ItemSeparatorComponent={renderSeperator}
