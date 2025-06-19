@@ -200,7 +200,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         frameImage={icons.modelSuccessful}
         confirmationMessage={
           confirmationType === 'delete'
-            ? 'Are you sure you want to delete this claim?'
+            ? 'Are you sure you want to delete this treatment?'
             : confirmationType === 'submit'
             ? 'Are you sure you want to make this claim?'
             : 'thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims'

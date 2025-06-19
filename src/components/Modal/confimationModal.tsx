@@ -186,7 +186,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: vw * 6,
     borderTopLeftRadius: vw * 6,
     width: '100%',
-    height: '45%',
     paddingHorizontal: vh * 2,
     paddingTop: vh * 2.5,
     paddingBottom: vh * 2,
@@ -237,7 +236,8 @@ const styles = StyleSheet.create({
     width: '48%',
     borderWidth: vh * 0.2,
     borderRadius: vh * 1.3,
-    padding: vh * 2,
+    paddingVertical: vh * 1.2,
+    paddingHorizontal: vh * 1.5,
     borderColor: COLORS.cancelButtonBorder,
     backgroundColor: COLORS.cancelBottonBackground,
   },
@@ -256,7 +256,10 @@ const styles = StyleSheet.create({
   deleteButton: {
     borderRadius: vh * 1.3,
   },
-  wrapper: {padding: vh * 2},
+  wrapper: {
+    paddingVertical: vh * 1.2,
+    paddingHorizontal: vh * 1.5,
+  },
   cancelButtonText: {
     fontSize: vw * 4.4,
     color: COLORS.cancelButton,
