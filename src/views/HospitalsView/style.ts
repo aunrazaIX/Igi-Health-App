@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     gap: vw * 2,
   },
+
   rightTab: {
     flexDirection: 'row',
     borderWidth: 2,
@@ -26,6 +27,11 @@ export const styles = StyleSheet.create({
   },
   activeTabRight: {
     backgroundColor: COLORS.cardBackgroundRed,
+  },
+  listIcon: {
+    width: vw * 5,
+    height: vw * 5,
+    resizeMode: 'contain',
   },
   activeTabRightText: {
     color: COLORS.white,

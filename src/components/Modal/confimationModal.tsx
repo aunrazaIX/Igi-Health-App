@@ -33,6 +33,8 @@ type ConfimationModalProps = {
   onClose?: () => void;
   closeIcon?: boolean;
   confirmationType: any;
+  submitButton?: boolean;
+  handleSubmit?: () => void;
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -50,6 +52,8 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   onClose,
   closeIcon,
   confirmationType,
+  submitButton,
+  handleSubmit,
 }) => {
   const handleClose = () => {
     setConfirmationModalVisible(false);
@@ -131,6 +135,26 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                 </LinearGradient>
               </TouchableOpacity>
             </View>
+          )}
+
+          {submitButton && (
+            <>
+              <View>
+                <Button
+                  name="Submit"
+                  inputStyle={styles.closeButton}
+                  onPress={handleSubmit}
+                />
+              </View>
+
+              <View>
+                <TouchableOpacity
+                  style={styles.cancelButtonSubmit}
+                  onPress={() => setConfirmationModalVisible(false)}>
+                  <AileronBold name="Cancel" style={styles.cancelButtonText} />
+                </TouchableOpacity>
+              </View>
+            </>
           )}
 
           {closeButton && (
@@ -217,6 +241,15 @@ const styles = StyleSheet.create({
     borderColor: COLORS.cancelButtonBorder,
     backgroundColor: COLORS.cancelBottonBackground,
   },
+  cancelButtonSubmit: {
+    // width: '48%',
+    borderWidth: vh * 0.2,
+    borderRadius: vh * 1.3,
+    padding: vh * 3,
+    borderColor: COLORS.cancelButtonBorder,
+    backgroundColor: COLORS.cancelBottonBackground,
+    marginTop: vh,
+  },
   deleteButtonContainer: {
     width: '48%',
   },
@@ -237,6 +270,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: COLORS.white,
   },
+  cancel: {},
   claimContainer: {
     marginTop: vh * 2,
   },

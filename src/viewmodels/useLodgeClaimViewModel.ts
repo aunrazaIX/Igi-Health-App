@@ -169,6 +169,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         : endpoints.claimLogde.lodge,
     onSuccess: res => {
       setConfirmationModal(true);
+      setConfirmationType('');
     },
     onError: e => {
       console.log(e, 'error');
@@ -373,11 +374,16 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       }
 
       if (currentStep === 3) {
-        trigger();
+        setConfirmationType('submit');
+        setConfirmationModal(true);
       }
     } catch (e) {
       console.log('Error', e);
     }
+  };
+
+  const onPressSubmitClaim = () => {
+    trigger();
   };
 
   const onSelectDocument = async () => {
@@ -479,6 +485,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       onSelectType,
       onSelectMaternityType,
       handleDeleteClaim,
+      setConfirmationType,
+      onPressSubmitClaim,
     },
   };
 };

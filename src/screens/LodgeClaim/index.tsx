@@ -61,6 +61,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     onSelectType,
     onSelectMaternityType,
     handleDeleteClaim,
+    setConfirmationType,
+    onPressSubmitClaim,
   } = functions;
 
   return (
@@ -103,6 +105,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       confirmationType={confirmationType}
       handleDeleteClaim={handleDeleteClaim}
       deletedIndex={deletedIndex}
+      setConfirmationType={setConfirmationType}
+      onPressSubmitClaim={onPressSubmitClaim}
     />
   );
 };

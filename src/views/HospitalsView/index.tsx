@@ -72,6 +72,52 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
               </View>
             </View>
 
+            <View style={styles.infoContainerHeaderRight}>
+              <TouchableOpacity
+                onPress={() => onPressRightTab('list')}
+                style={[
+                  styles.rightTab,
+                  selectedTabRight === 'list' && styles.activeTabRight,
+                ]}>
+                {selectedTabRight === 'list' ? (
+                  <Image style={styles.listIcon} source={icons.listActive} />
+                ) : (
+                  <Image style={styles.listIcon} source={icons.listIcon} />
+                )}
+
+                <AileronBold
+                  style={[
+                    styles.infoContainerHeaderText,
+                    selectedTabRight === 'list' && styles.activeTabRightText,
+                  ]}
+                  name="List"
+                  numberOfLines={1}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[
+                  styles.rightTab,
+                  selectedTabRight === 'map' && styles.activeTabRight,
+                ]}
+                onPress={() => onPressRightTab('map')}>
+                {selectedTabRight === 'map' ? (
+                  <Image style={styles.listIcon} source={icons.map} />
+                ) : (
+                  <Image style={styles.listIcon} source={icons.mapInactive} />
+                )}
+
+                <AileronBold
+                  style={[
+                    styles.infoContainerHeaderText,
+                    selectedTabRight === 'map' && styles.activeTabRightText,
+                  ]}
+                  name="Map"
+                  numberOfLines={1}
+                />
+              </TouchableOpacity>
+            </View>
+
             <View style={styles.mapTabsContainer}>
               <FlatList
                 data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}

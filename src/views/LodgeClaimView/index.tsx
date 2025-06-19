@@ -58,6 +58,8 @@ type LodgeClaimViewProps = {
   confirmationType: any;
   handleDeleteClaim: any;
   deletedIndex: any;
+  setConfirmationType: any;
+  onPressSubmitClaim: any;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -99,6 +101,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   selectedHospital,
   confirmationType,
   handleDeleteClaim,
+  setConfirmationType,
+  onPressSubmitClaim,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -197,11 +201,26 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         confirmationMessage={
           confirmationType === 'delete'
             ? 'Are you sure you want to delete this claim?'
+            : confirmationType === 'submit'
+            ? 'Are you sure you want to make this claim?'
             : 'thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims'
         }
-        claimSubmission={confirmationType === 'delete' ? false : true}
+        claimSubmission={
+          confirmationType === 'delete'
+            ? false
+            : confirmationType === 'submit'
+            ? false
+            : true
+        }
         deleteButton={confirmationType === 'delete' ? true : false}
-        closeButton={confirmationType === 'delete' ? false : true}
+        submitButton={confirmationType === 'submit' ? true : false}
+        closeButton={
+          confirmationType === 'delete'
+            ? false
+            : confirmationType === 'submit'
+            ? false
+            : true
+        }
         confirmationRequired={confirmationType === 'delete' ? true : false}
         CloseButtonText={'Continue To Login'}
         onClose={() => {
@@ -212,6 +231,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         handleDelete={
           confirmationType === 'delete'
             ? () => handleDeleteClaim(deletedIndex)
+            : null
+        }
+        handleSubmit={
+          confirmationType === 'submit'
+            ? () => {
+                onPressSubmitClaim();
+              }
             : null
         }
       />
