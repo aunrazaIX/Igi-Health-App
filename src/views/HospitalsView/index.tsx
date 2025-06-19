@@ -71,7 +71,6 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
                 />
               </View>
             </View>
-
             <View style={styles.infoContainerHeaderRight}>
               <TouchableOpacity
                 onPress={() => onPressRightTab('list')}
@@ -117,7 +116,6 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
                 />
               </TouchableOpacity>
             </View>
-
             <View style={styles.mapTabsContainer}>
               <FlatList
                 data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}
@@ -130,11 +128,14 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
                     onPressMapTab={onPressMapTab}
                     selectedMapTab={selectedMapTab}
                     provinceName={item}
+                    icon={true}
                   />
                 )}
               />
             </View>
+            |
           </View>
+
           <FlatList
             data={data}
             // contentContainerStyle={{paddingBottom: vh * 2}}

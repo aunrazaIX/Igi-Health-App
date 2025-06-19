@@ -5,15 +5,18 @@ import {useSelector} from 'react-redux';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useState} from 'react';
+import {RootState} from '../redux/store';
 
 type UseBenefitsViewModel = {
   states: {
     data: CoverageBenefit[];
 
     benefitsloading: any;
+    selectedTab: any;
   };
   functions: {
     goBack: () => void;
+    onPressTab: any;
   };
 };
 
@@ -26,8 +29,21 @@ type CoverageBenefit = {
 const useBenefitsViewModel = (): UseBenefitsViewModel => {
   let {user} = useSelector((state: RootState) => state.auth);
 
-  const [data, setData] = useState([]);
+  const [allBenefits, setAllBenefits] = useState([]);
+  const [selectedTab, setSelectedTab] = useState('Inpatient');
 
+  const onPressTab = (tab: string) => {
+    setSelectedTab(tab);
+  };
+
+  const formatPrice = (value: any) => {
+    if (!value) return '0';
+
+    const number = Number(value);
+    if (isNaN(number)) return value;
+
+    return new Intl.NumberFormat('en-PK').format(number);
+  };
   const navigation = useNavigation();
 
   const {data: benefitsData, loading: benefitsloading} = useApiHook({
@@ -37,17 +53,28 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
       ClientCode: user?.ClientCode,
     },
     onSuccess: res => {
-      const formattedData = res.map(
-        (item: any): CoverageBenefit => ({
-          title: item.BenefitDetails,
-          price: item?.EntitlementLimits,
-          image: icons.medicalList,
-        }),
-      );
-
-      setData(formattedData);
+      setAllBenefits(res);
     },
   });
+
+  let filteredData = allBenefits
+    .filter((item: any) => {
+      if (selectedTab === 'Outpatient') {
+        return item.BenefitTypeName === 'OPD';
+      } else if (selectedTab === 'Inpatient') {
+        return item.BenefitTypeName === 'IPD';
+      } else if (selectedTab === 'Maternity') {
+        return item.BenefitTypeName !== 'OPD' && item.BenefitTypeName !== 'IPD';
+      }
+      return false;
+    })
+    .map(
+      (item: any): CoverageBenefit => ({
+        title: item.BenefitDetails,
+        price: formatPrice(item?.EntitlementLimits),
+        image: icons.medicalList,
+      }),
+    );
 
   const goBack = () => {
     navigation.goBack();
@@ -55,12 +82,13 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
 
   return {
     states: {
-      data,
-
+      data: filteredData,
+      selectedTab,
       benefitsloading,
     },
     functions: {
       goBack,
+      onPressTab,
     },
   };
 };

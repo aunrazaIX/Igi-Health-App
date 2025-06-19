@@ -14,6 +14,8 @@ import {ImageSourcePropType} from 'react-native';
 import ModalLoading from '../../components/ModalLoading';
 import NoDataView from '../../components/NoDataView';
 import {vh, vw} from '../../assets/theme/dimension';
+import {Text} from 'react-native-gesture-handler';
+import ProvinceTab from '../../components/provinceTab';
 
 type Item = {
   title: string;
@@ -25,9 +27,18 @@ type Props = {
   data: Item[];
   benefitsloading: any;
   goBack: () => void;
+  onPressTab: any;
+  selectedTab: any;
 };
 
-const BenefitsView: React.FC<Props> = ({data, goBack, benefitsloading}) => {
+const BenefitsView: React.FC<Props> = ({
+  data,
+  goBack,
+  onPressTab,
+  selectedTab,
+
+  benefitsloading,
+}) => {
   const RenderBenefits = ({item}: {item: Item}) => (
     <View style={styles.card}>
       <LinearGradient
@@ -75,6 +86,26 @@ const BenefitsView: React.FC<Props> = ({data, goBack, benefitsloading}) => {
       <View style={styles.coverage}>
         <AileronBold name={'Coverage &'} style={styles.coverageTitle} />
         <AileronBold name={' Benefits!'} style={styles.benefitTitle} />
+      </View>
+
+      <View>
+        <View style={styles.mapTabsContainer}>
+          <FlatList
+            data={['Inpatient', 'Outpatient', 'Maternity']}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.mapTabsContainer}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => (
+              <ProvinceTab
+                onPressMapTab={onPressTab}
+                selectedMapTab={selectedTab}
+                provinceName={item}
+                icon={false}
+              />
+            )}
+          />
+        </View>
       </View>
     </View>
   );

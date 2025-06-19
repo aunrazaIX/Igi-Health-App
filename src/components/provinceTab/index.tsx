@@ -9,12 +9,14 @@ type ProvinceTabProps = {
   onPressMapTab: (tab: string) => void;
   selectedMapTab: string;
   provinceName: string;
+  icon: any;
 };
 
 const ProvinceTab: React.FC<ProvinceTabProps> = ({
   onPressMapTab,
   selectedMapTab,
   provinceName,
+  icon,
 }) => {
   return (
     <TouchableOpacity
@@ -22,19 +24,24 @@ const ProvinceTab: React.FC<ProvinceTabProps> = ({
       style={
         selectedMapTab === provinceName ? style.mapTabActive : style.mapTab
       }>
-      <View>
-        {selectedMapTab === provinceName ? (
-          <Image style={style.mapTabIcon} source={icons.mapLoacationActive} />
-        ) : (
-          <Image style={style.mapTabIcon} source={icons.mapLoacationInActive} />
-        )}
-      </View>
+      {icon && (
+        <View>
+          {selectedMapTab === provinceName ? (
+            <Image style={style.mapTabIcon} source={icons.mapLoacationActive} />
+          ) : (
+            <Image
+              style={style.mapTabIcon}
+              source={icons.mapLoacationInActive}
+            />
+          )}
+        </View>
+      )}
 
       <View>
         {selectedMapTab === provinceName ? (
-          <AileronBold style={style.mapTabTextActive} name={provinceName}/>
+          <AileronBold style={style.mapTabTextActive} name={provinceName} />
         ) : (
-          <AileronBold style={style.mapTabText} name={provinceName}/>
+          <AileronBold style={style.mapTabText} name={provinceName} />
         )}
       </View>
     </TouchableOpacity>

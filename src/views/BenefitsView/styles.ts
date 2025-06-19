@@ -53,6 +53,12 @@ const styles = StyleSheet.create({
     fontSize: vh * 2.3,
     color: COLORS.benefitTitle,
   },
+  mapTabsContainer: {
+    flexDirection: 'row',
+    gap: vw * 1.5,
+    marginBottom: vh,
+    marginTop: vh * 2,
+  },
   card: {
     width: '33.33%',
     alignItems: 'center',
