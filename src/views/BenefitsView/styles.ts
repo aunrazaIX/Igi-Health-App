@@ -89,6 +89,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     width: vh * 12,
   },
+  insuredTitleCovered: {
+    fontSize: vh * 1.6,
+    color: COLORS.cardBackgroundBlue,
+    marginVertical: vh * 1,
+    fontWeight: '800',
+    width: vh * 12,
+    // borderWidth: 2,
+  },
   insuredPrice: {
     fontSize: vh * 1.67,
     color: COLORS.insuredPrice,

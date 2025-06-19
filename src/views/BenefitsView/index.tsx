@@ -51,7 +51,14 @@ const BenefitsView: React.FC<Props> = ({
         </View>
       </LinearGradient>
 
-      <AileronSemiBold name={item.title} style={styles.insuredTitle} />
+      <AileronSemiBold
+        name={item.title}
+        style={
+          item.price === 'Covered'
+            ? styles.insuredTitleCovered
+            : styles.insuredTitle
+        }
+      />
       <AileronBold
         name={`${item.price}${!isNaN(Number(item.price)) ? ' /-' : ''}`}
         style={styles.insuredPrice}
