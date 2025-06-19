@@ -19,23 +19,31 @@ const ContactInfoView = ({
   return (
     <View style={styles.box}>
       <AileronSemiBold style={styles.title} name="Contact information" />
-      <AileronRegular
+      <AileronRegular style={styles.subtitle} name="Approval Center:" />
+      <AileronSemiBold style={styles.name} name={'Tel : +92-(042) 34503333'} />
+      <AileronSemiBold
         style={styles.subtitle}
-        name="Operations & Customer Services"
+        name={`Email: approvalsubmission.pakistan@igi.com.pk `}
       />
-      <AileronSemiBold style={styles.name} name={data?.name} />
-      <AileronSemiBold style={styles.subtitle} name={`Tel: ${data?.tel}`} />
-      <AileronSemiBold style={styles.subHeading} name={`Fax: ${data?.fax}`} />
-      <AileronBold
+
+      <AileronBold style={styles.subHeading} name={`Customer Services:`} />
+      <AileronSemiBold
         style={styles.subHeading}
-        name={`Emergency & Panel Hospital Approvals\nTel: ${data?.emergencyTel}`}
+        name={`UAN : 021-111-111-711`}
       />
       <AileronSemiBold
         style={styles.subHeading}
-        name={`For Claims Tel: ${data?.claimsTel}`}
+        name={`WhatsApp : +92-300-8208489`}
+      />
+      <AileronSemiBold
+        style={styles.subHeading}
+        name={`Email: corporate.services@igi.com.pk`}
       />
       <AileronBold style={styles.address} name={'Address:'} />
-      <AileronSemiBold name={data?.address} style={styles.addressDetail} />
+      <AileronSemiBold
+        name={`7th Floor, The Forum, Block -9, Khayaban – e - Jami, Clifton, Karachi, Pakistan.`}
+        style={styles.addressDetail}
+      />
 
       <View style={styles.buttonRow}>
         <TouchableOpacity

@@ -43,6 +43,8 @@ type Props = {
   confirmationModal: boolean;
   resetStates: () => void;
   dependantLoading: boolean;
+  modalType: any;
+  onPressDelete: any;
 };
 type dependentDetail = {
   dependent: string;
@@ -70,6 +72,8 @@ const PersonalView: React.FC<Props> = ({
   resetStates,
   deleteDepenedentLoading,
   dependantLoading,
+  modalType,
+  onPressDelete,
 }) => {
   return (
     <Container>
@@ -197,10 +201,16 @@ const PersonalView: React.FC<Props> = ({
         setConfirmationModalVisible={setConfirmationModal}
         frameImage={icons.ModalSuccessfull}
         confirmationMessage={
-          'Your request of deletion has been successfully applied'
+          modalType === 'delete'
+            ? 'are you sure you want to applied for request deletion'
+            : 'Your request of deletion has been successfully applied'
         }
-        closeButton={true}
-        Successfull={true}
+        closeButton={modalType === 'delete' ? false : true}
+        deleteButton={modalType === 'delete' ? true : false}
+        handleDelete={() => {
+          onPressDelete();
+        }}
+        Successfull={modalType === 'delete' ? false : true}
         CloseButtonText={'Continue To Login'}
         onClose={resetStates}
       />

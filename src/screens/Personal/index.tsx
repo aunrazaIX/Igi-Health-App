@@ -13,6 +13,7 @@ const Personal = () => {
     confirmationModal,
     deleteDepenedentLoading,
     dependantLoading,
+    modalType,
   } = states;
 
   const {
@@ -26,6 +27,7 @@ const Personal = () => {
     openAddDependent,
     setConfirmationModal,
     resetStates,
+    onPressDelete,
   } = functions;
 
   return (
@@ -48,6 +50,8 @@ const Personal = () => {
         setConfirmationModal={setConfirmationModal}
         resetStates={resetStates}
         dependantLoading={dependantLoading}
+        modalType={modalType}
+        onPressDelete={onPressDelete}
       />
     </>
   );

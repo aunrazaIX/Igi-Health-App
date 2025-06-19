@@ -172,24 +172,33 @@ const DrawerStack = () => {
 
         <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
           <View style={styles.menuContainer}>
-            <TouchableOpacity
-              style={styles.ButtonContainer}
-              onPress={handleProfile}>
-              <LinearGradient
-                colors={COLORS.PriorGradient}
-                style={styles.buttonGradient}>
-                <View style={styles.wrapper}>
-                  <AileronSemiBold
-                    name="View Profile"
-                    style={styles.Buttontext}
-                  />
-                  <Image
-                    source={drawerIcons.drawerArrowRight}
-                    style={styles.buttonIcon}
-                  />
-                </View>
-              </LinearGradient>
-            </TouchableOpacity>
+            <View style={styles.profileContainer}>
+              <View style={styles.profileRow}>
+                <AileronSemiBold
+                  name="Imran Naveed Qureshi"
+                  style={styles.profileTittle}
+                />
+              </View>
+
+              <TouchableOpacity
+                style={styles.ButtonContainer}
+                onPress={handleProfile}>
+                <LinearGradient
+                  colors={COLORS.PriorGradient}
+                  style={styles.buttonGradient}>
+                  <View style={styles.wrapper}>
+                    <AileronSemiBold
+                      name="View Profile"
+                      style={styles.Buttontext}
+                    />
+                    <Image
+                      source={drawerIcons.drawerArrowRight}
+                      style={styles.buttonIcon}
+                    />
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            </View>
 
             {routes?.length > 0 &&
               routes?.map((route, index) => (
@@ -224,33 +233,6 @@ const DrawerStack = () => {
                   <AileronBold style={styles.title} name={route?.name} />
                 </TouchableOpacity>
               ))}
-          </View>
-          <View style={styles.profileContainer}>
-            <View style={styles.profileRow}>
-              {/* <Image
-                source={drawerIcons.drawerProfile}
-                style={styles.profileIcon}
-              /> */}
-            </View>
-
-            {/* <TouchableOpacity
-              style={styles.ButtonContainer}
-              onPress={handleProfile}>
-              <LinearGradient
-                colors={COLORS.PriorGradient}
-                style={styles.buttonGradient}>
-                <View style={styles.wrapper}>
-                  <AileronSemiBold
-                    name="View Profile"
-                    style={styles.Buttontext}
-                  />
-                  <Image
-                    source={drawerIcons.drawerArrowRight}
-                    style={styles.buttonIcon}
-                  />
-                </View>
-              </LinearGradient>
-            </TouchableOpacity> */}
           </View>
         </ScrollView>
       </View>
@@ -326,6 +308,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 4,
     alignItems: 'center',
+    // justifyContent: 'center',
   },
   profileIcon: {
     width: vw * 15,
@@ -333,9 +316,10 @@ const styles = StyleSheet.create({
     borderRadius: vh * 1.5,
   },
   profileTittle: {
-    width: vw * 35,
-    fontSize: vw * 4,
+    // width: vw * 35,
+    fontSize: vw * 4.5,
     textAlign: 'left',
+    // borderWidth: 2,
   },
   Buttontext: {
     fontSize: vw * 3.5,

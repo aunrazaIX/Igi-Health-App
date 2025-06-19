@@ -46,6 +46,10 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
+  const [modalType, setModalType] = useState<string>('');
+
+  const [deleteDependent, setDeleteDependent] = useState<any>();
+
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const navigation = useNavigation();
@@ -115,6 +119,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
     onSuccess: res => {
+      console.log('succesgull');
       setConfirmationModal(true);
     },
     onError: e => {
@@ -123,17 +128,24 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
   });
 
   const deleteDepenedent = (dependent, index) => {
+    setConfirmationModal(true);
+    setModalType('delete');
+    setDeleteDependent(dependent);
+  };
+
+  const onPressDelete = () => {
+    setModalType('');
     let _apiData = {
       dependentRequestID: 0,
       dependentRequestTypesID: 3,
       // dependentTypeID: dependent?.dependentDetail[2]?.value,
       dependentTypeID: 3,
-      dependentName: dependent?.dependentDetail[0]?.value,
+      dependentName: deleteDependent?.dependentDetail[0]?.value,
       cnic: user?.cnic,
       clientCode: user?.ClientCode,
-      gender: dependent?.dependentDetail[1].value,
+      gender: deleteDependent?.dependentDetail[1].value,
 
-      Age: dependent?.dependentDetail[3].value,
+      Age: deleteDependent?.dependentDetail[3].value,
       dependentRequestStatus: true,
       createdAt: '2025-05-15T15:01:31.6552852+05:00',
       createdBy: 1,
@@ -142,7 +154,6 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
     console.log(_apiData, 'myAPi DATA');
     trigger(_apiData);
   };
-
   const toggleExpand = (index: number) => {
     setExpandedIndex(prevIndex => (prevIndex === index ? null : index));
   };
@@ -155,6 +166,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       expandedIndex,
       deleteDepenedentLoading,
       dependantLoading,
+      modalType,
     },
     functions: {
       openAddDependent,
@@ -165,6 +177,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       toggleExpand,
       setConfirmationModal,
       resetStates,
+      onPressDelete,
     },
   };
 };
