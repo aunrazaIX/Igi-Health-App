@@ -60,7 +60,7 @@ const BenefitsView: React.FC<Props> = ({
         }
       />
       <AileronBold
-        name={`${item.price}${!isNaN(Number(item.price)) ? ' /-' : ''}`}
+        name={`${item.price}${/\d[\d,]*/.test(item.price) ? ' /-' : ''}`}
         style={styles.insuredPrice}
       />
     </View>
