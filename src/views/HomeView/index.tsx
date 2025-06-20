@@ -349,7 +349,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                 <Image style={styles.cardLogo} source={item.logo} />
 
                 <View style={styles.cardContent}>
-                  <View style={{width: '85%'}}>
+                  <View style={{width: '81%'}}>
                     <AileronRegular
                       style={styles.dashboardContainerCardText}
                       name={item.name}
