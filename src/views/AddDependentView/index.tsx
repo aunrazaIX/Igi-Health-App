@@ -113,10 +113,12 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
                 dependentSetterForApiData('gender', option)
               }
               value={
-                dependentApiData?.dependentTypeID?.label === 'Son' ||
-                dependentApiData?.dependentTypeID?.label === 'Father'
-                  ? 'Male'
-                  : 'Female'
+                dependentApiData?.dependentTypeID?.label
+                  ? dependentApiData.dependentTypeID.label === 'Son' ||
+                    dependentApiData.dependentTypeID.label === 'Father'
+                    ? 'Male'
+                    : 'Female'
+                  : ''
               }
             />
 

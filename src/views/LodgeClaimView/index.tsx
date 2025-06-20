@@ -159,7 +159,9 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge Claim'}
         resetStates={resetStates}
       />
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        enableOnAndroid>
         <CurvedView containerStyle={styles.curveStyle}>
           <Stepper
             currentStep={currentStep}
