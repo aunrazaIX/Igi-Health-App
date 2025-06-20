@@ -43,9 +43,13 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
   const [tabChanging, setTabChanging] = useState(false);
 
   const onPressMapTab = (tab: string) => {
+    if (selectedMapTab === tab) {
+      return;
+    }
+
+    // setTabChanging(true);
     setSelectedMapTab(tab);
     setData([]);
-    setTabChanging(true);
   };
 
   const goBack = () => navigation.goBack();
