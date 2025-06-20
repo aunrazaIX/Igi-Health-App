@@ -1,5 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Keyboard,
+} from 'react-native';
 import React, {useState} from 'react';
 import DependentBox from '../DependentBox';
 import AileronRegular from '../AileronRegular';
@@ -32,6 +38,7 @@ const Select: React.FC<SelectProps> = ({
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   const handleSelect = (item: Options) => {
+    Keyboard.dismiss();
     setDropdownVisible(false);
     if (typeof onSelectOption == 'function') {
       onSelectOption(item);
@@ -43,7 +50,10 @@ const Select: React.FC<SelectProps> = ({
       <DependentBox containerStyle={styles.dependentContainer}>
         <AileronRegular name={selectLabel} style={styles.Patient} />
         <TouchableOpacity
-          onPress={() => setDropdownVisible(!isDropdownVisible)}>
+          onPress={() => {
+            Keyboard.dismiss();
+            setDropdownVisible(!isDropdownVisible);
+          }}>
           <View style={styles.selectBox}>
             <AileronBold
               style={styles.selectText}

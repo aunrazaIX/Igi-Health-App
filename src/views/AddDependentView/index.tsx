@@ -72,7 +72,10 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               style={styles.personalFrameIMG}
             />
             <View style={styles.manageContainer}>
-              <AileronBold name={'Manage Update'} style={styles.manageText} />
+              <AileronBold
+                name={dependentIndex != undefined ? 'Manage Update' : 'Add'}
+                style={styles.manageText}
+              />
               <AileronBold
                 name={'Dependent Details'}
                 style={styles.DependentText}
