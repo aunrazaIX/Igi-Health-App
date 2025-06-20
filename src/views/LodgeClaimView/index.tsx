@@ -152,15 +152,14 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? icons.addSquare
             : null
         }
+        containerStyleIcon={styles.addTreatment}
         tintColrorForTopViewFirstIcon={COLORS.white}
         FirstOpenModal={navigateTreatment}
         onPressBack={goBack}
         title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge Claim'}
         resetStates={resetStates}
       />
-      <KeyboardAwareScrollView
-        showsVerticalScrollIndicator={false}
-        enableOnAndroid>
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <CurvedView containerStyle={styles.curveStyle}>
           <Stepper
             currentStep={currentStep}
@@ -203,7 +202,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? 'Are you sure you want to delete this treatment?'
             : confirmationType === 'submit'
             ? 'Are you sure you want to make this claim?'
-            : 'thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims'
+            : 'Thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims.'
         }
         claimSubmission={
           confirmationType === 'delete'

@@ -40,10 +40,12 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
 
   const onPressTab = (tab: string) => setSelectedTab(tab);
   const onPressRightTab = (tab: string) => setSelectedTabRight(tab);
+  const [tabChanging, setTabChanging] = useState(false);
 
   const onPressMapTab = (tab: string) => {
     setSelectedMapTab(tab);
     setData([]);
+    setTabChanging(true);
   };
 
   const goBack = () => navigation.goBack();
@@ -68,6 +70,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
     }
 
     setData(filtered);
+    setTabChanging(false);
   }, [searchText, selectedMapTab, allData]);
 
   const {loading: hospitalLoading} = useApiHook({
@@ -100,6 +103,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       selectedMapTab,
       searchText,
       hospitalLoading,
+      tabChanging,
     },
     functions: {
       onPressTab,

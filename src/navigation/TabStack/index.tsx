@@ -25,7 +25,9 @@ const Tabs = () => {
         popToTopOnBlur: true,
         tabBarStyle: styles.tabBarStyle,
         tabBarItemStyle: {
-          paddingVertical: vh * 1,
+          // paddingVertical: vh * 1,
+          // alignItems: 'center',
+          // borderWidth: 2,
         },
         headerShown: false,
         tabBarIconStyle: {
@@ -170,7 +172,12 @@ const styles = StyleSheet.create({
     height: vw * 22,
     marginHorizontal: vw * 6,
     paddingHorizontal: vw * 2,
-    elevation: 3,
+    elevation: 1,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: COLORS.white,
   },
   iconContainer: {
     padding: vh * 1,
@@ -182,6 +189,9 @@ const styles = StyleSheet.create({
 
   gradientBorder: {
     borderRadius: vh * 50,
+    // borderWidth: 2,
+    // alignItems: 'center',
+    marginTop: vh,
   },
   wrapper: {
     paddingHorizontal: vw * 4,

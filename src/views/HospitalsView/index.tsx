@@ -50,6 +50,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
   data,
   setSearchText,
   hospitalLoading,
+  tabChanging,
 }) => {
   return (
     <>
@@ -154,7 +155,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
           />
         </KeyboardAwareScrollView>
 
-        <ModalLoading loading={hospitalLoading} />
+        <ModalLoading loading={hospitalLoading || tabChanging} />
       </CurvedView>
     </>
   );

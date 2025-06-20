@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
 
     // borderWidth: 2,
   },
+  addTreatment: {
+    resizeMode: 'contain',
+  },
 });
 
 export default styles;
