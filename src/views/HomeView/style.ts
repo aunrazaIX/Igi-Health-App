@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: vh * 8,
+    // paddingBottom: vh * 1.4,
   },
   headerLogo: {
     width: 25 * vw,
@@ -39,7 +40,7 @@ export const styles = StyleSheet.create({
   homeInfoContainer: {
     width: '100%',
     paddingHorizontal: vw * 4,
-    paddingVertical: vh * 2,
+    paddingVertical: vh * 3,
     borderRadius: vw * 6,
     backgroundColor: COLORS.white,
     elevation: 3,
@@ -50,7 +51,8 @@ export const styles = StyleSheet.create({
       height: 1,
     },
     // borderWidth: 2,
-    // height: 30 * vh,
+    // minHeight: 28 * vh,
+
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
   },
@@ -166,7 +168,7 @@ export const styles = StyleSheet.create({
   homeCardMainDetails: {
     // borderWidth: 2,
 
-    gap: vh * 0.5,
+    gap: vh * 0.9,
   },
 
   flipCardIcon: {
@@ -185,7 +187,7 @@ export const styles = StyleSheet.create({
     color: COLORS.textBlackShade,
   },
   infoCardFooterLeft: {
-    gap: vh * 0.5,
+    gap: vh * 0.9,
 
     alignItems: 'flex-start',
   },
@@ -241,7 +243,7 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCardText: {
     textAlign: 'left',
-    fontSize: vw * 5,
+    fontSize: vw * 4.5,
     color: COLORS.white,
   },
   cardsArrow: {
