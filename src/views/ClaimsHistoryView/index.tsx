@@ -15,6 +15,8 @@ import {
 import Calender from './Component/Calender';
 import NoDataView from '../../components/NoDataView';
 import ModalLoading from '../../components/ModalLoading';
+import SimpleLoader from '../../components/SimpleLoader';
+import {COLORS} from '../../assets/theme/colors';
 
 type claimsHistoryViewProps = {
   data: ClaimHistoryGroup[];
@@ -158,7 +160,10 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
           )}
         </View>
 
-        <ModalLoading loading={claimDataLoading} />
+        {/* <ModalLoading loading={claimDataLoading} />
+         */}
+
+        {claimDataLoading && <SimpleLoader color={COLORS.cardBackgroundRed} />}
       </CurvedView>
 
       {/* {isCalendarVisible && (
