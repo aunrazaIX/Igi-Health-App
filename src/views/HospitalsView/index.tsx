@@ -156,7 +156,9 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
                     </View>
                   );
                 }
-                return hospitalLoading ? null : (
+                return hospitalLoading ||
+                  tabChanging ||
+                  data.length !== 0 ? null : (
                   <NoDataView name="No hospitals found" />
                 );
               }}

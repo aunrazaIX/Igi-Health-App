@@ -149,7 +149,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
             </TouchableOpacity>
           </View>
 
-          {data ? (
+          {(data && data.length > 0) || claimDataLoading ? (
             <FlatList
               data={data}
               keyExtractor={(_, index) => index.toString()}
