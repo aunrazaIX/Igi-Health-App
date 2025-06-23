@@ -98,15 +98,24 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               />
             </DependentBox>
 
-            <Select
-              selectData={relationsOptions}
-              selectLabel={'Relationship'}
-              selectPlaceholder={'-- Select Relation --'}
-              onSelectOption={option =>
-                dependentSetterForApiData('dependentTypeID', option)
-              }
-              value={dependentApiData?.dependentTypeID?.label ?? null}
-            />
+           <Select
+  selectData={relationsOptions}
+  selectLabel={'Relationship'}
+  selectPlaceholder={'-- Select Relation --'}
+  onSelectOption={option => {
+    dependentSetterForApiData('dependentTypeID', option);
+
+    
+    if (option.label === 'Son' || option.label === 'Father') {
+      dependentSetterForApiData('gender', {label: 'Male', value: 'Male'});
+    } else if (option.label === 'Daughter' || option.label === 'Mother') {
+      dependentSetterForApiData('gender', {label: 'Female', value: 'Female'});
+    } else {
+      dependentSetterForApiData('gender', null); 
+    }
+  }}
+  value={dependentApiData?.dependentTypeID?.label ?? null}
+/>
 
             <Select
               selectData={genderOptions}
@@ -115,14 +124,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               onSelectOption={option =>
                 dependentSetterForApiData('gender', option)
               }
-              value={
-                dependentApiData?.dependentTypeID?.label
-                  ? dependentApiData.dependentTypeID.label === 'Son' ||
-                    dependentApiData.dependentTypeID.label === 'Father'
-                    ? 'Male'
-                    : 'Female'
-                  : ''
-              }
+            value={dependentApiData?.gender?.label ?? ''}
             />
 
             <DependentBox containerStyle={styles.dependentOuterStyle}>
