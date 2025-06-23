@@ -345,7 +345,8 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
         setErrorModal({
           Show: true,
           message:
-            error?.message || 'Biometric login failed. Please try again.',
+            `${error?.message} "please login manually again to setup new FingerPrint"` ||
+            'Biometric login failed. Please try again.',
         }),
       );
     }

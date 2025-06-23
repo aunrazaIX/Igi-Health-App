@@ -132,9 +132,17 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
                 style={styles.popupInput}
                 placeholder="Enter Age"
                 placeholderTextColor={COLORS.selectPlaceholder}
+                keyboardType="numeric"
                 onChangeText={text => {
                   const digitsOnly = text.replace(/[^0-9]/g, '');
-                  dependentSetterForApiData('Age', digitsOnly);
+                  const numericAge = Number(digitsOnly);
+
+                  if (
+                    digitsOnly === '' ||
+                    (numericAge >= 0 && numericAge <= 110)
+                  ) {
+                    dependentSetterForApiData('Age', digitsOnly);
+                  }
                 }}
                 value={dependentApiData?.Age ?? null}
               />
