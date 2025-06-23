@@ -22,6 +22,8 @@ import {COLORS} from '../../assets/theme/colors';
 import ProvinceTab from '../../components/provinceTab';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ModalLoading from '../../components/ModalLoading';
+import NoDataView from '../../components/NoDataView';
+import SimpleLoader from '../../components/SimpleLoader';
 
 type HospitalsViewProps = {
   selectedTab: string;
@@ -54,7 +56,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
 }) => {
   return (
     <>
-      <TopView title="Hospitals" />
+      <TopView title="Hospitals" type="default" />
       <CurvedView>
         <KeyboardAwareScrollView>
           <View>
@@ -137,25 +139,40 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
             |
           </View>
 
-          <FlatList
-            data={data}
-            // contentContainerStyle={{paddingBottom: vh * 2}}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({item}) => (
-              <>
+          {tabChanging ? (
+            <SimpleLoader color={COLORS.black} />
+          ) : (
+            <FlatList
+              data={data}
+              keyExtractor={(_, index) => index.toString()}
+              ListEmptyComponent={() => {
+                if (tabChanging) {
+                  return (
+                    <View style={{padding: 20, alignItems: 'center'}}>
+                      <SimpleLoader
+                        size="large"
+                        color={COLORS.cardBackgroundBlue}
+                      />
+                    </View>
+                  );
+                }
+                return hospitalLoading ? null : (
+                  <NoDataView name="No hospitals found" />
+                );
+              }}
+              renderItem={({item}) => (
                 <DetailsContainer
-                  detailsText={styles.detailsText}
                   detailsTextLabel={styles.detailsTextLabel}
                   detailsTextValue={styles.detailsTextValue}
                   headerIcon={[icons.arrowDirection]}
                   data={item}
                 />
-              </>
-            )}
-          />
+              )}
+            />
+          )}
         </KeyboardAwareScrollView>
 
-        <ModalLoading loading={hospitalLoading || tabChanging} />
+        <ModalLoading loading={hospitalLoading} />
       </CurvedView>
     </>
   );
