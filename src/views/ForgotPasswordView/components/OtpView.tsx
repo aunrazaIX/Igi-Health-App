@@ -1,15 +1,26 @@
-import React, { Fragment, useState } from 'react';
-import { OtpInput } from 'react-native-otp-entry';
-import { COLORS } from '../../../assets/theme/colors';
+import React, {Fragment, useState} from 'react';
+import {OtpInput} from 'react-native-otp-entry';
+import {COLORS} from '../../../assets/theme/colors';
 import styles from '../styles';
-import { AileronBold, AileronRegular } from '../../../components';
-import { TouchableOpacity, View } from 'react-native';
+import {AileronBold, AileronRegular} from '../../../components';
+import {TouchableOpacity, View} from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
-
-
-const OtpView = ({ setOtp, sendOtp, onPressResend, showResend, countdownKey, setShowResend }: { setOtp: (otp: string) => void; sendOtp: () => void; onPressResend: () => void; showResend: boolean; countdownKey: number; setShowResend: () => void; }) => {
-
+const OtpView = ({
+  setOtp,
+  sendOtp,
+  onPressResend,
+  showResend,
+  countdownKey,
+  setShowResend,
+}: {
+  setOtp: (otp: string) => void;
+  sendOtp: () => void;
+  onPressResend: () => void;
+  showResend: boolean;
+  countdownKey: number;
+  setShowResend: () => void;
+}) => {
   return (
     <Fragment>
       <OtpInput
@@ -35,15 +46,17 @@ const OtpView = ({ setOtp, sendOtp, onPressResend, showResend, countdownKey, set
           containerStyle: styles.otpContainer,
           focusedPinCodeContainerStyle: styles.otpBoxView,
         }}
-        onTextChange={(text) => {
-          setOtp(text)
+        onTextChange={text => {
+          setOtp(text);
         }}
       />
 
-      <View style={{ flexDirection: 'row', justifyContent: "center", alignItems: "center", }}>
-
-
-
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <AileronRegular style={styles.sendAgain} name="Send code again" />
 
         <CountDown
@@ -51,24 +64,18 @@ const OtpView = ({ setOtp, sendOtp, onPressResend, showResend, countdownKey, set
           size={12}
           until={60}
           onFinish={() => setShowResend(true)}
-          digitStyle={{ backgroundColor: '#FFF', }}
+          digitStyle={{backgroundColor: '#FFF'}}
           timeToShow={['M', 'S']}
-          timeLabels={{ m: '', s: '' }}
+          timeLabels={{m: '', s: ''}}
           showSeparator
         />
-
       </View>
-
 
       {showResend && (
         <TouchableOpacity onPress={onPressResend}>
           <AileronBold style={styles.resendCode} name="Resend Code" />
         </TouchableOpacity>
       )}
-
-
-
-
     </Fragment>
   );
 };

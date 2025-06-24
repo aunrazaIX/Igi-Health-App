@@ -3,6 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 const initalState = {
   showErrorModal: false,
   errorMessage: null,
+  errorDetail: null,
 };
 export const generalSlice = createSlice({
   name: 'generalSlice',
@@ -13,6 +14,9 @@ export const generalSlice = createSlice({
 
       if (payload?.message !== undefined) {
         state.errorMessage = payload.message;
+      }
+      if (payload?.detail !== undefined) {
+        state.errorDetail = payload.detail;
       }
     },
   },

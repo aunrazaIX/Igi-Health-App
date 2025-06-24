@@ -4,6 +4,7 @@ import ForgotPassword from '../../screens/ForgotPassword';
 
 const AuthStack = () => {
   const Stack = createStackNavigator();
+
   return (
     <Stack.Navigator
       initialRouteName={'Login'}

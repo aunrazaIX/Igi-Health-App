@@ -4,21 +4,26 @@ import {COLORS} from '../../assets/theme/colors';
 
 const styles = StyleSheet.create({
   curvedViewContent: {
-    marginTop: vh * 1.5,
+    // marginTop: vh,
     marginLeft: vw,
   },
   titleText: {
     fontSize: vh * 2.4,
     textAlign: 'left',
     color: COLORS.placeholderColor,
+    lineHeight: vh * 3,
+  },
+  curvedStyle: {
+    paddingBottom: vh * 0,
   },
   description: {
     textAlign: 'left',
     fontSize: vh * 2,
-    marginTop: vh * 2,
+    marginTop: vh,
   },
   button: {
-    marginVertical: vh * 2.5,
+    // marginVertical: vh * 2.5,
+    marginTop: vh,
   },
   otpContainer: {
     marginVertical: vh * 2,

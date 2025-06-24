@@ -5,7 +5,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
 interface AileronBoldProps extends TextProps {
-  name: string | number ;
+  name: string | number;
   style?: StyleProp<TextStyle>;
   numberOfLines?: number;
 }
@@ -35,5 +35,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,
+    // lineHeight: vh * 1.5,
   },
 });

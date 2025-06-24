@@ -283,6 +283,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 4,
     alignItems: 'center',
+    // borderWidth: 2,
   },
   icon: {
     width: vw * 7,
@@ -292,6 +293,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: vw * 4,
     color: COLORS.textBlackShade,
+    lineHeight: vh * 2.4,
   },
   menuContainer: {
     gap: vh * 4.5,

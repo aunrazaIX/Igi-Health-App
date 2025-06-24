@@ -3,6 +3,7 @@ import DrawerStack from '../DrawerStack';
 import AuthStack from '../AuthStack';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
+import Home from '../../screens/Home';
 
 const MainStack = () => {
   const {token, user} = useSelector((state: RootState) => state.auth);

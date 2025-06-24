@@ -101,7 +101,7 @@ const BenefitsView: React.FC<Props> = ({
             data={['Inpatient', 'Outpatient', 'Maternity']}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.mapTabsContainer}
+            contentContainerStyle={styles.mapTabsContainerList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => (
               <ProvinceTab
@@ -109,6 +109,7 @@ const BenefitsView: React.FC<Props> = ({
                 selectedMapTab={selectedTab}
                 provinceName={item}
                 icon={false}
+                activeMapTab={styles.activeMapTab}
               />
             )}
           />

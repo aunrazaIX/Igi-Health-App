@@ -43,7 +43,9 @@ const LoginForm = ({
     <>
       <AileronSemiBold
         numberOfLines={2}
-        name={'Enter your email or mobile number to access your account.'}
+        name={
+          'Enter your registered email or mobile number to access your account.'
+        }
         style={styles.loginContainerText}
       />
 
@@ -93,7 +95,7 @@ const LoginForm = ({
 
       <View style={[styles.row, {justifyContent: 'space-between'}]}>
         <CheckBox
-          description="Remeber Me"
+          description="Remember Me"
           onPressCheckBox={handleCheck}
           isChecked={checked}
         />

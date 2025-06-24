@@ -8,6 +8,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {AileronSemiBold, CurvedView} from '../../components';
 import {LoginForm, SignUpView} from './components';
 import ModalLoading from '../../components/ModalLoading';
+import {vh} from '../../assets/theme/dimension';
 
 const LoginView = ({
   onPressTab,
@@ -69,8 +70,9 @@ const LoginView = ({
     ),
   };
   return (
-    <KeyboardAwareScrollView enableOnAndroid>
+    <KeyboardAwareScrollView>
       <ImageBackground
+        imageStyle={styles.imageStyle}
         source={images.loginBackground}
         style={styles.imageContainer}>
         <View style={styles.loginContent}>
@@ -114,6 +116,7 @@ const LoginView = ({
           </CurvedView>
         </View>
       </ImageBackground>
+      //{' '}
     </KeyboardAwareScrollView>
   );
 };

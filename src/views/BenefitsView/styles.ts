@@ -58,6 +58,18 @@ const styles = StyleSheet.create({
     gap: vw * 1.5,
     marginBottom: vh,
     marginTop: vh * 2,
+
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mapTabsContainerList: {
+    gap: vw * 5,
+
+    width: '100%',
+    justifyContent: 'center',
+  },
+  activeMapTab: {
+    // borderWidth: 2,
   },
   card: {
     width: '33.33%',

@@ -5,6 +5,7 @@ import {useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useSelector} from 'react-redux';
+import moment from 'moment';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 
 type UsePersonalViewModal = {
@@ -81,7 +82,11 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
             {label: 'RelationShip :', value: item?.DPNTTYPE ?? '--'},
             {
               label: 'Date of Birth :',
-              value: item?.CLTDOB,
+              value: item?.CLTDOB
+                ? moment(item?.CLTDOB, 'YYYYMMDD').isValid()
+                  ? moment(item?.CLTDOB, 'YYYYMMDD').format('DD-MMM-YYYY')
+                  : '--'
+                : '--',
             },
           ],
         })),

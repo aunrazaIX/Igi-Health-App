@@ -19,6 +19,7 @@ const Home = () => {
     onPressMenu,
     onPressHeaderIcon,
     handleAssociatedApps,
+    handleCardDownload,
   } = functions;
 
   return (
@@ -35,6 +36,7 @@ const Home = () => {
       loading={loading}
       homeCardDataLoading={homeCardDataLoading}
       handleAssociatedApps={handleAssociatedApps}
+      handleCardDownload={handleCardDownload}
     />
   );
 };

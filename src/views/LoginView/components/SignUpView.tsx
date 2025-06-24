@@ -27,7 +27,7 @@ const SignUpView = ({
       <AileronSemiBold
         numberOfLines={2}
         name={
-          'Enter your email or CNIC Number and create a secure password to register.'
+          'Enter your official email or CNIC number and create a secure password to register.'
         }
         style={styles.loginContainerText}
       />
@@ -89,7 +89,7 @@ const SignUpView = ({
 
       <InputField
         label="CNIC Number"
-        placeholder="Enter cnic"
+        placeholder="Enter CNIC"
         allowCopyPaste={true}
         rightIcon={icons.cnic}
         onChangeText={text => {

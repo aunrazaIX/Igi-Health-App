@@ -76,7 +76,7 @@ const EnterEmailView = ({
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         label="CNIC Number"
-        placeholder="Enter your CNIC number"
+        placeholder="Enter your cnic number"
         containerStyle={style.inputContainer}
         value={apiData?.cnic}
         onChangeText={text => {

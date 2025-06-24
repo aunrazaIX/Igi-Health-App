@@ -18,7 +18,7 @@ type ErrorModalProps = {
 };
 
 const ErrorModal: React.FC<ErrorModalProps> = ({containerStyle}) => {
-  const {showErrorModal, errorMessage} = useSelector(
+  const {showErrorModal, errorMessage, errorDetail} = useSelector(
     (state: RootState) => state.general,
   );
   const dispatch = useDispatch();
@@ -30,15 +30,17 @@ const ErrorModal: React.FC<ErrorModalProps> = ({containerStyle}) => {
             <Image source={icons.errorPopup} style={styles.personalFrameIMG} />
 
             <View style={styles.confirmationContainer}>
-              <AileronBold name={errorMessage} style={styles.confirmation} />
+              <AileronBold
+                name={errorMessage || ''}
+                style={styles.confirmation}
+              />
             </View>
-
-            <AileronSemiBold
-              name={
-                'An error has occurred. Please try again later. If the problem persists, contact support.'
-              }
-              style={styles.confirmationDetail}
-            />
+            {errorDetail ? (
+              <AileronSemiBold
+                name={errorDetail}
+                style={styles.confirmationDetail}
+              />
+            ) : null}
           </View>
           <View>
             <Button
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
   },
   confirmation: {
     fontSize: vw * 6.5,
-    color: COLORS.confimationDetail,
+    color: COLORS.black,
     fontWeight: '700',
   },
   confirmationDetail: {

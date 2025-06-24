@@ -115,8 +115,8 @@ const ForgotPasswordView = ({
         icon={returnHeaderIcon[step]}
         title={returnHeaderName[step]}
       />
-      <CurvedView>
-        <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll>
+      <CurvedView containerStyle={styles.curvedStyle}>
+        <KeyboardAwareScrollView>
           <View style={styles.curvedViewContent}>
             <AileronBold style={styles.titleText} name={returnTitle[step]} />
             <AileronRegular

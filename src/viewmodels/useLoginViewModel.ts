@@ -121,7 +121,14 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     onError: error => {
       const errorMessage = error?.error || error?.message || '';
 
-      dispatch(setErrorModal({Show: true, message: errorMessage}));
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: `"Username or Password"`,
+          detail:
+            'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life',
+        }),
+      );
     },
   });
 
@@ -141,6 +148,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
         ClientCode: res?.Data?.ClientCode,
       };
       sendOtp(apiData);
+    },
+    onError: () => {
+      console.log('oo');
     },
   });
 
@@ -359,7 +369,14 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     if (signupApiData.email && signupApiData.cellNumber && signupApiData.cnic) {
       triggerSignup();
     } else {
-      dispatch(setErrorModal({Show: true, message: 'Please fill all feilds'}));
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Please fill all feilds',
+          detail:
+            'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life',
+        }),
+      );
     }
   };
 

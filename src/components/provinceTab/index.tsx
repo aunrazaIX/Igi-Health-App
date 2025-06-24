@@ -10,6 +10,7 @@ type ProvinceTabProps = {
   selectedMapTab: string;
   provinceName: string;
   icon: any;
+  activeMapTab: any;
 };
 
 const ProvinceTab: React.FC<ProvinceTabProps> = ({
@@ -17,12 +18,15 @@ const ProvinceTab: React.FC<ProvinceTabProps> = ({
   selectedMapTab,
   provinceName,
   icon,
+  activeMapTab,
 }) => {
   return (
     <TouchableOpacity
       onPress={() => onPressMapTab(provinceName)}
       style={
-        selectedMapTab === provinceName ? style.mapTabActive : style.mapTab
+        selectedMapTab === provinceName
+          ? [style.mapTabActive, activeMapTab]
+          : style.mapTab
       }>
       {icon && (
         <View>
@@ -59,6 +63,7 @@ const style = StyleSheet.create({
     borderRadius: vw * 8,
     gap: vw * 1.5,
     alignItems: 'center',
+    // borderWidth: 2,
   },
   mapTab: {
     flexDirection: 'row',

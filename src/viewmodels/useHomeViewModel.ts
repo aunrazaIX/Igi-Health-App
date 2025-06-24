@@ -1,7 +1,7 @@
 import {useRef, useState} from 'react';
 import {cardIcons, icons} from '../assets';
 import {COLORS} from '../assets/theme/colors';
-import {Animated, Linking} from 'react-native';
+import {Alert, Animated, Linking} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
 import endpoints from '../api/endspoints';
@@ -56,6 +56,7 @@ type UseHomeViewModelReturn = {
     onPressMenu: (cardData: CardItemData) => void;
     onPressHeaderIcon: (to: string) => void;
     handleAssociatedApps: (url: string) => void;
+    handleCardDownload: any;
   };
 };
 type ClaimStats = {
@@ -82,6 +83,10 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     currentValue.current = value;
   });
   // const {rememberMe, credentials} = useSelector(state => state.auth);
+
+  const handleCardDownload = () => {
+    console.log('hhh');
+  };
 
   const animateCard = () => {
     if (currentValue.current >= 90) {
@@ -169,7 +174,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   const cardData: CardItemData[] = [
     {
       logo: cardIcons.benefits,
-      name: 'Benefits',
+      name: 'Entitled Benefits',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       to: 'Benefits',
@@ -228,6 +233,14 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       mainParent: 'Tabs',
       stChild: 'Helpline',
     },
+
+    {
+      logo: cardIcons.helpLine,
+      name: 'Comlaint',
+      image: icons.forwardArrow,
+      backgroundColor: COLORS.cardBackgroundRed,
+      link: 'corporate.services@igi.com.pk',
+    },
   ].filter(Boolean);
 
   const {data: rawClaimData, loading} = useApiHook({
@@ -248,6 +261,12 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     if (cardData?.to) {
       navigate.navigate(cardData?.to);
       return;
+    }
+    if (cardData?.link?.includes('@')) {
+      const emailUrl = `mailto:${cardData?.link}`;
+      return Linking.openURL(emailUrl).catch(err =>
+        Alert.alert('Error', err.message),
+      );
     }
 
     if (cardData?.mainParent) {
@@ -302,6 +321,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       onPressMenu,
       onPressHeaderIcon,
       handleAssociatedApps,
+      handleCardDownload,
     },
   };
 };

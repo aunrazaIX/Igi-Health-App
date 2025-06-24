@@ -44,6 +44,7 @@ type HomeViewProps = {
   loading: boolean;
   handleAssociatedApps: any;
   homeCardDataLoading: any;
+  handleCardDownload: any;
 };
 
 const HomeView: React.FC<HomeViewProps> = ({
@@ -59,6 +60,7 @@ const HomeView: React.FC<HomeViewProps> = ({
   loading,
   homeCardDataLoading,
   handleAssociatedApps,
+  handleCardDownload,
 }) => {
   const user = useSelector(state => state.auth.user);
 
@@ -89,6 +91,15 @@ const HomeView: React.FC<HomeViewProps> = ({
               <Animated.View
                 style={[styles.homeInfoContainer, frontAnimatedStyle]}>
                 <TouchableOpacity onPress={animateCard}>
+                  <TouchableOpacity
+                    style={styles.downloadIcon}
+                    onPress={handleCardDownload}>
+                    <Image
+                      style={styles.downloadIconImage}
+                      source={icons.download}
+                    />
+                  </TouchableOpacity>
+
                   <View style={styles.homeInfoContainerHeader}>
                     <View>
                       <Image style={styles.logo} source={icons.logo} />

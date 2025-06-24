@@ -71,11 +71,20 @@ export const styles = StyleSheet.create({
     height: 7 * vh,
     resizeMode: 'contain',
   },
+  downloadIcon: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  downloadIconImage: {
+    width: 14 * vw,
+    height: 6 * vh,
+    resizeMode: 'contain',
+  },
+
   homeInfoContainerHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // borderWidth: 2,
   },
   text: {
     color: COLORS.textColor,

@@ -27,8 +27,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#48C3FF',
     flex: 1,
     width: '100%',
-    // borderWidth: 2,
-    // height: vh * 80,
   },
   subContainer: {
     paddingVertical: vh * 2,

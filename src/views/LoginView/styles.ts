@@ -5,12 +5,13 @@ import {COLORS} from '../../assets/theme/colors';
 export const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
-    // borderWidth: 2,
+  },
+  imageStyle: {
     height: vh * 100,
   },
   wrapper: {padding: vh * 0.7},
   logo: {
-    marginTop: vh * 6.5,
+    marginTop: vh * 3,
     height: vh * 10,
     width: vw * 60,
     resizeMode: 'contain',
@@ -21,7 +22,7 @@ export const styles = StyleSheet.create({
     paddingBottom: vh,
   },
   loginContent: {
-    gap: vh * 4,
+    gap: vh * 2.5,
     flex: 1,
     paddingHorizontal: vw * 4,
     alignItems: 'center',
@@ -74,10 +75,14 @@ export const styles = StyleSheet.create({
   tabText: {
     paddingVertical: vh * 0.4,
     fontSize: vw * 3.6,
+    lineHeight: vh * 2,
   },
   forgetPassword: {
     fontSize: vw * 3.4,
     color: COLORS.forgotPass,
+    lineHeight: vh * 2,
+
+    // backgroundColor: 'red',
   },
   loginButton: {
     marginTop: vh * 2,

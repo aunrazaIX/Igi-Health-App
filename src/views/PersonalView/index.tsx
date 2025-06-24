@@ -79,7 +79,7 @@ const PersonalView: React.FC<Props> = ({
     <Container>
       <TopView
         onPressBack={goBack}
-        title={'Personal'}
+        title={'Family Details'}
         TopViewFirstIcon={images.AddNew}
         FirstOpenModal={openAddDependent}
       />
@@ -202,7 +202,7 @@ const PersonalView: React.FC<Props> = ({
         frameImage={icons.ModalSuccessfull}
         confirmationMessage={
           modalType === 'delete'
-            ? 'are you sure you want to applied for request deletion'
+            ? 'Are you sure you want to apply for deletion request of selected dependent ?'
             : 'Your request of deletion has been successfully applied'
         }
         closeButton={modalType === 'delete' ? false : true}

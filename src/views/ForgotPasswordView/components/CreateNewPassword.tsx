@@ -19,7 +19,7 @@ const CreateNewPassword = ({
       <InputField
         secureTextEntry
         label="New Password"
-        placeholder="Enter New Password"
+        placeholder="Enter new password"
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
@@ -35,7 +35,7 @@ const CreateNewPassword = ({
       <InputField
         secureTextEntry
         label="Confirm Password"
-        placeholder="Enter Confirm Password"
+        placeholder="Enter confirm password"
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         containerStyle={style.inputContainer}
