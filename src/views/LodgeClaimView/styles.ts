@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
 
 const styles = StyleSheet.create({
   curvedStyles: {
@@ -22,10 +23,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   curveStyle: {
-    minHeight: 81 * vh,
-    // paddingBottom: vh * 3,
-
-    // borderWidth: 2,
+    height: 80.9 * vh,
+    paddingBottom: vh * 12,
   },
   addTreatment: {
     resizeMode: 'contain',
