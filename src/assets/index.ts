@@ -158,4 +158,5 @@ export const cardIcons = {
   hospital: require('./icons/hospital-02.png'),
   discountedCenters: require('./icons/labs.png'),
   helpLine: require('./icons/helpline.png'),
+  complaint: require('./icons/Complaint.png'),
 };

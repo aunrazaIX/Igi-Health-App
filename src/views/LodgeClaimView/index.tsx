@@ -6,7 +6,7 @@ import {
   Stepper,
   TopView,
 } from '../../components';
-import { Claim, PersonalDetails, UploadDoc } from './components';
+import {Claim, PersonalDetails, UploadDoc} from './components';
 import {
   ClaimDetailSection,
   PersonelDataSection,
@@ -14,11 +14,11 @@ import {
   StepItem,
   DependantList,
 } from './typeInterface';
-import { icons, images } from '../../assets';
-import { COLORS } from '../../assets/theme/colors';
+import {icons, images} from '../../assets';
+import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useNavigation } from '@react-navigation/native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 
 type LodgeClaimViewProps = {
@@ -147,8 +147,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
       <TopView
         TopViewFirstIcon={
           (currentStep === 2 && selectedType?.value === 1) ||
-            (currentStep === 2 && claimsDetails?.length < 1) ||
-            (type === 'priorApproval' && currentStep === 2)
+          (currentStep === 2 && claimsDetails?.length < 1) ||
+          (type === 'priorApproval' && currentStep === 2)
             ? icons.addSquare
             : null
         }
@@ -177,14 +177,14 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
                   ? true
                   : false
                 : currentStep === 2
-                  ? claimsDetails?.length > 0
-                    ? false
-                    : true
-                  : currentStep === 3 &&
-                    selectedDocuments?.length > 0 &&
-                    claimData.claimComments?.length > 0
-                    ? false
-                    : true
+                ? claimsDetails?.length > 0
+                  ? false
+                  : true
+                : currentStep === 3 &&
+                  selectedDocuments?.length > 0 &&
+                  claimData.claimComments?.length > 0
+                ? false
+                : true
             }
             onPress={onPressNext}
             name={currentStep === 3 ? 'Submit' : 'Next'}
@@ -203,15 +203,15 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           confirmationType === 'delete'
             ? 'Are you sure you want to delete this treatment?'
             : confirmationType === 'submit'
-              ? 'Are you sure you want to make this claim?'
-              : 'Thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims.'
+            ? 'Are you sure you want to make this claim?'
+            : 'Thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims.'
         }
         claimSubmission={
           confirmationType === 'delete'
             ? false
             : confirmationType === 'submit'
-              ? false
-              : true
+            ? false
+            : true
         }
         deleteButton={confirmationType === 'delete' ? true : false}
         submitButton={confirmationType === 'submit' ? true : false}
@@ -219,8 +219,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           confirmationType === 'delete'
             ? false
             : confirmationType === 'submit'
-              ? false
-              : true
+            ? false
+            : true
         }
         confirmationRequired={confirmationType === 'delete' ? true : false}
         CloseButtonText={'Continue To Login'}
@@ -237,8 +237,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         handleSubmit={
           confirmationType === 'submit'
             ? () => {
-              onPressSubmitClaim();
-            }
+                onPressSubmitClaim();
+              }
             : null
         }
       />

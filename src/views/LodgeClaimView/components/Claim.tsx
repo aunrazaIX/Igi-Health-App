@@ -6,6 +6,7 @@ import {COLORS} from '../../../assets/theme/colors';
 import {ClaimDetailSection} from '../typeInterface';
 
 import NoDataView from '../../../components/NoDataView';
+import {ScrollView} from 'react-native-gesture-handler';
 
 type ClaimProps = {
   claimsDetails: ClaimDetailSection[];
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: vh * 1.25,
     width: '100%',
+
     rowGap: vh * 1.25,
   },
   list: {

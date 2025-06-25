@@ -65,7 +65,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
     <>
       <TopView title={'Add Dependent Request'} />
       <CurvedView>
-        <KeyboardAwareScrollView enableOnAndroid>
+        <KeyboardAwareScrollView>
           <View style={styles.personalFrameContainer}>
             <Image
               source={images.personalFrame}
@@ -98,33 +98,41 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               />
             </DependentBox>
 
-           <Select
-  selectData={relationsOptions}
-  selectLabel={'Relationship'}
-  selectPlaceholder={'-- Select Relation --'}
-  onSelectOption={option => {
-    dependentSetterForApiData('dependentTypeID', option);
+            <Select
+              selectData={relationsOptions}
+              selectLabel={'Relationship'}
+              selectPlaceholder={'-- Select Relation --'}
+              onSelectOption={option => {
+                dependentSetterForApiData('dependentTypeID', option);
 
-    
-    if (option.label === 'Son' || option.label === 'Father') {
-      dependentSetterForApiData('gender', {label: 'Male', value: 'Male'});
-    } else if (option.label === 'Daughter' || option.label === 'Mother') {
-      dependentSetterForApiData('gender', {label: 'Female', value: 'Female'});
-    } else {
-      dependentSetterForApiData('gender', null); 
-    }
-  }}
-  value={dependentApiData?.dependentTypeID?.label ?? null}
-/>
+                if (option.label === 'Son' || option.label === 'Father') {
+                  dependentSetterForApiData('gender', {
+                    label: 'Male',
+                    value: 'Male',
+                  });
+                } else if (
+                  option.label === 'Daughter' ||
+                  option.label === 'Mother'
+                ) {
+                  dependentSetterForApiData('gender', {
+                    label: 'Female',
+                    value: 'Female',
+                  });
+                } else {
+                  dependentSetterForApiData('gender', null);
+                }
+              }}
+              value={dependentApiData?.dependentTypeID?.label ?? null}
+            />
 
             <Select
               selectData={genderOptions}
-              selectLabel={dependentApiData?.gender?.label ?? 'Gender'}
+              selectLabel={'Gender'}
               selectPlaceholder={'-- Select Gender --'}
               onSelectOption={option =>
                 dependentSetterForApiData('gender', option)
               }
-            value={dependentApiData?.gender?.label ?? ''}
+              value={dependentApiData?.gender?.label ?? ''}
             />
 
             <DependentBox containerStyle={styles.dependentOuterStyle}>

@@ -239,7 +239,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
 
     {
-      logo: cardIcons.helpLine,
+      logo: cardIcons.complaint,
       name: 'Complaint',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundRed,
