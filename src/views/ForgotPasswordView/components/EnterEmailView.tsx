@@ -26,7 +26,7 @@ const EnterEmailView = ({
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         label="Mobile Number"
-        placeholder="Enter your mobile number"
+        placeholder="Enter Your Mobile Number"
         containerStyle={style.inputContainer}
         value={apiData?.cellNumber}
         keyboardType="phone-pad"
@@ -59,7 +59,7 @@ const EnterEmailView = ({
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         label="Your Email"
-        placeholder="Enter your email address"
+        placeholder="Enter Your Email Address"
         containerStyle={style.inputContainer}
         value={apiData?.email}
         onChangeText={text => {
@@ -76,7 +76,7 @@ const EnterEmailView = ({
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         label="CNIC Number"
-        placeholder="Enter your cnic number"
+        placeholder="Enter Your Cnic Number"
         containerStyle={style.inputContainer}
         value={apiData?.cnic}
         onChangeText={text => {
