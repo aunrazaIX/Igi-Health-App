@@ -26,6 +26,7 @@ type HomeViewProps = {
   searchText: any;
   setSearchText: any;
   loading: any;
+  handleMapDirection: any;
 };
 
 const PanelHospitalListView: React.FC<HomeViewProps> = ({
@@ -38,6 +39,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   searchText,
   setSearchText,
   loading,
+  handleMapDirection,
 }) => {
   return (
     <>
@@ -188,12 +190,10 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                     headerIcon={
                       selectedTab === 'PanelHospitals'
                         ? icons.arrowDirection
-                        : [
-                            icons.discountCentersDirection,
-                            icons.discountCentersMultipleDirection,
-                          ]
+                        : [icons.arrowDirection]
                     }
                     data={item}
+                    onPress={handleMapDirection}
                   />
                 </>
               )}

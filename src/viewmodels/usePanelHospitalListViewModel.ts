@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {useState, useEffect} from 'react';
-import {ImageSourcePropType} from 'react-native';
+import {ImageSourcePropType, Linking} from 'react-native';
 import {icons} from '../assets';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
@@ -31,6 +31,7 @@ type usePanelHospitalListViewModel = {
     onPressRightTab: (tab: string) => void;
     goBack: () => void;
     setSearchText: (text: string) => void;
+    handleMapDirection: any;
   };
 };
 
@@ -53,6 +54,18 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
 
   const onPressRightTab = (tab: string) => {
     setSelectedTabRight(tab);
+  };
+
+  const handleMapDirection = (
+    latitude: string | number,
+    longitude: string | number,
+  ) => {
+    if (latitude && longitude) {
+      const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+      Linking.openURL(url).catch(err => {
+        console.error('Failed to open Google Maps:', err);
+      });
+    }
   };
 
   const goBack = () => navigation.goBack();
@@ -138,6 +151,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
       onPressRightTab,
       goBack,
       setSearchText,
+      handleMapDirection,
     },
   };
 };

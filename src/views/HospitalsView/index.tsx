@@ -67,7 +67,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
               <View style={styles.moreFilter}>
                 <InputField
                   value={searchText}
-                  placeholder="search city / address / town .."
+                  placeholder="Search city / address / town .."
                   placeholderTextColor={COLORS.textGrayShade}
                   onChangeText={text => setSearchText(text)}
                   searchFieldRight={styles.searchFieldRight}

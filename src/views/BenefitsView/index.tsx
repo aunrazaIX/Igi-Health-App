@@ -59,7 +59,7 @@ const BenefitsView: React.FC<Props> = ({
         style={
           item.price === 'Not Covered'
             ? styles.insuredTitle
-            : styles.insuredTitleCovered
+            : styles.insuredTitle
         }
       />
       <AileronBold

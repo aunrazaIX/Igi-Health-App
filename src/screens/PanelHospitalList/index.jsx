@@ -4,7 +4,13 @@ import usePanelHospitalListViewModel from '../../viewmodels/usePanelHospitalList
 const PanelHospitalList = ({navigation}) => {
   const {states, functions} = usePanelHospitalListViewModel({navigation});
 
-  const {onPressTab, onPressRightTab, goBack, setSearchText} = functions;
+  const {
+    onPressTab,
+    onPressRightTab,
+    goBack,
+    setSearchText,
+    handleMapDirection,
+  } = functions;
 
   const {data, selectedTab, selectedTabRight, searchText, loading} = states;
   return (
@@ -18,6 +24,7 @@ const PanelHospitalList = ({navigation}) => {
       searchText={searchText}
       setSearchText={setSearchText}
       loading={loading}
+      handleMapDirection={handleMapDirection}
     />
   );
 };

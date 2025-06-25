@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
   inputFeild: {
     borderWidth: 2,
     height: vh * 6,
-    width: '80%',
+    // width: '80%',
   },
 
   tabText: {
@@ -106,7 +106,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 1.5,
     marginBottom: vh,
-    marginTop: vh * 2,
+    marginTop: vh,
   },
   mapTabIcon: {
     height: vh * 3,

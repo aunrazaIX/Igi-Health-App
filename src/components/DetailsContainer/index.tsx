@@ -53,7 +53,11 @@ const DetailsContainer: React.FC<Props> = ({
                 icon ? (
                   <TouchableOpacity
                     key={`header-icon-${idx}`}
-                    onPress={() => onPress(data?.latitude, data?.longitude)}>
+                    onPress={
+                      onPress
+                        ? () => onPress(data?.latitude, data?.longitude)
+                        : null
+                    }>
                     <Image style={styles.headerArrow} source={icon} />
                   </TouchableOpacity>
                 ) : null,

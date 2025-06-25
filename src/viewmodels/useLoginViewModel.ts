@@ -124,9 +124,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       dispatch(
         setErrorModal({
           Show: true,
-          message: `"Username or Password"`,
+          message: `"Username or Password invalid"`,
           detail:
-            'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life',
+            'An error has occurred, please try again with correct credentials. If the problem persists, contact IGI Life',
         }),
       );
     },
