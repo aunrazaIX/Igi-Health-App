@@ -79,7 +79,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
                   ? 'Female'
                   : null,
             },
-            {label: 'RelationShip :', value: item?.DPNTTYPE ?? '--'},
+            {label: 'Relationship :', value: item?.DPNTTYPE ?? '--'},
             {
               label: 'Date of Birth :',
               value: item?.CLTDOB
