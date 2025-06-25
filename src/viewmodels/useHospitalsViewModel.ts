@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {icons} from '../assets';
+import {Linking} from 'react-native';
 
 export type PanelHospitalList = {
   label: string;
@@ -25,6 +26,7 @@ type usePanelHospitalListViewModel = {
     onPressMapTab: (tab: string) => void;
     goBack: () => void;
     setSearchText: (text: string) => void;
+    handleMapDirection: any;
   };
 };
 
@@ -35,8 +37,8 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
   const [selectedTabRight, setSelectedTabRight] = useState('list');
   const [selectedMapTab, setSelectedMapTab] = useState('Sindh');
   const [searchText, setSearchText] = useState('');
-  const [allData, setAllData] = useState([]);
-  const [data, setData] = useState([]);
+  const [allData, setAllData] = useState<any[]>([]);
+  const [data, setData] = useState<any[]>([]);
 
   const onPressTab = (tab: string) => setSelectedTab(tab);
   const onPressRightTab = (tab: string) => setSelectedTabRight(tab);
@@ -49,22 +51,35 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
     // setData([]);
   };
 
+  const handleMapDirection = (
+    latitude: string | number,
+    longitude: string | number,
+  ) => {
+    if (latitude && longitude) {
+      const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+      Linking.openURL(url).catch(err => {
+        console.error('Failed to open Google Maps:', err);
+      });
+    }
+  };
   const goBack = () => navigation.goBack();
 
   useEffect(() => {
     const lowerText = searchText.toLowerCase();
 
-    let filtered = allData;
+    let filtered: any[] = allData;
 
     if (selectedMapTab) {
-      filtered = filtered.filter(item => item.ProvinceName === selectedMapTab);
+      filtered = filtered.filter(
+        (item: any) => item.ProvinceName === selectedMapTab,
+      );
     }
 
     if (searchText.trim()) {
       filtered = filtered.filter(
-        item =>
+        (item: any) =>
           item.headerLabel?.toLowerCase().includes(lowerText) ||
-          item.items?.some(subItem =>
+          item.items?.some((subItem: any) =>
             subItem.value?.toLowerCase().includes(lowerText),
           ),
       );
@@ -79,7 +94,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
     method: 'get',
     onSuccess: res => {
       const formattedData =
-        res?.map(item => ({
+        res?.map((item: any) => ({
           headerLabel: item?.HospitalName,
           headerIcon: icons.taskEdit,
           longitude: item?.HospitalLong,
@@ -112,6 +127,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       onPressMapTab,
       goBack,
       setSearchText,
+      handleMapDirection,
     },
   };
 };

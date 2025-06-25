@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: vh * 3,
+    // lineHeight: vh * 3,
   },
   coverageTitle: {
     fontSize: vh * 2.3,
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
   benefitTitle: {
     fontSize: vh * 2.3,
     color: COLORS.benefitTitle,
+    lineHeight: vh * 3,
   },
   mapTabsContainer: {
     flexDirection: 'row',
@@ -90,9 +92,18 @@ const styles = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor:'white',
+    // backgroundColor: COLORS.cardBackgroundRed,
     paddingVertical: vh * 1.5,
     paddingHorizontal: vh * 2.8,
+    // borderRadius: vh * 1.5,
+  },
+  disabled: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'gray',
+    paddingVertical: vh * 1.5,
+    paddingHorizontal: vh * 2.8,
+    borderRadius: vh * 1.5,
   },
   insuredTitle: {
     fontSize: vh * 1.6,
@@ -100,10 +111,11 @@ const styles = StyleSheet.create({
     marginVertical: vh * 1,
     fontWeight: '600',
     width: vh * 12,
+    // backgroundColor: 'red',
   },
   insuredTitleCovered: {
     fontSize: vh * 1.6,
-    color: COLORS.cardBackgroundBlue,
+    color: COLORS.cardBackgroundRed,
     marginVertical: vh * 1,
     fontWeight: '800',
     width: vh * 12,

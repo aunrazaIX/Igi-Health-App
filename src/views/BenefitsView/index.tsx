@@ -46,7 +46,10 @@ const BenefitsView: React.FC<Props> = ({
         start={{x: 1, y: 0}}
         end={{x: 0, y: 1}}
         style={styles.CardBox}>
-        <View style={styles.wrapper}>
+        <View
+          style={
+            item?.price === 'Not Covered' ? styles.disabled : styles.wrapper
+          }>
           <Image source={item.image} style={styles.coverageCardImage} />
         </View>
       </LinearGradient>
@@ -54,14 +57,18 @@ const BenefitsView: React.FC<Props> = ({
       <AileronSemiBold
         name={item.title}
         style={
-          item.price === 'Covered'
-            ? styles.insuredTitleCovered
-            : styles.insuredTitle
+          item.price === 'Not Covered'
+            ? styles.insuredTitle
+            : styles.insuredTitleCovered
         }
       />
       <AileronBold
         name={`${item.price}${/\d[\d,]*/.test(item.price) ? ' /-' : ''}`}
-        style={styles.insuredPrice}
+        style={
+          item.price === 'Not Covered'
+            ? styles.insuredTitle
+            : styles.insuredTitleCovered
+        }
       />
     </View>
   );

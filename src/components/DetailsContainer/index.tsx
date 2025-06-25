@@ -19,6 +19,7 @@ type Props = {
   detailsText?: {};
   detailsTextValue?: {};
   headerIcon?: ImageSourcePropType | null | ImageSourcePropType[];
+  onPress: any;
 };
 
 const DetailsContainer: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const DetailsContainer: React.FC<Props> = ({
   detailsTextLabel,
   detailsTextValue,
   headerIcon,
+  onPress,
 }) => {
   const [isArrowUp, setIsArrowUp] = useState<boolean>(true);
 
@@ -35,7 +37,9 @@ const DetailsContainer: React.FC<Props> = ({
         onPress={() => setIsArrowUp(!isArrowUp)}
         style={styles.cardHeader}>
         <View style={styles.cardHeaderLeft}>
-          <Image style={styles.headerArrow} source={data?.headerIcon} />
+          {data?.headerIcon && (
+            <Image style={styles.headerArrow} source={data.headerIcon} />
+          )}
           <AileronBold
             style={styles.cardHeaderLeftText}
             name={data?.headerLabel}
@@ -45,11 +49,19 @@ const DetailsContainer: React.FC<Props> = ({
         <View style={styles.cardHeaderRight}>
           {headerIcon &&
             (Array.isArray(headerIcon) ? (
-              headerIcon?.map((icon, idx) => (
-                <Image key={idx} style={styles.headerArrow} source={icon} />
-              ))
+              headerIcon?.map((icon, idx) =>
+                icon ? (
+                  <TouchableOpacity
+                    key={`header-icon-${idx}`}
+                    onPress={() => onPress(data?.latitude, data?.longitude)}>
+                    <Image style={styles.headerArrow} source={icon} />
+                  </TouchableOpacity>
+                ) : null,
+              )
             ) : (
-              <Image style={styles.headerArrow} source={headerIcon} />
+              <TouchableOpacity onPress={onPress}>
+                <Image style={styles.headerArrow} source={headerIcon} />
+              </TouchableOpacity>
             ))}
 
           <Image
@@ -161,5 +173,6 @@ export const styles = StyleSheet.create({
   headerArrow: {
     width: vw * 7.5,
     height: vw * 7.5,
+    // borderWidth: 2,
   },
 });

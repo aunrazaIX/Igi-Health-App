@@ -73,6 +73,7 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
         title: item.BenefitDetails,
         price: formatPrice(item?.EntitlementLimits),
         image: icons.medicalList,
+        // imageDisabled : icons.
       }),
     );
 

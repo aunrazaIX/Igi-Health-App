@@ -4,8 +4,14 @@ import useHospitalsViewModel from '../../viewmodels/useHospitalsViewModel';
 const Hospitals = () => {
   const {states, functions} = useHospitalsViewModel();
 
-  const {onPressTab, onPressRightTab, onPressMapTab, goBack, setSearchText} =
-    functions;
+  const {
+    onPressTab,
+    onPressRightTab,
+    onPressMapTab,
+    goBack,
+    setSearchText,
+    handleMapDirection,
+  } = functions;
   const {
     selectedTab,
     selectedTabRight,
@@ -29,6 +35,7 @@ const Hospitals = () => {
       setSearchText={setSearchText}
       hospitalLoading={hospitalLoading}
       tabChanging={tabChanging}
+      handleMapDirection={handleMapDirection}
     />
   );
 };

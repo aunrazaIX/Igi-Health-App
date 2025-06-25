@@ -38,6 +38,7 @@ type HospitalsViewProps = {
   data: any;
   hospitalLoading: boolean;
   tabChanging: boolean;
+  handleMapDirection: any;
 };
 
 const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
@@ -53,7 +54,9 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
   setSearchText,
   hospitalLoading,
   tabChanging,
+  handleMapDirection,
 }) => {
+  console.log(data, 'dataaaaaaa');
   return (
     <>
       <TopView title="Hospitals" type="default" />
@@ -163,12 +166,15 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
                 );
               }}
               renderItem={({item}) => (
-                <DetailsContainer
-                  detailsTextLabel={styles.detailsTextLabel}
-                  detailsTextValue={styles.detailsTextValue}
-                  headerIcon={[icons.arrowDirection]}
-                  data={item}
-                />
+                <>
+                  <DetailsContainer
+                    detailsTextLabel={styles.detailsTextLabel}
+                    detailsTextValue={styles.detailsTextValue}
+                    headerIcon={[icons.arrowDirection]}
+                    data={item}
+                    onPress={handleMapDirection}
+                  />
+                </>
               )}
             />
           )}
