@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: vh * 8,
+    marginTop: vh * 3,
     // paddingBottom: vh * 1.4,
   },
   headerLogo: {
@@ -76,8 +76,8 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   downloadIconImage: {
-    width: 14 * vw,
-    height: 6 * vh,
+    width: 10 * vw,
+    height: 4 * vh,
     resizeMode: 'contain',
   },
 

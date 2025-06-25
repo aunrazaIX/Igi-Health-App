@@ -5,13 +5,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {AileronSemiBold, ConfirmationModal} from '../../../components';
-import {vh, vw} from '../../../assets/theme/dimension';
-import {COLORS} from '../../../assets/theme/colors';
-import {icons, images} from '../../../assets';
-import {useDispatch, useSelector} from 'react-redux';
-import {setRemarks} from '../../../redux/lodgeSlice';
+import React, { useState } from 'react';
+import { AileronSemiBold, ConfirmationModal } from '../../../components';
+import { vh, vw } from '../../../assets/theme/dimension';
+import { COLORS } from '../../../assets/theme/colors';
+import { icons, images } from '../../../assets';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRemarks } from '../../../redux/lodgeSlice';
 
 type UploadDocProps = {
   onSelectDocument: () => void;
@@ -90,9 +90,8 @@ const UploadDoc: React.FC<UploadDocProps> = ({
 
                 <View>
                   <AileronSemiBold
-                    name={`file size : ${
-                      item?.fileSizeInMB?.toFixed(3) || ''
-                    } MB`}
+                    name={`file size : ${item?.fileSizeInMB?.toFixed(3) || ''
+                      } MB`}
                     style={styles.fileSizeText}
                   />
                 </View>
@@ -234,7 +233,7 @@ const styles = StyleSheet.create({
     borderRadius: vh * 2,
   },
   addRemarks: {
-    marginVertical: vh * 3,
+    marginVertical: vh * 1,
   },
   remarksInput: {
     color: COLORS.placeholderColor,

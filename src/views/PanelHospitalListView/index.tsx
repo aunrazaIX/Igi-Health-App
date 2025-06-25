@@ -45,7 +45,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
         title={
           selectedTab === 'PanelHospitals'
             ? 'Panel Hospital List'
-            : 'Discounted Centers'
+            : 'Discount Centers'
         }
       />
 

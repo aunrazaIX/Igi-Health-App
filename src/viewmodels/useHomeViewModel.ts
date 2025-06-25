@@ -1,7 +1,7 @@
 import {useRef, useState} from 'react';
 import {cardIcons, icons} from '../assets';
 import {COLORS} from '../assets/theme/colors';
-import {Alert, Animated, Linking} from 'react-native';
+import {Alert, Animated, Linking, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
 import endpoints from '../api/endspoints';
@@ -106,7 +106,11 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   const handleAssociatedApps = url => {
     if (url) {
-      Linking.openURL(url).catch(err =>
+      let finalUrl = url;
+      if (typeof url === 'object' && url !== null) {
+        finalUrl = Platform.OS === 'ios' ? url.ios : url.android;
+      }
+      Linking.openURL(finalUrl).catch(err =>
         console.error('Failed to open URL:', err),
       );
     }
@@ -213,7 +217,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
     {
       logo: cardIcons.discountedCenters,
-      name: 'Discounted Centers',
+      name: 'Discount Centers',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       to: 'PanelHospitalList',
@@ -236,7 +240,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
     {
       logo: cardIcons.helpLine,
-      name: 'Comlaint',
+      name: 'Complaint',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundRed,
       link: 'corporate.services@igi.com.pk',
