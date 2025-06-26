@@ -33,12 +33,12 @@ const HelplineView = ({
         <TopView title={'Helpline'} />
         <CurvedView containerStyle={styles.container}>
           <ContactInfoView onPress={onPress} data={contactInfo} />
-          <ClaimAssistanceView data={claimAssistance} />
-          <SingleHelplineView
+          {/* <ClaimAssistanceView data={claimAssistance} /> */}
+          {/* <SingleHelplineView
             cities={hotlines?.cities}
             emails={hotlines?.emails}
             website={hotlines?.website}
-          />
+          /> */}
         </CurvedView>
       </ScrollView>
     </>
