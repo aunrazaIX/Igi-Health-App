@@ -70,7 +70,9 @@ const LoginView = ({
     ),
   };
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView
+      extraScrollHeight={20}
+      keyboardShouldPersistTaps="handled">
       <ImageBackground
         imageStyle={styles.imageStyle}
         source={images.loginBackground}

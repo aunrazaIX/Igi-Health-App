@@ -33,7 +33,11 @@ const Claim: React.FC<ClaimProps> = ({
             />
           ))
         ) : (
-          <NoDataView name={'no claim found'} />
+          <NoDataView
+            name={'no claim found'}
+            iconStyle={{height: vh * 8}}
+            text={{fontSize: vw * 5}}
+          />
         )}
       </View>
     </View>

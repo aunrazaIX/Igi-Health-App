@@ -45,6 +45,8 @@ const AddTreatmentView = ({
       <TopView title={'Add A Treatment'} />
       <CurvedView containerStyle={styles.curveStyle}>
         <KeyboardAwareScrollView
+          extraScrollHeight={20}
+          keyboardShouldPersistTaps="always"
           showsVerticalScrollIndicator={false}
           enableOnAndroid>
           <View style={styles.container}>

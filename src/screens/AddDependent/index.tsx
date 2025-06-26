@@ -20,6 +20,7 @@ const AddDependent = ({navigation, route}: {navigation: any; route: any}) => {
     setConfirmationModal,
     resetStates,
     handleCancel,
+    formatAgeToDate,
   } = functions;
 
   return (
@@ -38,6 +39,7 @@ const AddDependent = ({navigation, route}: {navigation: any; route: any}) => {
         dependentIndex={dependentIndex}
         dependantsData={dependantsData}
         handleCancel={handleCancel}
+        formatAgeToDate={formatAgeToDate}
       />
     </>
   );

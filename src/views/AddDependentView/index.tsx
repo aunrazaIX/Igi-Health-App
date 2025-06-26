@@ -17,6 +17,7 @@ import styles from './styles';
 import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {vh} from '../../assets/theme/dimension';
+import DatePicker from '../../components/DatePicker';
 
 type OptionType = {
   label: string;
@@ -28,6 +29,7 @@ type DependentApiData = {
   gender?: string;
   relation?: string;
   age?: string;
+  Age?: string;
 };
 
 type AddDependentViewProps = {
@@ -44,6 +46,7 @@ type AddDependentViewProps = {
   dependentIndex: any;
   dependantsData: any;
   handleCancel: any;
+  formatAgeToDate: any;
 };
 
 const AddDependentView: React.FC<AddDependentViewProps> = ({
@@ -60,6 +63,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   addDependentLoading,
   dependentIndex,
   dependantsData,
+  formatAgeToDate,
 }) => {
   return (
     <>
@@ -136,25 +140,41 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             />
 
             <DependentBox containerStyle={styles.dependentOuterStyle}>
-              <AileronRegular name="Age" style={styles.selectLabel} />
-
-              <TextInput
-                style={styles.popupInput}
-                placeholder="Enter Age"
-                placeholderTextColor={COLORS.selectPlaceholder}
-                keyboardType="numeric"
-                onChangeText={text => {
-                  const digitsOnly = text.replace(/[^0-9]/g, '');
-                  const numericAge = Number(digitsOnly);
-
-                  if (
-                    digitsOnly === '' ||
-                    (numericAge >= 0 && numericAge <= 110)
-                  ) {
-                    dependentSetterForApiData('Age', digitsOnly);
-                  }
+              <DatePicker
+                onSelectValue={(date: Date) => {
+                  const d = new Date(date);
+                  const day = String(d.getDate()).padStart(2, '0');
+                  const month = String(d.getMonth() + 1).padStart(2, '0');
+                  const year = d.getFullYear();
+                  const formatted = `${day}${month}${year}`;
+                  dependentSetterForApiData('Age', formatted);
                 }}
-                value={dependentApiData?.Age ?? null}
+                placeholder={'Select Date'}
+                label={'Date of Birth'}
+                value={
+                  dependentApiData?.Age
+                    ? formatAgeToDate(dependentApiData.Age)
+                    : ''
+                }
+                selectedDate={
+                  dependentApiData?.Age && dependentApiData.Age.length === 8
+                    ? new Date(
+                        `${dependentApiData.Age.slice(
+                          4,
+                          8,
+                        )}-${dependentApiData.Age.slice(
+                          2,
+                          4,
+                        )}-${dependentApiData.Age.slice(0, 2)}`,
+                      )
+                    : undefined
+                }
+                disabled={false}
+                labelStyle={{}}
+                containerStyle={{}}
+                mode="date"
+                maximumDate={new Date()}
+                minimumDate={undefined}
               />
             </DependentBox>
             <Button
