@@ -91,14 +91,14 @@ const HomeView: React.FC<HomeViewProps> = ({
               <Animated.View
                 style={[styles.homeInfoContainer, frontAnimatedStyle]}>
                 <TouchableOpacity onPress={animateCard}>
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                     style={styles.downloadIcon}
                     onPress={handleCardDownload}>
                     <Image
                       style={styles.downloadIconImage}
                       source={icons.download}
                     />
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
 
                   <View style={styles.homeInfoContainerHeader}>
                     <View>

@@ -32,6 +32,12 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     age: dependentData?.dependentDetail[3]?.value,
   };
 
+  const formatAgeString = (rawDate: string | undefined): string | null => {
+    if (!rawDate) return null;
+    const digitsOnly = rawDate.replace(/\D/g, '');
+    return digitsOnly || null;
+  };
+
   const {
     setterForApiData: dependentSetterForApiData,
     apiData: dependentApiData,
@@ -48,10 +54,13 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       label: prefilledData.gender.label,
       Value: prefilledData.gender.value,
     },
-    Age: prefilledData?.age?.toString() ?? null,
+
+    Age: formatAgeString(prefilledData?.age?.toString() ?? null),
     dependentRequestStatus: true,
     createdBy: 1,
   });
+
+  console.log(dependentApiData, 'dataaaaaa usman');
 
   const genderOptions: personalDetail[] = [
     {value: 'Male', label: 'Male'},
@@ -75,7 +84,12 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
     onSuccess: res => {
+      console.log('update successfully');
       setConfirmationModal(true);
+    },
+
+    onError: error => {
+      console.log(error, 'Error');
     },
   });
 
@@ -103,6 +117,9 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         }),
       );
     } else {
+      console.log('triggering updating');
+
+      console.log(_apiData, 'apidataaaaaaaausman');
       trigger(_apiData);
     }
   };

@@ -228,11 +228,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: vw * 4,
     backgroundColor: COLORS.cardBackgroundBlue,
-    width: vw * 40,
+    width: vw * 36,
     marginRight: vw * 3,
     paddingHorizontal: vw * 3.5,
-    paddingVertical: vw * 2.5,
-    height: vw * 40,
+    // paddingVertical: vw * 2.5,
+    height: vw * 36,
   },
   cardLogoContainer: {
     marginVertical: vh * 1,
@@ -240,7 +240,7 @@ export const styles = StyleSheet.create({
   },
   cardLogo: {
     // marginVertical: vh*1.5,
-    width: vw * 18,
+    width: vw * 15,
     height: vh * 10,
     resizeMode: 'contain',
   },

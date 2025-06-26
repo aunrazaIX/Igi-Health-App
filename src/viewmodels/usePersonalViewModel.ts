@@ -79,7 +79,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
                   ? 'Female'
                   : null,
             },
-            {label: 'RelationShip :', value: item?.DPNTTYPE ?? '--'},
+            {label: 'Relationship :', value: item?.DPNTTYPE ?? '--'},
             {
               label: 'Date of Birth :',
               value: item?.CLTDOB
@@ -138,6 +138,13 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
     setDeleteDependent(dependent);
   };
 
+  const formatAgeString = (rawDate: string | undefined): string | null => {
+    if (!rawDate) return null;
+
+    const digitsOnly = rawDate.replace(/\D/g, '');
+    return digitsOnly || null;
+  };
+
   const onPressDelete = () => {
     setModalType('');
     let _apiData = {
@@ -150,7 +157,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       clientCode: user?.ClientCode,
       gender: deleteDependent?.dependentDetail[1].value,
 
-      Age: deleteDependent?.dependentDetail[3].value,
+      Age: formatAgeString(deleteDependent?.dependentDetail[3].value),
       dependentRequestStatus: true,
       createdAt: '2025-05-15T15:01:31.6552852+05:00',
       createdBy: 1,
