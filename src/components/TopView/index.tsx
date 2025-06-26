@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   wrapper: {
-    paddingTop: vh * 6,
+    paddingTop: vh * 3.5,
     paddingHorizontal: vw * 3,
     alignItems: 'center',
   },

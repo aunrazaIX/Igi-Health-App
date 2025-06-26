@@ -64,7 +64,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   return (
     <>
       <TopView title={'Add Dependent Request'} />
-      <CurvedView>
+      <CurvedView containerStyle={styles.curvedStyle}>
         <KeyboardAwareScrollView>
           <View style={styles.personalFrameContainer}>
             <Image

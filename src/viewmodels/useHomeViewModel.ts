@@ -55,7 +55,9 @@ type UseHomeViewModelReturn = {
     toggleDrawer: () => void;
     onPressMenu: (cardData: CardItemData) => void;
     onPressHeaderIcon: (to: string) => void;
-    handleAssociatedApps: (url: string) => void;
+    handleAssociatedApps: (
+      url: string | {ios: string; android: string},
+    ) => void;
     handleCardDownload: any;
   };
 };
@@ -104,11 +106,15 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     }
   };
 
-  const handleAssociatedApps = url => {
+  const handleAssociatedApps = (
+    url: string | {ios: string; android: string},
+  ) => {
     if (url) {
-      let finalUrl = url;
+      let finalUrl: string;
       if (typeof url === 'object' && url !== null) {
         finalUrl = Platform.OS === 'ios' ? url.ios : url.android;
+      } else {
+        finalUrl = url;
       }
       Linking.openURL(finalUrl).catch(err =>
         console.error('Failed to open URL:', err),
