@@ -74,7 +74,7 @@ export const icons = {
   listActive: require('./icons/list-active.png'),
   mapLoacationActive: require('./icons/mapLocationActive.png'),
   mapLoacationInActive: require('./icons/mapLocation-inactive.png'),
-  calender: require('./icons/calender.png'),
+  calender: require('./icons/calendar.png'),
   arrowDirection: require('./icons/arrow.png'),
   searchBlack: require('./icons/searchBlack.png'),
   searchWhite: require('./icons/searchWhite.png'),

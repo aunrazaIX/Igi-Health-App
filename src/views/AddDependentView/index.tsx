@@ -65,6 +65,11 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   dependantsData,
   formatAgeToDate,
 }) => {
+  // Determine if gender should be disabled
+  const relationship = dependentApiData?.dependentTypeID?.label;
+  const isSpouse = relationship === 'Spouse';
+  const genderDisabled = !isSpouse;
+
   return (
     <>
       <TopView title={'Add Dependent Request'} />
@@ -75,7 +80,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               source={images.personalFrame}
               style={styles.personalFrameIMG}
             />
-            <View style={styles.manageContainer}>
+            {/* <View style={styles.manageContainer}>
               <AileronBold
                 name={dependentIndex != undefined ? 'Manage Update' : 'Add'}
                 style={styles.manageText}
@@ -84,7 +89,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
                 name={'Dependent Details'}
                 style={styles.DependentText}
               />
-            </View>
+            </View> */}
 
             <DependentBox containerStyle={styles.dependentOuterStyle}>
               <AileronRegular
@@ -137,6 +142,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
                 dependentSetterForApiData('gender', option)
               }
               value={dependentApiData?.gender?.label ?? ''}
+              disabled={genderDisabled}
             />
 
             <DependentBox containerStyle={styles.dependentOuterStyle}>

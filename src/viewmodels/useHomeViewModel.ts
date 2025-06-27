@@ -237,7 +237,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
     {
       logo: cardIcons.helpLine,
-      name: 'HelpLines',
+      name: 'Helplines',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundLightBlue,
       mainParent: 'Tabs',

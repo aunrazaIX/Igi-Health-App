@@ -203,7 +203,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           confirmationType === 'delete'
             ? 'Are you sure you want to delete this treatment?'
             : confirmationType === 'submit'
-            ? 'Are you sure you want to make this claim?'
+            ? "You're about to submit this medical claim. Please confirm  ✓ All required fields are completed ✓ Dates and amounts are accurate ✓ Supporting documents are attached"
             : 'Thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims.'
         }
         claimSubmission={

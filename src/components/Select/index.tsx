@@ -25,6 +25,8 @@ type SelectProps = {
   value: string;
   selectPlaceholder: string;
   onSelectOption: (item: Options) => void;
+  disabled?: boolean;
+  isSearch?: boolean;
 };
 
 const Select: React.FC<SelectProps> = ({
@@ -34,6 +36,7 @@ const Select: React.FC<SelectProps> = ({
   value,
   onSelectOption,
   isSearch,
+  disabled = false,
 }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -50,20 +53,21 @@ const Select: React.FC<SelectProps> = ({
       <DependentBox containerStyle={styles.dependentContainer}>
         <AileronRegular name={selectLabel} style={styles.Patient} />
         <TouchableOpacity
+          disabled={disabled}
           onPress={() => {
+            if (disabled) return;
             Keyboard.dismiss();
             setDropdownVisible(!isDropdownVisible);
-          }}>
-          <View style={styles.selectBox}>
-            <AileronBold
-              style={styles.selectText}
-              name={value || selectPlaceholder}
-            />
-            <Image
-              style={styles.arrow}
-              source={isDropdownVisible ? icons.selectArrowUp : icons.arrowDown}
-            />
-          </View>
+          }}
+          style={[styles.selectBox, disabled && {opacity: 0.5}]}>
+          <AileronBold
+            style={styles.selectText}
+            name={value || selectPlaceholder}
+          />
+          <Image
+            style={styles.arrow}
+            source={isDropdownVisible ? icons.selectArrowUp : icons.arrowDown}
+          />
         </TouchableOpacity>
       </DependentBox>
       <SelectModal
