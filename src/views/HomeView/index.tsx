@@ -472,9 +472,11 @@ const HomeView: React.FC<HomeViewProps> = ({
             <View style={styles.associatedImageContainer}>
               <TouchableOpacity
                 onPress={() =>
-                  handleAssociatedApps(
-                    'https://play.google.com/store/apps/details?id=com.vitalityactive.igi&hl=en-US ',
-                  )
+                  handleAssociatedApps({
+                    ios: 'https://apps.apple.com/pk/app/igi-life-vitality/id1398273780 ',
+                    android:
+                      'https://play.google.com/store/apps/details?id=com.vitalityactive.igi&hl=en-US ',
+                  })
                 }>
                 <Image
                   source={images.LogoLife}
@@ -486,9 +488,11 @@ const HomeView: React.FC<HomeViewProps> = ({
             <View style={styles.associatedImageContainer}>
               <TouchableOpacity
                 onPress={() =>
-                  handleAssociatedApps(
-                    'https://play.google.com/store/apps/details?id=com.sehatkahani.app&hl=en ',
-                  )
+                  handleAssociatedApps({
+                    ios: 'https://apps.apple.com/pk/app/sehat-kahani-retail/id1470938140',
+                    android:
+                      'https://play.google.com/store/apps/details?id=com.sehatkahani.app&hl=en',
+                  })
                 }>
                 <Image
                   source={images.sehatKahani}

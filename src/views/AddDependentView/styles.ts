@@ -56,6 +56,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.personalValue,
     fontSize: vw * 3.6,
+    lineHeight: vh * 2,
+    minHeight: vh * 2,
   },
   popupInput: {
     marginTop: vh * -0.9,
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
     color: COLORS.personalValue,
     fontSize: vw * 4,
     fontWeight: '500',
+    paddingLeft: 0,
   },
   modalAddButton: {
     marginTop: vh * 2,
@@ -80,6 +83,9 @@ const styles = StyleSheet.create({
     color: COLORS.cancelButton,
     fontSize: vw * 4.4,
     fontWeight: '700',
+  },
+  curvedStyle: {
+    paddingBottom: vh * 12,
   },
 });
 

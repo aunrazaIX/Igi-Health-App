@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
+import React, {ReactNode} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
 
 type StyleObject = Record<string, string | number | boolean>;
 

@@ -18,6 +18,12 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
+  const formatAgeString = (rawDate: string | undefined): string | null => {
+    if (!rawDate) return null;
+    const digitsOnly = rawDate.replace(/\D/g, '');
+    return digitsOnly;
+  };
+
   const prefilledData = {
     dependentName: dependentData?.dependentDetail[0]?.value,
     gender: {
@@ -29,13 +35,18 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       value: dependentData?.dependentDetail[2]?.value,
     },
 
-    age: dependentData?.dependentDetail[3]?.value,
+    age: formatAgeString(dependentData?.dependentDetail[3]?.value),
   };
 
-  const formatAgeString = (rawDate: string | undefined): string | null => {
-    if (!rawDate) return null;
-    const digitsOnly = rawDate.replace(/\D/g, '');
-    return digitsOnly || null;
+  console.log(prefilledData.age, 'ppppppppppppppppppppp');
+
+  const formatAgeToDate = (raw: string): string => {
+    if (!raw) return '';
+    const digits = raw.replace(/[^0-9]/g, '').padStart(8, '0');
+    const day = digits.slice(0, 2);
+    const month = digits.slice(2, 4);
+    const year = digits.slice(4, 8);
+    return `${day}-${month}-${year}`;
   };
 
   const {
@@ -55,7 +66,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       Value: prefilledData.gender.value,
     },
 
-    Age: formatAgeString(prefilledData?.age?.toString() ?? null),
+    Age: prefilledData?.age?.toString() ?? null,
     dependentRequestStatus: true,
     createdBy: 1,
   });
@@ -148,6 +159,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       setConfirmationModal,
       resetStates,
       handleCancel,
+      formatAgeToDate,
     },
   };
 };

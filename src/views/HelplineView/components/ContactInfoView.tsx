@@ -54,7 +54,7 @@ const ContactInfoView = ({
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => onPress('mail', 'iusmanhanif09@gmail.com')}
+          onPress={() => onPress('mail', 'corporate.services@igi.com.pk')}
           style={styles.actionBtn}>
           <Image source={icons.email} style={styles.icon} />
           <AileronRegular name="Email" style={styles.callTittle} />
