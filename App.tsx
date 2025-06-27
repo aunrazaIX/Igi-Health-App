@@ -24,8 +24,8 @@ const App = () => {
             style={{
               flex: 1,
               backgroundColor: COLORS.loginContainer,
-              paddingTop:
-                Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+              // paddingTop:
+              // Platform.OS === 'android' ? StatusBar.currentHeight : 0,
             }}>
             <StatusBar
               barStyle={'dark-content'}
