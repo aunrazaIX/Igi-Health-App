@@ -1679,6 +1679,27 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNDateTimePicker (8.4.2):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNGestureHandler (2.25.0):
     - DoubleConversion
     - glog
@@ -1985,6 +2006,7 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -2141,6 +2163,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNDateTimePicker:
+    :path: "../node_modules/@react-native-community/datetimepicker"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -2225,6 +2249,7 @@ SPEC CHECKSUMS:
   ReactCodegen: 82d5bc3e3ad2c8496848554cb2d3b64b03b53420
   ReactCommon: 269d0d36423fad044eaea49900e88684ac670a16
   RNCAsyncStorage: 79cfba789fca205b204f3ce7948b874500129eb4
+  RNDateTimePicker: 928f412d4ea9d2f21b0535917449a349024eef05
   RNGestureHandler: dcb1b1db024f3744b03af56d132f4f72c4c27195
   RNReanimated: 6d25b4dcb540228c6ec8b7d1dae54c464b90a2f6
   RNScreens: 8aec64fb213fd52a64445e2e470f7a9b546c5df3
