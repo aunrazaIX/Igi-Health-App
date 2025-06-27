@@ -63,12 +63,15 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderRadius: vw * 4,
+    justifyContent: 'center',
   },
 
   buttonText: {
     color: COLORS.buttonText,
     fontWeight: 'bold',
     fontSize: vw * 4.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonContent: {
     width: '100%',
