@@ -70,6 +70,7 @@ export const styles = StyleSheet.create({
     width: 28 * vw,
     height: 7 * vh,
     resizeMode: 'contain',
+    // borderWidth:2
   },
   downloadIcon: {
     justifyContent: 'center',
@@ -85,6 +86,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    
   },
   text: {
     color: COLORS.textColor,
@@ -96,7 +98,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 3,
   },
   statisticsHeader: {
-    fontSize: vw * 5,
+     fontSize: vh * 2.3,
   },
   graphContainer: {
     height: vh * 20,
@@ -158,7 +160,7 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   homeInfoContainerMiddle: {
-    marginTop: vh * 2.8,
+    marginTop: vh * 1.2,
     // borderWidth: 2,
 
     // justifyContent: 'space-between',
@@ -168,6 +170,7 @@ export const styles = StyleSheet.create({
     fontSize: vw * 4,
     color: COLORS.textColor,
     textAlign: 'left',
+    lineHeight  : vh*2
   },
   homeInfoContainerMiddleTextLogo: {
     flexDirection: 'row',
@@ -206,9 +209,10 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
 
     marginTop: vh * 1.3,
+    gap: vw * 2,
     alignItems: 'center',
   },
   dashboardContainerHeaderIcons: {
@@ -252,8 +256,9 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCardText: {
     textAlign: 'left',
-    fontSize: vw * 4.5,
+    fontSize: vw * 4,
     color: COLORS.white,
+    
   },
   cardsArrow: {
     width: vw * 6,
@@ -311,6 +316,7 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.textBlackShade,
     // borderWidth: 2,
+    lineHeight : vh*1.99
   },
   homeBackCardRow: {
     flexDirection: 'row',
@@ -353,7 +359,7 @@ export const styles = StyleSheet.create({
   associatedTittle: {
     textAlign: 'left',
     marginVertical: vh * 2,
-    fontSize: vw * 6,
+ fontSize: vh * 2.3,
     color: COLORS.textBlackShade,
   },
   associatedImageContainer: {

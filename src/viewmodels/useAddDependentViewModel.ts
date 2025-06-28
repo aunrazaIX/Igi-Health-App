@@ -7,6 +7,7 @@ import {RootState} from '../redux/store';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {setErrorModal} from '../redux/generalSlice';
+import { DetailsContainer } from '../components';
 
 const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   let {user} = useSelector((state: RootState) => state.auth);
@@ -121,10 +122,12 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       !dependentApiData?.dependentTypeID?.value ||
       !dependentApiData?.Age
     ) {
-      dispatch(
+       dispatch(
         setErrorModal({
           Show: true,
-          message: 'Please fill all required fields',
+          message: `"Please fill all require feilds"`,
+          detail:
+            'An error has occurred, please fill all require feilds. If the problem persists, contact IGI Life',
         }),
       );
     } else {

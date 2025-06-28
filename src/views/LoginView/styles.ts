@@ -127,7 +127,9 @@ export const styles = StyleSheet.create({
   },
   orText: {
     fontSize: vw * 5,
-    marginTop: vh * 4,
-    // marginVertical: vh,
+
+    marginVertical: vh *2,
+    // borderWidth:2
+
   },
 });

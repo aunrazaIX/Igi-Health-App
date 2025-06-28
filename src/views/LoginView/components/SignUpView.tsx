@@ -181,8 +181,8 @@ const style = StyleSheet.create({
     // color: COLORS.textGrayShade,
   },
   inputStyle: {
-    // fontSize: vw * 3.5,
-    // fontWeight: '700',
+    fontSize: vw * 3.5,
+    fontWeight: '700',
   },
   inputFeilds: {
     marginTop: vh * 3,

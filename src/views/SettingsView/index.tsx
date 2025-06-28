@@ -27,7 +27,7 @@ const SettingsView = ({
 }) => {
   return (
     <Container>
-      <TopView title={'Settings'} type={'settings'} />
+      <TopView title={'Settings'} type={'settings'} titleStyle={{lineHeight : vh*4}} />
       <CurvedView>
         {data?.map(item => (
           <TouchableOpacity

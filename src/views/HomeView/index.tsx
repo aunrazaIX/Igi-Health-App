@@ -15,7 +15,7 @@ import AileronBold from '../../components/AileronBold';
 import AileronSemiBold from '../../components/AileronSemiBold';
 import AileronLight from '../../components/AileronLight';
 import AileronRegular from '../../components/AileronRegular';
-import {vh} from '../../assets/theme/dimension';
+import {vh, vw} from '../../assets/theme/dimension';
 import {useSelector} from 'react-redux';
 import ModalLoading from '../../components/ModalLoading';
 
@@ -64,6 +64,8 @@ const HomeView: React.FC<HomeViewProps> = ({
 }) => {
   const user = useSelector(state => state.auth.user);
 
+  console.log(homeCardData, "cardDataaaa bhai")
+
   return (
     <ScrollView>
       <LinearGradient
@@ -105,7 +107,13 @@ const HomeView: React.FC<HomeViewProps> = ({
                       <Image style={styles.logo} source={icons.logo} />
                     </View>
 
-                    <View style={styles.homeInfoContainerHeaderText}>
+ <TouchableOpacity onPress={animateCard}>
+                        <Image
+                          style={styles.flipCardIcon}
+                          source={images.flipCard}
+                        />
+                      </TouchableOpacity>
+                    {/* <View style={styles.homeInfoContainerHeaderText}>
                       <AileronBold
                         name={'Health Insurance'}
                         numberOfLines={1}
@@ -121,7 +129,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                         style={styles.infoCardTextlight}
                         numberOfLines={2}
                       />
-                    </View>
+                    </View> */}
                   </View>
 
                   <View style={styles.homeInfoContainerMiddle}>
@@ -149,13 +157,43 @@ const HomeView: React.FC<HomeViewProps> = ({
                             numberOfLines={1}
                           />
                         </View>
+
+                         <View>
+                          <AileronSemiBold
+                            name={`Policy Name: ${homeCardData[0]?.Policy_Insured_Name
+}`}
+                            style={styles.infoCardMiddleTextlight}
+                            numberOfLines={1}
+                          />
+                        </View>
+
+                         <View style={{flexDirection:"row" , gap:vw*5}}>
+                           
+                          <AileronSemiBold
+                            name={`class: ${homeCardData[0].Policy_CertNo}`}
+                            style={styles.infoCardMiddleTextlight}
+                            numberOfLines={1}
+                          />
+
+   
+                          <AileronSemiBold
+                            name={`Cert No: ${homeCardData[0]?.Policy_Insured_Age
+}`}
+                            style={styles.infoCardMiddleTextlight}
+                            numberOfLines={1}
+                          />
+                          
+                         
+                          <AileronSemiBold
+                            name={`Age: ${homeCardData[0]?.Policy_Insured_Age
+}`}
+                            style={styles.infoCardMiddleTextlight}
+                            numberOfLines={1}
+                          />
+                        </View>
+
                       </View>
-                      <TouchableOpacity onPress={animateCard}>
-                        <Image
-                          style={styles.flipCardIcon}
-                          source={images.flipCard}
-                        />
-                      </TouchableOpacity>
+                     
                     </View>
                   </View>
 
@@ -178,7 +216,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                       />
                     </View>
 
-                    <View style={styles.infoCardFooterRight}>
+                    {/* <View style={styles.infoCardFooterRight}>
                       <AileronSemiBold
                         name={'Expiry Date'}
                         style={styles.infoCardMiddleTextlight}
@@ -190,7 +228,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                         style={styles.infoCardFooterTextBold}
                         numberOfLines={1}
                       />
-                    </View>
+                    </View> */}
                   </View>
                 </TouchableOpacity>
               </Animated.View>
@@ -306,7 +344,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
                           <AileronSemiBold
                             style={styles.homeBackCardText}
-                            name={`Rs. Per Day: ${homeCardData[0]?.Policy_Daily_RoomLimit}`}
+                           name={`Rs. Per Day: ${homeCardData[0]?.Policy_Daily_RoomLimit?.toLocaleString()}`}
                           />
                         </View>
                       </View>
@@ -339,9 +377,10 @@ const HomeView: React.FC<HomeViewProps> = ({
       <View style={styles.gradient}>
         <View>
           <View style={styles.dashboardContainerHeader}>
+                  <Image source={icons.claimStatistics} style={styles.statisticsIcon} />
             <AileronBold
               style={styles.dashboardContainerTextBold}
-              name="Health & Wellness"
+              name="Quick Services"
               numberOfLines={1}
             />
           </View>
@@ -463,11 +502,14 @@ const HomeView: React.FC<HomeViewProps> = ({
           </View>
         </View>
         <View>
-          <AileronSemiBold
+          <View style={styles.claimStatistics}>    <Image source={icons.claimStatistics} style={styles.statisticsIcon} /> 
+           <AileronSemiBold
             name={'Associated Apps'}
             style={styles.associatedTittle}
           />
 
+           </View>
+         
           <View style={styles.associatedContainer}>
             <View style={styles.associatedImageContainer}>
               <TouchableOpacity

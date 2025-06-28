@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderRadius: vh * 1,
     marginBottom: vh * 1, 
+    
   },
   label: {
     flex: 1,
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
     fontSize: vh * 1.7,
     paddingHorizontal: vh*2,
     color: COLORS.black, 
+    lineHeight : vh*2.2
   },
   arrowIcon: {
     width: vw * 5,
