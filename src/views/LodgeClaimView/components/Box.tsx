@@ -17,6 +17,14 @@ type BoxProps = {
 };
 
 const Box: React.FC<BoxProps> = ({ data, onPressDelete, onPressEdit }) => {
+
+  const formatValue = (value: string) => {
+    if (!isNaN(Number(value)) && value.trim() !== '') {
+      return Number(value).toLocaleString();
+    }
+    return value;
+  };
+
   return (
     <View style={styles.boxContainer}>
       <View style={styles.header}>
@@ -35,11 +43,15 @@ const Box: React.FC<BoxProps> = ({ data, onPressDelete, onPressEdit }) => {
           </TouchableOpacity>
         )}
       </View>
+
       <View style={styles.details}>
         {data?.info?.map((_item: InfoItem, index: number) => (
           <View style={styles.field} key={index}>
             <AileronSemiBold name={_item?.label} style={styles.detailLabel} />
-            <AileronSemiBold name={_item?.value} style={styles.detailvalue} />
+            <AileronSemiBold
+              name={formatValue(_item?.value)}
+              style={styles.detailvalue}
+            />
           </View>
         ))}
       </View>
@@ -62,7 +74,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.14,
     shadowOffset: { width: 0, height: 1 },
     shadowRadius: 2,
-
   },
   avatar: {
     resizeMode: 'contain',
@@ -96,7 +107,6 @@ const styles = StyleSheet.create({
   detailvalue: {
     fontSize: vh * 1.6,
     color: COLORS.personalValue,
-    // borderWidth: 2,
     maxWidth: vw * 50,
   },
   field: {

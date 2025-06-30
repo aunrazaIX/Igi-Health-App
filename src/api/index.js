@@ -2,8 +2,8 @@ import axios from 'axios';
 import {EventRegister} from 'react-native-event-listeners';
 import {store} from '../redux/store';
 const api = axios.create({
-  baseURL: 'http://10.9.0.55:8088/api/',
-  // baseURL: 'https://testportal.igi.com.pk:8801/api',
+  // baseURL: 'http://10.9.0.55:8088/api/',
+  baseURL: 'https://testportal.igi.com.pk:8801/api',
   timeout: 60000,
 });
 
