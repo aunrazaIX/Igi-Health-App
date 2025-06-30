@@ -18,6 +18,7 @@ import AileronRegular from '../../components/AileronRegular';
 import {vh, vw} from '../../assets/theme/dimension';
 import {useSelector} from 'react-redux';
 import ModalLoading from '../../components/ModalLoading';
+import moment from 'moment';
 
 type CardItem = {
   logo: ImageSourcePropType;
@@ -63,8 +64,9 @@ const HomeView: React.FC<HomeViewProps> = ({
   handleCardDownload,
 }) => {
   const user = useSelector(state => state.auth.user);
+  console.log(user, 'userrrr');
 
-  console.log(homeCardData, "cardDataaaa bhai")
+  console.log(homeCardData, 'homeCardData');
 
   return (
     <ScrollView>
@@ -77,10 +79,19 @@ const HomeView: React.FC<HomeViewProps> = ({
             </View>
 
             <View style={styles.headerIconsRow}>
-              <TouchableOpacity
-                onPress={() => onPressHeaderIcon('Notifications')}>
-                <Image source={icons.notification} style={styles.headerIcons} />
-              </TouchableOpacity>
+              <View style={styles.headerDNIcons}>
+                <TouchableOpacity>
+                  <Image source={icons.download} style={styles.headerIcons} />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => onPressHeaderIcon('Notifications')}>
+                  <Image
+                    source={icons.notification}
+                    style={styles.headerIcons}
+                  />
+                </TouchableOpacity>
+              </View>
 
               <TouchableOpacity onPress={toggleDrawer}>
                 <Image source={icons.menu} style={styles.headerIcons} />
@@ -107,40 +118,15 @@ const HomeView: React.FC<HomeViewProps> = ({
                       <Image style={styles.logo} source={icons.logo} />
                     </View>
 
- <TouchableOpacity onPress={animateCard}>
-                        <Image
-                          style={styles.flipCardIcon}
-                          source={images.flipCard}
-                        />
-                      </TouchableOpacity>
-                    {/* <View style={styles.homeInfoContainerHeaderText}>
-                      <AileronBold
-                        name={'Health Insurance'}
-                        numberOfLines={1}
-                        style={styles.infoCardTextBold}
+                    <TouchableOpacity onPress={animateCard}>
+                      <Image
+                        style={styles.flipCardIcon}
+                        source={images.flipCard}
                       />
-
-                      <AileronSemiBold
-                        name={`User ID: ${
-                          homeCardData[0]?.Policy_Number +
-                          homeCardData[0]?.Policy_Class +
-                          homeCardData[0]?.Policy_CertNo
-                        }`}
-                        style={styles.infoCardTextlight}
-                        numberOfLines={2}
-                      />
-                    </View> */}
+                    </TouchableOpacity>
                   </View>
 
                   <View style={styles.homeInfoContainerMiddle}>
-                    <View style={styles.homeInfoContainerMiddleText}>
-                      {/* <AileronSemiBold
-                        name={`Policy Number ${homeCardData[0]?.Policy_Number}`}
-                        style={styles.infoCardMiddleTextlight}
-                        numberOfLines={1}
-                      /> */}
-                    </View>
-
                     <View style={styles.homeInfoContainerMiddleTextLogo}>
                       <View style={styles.homeCardMainDetails}>
                         <View>
@@ -150,6 +136,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                             numberOfLines={1}
                           />
                         </View>
+
                         <View>
                           <AileronSemiBold
                             name={`CNIC: ${user?.cnic}`}
@@ -158,42 +145,54 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
                         </View>
 
-                         <View>
+                        <View>
                           <AileronSemiBold
-                            name={`Policy Name: ${homeCardData[0]?.Policy_Insured_Name
-}`}
+                            name={`Policy Name: ${homeCardData[0]?.Policy_Insured_Name}`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
                         </View>
 
-                         <View style={{flexDirection:"row" , gap:vw*5}}>
-                           
+                        {/* <View style={{flexDirection: 'row', gap: vw * 5}}>
                           <AileronSemiBold
                             name={`class: ${homeCardData[0].Policy_CertNo}`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
 
-   
                           <AileronSemiBold
-                            name={`Cert No: ${homeCardData[0]?.Policy_Insured_Age
-}`}
+                            name={`Cert No: ${homeCardData[0]?.Policy_Insured_Age}`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
-                          
-                         
-                          <AileronSemiBold
-                            name={`Age: ${homeCardData[0]?.Policy_Insured_Age
-}`}
-                            style={styles.infoCardMiddleTextlight}
-                            numberOfLines={1}
-                          />
-                        </View>
 
+                          <AileronSemiBold
+                            name={`Age: ${homeCardData[0]?.Policy_Insured_Age}`}
+                            style={styles.infoCardMiddleTextlight}
+                            numberOfLines={1}
+                          />
+                        </View> */}
                       </View>
-                     
+
+                      <View style={{gap: vh}}>
+                        <AileronSemiBold
+                          name={`class: ${homeCardData[0].Policy_CertNo}`}
+                          style={styles.infoCardMiddleTextlight}
+                          numberOfLines={2}
+                        />
+
+                        <AileronSemiBold
+                          name={`Cert No: ${homeCardData[0]?.Policy_Insured_Age}`}
+                          style={styles.infoCardMiddleTextlight}
+                          numberOfLines={1}
+                        />
+
+                        <AileronSemiBold
+                          name={`Age: ${homeCardData[0]?.Policy_Insured_Age}`}
+                          style={styles.infoCardMiddleTextlight}
+                          numberOfLines={1}
+                        />
+                      </View>
                     </View>
                   </View>
 
@@ -242,43 +241,20 @@ const HomeView: React.FC<HomeViewProps> = ({
                 <TouchableOpacity onPress={animateCard}>
                   <View style={styles.homeBackCardContainer}>
                     <View
-                      style={{justifyContent: 'space-between', gap: vh * 1.5}}>
+                      style={{
+                        justifyContent: 'space-between',
+                        // gap: vh * 1.5,
+                      }}>
                       <View style={styles.homeBackCardHeading}>
-                        <AileronBold
-                          style={styles.homeBackCardHeadingBlack}
-                          name={'Dependent'}
-                        />
-                        <AileronBold
-                          style={styles.homeBackCardHeadingColor}
-                          name={'Details'}
-                        />
-                      </View>
-
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'flex-end',
-                        }}>
-                        <View
-                          style={{
-                            flexDirection: 'col',
-                            gap: vh * 1.2,
-                          }}>
-                          {homeCardData
-                            ?.filter(
-                              _item =>
-                                _item?.Policy_Insured_Relaion !== 'Member',
-                            )
-                            .map((item, index) => (
-                              <AileronRegular
-                                key={index}
-                                name={`${item?.Policy_Insured_Name?.trim()}: ${
-                                  item?.Policy_Insured_Age
-                                }`}
-                                style={styles.homeBackCardText}
-                              />
-                            ))}
+                        <View style={{flexDirection: 'row', gap: vw}}>
+                          <AileronBold
+                            style={styles.homeBackCardHeadingBlack}
+                            name={'Dependent'}
+                          />
+                          <AileronBold
+                            style={styles.homeBackCardHeadingColor}
+                            name={'Details'}
+                          />
                         </View>
 
                         <TouchableOpacity onPress={animateCard}>
@@ -287,6 +263,59 @@ const HomeView: React.FC<HomeViewProps> = ({
                             source={images.flipCard}
                           />
                         </TouchableOpacity>
+                      </View>
+
+                      <View style={styles.backCardDetails}>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'flex-end',
+                          }}>
+                          <View
+                            style={{
+                              flexDirection: 'col',
+                              gap: vh * 1.2,
+                            }}>
+                            {homeCardData
+                              ?.filter(
+                                _item =>
+                                  _item?.Policy_Insured_Relaion !== 'Member',
+                              )
+                              .map((item, index) => (
+                                <AileronRegular
+                                  key={index}
+                                  name={`${item?.Policy_Insured_Name?.trim()}: ${
+                                    item?.Policy_Insured_Age
+                                  }`}
+                                  style={styles.homeBackCardText}
+                                />
+                              ))}
+                          </View>
+
+                          {/* <TouchableOpacity onPress={animateCard}>
+                          <Image
+                            style={styles.flipCardIcon}
+                            source={images.flipCard}
+                          />
+                        </TouchableOpacity> */}
+                        </View>
+
+                        <View style={styles.validity}>
+                          <AileronBold
+                            style={{fontSize: vw * 3.4}}
+                            name={`    Valid from : ${moment(
+                              homeCardData[0]?.Policy_Start_Date,
+                            ).format('DD-MM-YYYY')}`}
+                          />
+
+                          <AileronBold
+                            style={{fontSize: vw * 3.4}}
+                            name={`Valid till : ${moment(
+                              homeCardData[0]?.Policy_expiry_Date,
+                            ).format('DD-MM-YYYY')}`}
+                          />
+                        </View>
                       </View>
 
                       {/* <View style={styles.homeBackCardRow}>
@@ -315,7 +344,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                         </TouchableOpacity>
                       </View> */}
 
-                      <View style={styles.homeBackCardTextRow}>
+                      {/* <View style={styles.homeBackCardTextRow}>
                         <AileronSemiBold
                           style={styles.homeBackCardText}
                           name={`Class : ${homeCardData[0].Policy_CertNo}`}
@@ -328,7 +357,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                           style={styles.homeBackCardText}
                           name={`Age : ${homeCardData[0]?.Policy_Insured_Age}`}
                         />
-                      </View>
+                      </View> */}
                     </View>
                     <View style={styles.backCardFooter}>
                       <View style={styles.backCardFooterBox}>
@@ -344,7 +373,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
                           <AileronSemiBold
                             style={styles.homeBackCardText}
-                           name={`Rs. Per Day: ${homeCardData[0]?.Policy_Daily_RoomLimit?.toLocaleString()}`}
+                            name={`Rs. Per Day: ${homeCardData[0]?.Policy_Daily_RoomLimit?.toLocaleString()}`}
                           />
                         </View>
                       </View>
@@ -362,7 +391,11 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
                           <AileronSemiBold
                             style={styles.homeBackCardText}
-                            name={homeCardData[0]?.Policy_MatLimit}
+                            name={
+                              homeCardData[0]?.Policy_MatLimit > 0
+                                ? 'Available'
+                                : 'Not Available'
+                            }
                           />
                         </View>
                       </View>
@@ -377,7 +410,10 @@ const HomeView: React.FC<HomeViewProps> = ({
       <View style={styles.gradient}>
         <View>
           <View style={styles.dashboardContainerHeader}>
-                  <Image source={icons.claimStatistics} style={styles.statisticsIcon} />
+            <Image
+              source={icons.claimStatistics}
+              style={styles.statisticsIcon}
+            />
             <AileronBold
               style={styles.dashboardContainerTextBold}
               name="Quick Services"
@@ -502,14 +538,18 @@ const HomeView: React.FC<HomeViewProps> = ({
           </View>
         </View>
         <View>
-          <View style={styles.claimStatistics}>    <Image source={icons.claimStatistics} style={styles.statisticsIcon} /> 
-           <AileronSemiBold
-            name={'Associated Apps'}
-            style={styles.associatedTittle}
-          />
+          <View style={styles.claimStatistics}>
+            {' '}
+            <Image
+              source={icons.claimStatistics}
+              style={styles.statisticsIcon}
+            />
+            <AileronSemiBold
+              name={'Associated Apps'}
+              style={styles.associatedTittle}
+            />
+          </View>
 
-           </View>
-         
           <View style={styles.associatedContainer}>
             <View style={styles.associatedImageContainer}>
               <TouchableOpacity

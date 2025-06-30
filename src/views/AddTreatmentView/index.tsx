@@ -92,7 +92,7 @@ const AddTreatmentView = ({
                 setterForApiData('amount', cleanedText);
               }}
               label="Amount"
-              placeholder="enter amount"
+              placeholder="Enter Amount"
             />
 
             <InputField

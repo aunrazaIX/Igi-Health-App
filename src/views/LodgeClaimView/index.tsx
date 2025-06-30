@@ -20,6 +20,7 @@ import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
+import {vh} from '../../assets/theme/dimension';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -127,6 +128,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         onPressEdit={onPressEdit}
         claimsDetails={claimsDetails}
         navigateTreatment={navigateTreatment}
+        currentStep={currentStep}
+        selectedType={selectedType}
       />
     ),
     uploadDoc: (
@@ -145,13 +148,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   return (
     <>
       <TopView
-        TopViewFirstIcon={
-          (currentStep === 2 && selectedType?.value === 1) ||
-          (currentStep === 2 && claimsDetails?.length < 1) ||
-          (type === 'priorApproval' && currentStep === 2)
-            ? icons.addSquare
-            : null
-        }
+        // TopViewFirstIcon={
+        //   (currentStep === 2 && selectedType?.value === 1) ||
+        //   (currentStep === 2 && claimsDetails?.length < 1) ||
+        //   (type === 'priorApproval' && currentStep === 2)
+        //     ? icons.addSquare
+        //     : null
+        // }
         containerStyleIcon={styles.addTreatment}
         tintColrorForTopViewFirstIcon={COLORS.white}
         FirstOpenModal={navigateTreatment}
@@ -169,6 +172,16 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             onPressStep={onPressStep}
             componentList={renderStep}
           />
+
+          {(currentStep === 2 && selectedType?.value === 1) ||
+          (currentStep === 2 && claimsDetails?.length < 1) ||
+          (type === 'priorApproval' && currentStep === 2) ? (
+            <Button
+              containerStyle={{marginBottom: vh}}
+              onPress={navigateTreatment}
+              name="Add a Claim"
+            />
+          ) : null}
 
           <Button
             disabled={

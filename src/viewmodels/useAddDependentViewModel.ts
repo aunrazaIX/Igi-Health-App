@@ -7,15 +7,19 @@ import {RootState} from '../redux/store';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {setErrorModal} from '../redux/generalSlice';
-import { DetailsContainer } from '../components';
+import {DetailsContainer} from '../components';
 
 const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   let {user} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
 
-  const {dependentData, dependentIndex} = route?.params || {};
+  const {dependentData, dependentIndex, isUpdate} = route?.params || {};
+
+  console.log(isUpdate, 'isu');
 
   const navigation = useNavigation();
+
+  const [confirmationType, setConfirmatonType] = useState('');
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
@@ -59,7 +63,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     cnic: user?.cnic,
     clientCode: user?.ClientCode,
     dependentTypeID: {label: prefilledData.relationship.label},
-
     dependentRequestTypesID: dependentIndex ? 2 : 1,
     dependentRequestID: 0,
     gender: {
@@ -96,8 +99,12 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
     onSuccess: res => {
-      console.log('update successfully');
-      setConfirmationModal(true);
+      if (!isUpdate) {
+        setConfirmatonType('');
+        setConfirmationModal(true);
+      }
+
+      setConfirmatonType('');
     },
 
     onError: error => {
@@ -105,6 +112,36 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     },
   });
 
+  const handleSubmitRequest = () => {
+    // const filled = dependentCheckForError();
+    // if (!filled) return;
+
+    let _apiData = {
+      ...dependentApiData,
+      dependentTypeID: dependentApiData?.dependentTypeID?.value,
+      gender: dependentApiData?.gender?.label,
+    };
+
+    if (
+      !dependentApiData?.dependentName ||
+      !dependentApiData?.gender?.label ||
+      !dependentApiData?.dependentTypeID?.value ||
+      !dependentApiData?.Age
+    ) {
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: `"Please fill all require feilds"`,
+          detail:
+            'An error has occurred, please fill all require feilds. If the problem persists, contact IGI Life',
+        }),
+      );
+    } else {
+      console.log('triggering updating');
+      trigger(_apiData);
+      // setConfirmatonType('update');
+    }
+  };
   const onPressSubmit = () => {
     const filled = dependentCheckForError();
 
@@ -122,7 +159,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       !dependentApiData?.dependentTypeID?.value ||
       !dependentApiData?.Age
     ) {
-       dispatch(
+      dispatch(
         setErrorModal({
           Show: true,
           message: `"Please fill all require feilds"`,
@@ -131,10 +168,16 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         }),
       );
     } else {
-      console.log('triggering updating');
-
-      console.log(_apiData, 'apidataaaaaaaausman');
-      trigger(_apiData);
+      if (isUpdate) {
+        // trigger(_apiData);
+        setConfirmationModal(true);
+        setConfirmatonType('update');
+      } else {
+        console.log('triggering updating');
+        trigger(_apiData);
+        // setConfirmationModal(true);
+        // setConfirmatonType('update');
+      }
     }
   };
 
@@ -155,6 +198,8 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       confirmationModal,
       dependentData,
       dependentIndex,
+      confirmationType,
+      isUpdate,
     },
     functions: {
       onPressSubmit,
@@ -163,6 +208,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       resetStates,
       handleCancel,
       formatAgeToDate,
+      handleSubmitRequest,
     },
   };
 };

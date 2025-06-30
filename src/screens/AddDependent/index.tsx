@@ -13,6 +13,8 @@ const AddDependent = ({navigation, route}: {navigation: any; route: any}) => {
     dependentData,
     dependentIndex,
     dependantsData,
+    confirmationType,
+    isUpdate,
   } = states;
   const {
     onPressSubmit,
@@ -21,6 +23,7 @@ const AddDependent = ({navigation, route}: {navigation: any; route: any}) => {
     resetStates,
     handleCancel,
     formatAgeToDate,
+    handleSubmitRequest,
   } = functions;
 
   return (
@@ -40,6 +43,9 @@ const AddDependent = ({navigation, route}: {navigation: any; route: any}) => {
         dependantsData={dependantsData}
         handleCancel={handleCancel}
         formatAgeToDate={formatAgeToDate}
+        confirmatonType={confirmationType}
+        handleSubmitRequest={handleSubmitRequest}
+        isUpdate={isUpdate}
       />
     </>
   );

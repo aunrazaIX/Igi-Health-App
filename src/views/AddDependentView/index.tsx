@@ -47,6 +47,9 @@ type AddDependentViewProps = {
   dependantsData: any;
   handleCancel: any;
   formatAgeToDate: any;
+  confirmatonType: any;
+  handleSubmitRequest: any;
+  isUpdate: any;
 };
 
 const AddDependentView: React.FC<AddDependentViewProps> = ({
@@ -64,6 +67,9 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   dependentIndex,
   dependantsData,
   formatAgeToDate,
+  confirmatonType,
+  handleSubmitRequest,
+  isUpdate,
 }) => {
   // Determine if gender should be disabled
   const relationship = dependentApiData?.dependentTypeID?.label;
@@ -72,7 +78,11 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
 
   return (
     <>
-      <TopView title={'Add Dependent Request'} />
+      <TopView
+        title={
+          isUpdate ? 'Update Dependent Request' : 'Manage Dependent Request'
+        }
+      />
       <CurvedView containerStyle={styles.curvedStyle}>
         <KeyboardAwareScrollView>
           <View style={styles.personalFrameContainer}>
@@ -184,7 +194,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               />
             </DependentBox>
             <Button
-              name={dependentIndex != undefined ? 'Update' : 'Submit'}
+              name={dependentIndex != undefined ? 'Submit Request' : 'Submit'}
               containerStyle={styles.modalAddButton}
               inputStyle={styles.modalAddText}
               onPress={onPressSubmit}
@@ -203,12 +213,18 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
           <ConfirmationModal
             ConfirmationModalVisible={confirmationModal}
             setConfirmationModalVisible={setConfirmationModal}
+            submitButton={confirmatonType === 'update' ? true : false}
             frameImage={icons.ModalSuccessfull}
-            confirmationMessage={'Your request has been successfully applied'}
-            closeButton={true}
+            confirmationMessage={
+              confirmatonType === 'update'
+                ? 'Are you sure you want to submit the request to IGI Life to edit the records?'
+                : 'Your request has been submitted.\nNote: All edit requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation.'
+            }
+            closeButton={confirmatonType === 'update' ? false : true}
             Successfull={true}
             CloseButtonText={'Continue To Login'}
             onClose={resetStates}
+            handleSubmit={handleSubmitRequest}
           />
         </KeyboardAwareScrollView>
       </CurvedView>

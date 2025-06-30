@@ -84,7 +84,7 @@ const BenefitsView: React.FC<Props> = ({
           <View style={styles.MaximumLeftBox}>
             <Image source={images.Logo} style={styles.benefitsLogo} />
             <AileronBold
-              name={'Maximum\nHospitalization'}
+              name={'Entitled\nHospitalization'}
               style={styles.MaximumTitle}
             />
             <AileronBold name={'Benefits!'} style={styles.BenefitsTitle} />
@@ -139,7 +139,7 @@ const BenefitsView: React.FC<Props> = ({
           ListEmptyComponent={
             !benefitsloading ? (
               <View style={{alignItems: 'center', marginTop: 20}}>
-                <NoDataView name={'No benefits Found'} />
+                <NoDataView name={'No Benefits Found'} />
               </View>
             ) : null
           }

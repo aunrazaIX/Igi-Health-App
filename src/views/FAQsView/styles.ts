@@ -16,10 +16,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: vw * 4,
+    fontSize: vw * 3.3,
     textAlign: 'left',
     color: COLORS.black,
-    width: '80%',
+    width: '100%',
+    lineHeight: vh * 3,
   },
   headertitle: {
     fontSize: vw * 4.5,
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
     color: COLORS.faqsSubHeading,
     marginBottom: vh * 2,
     textAlign: 'left',
+    lineHeight: vh * 3,
   },
   icon: {
     objectFit: 'contain',

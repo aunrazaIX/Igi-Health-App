@@ -119,7 +119,7 @@ export const icons = {
   editIcon: require('./icons/editIcon.png'),
   mobNumber: require('./icons/mobNumber.png'),
   modelSuccessful: require('./icons/modelSuccessful.png'),
-  download: require('./icons/download.png'),
+  download: require('./icons/downloadIcon.png'),
 };
 
 export const drawerIcons = {
@@ -141,6 +141,7 @@ export const drawerIcons = {
   drawerClose: require('./icons/drawerClose.png'),
   drawerArrowRight: require('./icons/drawerArrowRight.png'),
   drawerLogout: require('./icons/drawerLogout.png'),
+  drawerInvite: require('./icons/inviteFriend.png'),
 };
 
 export const tabIcons = {

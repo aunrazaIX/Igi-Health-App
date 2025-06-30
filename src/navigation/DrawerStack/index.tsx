@@ -15,7 +15,7 @@ import {
   DrawerContentComponentProps,
   useDrawerStatus,
 } from '@react-navigation/drawer';
-import {drawerIcons, images} from '../../assets';
+import {drawerIcons, icons, images} from '../../assets';
 import {AileronBold, AileronSemiBold} from '../../components';
 import Tabs from '../TabStack';
 import ClaimsHistory from '../../screens/ClaimsHistory';
@@ -137,6 +137,12 @@ const DrawerStack = () => {
 
     {
       id: 14,
+      name: 'Invite A Friend',
+      icon: drawerIcons.drawerInvite,
+    },
+
+    {
+      id: 15,
       name: 'Logout',
       icon: drawerIcons.drawerLogout,
       to: 'logout',
