@@ -176,7 +176,7 @@ const HomeView: React.FC<HomeViewProps> = ({
 
                       <View style={{gap: vh}}>
                         <AileronSemiBold
-                          name={`class: ${homeCardData[0].Policy_CertNo}`}
+                          name={`Class: ${homeCardData[0].Policy_CertNo}`}
                           style={styles.infoCardMiddleTextlight}
                           numberOfLines={2}
                         />
