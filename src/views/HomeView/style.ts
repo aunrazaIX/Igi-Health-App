@@ -285,7 +285,7 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCardText: {
     textAlign: 'left',
-    fontSize: vw * 3.8,
+    fontSize: vw * 3.9,
     color: COLORS.white,
   },
   cardsArrow: {
