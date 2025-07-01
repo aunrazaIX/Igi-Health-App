@@ -297,7 +297,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   }));
 
   const goBack = () => {
-    resetStates();
+    // resetStates();
 
     navigation.reset({
       index: 0,

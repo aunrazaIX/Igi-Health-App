@@ -196,13 +196,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             />
           ) : null}
 
-          {currentStep === 2 || currentStep === 3 ? (
+          {/* {currentStep === 2 || currentStep === 3 ? (
             <Button
               containerStyle={{marginBottom: vh}}
               onPress={handleBackButton}
               name="Back"
             />
-          ) : null}
+          ) : null} */}
 
           <Button
             disabled={
@@ -241,7 +241,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             : confirmationType === 'fileDelete'
             ? 'Are you sure you want to delete this file?'
             : confirmationType === 'back'
-            ? 'Going back will return you to the home screen and clear your data. Do you want to continue?'
+            ? 'Going back will return you to the home screen. Do you want to continue?'
             : 'Thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims.'
         }
         claimSubmission={
