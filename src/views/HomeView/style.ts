@@ -117,6 +117,7 @@ export const styles = StyleSheet.create({
   },
   statisticsHeader: {
     fontSize: vh * 2.3,
+    color: COLORS.textBlackShade,
   },
   graphContainer: {
     height: vh * 20,
@@ -284,7 +285,7 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCardText: {
     textAlign: 'left',
-    fontSize: vw * 4,
+    fontSize: vw * 3.8,
     color: COLORS.white,
   },
   cardsArrow: {

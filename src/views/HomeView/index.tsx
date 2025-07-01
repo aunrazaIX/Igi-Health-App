@@ -544,7 +544,7 @@ const HomeView: React.FC<HomeViewProps> = ({
               source={icons.claimStatistics}
               style={styles.statisticsIcon}
             />
-            <AileronSemiBold
+            <AileronBold
               name={'Associated Apps'}
               style={styles.associatedTittle}
             />
