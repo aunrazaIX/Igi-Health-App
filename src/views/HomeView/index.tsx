@@ -555,9 +555,9 @@ const HomeView: React.FC<HomeViewProps> = ({
               <TouchableOpacity
                 onPress={() =>
                   handleAssociatedApps({
-                    ios: 'https://apps.apple.com/pk/app/igi-life-vitality/id1398273780 ',
+                    ios: 'https://apps.apple.com/pk/app/igi-life-vitality/id1398273780',
                     android:
-                      'https://play.google.com/store/apps/details?id=com.vitalityactive.igi&hl=en-US ',
+                      'https://play.google.com/store/apps/details?id=com.vitalityactive.igi&hl=en-US',
                   })
                 }>
                 <Image

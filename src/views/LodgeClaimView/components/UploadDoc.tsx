@@ -47,7 +47,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
             />
           </TouchableOpacity>
           <AileronSemiBold
-            name="(Max. File size: 25 MB)"
+            name="(Max. File Size: 25 MB)"
             style={styles.maxFile}
           />
         </View>
@@ -90,7 +90,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
 
                 <View>
                   <AileronSemiBold
-                    name={`File size : ${
+                    name={`File Size : ${
                       item?.fileSizeInMB?.toFixed(3) || ''
                     } MB`}
                     style={styles.fileSizeText}
@@ -111,7 +111,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
               onChangeText={text => setterForclaimData('claimComments', text)}
               style={styles.remarksInput}
               numberOfLines={4}
-              placeholder="add remarks"
+              placeholder="Add Remarks"
             />
           </View>
         </View>

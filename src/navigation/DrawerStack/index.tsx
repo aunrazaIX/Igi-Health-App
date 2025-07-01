@@ -136,13 +136,13 @@ const DrawerStack = () => {
     },
 
     {
-      id: 14,
+      id: 15,
       name: 'Invite A Friend',
       icon: drawerIcons.drawerInvite,
     },
 
     {
-      id: 15,
+      id: 14,
       name: 'Logout',
       icon: drawerIcons.drawerLogout,
       to: 'logout',

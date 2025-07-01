@@ -61,6 +61,8 @@ type LodgeClaimViewProps = {
   deletedIndex: any;
   setConfirmationType: any;
   onPressSubmitClaim: any;
+  handleDeleteFile: any;
+  deletedFileIndex: any;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -104,6 +106,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   handleDeleteClaim,
   setConfirmationType,
   onPressSubmitClaim,
+  handleDeleteFile,
+  deletedFileIndex,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -216,7 +220,9 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           confirmationType === 'delete'
             ? 'Are you sure you want to delete this treatment?'
             : confirmationType === 'submit'
-            ? "You're about to submit this medical claim. Please confirm  ✓ All required fields are completed ✓ Dates and amounts are accurate ✓ Supporting documents are attached"
+            ? 'Are you sure you want to submit this claim?'
+            : confirmationType === 'fileDelete'
+            ? 'Are you sure you want to delete this file?'
             : 'Thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims.'
         }
         claimSubmission={
@@ -224,18 +230,34 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? false
             : confirmationType === 'submit'
             ? false
+            : confirmationType === 'fileDelete'
+            ? false
             : true
         }
-        deleteButton={confirmationType === 'delete' ? true : false}
+        deleteButton={
+          confirmationType === 'delete'
+            ? true
+            : confirmationType === 'fileDelete'
+            ? true
+            : false
+        }
         submitButton={confirmationType === 'submit' ? true : false}
         closeButton={
           confirmationType === 'delete'
             ? false
             : confirmationType === 'submit'
             ? false
+            : confirmationType === 'fileDelete'
+            ? false
             : true
         }
-        confirmationRequired={confirmationType === 'delete' ? true : false}
+        confirmationRequired={
+          confirmationType === 'delete'
+            ? true
+            : confirmationType === 'fileDelete'
+            ? true
+            : false
+        }
         CloseButtonText={'Continue To Login'}
         onClose={() => {
           resetStates;
@@ -245,6 +267,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         handleDelete={
           confirmationType === 'delete'
             ? () => handleDeleteClaim(deletedIndex)
+            : confirmationType === 'fileDelete'
+            ? () => handleDeleteFile(deletedFileIndex)
             : null
         }
         handleSubmit={
