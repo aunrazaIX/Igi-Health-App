@@ -1,9 +1,9 @@
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
-import { AileronBold, AileronSemiBold } from '../../../components';
-import { icons } from '../../../assets';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {COLORS} from '../../../assets/theme/colors';
+import {AileronBold, AileronSemiBold} from '../../../components';
+import {icons} from '../../../assets';
 
 type InfoItem = {
   label: string;
@@ -16,8 +16,7 @@ type BoxProps = {
   onPressEdit: () => void;
 };
 
-const Box: React.FC<BoxProps> = ({ data, onPressDelete, onPressEdit }) => {
-
+const Box: React.FC<BoxProps> = ({data, onPressDelete, onPressEdit}) => {
   const formatValue = (value: string) => {
     if (!isNaN(Number(value)) && value.trim() !== '') {
       return Number(value).toLocaleString();
@@ -49,7 +48,11 @@ const Box: React.FC<BoxProps> = ({ data, onPressDelete, onPressEdit }) => {
           <View style={styles.field} key={index}>
             <AileronSemiBold name={_item?.label} style={styles.detailLabel} />
             <AileronSemiBold
-              name={formatValue(_item?.value)}
+              name={
+                _item?.label.toLowerCase().includes('amount')
+                  ? formatValue(_item?.value)
+                  : _item?.value
+              }
               style={styles.detailvalue}
             />
           </View>
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     shadowColor: '#000',
     shadowOpacity: 0.14,
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowRadius: 2,
   },
   avatar: {
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  button: { height: vw * 6, width: vw * 6 },
+  button: {height: vw * 6, width: vw * 6},
   buttonIcon: {
     height: vw * 6,
     width: vw * 6,
