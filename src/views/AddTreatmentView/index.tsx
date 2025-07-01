@@ -57,7 +57,7 @@ const AddTreatmentView = ({
                 style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
               />
               <AileronBold
-                name="Treatment"
+                name=" Treatment"
                 style={[styles.text, {color: COLORS.cardBackgroundRed}]}
               />
             </View>
