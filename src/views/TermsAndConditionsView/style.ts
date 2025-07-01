@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
   termsAndConditionsText: {
     textAlign: 'left',
     fontSize: vw * 3.5,
+    maxWidth: '90%',
     color: COLORS.textBlackShade,
   },
   termsAndConditionsPoints: {
@@ -40,6 +41,7 @@ export const styles = StyleSheet.create({
   },
   pointsText: {
     textAlign: 'left',
+    maxWidth: '95%',
     fontSize: vw * 3.7,
     lineHeight: vh * 2.5,
     color: COLORS.textBlackShade,

@@ -63,6 +63,8 @@ type LodgeClaimViewProps = {
   onPressSubmitClaim: any;
   handleDeleteFile: any;
   deletedFileIndex: any;
+  handleBackButton: any;
+  handleGOBack: any;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -108,6 +110,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   onPressSubmitClaim,
   handleDeleteFile,
   deletedFileIndex,
+  handleBackButton,
+  handleGOBack,
 }) => {
   const renderStep = {
     personalDetails: (
@@ -149,6 +153,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
 
   const navigation = useNavigation();
 
+  console.log(type, 'typeeee');
+
   return (
     <>
       <TopView
@@ -159,10 +165,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         //     ? icons.addSquare
         //     : null
         // }
+
         containerStyleIcon={styles.addTreatment}
         tintColrorForTopViewFirstIcon={COLORS.white}
         FirstOpenModal={navigateTreatment}
-        onPressBack={goBack}
+        onPressBack={
+          type === 'priorApproval' || 'lodgeClaim' ? handleGOBack : goBack
+        }
         title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge Claim'}
         resetStates={resetStates}
       />
@@ -184,6 +193,14 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
               containerStyle={{marginBottom: vh}}
               onPress={navigateTreatment}
               name="Add a Claim"
+            />
+          ) : null}
+
+          {currentStep === 2 || currentStep === 3 ? (
+            <Button
+              containerStyle={{marginBottom: vh}}
+              onPress={handleBackButton}
+              name="Back"
             />
           ) : null}
 
@@ -215,7 +232,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
       <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
-        frameImage={icons.modelSuccessful}
+        frameImage={type === 'back' ? icons.addSquare : icons.modelSuccessful}
         confirmationMessage={
           confirmationType === 'delete'
             ? 'Are you sure you want to delete this treatment?'
@@ -223,6 +240,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? 'Are you sure you want to submit this claim?'
             : confirmationType === 'fileDelete'
             ? 'Are you sure you want to delete this file?'
+            : confirmationType === 'back'
+            ? 'Going back will return you to the home screen and clear your data. Do you want to continue?'
             : 'Thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims.'
         }
         claimSubmission={
@@ -232,6 +251,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? false
             : confirmationType === 'fileDelete'
             ? false
+            : confirmationType === 'back'
+            ? false
             : true
         }
         deleteButton={
@@ -239,8 +260,11 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? true
             : confirmationType === 'fileDelete'
             ? true
+            : confirmationType === 'back'
+            ? true
             : false
         }
+        type={type}
         submitButton={confirmationType === 'submit' ? true : false}
         closeButton={
           confirmationType === 'delete'
@@ -248,6 +272,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             : confirmationType === 'submit'
             ? false
             : confirmationType === 'fileDelete'
+            ? false
+            : confirmationType === 'back'
             ? false
             : true
         }
@@ -269,6 +295,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? () => handleDeleteClaim(deletedIndex)
             : confirmationType === 'fileDelete'
             ? () => handleDeleteFile(deletedFileIndex)
+            : confirmationType === 'back'
+            ? () => goBack()
             : null
         }
         handleSubmit={

@@ -30,7 +30,7 @@ const TopView = ({
   goBack,
   resetStates,
   type,
-  titleStyle
+  titleStyle,
 }: {
   title: string;
   onPressBack?: () => void;
@@ -45,7 +45,7 @@ const TopView = ({
   tintColrorForTopViewFirstIcon?: string;
   resetStates?: () => void;
   type: string;
-  titleStyle: any
+  titleStyle: any;
 }) => {
   const route = useRoute();
   const navigation = useNavigation();
@@ -58,8 +58,10 @@ const TopView = ({
             onPress={() => {
               if (onPressBack) {
                 onPressBack();
+                return;
               }
 
+              console.log('continueeeee');
               const stackRoutes = navigation?.getState()?.routes;
               const currentRouteIndex = stackRoutes?.findIndex(
                 _route => _route.name === route.name,
@@ -80,7 +82,10 @@ const TopView = ({
             style={styles.backIconContainer}>
             <Image style={styles.backIcon} source={icons.backArrow} />
           </TouchableOpacity>
-          <AileronSemiBold style={[styles.headerName , titleStyle]} name={title} />
+          <AileronSemiBold
+            style={[styles.headerName, titleStyle]}
+            name={title}
+          />
           {(TopViewSecondIcon || TopViewFirstIcon) && (
             <View style={styles.headerIcon}>
               <TouchableOpacity onPress={SecondOpenModal}>
@@ -151,7 +156,7 @@ const styles = StyleSheet.create({
     fontSize: vw * 5,
     textAlign: 'center',
     marginLeft: vw * 2.2,
-    
+
     // borderWidth: 2,
   },
   iconStyle: {

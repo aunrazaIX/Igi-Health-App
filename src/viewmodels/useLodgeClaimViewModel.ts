@@ -237,7 +237,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       const routes = state.routes;
       const currentRoute = routes[routes.length - 1];
       if (currentRoute?.name !== 'AddTreatment') {
-        resetStates();
+        // resetStates();
       }
     },
   });
@@ -383,6 +383,15 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     }
   };
 
+  const handleBackButton = () => {
+    dispatch(setStep(currentStep - 1));
+  };
+
+  const handleGOBack = () => {
+    setConfirmationType('back');
+    setConfirmationModal(true);
+  };
+
   const onPressSubmitClaim = () => {
     trigger();
   };
@@ -498,6 +507,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       setConfirmationType,
       onPressSubmitClaim,
       handleDeleteFile,
+      handleBackButton,
+      handleGOBack,
     },
   };
 };

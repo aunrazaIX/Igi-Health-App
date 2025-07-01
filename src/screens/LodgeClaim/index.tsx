@@ -65,6 +65,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     setConfirmationType,
     onPressSubmitClaim,
     handleDeleteFile,
+    handleBackButton,
+    handleGOBack,
   } = functions;
 
   return (
@@ -111,6 +113,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       onPressSubmitClaim={onPressSubmitClaim}
       handleDeleteFile={handleDeleteFile}
       deletedFileIndex={deletedFileIndex}
+      handleBackButton={handleBackButton}
+      handleGOBack={handleGOBack}
     />
   );
 };
