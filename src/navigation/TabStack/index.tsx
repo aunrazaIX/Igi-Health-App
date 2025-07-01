@@ -30,10 +30,11 @@ const Tabs = () => {
           // alignItems: 'center',
           // borderWidth: 2,
           // paddingTop: vh * 0.5,
+          // paddingBottom: vh * 3,
         },
         headerShown: false,
         tabBarIconStyle: {
-          marginVertical: vh * 1.1,
+          marginVertical: vh * 0.8,
         },
         tabBarHideOnKeyboard: true,
       }}>
@@ -52,7 +53,7 @@ const Tabs = () => {
 
               <AileronRegular
                 name="Home"
-                style={{color: 'black', fontSize: vw * 3, marginTop: vh * 0.1}}
+                style={{color: 'black', fontSize: vw * 3}}
               />
             </View>
           ),
@@ -130,8 +131,7 @@ const Tabs = () => {
                       style={[styles.iconStyle, {tintColor: 'white'}]}
                       source={tabIcons.note}
                     />
-                    <Text
-                      style={{color: 'white', fontSize: vw * 3, marginTop: 2}}>
+                    <Text style={{color: 'white', fontSize: vw * 3}}>
                       Prior Approval
                     </Text>
                   </View>
@@ -184,9 +184,9 @@ const Tabs = () => {
                     style={[styles.iconStyle, {tintColor: 'white'}]}
                     source={tabIcons.PriorApproval}
                   />
-                  <Text style={{color: 'white', fontSize: 12, marginTop: 2}}>
+                  {/* <Text style={{color: 'white', fontSize: 12, marginTop: 2}}>
                     Lodge Claim
-                  </Text>
+                  </Text> */}
                 </View>
               </LinearGradient>
             ) : (
@@ -238,9 +238,9 @@ const Tabs = () => {
                     style={[styles.iconStyle, {tintColor: 'white'}]}
                     source={tabIcons.customerSupport}
                   />
-                  <Text style={{color: 'white', fontSize: 12, marginTop: 2}}>
+                  {/* <Text style={{color: 'white', fontSize: 12, marginTop: 2}}>
                     Helpline
-                  </Text>
+                  </Text> */}
                 </View>
               </LinearGradient>
             ) : (
@@ -270,6 +270,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderRadius: vh * 50,
     height: vw * 20,
+
     marginHorizontal: vw * 6,
     // paddingHorizontal: vw * 1.2,
     elevation: 1,
