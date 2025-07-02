@@ -1,4 +1,4 @@
-package com.igihealth
+package com.igilifehealth
 
 import android.app.Application
 import com.facebook.react.PackageList
