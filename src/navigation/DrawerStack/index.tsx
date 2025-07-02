@@ -5,6 +5,8 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Share,
+  Platform,
 } from 'react-native';
 import React, {useEffect, useRef} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -15,7 +17,7 @@ import {
   DrawerContentComponentProps,
   useDrawerStatus,
 } from '@react-navigation/drawer';
-import {drawerIcons, images} from '../../assets';
+import {drawerIcons, icons, images} from '../../assets';
 import {AileronBold, AileronSemiBold} from '../../components';
 import Tabs from '../TabStack';
 import ClaimsHistory from '../../screens/ClaimsHistory';
@@ -136,6 +138,12 @@ const DrawerStack = () => {
     },
 
     {
+      id: 15,
+      name: 'Invite A Friend',
+      icon: drawerIcons.drawerInvite,
+    },
+
+    {
       id: 14,
       name: 'Logout',
       icon: drawerIcons.drawerLogout,
@@ -205,9 +213,23 @@ const DrawerStack = () => {
                 <TouchableOpacity
                   key={index}
                   style={styles.row}
-                  onPress={() => {
+                  onPress={async () => {
                     if (route.id === 14) {
                       dispatch(logout());
+                      return;
+                    }
+                    if (route.id === 15) {
+                      const appLink =
+                        Platform.OS === 'android'
+                          ? 'https://play.google.com/store/apps/details?id=com.sehatkahani.app&hl=en'
+                          : 'https://apps.apple.com/pk/app/sehat-kahani-retail/id1470938140';
+                      try {
+                        await Share.share({
+                          message: `Check out the IGI Health App! Download it here: ${appLink}`,
+                        });
+                      } catch (error) {
+                        console.log(error);
+                      }
                       return;
                     }
                     if (route.to) {

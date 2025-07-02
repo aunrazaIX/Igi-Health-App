@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   description: {
     textAlign: 'left',
-    fontSize: vh * 2,
+    fontSize: vw * 4,
     marginTop: vh,
   },
   button: {

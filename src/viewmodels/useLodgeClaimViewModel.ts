@@ -75,6 +75,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   const [confirmationType, setConfirmationType] = useState<string>('');
   const [deletedIndex, setDeletedIndex] = useState<any>(null);
+  const [deletedFileIndex, setDeletedFileIndex] = useState(null);
 
   const {
     selectedDocuments,
@@ -236,7 +237,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       const routes = state.routes;
       const currentRoute = routes[routes.length - 1];
       if (currentRoute?.name !== 'AddTreatment') {
-        resetStates();
+        // resetStates();
       }
     },
   });
@@ -296,7 +297,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   }));
 
   const goBack = () => {
-    resetStates();
+    // resetStates();
 
     navigation.reset({
       index: 0,
@@ -382,6 +383,15 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     }
   };
 
+  const handleBackButton = () => {
+    dispatch(setStep(currentStep - 1));
+  };
+
+  const handleGOBack = () => {
+    setConfirmationType('back');
+    setConfirmationModal(true);
+  };
+
   const onPressSubmitClaim = () => {
     trigger();
   };
@@ -441,7 +451,15 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   };
 
   const handleCancelFile = (item, index) => {
-    dispatch(onDeleteDocuments(index));
+    setConfirmationType('fileDelete');
+    setConfirmationModal(true);
+    setDeletedFileIndex(index);
+
+    // dispatch(onDeleteDocuments(index));
+  };
+
+  const handleDeleteFile = deletedFileIndex => {
+    dispatch(onDeleteDocuments(deletedFileIndex));
   };
 
   return {
@@ -467,6 +485,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       selectedHospital,
       confirmationType,
       deletedIndex,
+      deletedFileIndex,
     },
     functions: {
       goBack,
@@ -487,6 +506,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       handleDeleteClaim,
       setConfirmationType,
       onPressSubmitClaim,
+      handleDeleteFile,
+      handleBackButton,
+      handleGOBack,
     },
   };
 };

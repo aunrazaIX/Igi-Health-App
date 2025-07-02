@@ -2,7 +2,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {StyleSheet, Image, View} from 'react-native';
+import {StyleSheet, Image, View, Text} from 'react-native';
 import {tabIcons} from '../../assets';
 import HomeStack from '../HomeStack';
 import {COLORS} from '../../assets/theme/colors';
@@ -12,6 +12,7 @@ import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaimStack from '../LodgeClaimStack';
 import {useSelector} from 'react-redux';
+import {AileronRegular} from '../../components';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,16 +29,34 @@ const Tabs = () => {
           // paddingVertical: vh * 1,
           // alignItems: 'center',
           // borderWidth: 2,
+          // paddingTop: vh * 0.5,
+          // paddingBottom: vh * 3,
         },
         headerShown: false,
         tabBarIconStyle: {
-          marginVertical: vh * 2,
+          marginVertical: vh * 0.8,
         },
         tabBarHideOnKeyboard: true,
       }}>
       <Tab.Screen
         options={{
-          tabBarShowLabel: false,
+          tabBarShowLabel: true,
+          tabBarLabel: ({focused}) => (
+            <View style={{alignItems: 'center'}}>
+              <AileronRegular
+                style={{
+                  color: focused ? 'black' : 'black',
+                  fontSize: vw,
+                }}>
+                Home
+              </AileronRegular>
+
+              <AileronRegular
+                name="Home"
+                style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
+              />
+            </View>
+          ),
           popToTopOnBlur: true,
           tabBarIcon: ({focused}) =>
             focused ? (
@@ -51,6 +70,15 @@ const Tabs = () => {
                     style={[styles.iconStyle, {tintColor: 'white'}]}
                     source={tabIcons.home}
                   />
+                  {/* <Text
+                    style={{
+                      color: 'white',
+                      fontSize: vw * 3,
+
+                      marginTop: 2,
+                    }}>
+                    Home
+                  </Text> */}
                 </View>
               </LinearGradient>
             ) : (
@@ -59,6 +87,10 @@ const Tabs = () => {
                   style={[styles.iconStyle, {tintColor: 'black'}]}
                   source={tabIcons.home}
                 />
+                {/* <Text
+                  style={{color: 'black', fontSize: 12, marginTop: vh * 0.2}}>
+                  Home
+                </Text> */}
               </View>
             ),
         }}
@@ -68,7 +100,23 @@ const Tabs = () => {
       {user?.showPriorApproval && (
         <Tab.Screen
           options={{
-            tabBarShowLabel: false,
+            tabBarShowLabel: true,
+            tabBarLabel: ({focused}) => (
+              <View style={{alignItems: 'center'}}>
+                <AileronRegular
+                  style={{
+                    color: focused ? 'black' : 'black',
+                    fontSize: vw,
+                  }}>
+                  Prior Approval
+                </AileronRegular>
+
+                <AileronRegular
+                  name="Prior Approval"
+                  style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
+                />
+              </View>
+            ),
             popToTopOnBlur: true,
             tabBarStyle: {display: 'none'},
             tabBarIcon: ({focused}) =>
@@ -83,11 +131,17 @@ const Tabs = () => {
                       style={[styles.iconStyle, {tintColor: 'white'}]}
                       source={tabIcons.note}
                     />
+                    <Text style={{color: 'white', fontSize: vw * 3}}>
+                      Prior Approval
+                    </Text>
                   </View>
                 </LinearGradient>
               ) : (
                 <View style={[styles.gradientBorder, styles.wrapper]}>
-                  <Image style={styles.iconStyle} source={tabIcons.note} />
+                  <Image style={styles.iconStyleprior} source={tabIcons.note} />
+                  {/* <Text style={{color: 'black', fontSize: 12, marginTop: 2}}>
+                    Prior Approval
+                  </Text> */}
                 </View>
               ),
           }}
@@ -99,7 +153,23 @@ const Tabs = () => {
 
       <Tab.Screen
         options={{
-          tabBarShowLabel: false,
+          tabBarShowLabel: true,
+          tabBarLabel: ({focused}) => (
+            <View style={{alignItems: 'center'}}>
+              <AileronRegular
+                style={{
+                  color: focused ? 'black' : 'black',
+                  fontSize: vw,
+                }}>
+                Lodge Claim
+              </AileronRegular>
+
+              <AileronRegular
+                name="Lodge Claim"
+                style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
+              />
+            </View>
+          ),
           popToTopOnBlur: true,
           tabBarStyle: {display: 'none'},
           tabBarIcon: ({focused}) =>
@@ -114,6 +184,9 @@ const Tabs = () => {
                     style={[styles.iconStyle, {tintColor: 'white'}]}
                     source={tabIcons.PriorApproval}
                   />
+                  {/* <Text style={{color: 'white', fontSize: 12, marginTop: 2}}>
+                    Lodge Claim
+                  </Text> */}
                 </View>
               </LinearGradient>
             ) : (
@@ -122,6 +195,9 @@ const Tabs = () => {
                   style={[styles.iconStyle]}
                   source={tabIcons.PriorApproval}
                 />
+                {/* <Text style={{color: 'black', fontSize: 12, marginTop: 2}}>
+                  Lodge Claim
+                </Text> */}
               </View>
             ),
         }}
@@ -132,7 +208,23 @@ const Tabs = () => {
 
       <Tab.Screen
         options={{
-          tabBarShowLabel: false,
+          tabBarShowLabel: true,
+          tabBarLabel: ({focused}) => (
+            <View style={{alignItems: 'center'}}>
+              <AileronRegular
+                style={{
+                  color: focused ? 'black' : 'black',
+                  fontSize: vw,
+                }}>
+                Helpline
+              </AileronRegular>
+
+              <AileronRegular
+                name="Helpline"
+                style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
+              />
+            </View>
+          ),
           popToTopOnBlur: true,
           tabBarIcon: ({focused}) =>
             focused ? (
@@ -146,6 +238,9 @@ const Tabs = () => {
                     style={[styles.iconStyle, {tintColor: 'white'}]}
                     source={tabIcons.customerSupport}
                   />
+                  {/* <Text style={{color: 'white', fontSize: 12, marginTop: 2}}>
+                    Helpline
+                  </Text> */}
                 </View>
               </LinearGradient>
             ) : (
@@ -154,6 +249,9 @@ const Tabs = () => {
                   style={styles.iconStyle}
                   source={tabIcons.customerSupport}
                 />
+                {/* <Text style={{color: 'black', fontSize: 12, marginTop: 2}}>
+                  Helpline
+                </Text> */}
               </View>
             ),
         }}
@@ -168,18 +266,19 @@ export default Tabs;
 const styles = StyleSheet.create({
   tabBarStyle: {
     position: 'absolute',
-    bottom: vh * 1,
+    bottom: vh * 1.5,
     backgroundColor: COLORS.white,
     borderRadius: vh * 50,
-    height: vw * 22,
+    height: vw * 20,
+
     marginHorizontal: vw * 6,
-    paddingHorizontal: vw * 2,
+    // paddingHorizontal: vw * 1.2,
     elevation: 1,
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    borderColor: COLORS.white,
+    // borderColor: COLORS.white,
   },
   iconContainer: {
     padding: vh * 1,
@@ -194,17 +293,23 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     // alignItems: 'center',
     marginTop: vh,
+    marginBottom: vh * 0.5,
   },
   wrapper: {
-    paddingHorizontal: vw * 4,
-    paddingVertical: vw * 4,
+    paddingHorizontal: vw * 2.2,
+    paddingVertical: vw * 2.2,
     borderRadius: (vw * 25) / 2,
     // justifyContent: 'center',
     // alignItems: 'center',
   },
   iconStyle: {
-    height: vw * 9,
-    width: vw * 9,
+    height: vw * 6.2,
+    width: vw * 6.2,
+    resizeMode: 'contain',
+  },
+  iconStyleprior: {
+    height: vw * 6.8,
+    width: vw * 7,
     resizeMode: 'contain',
   },
   iconStyleLarge: {

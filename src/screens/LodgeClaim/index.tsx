@@ -42,6 +42,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     selectedHospital,
     confirmationType,
     deletedIndex,
+    deletedFileIndex,
   } = states;
 
   const {
@@ -63,6 +64,9 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     handleDeleteClaim,
     setConfirmationType,
     onPressSubmitClaim,
+    handleDeleteFile,
+    handleBackButton,
+    handleGOBack,
   } = functions;
 
   return (
@@ -107,6 +111,10 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       deletedIndex={deletedIndex}
       setConfirmationType={setConfirmationType}
       onPressSubmitClaim={onPressSubmitClaim}
+      handleDeleteFile={handleDeleteFile}
+      deletedFileIndex={deletedFileIndex}
+      handleBackButton={handleBackButton}
+      handleGOBack={handleGOBack}
     />
   );
 };

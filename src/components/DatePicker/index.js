@@ -33,6 +33,10 @@ const DatePicker = ({
             setShowModal(!showModal);
           }}
           style={styles.innerContainer}>
+          {/* <Image
+            style={{width: vw * 10, height: vh * 4, borderWidth: 2}}
+            source={icons.calender}
+          /> */}
           <AileronRegular
             style={[
               styles.pickerText,
@@ -41,6 +45,7 @@ const DatePicker = ({
             ]}
             name={value ? value : placeholder}
           />
+
           <View style={styles.iconView}>
             <Image style={styles.dropDownIcon} source={icons.calender} />
           </View>
@@ -86,26 +91,26 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderColor: COLORS.black + '22',
-    borderWidth: 1.5,
+    // borderWidth: 1.5,
     borderRadius: vw * 2,
-    paddingHorizontal: vw * 2,
   },
   pickerText: {
     fontSize: vh * 1.5,
     textAlign: 'left',
     color: COLORS.black,
     width: '75%',
+    // borderWidth: 2,
   },
   iconView: {
     width: '25%',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   dropDownIcon: {
-    width: '100%',
+    width: vw * 7,
+    height: vw * 7,
     resizeMode: 'contain',
-    height: '55%',
   },
   label: {
     fontSize: vh * 1.55,

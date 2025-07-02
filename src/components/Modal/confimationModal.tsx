@@ -35,6 +35,7 @@ type ConfimationModalProps = {
   confirmationType: any;
   submitButton?: boolean;
   handleSubmit?: () => void;
+  type: any;
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -54,6 +55,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   confirmationType,
   submitButton,
   handleSubmit,
+  type,
 }) => {
   const handleClose = () => {
     setConfirmationModalVisible(false);
@@ -128,7 +130,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                   colors={COLORS.deleteButtonGradient}>
                   <View style={styles.wrapper}>
                     <AileronBold
-                      name="Delete"
+                      name={confirmationType === 'back' ? 'Continue' : 'Delete'}
                       style={styles.deleteButtonText}
                     />
                   </View>
@@ -244,8 +246,8 @@ const styles = StyleSheet.create({
   cancelButtonSubmit: {
     // width: '48%',
     borderWidth: vh * 0.2,
-    borderRadius: vh * 1.3,
-    padding: vh * 3,
+    borderRadius: vw * 4,
+    padding: vh * 2,
     borderColor: COLORS.cancelButtonBorder,
     backgroundColor: COLORS.cancelBottonBackground,
     marginTop: vh,

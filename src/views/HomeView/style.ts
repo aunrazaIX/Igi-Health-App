@@ -23,23 +23,36 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: vh * 3,
     // paddingBottom: vh * 1.4,
+    // borderWidth: 2,
   },
   headerLogo: {
     width: 25 * vw,
     height: vh * 6,
     resizeMode: 'contain',
   },
+  userName: {
+    fontSize: vw * 3,
+    color: 'white',
+  },
   headerIconsRow: {
     flexDirection: 'row',
     gap: vw * 5,
   },
+  headerDNIcons: {
+    flexDirection: 'row',
+    // borderWidth: 2,
+    gap: vw,
+  },
   headerIcons: {
     width: vw * 6,
     height: vw * 6,
+    backgroundColor: 'White',
+    tintColor: 'white',
   },
   homeInfoContainer: {
     width: '100%',
     paddingHorizontal: vw * 4,
+
     paddingVertical: vh * 3,
     borderRadius: vw * 6,
     backgroundColor: COLORS.white,
@@ -70,6 +83,12 @@ export const styles = StyleSheet.create({
     width: 28 * vw,
     height: 7 * vh,
     resizeMode: 'contain',
+    justifyContent: 'flex-start',
+    // borderWidth: 2,
+    alignItems: 'flex-start',
+    alignContent: 'flex-start',
+    alignSelf: 'flex-start',
+    // borderWidth:2
   },
   downloadIcon: {
     justifyContent: 'center',
@@ -85,6 +104,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    // borderWidth: 2,
   },
   text: {
     color: COLORS.textColor,
@@ -96,7 +116,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 3,
   },
   statisticsHeader: {
-    fontSize: vw * 5,
+    fontSize: vh * 2.3,
+    color: COLORS.textBlackShade,
   },
   graphContainer: {
     height: vh * 20,
@@ -158,25 +179,25 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   homeInfoContainerMiddle: {
-    marginTop: vh * 2.8,
-    // borderWidth: 2,
+    marginTop: vh * 1.2,
 
-    // justifyContent: 'space-between',
+    // justifyContent: 'space-between',/
   },
   homeInfoContainerMiddleText: {},
   infoCardMiddleTextlight: {
-    fontSize: vw * 4,
+    fontSize: vw * 3.7,
     color: COLORS.textColor,
     textAlign: 'left',
+    lineHeight: vh * 2,
   },
   homeInfoContainerMiddleTextLogo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+
     alignItems: 'center',
   },
   homeCardMainDetails: {
     // borderWidth: 2,
-
     gap: vh * 0.9,
   },
 
@@ -185,6 +206,17 @@ export const styles = StyleSheet.create({
     height: vh * 6,
     resizeMode: 'contain',
   },
+  backCardDetails: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  validity: {
+    gap: vh * 2,
+    // borderWidth: 2,
+
+    marginTop: vh,
+  },
+
   infoCardFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -206,9 +238,10 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
 
     marginTop: vh * 1.3,
+    gap: vw * 2,
     alignItems: 'center',
   },
   dashboardContainerHeaderIcons: {
@@ -252,7 +285,7 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCardText: {
     textAlign: 'left',
-    fontSize: vw * 4.5,
+    fontSize: vw * 3.9,
     color: COLORS.white,
   },
   cardsArrow: {
@@ -296,7 +329,9 @@ export const styles = StyleSheet.create({
   },
   homeBackCardHeading: {
     flexDirection: 'row',
-    gap: vw * 1,
+    // gap: vw * 1,
+    justifyContent: 'space-between',
+    // borderWidth: 2,
   },
   homeBackCardHeadingBlack: {
     fontSize: vw * 4.5,
@@ -311,6 +346,7 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.textBlackShade,
     // borderWidth: 2,
+    lineHeight: vh * 1.99,
   },
   homeBackCardRow: {
     flexDirection: 'row',
@@ -353,7 +389,7 @@ export const styles = StyleSheet.create({
   associatedTittle: {
     textAlign: 'left',
     marginVertical: vh * 2,
-    fontSize: vw * 6,
+    fontSize: vh * 2.3,
     color: COLORS.textBlackShade,
   },
   associatedImageContainer: {

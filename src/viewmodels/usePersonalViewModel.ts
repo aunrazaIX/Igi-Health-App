@@ -53,6 +53,8 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
 
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
+  const [isUpdate, setIsUpdate] = useState(false);
+
   const navigation = useNavigation();
 
   const {data, loading: dependantLoading} = useApiHook({
@@ -106,13 +108,18 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
   };
 
   const openAddDependent = () => {
-    navigation.navigate('AddDependent');
+    setIsUpdate(false);
+    navigation.navigate('AddDependent', {
+      isUpdate: false,
+    });
   };
 
   const manageUpdate = (dependent, index) => {
+    setIsUpdate(true);
     navigation.navigate('AddDependent', {
       dependentData: dependent ?? null,
       dependentIndex: index ?? null,
+      isUpdate: true,
     });
   };
 

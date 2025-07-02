@@ -30,7 +30,7 @@ const HelplineView = ({
   return (
     <>
       <ScrollView>
-        <TopView title={'Helpline'} />
+        <TopView title={'Helplines'} />
         <CurvedView containerStyle={styles.container}>
           <ContactInfoView onPress={onPress} data={contactInfo} />
           {/* <ClaimAssistanceView data={claimAssistance} /> */}

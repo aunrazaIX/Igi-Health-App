@@ -199,7 +199,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
     {
       logo: cardIcons.lodgeClaim,
-      name: 'Lodge A Claim',
+      name: 'Lodge a Claim',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundBlue,
       mainParent: 'Tabs',
@@ -237,7 +237,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
     {
       logo: cardIcons.helpLine,
-      name: 'HelpLines',
+      name: 'Helplines',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundLightBlue,
       mainParent: 'Tabs',

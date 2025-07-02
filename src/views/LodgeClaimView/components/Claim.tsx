@@ -7,18 +7,23 @@ import {ClaimDetailSection} from '../typeInterface';
 
 import NoDataView from '../../../components/NoDataView';
 import {ScrollView} from 'react-native-gesture-handler';
+import {Button} from '../../../components';
 
 type ClaimProps = {
   claimsDetails: ClaimDetailSection[];
   navigateTreatment: () => void;
   onPressDelete: (index: number) => void;
   onPressEdit: (data: object, index: number) => void;
+  selectedType: any;
 };
 
 const Claim: React.FC<ClaimProps> = ({
   claimsDetails,
   onPressDelete,
   onPressEdit,
+  navigateTreatment,
+  currentStep,
+  selectedType,
 }) => {
   return (
     <View style={styles.container}>
@@ -33,11 +38,7 @@ const Claim: React.FC<ClaimProps> = ({
             />
           ))
         ) : (
-          <NoDataView
-            name={'no claim found'}
-            iconStyle={{height: vh * 8}}
-            text={{fontSize: vw * 5}}
-          />
+          <NoDataView name={'No Treatments found'} />
         )}
       </View>
     </View>

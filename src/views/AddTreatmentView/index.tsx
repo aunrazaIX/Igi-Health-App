@@ -57,7 +57,7 @@ const AddTreatmentView = ({
                 style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
               />
               <AileronBold
-                name="Treatment"
+                name=" Treatment"
                 style={[styles.text, {color: COLORS.cardBackgroundRed}]}
               />
             </View>
@@ -92,7 +92,7 @@ const AddTreatmentView = ({
                 setterForApiData('amount', cleanedText);
               }}
               label="Amount"
-              placeholder="enter amount"
+              placeholder="Enter Amount"
             />
 
             <InputField
