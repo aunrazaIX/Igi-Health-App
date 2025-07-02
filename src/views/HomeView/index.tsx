@@ -80,7 +80,7 @@ const HomeView: React.FC<HomeViewProps> = ({
 
             <View style={styles.headerIconsRow}>
               <View style={styles.headerDNIcons}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleCardDownload}>
                   <Image source={icons.download} style={styles.headerIcons} />
                 </TouchableOpacity>
 
