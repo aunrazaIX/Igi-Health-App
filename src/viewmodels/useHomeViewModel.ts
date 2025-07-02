@@ -11,6 +11,8 @@ import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {DrawerStackParamList} from '../navigation/types';
 import {useSelector} from 'react-redux';
 import {RootState} from '@reduxjs/toolkit/query';
+import {PermissionsAndroid} from 'react-native';
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
 
 export type CardItemData = {
   logo?: ImageSourcePropType;
@@ -86,8 +88,172 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   });
   // const {rememberMe, credentials} = useSelector(state => state.auth);
 
-  const handleCardDownload = () => {
-    console.log('hhh');
+  const generateCardHTML = (data, user) => `
+  ${console.log(data, 'dataaaaa usman')}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card</title>
+  </head>
+
+  <body>
+    <table style="width: 100%">
+      <tbody>
+        <tr>
+          <td>
+            <div style="padding: 20px">
+              <table style="width: 396px; border-radius: 24px; box-shadow: 0px 2px 12.1px rgba(0,0,0,0.25); padding: 20px; background: #fff; margin: auto; font-size: 16px; color: #393939;">
+                <tbody>
+                  <tr><td style="padding-bottom: 15px"><img src=${
+                    icons.CancelIcon
+                  } style="width: 107px; height: 48px" /></td></tr>
+
+                  <tr>
+                    <td style="padding-bottom: 5px">
+                      <span>Policy Number: </span><span>${
+                        data[0]?.Policy_Number
+                      }</span>
+                    </td>
+                    <td style="text-align: end; padding-bottom: 5px">
+                      <span>Class: </span><span>${data[0]?.Policy_CertNo}</span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="padding-bottom: 5px">
+                      <span>CNIC: </span><span>${user?.cnic}</span>
+                    </td>
+                    <td style="text-align: end; padding-bottom: 5px">
+                      <span>Cert No: </span><span>${
+                        data[0]?.Policy_Insured_Age
+                      }</span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="padding-bottom: 5px">
+                      <span>Policy Name: </span><span>${
+                        data[0]?.Policy_Insured_Relaion
+                      }</span>
+                    </td>
+                    <td style="text-align: end; padding-bottom: 5px">
+                      <span>Age: </span><span>${
+                        data[0]?.Policy_Insured_Age
+                      }</span>
+                    </td>
+                  </tr>
+
+                  <tr><td style="padding: 15px 0 5px">Card Holder Name</td></tr>
+                  <tr><td style="font-size: 17px; font-weight: 600">${data
+                    ?.find(item => item?.Policy_Insured_Relaion == 'Member')
+                    ?.Policy_Insured_Name.trim()}</td></tr>
+                </tbody>
+              </table>
+
+              <table style="width: 396px; border-radius: 24px; box-shadow: 0px 2px 12.1px rgba(0,0,0,0.25); padding: 20px; background: #fff; margin: 20px auto 0 auto; font-size: 16px; color: #393939;">
+                <tbody>
+                  <tr style="font-size: 20px">
+                    <td style="padding-bottom: 5px; font-weight: 700">
+                      Dependent <span style="color: #ee2560">Details</span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <table>
+                        <tbody>
+                          ${data
+                            ?.filter(
+                              _item =>
+                                _item?.Policy_Insured_Relaion !== 'Member',
+                            )
+                            ?.map(
+                              dep => `
+                              <tr>
+                                <td>${dep?.Policy_Insured_Name?.trim()}:</td>
+                                <td>${dep?.Policy_Insured_Age}</td>
+                              </tr>`,
+                            )
+                            .join('')}
+                        </tbody>
+                      </table>
+                    </td>
+                    <td>
+                      <table style="font-weight: 600">
+                        <tr><td style="padding-bottom: 15px">Valid from:</td><td style="padding-bottom: 15px">${
+                          data[0]?.Policy_Start_Date
+                        }</td></tr>
+                        <tr><td>Valid till:</td><td>${
+                          data[0]?.Policy_expiry_Date
+                        }</td></tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td><img src="max-room.png" style="width: 30px; height: 30px" /></td>
+                            <td style="font-size: 14px; padding-left: 5px">
+                              <p style="margin: 0">Max. Room & Board</p>
+                              <p style="margin: 0">Rs. Per Day: ${
+                                data[0]?.Policy_Daily_RoomLimit
+                              }</p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td><img src="maternity.png" style="width: 21px; height: 34px" /></td>
+                            <td style="font-size: 14px; padding-left: 5px">
+                              <p style="margin: 0">Maternity</p>
+                              <p style="margin: 0">${
+                                data[0]?.Policy_MatLimit > 0
+                                  ? 'Available'
+                                  : 'Not Available'
+                              }</p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+`;
+
+  const handleCardDownload = async () => {
+    try {
+      const html = generateCardHTML(homeCardData, user);
+
+      const options = {
+        html,
+        fileName: 'MyCard',
+        directory: 'Documents',
+      };
+
+      const file = await RNHTMLtoPDF.convert(options);
+
+      Alert.alert('Success', `PDF saved at:\n${file.filePath}`);
+    } catch (error) {
+      console.error('error arha hai:', error);
+      Alert.alert('Error', 'Something went wrong');
+    }
   };
 
   const animateCard = () => {
