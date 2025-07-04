@@ -94,7 +94,7 @@ const ForgotPasswordView = ({
     3: 'At least 8 characters, with uppercase and lowercase letters.',
   };
   const returnButtonName: Record<number, string> = {
-    1: 'Forgot Password',
+    1: 'Submit',
     2: 'Next',
     3: 'Submit',
   };
