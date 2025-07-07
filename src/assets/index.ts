@@ -15,6 +15,7 @@ export const images = {
   loginBackground: require('./images/loginBackground.png'),
   ellipseBlue: require('./images/EllipseBlue.png'),
   ellipseRed: require('./images/EllipseRed.png'),
+  Intro: require('./images/introImage.png'),
 };
 
 export const icons = {

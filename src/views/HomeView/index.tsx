@@ -561,7 +561,6 @@ const HomeView: React.FC<HomeViewProps> = ({
         </View>
         <View>
           <View style={styles.claimStatistics}>
-            {' '}
             <Image
               source={icons.claimStatistics}
               style={styles.statisticsIcon}
