@@ -115,6 +115,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.14,
     shadowOffset: {width: 0, height: 1},
     shadowRadius: 2,
+    marginBottom: vh * 4,
   },
 
   cardHeader: {

@@ -78,7 +78,7 @@ const PersonalView: React.FC<Props> = ({
   return (
     <Container>
       <TopView
-        onPressBack={goBack}
+        // onPressBack={goBack}
         title={'Family Details'}
         TopViewFirstIcon={images.AddNew}
         FirstOpenModal={openAddDependent}

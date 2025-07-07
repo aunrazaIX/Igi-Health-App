@@ -29,7 +29,6 @@ const HomeStack = () => {
       <Stack.Screen name="Hospitals" component={Hospitals} />
       <Stack.Screen name="PanelHospitalList" component={PanelHospitalList} />
       <Stack.Screen name="ClaimHistory" component={ClaimsHistory} />
-
       <Stack.Screen name="Notifications" component={Notification} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="Login" component={Login} />
