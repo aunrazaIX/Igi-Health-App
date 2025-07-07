@@ -131,7 +131,12 @@ const HomeView: React.FC<HomeViewProps> = ({
                       <View style={styles.homeCardMainDetails}>
                         <View>
                           <AileronSemiBold
-                            name={`Policy Number: ${homeCardData.find((item)=>item.Policy_Insured_Relaion==="Member")?.Policy_Number}`}
+                            name={`Policy Number: ${
+                              homeCardData.find(
+                                item =>
+                                  item.Policy_Insured_Relaion === 'Member',
+                              )?.Policy_Number
+                            }`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
@@ -147,7 +152,12 @@ const HomeView: React.FC<HomeViewProps> = ({
 
                         <View>
                           <AileronSemiBold
-                            name={`Policy Name: ${homeCardData.find((item)=>item.Policy_Insured_Relaion==="Member")?.Policy_Insured_Name}`}
+                            name={`Policy Name: ${
+                              homeCardData.find(
+                                item =>
+                                  item.Policy_Insured_Relaion === 'Member',
+                              )?.Policy_Insured_Name
+                            }`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
@@ -176,19 +186,31 @@ const HomeView: React.FC<HomeViewProps> = ({
 
                       <View style={{gap: vh}}>
                         <AileronSemiBold
-                          name={`Class: ${homeCardData.find((item)=>item.Policy_Insured_Relaion==="Member")?.Policy_Class}`}
+                          name={`Class: ${
+                            homeCardData.find(
+                              item => item.Policy_Insured_Relaion === 'Member',
+                            )?.Policy_Class
+                          }`}
                           style={styles.infoCardMiddleTextlight}
                           numberOfLines={2}
                         />
 
                         <AileronSemiBold
-                          name={`Cert No: ${homeCardData.find((item)=>item.Policy_Insured_Relaion==="Member")?.Policy_CertNo}`}
+                          name={`Cert No: ${
+                            homeCardData.find(
+                              item => item.Policy_Insured_Relaion === 'Member',
+                            )?.Policy_CertNo
+                          }`}
                           style={styles.infoCardMiddleTextlight}
                           numberOfLines={1}
                         />
 
                         <AileronSemiBold
-                          name={`Age: ${homeCardData.find((item)=>item.Policy_Insured_Relaion==="Member")?.Policy_Insured_Age}`}
+                          name={`Age: ${
+                            homeCardData.find(
+                              item => item.Policy_Insured_Relaion === 'Member',
+                            )?.Policy_Insured_Age
+                          }`}
                           style={styles.infoCardMiddleTextlight}
                           numberOfLines={1}
                         />
