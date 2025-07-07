@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   listText: {
     textAlign: 'left',
     fontSize: vh * 1.7,
+        lineHeight : vh*2.5
   },
   optionStyles: {
     backgroundColor: COLORS.grey,

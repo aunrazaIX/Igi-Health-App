@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     paddingBottom: vh * 3,
   },
   textContainer: {
-    flexDirection: 'row',
+    flexDirection: 'col',
     justifyContent: 'center',
     alignItems: 'center',
   },

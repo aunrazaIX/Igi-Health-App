@@ -139,7 +139,7 @@ const useForgotPasswordViewModel = ({
       ForgotpasswordResetStates();
     },
     onError: res => {
-      dispatch(setErrorModal({Show: true, message: 'Incorrect Data'}));
+      dispatch(setErrorModal({Show: true, message: 'Reset Failed' , detail : "We couldn’t find an account with the details you provided. Please check your information and try again or contact IGI Life"}));
     },
   });
 

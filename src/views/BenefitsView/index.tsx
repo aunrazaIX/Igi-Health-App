@@ -84,7 +84,13 @@ const BenefitsView: React.FC<Props> = ({
           <View style={styles.MaximumLeftBox}>
             <Image source={images.Logo} style={styles.benefitsLogo} />
             <AileronBold
-              name={'Entitled\nHospitalization'}
+              name={
+                selectedTab === 'Inpatient'
+                  ? 'Entitled\nInpatient'
+                  : selectedTab === 'Outpatient'
+                  ? 'Entitled\nOutpatient'
+                  : 'Entitled\nMaternity'
+              }
               style={styles.MaximumTitle}
             />
             <AileronBold name={'Benefits!'} style={styles.BenefitsTitle} />

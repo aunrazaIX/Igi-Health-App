@@ -42,7 +42,7 @@ const AddTreatmentView = ({
 }: AddTreatmentViewProps) => {
   return (
     <>
-      <TopView title={'Add A Treatment'} />
+      <TopView title={'Enter Claim Details'} />
       <CurvedView containerStyle={styles.curveStyle}>
         <KeyboardAwareScrollView
           extraScrollHeight={20}
@@ -53,11 +53,11 @@ const AddTreatmentView = ({
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>
               <AileronBold
-                name="Add"
+                name="Add receipt and"
                 style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
               />
               <AileronBold
-                name=" Treatment"
+                name="treatment information"
                 style={[styles.text, {color: COLORS.cardBackgroundRed}]}
               />
             </View>

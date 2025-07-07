@@ -70,7 +70,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
         value={selectedPatient?.label}
         onSelectOption={value => onSelectPatient(value)}
         selectData={dependants}
-        selectLabel={'Patient Information'}
+        selectLabel={'Patient Name'}
         selectPlaceholder={'-- Select Patient From List --'}
       />
       {type !== 'priorApproval' && (
@@ -78,7 +78,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
           value={selectedType?.label}
           onSelectOption={value => onSelectType(value)}
           selectData={patientOptions}
-          selectLabel={'Coverage Type'}
+          selectLabel={'Nature of Claim'}
           selectPlaceholder={'-- Select Covergae Type  --'}
         />
       )}

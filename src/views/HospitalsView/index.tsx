@@ -59,7 +59,7 @@ const PanelHospitalListView: React.FC<HospitalsViewProps> = ({
   console.log(data, 'dataaaaaaa');
   return (
     <>
-      <TopView title="Hospitals" type="default" />
+      <TopView title="Network Hospitals" type="default" />
       <CurvedView>
         <KeyboardAwareScrollView>
           <View>

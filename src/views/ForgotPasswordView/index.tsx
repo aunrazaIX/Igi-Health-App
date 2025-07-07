@@ -89,7 +89,7 @@ const ForgotPasswordView = ({
     3: 'Create New Password',
   };
   const returnDescription: Record<number, string> = {
-    1: 'Enter your email address to recover your password.',
+    1: 'Please enter the required information to reset your password',
     2: 'An authentication code has been sent to imran-naveed-8852@gmail.com',
     3: 'At least 8 characters, with uppercase and lowercase letters.',
   };

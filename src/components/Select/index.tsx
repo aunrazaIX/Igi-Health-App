@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
   listText: {
     textAlign: 'left',
     fontSize: vh * 1.7,
+    
+
   },
   selectContainer: {
     width: '100%',

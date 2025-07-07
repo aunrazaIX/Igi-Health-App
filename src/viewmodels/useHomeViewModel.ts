@@ -455,7 +455,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     },
     {
       logo: cardIcons.hospital,
-      name: 'Hospital Directory',
+      name: 'Network Hospitals',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundRed,
       to: 'Hospitals',
