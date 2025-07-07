@@ -100,6 +100,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   const generateCardHTML = (data, user) => `
  
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -121,11 +122,17 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
                   <tr>
                     <td style="padding-bottom: 5px">
                       <span>Policy Number: </span><span>${
-                        data[0]?.Policy_Number
+                        data.find(
+                          item => item.Policy_Insured_Relaion === 'Member',
+                        )?.Policy_Number
                       }</span>
                     </td>
                     <td style="text-align: end; padding-bottom: 5px">
-                      <span>Class: </span><span>${data[0]?.Policy_CertNo}</span>
+                      <span>Classs: </span><span>${
+                        data.find(
+                          item => item.Policy_Insured_Relaion === 'Member',
+                        )?.Policy_Class
+                      }</span>
                     </td>
                   </tr>
 
@@ -135,7 +142,9 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
                     </td>
                     <td style="text-align: end; padding-bottom: 5px">
                       <span>Cert No: </span><span>${
-                        data[0]?.Policy_Insured_Age
+                        data.find(
+                          item => item.Policy_Insured_Relaion === 'Member',
+                        )?.Policy_CertNo
                       }</span>
                     </td>
                   </tr>
@@ -148,7 +157,9 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
                     </td>
                     <td style="text-align: end; padding-bottom: 5px">
                       <span>Age: </span><span>${
-                        data[0]?.Policy_Insured_Age
+                        data.find(
+                          item => item.Policy_Insured_Relaion === 'Member',
+                        )?.Policy_Insured_Age
                       }</span>
                     </td>
                   </tr>
@@ -276,16 +287,13 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     try {
       const permissionGranted = await requestStoragePermission();
       if (permissionGranted) {
-        const dir =
-          Platform.OS === 'android'
-            ? RNFetchBlob.fs.dirs.DownloadDir
-            : RNFetchBlob.fs.dirs.DocumentDir;
-        const filePath = `${dir}/PolicyCard.pdf`;
+        const dir = RNFetchBlob.fs.dirs.DocumentDir;
+        const filePath = `${dir}/IGIPolicyCard.pdf`;
 
         const html = generateCardHTML(homeCardData, user);
         const options = {
           html,
-          fileName: 'PolicyCard',
+          fileName: 'IGIPolicyCard',
           directory: 'Documents',
           base64: true,
         };
