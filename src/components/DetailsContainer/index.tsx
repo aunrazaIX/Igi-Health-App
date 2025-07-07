@@ -29,7 +29,7 @@ const DetailsContainer: React.FC<Props> = ({
   headerIcon,
   onPress,
 }) => {
-  const [isArrowUp, setIsArrowUp] = useState<boolean>(true);
+  const [isArrowUp, setIsArrowUp] = useState<boolean>(false);
 
   return (
     <View style={[styles.card]}>

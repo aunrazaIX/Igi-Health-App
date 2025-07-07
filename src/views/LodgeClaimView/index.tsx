@@ -193,7 +193,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             <Button
               containerStyle={{marginBottom: vh}}
               onPress={navigateTreatment}
-              name="Add a Claim"
+              name="Create Claim"
             />
           ) : null}
 
