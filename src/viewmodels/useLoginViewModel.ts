@@ -115,8 +115,8 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     onSuccess: res => {
       loginResponse.current = res;
       let apiData = {
-        // ClientCode: res?.Data?.ClientCode,
-        ClientCode: 'ERC',
+        ClientCode: res?.Data?.ClientCode,
+        // ClientCode: 'ERC',
       };
       getCovergaeApi(apiData);
     },
