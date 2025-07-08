@@ -15,6 +15,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {PanelHospitalGroup} from '../../viewmodels/usePanelHospitalListViewModel';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
+import MapView, {Marker} from 'react-native-maps';
 
 type HomeViewProps = {
   data: PanelHospitalGroup[];
@@ -165,13 +166,44 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
           </View>
 
           {selectedTabRight === 'map' && (
-            <InputField
-              searchFieldRight={styles.searchFieldRight}
-              searchFieldRightIcon={styles.searchFieldRightIcon}
-              inputStyle={styles.inputStyle}
-              searchIcon={icons.searchBlack}
-              containerStyle={styles.inputFeild}
-            />
+            <View
+              style={{
+                width: '100%',
+                // height: vh * 50,
+                // marginHorizontal: vw*10,
+                flex: 1,
+
+                borderRadius: vw * 5,
+                overflow: 'hidden',
+                // marginTop: vh * 2,
+              }}>
+              <MapView
+                style={{flex: 1}}
+                initialRegion={{
+                  latitude: 37.78825,
+                  longitude: -122.4324,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }}>
+                {data.map((item, index) => {
+                  const latitude = Number(item.latitude) || 0;
+                  const longitude = Number(item.longitude) || 0;
+
+                  const addressObj = item.items.find(
+                    i => i.label === 'Address:',
+                  );
+                  const address = addressObj ? addressObj.value : '';
+                  return (
+                    <Marker
+                      key={index}
+                      coordinate={{latitude, longitude}}
+                      title={item.headerLabel}
+                      description={address}
+                    />
+                  );
+                })}
+              </MapView>
+            </View>
           )}
 
           {((selectedTab === 'PanelHospitals' && selectedTabRight === 'list') ||
