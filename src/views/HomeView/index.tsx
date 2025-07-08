@@ -131,7 +131,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                       <View style={styles.homeCardMainDetails}>
                         <View>
                           <AileronSemiBold
-                            name={`Policy Number ${homeCardData[0]?.Policy_Number}`}
+                            name={`Policy Number: ${homeCardData[0]?.Policy_Number}`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
