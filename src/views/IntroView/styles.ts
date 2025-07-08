@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     fontSize: vw * 8.5,
 
     marginTop: vh,
+
     alignItems: 'flex-start',
   },
   headingTextPink: {
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.black + '44',
     borderStyle: 'dashed',
     width: '95%',
-    alignSelf: 'center',
+    // alignSelf: 'center',
 
     marginTop: vh * 3,
   },
@@ -41,19 +42,19 @@ const styles = StyleSheet.create({
     marginTop: vh * 1.5,
   },
   paraText: {
-    fontSize: vw * 5,
-    color: 'black' + 50,
+    fontSize: vw * 4.8,
+    color: 'black' + 45,
     lineHeight: vh * 3.5,
     alignItems: 'flex-start',
     textAlign: 'left',
   },
   buttonContainer: {
-    marginTop: vh * 3,
-    // borderWidth: 2,
+    marginTop: vh * 1.5,
   },
   button: {
     // borderWidth: 2,
     width: vw * 40,
+    // marginBottom: vh * 2,
   },
   buttonText: {
     fontSize: vw * 5,

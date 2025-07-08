@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useDispatch, useSelector} from 'react-redux';
@@ -413,6 +413,37 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   };
 
   const tabs = ['login', 'signup'];
+
+  useEffect(() => {
+    if (isToggle && credentials?.userName && credentials?.password) {
+      const setupBiometrics = async () => {
+        try {
+          const rnBiometrics = new ReactNativeBiometrics({
+            allowDeviceCredentials: true,
+          });
+          const {available, biometryType} =
+            await rnBiometrics.isSensorAvailable();
+          if (available) {
+            await rnBiometrics.deleteKeys();
+            await rnBiometrics.createKeys();
+            dispatch(
+              setBiometrics({
+                userName: loginApiData.userName,
+                password: loginApiData?.password,
+                deviceId: '23232323232',
+                LoginDeviceName: 'Mobile',
+                biometryType: biometryType,
+              }),
+            );
+          }
+        } catch (error) {
+          console.log('Biometric setup error (toggle):', error);
+        }
+      };
+      setupBiometrics();
+    }
+  }, [isToggle]);
+
   return {
     states: {
       selectedTab,
