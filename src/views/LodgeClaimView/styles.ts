@@ -23,8 +23,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   curveStyle: {
-    minHeight: vh * 78,
+    minHeight: vh * 85,
     paddingBottom: vh * 15,
+    // borderWidth: 2,
   },
   addTreatment: {
     resizeMode: 'contain',

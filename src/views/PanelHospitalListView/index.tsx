@@ -54,7 +54,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
       <CurvedView>
         <View style={styles.infoContainerHeader}>
           <InputField
-            placeholder="search Name / Phone / City / Address .."
+            placeholder="Search Name / Phone / City / Address .."
             placeholderTextColor={COLORS.textGrayShade}
             inputStyle={styles.inputStyle}
             containerStyle={styles.inputFeild}
