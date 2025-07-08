@@ -118,7 +118,7 @@ const Tabs = () => {
               </View>
             ),
             popToTopOnBlur: true,
-            tabBarStyle: {display: 'none'},
+            // tabBarStyle: {display: 'none'},
             tabBarIcon: ({focused}) =>
               focused ? (
                 <LinearGradient
@@ -171,7 +171,7 @@ const Tabs = () => {
             </View>
           ),
           popToTopOnBlur: true,
-          tabBarStyle: {display: 'none'},
+          // tabBarStyle: {display: 'none'},
           tabBarIcon: ({focused}) =>
             focused ? (
               <LinearGradient

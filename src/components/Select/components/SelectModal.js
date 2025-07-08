@@ -34,7 +34,7 @@ const SelectModal = ({
           let searchData = universalSearch(search, ['label', 'value'], data);
           setFilterData(searchData);
         }
-      }, 1000);
+      });
       return () => {
         clearTimeout(delayDebounceFn);
       };
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   listText: {
     textAlign: 'left',
     fontSize: vh * 1.7,
-        lineHeight : vh*2.5
+    lineHeight: vh * 2.5,
   },
   optionStyles: {
     backgroundColor: COLORS.grey,

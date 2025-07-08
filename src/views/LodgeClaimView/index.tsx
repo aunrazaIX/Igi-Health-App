@@ -287,7 +287,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         }
         CloseButtonText={'Continue To Login'}
         onClose={() => {
-          resetStates;
+          resetStates();
           navigation.navigate('HomeStack');
         }}
         confirmationType={confirmationType}
