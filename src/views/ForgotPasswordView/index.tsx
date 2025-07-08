@@ -14,7 +14,7 @@ import {
 import styles from './styles';
 import {ImageSourcePropType, KeyboardAvoidingView, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import { vh } from '../../assets/theme/dimension';
+import {vh} from '../../assets/theme/dimension';
 
 const ForgotPasswordView = ({
   step,
@@ -115,7 +115,7 @@ const ForgotPasswordView = ({
         onPressBack={onPressBack}
         icon={returnHeaderIcon[step]}
         title={returnHeaderName[step]}
-        titleStyle={{lineHeight : vh*3}}
+        titleStyle={{lineHeight: vh * 3}}
       />
       <CurvedView containerStyle={styles.curvedStyle}>
         <KeyboardAwareScrollView>

@@ -139,7 +139,14 @@ const useForgotPasswordViewModel = ({
       ForgotpasswordResetStates();
     },
     onError: res => {
-      dispatch(setErrorModal({Show: true, message: 'Reset Failed' , detail : "We couldn’t find an account with the details you provided. Please check your information and try again or contact IGI Life"}));
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Reset Failed',
+          detail:
+            'We couldn’t find an account with the details you provided. Please check your information and try again or contact IGI Life',
+        }),
+      );
     },
   });
 
@@ -223,7 +230,12 @@ const useForgotPasswordViewModel = ({
     if (step == 1 && type == 'forgot') {
       if (!apiData.cellNumber || !apiData.email || !apiData.cnic) {
         dispatch(
-          setErrorModal({Show: true, message: 'Please fill all fields'}),
+          setErrorModal({
+            Show: true,
+            message: 'Reset Failed',
+            detail:
+              'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life.',
+          }),
         );
         return;
       } else {
