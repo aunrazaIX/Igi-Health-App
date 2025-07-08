@@ -326,15 +326,17 @@ const HomeView: React.FC<HomeViewProps> = ({
                         <View style={styles.validity}>
                           <AileronBold
                             style={{fontSize: vw * 3.4}}
-                            name={`    Valid from : ${moment(
+                            name={`Valid from : ${moment(
                               homeCardData[0]?.Policy_Start_Date,
+                              'YYYYMMDD',
                             ).format('DD-MM-YYYY')}`}
                           />
 
                           <AileronBold
                             style={{fontSize: vw * 3.4}}
-                            name={`Valid till : ${moment(
-                              homeCardData[0]?.Policy_expiry_Date,
+                            name={`Valid from : ${moment(
+                              homeCardData[0]?.Policy_Expiry_Date,
+                              'YYYYMMDD',
                             ).format('DD-MM-YYYY')}`}
                           />
                         </View>

@@ -66,7 +66,13 @@ const Select: React.FC<SelectProps> = ({
           />
           <Image
             style={styles.arrow}
-            source={isDropdownVisible ? icons.selectArrowUp : icons.arrowDown}
+            source={
+              value
+                ? null
+                : isDropdownVisible
+                ? icons.selectArrowUp
+                : icons.arrowDown
+            }
           />
         </TouchableOpacity>
       </DependentBox>
@@ -119,8 +125,6 @@ const styles = StyleSheet.create({
   listText: {
     textAlign: 'left',
     fontSize: vh * 1.7,
-    
-
   },
   selectContainer: {
     width: '100%',

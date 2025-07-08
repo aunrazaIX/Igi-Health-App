@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
   boxContainer: {
     padding: vh,
     width: '100%',
-    paddingVertical: vh * 2,
-    marginVertical: vh * 1.5,
+    // paddingVertical: vh * 2,
+    // marginVertical: vh * 1.5,
     borderRadius: vh * 2,
     elevation: 3,
     backgroundColor: COLORS.white,

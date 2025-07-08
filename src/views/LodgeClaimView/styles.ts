@@ -27,6 +27,16 @@ const styles = StyleSheet.create({
     paddingBottom: vh * 15,
     // borderWidth: 2,
   },
+  personalButton: {
+    marginBottom: vh * 3,
+  },
+  claimButton: {
+    marginBottom: vh * 3,
+  },
+  uploadButton: {
+    marginBottom: vh * 3,
+    // borderWidth: 2,
+  },
   addTreatment: {
     resizeMode: 'contain',
   },

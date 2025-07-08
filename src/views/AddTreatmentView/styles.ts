@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
   priorGradient: {
     width: '100%',
     borderRadius: vh * 1.5,
-    marginBottom: vh * 1.5,
+    marginBottom: vh * 3,
+    // borderWidth: 2,
   },
   wrapper: {padding: vh * 2},
   priorNext: {

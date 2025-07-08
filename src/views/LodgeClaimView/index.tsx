@@ -206,6 +206,15 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           ) : null} */}
 
           <Button
+            containerStyle={
+              currentStep === 1
+                ? styles.personalButton
+                : currentStep === 2
+                ? styles.claimButton
+                : currentStep === 3
+                ? styles.uploadButton
+                : undefined
+            }
             disabled={
               currentStep === 1
                 ? !selectedPatient

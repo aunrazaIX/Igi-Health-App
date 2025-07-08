@@ -204,15 +204,15 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
                     <td>
                       <table style="font-weight: 600">
                         <tr><td style="padding-bottom: 15px">Valid from:</td><td style="padding-bottom: 15px">
-                         ${moment(data[0]?.Policy_Start_Date).format(
-                           'DD-MM-YYYY',
-                         )}
+                        ${moment(data[0]?.Policy_Start_Date, 'YYYYMMDD').format(
+                          'DD-MM-YYYY',
+                        )}
                         </td></tr>
                         <tr><td>Valid till:</td><td>
 
-                       ${moment(data[0]?.Policy_expiry_Date).format(
-                         'DD-MM-YYYY',
-                       )}
+                      ${moment(data[0]?.Policy_Expiry_Date, 'YYYYMMDD').format(
+                        'DD-MM-YYYY',
+                      )}
                         </td></tr>
                       </table>
                     </td>

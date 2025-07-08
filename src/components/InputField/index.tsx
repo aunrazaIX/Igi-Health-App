@@ -86,7 +86,6 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
               !editable && {color: COLORS.black + '55'},
             ]}
             placeholder={placeholder}
-            
             placeholderTextColor={
               multiline && editable
                 ? COLORS.black + '44'
