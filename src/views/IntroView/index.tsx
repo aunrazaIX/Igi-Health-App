@@ -35,7 +35,7 @@ const IntroView = ({
           <View style={styles.paraTextContainer}>
             <AileronRegular
               style={styles.paraText}
-              name="Enjoy peace of mind with IGI Health Insurance. We offer tailored plans for individuals and families, ensuring you receive the best medical care"
+              name="Enjoy peace of mind with IGI Health Insurance. We offer tailored plans for individuals and families, ensuring you receive the best medical care."
             />
           </View>
 

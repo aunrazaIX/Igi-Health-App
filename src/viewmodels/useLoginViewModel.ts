@@ -128,7 +128,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
           Show: true,
           message: `"Incorrect Credentials"`,
           detail:
-            "We couldn't find an account with these details. Please check your username and password and try again",
+            "We couldn't find an account with these details. Please check your username and password and try again.",
         }),
       );
     },
@@ -157,7 +157,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
           Show: true,
           message: 'Signup Failed',
           detail:
-            'We couldn’t find your details in our records. Please check your information or contact IGI Life',
+            'We couldn’t find your details in our records. Please check your information or contact IGI Life.',
         }),
       );
 
@@ -396,7 +396,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
           Show: true,
           message: 'Please fill all feilds',
           detail:
-            'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life',
+            'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life.',
         }),
       );
     }
