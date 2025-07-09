@@ -244,7 +244,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               selectedTabRight === 'list')) && (
             <FlatList
               data={data}
-              contentContainerStyle={{paddingBottom: vh * 20}}
+              contentContainerStyle={{paddingBottom: vh * 15}}
               keyExtractor={(_, index) => index.toString()}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => (
