@@ -1,9 +1,10 @@
-import {useNavigation} from '@react-navigation/native';
-import {useState, useEffect} from 'react';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useState, useEffect, useCallback} from 'react';
 import {ImageSourcePropType, Linking} from 'react-native';
 import {icons} from '../assets';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
+import Geolocation from '@react-native-community/geolocation';
 
 export type PanelHospitalGroup = {
   headerLabel: string;
@@ -25,6 +26,7 @@ type usePanelHospitalListViewModel = {
     selectedTabRight: string;
     searchText: string;
     loading: boolean;
+    position: any;
   };
   functions: {
     onPressTab: (tab: string) => void;
@@ -39,6 +41,12 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
   const [selectedTab, setSelectedTab] = useState('DiscountedCenters');
   const [selectedTabRight, setSelectedTabRight] = useState('list');
   const [data, setData] = useState<PanelHospitalGroup[]>([]);
+  const [position, setPosition] = useState({
+    latitude: 10,
+    longitude: 10,
+    latitudeDelta: 0.001,
+    longitudeDelta: 0.001,
+  });
   const [searchText, setSearchText] = useState('');
   const [allData, setAllData] = useState<{
     panelHospitals: PanelHospitalGroup[];
@@ -89,6 +97,26 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
 
     setData(currentData);
   }, [selectedTab, searchText, allData]);
+
+  useFocusEffect(
+    useCallback(() => {
+      Geolocation.getCurrentPosition(
+        pos => {
+          const crd = pos.coords;
+          console.log(crd);
+          setPosition({
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+            latitudeDelta: 0.0421,
+            longitudeDelta: 0.0421,
+          });
+        },
+        err => {
+          console.log(err);
+        },
+      );
+    }, []),
+  );
 
   const {loading: loadingPanelHospitals} = useApiHook({
     apiEndpoint: endpoints.panelHospital.getPanelHospitals,
@@ -145,6 +173,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
       selectedTabRight,
       searchText,
       loading: loadingPanelHospitals || loadingDiscountedCenters,
+      position,
     },
     functions: {
       onPressTab,

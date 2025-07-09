@@ -107,6 +107,7 @@ export const styles = StyleSheet.create({
     gap: vw * 1.5,
     marginBottom: vh,
     marginTop: vh,
+    // borderWidth: 2,
   },
   mapTabIcon: {
     height: vh * 3,

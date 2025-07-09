@@ -77,7 +77,9 @@ const SelectModal = ({
               />
             )}
             <FlatList
-              ListEmptyComponent={() => <NoDataView name={'No Options'} />}
+              ListEmptyComponent={() => (
+                <NoDataView name={'No matches for your search'} />
+              )}
               data={search ? filterData : data}
               renderItem={renderItem}
               key={'dropDown'}

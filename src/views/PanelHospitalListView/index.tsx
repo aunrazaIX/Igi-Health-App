@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   FlatList,
   StyleSheet,
+  Linking,
 } from 'react-native';
 import React from 'react';
 import {AileronBold, CurvedView, InputField, TopView} from '../../components';
@@ -28,6 +29,7 @@ type HomeViewProps = {
   setSearchText: any;
   loading: any;
   handleMapDirection: any;
+  position: any;
 };
 
 const PanelHospitalListView: React.FC<HomeViewProps> = ({
@@ -41,7 +43,26 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   setSearchText,
   loading,
   handleMapDirection,
+  position,
 }) => {
+  console.log(position, 'positionss');
+  console.log(data, 'usman');
+
+  const cleanCoordinate = (value: string): number | null => {
+    if (!value || typeof value !== 'string') return null;
+
+    // Match the numeric part before the degree symbol
+    const match = value.match(/^([\d.]+)\s*°/);
+    if (!match) return null;
+
+    const number = parseFloat(match[1]);
+    return isNaN(number) ? null : number;
+  };
+
+  const openInGoogleMaps = (latitude: number, longitude: number) => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    Linking.openURL(url);
+  };
   return (
     <>
       <TopView
@@ -54,14 +75,16 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
 
       <CurvedView>
         <View style={styles.infoContainerHeader}>
-          <InputField
-            placeholder="Search Name / Phone / City / Address .."
-            placeholderTextColor={COLORS.textGrayShade}
-            inputStyle={styles.inputStyle}
-            containerStyle={styles.inputFeild}
-            value={searchText}
-            onChangeText={text => setSearchText(text)}
-          />
+          {selectedTabRight === 'list' && (
+            <InputField
+              placeholder="Search Name / Phone / City / Address .."
+              placeholderTextColor={COLORS.textGrayShade}
+              inputStyle={styles.inputStyle}
+              containerStyle={styles.inputFeild}
+              value={searchText}
+              onChangeText={text => setSearchText(text)}
+            />
+          )}
 
           <View style={styles.infoContainerHeaderRight}>
             <TouchableOpacity
@@ -169,25 +192,34 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             <View
               style={{
                 width: '100%',
-                // height: vh * 50,
-                // marginHorizontal: vw*10,
-                flex: 1,
+                height: vh * 57,
+                // marginHorizontal: vw * 10,
+                // flex: 1,
 
-                borderRadius: vw * 5,
-                overflow: 'hidden',
                 // marginTop: vh * 2,
               }}>
               <MapView
+                // showsUserLocation={true}
+                showsUserLocation
                 style={{flex: 1}}
-                initialRegion={{
-                  latitude: 37.78825,
-                  longitude: -122.4324,
-                  latitudeDelta: 0.0922,
-                  longitudeDelta: 0.0421,
+                region={{
+                  latitude: position.latitude,
+                  longitude: position.longitude,
+                  latitudeDelta: position.latitudeDelta,
+                  longitudeDelta: position.longitudeDelta,
                 }}>
                 {data.map((item, index) => {
-                  const latitude = Number(item.latitude) || 0;
-                  const longitude = Number(item.longitude) || 0;
+                  const latitude = cleanCoordinate(item.longitude ?? '');
+                  const longitude = cleanCoordinate(item.latitude ?? '');
+                  if (latitude === null || longitude === null) {
+                    return null;
+                  }
+                  console.log(
+                    'Markeerrrr',
+                    item.headerLabel,
+                    latitude,
+                    longitude,
+                  );
 
                   const addressObj = item.items.find(
                     i => i.label === 'Address:',
@@ -199,6 +231,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                       coordinate={{latitude, longitude}}
                       title={item.headerLabel}
                       description={address}
+                      onPress={() => openInGoogleMaps(latitude, longitude)}
                     />
                   );
                 })}

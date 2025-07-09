@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     gap: vw * 2,
+    // borderWidth: 2,
   },
   rightTab: {
     flexDirection: 'row',
@@ -72,7 +73,12 @@ export const styles = StyleSheet.create({
   },
   inputFeild: {
     borderWidth: 2,
+    // paddingHorizontal: vw * 2,
+    // marginHorizontal: vw * 2,
     height: vh * 6,
+
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   searchFieldRight: {
     position: 'relative',

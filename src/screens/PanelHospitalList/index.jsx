@@ -3,7 +3,7 @@ import usePanelHospitalListViewModel from '../../viewmodels/usePanelHospitalList
 
 const PanelHospitalList = ({navigation}) => {
   const {states, functions} = usePanelHospitalListViewModel({navigation});
-
+  const {position} = states;
   const {
     onPressTab,
     onPressRightTab,
@@ -25,6 +25,7 @@ const PanelHospitalList = ({navigation}) => {
       setSearchText={setSearchText}
       loading={loading}
       handleMapDirection={handleMapDirection}
+      position={position}
     />
   );
 };

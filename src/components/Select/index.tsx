@@ -64,16 +64,12 @@ const Select: React.FC<SelectProps> = ({
             style={styles.selectText}
             name={value || selectPlaceholder}
           />
-          <Image
-            style={styles.arrow}
-            source={
-              value
-                ? null
-                : isDropdownVisible
-                ? icons.selectArrowUp
-                : icons.arrowDown
-            }
-          />
+          {!disabled && (
+            <Image
+              style={styles.arrow}
+              source={isDropdownVisible ? icons.selectArrowUp : icons.arrowDown}
+            />
+          )}
         </TouchableOpacity>
       </DependentBox>
       <SelectModal
