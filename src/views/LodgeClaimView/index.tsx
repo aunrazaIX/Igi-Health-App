@@ -193,7 +193,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             <Button
               containerStyle={{marginBottom: vh}}
               onPress={navigateTreatment}
-              name="Add a Claim"
+              name="Create Claim"
             />
           ) : null}
 
@@ -206,6 +206,15 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           ) : null} */}
 
           <Button
+            containerStyle={
+              currentStep === 1
+                ? styles.personalButton
+                : currentStep === 2
+                ? styles.claimButton
+                : currentStep === 3
+                ? styles.uploadButton
+                : undefined
+            }
             disabled={
               currentStep === 1
                 ? !selectedPatient
@@ -287,7 +296,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         }
         CloseButtonText={'Continue To Login'}
         onClose={() => {
-          resetStates;
+          resetStates();
           navigation.navigate('HomeStack');
         }}
         confirmationType={confirmationType}

@@ -19,7 +19,7 @@ const ContactInfoView = ({
   return (
     <View style={styles.box}>
       <AileronSemiBold style={styles.title} name="Contact information" />
-      <AileronRegular style={styles.subtitle} name="Approval Center:" />
+      <AileronBold style={styles.subtitle} name="Approval Center:" />
       <AileronSemiBold style={styles.name} name={'Tel : +92-(042) 34503333'} />
       <AileronSemiBold
         style={styles.subtitle}

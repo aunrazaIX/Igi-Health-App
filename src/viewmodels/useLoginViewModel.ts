@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,6 +13,8 @@ import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {setErrorModal} from '../redux/generalSlice';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import {RootState} from '../redux/store';
+import {DetailsContainer} from '../components';
+import {Platform} from 'react-native';
 
 export type UserDetails = {
   name: string;
@@ -124,9 +126,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       dispatch(
         setErrorModal({
           Show: true,
-          message: `"Username or Password invalid"`,
+          message: `"Incorrect Credentials"`,
           detail:
-            'An error has occurred, please try again with correct credentials. If the problem persists, contact IGI Life',
+            "We couldn't find an account with these details. Please check your username and password and try again.",
         }),
       );
     },
@@ -150,6 +152,15 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       sendOtp(apiData);
     },
     onError: () => {
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Signup Failed',
+          detail:
+            'We couldn’t find your details in our records. Please check your information or contact IGI Life.',
+        }),
+      );
+
       console.log('oo');
     },
   });
@@ -351,14 +362,25 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       await trigger(apiData);
     } catch (error: any) {
       console.log('Biometric login error:', error);
-      dispatch(
-        setErrorModal({
-          Show: true,
-          message:
-            `${error?.message} "please login manually again to setup new FingerPrint"` ||
-            'Biometric login failed. Please try again.',
-        }),
-      );
+      if (Platform.OS === 'ios') {
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Enable Face ID / Touch ID',
+            detail:
+              ' Please log in with your username and password first. You can turn on Face ID or Touch ID later in the app settings.',
+          }),
+        );
+      } else {
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Biometric Login Not Set Up',
+            detail:
+              "Please sign in with your username and password first. You can then enable biometric login in the app's settings.",
+          }),
+        );
+      }
     }
   };
 
@@ -374,7 +396,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
           Show: true,
           message: 'Please fill all feilds',
           detail:
-            'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life',
+            'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life.',
         }),
       );
     }
@@ -391,6 +413,37 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   };
 
   const tabs = ['login', 'signup'];
+
+  useEffect(() => {
+    if (isToggle && credentials?.userName && credentials?.password) {
+      const setupBiometrics = async () => {
+        try {
+          const rnBiometrics = new ReactNativeBiometrics({
+            allowDeviceCredentials: true,
+          });
+          const {available, biometryType} =
+            await rnBiometrics.isSensorAvailable();
+          if (available) {
+            await rnBiometrics.deleteKeys();
+            await rnBiometrics.createKeys();
+            dispatch(
+              setBiometrics({
+                userName: loginApiData.userName,
+                password: loginApiData?.password,
+                deviceId: '23232323232',
+                LoginDeviceName: 'Mobile',
+                biometryType: biometryType,
+              }),
+            );
+          }
+        } catch (error) {
+          console.log('Biometric setup error (toggle):', error);
+        }
+      };
+      setupBiometrics();
+    }
+  }, [isToggle]);
+
   return {
     states: {
       selectedTab,

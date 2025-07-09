@@ -5,7 +5,7 @@ import {COLORS} from '../../assets/theme/colors';
 const styles = StyleSheet.create({
   container: {
     paddingTop: vh * 3,
-    paddingBottom: vh * 13,
+    paddingBottom: vh * 24,
   },
   box: {
     backgroundColor: COLORS.white,
@@ -30,10 +30,12 @@ const styles = StyleSheet.create({
     marginBottom: vh * 2,
     textAlign: 'left',
     color: COLORS.textBlackShade,
+    lineHeight: vh * 2,
   },
   subtitle: {
     fontSize: vw * 4,
     textAlign: 'left',
+    lineHeight: vh * 3,
   },
   label: {
     fontSize: vh * 1.7,
@@ -43,10 +45,13 @@ const styles = StyleSheet.create({
     fontSize: vw * 4,
     textAlign: 'left',
     marginTop: vh * 1.5,
+    lineHeight: vh * 2,
   },
   address: {
     marginTop: vh * 2,
     fontSize: vw * 4,
+    textAlign: 'left',
+    lineHeight: vh * 2,
   },
   name: {
     fontSize: vh * 2,
@@ -81,6 +86,8 @@ const styles = StyleSheet.create({
   },
   addressDetail: {
     fontSize: vw * 3.7,
+    textAlign: 'left',
+    lineHeight: vh * 3,
   },
   callTittle: {
     fontSize: vw * 3.3,

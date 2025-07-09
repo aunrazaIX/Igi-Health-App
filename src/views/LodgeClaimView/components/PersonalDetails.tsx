@@ -1,10 +1,10 @@
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import { Select } from '../../../components';
-import { vh } from '../../../assets/theme/dimension';
+import {Select} from '../../../components';
+import {vh} from '../../../assets/theme/dimension';
 import Box from './Box';
-import { PersonelDataSection } from '../typeInterface';
-import { icons } from '../../../assets';
+import {PersonelDataSection} from '../typeInterface';
+import {icons} from '../../../assets';
 
 type PersonalDetailsProps = {
   patientOptions: any[];
@@ -70,7 +70,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
         value={selectedPatient?.label}
         onSelectOption={value => onSelectPatient(value)}
         selectData={dependants}
-        selectLabel={'Patient Information'}
+        selectLabel={'Patient Name'}
         selectPlaceholder={'-- Select Patient From List --'}
       />
       {type !== 'priorApproval' && (
@@ -78,7 +78,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
           value={selectedType?.label}
           onSelectOption={value => onSelectType(value)}
           selectData={patientOptions}
-          selectLabel={'Coverage Type'}
+          selectLabel={'Nature of Claim'}
           selectPlaceholder={'-- Select Covergae Type  --'}
         />
       )}
@@ -90,6 +90,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
           selectData={hospitalList}
           selectLabel={'Select Hospital'}
           selectPlaceholder={'-- Select Hospital From List --'}
+          isSearch={true}
         />
       )}
 

@@ -131,7 +131,12 @@ const HomeView: React.FC<HomeViewProps> = ({
                       <View style={styles.homeCardMainDetails}>
                         <View>
                           <AileronSemiBold
-                            name={`Policy Number: ${homeCardData[0]?.Policy_Number}`}
+                            name={`Policy Number: ${
+                              homeCardData.find(
+                                item =>
+                                  item.Policy_Insured_Relaion === 'Member',
+                              )?.Policy_Number
+                            }`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
@@ -147,7 +152,12 @@ const HomeView: React.FC<HomeViewProps> = ({
 
                         <View>
                           <AileronSemiBold
-                            name={`Policy Name: ${homeCardData[0]?.Policy_Insured_Name}`}
+                            name={`Policy Name: ${
+                              homeCardData.find(
+                                item =>
+                                  item.Policy_Insured_Relaion === 'Member',
+                              )?.Policy_Insured_Name
+                            }`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
@@ -176,19 +186,31 @@ const HomeView: React.FC<HomeViewProps> = ({
 
                       <View style={{gap: vh}}>
                         <AileronSemiBold
-                          name={`Class: ${homeCardData[0].Policy_CertNo}`}
+                          name={`Class: ${
+                            homeCardData.find(
+                              item => item.Policy_Insured_Relaion === 'Member',
+                            )?.Policy_Class
+                          }`}
                           style={styles.infoCardMiddleTextlight}
                           numberOfLines={2}
                         />
 
                         <AileronSemiBold
-                          name={`Cert No: ${homeCardData[0]?.Policy_Insured_Age}`}
+                          name={`Cert No: ${
+                            homeCardData.find(
+                              item => item.Policy_Insured_Relaion === 'Member',
+                            )?.Policy_CertNo
+                          }`}
                           style={styles.infoCardMiddleTextlight}
                           numberOfLines={1}
                         />
 
                         <AileronSemiBold
-                          name={`Age: ${homeCardData[0]?.Policy_Insured_Age}`}
+                          name={`Age: ${
+                            homeCardData.find(
+                              item => item.Policy_Insured_Relaion === 'Member',
+                            )?.Policy_Insured_Age
+                          }`}
                           style={styles.infoCardMiddleTextlight}
                           numberOfLines={1}
                         />
@@ -304,15 +326,17 @@ const HomeView: React.FC<HomeViewProps> = ({
                         <View style={styles.validity}>
                           <AileronBold
                             style={{fontSize: vw * 3.4}}
-                            name={`    Valid from : ${moment(
+                            name={`Valid from : ${moment(
                               homeCardData[0]?.Policy_Start_Date,
+                              'YYYYMMDD',
                             ).format('DD-MM-YYYY')}`}
                           />
 
                           <AileronBold
                             style={{fontSize: vw * 3.4}}
-                            name={`Valid till : ${moment(
-                              homeCardData[0]?.Policy_expiry_Date,
+                            name={`Valid from : ${moment(
+                              homeCardData[0]?.Policy_Expiry_Date,
+                              'YYYYMMDD',
                             ).format('DD-MM-YYYY')}`}
                           />
                         </View>
@@ -539,7 +563,6 @@ const HomeView: React.FC<HomeViewProps> = ({
         </View>
         <View>
           <View style={styles.claimStatistics}>
-            {' '}
             <Image
               source={icons.claimStatistics}
               style={styles.statisticsIcon}

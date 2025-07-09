@@ -14,7 +14,7 @@ import {
 import styles from './styles';
 import {ImageSourcePropType, KeyboardAvoidingView, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import { vh } from '../../assets/theme/dimension';
+import {vh} from '../../assets/theme/dimension';
 
 const ForgotPasswordView = ({
   step,
@@ -89,12 +89,12 @@ const ForgotPasswordView = ({
     3: 'Create New Password',
   };
   const returnDescription: Record<number, string> = {
-    1: 'Enter your email address to recover your password.',
+    1: 'Please enter the required information to reset your password',
     2: 'An authentication code has been sent to imran-naveed-8852@gmail.com',
     3: 'At least 8 characters, with uppercase and lowercase letters.',
   };
   const returnButtonName: Record<number, string> = {
-    1: 'Forgot Password',
+    1: 'Submit',
     2: 'Next',
     3: 'Submit',
   };
@@ -115,7 +115,7 @@ const ForgotPasswordView = ({
         onPressBack={onPressBack}
         icon={returnHeaderIcon[step]}
         title={returnHeaderName[step]}
-        titleStyle={{lineHeight : vh*3}}
+        titleStyle={{lineHeight: vh * 3}}
       />
       <CurvedView containerStyle={styles.curvedStyle}>
         <KeyboardAwareScrollView>

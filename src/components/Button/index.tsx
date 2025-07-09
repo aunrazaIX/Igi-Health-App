@@ -22,6 +22,7 @@ interface ButtonProps extends TouchableOpacityProps {
   disabled?: boolean;
   ForgotPasswordLoading?: boolean;
   route?: any;
+  showIconRight: any;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -33,6 +34,7 @@ const Button: React.FC<ButtonProps> = ({
   gradientColors,
   loading,
   disabled,
+  showIconRight,
 }) => {
   return (
     <LinearGradient
@@ -51,6 +53,9 @@ const Button: React.FC<ButtonProps> = ({
           <SimpleLoader size={'small'} />
         ) : (
           <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
+        )}
+        {showIconRight && (
+          <Image style={styles.buttonIcon} source={showIconRight} />
         )}
       </TouchableOpacity>
     </LinearGradient>

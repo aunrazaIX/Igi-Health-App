@@ -118,7 +118,6 @@ const LoginView = ({
           </CurvedView>
         </View>
       </ImageBackground>
-      //{' '}
     </KeyboardAwareScrollView>
   );
 };

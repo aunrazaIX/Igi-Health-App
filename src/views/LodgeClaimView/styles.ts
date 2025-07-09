@@ -23,8 +23,19 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   curveStyle: {
-    minHeight: vh * 78,
-    paddingBottom: vh * 3,
+    minHeight: vh * 85,
+    paddingBottom: vh * 15,
+    // borderWidth: 2,
+  },
+  personalButton: {
+    marginBottom: vh * 3,
+  },
+  claimButton: {
+    marginBottom: vh * 3,
+  },
+  uploadButton: {
+    marginBottom: vh * 3,
+    // borderWidth: 2,
   },
   addTreatment: {
     resizeMode: 'contain',

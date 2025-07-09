@@ -15,6 +15,7 @@ import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ModalLoading from '../../components/ModalLoading';
+import {vh} from '../../assets/theme/dimension';
 
 type AddTreatmentViewProps = {
   treatmentTypes: any[];
@@ -42,22 +43,21 @@ const AddTreatmentView = ({
 }: AddTreatmentViewProps) => {
   return (
     <>
-      <TopView title={'Add A Treatment'} />
+      <TopView title={'Enter Claim Details'} />
       <CurvedView containerStyle={styles.curveStyle}>
         <KeyboardAwareScrollView
           extraScrollHeight={20}
           keyboardShouldPersistTaps="always"
-          showsVerticalScrollIndicator={false}
-          enableOnAndroid>
+          showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>
               <AileronBold
-                name="Add"
+                name="Add receipt and"
                 style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
               />
               <AileronBold
-                name=" Treatment"
+                name="treatment information"
                 style={[styles.text, {color: COLORS.cardBackgroundRed}]}
               />
             </View>
@@ -72,6 +72,7 @@ const AddTreatmentView = ({
             />
 
             <InputField
+              containerStyle={{marginVertical: vh * 0}}
               value={apiData?.receiptNumber}
               onChangeText={text => {
                 const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
@@ -86,7 +87,7 @@ const AddTreatmentView = ({
             <InputField
               maxLength={7}
               value={apiData?.amount}
-              errorMessage={apiData?.error_amount}
+              // errorMessage={apiData?.error_amount}
               onChangeText={text => {
                 const cleanedText = text.replace(/[^0-9]/g, '');
                 setterForApiData('amount', cleanedText);
@@ -98,7 +99,7 @@ const AddTreatmentView = ({
             <InputField
               value={apiData?.description}
               maxLength={200}
-              errorMessage={apiData?.error_description}
+              // errorMessage={apiData?.error_description}
               onChangeText={text => setterForApiData('description', text)}
               multiline
               label="Description"

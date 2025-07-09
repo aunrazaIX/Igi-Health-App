@@ -4,6 +4,7 @@ const initalState = {
   showErrorModal: false,
   errorMessage: null,
   errorDetail: null,
+  isIntroSlider: true,
 };
 export const generalSlice = createSlice({
   name: 'generalSlice',
@@ -19,7 +20,11 @@ export const generalSlice = createSlice({
         state.errorDetail = payload.detail;
       }
     },
+
+    setIntroSlider: (state, {payload}) => {
+      state.isIntroSlider = payload;
+    },
   },
 });
-export const {setErrorModal} = generalSlice.actions;
+export const {setErrorModal, setIntroSlider} = generalSlice.actions;
 export const generalReducer = generalSlice.reducer;

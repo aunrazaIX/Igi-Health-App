@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     marginBottom: vh * 3,
   },
   subContainer: {
-    height: vh * 5,
+    height: vh * 3,
     width: '100%',
   },
   labelContainer: {
