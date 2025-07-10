@@ -69,6 +69,7 @@ const AddTreatmentView = ({
               selectLabel={'-- Select Treatment --'}
               selectPlaceholder={'-- Select Treatment --'}
               isSearch={true}
+              selectContainer={{marginBottom: vh * 1.3}}
             />
 
             <InputField

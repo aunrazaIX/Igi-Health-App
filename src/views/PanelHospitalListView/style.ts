@@ -61,6 +61,37 @@ export const styles = StyleSheet.create({
     gap: vw * 2,
     borderColor: COLORS.buttonBorder,
   },
+  calloutContainer: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 10,
+  },
+  callout: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 10,
+    minWidth: 200,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  calloutTitle: {
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginBottom: 5,
+  },
+  calloutDescription: {
+    fontSize: 12,
+    color: '#555',
+  },
+  calloutLink: {
+    fontSize: 12,
+    color: 'blue',
+    marginTop: 5,
+    textDecorationLine: 'underline',
+  },
 
   tab: {
     borderRadius: vw * 8,

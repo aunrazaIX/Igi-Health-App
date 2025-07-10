@@ -181,7 +181,14 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       signupResetStates();
     },
     onError: res => {
-      dispatch(setErrorModal({Show: true, message: 'Incorrect Data'}));
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Signup Failed',
+          detail:
+            'We couldn’t find your details in our records. Please check your information or contact IGI Life.',
+        }),
+      );
     },
   });
 

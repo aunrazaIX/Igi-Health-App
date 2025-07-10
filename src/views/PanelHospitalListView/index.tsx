@@ -16,7 +16,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {PanelHospitalGroup} from '../../viewmodels/usePanelHospitalListViewModel';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Callout, Marker} from 'react-native-maps';
 
 type HomeViewProps = {
   data: PanelHospitalGroup[];
@@ -51,7 +51,6 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   const cleanCoordinate = (value: string): number | null => {
     if (!value || typeof value !== 'string') return null;
 
-    // Match the numeric part before the degree symbol
     const match = value.match(/^([\d.]+)\s*°/);
     if (!match) return null;
 
@@ -232,13 +231,24 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                   );
                   const address = addressObj ? addressObj.value : '';
                   return (
-                    <Marker
-                      key={index}
-                      coordinate={{latitude, longitude}}
-                      title={item.headerLabel}
-                      description={address}
-                      onPress={() => openInGoogleMaps(latitude, longitude)}
-                    />
+                    <Marker key={index} coordinate={{latitude, longitude}}>
+                      <Callout
+                        onPress={() => openInGoogleMaps(latitude, longitude)}>
+                        <TouchableOpacity style={styles.calloutContainer}>
+                          <View style={styles.callout}>
+                            <Text style={styles.calloutTitle}>
+                              {item.headerLabel}
+                            </Text>
+                            <Text style={styles.calloutDescription}>
+                              {address}
+                            </Text>
+                            <Text style={styles.calloutLink}>
+                              Tap to open in Google Maps
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      </Callout>
+                    </Marker>
                   );
                 })}
               </MapView>

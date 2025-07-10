@@ -25,7 +25,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ModalLoading from '../../components/ModalLoading';
 import NoDataView from '../../components/NoDataView';
 import SimpleLoader from '../../components/SimpleLoader';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Callout, Marker} from 'react-native-maps';
 
 type HospitalsViewProps = {
   selectedTab: string;
@@ -243,13 +243,24 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
                   );
                   const address = addressObj ? addressObj.value : '';
                   return (
-                    <Marker
-                      key={index}
-                      coordinate={{latitude, longitude}}
-                      title={item.headerLabel}
-                      description={address}
-                      onPress={() => openInGoogleMaps(latitude, longitude)}
-                    />
+                    <Marker key={index} coordinate={{latitude, longitude}}>
+                      <Callout
+                        onPress={() => openInGoogleMaps(latitude, longitude)}>
+                        <TouchableOpacity style={styles.calloutContainer}>
+                          <View style={styles.callout}>
+                            <Text style={styles.calloutTitle}>
+                              {item.headerLabel}
+                            </Text>
+                            <Text style={styles.calloutDescription}>
+                              {address}
+                            </Text>
+                            <Text style={styles.calloutLink}>
+                              Tap to open in Google Maps
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      </Callout>
+                    </Marker>
                   );
                 })}
               </MapView>
