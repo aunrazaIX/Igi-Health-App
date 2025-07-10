@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     minHeight: vh * 2,
   },
   popupInput: {
-    marginTop: vh * -0.9,
+    marginTop: vh * -0.7,
     marginLeft: 0,
     color: COLORS.personalValue,
     fontSize: vw * 4,
