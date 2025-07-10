@@ -15,6 +15,16 @@ export const styles = StyleSheet.create({
     gap: vw * 2,
     // borderWidth: 2,
   },
+  infoContainerHeaderRightMap: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: vw * 2,
+    // borderWidth: 2,
+    marginHorizontal: vw * 3,
+  },
+  curvedMapView: {
+    paddingHorizontal: 0 * vw,
+  },
   rightTab: {
     flexDirection: 'row',
     borderColor: COLORS.buttonBorder,

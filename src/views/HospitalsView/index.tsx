@@ -80,7 +80,8 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
   return (
     <>
       <TopView title="Network Hospitals" type="default" />
-      <CurvedView>
+      <CurvedView
+        containerStyle={selectedTabRight === 'map' && styles.cruvedMapView}>
         <KeyboardAwareScrollView>
           <View>
             <View style={styles.mapTextContainer}>
@@ -99,7 +100,12 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
                 )}
               </View>
             </View>
-            <View style={styles.infoContainerHeaderRight}>
+            <View
+              style={
+                selectedTabRight === 'map'
+                  ? styles.infoContainerHeaderRightMap
+                  : styles.infoContainerHeaderRight
+              }>
               <TouchableOpacity
                 onPress={() => onPressRightTab('list')}
                 style={[
@@ -214,7 +220,6 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
                 height: vh * 58,
                 // marginHorizontal: vw * 10,
                 // flex: 1,
-
                 marginTop: vh * 2,
               }}>
               <MapView

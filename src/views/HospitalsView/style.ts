@@ -13,6 +13,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     gap: vw * 2,
   },
+  infoContainerHeaderRightMap: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: vw * 2,
+    marginHorizontal: vw * 2,
+  },
 
   rightTab: {
     flexDirection: 'row',
@@ -101,6 +107,9 @@ export const styles = StyleSheet.create({
   mapTextContainer: {
     gap: vw * 2,
     justifyContent: 'center',
+  },
+  cruvedMapView: {
+    paddingHorizontal: vw * 0,
   },
   mapTabsContainer: {
     flexDirection: 'row',

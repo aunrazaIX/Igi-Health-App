@@ -73,7 +73,8 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
         }
       />
 
-      <CurvedView>
+      <CurvedView
+        containerStyle={selectedTabRight === 'map' && styles.curvedMapView}>
         <View style={styles.infoContainerHeader}>
           {selectedTabRight === 'list' && (
             <InputField
@@ -86,7 +87,12 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             />
           )}
 
-          <View style={styles.infoContainerHeaderRight}>
+          <View
+            style={
+              selectedTabRight === 'map'
+                ? styles.infoContainerHeaderRightMap
+                : styles.infoContainerHeaderRight
+            }>
             <TouchableOpacity
               onPress={() => onPressRightTab('list')}
               style={[
@@ -193,7 +199,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               style={{
                 width: '100%',
                 height: vh * 57,
-                // marginHorizontal: vw * 10,
+                // marginHorizontal: vw * 2,
                 // flex: 1,
 
                 // marginTop: vh * 2,
