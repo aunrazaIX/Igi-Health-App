@@ -224,6 +224,7 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
               }}>
               <MapView
                 showsUserLocation
+                key={selectedTabRight}
                 style={{flex: 1}}
                 region={{
                   latitude: position.latitude,

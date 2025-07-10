@@ -205,6 +205,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               }}>
               <MapView
                 // showsUserLocation={true}
+                key={selectedTabRight}
                 showsUserLocation
                 style={{flex: 1}}
                 region={{
