@@ -31,6 +31,7 @@ import Profile from '../../screens/Profile';
 
 const DrawerStack = () => {
   const {user} = useSelector(state => state.auth);
+  console.log('userrrrr', user);
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -183,7 +184,11 @@ const DrawerStack = () => {
             <View style={styles.profileContainer}>
               <View style={styles.profileRow}>
                 <AileronSemiBold
-                  name="Imran Naveed Qureshi"
+                  name={
+                    user?.UserName.includes('.com')
+                      ? 'Imran Naveed Qureshi'
+                      : user?.UserName
+                  }
                   style={styles.profileTittle}
                 />
               </View>

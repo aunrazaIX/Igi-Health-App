@@ -219,12 +219,6 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                   if (latitude === null || longitude === null) {
                     return null;
                   }
-                  console.log(
-                    'Markeerrrr',
-                    item.headerLabel,
-                    latitude,
-                    longitude,
-                  );
 
                   const addressObj = item.items.find(
                     i => i.label === 'Address:',
