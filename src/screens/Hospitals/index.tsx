@@ -20,6 +20,7 @@ const Hospitals = () => {
     searchText,
     hospitalLoading,
     tabChanging,
+    position,
   } = states;
   return (
     <HospitalsView
@@ -36,6 +37,7 @@ const Hospitals = () => {
       hospitalLoading={hospitalLoading}
       tabChanging={tabChanging}
       handleMapDirection={handleMapDirection}
+      position={position}
     />
   );
 };

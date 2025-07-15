@@ -17,6 +17,7 @@ import NoDataView from '../../components/NoDataView';
 import ModalLoading from '../../components/ModalLoading';
 import SimpleLoader from '../../components/SimpleLoader';
 import {COLORS} from '../../assets/theme/colors';
+import {vh} from '../../assets/theme/dimension';
 
 type claimsHistoryViewProps = {
   data: ClaimHistoryGroup[];
@@ -151,6 +152,10 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
 
           {(data && data.length > 0) || claimDataLoading ? (
             <FlatList
+              contentContainerStyle={{
+                paddingBottom: vh * 15,
+                paddingTop: vh * 2,
+              }}
               data={data}
               keyExtractor={(_, index) => index.toString()}
               renderItem={({item}) => <DetailsContainer data={item} />}

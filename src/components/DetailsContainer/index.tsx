@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     paddingHorizontal: vw * 2,
     paddingVertical: vh * 1.2,
-    marginVertical: vh * 1.5,
+    // marginVertical: vh * 1.5,
     // alignItems: 'center',
     gap: vh * 1,
     elevation: 2,
@@ -115,7 +115,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.14,
     shadowOffset: {width: 0, height: 1},
     shadowRadius: 2,
-    marginBottom: vh * 4,
+    marginBottom: vh * 3.5,
   },
 
   cardHeader: {

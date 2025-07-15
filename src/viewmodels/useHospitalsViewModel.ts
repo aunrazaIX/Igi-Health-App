@@ -1,9 +1,10 @@
-import {useNavigation} from '@react-navigation/native';
-import {useState, useEffect} from 'react';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useState, useEffect, useCallback} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {icons} from '../assets';
 import {Linking} from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
 
 export type PanelHospitalList = {
   label: string;
@@ -19,6 +20,7 @@ type usePanelHospitalListViewModel = {
     searchText: string;
     hospitalLoading: boolean;
     tabChanging: boolean;
+    position: any;
   };
   functions: {
     onPressTab: (tab: string) => void;
@@ -39,6 +41,13 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
   const [searchText, setSearchText] = useState('');
   const [allData, setAllData] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
+
+  const [position, setPosition] = useState({
+    latitude: 10,
+    longitude: 10,
+    latitudeDelta: 0.001,
+    longitudeDelta: 0.001,
+  });
 
   const onPressTab = (tab: string) => setSelectedTab(tab);
   const onPressRightTab = (tab: string) => setSelectedTabRight(tab);
@@ -111,6 +120,26 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
     },
   });
 
+  useFocusEffect(
+    useCallback(() => {
+      Geolocation.getCurrentPosition(
+        pos => {
+          const crd = pos.coords;
+          console.log(crd);
+          setPosition({
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+            latitudeDelta: 0.0421,
+            longitudeDelta: 0.0421,
+          });
+        },
+        err => {
+          console.log(err);
+        },
+      );
+    }, []),
+  );
+
   return {
     states: {
       data,
@@ -120,6 +149,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       searchText,
       hospitalLoading,
       tabChanging,
+      position,
     },
     functions: {
       onPressTab,

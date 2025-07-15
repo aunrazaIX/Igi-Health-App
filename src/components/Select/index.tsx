@@ -27,6 +27,7 @@ type SelectProps = {
   onSelectOption: (item: Options) => void;
   disabled?: boolean;
   isSearch?: boolean;
+  selectContainer: any;
 };
 
 const Select: React.FC<SelectProps> = ({
@@ -37,6 +38,7 @@ const Select: React.FC<SelectProps> = ({
   onSelectOption,
   isSearch,
   disabled = false,
+  selectContainer,
 }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -49,7 +51,7 @@ const Select: React.FC<SelectProps> = ({
   };
 
   return (
-    <View style={styles.selectContainer}>
+    <View style={[styles.selectContainer, selectContainer]}>
       <DependentBox containerStyle={styles.dependentContainer}>
         <AileronRegular name={selectLabel} style={styles.Patient} />
         <TouchableOpacity
@@ -64,16 +66,12 @@ const Select: React.FC<SelectProps> = ({
             style={styles.selectText}
             name={value || selectPlaceholder}
           />
-          <Image
-            style={styles.arrow}
-            source={
-              value
-                ? null
-                : isDropdownVisible
-                ? icons.selectArrowUp
-                : icons.arrowDown
-            }
-          />
+          {!disabled && (
+            <Image
+              style={styles.arrow}
+              source={isDropdownVisible ? icons.selectArrowUp : icons.arrowDown}
+            />
+          )}
         </TouchableOpacity>
       </DependentBox>
       <SelectModal
@@ -128,6 +126,8 @@ const styles = StyleSheet.create({
   },
   selectContainer: {
     width: '100%',
+    // borderWidth: 2,
+    // marginBottom: vh * 3,
   },
   dependentContainer: {
     padding: vw * 3.5,

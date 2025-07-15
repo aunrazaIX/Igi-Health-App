@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   FlatList,
   StyleSheet,
+  Linking,
 } from 'react-native';
 import React from 'react';
 import {AileronBold, CurvedView, InputField, TopView} from '../../components';
@@ -15,6 +16,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {PanelHospitalGroup} from '../../viewmodels/usePanelHospitalListViewModel';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
+import MapView, {Callout, Marker} from 'react-native-maps';
 
 type HomeViewProps = {
   data: PanelHospitalGroup[];
@@ -27,6 +29,7 @@ type HomeViewProps = {
   setSearchText: any;
   loading: any;
   handleMapDirection: any;
+  position: any;
 };
 
 const PanelHospitalListView: React.FC<HomeViewProps> = ({
@@ -40,7 +43,25 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   setSearchText,
   loading,
   handleMapDirection,
+  position,
 }) => {
+  console.log(position, 'positionss');
+  console.log(data, 'usman');
+
+  const cleanCoordinate = (value: string): number | null => {
+    if (!value || typeof value !== 'string') return null;
+
+    const match = value.match(/^([\d.]+)\s*°/);
+    if (!match) return null;
+
+    const number = parseFloat(match[1]);
+    return isNaN(number) ? null : number;
+  };
+
+  const openInGoogleMaps = (latitude: number, longitude: number) => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    Linking.openURL(url);
+  };
   return (
     <>
       <TopView
@@ -51,18 +72,26 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
         }
       />
 
-      <CurvedView>
+      <CurvedView
+        containerStyle={selectedTabRight === 'map' && styles.curvedMapView}>
         <View style={styles.infoContainerHeader}>
-          <InputField
-            placeholder="Search Name / Phone / City / Address .."
-            placeholderTextColor={COLORS.textGrayShade}
-            inputStyle={styles.inputStyle}
-            containerStyle={styles.inputFeild}
-            value={searchText}
-            onChangeText={text => setSearchText(text)}
-          />
+          {selectedTabRight === 'list' && (
+            <InputField
+              placeholder="Search Name / Phone / City / Address .."
+              placeholderTextColor={COLORS.textGrayShade}
+              inputStyle={styles.inputStyle}
+              containerStyle={styles.inputFeild}
+              value={searchText}
+              onChangeText={text => setSearchText(text)}
+            />
+          )}
 
-          <View style={styles.infoContainerHeaderRight}>
+          <View
+            style={
+              selectedTabRight === 'map'
+                ? styles.infoContainerHeaderRightMap
+                : styles.infoContainerHeaderRight
+            }>
             <TouchableOpacity
               onPress={() => onPressRightTab('list')}
               style={[
@@ -165,13 +194,60 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
           </View>
 
           {selectedTabRight === 'map' && (
-            <InputField
-              searchFieldRight={styles.searchFieldRight}
-              searchFieldRightIcon={styles.searchFieldRightIcon}
-              inputStyle={styles.inputStyle}
-              searchIcon={icons.searchBlack}
-              containerStyle={styles.inputFeild}
-            />
+            <View
+              style={{
+                width: '100%',
+                height: vh * 57,
+                // marginHorizontal: vw * 2,
+                // flex: 1,
+
+                // marginTop: vh * 2,
+              }}>
+              <MapView
+                // showsUserLocation={true}
+                key={selectedTabRight}
+                showsUserLocation
+                style={{flex: 1}}
+                region={{
+                  latitude: position.latitude,
+                  longitude: position.longitude,
+                  latitudeDelta: position.latitudeDelta,
+                  longitudeDelta: position.longitudeDelta,
+                }}>
+                {data.map((item, index) => {
+                  const latitude = cleanCoordinate(item.longitude ?? '');
+                  const longitude = cleanCoordinate(item.latitude ?? '');
+                  if (latitude === null || longitude === null) {
+                    return null;
+                  }
+
+                  const addressObj = item.items.find(
+                    i => i.label === 'Address:',
+                  );
+                  const address = addressObj ? addressObj.value : '';
+                  return (
+                    <Marker key={index} coordinate={{latitude, longitude}}>
+                      <Callout
+                        onPress={() => openInGoogleMaps(latitude, longitude)}>
+                        <TouchableOpacity style={styles.calloutContainer}>
+                          <View style={styles.callout}>
+                            <Text style={styles.calloutTitle}>
+                              {item.headerLabel}
+                            </Text>
+                            <Text style={styles.calloutDescription}>
+                              {address}
+                            </Text>
+                            <Text style={styles.calloutLink}>
+                              Tap to open in Google Maps
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      </Callout>
+                    </Marker>
+                  );
+                })}
+              </MapView>
+            </View>
           )}
 
           {((selectedTab === 'PanelHospitals' && selectedTabRight === 'list') ||
@@ -179,7 +255,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               selectedTabRight === 'list')) && (
             <FlatList
               data={data}
-              contentContainerStyle={{paddingBottom: vh * 20}}
+              contentContainerStyle={{paddingBottom: vh * 15}}
               keyExtractor={(_, index) => index.toString()}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => (

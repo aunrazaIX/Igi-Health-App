@@ -435,6 +435,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               setErrorModal({
                 show: true,
                 message: "same file can't be selected again",
+                detail: "same file can't be selected multiples times",
               }),
             );
             return;
