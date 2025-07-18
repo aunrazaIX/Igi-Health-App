@@ -16,6 +16,8 @@ const ForgotPassword = ({route}: {route: any}) => {
     showResend,
     countdownKey,
     updatePasswordLoading,
+    verifiedUserData,
+    savedDataForVerification,
   } = states;
   const {
     handleStep,
@@ -58,6 +60,8 @@ const ForgotPassword = ({route}: {route: any}) => {
       onCloseSuccessModal={onCloseSuccessModal}
       disabled={disabled}
       updatePasswordLoading={updatePasswordLoading}
+      verifiedUserData={verifiedUserData}
+      savedDataForVerification={savedDataForVerification}
     />
   );
 };

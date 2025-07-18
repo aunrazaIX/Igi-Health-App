@@ -15,6 +15,7 @@ import styles from './styles';
 import {ImageSourcePropType, KeyboardAvoidingView, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {vh} from '../../assets/theme/dimension';
+import {useSelector} from 'react-redux';
 
 const ForgotPasswordView = ({
   step,
@@ -39,6 +40,8 @@ const ForgotPasswordView = ({
   setShowResend,
   onCloseSuccessModal,
   updatePasswordLoading,
+  verifiedUserData,
+  savedDataForVerification,
 }: {
   step: number;
   onPressBack: () => void;
@@ -62,7 +65,13 @@ const ForgotPasswordView = ({
   setShowResend: () => void;
   disabled: () => void;
   updatePasswordLoading: boolean;
+  verifiedUserData: any;
+  savedDataForVerification: any;
 }) => {
+  const {user} = useSelector((state: RootState) => state.auth);
+
+  console.log(savedDataForVerification, 'ppppppppppppppppppp');
+
   const returnComponent: Record<number, JSX.Element> = {
     1: <EnterEmailView setterForApiData={setterForApiData} apiData={apiData} />,
     2: (
@@ -90,7 +99,7 @@ const ForgotPasswordView = ({
   };
   const returnDescription: Record<number, string> = {
     1: 'Please enter the required information to reset your password',
-    2: 'An authentication code has been sent to imran-naveed-8852@gmail.com',
+    2: `An authentication code has been sent to ${savedDataForVerification?.UserName} `,
     3: 'At least 8 characters, with uppercase and lowercase letters.',
   };
   const returnButtonName: Record<number, string> = {
@@ -101,7 +110,7 @@ const ForgotPasswordView = ({
   const returnHeaderName: Record<number, string> = {
     1: 'Forgot Password',
     2: 'OTP Verification',
-    3: 'Create New Password',
+    3: 'Create Password & Continue',
   };
   const returnHeaderIcon: Record<number, ImageSourcePropType | null> = {
     1: icons.forgotPassword,

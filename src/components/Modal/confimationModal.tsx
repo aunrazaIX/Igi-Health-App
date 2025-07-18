@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     paddingVertical: vh * 1.2,
     paddingHorizontal: vh * 1.5,
     borderColor: COLORS.cancelButtonBorder,
-    backgroundColor: COLORS.cancelBottonBackground,
+    backgroundColor: COLORS.cardBackgroundLightBlue,
   },
   cancelButtonSubmit: {
     // width: '48%',
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
   },
   cancelButtonText: {
     fontSize: vw * 4.4,
-    color: COLORS.cancelButton,
+    color: COLORS.white,
   },
   deleteButtonText: {
     fontSize: vw * 4.4,

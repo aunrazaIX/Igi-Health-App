@@ -192,7 +192,14 @@ const useForgotPasswordViewModel = ({
       if (res.Data) {
         setStep(3);
       } else {
-        dispatch(setErrorModal({Show: true, message: 'Invalid Or Expire Otp'}));
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Invalid OTP',
+            detail:
+              'The OTP you entered is incorrect. Please check and try again.',
+          }),
+        );
       }
     },
     onError: error => {
@@ -285,6 +292,7 @@ const useForgotPasswordViewModel = ({
       otp,
       showResend,
       countdownKey,
+      savedDataForVerification,
     },
     functions: {
       handleStep,

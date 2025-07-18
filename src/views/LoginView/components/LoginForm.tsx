@@ -44,7 +44,7 @@ const LoginForm = ({
       <AileronSemiBold
         numberOfLines={2}
         name={
-          'Enter your registered email or mobile number to access your account.'
+          'Please enter your registered email address and password to access your account.'
         }
         style={styles.loginContainerText}
       />
@@ -52,7 +52,7 @@ const LoginForm = ({
       <View style={style.inputFeilds}>
         <InputField
           label="Your Email  "
-          placeholder="Enter Email Address"
+          placeholder="Enter Your Official Email Address"
           rightIcon={icons.email}
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
@@ -159,7 +159,7 @@ const style = StyleSheet.create({
   },
   labelStyle: {
     fontSize: vw * 3,
-    color: COLORS.textGrayShade,
+    // color: COLORS.textGrayShade,
   },
   inputStyle: {
     fontSize: vw * 3.5,

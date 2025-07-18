@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     borderRadius: vw * 3.5,
   },
   modalCancelText: {
-    color: COLORS.cancelButton,
+    color: COLORS.white,
     fontSize: vw * 4.4,
     fontWeight: '700',
   },

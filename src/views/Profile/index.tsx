@@ -12,6 +12,7 @@ import {
 import styles from './styles';
 import {icons, images} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
+import {vw} from '../../assets/theme/dimension';
 
 type Props = {
   ProfileData: Item[];
@@ -36,7 +37,7 @@ const ProfileView: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <TopView title="Profile" />
+      <TopView title="Profile" titleStyle={{letterSpacing: vw * 0.15}} />
       <CurvedView containerStyle={styles.curvedStyle}>
         <View style={styles.profileDetailContainer}>
           {/* 

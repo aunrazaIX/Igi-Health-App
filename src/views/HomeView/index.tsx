@@ -19,6 +19,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {useSelector} from 'react-redux';
 import ModalLoading from '../../components/ModalLoading';
 import moment from 'moment';
+import SimpleLoader from '../../components/SimpleLoader';
 
 type CardItem = {
   logo: ImageSourcePropType;
@@ -329,15 +330,15 @@ const HomeView: React.FC<HomeViewProps> = ({
                             name={`Valid from : ${moment(
                               homeCardData[0]?.Policy_Start_Date,
                               'YYYYMMDD',
-                            ).format('DD-MM-YYYY')}`}
+                            ).format('DD-MMM-YYYY')}`}
                           />
 
                           <AileronBold
                             style={{fontSize: vw * 3.4}}
-                            name={`Valid from : ${moment(
+                            name={`Valid till : ${moment(
                               homeCardData[0]?.Policy_Expiry_Date,
                               'YYYYMMDD',
-                            ).format('DD-MM-YYYY')}`}
+                            ).format('DD-MMM-YYYY')}`}
                           />
                         </View>
                       </View>
@@ -492,21 +493,31 @@ const HomeView: React.FC<HomeViewProps> = ({
             style={styles.meterLightText}
             name="Total Claim Amount"
           />
-          <AileronBold
-            style={styles.meterBoldText}
-            name={claimData?.totalClaimAmount}
-          />
+
+          {!loading ? (
+            <AileronBold
+              style={styles.meterBoldText}
+              name={claimData.totalClaimAmount}
+            />
+          ) : (
+            <SimpleLoader color="black" />
+          )}
         </View>
 
         <View style={styles.statisticsContainer}>
           <View style={styles.dashboardMeterDetail}>
             <View style={styles.totalDeducted}>
               <Image source={icons.totalDeducted} style={styles.meterIcon} />
-              <AileronBold
-                style={styles.meterDetailTextLight}
-                name="Total Deducted"
-                numberOfLines={1}
-              />
+
+              {loading ? (
+                <SimpleLoader />
+              ) : (
+                <AileronBold
+                  style={styles.meterDetailTextLight}
+                  name="Total Deducted"
+                  numberOfLines={1}
+                />
+              )}
             </View>
             <AileronBold
               name={claimData?.deductedAmount}
@@ -531,11 +542,16 @@ const HomeView: React.FC<HomeViewProps> = ({
           <View style={styles.dashboardMeterDetail}>
             <View style={styles.totalDeducted}>
               <Image style={styles.meterIcon} source={icons.totalPaid} />
-              <AileronBold
-                style={styles.meterDetailTextLight}
-                name="Total Paid"
-                numberOfLines={1}
-              />
+
+              {loading ? (
+                <SimpleLoader />
+              ) : (
+                <AileronBold
+                  style={styles.meterDetailTextLight}
+                  name="Total Paid"
+                  numberOfLines={1}
+                />
+              )}
             </View>
 
             <AileronBold

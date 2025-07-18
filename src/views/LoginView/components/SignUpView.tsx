@@ -27,7 +27,7 @@ const SignUpView = ({
       <AileronSemiBold
         numberOfLines={2}
         name={
-          'Enter your official email or CNIC number and create a secure password to register.'
+          'Please enter the required information below to create your account.'
         }
         style={styles.loginContainerText}
       />
@@ -72,7 +72,7 @@ const SignUpView = ({
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         label="Your Email"
-        placeholder="Enter Email Address"
+        placeholder="Enter Your Official Email Address"
         allowCopyPaste={true}
         rightIcon={icons.email}
         onChangeText={text => {

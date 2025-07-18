@@ -461,6 +461,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       loginApiData,
       checked,
       rememberMe,
+      verifiedUserData,
     },
     functions: {
       onPressTab,

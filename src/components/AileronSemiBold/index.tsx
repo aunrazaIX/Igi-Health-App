@@ -4,7 +4,6 @@ import {fonts} from '../../assets/fonts';
 import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
-
 interface AileronSemiBoldProps extends TextProps {
   name: string;
   style?: StyleProp<TextStyle>;
@@ -36,5 +35,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,
+    // letterSpacing: vw * 0.121,
   },
 });

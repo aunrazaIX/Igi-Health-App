@@ -202,7 +202,10 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             <Button
               name="Cancel"
               containerStyle={styles.modalCancelButton}
-              gradientColors={['#E1E3E6', '#E1E3E6']}
+              gradientColors={[
+                ' rgba(238, 37, 96, 1)',
+                ' rgba(238, 37, 96, 1)',
+              ]}
               inputStyle={styles.modalCancelText}
               onPress={handleCancel}
             />

@@ -59,7 +59,7 @@ const EnterEmailView = ({
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         label="Your Email"
-        placeholder="Enter Your Email Address"
+        placeholder="Enter Your Official Email Address"
         containerStyle={style.inputContainer}
         value={apiData?.email}
         onChangeText={text => {

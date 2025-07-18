@@ -5,10 +5,23 @@ import {persistStore, persistReducer} from 'redux-persist';
 import {authReducer} from './authSlice';
 import {lodegeReducer} from './lodgeSlice';
 import {generalReducer} from './generalSlice';
+import createTransform from 'redux-persist/es/createTransform';
 
+const authTransform = createTransform(
+  inboundState => {
+    const {token, user, ...rest} = inboundState;
+    return rest;
+  },
+  outboundState => {
+    return outboundState;
+  },
+  outboundState => outboundState,
+  {whitelist: ['auth']},
+);
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  transforms: [authTransform],
 };
 
 const rootReducer = combineReducers({

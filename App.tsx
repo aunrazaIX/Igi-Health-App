@@ -27,10 +27,13 @@ const App = () => {
               // paddingTop:
               // Platform.OS === 'android' ? StatusBar.currentHeight : 0,
             }}>
-            <StatusBar
-              barStyle={'dark-content'}
-              backgroundColor={COLORS.loginContainer}
-            />
+            {Platform.OS === 'ios' && (
+              <StatusBar
+                barStyle={'dark-content'}
+                backgroundColor={COLORS.loginContainer}
+              />
+            )}
+
             <MainStack />
             <View>
               <ErrorModal />

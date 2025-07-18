@@ -319,6 +319,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: vw * 4,
+    letterSpacing: vw * 0.121,
     color: COLORS.textBlackShade,
     lineHeight: vh * 2.4,
   },
@@ -353,6 +354,7 @@ const styles = StyleSheet.create({
   Buttontext: {
     fontSize: vw * 3.5,
     color: COLORS.white,
+    letterSpacing: vw * 0.15,
   },
   ButtonContainer: {
     width: '80%',
