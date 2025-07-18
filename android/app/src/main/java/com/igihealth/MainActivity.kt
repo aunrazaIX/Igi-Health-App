@@ -1,4 +1,4 @@
-package com.igihealth
+package com.igilifehealth
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
