@@ -104,10 +104,23 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               </View>
             )}
 
-            <AileronSemiBold
-              name={confirmationMessage}
-              style={styles.confirmationDetail}
-            />
+            {confirmationMessage && confirmationMessage.includes('Note:') ? (
+              <>
+                <AileronSemiBold
+                  name={confirmationMessage.split('Note:')[0].trim()}
+                  style={styles.confirmationDetail}
+                />
+                <AileronSemiBold
+                  name={'Note:' + confirmationMessage.split('Note:')[1]}
+                  style={styles.confirmationDetailNote}
+                />
+              </>
+            ) : (
+              <AileronSemiBold
+                name={confirmationMessage}
+                style={styles.confirmationDetail}
+              />
+            )}
           </View>
 
           {deleteButton && (
@@ -115,7 +128,16 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <TouchableOpacity
                 style={styles.cancelButton}
                 onPress={() => setConfirmationModalVisible(false)}>
-                <AileronBold name="Cancel" style={styles.cancelButtonText} />
+                <LinearGradient
+                  style={styles.deleteButton}
+                  colors={COLORS.activeButtonGradient}>
+                  <View style={styles.wrapper}>
+                    <AileronBold
+                      name="Cancel"
+                      style={styles.cancelButtonText}
+                    />
+                  </View>
+                </LinearGradient>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -224,11 +246,19 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   confirmationDetail: {
-    fontSize: vw * 4.1,
+    fontSize: vw * 4.5,
     color: COLORS.confimationDetail,
     marginTop: vh * 1.5,
+    marginBottom: vh,
+    lineHeight: vh * 2,
+  },
+  confirmationDetailNote: {
+    fontSize: vw * 4.1,
+    color: COLORS.confimationDetail,
+    // marginTop: vh * 1.5,
+    fontStyle: 'italic',
     marginBottom: vh * 2.5,
-    lineHeight: vh * 2.7,
+    lineHeight: vh * 2.2,
   },
   confirmationButtonContainer: {
     flexDirection: 'row',
@@ -236,12 +266,12 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     width: '48%',
-    borderWidth: vh * 0.2,
+    // borderWidth: vh * 0.2,
     borderRadius: vh * 1.3,
-    paddingVertical: vh * 1.2,
-    paddingHorizontal: vh * 1.5,
+    // paddingVertical: vh * 1.2,
+    // paddingHorizontal: vh * 1.5,
     borderColor: COLORS.cancelButtonBorder,
-    backgroundColor: COLORS.cardBackgroundLightBlue,
+    // backgroundColor: COLORS.activeButtonGradient,
   },
   cancelButtonSubmit: {
     // width: '48%',

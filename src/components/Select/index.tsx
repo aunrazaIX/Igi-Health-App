@@ -53,7 +53,7 @@ const Select: React.FC<SelectProps> = ({
   return (
     <View style={[styles.selectContainer, selectContainer]}>
       <DependentBox containerStyle={styles.dependentContainer}>
-        <AileronBold name={selectLabel} style={styles.Patient} />
+        <AileronRegular name={selectLabel} style={styles.Patient} />
         <TouchableOpacity
           disabled={disabled}
           onPress={() => {
@@ -62,7 +62,7 @@ const Select: React.FC<SelectProps> = ({
             setDropdownVisible(!isDropdownVisible);
           }}
           style={[styles.selectBox, disabled && {opacity: 0.5}]}>
-          <AileronRegular
+          <AileronBold
             style={styles.selectText}
             name={value || selectPlaceholder}
           />
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   selectText: {
     color: COLORS.personalValue,
     fontSize: vh * 1.7,
+    marginTop: vh * 0.5,
   },
   arrow: {
     width: vh * 2,

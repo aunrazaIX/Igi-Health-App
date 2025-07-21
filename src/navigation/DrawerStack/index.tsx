@@ -28,6 +28,7 @@ import {logout} from '../../redux/authSlice';
 import SettingStack from '../SettingStack';
 import {useNavigation} from '@react-navigation/native';
 import Profile from '../../screens/Profile';
+import TermsAndConditionsView from '../../views/TermsAndConditionsView';
 
 const DrawerStack = () => {
   const {user} = useSelector(state => state.auth);
@@ -108,22 +109,30 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'PanelHospitalList',
     },
-    {
-      id: 10,
-      name: 'Helpline',
-      icon: drawerIcons.drawerHelpline,
-      mainParent: 'Tabs',
-      stChild: 'Helpline',
-    },
+    // {
+    //   id: 10,
+    //   name: 'Helpline',
+    //   icon: drawerIcons.drawerHelpline,
+    //   mainParent: 'Tabs',
+    //   stChild: 'Helpline',
+    // },
+
+    // {
+    //   id: 11,
+    //   name: 'Notifications',
+    //   icon: drawerIcons.drawerNotification,
+    //   mainParent: 'Tabs',
+    //   stChild: 'HomeStack',
+    //   ndChild: 'Notifications',
+    // },
 
     {
-      id: 11,
-      name: 'Notifications',
-      icon: drawerIcons.drawerNotification,
-      mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'Notifications',
+      id: 10,
+      name: 'Privacy',
+      icon: icons.privacy,
+      to: 'Privacy',
     },
+
     {
       id: 12,
       name: 'FAQs',
@@ -280,6 +289,7 @@ const DrawerStack = () => {
       <Drawer.Screen name="FAQs" component={FAQs} />
       <Drawer.Screen name="SettingsStack" component={SettingStack} />
       <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="Privacy" component={TermsAndConditionsView} />
     </Drawer.Navigator>
   );
 };

@@ -66,14 +66,17 @@ const AddTreatmentView = ({
               value={apiData?.treatment?.label}
               onSelectOption={option => setterForApiData('treatment', option)}
               selectData={treatmentTypes}
-              selectLabel={'-- Select Treatment --'}
-              selectPlaceholder={'-- Select Treatment --'}
+              selectLabel={'Treatment Or Service Type --'}
+              selectPlaceholder={'Select treatment/service from list'}
               isSearch={true}
-              selectContainer={{marginBottom: vh * 1.3}}
+              selectContainer={{
+                marginBottom: vh * 1.3,
+                paddingVertical: vh,
+              }}
             />
 
             <InputField
-              containerStyle={{marginVertical: vh * 0}}
+              containerStyle={{marginVertical: vh * 0, paddingVertical: vh}}
               value={apiData?.receiptNumber}
               onChangeText={text => {
                 const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
@@ -81,8 +84,8 @@ const AddTreatmentView = ({
               }}
               maxLength={20}
               label="Receipt Number"
-              errorMessage={apiData?.error_receiptNumber}
-              placeholder="Receipt Number"
+              // errorMessage={apiData?.error_receiptNumber}
+              placeholder="Enter receipt/bill no."
             />
 
             <InputField

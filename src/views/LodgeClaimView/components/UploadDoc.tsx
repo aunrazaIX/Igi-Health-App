@@ -37,7 +37,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
           </View>
 
           <AileronSemiBold
-            name={'Uploading Supporting\nDocuments'}
+            name={'Upload Supporting\nDocuments'}
             style={styles.supporting}
           />
           <TouchableOpacity onPress={onSelectDocument}>

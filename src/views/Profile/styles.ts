@@ -58,11 +58,11 @@ const styles = StyleSheet.create({
     fontSize: vw * 3.6,
   },
   popupInput: {
-    marginTop: vh * -0.9,
+    // marginTop: vh * -0.9,
     marginLeft: 0,
     paddingLeft: 0,
     color: COLORS.labelDisabled,
-    fontSize: vw * 4,
+    fontSize: vw * 3.5,
     fontWeight: '700',
   },
   profileDetailContainer: {},

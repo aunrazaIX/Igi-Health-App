@@ -68,7 +68,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       setGetData(
         res?.Data?.map((item, index) => ({
           dependent: 'Dependent Detail',
-          image: icons.frame,
+          image: item?.CLTSEX === 'M' ? icons.genderFrame : icons.frame,
           dependentDetail: [
             {label: 'Name :', value: item?.LGIVNAME.trim()},
 

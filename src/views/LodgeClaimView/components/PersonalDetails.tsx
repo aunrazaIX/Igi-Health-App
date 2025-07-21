@@ -67,7 +67,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
   return (
     <View style={styles.container}>
       <Select
-        value={selectedPatient?.label}
+        value={selectedPatient?.label.trim('')}
         onSelectOption={value => onSelectPatient(value)}
         selectData={dependants}
         selectLabel={'Patient Name'}
@@ -79,7 +79,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
           onSelectOption={value => onSelectType(value)}
           selectData={patientOptions}
           selectLabel={'Nature of Claim'}
-          selectPlaceholder={'-- Select Covergae Type  --'}
+          selectPlaceholder={'-- Select Coverage Type  --'}
         />
       )}
 

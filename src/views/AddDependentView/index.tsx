@@ -79,9 +79,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   return (
     <>
       <TopView
-        title={
-          isUpdate ? 'Update Dependent Request' : 'Manage Dependent Request'
-        }
+        title={isUpdate ? 'Update Dependent Request' : 'Add New Dependent'}
       />
       <CurvedView containerStyle={styles.curvedStyle}>
         <KeyboardAwareScrollView>
@@ -203,7 +201,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               name="Cancel"
               containerStyle={styles.modalCancelButton}
               gradientColors={[
-                ' rgba(238, 37, 96, 1)',
+                ' rgba(251, 88, 136, 1)',
                 ' rgba(238, 37, 96, 1)',
               ]}
               inputStyle={styles.modalCancelText}

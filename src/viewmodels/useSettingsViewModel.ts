@@ -49,12 +49,12 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
       icon: icons.faceIDIcon,
       to: 'Face ID/ Finger Print',
     },
-    {
-      id: 3,
-      label: 'Privacy',
-      icon: icons.privacy,
-      to: 'Privacy',
-    },
+    // {
+    //   id: 3,
+    //   label: 'Privacy',
+    //   icon: icons.privacy,
+    //   to: 'Privacy',
+    // },
     {
       id: 4,
       label: 'Change Password',
@@ -64,14 +64,14 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
       ndChild: 'ForgotPassword',
     },
 
-    {
-      id: 7,
-      label: 'Notifications',
-      icon: icons.bellNotification,
-      mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'Notifications',
-    },
+    // {
+    //   id: 7,
+    //   label: 'Notifications',
+    //   icon: icons.bellNotification,
+    //   mainParent: 'Tabs',
+    //   stChild: 'HomeStack',
+    //   ndChild: 'Notifications',
+    // },
 
     {
       id: 8,

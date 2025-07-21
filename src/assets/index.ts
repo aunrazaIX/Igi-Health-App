@@ -122,6 +122,7 @@ export const icons = {
   modelSuccessful: require('./icons/modelSuccessful.png'),
   download: require('./icons/downloadIcon.png'),
   rightArrowNext: require('./icons/rightArrowNext.png'),
+  genderFrame: require('./icons/genderFrame.png'),
 };
 
 export const drawerIcons = {

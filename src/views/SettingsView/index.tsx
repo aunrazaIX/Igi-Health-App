@@ -27,7 +27,11 @@ const SettingsView = ({
 }) => {
   return (
     <Container>
-      <TopView title={'Settings'} type={'settings'} titleStyle={{lineHeight : vh*4}} />
+      <TopView
+        title={'Settings'}
+        type={'settings'}
+        titleStyle={{lineHeight: vh * 4}}
+      />
       <CurvedView>
         {data?.map(item => (
           <TouchableOpacity
@@ -35,7 +39,7 @@ const SettingsView = ({
             key={item?.id}
             style={styles.row}>
             <Image
-              style={{height: vh * 4, width: vw * 8}}
+              style={{height: vh * 4, width: vw * 8, resizeMode: 'contain'}}
               source={item?.icon}
             />
             <AileronSemiBold name={item?.label} style={styles.label} />

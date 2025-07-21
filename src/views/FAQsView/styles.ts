@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: vw * 3.3,
+    fontSize: vw * 4,
     textAlign: 'left',
     color: COLORS.black,
     width: '100%',
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   description: {
     color: COLORS.black,
-    fontSize: vw * 3.7,
+    fontSize: vw * 3.2,
     textAlign: 'left',
   },
 });

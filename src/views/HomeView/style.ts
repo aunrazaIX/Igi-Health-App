@@ -13,6 +13,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 4,
     backgroundColor: COLORS.white,
   },
+  profileTittle: {
+    color: COLORS.white,
+    fontSize: vw * 2.8,
+  },
   wrapper: {
     paddingBottom: vh * 2,
     paddingHorizontal: vw * 4,

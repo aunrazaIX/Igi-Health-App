@@ -7,6 +7,7 @@ import {
   Button,
   CurvedView,
   DependentBox,
+  InputField,
   TopView,
 } from '../../components';
 import styles from './styles';

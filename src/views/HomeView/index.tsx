@@ -75,8 +75,19 @@ const HomeView: React.FC<HomeViewProps> = ({
         colors={['rgba(11, 74, 152, 1)', 'rgba(72, 195, 255, 1)']}>
         <View style={styles.wrapper}>
           <View style={styles.homeHeader}>
-            <View>
+            {/* <View>
               <Image style={styles.headerLogo} source={images.logoWhite} />
+            </View> */}
+
+            <View>
+              <AileronSemiBold
+                name={
+                  user?.UserName.includes('.com')
+                    ? `Welcome Back , Imran Naveed Qureshi`
+                    : `Welcome Back , ${user?.UserName}`
+                }
+                style={styles.profileTittle}
+              />
             </View>
 
             <View style={styles.headerIconsRow}>

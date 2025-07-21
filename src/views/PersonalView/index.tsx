@@ -84,31 +84,29 @@ const PersonalView: React.FC<Props> = ({
         FirstOpenModal={openAddDependent}
       />
       <CurvedView>
-        <ScrollView>
-          <View style={{paddingBottom: vh * 21}}>
-            <ImageBackground
-              source={images.SecureFuture}
-              style={styles.personalImage}>
-              <View style={styles.secureTextGrp}>
-                <AileronSemiBold
-                  style={styles.secureText}
-                  name={'We\nSecure\nYour'}
-                />
-                <AileronSemiBold style={styles.futureText} name={'Future!'} />
-              </View>
-            </ImageBackground>
-
-            <View style={styles.dependentBox}>
-              <AileronBold name={'Covered '} style={styles.dependentText} />
-              <AileronBold
-                name={'Family Members!'}
-                style={styles.detailsText}
+        <View style={{paddingBottom: vh * 21}}>
+          <ImageBackground
+            source={images.SecureFuture}
+            style={styles.personalImage}>
+            <View style={styles.secureTextGrp}>
+              <AileronSemiBold
+                style={styles.secureText}
+                name={'We\nSecure\nYour'}
               />
+              <AileronSemiBold style={styles.futureText} name={'Future!'} />
             </View>
+          </ImageBackground>
 
+          <View style={styles.dependentBox}>
+            <AileronBold name={'Covered '} style={styles.dependentText} />
+            <AileronBold name={'Family Members!'} style={styles.detailsText} />
+          </View>
+
+          <ScrollView>
             {data?.map((dependent, index) => (
               <>
                 {console.log('depende', dependent)}
+
                 <DependentBox
                   key={index}
                   containerStyle={styles.dependentBoxStyle}>
@@ -182,8 +180,8 @@ const PersonalView: React.FC<Props> = ({
                 </DependentBox>
               </>
             ))}
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </View>
 
         <ModalLoading loading={deleteDepenedentLoading || dependantLoading} />
       </CurvedView>

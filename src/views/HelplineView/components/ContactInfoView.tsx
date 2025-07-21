@@ -20,29 +20,32 @@ const ContactInfoView = ({
     <View style={styles.box}>
       <AileronSemiBold style={styles.title} name="Contact information" />
       <AileronBold style={styles.subtitle} name="Approval Center:" />
-      <AileronSemiBold style={styles.name} name={'Tel : +92-(042) 34503333'} />
       <AileronSemiBold
-        style={styles.subtitle}
+        style={styles.headingText}
+        name={'Tel : +92-(042) 34503333'}
+      />
+      <AileronSemiBold
+        style={styles.headingText}
         name={`Email: approvalsubmission.pakistan@igi.com.pk `}
       />
 
       <AileronBold style={styles.subHeading} name={`Customer Services:`} />
       <AileronSemiBold
-        style={styles.subHeading}
+        style={styles.headingText}
         name={`UAN : 021-111-111-711`}
       />
       <AileronSemiBold
-        style={styles.subHeading}
+        style={styles.headingText}
         name={`WhatsApp : +92-300-8208489`}
       />
       <AileronSemiBold
-        style={styles.subHeading}
+        style={styles.headingText}
         name={`Email: corporate.services@igi.com.pk`}
       />
       <AileronBold style={styles.address} name={'Address:'} />
       <AileronSemiBold
         name={`7th Floor, The Forum, Block -9, Khayaban – e - Jami, Clifton, Karachi, Pakistan.`}
-        style={styles.addressDetail}
+        style={styles.headingText}
       />
 
       <View style={styles.buttonRow}>

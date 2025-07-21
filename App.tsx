@@ -1,13 +1,19 @@
-import React, { useRef, useEffect } from 'react';
+import React, {useRef, useEffect} from 'react';
 import MainStack from './src/navigation/MainStack';
-import { Platform, SafeAreaView, StatusBar, View, TouchableWithoutFeedback } from 'react-native';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { Provider, useDispatch } from 'react-redux';
-import { persistor, store } from './src/redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  View,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import {Provider, useDispatch} from 'react-redux';
+import {persistor, store} from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 import ErrorModal from './src/components/Modal/ErrorModal';
-import { COLORS } from './src/assets/theme/colors';
-import { logout } from './src/redux/authSlice';
+import {COLORS} from './src/assets/theme/colors';
+import {logout} from './src/redux/authSlice';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -16,7 +22,7 @@ const MyTheme = {
   },
 };
 
-const INACTIVITY_LIMIT = 1 * 60 * 1000; 
+const INACTIVITY_LIMIT = 3 * 60 * 1000;
 
 const AppContent = () => {
   const dispatch = useDispatch();
@@ -42,9 +48,12 @@ const AppContent = () => {
       onStateChange={resetTimer} // Reset on navigation
     >
       <TouchableWithoutFeedback onPress={resetTimer}>
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.loginContainer }}>
+        <SafeAreaView style={{flex: 1, backgroundColor: COLORS.loginContainer}}>
           {Platform.OS === 'ios' && (
-            <StatusBar barStyle={'dark-content'} backgroundColor={COLORS.loginContainer} />
+            <StatusBar
+              barStyle={'dark-content'}
+              backgroundColor={COLORS.loginContainer}
+            />
           )}
           <MainStack />
           <View>
