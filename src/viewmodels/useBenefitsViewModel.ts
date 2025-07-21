@@ -53,6 +53,7 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
       ClientCode: user?.ClientCode,
     },
     onSuccess: res => {
+      console.log(res, 'resDataEAFKLNKL')
       setAllBenefits(res);
     },
   });

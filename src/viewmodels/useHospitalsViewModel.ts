@@ -2,7 +2,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useState, useEffect, useCallback} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-import {icons} from '../assets';
+import {drawerIcons, icons} from '../assets';
 import {Linking} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 
@@ -105,7 +105,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       const formattedData =
         res?.map((item: any) => ({
           headerLabel: item?.HospitalName,
-          headerIcon: icons.taskEdit,
+          headerIcon: drawerIcons.drawerDiscountedCenters,
           longitude: item?.HospitalLong,
           latitude: item?.HospitalLat,
           ProvinceName: item?.ProvinceName,

@@ -5,16 +5,16 @@ import {
   CurvedView,
   TopView,
 } from '../../components';
-import {images} from '../../assets';
-import {FlatList, Image, View} from 'react-native';
+import { images } from '../../assets';
+import { FlatList, Image, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
-import {COLORS} from '../../assets/theme/colors';
-import {ImageSourcePropType} from 'react-native';
+import { COLORS } from '../../assets/theme/colors';
+import { ImageSourcePropType } from 'react-native';
 import ModalLoading from '../../components/ModalLoading';
 import NoDataView from '../../components/NoDataView';
-import {vh, vw} from '../../assets/theme/dimension';
-import {Text} from 'react-native-gesture-handler';
+import { vh, vw } from '../../assets/theme/dimension';
+import { Text } from 'react-native-gesture-handler';
 import ProvinceTab from '../../components/provinceTab';
 
 type Item = {
@@ -39,12 +39,12 @@ const BenefitsView: React.FC<Props> = ({
 
   benefitsloading,
 }) => {
-  const RenderBenefits = ({item}: {item: Item}) => (
+  const RenderBenefits = ({ item }: { item: Item }) => (
     <View style={styles.card}>
       <LinearGradient
         colors={['#0B4A98', '#0f8dd7']}
-        start={{x: 1, y: 0}}
-        end={{x: 0, y: 1}}
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 1 }}
         style={styles.CardBox}>
         <View
           style={
@@ -76,8 +76,8 @@ const BenefitsView: React.FC<Props> = ({
   const headerComponent = () => (
     <View>
       <LinearGradient
-        start={{x: 0, y: 0}}
-        end={{x: 0.8, y: 0}}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
         colors={COLORS.benefitsCardGradient}
         style={styles.BenefitsGradients}>
         <View style={styles.Maximum}>
@@ -88,8 +88,8 @@ const BenefitsView: React.FC<Props> = ({
                 selectedTab === 'Inpatient'
                   ? 'Entitled\nInpatient'
                   : selectedTab === 'Outpatient'
-                  ? 'Entitled\nOutpatient'
-                  : 'Entitled\nMaternity'
+                    ? 'Entitled\nOutpatient'
+                    : 'Entitled\nMaternity'
               }
               style={styles.MaximumTitle}
             />
@@ -116,7 +116,7 @@ const BenefitsView: React.FC<Props> = ({
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.mapTabsContainerList}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <ProvinceTab
                 onPressMapTab={onPressTab}
                 selectedMapTab={selectedTab}
@@ -144,7 +144,7 @@ const BenefitsView: React.FC<Props> = ({
           data={data}
           ListEmptyComponent={
             !benefitsloading ? (
-              <View style={{alignItems: 'center', marginTop: 20}}>
+              <View style={{ alignItems: 'center', marginTop: 20 }}>
                 <NoDataView name={'No Benefits Found'} />
               </View>
             ) : null

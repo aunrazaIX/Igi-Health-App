@@ -1,9 +1,9 @@
-import {View, Image, FlatList, TouchableOpacity} from 'react-native';
+import { View, Image, FlatList, TouchableOpacity } from 'react-native';
 import React from 'react';
-import {styles} from './style';
+import { styles } from './style';
 import TopView from '../../components/TopView';
-import {icons} from '../../assets';
-import {AileronBold, CurvedView} from '../../components';
+import { icons } from '../../assets';
+import { AileronBold, CurvedView } from '../../components';
 import DetailsContainer from '../../components/DetailsContainer';
 
 import {
@@ -16,8 +16,8 @@ import Calender from './Component/Calender';
 import NoDataView from '../../components/NoDataView';
 import ModalLoading from '../../components/ModalLoading';
 import SimpleLoader from '../../components/SimpleLoader';
-import {COLORS} from '../../assets/theme/colors';
-import {vh} from '../../assets/theme/dimension';
+import { COLORS } from '../../assets/theme/colors';
+import { vh } from '../../assets/theme/dimension';
 
 type claimsHistoryViewProps = {
   data: ClaimHistoryGroup[];
@@ -47,7 +47,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
       <TopView title="Claims History" SecondOpenModal={onPressHeaderIcon} />
       <CurvedView>
         <View>
-          <View style={styles.infoContainerTop}>
+          {/* <View style={styles.infoContainerTop}>
             <TouchableOpacity
               onPress={() => onPressAmountStatusTab('paidAmount')}
               style={
@@ -93,8 +93,8 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
                 }
               />
             </TouchableOpacity>
-          </View>
-          <View style={styles.infoContainerSecondTop}>
+          </View> */}
+          {/* <View style={styles.infoContainerSecondTop}>
             <TouchableOpacity
               onPress={() => onPressDaysStatusTab('Daily')}
               style={
@@ -148,7 +148,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
                 }
               />
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           {(data && data.length > 0) || claimDataLoading ? (
             <FlatList
@@ -158,7 +158,7 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
               }}
               data={data}
               keyExtractor={(_, index) => index.toString()}
-              renderItem={({item}) => <DetailsContainer data={item} />}
+              renderItem={({ item }) => <DetailsContainer data={item} />}
             />
           ) : (
             <NoDataView name="No Claim Found" />

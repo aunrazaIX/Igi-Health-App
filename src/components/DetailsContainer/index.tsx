@@ -6,12 +6,12 @@ import {
   ImageSourcePropType,
   Text,
 } from 'react-native';
-import React, {useState} from 'react';
-import {COLORS} from '../../assets/theme/colors';
-import {icons} from '../../assets';
+import React, { useState } from 'react';
+import { COLORS } from '../../assets/theme/colors';
+import { icons } from '../../assets';
 import AileronBold from '../AileronBold';
-import {vh, vw} from '../../assets/theme/dimension';
-import {PanelHospitalGroup} from '../../viewmodels/usePanelHospitalListViewModel';
+import { vh, vw } from '../../assets/theme/dimension';
+import { PanelHospitalGroup } from '../../viewmodels/usePanelHospitalListViewModel';
 
 type Props = {
   data?: PanelHospitalGroup;
@@ -30,6 +30,7 @@ const DetailsContainer: React.FC<Props> = ({
   onPress,
 }) => {
   const [isArrowUp, setIsArrowUp] = useState<boolean>(false);
+  console.log(data, 'abc')
 
   return (
     <View style={[styles.card]}>
@@ -40,10 +41,13 @@ const DetailsContainer: React.FC<Props> = ({
           {data?.headerIcon && (
             <Image style={styles.headerArrow} source={data.headerIcon} />
           )}
-          <AileronBold
-            style={styles.cardHeaderLeftText}
-            name={data?.headerLabel}
-          />
+          <View>
+            <AileronBold
+              style={styles.cardHeaderLeftText}
+              name={data?.headerLabel}
+            />
+            <AileronBold name={data?.RelationName} style={styles.patientName} />
+          </View>
         </View>
 
         <View style={styles.cardHeaderRight}>
@@ -113,38 +117,38 @@ export const styles = StyleSheet.create({
     elevation: 2,
     shadowColor: '#000',
     shadowOpacity: 0.14,
-    shadowOffset: {width: 0, height: 1},
+    shadowOffset: { width: 0, height: 1 },
     shadowRadius: 2,
-    marginBottom: vh * 3.5,
+    marginBottom: vh * 2,
   },
 
   cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: vh * 0.5,
-    // borderWidth: 2,
   },
 
   cardHeaderLeft: {
     gap: vw * 2,
     flexDirection: 'row',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
+    width: '80%',
   },
   cardHeaderLeftText: {
-    fontSize: vw * 4,
+    fontSize: vw * 3.5,
     color: COLORS.black,
-    // borderWidth: 2,
     width: vw * 47,
     textAlign: 'left',
     marginLeft: vw,
-    lineHeight: vh * 2.5,
+    lineHeight: vh * 2
   },
   cardHeaderRight: {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     gap: vw * 2,
+    width: '20%',
   },
 
   cardHorizontalLine: {
@@ -152,26 +156,24 @@ export const styles = StyleSheet.create({
     // height: vh * 0.4,
     borderStyle: 'dashed',
     width: '100%',
-
     borderColor: COLORS.textGrayShade,
-    marginBottom: vh * 2,
+    marginBottom: vh * 1,
     opacity: 0.4,
   },
   claimsHistoryCardDetailsContainer: {},
   cardDetails: {
-    marginBottom: vh * 1,
-
+    marginBottom: vh * 0.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
   },
   detailsLabel: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3,
     width: '30%',
     textAlign: 'left',
   },
   detailsValue: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3,
     color: COLORS.textBlackShade,
     textAlign: 'right',
     width: '70%',
@@ -179,6 +181,9 @@ export const styles = StyleSheet.create({
   headerArrow: {
     width: vw * 7.5,
     height: vw * 7.5,
-    // borderWidth: 2,
   },
+  patientName: {
+    fontSize: vw * 3.5,
+    marginLeft: vw,
+  }
 });
