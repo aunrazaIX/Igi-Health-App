@@ -123,6 +123,9 @@ export const icons = {
   download: require('./icons/downloadIcon.png'),
   rightArrowNext: require('./icons/rightArrowNext.png'),
   genderFrame: require('./icons/genderFrame.png'),
+  claimPaid: require('./icons/paid.png'),
+  rejected: require('./icons/rejected.png'),
+  pending: require('./icons/pending.png'),
 };
 
 export const drawerIcons = {

@@ -20,6 +20,7 @@ type Props = {
   detailsTextValue?: {};
   headerIcon?: ImageSourcePropType | null | ImageSourcePropType[];
   onPress: any;
+  patientName: any;
 };
 
 const DetailsContainer: React.FC<Props> = ({
@@ -28,6 +29,7 @@ const DetailsContainer: React.FC<Props> = ({
   detailsTextValue,
   headerIcon,
   onPress,
+  patientName,
 }) => {
   const [isArrowUp, setIsArrowUp] = useState<boolean>(false);
 
@@ -42,7 +44,11 @@ const DetailsContainer: React.FC<Props> = ({
           )}
           <AileronBold
             style={styles.cardHeaderLeftText}
-            name={data?.headerLabel}
+            name={
+              patientName
+                ? `${data?.headerLabel}\n${patientName}`
+                : data?.headerLabel
+            }
           />
         </View>
 
