@@ -58,7 +58,9 @@ const style = StyleSheet.create({
   mapTabActive: {
     flexDirection: 'row',
     backgroundColor: COLORS.cardBackgroundRed,
-    padding: vw * 4,
+    // padding: vw * 4,
+    paddingVertical: vh,
+    paddingHorizontal: vw * 2,
     justifyContent: 'center',
     borderRadius: vw * 8,
     gap: vw * 1.5,
@@ -68,7 +70,8 @@ const style = StyleSheet.create({
   mapTab: {
     flexDirection: 'row',
     backgroundColor: COLORS.buttonBorder,
-    padding: vw * 4,
+    // paddingVertical: vh,
+    paddingHorizontal: vw * 3,
     borderRadius: vw * 8,
     gap: vw * 1.5,
     alignItems: 'center',
