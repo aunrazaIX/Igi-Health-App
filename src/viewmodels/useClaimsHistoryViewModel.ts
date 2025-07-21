@@ -68,49 +68,56 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
         res?.Data?.map(item => ({
           headerLabel: `Claim #${item.ClaimID}`,
           headerIcon: icons.taskEdit,
+          RelationName: item.RelationName,
           items: [
             {label: 'Patient Name:', value: item?.RelationName.trim('')},
-            {label: 'Services Date:', value: item?.ClaimSubmittedDate},
+            {
+              label: 'Services Date:',
+              value: moment(item?.ClaimSubmittedDate, 'YYYY-MM-DD').format('DD-MM-YYYY')
+            },
             {label: 'Claim Type:', value: item?.ClaimsSubTypeName},
-            {label: 'Claims Remarks:', value: item?.ClaimsDescription},
-            {label: 'Claim Value:', value: item?.SubmiitedClaim},
+            {label: 'Claim Value:', value: Number(item?.SubmiitedClaim).toLocaleString('en-PK')},
             {label: 'Status:', value: item?.ClaimStatusName},
+            {label: 'Amount Claimed', value: item?.SubmiitedClaim},
+            {label: 'Amount Paid', value: item?.TotalPaid},
+            {label: 'Claims Remarks:', value: item?.ClaimsDescription},
           ],
         })),
       );
     },
   });
 
-  const filterByClaimStatus = useMemo(() => {
-    return data?.filter(claim => {
-      const temp = claim?.items[5];
-      if (!temp?.value) return false;
-      const statusValue = temp?.value;
-      return amountStatusTab === 'paidAmount'
-        ? statusValue === 8
-        : statusValue !== 8;
-    });
-  }, [data, amountStatusTab]);
+  // const filterByClaimStatus = useMemo(() => {
+  //   return data?.filter(claim => {
+  //     const temp = claim?.items[5];
+  //     if (!temp?.value) return false;
+  //     const statusValue = temp?.value;
+  //     return amountStatusTab === 'paidAmount'
+  //       ? statusValue === 8
+  //       : statusValue !== 8;
+  //   });
+  // }, [data, amountStatusTab]);
 
-  const filterDataByTime = useMemo(() => {
-    return filterByClaimStatus?.filter(claim => {
-      const temp = claim?.items[1];
-      if (!temp?.value) return false;
-      const claimDate = moment(temp?.value, 'YYYY-MM-DD');
-      if (daysStatusTab === 'Daily') {
-        return claimDate.isSame(moment(), 'day');
-      } else if (daysStatusTab === 'Monthly') {
-        return claimDate.isSame(moment(), 'month');
-      } else if (daysStatusTab === 'Yearly') {
-        return claimDate.isSame(moment(), 'year');
-      }
-      return true;
-    });
-  }, [daysStatusTab, filterByClaimStatus]);
+  // const filterDataByTime = useMemo(() => {
+  //   return filterByClaimStatus?.filter(claim => {
+  //     const temp = claim?.items[1];
+  //     if (!temp?.value) return false;
+  //     const claimDate = moment(temp?.value, 'YYYY-MM-DD');
+  //     if (daysStatusTab === 'Daily') {
+  //       return claimDate.isSame(moment(), 'day');
+  //     } else if (daysStatusTab === 'Monthly') {
+  //       return claimDate.isSame(moment(), 'month');
+  //     } else if (daysStatusTab === 'Yearly') {
+  //       return claimDate.isSame(moment(), 'year');
+  //     }
+  //     return true;
+  //   });
+  // }, [daysStatusTab, filterByClaimStatus]);
 
   return {
     states: {
-      data: filterDataByTime,
+      // data: filterDataByTime,
+      data,
       amountStatusTab,
       daysStatusTab,
       isCalendarVisible,
