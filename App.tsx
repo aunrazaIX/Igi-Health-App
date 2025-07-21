@@ -14,6 +14,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import ErrorModal from './src/components/Modal/ErrorModal';
 import {COLORS} from './src/assets/theme/colors';
 import {logout} from './src/redux/authSlice';
+import {setErrorModal} from './src/redux/generalSlice';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -32,6 +33,14 @@ const AppContent = () => {
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => {
       dispatch(logout());
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Session Expired',
+          detail:
+            'Your session has timed out due to inactivity. Please log in again to continue.',
+        }),
+      );
     }, INACTIVITY_LIMIT);
   };
 
@@ -43,10 +52,7 @@ const AppContent = () => {
   }, []);
 
   return (
-    <NavigationContainer
-      theme={MyTheme}
-      onStateChange={resetTimer} // Reset on navigation
-    >
+    <NavigationContainer theme={MyTheme} onStateChange={resetTimer}>
       <TouchableWithoutFeedback onPress={resetTimer}>
         <SafeAreaView style={{flex: 1, backgroundColor: COLORS.loginContainer}}>
           {Platform.OS === 'ios' && (

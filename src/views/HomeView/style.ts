@@ -15,7 +15,8 @@ export const styles = StyleSheet.create({
   },
   profileTittle: {
     color: COLORS.white,
-    fontSize: vw * 2.8,
+    fontSize: vw * 3,
+    textAlign: 'left',
   },
   wrapper: {
     paddingBottom: vh * 2,

@@ -100,7 +100,14 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
 
             {Successfull && (
               <View style={styles.confirmationContainer}>
-                <AileronBold name="Successful!" style={styles.confirmation} />
+                <AileronBold
+                  name={
+                    confirmationType === 'update'
+                      ? 'Confirm Edit Request'
+                      : 'Successful!'
+                  }
+                  style={styles.confirmation}
+                />
               </View>
             )}
 
@@ -175,7 +182,14 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                 <TouchableOpacity
                   style={styles.cancelButtonSubmit}
                   onPress={() => setConfirmationModalVisible(false)}>
-                  <AileronBold name="Cancel" style={styles.cancelButtonText} />
+                  <LinearGradient
+                    style={styles.buttonCancel}
+                    colors={COLORS.deleteButtonGradient}>
+                    <AileronBold
+                      name="Cancel"
+                      style={styles.cancelButtonText}
+                    />
+                  </LinearGradient>
                 </TouchableOpacity>
               </View>
             </>
@@ -277,7 +291,7 @@ const styles = StyleSheet.create({
     // width: '48%',
     borderWidth: vh * 0.2,
     borderRadius: vw * 4,
-    padding: vh * 2,
+    // padding: vh * 2,
     borderColor: COLORS.cancelButtonBorder,
     backgroundColor: COLORS.cancelBottonBackground,
     marginTop: vh,
@@ -299,6 +313,11 @@ const styles = StyleSheet.create({
   deleteButtonText: {
     fontSize: vw * 4.4,
     color: COLORS.white,
+  },
+  buttonCancel: {
+    paddingVertical: vh * 2,
+    paddingHorizontal: vh * 1.5,
+    borderRadius: vh * 1.3,
   },
   closeButton: {
     fontSize: vw * 4.7,

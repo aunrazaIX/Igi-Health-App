@@ -28,6 +28,7 @@ interface InputFieldProps extends TextInputProps {
   iconViewStyle?: StyleObject | StyleObject[];
   errorMessage?: string;
   allowCopyPaste?: boolean;
+  placeholderTextColor: any;
 }
 
 const InputField = forwardRef<TextInput, InputFieldProps>(
@@ -53,6 +54,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
       rightIcon = undefined,
       errorMessage,
       allowCopyPaste = true,
+      placeholderTextColor,
       ...rest
     },
     ref,
@@ -87,11 +89,12 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             ]}
             placeholder={placeholder}
             placeholderTextColor={
-              multiline && editable
+              placeholderTextColor ??
+              (multiline && editable
                 ? COLORS.black + '44'
                 : editable
                 ? COLORS.placeholderColor
-                : COLORS.black + '44'
+                : COLORS.black + '44')
             }
             value={value}
             editable={editable}

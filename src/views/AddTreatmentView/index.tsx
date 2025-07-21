@@ -76,6 +76,8 @@ const AddTreatmentView = ({
             />
 
             <InputField
+              placeholderTextColor={COLORS.textGrayShade}
+              labelStyle={{color: COLORS.textBlackShade}}
               containerStyle={{marginVertical: vh * 0, paddingVertical: vh}}
               value={apiData?.receiptNumber}
               onChangeText={text => {
@@ -89,6 +91,8 @@ const AddTreatmentView = ({
             />
 
             <InputField
+              labelStyle={{color: COLORS.textBlackShade}}
+              placeholderTextColor={COLORS.textGrayShade}
               maxLength={7}
               value={apiData?.amount}
               // errorMessage={apiData?.error_amount}
@@ -101,6 +105,7 @@ const AddTreatmentView = ({
             />
 
             <InputField
+              labelStyle={{color: COLORS.textBlackShade}}
               value={apiData?.description}
               maxLength={200}
               // errorMessage={apiData?.error_description}

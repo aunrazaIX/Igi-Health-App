@@ -108,7 +108,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
                 value={dependentApiData.dependentName ?? null}
                 style={styles.popupInput}
                 placeholder="Enter Name"
-                placeholderTextColor={COLORS.selectPlaceholder}
+                placeholderTextColor={COLORS.textGrayShade}
                 onChangeText={text =>
                   dependentSetterForApiData('dependentName', text)
                 }
@@ -226,6 +226,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             CloseButtonText={'Continue To Login'}
             onClose={resetStates}
             handleSubmit={handleSubmitRequest}
+            confirmationType={confirmatonType}
           />
         </KeyboardAwareScrollView>
       </CurvedView>

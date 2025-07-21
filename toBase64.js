@@ -8,10 +8,7 @@ const filePathOfMaternity = path.join(
   'src/assets/icons/maternity.png',
 );
 
-const fileOfcardRoom = path.join(
-  __dirname,
-  'src/assets/icons/flipCardRoom.png',
-);
+const fileOfcardRoom = path.join(__dirname, 'src/assets/icons/room.png');
 
 const maternity = fs.readFileSync(filePathOfMaternity);
 const cardRoom = fs.readFileSync(fileOfcardRoom);
