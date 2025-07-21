@@ -81,8 +81,8 @@ const style = StyleSheet.create({
     paddingHorizontal: vw * 1,
   },
   labelStyle: {
-    fontSize: vw * 3,
-    color: COLORS.textGrayShade,
+    fontSize: vw * 3.5,
+    
   },
   inputStyle: {
     fontSize: vw * 3.5,

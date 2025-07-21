@@ -8,6 +8,7 @@ import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {setErrorModal} from '../redux/generalSlice';
 import {DetailsContainer} from '../components';
+import moment from 'moment';
 
 const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   let {user} = useSelector((state: RootState) => state.auth);
@@ -42,8 +43,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
     age: dependentData?.dependentDetail[3]?.value,
   };
-
-  console.log(prefilledData.age, 'ppppppppppppppppppppp');
 
   const formatAgeToDate = (raw: string): string => {
     if (!raw) return '';
@@ -120,6 +119,9 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       ...dependentApiData,
       dependentTypeID: dependentApiData?.dependentTypeID?.value,
       gender: dependentApiData?.gender?.label,
+      Age: dependentApiData?.Age
+        ? moment(dependentApiData.Age, 'D-MMM-YYYY').format('DDMMYYYY')
+        : '',
     };
 
     if (
@@ -138,11 +140,13 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       );
     } else {
       console.log('triggering updating');
+      console.log('apiData', _apiData);
       trigger(_apiData);
       // setConfirmatonType('update');
     }
   };
   const onPressSubmit = () => {
+    console.log('onPressSubmit CAlled');
     const filled = dependentCheckForError();
 
     // if (!filled) return;
@@ -151,6 +155,9 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       ...dependentApiData,
       dependentTypeID: dependentApiData?.dependentTypeID?.value,
       gender: dependentApiData?.gender?.label,
+      Age: dependentApiData?.Age
+        ? moment(dependentApiData.Age, 'D-MMM-YYYY').format('DDMMYYYY')
+        : '',
     };
 
     if (
@@ -173,7 +180,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         setConfirmationModal(true);
         setConfirmatonType('update');
       } else {
-        console.log('triggering updating');
+        console.log(_apiData, 'usman');
         trigger(_apiData);
         // setConfirmationModal(true);
         // setConfirmatonType('update');

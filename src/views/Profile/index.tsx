@@ -14,6 +14,7 @@ import styles from './styles';
 import {icons, images} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import {vw} from '../../assets/theme/dimension';
+import {useSelector} from 'react-redux';
 
 type Props = {
   ProfileData: Item[];
@@ -36,6 +37,16 @@ const ProfileView: React.FC<Props> = ({
   editable,
   handleSave,
 }) => {
+  const {
+    rememberMe,
+    credentials,
+    deviceId,
+    biometrics,
+    user,
+    isToggle,
+    faceIdCredentials,
+  } = useSelector((state: RootState) => state.auth);
+
   return (
     <>
       <TopView title="Profile" titleStyle={{letterSpacing: vw * 0.15}} />
@@ -49,11 +60,13 @@ const ProfileView: React.FC<Props> = ({
 
           <View style={styles.profileDetail}>
             <AileronBold
-              name={'Imran Naveed Qureshi'}
+              name={
+                user?.UserName.includes('.com') ? 'Aun Raza' : user?.UserName
+              }
               style={styles.ProfileName}
             />
             <AileronRegular
-              name={'imran-naveed-8852@gmail.com'}
+              name={user?.UserEmail}
               style={styles.profileEmail}
             />
           </View>

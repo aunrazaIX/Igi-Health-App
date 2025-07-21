@@ -91,9 +91,9 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             placeholderTextColor={
               placeholderTextColor ??
               (multiline && editable
-                ? COLORS.black + '44'
+                ? COLORS.textGrayShade
                 : editable
-                ? COLORS.placeholderColor
+                ? COLORS.textGrayShade
                 : COLORS.black + '44')
             }
             value={value}
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   label: {
     textAlign: 'left',
     fontSize: vw * 3,
-    color: COLORS.textGrayShade,
+    color: COLORS.textBlackShade,
   },
   textInput: {
     width: '85%',

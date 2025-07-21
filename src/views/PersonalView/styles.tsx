@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'left',
     fontSize: vh * 1.8,
+    lineHeight : vh*2.2,
     color: COLORS.insuredPrice,
   },
   icon: {

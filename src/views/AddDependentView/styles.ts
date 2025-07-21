@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   selectLabel: {
     textAlign: 'left',
-    color: COLORS.personalValue,
+    color: COLORS.textBlackShade,
     fontSize: vw * 3.6,
     lineHeight: vh * 2,
     minHeight: vh * 2,

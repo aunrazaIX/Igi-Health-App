@@ -38,6 +38,7 @@ const SignUpView = ({
         inputStyle={style.inputStyle}
         allowCopyPaste={true}
         label="Mobile Number"
+        
         placeholder="Enter Mobile Number"
         rightIcon={icons.mobNumber}
         onChangeText={text => {
@@ -177,7 +178,7 @@ const style = StyleSheet.create({
     // paddingHorizontal: vw * 1,
   },
   labelStyle: {
-    // fontSize: vw * 3,
+    fontSize: vw * 3.5,
     // color: COLORS.textGrayShade,
   },
   inputStyle: {

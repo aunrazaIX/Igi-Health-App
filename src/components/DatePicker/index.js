@@ -5,6 +5,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AileronRegular from '../AileronRegular';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
+import AileronBold from '../AileronBold';
 
 const DatePicker = ({
   label,
@@ -25,7 +26,7 @@ const DatePicker = ({
     <View style={[styles.container, containerStyle]}>
       <View style={styles.subContainer}>
         <View style={styles.labelContainer}>
-          <AileronRegular style={[styles.label, labelStyle]} name={label} />
+          <AileronBold style={[styles.label, labelStyle]} name={label} />
         </View>
         <TouchableOpacity
           disabled={disabled}

@@ -14,6 +14,7 @@ import AileronBold from '../AileronBold';
 import AileronSemiBold from '../AileronSemiBold';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from '../Button';
+import AileronRegular from '../AileronRegular';
 
 type StyleObject = Record<string, string | number | boolean>;
 
@@ -115,7 +116,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <>
                 <AileronSemiBold
                   name={confirmationMessage.split('Note:')[0].trim()}
-                  style={styles.confirmationDetail}
+                  style={styles.confirmationDetailWithNote}
                 />
                 <AileronSemiBold
                   name={'Note:' + confirmationMessage.split('Note:')[1]}
@@ -123,7 +124,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                 />
               </>
             ) : (
-              <AileronSemiBold
+              <AileronRegular
                 name={confirmationMessage}
                 style={styles.confirmationDetail}
               />
@@ -260,14 +261,21 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   confirmationDetail: {
-    fontSize: vw * 4.5,
-    color: COLORS.confimationDetail,
+    fontSize: vw * 3.5,
+    color: COLORS.textBlackShade,
     marginTop: vh * 1.5,
-    marginBottom: vh,
-    lineHeight: vh * 2,
+    marginBottom: vh * 1.5,
+    lineHeight: vh * 2.5,
+  },
+  confirmationDetailWithNote: {
+    fontSize: vw * 5,
+    color: COLORS.textBlackShade,
+    marginTop: vh * 1.5,
+    marginBottom: vh * 1.5,
+    lineHeight: vh * 2.5,
   },
   confirmationDetailNote: {
-    fontSize: vw * 4.1,
+    fontSize: vw * 3.4,
     color: COLORS.confimationDetail,
     // marginTop: vh * 1.5,
     fontStyle: 'italic',
