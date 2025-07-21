@@ -15,7 +15,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
   const {dependentData, dependentIndex, isUpdate} = route?.params || {};
 
-  console.log(isUpdate, 'isu');
+  console.log(dependentData, 'data add dependent');
 
   const navigation = useNavigation();
 
@@ -40,7 +40,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       value: dependentData?.dependentDetail[2]?.value,
     },
 
-    age: formatAgeString(dependentData?.dependentDetail[3]?.value),
+    age: dependentData?.dependentDetail[3]?.value,
   };
 
   console.log(prefilledData.age, 'ppppppppppppppppppppp');

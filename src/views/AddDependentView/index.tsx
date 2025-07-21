@@ -18,6 +18,7 @@ import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {vh} from '../../assets/theme/dimension';
 import DatePicker from '../../components/DatePicker';
+import moment from 'moment';
 
 type OptionType = {
   label: string;
@@ -156,20 +157,12 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             <DependentBox containerStyle={styles.dependentOuterStyle}>
               <DatePicker
                 onSelectValue={(date: Date) => {
-                  const d = new Date(date);
-                  const day = String(d.getDate()).padStart(2, '0');
-                  const month = String(d.getMonth() + 1).padStart(2, '0');
-                  const year = d.getFullYear();
-                  const formatted = `${day}${month}${year}`;
+                  const formatted = moment(date).format('D-MMM-YYYY');
                   dependentSetterForApiData('Age', formatted);
                 }}
                 placeholder={'Select Date'}
                 label={'Date of Birth'}
-                value={
-                  dependentApiData?.Age
-                    ? formatAgeToDate(dependentApiData.Age)
-                    : ''
-                }
+                value={dependentApiData?.Age ? dependentApiData.Age : ''}
                 selectedDate={
                   dependentApiData?.Age && dependentApiData.Age.length === 8
                     ? new Date(
