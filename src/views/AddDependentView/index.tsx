@@ -101,10 +101,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             </View> */}
 
             <DependentBox containerStyle={styles.dependentOuterStyle}>
-              <AileronBold
-                name="Dependent Name"
-                style={styles.selectLabel}
-              />
+              <AileronBold name="Dependent Name" style={styles.selectLabel} />
               <TextInput
                 value={dependentApiData.dependentName ?? null}
                 style={styles.popupInput}
@@ -162,7 +159,6 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
                 }}
                 placeholder={'Select Date'}
                 label={'Date of Birth'}
-                
                 value={dependentApiData?.Age ? dependentApiData.Age : ''}
                 selectedDate={
                   dependentApiData?.Age && dependentApiData.Age.length === 8

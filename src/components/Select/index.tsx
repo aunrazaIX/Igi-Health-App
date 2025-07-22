@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     color: COLORS.personalValue,
     fontSize: vh * 1.7,
     marginTop: vh * 0.5,
+    lineHeight: vh * 2.2,
   },
   arrow: {
     width: vh * 2,
