@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: vw * 3.9,
     color: COLORS.textBlackShade,
+    lineHeight: vh*2.2
   },
   termsAndConditionsText: {
     textAlign: 'left',
