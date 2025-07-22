@@ -126,6 +126,7 @@ export const icons = {
   claimPaid: require('./icons/paid.png'),
   rejected: require('./icons/rejected.png'),
   pending: require('./icons/pending.png'),
+  successful  : require('./icons/successful.png'),
 };
 
 export const drawerIcons = {

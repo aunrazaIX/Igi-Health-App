@@ -37,6 +37,7 @@ type ConfimationModalProps = {
   submitButton?: boolean;
   handleSubmit?: () => void;
   type: any;
+  isUpdate : any
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -57,6 +58,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   submitButton,
   handleSubmit,
   type,
+  isUpdate
 }) => {
   const handleClose = () => {
     setConfirmationModalVisible(false);
@@ -105,7 +107,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                   name={
                     confirmationType === 'update'
                       ? 'Confirm Edit Request'
-                      : 'Successful!'
+                      : isUpdate ? "Confirm Edit Request" : 'Successful!'
                   }
                   style={styles.confirmation}
                 />

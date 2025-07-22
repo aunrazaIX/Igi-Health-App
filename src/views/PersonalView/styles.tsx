@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     borderStyle: 'dashed',
     paddingTop: vh * 1,
     gap: vh * 1.5,
+    // marginBottom : vh*12
   },
   detailRow: {
     flexDirection: 'row',

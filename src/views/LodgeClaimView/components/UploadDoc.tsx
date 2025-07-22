@@ -110,7 +110,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
               value={claimData.claimComments}
               onChangeText={text => setterForclaimData('claimComments', text)}
               style={styles.remarksInput}
-              numberOfLines={4}
+              numberOfLines={3}
               placeholder="Add Remarks"
             />
           </View>
@@ -232,6 +232,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: vh * 1,
     borderRadius: vh * 2,
+    marginTop : vh
   },
   addRemarks: {
     marginVertical: vh * 1,

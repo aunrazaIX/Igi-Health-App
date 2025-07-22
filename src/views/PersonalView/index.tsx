@@ -96,13 +96,14 @@ const PersonalView: React.FC<Props> = ({
               <AileronSemiBold style={styles.futureText} name={'Future!'} />
             </View>
           </ImageBackground>
-
           <View style={styles.dependentBox}>
             <AileronBold name={'Covered '} style={styles.dependentText} />
             <AileronBold name={'Family Members!'} style={styles.detailsText} />
           </View>
+ <ScrollView>
 
-          <ScrollView>
+         
+         <View style={{marginBottom : vh*12}}> 
             {data?.map((dependent, index) => (
               <>
                 {console.log('depende', dependent)}
@@ -179,7 +180,7 @@ const PersonalView: React.FC<Props> = ({
                   </TouchableOpacity>
                 </DependentBox>
               </>
-            ))}
+            ))}</View>
           </ScrollView>
         </View>
 
