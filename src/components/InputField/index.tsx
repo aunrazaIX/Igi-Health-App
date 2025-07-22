@@ -123,7 +123,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             </TouchableOpacity>
           )}
         </View>
-        {errorMessage && (
+        {typeof errorMessage == 'string' && (
           <AileronBold style={styles.errorText} name={errorMessage || ''} />
         )}
       </View>

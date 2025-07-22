@@ -13,8 +13,8 @@ import {vh, vw} from '../../assets/theme/dimension';
 const TermsAndConditionsView = () => {
   return (
     <>
-      <TopView  title="Privacy" />
-      <CurvedView>
+      <TopView title="Privacy" />
+      <CurvedView containerStyle={{paddingBottom: vh * 0}}>
         <ScrollView>
           <View style={styles.termsAndConditionContainer}>
             <View style={styles.policyInformation}>

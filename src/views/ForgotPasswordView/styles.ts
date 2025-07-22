@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.placeholderColor,
     lineHeight: vh * 3,
+    letterSpacing: vh * 0.1,
   },
   curvedStyle: {
     paddingBottom: vh * 0,

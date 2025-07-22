@@ -80,7 +80,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   return (
     <>
       <TopView
-        title={isUpdate ? 'Update Dependent Request' : 'Add New Dependent'}
+        title={isUpdate ? 'Update Dependent Details' : 'Add New Dependent'}
       />
       <CurvedView containerStyle={styles.curvedStyle}>
         <KeyboardAwareScrollView>
@@ -154,25 +154,11 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             <DependentBox containerStyle={styles.dependentOuterStyle}>
               <DatePicker
                 onSelectValue={(date: Date) => {
-                  const formatted = moment(date).format('D-MMM-YYYY');
-                  dependentSetterForApiData('Age', formatted);
+                  dependentSetterForApiData('Age', date);
                 }}
                 placeholder={'Select Date'}
                 label={'Date of Birth'}
                 value={dependentApiData?.Age ? dependentApiData.Age : ''}
-                selectedDate={
-                  dependentApiData?.Age && dependentApiData.Age.length === 8
-                    ? new Date(
-                        `${dependentApiData.Age.slice(
-                          4,
-                          8,
-                        )}-${dependentApiData.Age.slice(
-                          2,
-                          4,
-                        )}-${dependentApiData.Age.slice(0, 2)}`,
-                      )
-                    : undefined
-                }
                 disabled={false}
                 labelStyle={{}}
                 containerStyle={{}}
@@ -209,7 +195,9 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             confirmationMessage={
               confirmatonType === 'update'
                 ? 'Are you sure you want to submit the request to IGI Life to edit the records?'
-                : 'Your request has been submitted.\nNote: All edit requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation.'
+                : isUpdate
+                ? 'Your request has been submitted.\nNote: All edit requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation.'
+                : 'Your request has been submitted.\nNote: All new additions requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation..'
             }
             closeButton={confirmatonType === 'update' ? false : true}
             Successfull={true}

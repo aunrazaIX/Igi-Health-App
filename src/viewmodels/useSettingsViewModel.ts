@@ -73,13 +73,13 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
     //   ndChild: 'Notifications',
     // },
 
-    {
-      id: 8,
-      label: 'Help',
-      icon: icons.help,
-      mainParent: 'Tabs',
-      stChild: 'Helpline',
-    },
+    // {
+    //   id: 8,
+    //   label: 'Help',
+    //   icon: icons.help,
+    //   mainParent: 'Tabs',
+    //   stChild: 'Helpline',
+    // },
   ];
 
   const goBack = () => {

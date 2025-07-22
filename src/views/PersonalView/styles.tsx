@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'left',
     fontSize: vh * 1.8,
-    lineHeight : vh*2.2,
+    lineHeight: vh * 2.2,
     color: COLORS.insuredPrice,
   },
   icon: {
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
   },
   dependentBoxStyle: {
     // padding: vw * 3.5,
-    paddingVertical: vh,
-    // marginBottom: vh,
+    // paddingVertical: v,
+    // marginBottom: vh * 2,
   },
 });
 

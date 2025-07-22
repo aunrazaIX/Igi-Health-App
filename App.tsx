@@ -9,14 +9,16 @@ import {
   Alert,
 } from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
-import {Provider, useDispatch} from 'react-redux';
+import {Provider, useDispatch, useSelector} from 'react-redux';
 import {persistor, store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import ErrorModal from './src/components/Modal/ErrorModal';
 import {COLORS} from './src/assets/theme/colors';
 import {logout} from './src/redux/authSlice';
-import NetInfo from '@react-native-community/netinfo';
+
 import {setErrorModal} from './src/redux/generalSlice';
+import NetInfo from '@react-native-community/netinfo';
+import {EventRegister} from 'react-native-event-listeners';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -28,10 +30,14 @@ const MyTheme = {
 const INACTIVITY_LIMIT = 3 * 60 * 1000;
 
 const AppContent = () => {
+  const {user} = useSelector((state: RootState) => state.auth);
+
   const dispatch = useDispatch();
   const timer = useRef(null);
 
   const resetTimer = () => {
+    if (!user) return;
+
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => {
       dispatch(logout());
@@ -47,19 +53,13 @@ const AppContent = () => {
   };
 
   useEffect(() => {
+    if (!user) return;
     resetTimer();
-    const unsubscribe = NetInfo.addEventListener(state => {
-      if (!state.isConnected) {
-        Alert.alert(
-          'No Internet Connection',
-          'Please check your internet connectivity.',
-        );
-      }
-    });
+
     return () => {
       if (timer.current) clearTimeout(timer.current);
     };
-  }, []);
+  }, [user]);
 
   return (
     <NavigationContainer theme={MyTheme} onStateChange={resetTimer}>

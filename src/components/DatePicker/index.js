@@ -6,6 +6,7 @@ import AileronRegular from '../AileronRegular';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import AileronBold from '../AileronBold';
+import moment from 'moment';
 
 const DatePicker = ({
   label,
@@ -56,12 +57,12 @@ const DatePicker = ({
         minimumDate={minimumDate ?? null}
         maximumDate={maximumDate ? maximumDate : new Date()}
         onCancel={() => setShowModal(false)}
-        mode={mode ? mode : 'date'}
+        mode={'date'}
         isVisible={showModal}
         date={selectedDate}
         onConfirm={date => {
           if (onSelectValue && typeof onSelectValue === 'function') {
-            onSelectValue(date);
+            onSelectValue(moment(date).format('DD-MMM-YYYY'));
           }
           setShowModal(false);
         }}

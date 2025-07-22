@@ -282,7 +282,7 @@ const useForgotPasswordViewModel = ({
   };
   return {
     states: {
-      step,
+      step: 3,
       confirmationModal,
       verifyOtpLoading,
       apiData,

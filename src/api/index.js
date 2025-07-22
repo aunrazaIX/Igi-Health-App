@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {EventRegister} from 'react-native-event-listeners';
 import {store} from '../redux/store';
+import {fetch} from '@react-native-community/netinfo';
 const api = axios.create({
   // baseURL: 'http://10.9.0.55:8088/api/',
   baseURL: 'https://testportal.igi.com.pk:8801/api',
@@ -46,6 +47,14 @@ api.interceptors.response.use(
   },
 );
 
+const checkInternet = async () => {
+  let netState = await fetch();
+  if (!netState.isConnected) {
+    EventRegister.emitEvent('aun');
+  }
+  return netState.isConnected;
+};
+
 export const dataToQueryParameter = data => {
   if (typeof data === 'object') {
     if (!Array.isArray(data)) {
@@ -79,10 +88,21 @@ export const jsonToFormdata = json => {
   });
   return data;
 };
-const get = (endpoint, params = {}) =>
-  api.get(params ? `${endpoint}${dataToQueryParameter(params)}` : endpoint);
-const post = (endpoint, data = {}, isFormData = false) =>
-  api.post(endpoint, isFormData ? jsonToFormdata(data) : data);
+const get = async (endpoint, params = {}) => {
+  let abc = await checkInternet();
+  if (abc) {
+    return api.get(
+      params ? `${endpoint}${dataToQueryParameter(params)}` : endpoint,
+    );
+  }
+};
+const post = async (endpoint, data = {}, isFormData = false) => {
+  let abc = await checkInternet();
+  console.log('abc', abc);
+  if (abc) {
+    return api.post(endpoint, isFormData ? jsonToFormdata(data) : data);
+  }
+};
 const put = (endpoint, data = {}) => api.put(endpoint, data);
 const patch = (endpoint, data = {}) => api.patch(endpoint, data);
 const del = (endpoint, data = {}) => api.delete(endpoint, {data});

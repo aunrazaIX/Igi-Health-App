@@ -38,7 +38,6 @@ const SignUpView = ({
         inputStyle={style.inputStyle}
         allowCopyPaste={true}
         label="Mobile Number"
-        
         placeholder="Enter Mobile Number"
         rightIcon={icons.mobNumber}
         onChangeText={text => {

@@ -105,7 +105,7 @@ const ForgotPasswordView = ({
   const returnButtonName: Record<number, string> = {
     1: 'Submit',
     2: 'Next',
-    3: 'Submit',
+    3: 'Create Password & Continue',
   };
   const returnHeaderName: Record<number, string> = {
     1: 'Forgot Password',
