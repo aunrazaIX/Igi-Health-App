@@ -462,14 +462,36 @@ const HomeView: React.FC<HomeViewProps> = ({
             keyExtractor={_item => _item?.name}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
-              <TouchableOpacity
-                onPress={() => onPressMenu(item)}
-                style={[
-                  styles.dashboardContainerCards,
-                  {backgroundColor: item.backgroundColor},
-                ]}>
-                <Image style={styles.cardLogo} source={item.logo} />
+              // <TouchableOpacity
+              //   onPress={() => onPressMenu(item)}
+              //   style={[
+              //     styles.dashboardContainerCards,
+              //     {backgroundColor: item.backgroundColor},
+              //   ]}>
+              //   <Image style={styles.cardLogo} source={item.logo} />
 
+              //   <View style={styles.cardContent}>
+              //     <View style={{width: '81%'}}>
+              //       <AileronRegular
+              //         style={styles.dashboardContainerCardText}
+              //         name={item.name}
+              //         numberOfLines={2}
+              //       />
+              //     </View>
+
+              //     <Image source={item.image} style={styles.cardsArrow} />
+              //   </View>
+              // </TouchableOpacity>
+
+              <View style={styles.cardsContainer}>
+                <TouchableOpacity
+                  onPress={() => onPressMenu(item)}
+                  style={[
+                    styles.dashboardContainerCards,
+                    {backgroundColor: item.backgroundColor},
+                  ]}>
+                  <Image style={styles.cardLogo} source={item.logo} />
+                  {/* 
                 <View style={styles.cardContent}>
                   <View style={{width: '81%'}}>
                     <AileronRegular
@@ -480,8 +502,24 @@ const HomeView: React.FC<HomeViewProps> = ({
                   </View>
 
                   <Image source={item.image} style={styles.cardsArrow} />
+                </View> */}
+                </TouchableOpacity>
+
+                <View
+                  style={{
+                    width: vw * 22,
+                    // alignItems: 'center',
+                    justifyContent: 'center',
+                    // alignSelf: 'center',
+                    // borderWidth: 2,
+                  }}>
+                  <AileronBold
+                    style={styles.dashboardContainerCardText}
+                    name={item.name}
+                    // numberOfLines={1}
+                  />
                 </View>
-              </TouchableOpacity>
+              </View>
             )}
           />
         </View>

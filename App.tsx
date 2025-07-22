@@ -6,6 +6,7 @@ import {
   StatusBar,
   View,
   TouchableWithoutFeedback,
+  Alert,
 } from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {Provider, useDispatch} from 'react-redux';
@@ -14,6 +15,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import ErrorModal from './src/components/Modal/ErrorModal';
 import {COLORS} from './src/assets/theme/colors';
 import {logout} from './src/redux/authSlice';
+import NetInfo from '@react-native-community/netinfo';
 import {setErrorModal} from './src/redux/generalSlice';
 
 const MyTheme = {
@@ -46,6 +48,14 @@ const AppContent = () => {
 
   useEffect(() => {
     resetTimer();
+    const unsubscribe = NetInfo.addEventListener(state => {
+      if (!state.isConnected) {
+        Alert.alert(
+          'No Internet Connection',
+          'Please check your internet connectivity.',
+        );
+      }
+    });
     return () => {
       if (timer.current) clearTimeout(timer.current);
     };
