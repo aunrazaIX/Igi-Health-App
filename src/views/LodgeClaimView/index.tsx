@@ -242,7 +242,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
       <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
-        frameImage={type === 'back' ? icons.addSquare : icons.ModalSuccessfull}
+        frameImage={type === 'back' ? icons.addSquare : icons.modelSuccessful}
         confirmationMessage={
           confirmationType === 'delete'
             ? 'Are you sure you want to delete this treatment?'
