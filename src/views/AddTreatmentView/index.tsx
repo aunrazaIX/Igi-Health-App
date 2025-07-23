@@ -70,7 +70,7 @@ const AddTreatmentView = ({
               selectPlaceholder={'Select treatment/service from list'}
               isSearch={true}
               selectContainer={{
-                marginBottom: vh * 1.3,
+                // marginBottom: vh * 1.3,
                 paddingVertical: vh,
               }}
             />
