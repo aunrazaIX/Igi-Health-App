@@ -15,12 +15,10 @@ const MainStack = () => {
 
   useEffect(() => {
     EventRegister.addEventListener('aun', () => {
-      console.log('ASDSADSA3213123');
-
       dispatch(
         setErrorModal({
           show: true,
-          message: 'No internet connection',
+          message: 'No Internet Connection',
           detail: 'Please check your network and try again.',
         }),
       );

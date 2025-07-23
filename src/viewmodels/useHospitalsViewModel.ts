@@ -105,7 +105,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       const formattedData =
         res?.map((item: any) => ({
           headerLabel: item?.HospitalName,
-          headerIcon: icons.taskEdit,
+          headerIcon: icons.hospitalInactive,
           longitude: item?.HospitalLong,
           latitude: item?.HospitalLat,
           ProvinceName: item?.ProvinceName,

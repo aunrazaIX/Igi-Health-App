@@ -73,10 +73,15 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
             {label: 'Patient Name:', value: item?.RelationName.trim('')},
             {
               label: 'Services Date:',
-              value: moment(item?.ClaimSubmittedDate, 'YYYY-MM-DD').format('DD-MM-YYYY')
+              value: moment(item?.ClaimSubmittedDate, 'YYYY-MMM-DD').format(
+                'DD-MMM-YYYY',
+              ),
             },
             {label: 'Claim Type:', value: item?.ClaimsSubTypeName},
-            {label: 'Claim Value:', value: Number(item?.SubmiitedClaim).toLocaleString('en-PK')},
+            {
+              label: 'Claim Value:',
+              value: Number(item?.SubmiitedClaim).toLocaleString('en-PK'),
+            },
             {label: 'Status:', value: item?.ClaimStatusName},
             {label: 'Amount Claimed', value: item?.SubmiitedClaim},
             {label: 'Amount Paid', value: item?.TotalPaid},
