@@ -659,9 +659,9 @@ const HomeView: React.FC<HomeViewProps> = ({
               <TouchableOpacity
                 onPress={() =>
                   handleAssociatedApps({
-                    ios: 'https://apps.apple.com/pk/app/sehat-kahani-retail/id1470938140',
+                    ios: 'https://apps.apple.com/pk/app/sehat-kahani-corporate/id1460568869',
                     android:
-                      'https://play.google.com/store/apps/details?id=com.sehatkahani.app&hl=en',
+                      'https://play.google.com/store/apps/details?id=com.sehatkahani.corp.app',
                   })
                 }>
                 <Image
