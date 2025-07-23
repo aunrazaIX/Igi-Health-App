@@ -58,7 +58,7 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
   });
 
   let filteredData = allBenefits
-    .filter((item: any) => {
+    ?.filter((item: any) => {
       if (selectedTab === 'Outpatient') {
         return item.BenefitTypeName === 'OPD';
       } else if (selectedTab === 'Inpatient') {

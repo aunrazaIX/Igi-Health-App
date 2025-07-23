@@ -191,7 +191,11 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             ConfirmationModalVisible={confirmationModal}
             setConfirmationModalVisible={setConfirmationModal}
             submitButton={confirmatonType === 'update' ? true : false}
-            frameImage={ isUpdate && confirmatonType ==="update" ? icons.ModalSuccessfull : icons.modelSuccessful}
+            frameImage={
+              isUpdate && confirmatonType === 'update'
+                ? icons.ModalSuccessfull
+                : icons.modelSuccessful
+            }
             confirmationMessage={
               confirmatonType === 'update'
                 ? 'Are you sure you want to submit the request to IGI Life to edit the records?'
@@ -201,7 +205,6 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             }
             closeButton={confirmatonType === 'update' ? false : true}
             Successfull={true}
-            
             CloseButtonText={'Continue To Login'}
             onClose={resetStates}
             handleSubmit={handleSubmitRequest}

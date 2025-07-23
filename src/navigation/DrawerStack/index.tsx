@@ -281,6 +281,7 @@ const DrawerStack = () => {
         drawerPosition: 'left',
         drawerStyle: styles.drawerContainer,
         headerShown: false,
+        swipeEnabled: false,
       }}
       initialRouteName="Tabs">
       <Drawer.Screen name="Tabs" component={Tabs} />

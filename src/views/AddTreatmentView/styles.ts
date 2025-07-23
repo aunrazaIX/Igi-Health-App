@@ -19,14 +19,14 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   image: {
-    height: vw * 18,
-    width: vw * 18,
+    height: vw * 12,
+    width: vw * 12,
     resizeMode: 'contain',
     alignSelf: 'center',
     marginBottom: vh * 2,
   },
   curveStyle: {
-    paddingBottom: vh * 3,
+    paddingBottom: vh * 8,
   },
   textContainer: {
     flexDirection: 'col',
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: vw * 6,
+    fontSize: vw * 4.5,
   },
   inputContainer: {
     borderWidth: 2,
