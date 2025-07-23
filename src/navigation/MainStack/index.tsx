@@ -17,7 +17,13 @@ const MainStack = () => {
     EventRegister.addEventListener('aun', () => {
       console.log('ASDSADSA3213123');
 
-      dispatch(setErrorModal({show: true, message: 'ASd1321'}));
+      dispatch(
+        setErrorModal({
+          show: true,
+          message: 'No internet connection',
+          detail: 'Please check your network and try again.',
+        }),
+      );
     });
   }, []);
 
