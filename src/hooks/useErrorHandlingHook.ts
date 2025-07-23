@@ -29,6 +29,8 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
         value === ''
           ? key === 'userName'
             ? 'email address is required'
+            : key === 'receiptNumber'
+            ? 'Receipt number is required'
             : `${key} is required`
           : '',
     }));
@@ -59,7 +61,9 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
         ) {
           updatedData[`error_${key}`] =
             key === 'userName'
-              ? 'email address is required'
+              ? 'Email address is required'
+              : key === 'receiptNumber'
+              ? 'Receipt number is required'
               : `${key} is required`;
           isAllowedForProceeding = false;
         }

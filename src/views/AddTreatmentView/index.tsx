@@ -78,7 +78,11 @@ const AddTreatmentView = ({
             <InputField
               placeholderTextColor={COLORS.textGrayShade}
               labelStyle={{color: COLORS.textBlackShade}}
-              containerStyle={{marginVertical: vh * 0, paddingVertical: vh}}
+              containerStyle={
+                apiData?.error_receiptNumber
+                  ? {marginBottom: vh * 2.5, paddingVertical: vh}
+                  : {marginVertical: vh, paddinsdgVertical: vh}
+              }
               value={apiData?.receiptNumber}
               onChangeText={text => {
                 const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
@@ -86,16 +90,21 @@ const AddTreatmentView = ({
               }}
               maxLength={20}
               label="Receipt Number"
-              // errorMessage={apiData?.error_receiptNumber}
+              errorMessage={apiData?.error_receiptNumber}
               placeholder="Enter receipt/bill no."
             />
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade}}
+              containerStyle={
+                apiData?.error_amount
+                  ? {marginBottom: vh * 2, paddingVertical: vh}
+                  : {marginVertical: vh, paddinsdgVertical: vh}
+              }
               placeholderTextColor={COLORS.textGrayShade}
               maxLength={7}
               value={apiData?.amount}
-              // errorMessage={apiData?.error_amount}
+              errorMessage={apiData?.error_amount}
               onChangeText={text => {
                 const cleanedText = text.replace(/[^0-9]/g, '');
                 setterForApiData('amount', cleanedText);
@@ -106,9 +115,14 @@ const AddTreatmentView = ({
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade}}
+              containerStyle={
+                apiData?.error_description
+                  ? {marginBottom: vh * 3, paddingVertical: vh}
+                  : {marginVertical: vh, paddinsdgVertical: vh}
+              }
               value={apiData?.description}
               maxLength={200}
-              // errorMessage={apiData?.error_description}
+              errorMessage={apiData?.error_description}
               onChangeText={text => setterForApiData('description', text)}
               multiline
               label="Description"
