@@ -124,14 +124,10 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
           )}
         </View>
         {typeof errorMessage == 'string' && (
-          <AileronBold
-            style={styles.errorText}
-            name={
-              errorMessage
-                ? errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1)
-                : ''
-            }
-          />
+         <AileronBold
+  style={styles.errorText}
+  name={errorMessage ? errorMessage.toUpperCase() : ''}
+/>
         )}
       </View>
     );
