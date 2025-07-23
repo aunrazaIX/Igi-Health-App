@@ -15,6 +15,8 @@ const MainStack = () => {
 
   useEffect(() => {
     EventRegister.addEventListener('aun', () => {
+      console.log('ASDSADSA3213123');
+
       dispatch(
         setErrorModal({
           show: true,
