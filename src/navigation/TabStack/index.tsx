@@ -36,7 +36,7 @@ const Tabs = () => {
         tabBarIconStyle: {
           marginVertical: vh * 0.8,
         },
-        tabBarHideOnKeyboard: true,
+        // tabBarHideOnKeyboard: true,
       }}>
       <Tab.Screen
         options={{

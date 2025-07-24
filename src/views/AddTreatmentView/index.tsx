@@ -1,4 +1,10 @@
-import {Image, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {
   AileronBold,
@@ -44,6 +50,7 @@ const AddTreatmentView = ({
   return (
     <>
       <TopView title={'Enter Claim Details'} />
+
       <CurvedView containerStyle={styles.curveStyle}>
         <KeyboardAwareScrollView
           extraScrollHeight={20}
