@@ -222,7 +222,7 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
                 // flex: 1,
                 marginTop: vh * 2,
               }}>
-              <MapView
+              {/* <MapView
                 showsUserLocation
                 key={selectedTabRight}
                 style={{flex: 1}}
@@ -264,7 +264,7 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
                     </Marker>
                   );
                 })}
-              </MapView>
+              </MapView> */}
             </View>
           )}
         </KeyboardAwareScrollView>

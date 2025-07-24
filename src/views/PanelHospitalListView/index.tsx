@@ -203,7 +203,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
 
                 // marginTop: vh * 2,
               }}>
-              <MapView
+              {/* <MapView
                 // showsUserLocation={true}
                 key={selectedTabRight}
                 showsUserLocation
@@ -246,7 +246,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
                     </Marker>
                   );
                 })}
-              </MapView>
+              </MapView> */}
             </View>
           )}
 
