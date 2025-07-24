@@ -35,48 +35,46 @@ const AppContent = () => {
   const dispatch = useDispatch();
   const timer = useRef(null);
 
-  const resetTimer = () => {
-    if (!user) return;
+  // const resetTimer = () => {
+  //   if (!user) return;
 
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => {
-      dispatch(logout());
-      dispatch(
-        setErrorModal({
-          Show: true,
-          message: 'Session Expired',
-          detail:
-            'Your session has timed out due to inactivity. Please log in again to continue.',
-        }),
-      );
-    }, INACTIVITY_LIMIT);
-  };
+  //   if (timer.current) clearTimeout(timer.current);
+  //   timer.current = setTimeout(() => {
+  //     dispatch(logout());
+  //     dispatch(
+  //       setErrorModal({
+  //         Show: true,
+  //         message: 'Session Expired',
+  //         detail:
+  //           'Your session has timed out due to inactivity. Please log in again to continue.',
+  //       }),
+  //     );
+  //   }, INACTIVITY_LIMIT);
+  // };
 
-  useEffect(() => {
-    if (!user) return;
-    resetTimer();
+  // useEffect(() => {
+  //   if (!user) return;
+  //   resetTimer();
 
-    return () => {
-      if (timer.current) clearTimeout(timer.current);
-    };
-  }, [user]);
+  //   return () => {
+  //     if (timer.current) clearTimeout(timer.current);
+  //   };
+  // }, [user]);
 
   return (
-    <NavigationContainer theme={MyTheme} onStateChange={resetTimer}>
-      <TouchableWithoutFeedback onPress={resetTimer}>
-        <SafeAreaView style={{flex: 1, backgroundColor: COLORS.loginContainer}}>
-          {Platform.OS === 'ios' && (
-            <StatusBar
-              barStyle={'dark-content'}
-              backgroundColor={COLORS.loginContainer}
-            />
-          )}
-          <MainStack />
-          <View>
-            <ErrorModal />
-          </View>
-        </SafeAreaView>
-      </TouchableWithoutFeedback>
+    <NavigationContainer theme={MyTheme}>
+      <SafeAreaView style={{flex: 1, backgroundColor: COLORS.loginContainer}}>
+        {Platform.OS === 'ios' && (
+          <StatusBar
+            barStyle={'dark-content'}
+            backgroundColor={COLORS.loginContainer}
+          />
+        )}
+        <MainStack />
+        <View>
+          <ErrorModal />
+        </View>
+      </SafeAreaView>
     </NavigationContainer>
   );
 };

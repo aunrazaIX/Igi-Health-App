@@ -31,7 +31,7 @@ const ErrorModal: React.FC<ErrorModalProps> = ({containerStyle}) => {
 
             <View style={styles.confirmationContainer}>
               <AileronBold
-                name={errorMessage || ''}
+                name={errorMessage || 'Something went wrong'}
                 style={styles.confirmation}
               />
             </View>

@@ -15,6 +15,7 @@ import ReactNativeBiometrics from 'react-native-biometrics';
 import {RootState} from '../redux/store';
 import {DetailsContainer} from '../components';
 import {Platform} from 'react-native';
+import {generateUUID} from '../utils';
 
 export type UserDetails = {
   name: string;
@@ -56,6 +57,8 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     isToggle,
     faceIdCredentials,
   } = useSelector((state: RootState) => state.auth);
+
+  const test = useRef(null);
 
   console.log(biometrics, 'bioemtrics ');
   console.log(faceIdCredentials, 'faceiDDDDD');
@@ -139,10 +142,11 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      setVerifiedUserData({...res?.Data, uuid: 'ASDADASDASDASDASDADAD'});
+      let id = generateUUID();
+      test.current = {...res?.Data, uuid: id};
       let apiData = {
         userId: res?.Data?.UserID,
-        uuid: 'ASDADASDASDASDASDADAD',
+        uuid: id,
         user_email: res?.Data?.UserEmail,
         user_cellnumber: res?.Data?.UserCellNumber,
         opt_reason: 'Register New User',
@@ -173,9 +177,10 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
+      console.log('YE CASAAd', test.current);
       navigation.navigate('ForgotPassword', {
         step: 2,
-        verifiedUserData,
+        verifiedUserData: test.current,
         type: 'signup',
       });
       signupResetStates();

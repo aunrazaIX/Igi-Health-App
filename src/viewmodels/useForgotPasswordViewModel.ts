@@ -1,10 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useDispatch} from 'react-redux';
 import {setErrorModal} from '../redux/generalSlice';
+import {generateUUID} from '../utils';
 
 type UseForgotPasswordViewModelReturnType = {
   states: {
@@ -38,6 +39,7 @@ const useForgotPasswordViewModel = ({
 }: {
   route: any;
 }): UseForgotPasswordViewModelReturnType => {
+  const test = useRef(null);
   const {step: _step, verifiedUserData, type} = route?.params || {};
   const [step, setStep] = useState<number>(_step ? _step : 1);
   const [savedDataForVerification, setSavedDataforVerification] =
@@ -47,6 +49,8 @@ const useForgotPasswordViewModel = ({
 
   const [showResend, setShowResend] = useState(false);
   const [countdownKey, setCountdownKey] = useState(0);
+
+  console.log(step);
 
   // useEffect(() => {
   //   setStep(_step);
@@ -84,6 +88,13 @@ const useForgotPasswordViewModel = ({
     }
   };
 
+  const test12 = () => {
+    if (type == 'signup') {
+      return verifiedUserData;
+    }
+    return test.current;
+  };
+
   const {
     setterForApiData,
     checkForError: ForgotpasswordCheckForError,
@@ -111,23 +122,25 @@ const useForgotPasswordViewModel = ({
       method: 'post',
       argsOrBody: apiData,
       onSuccess: res => {
-        setSavedDataforVerification({
+        let id = generateUUID();
+        test.current = {
           ...res?.Data,
-          uuid: 'ASDADASDASDASDASDADAD',
-        });
-
+          uuid: id,
+        };
         let apiData = {
           userId: res?.Data?.UserID,
-          uuid: 'ASDADASDASDASDASDADAD',
+          uuid: id,
           user_email: res?.Data?.UserEmail,
           user_cellnumber: res?.Data?.UserCellNumber,
           opt_reason: 'for Forgot Password Request',
           opt_typeID: '2',
           ClientCode: res?.Data?.ClientCode,
         };
-
         setOtp('');
         sendOtp(apiData);
+      },
+      onError: e => {
+        dispatch(setErrorModal({show: true, message: e?.error, detail: ''}));
       },
     });
 
@@ -155,25 +168,20 @@ const useForgotPasswordViewModel = ({
   };
 
   const onPressResend = () => {
+    let id = generateUUID();
     setShowResend(false);
-    let userData =
-      type == 'forgot' && step == 2
-        ? savedDataForVerification
-        : verifiedUserData;
+
     sendOtp({
-      userId: userData?.UserID,
-      uuid: 'ASDADASDASDASDASDADAD',
-      user_email: userData?.UserEmail,
-      user_cellnumber: userData?.UserCellNumber,
+      userId: test12()?.UserID,
+      uuid: id,
+      user_email: test12()?.UserEmail,
+      user_cellnumber: test12()?.UserCellNumber,
       opt_reason: 'for Forgot Password Request',
       opt_typeID: '2',
-      ClientCode: userData?.ClientCode,
+      ClientCode: test12()?.ClientCode,
     });
     setCountdownKey(prev => prev + 1);
   };
-
-  let verifyUserData =
-    type == 'forgot' && step == 2 ? savedDataForVerification : verifiedUserData;
 
   const {
     trigger: triggerVerifyOtp,
@@ -184,9 +192,9 @@ const useForgotPasswordViewModel = ({
     method: 'post',
     argsOrBody: {
       otp: otp,
-      uuid: verifyUserData?.uuid,
-      userId: verifyUserData?.UserID,
-      ClientCode: verifyUserData?.ClientCode,
+      uuid: test12()?.uuid,
+      userId: test12()?.UserID,
+      ClientCode: test12()?.ClientCode,
     },
     onSuccess: res => {
       if (res.Data) {
@@ -208,6 +216,8 @@ const useForgotPasswordViewModel = ({
     },
   });
 
+  console.log('test12()', test12());
+
   const {
     trigger: triggerUpdatePassword,
     loading: updatePasswordLoading,
@@ -216,19 +226,21 @@ const useForgotPasswordViewModel = ({
     apiEndpoint: endpoints.auth.updatePassword,
     method: 'post',
     argsOrBody: {
-      OldPassword: savedDataForVerification?.UserPassword,
-      userId: savedDataForVerification?.UserID,
+      OldPassword: test12()?.UserPassword,
+      userId: test12()?.UserID,
       isPassEncrypted: true,
       NewPassword: updatePasswordApiData.confirmPassword,
     },
 
     onSuccess: res => {
+      console.log('RE', res);
       if (res?.Data) {
         updatePasswordResetStates();
         setConfirmationModal(true);
       }
     },
     onError: error => {
+      console.log('error', error);
       dispatch(setErrorModal({show: true, message: error}));
     },
   });
@@ -257,8 +269,7 @@ const useForgotPasswordViewModel = ({
       triggerVerifyOtp();
       return;
     }
-
-    if (step == 3 && type == 'forgot') {
+    if (step == 3 && (type == 'forgot' || type == 'signup')) {
       if (
         !updatePasswordApiData.newPassword ||
         !updatePasswordApiData.confirmPassword

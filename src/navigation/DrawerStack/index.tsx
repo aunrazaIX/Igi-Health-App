@@ -8,7 +8,7 @@ import {
   Share,
   Platform,
 } from 'react-native';
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Home from '../../screens/Home';
 import {COLORS} from '../../assets/theme/colors';
@@ -29,10 +29,14 @@ import SettingStack from '../SettingStack';
 import {useNavigation} from '@react-navigation/native';
 import Profile from '../../screens/Profile';
 import TermsAndConditionsView from '../../views/TermsAndConditionsView';
+import InactivityHandler from '../../components/InActivity';
 
 const DrawerStack = () => {
   const {user} = useSelector(state => state.auth);
-  console.log('userrrrr', user);
+
+  const timeout = useMemo(() => {
+    return 3 * 60 * 1000;
+  }, []);
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -275,23 +279,24 @@ const DrawerStack = () => {
     );
   };
   return (
-    <Drawer.Navigator
-      drawerContent={DrawerContent}
-      screenOptions={{
-        drawerPosition: 'left',
-        drawerStyle: styles.drawerContainer,
-        headerShown: false,
-        swipeEnabled: false,
-      }}
-      initialRouteName="Tabs">
-      <Drawer.Screen name="Tabs" component={Tabs} />
-      <Drawer.Screen name="Home" component={Home} />
-      {/* <Drawer.Screen name="ClaimsHistory" component={ClaimsHistory} /> */}
-      <Drawer.Screen name="FAQs" component={FAQs} />
-      <Drawer.Screen name="SettingsStack" component={SettingStack} />
-      <Drawer.Screen name="Profile" component={Profile} />
-      <Drawer.Screen name="Privacy" component={TermsAndConditionsView} />
-    </Drawer.Navigator>
+    <InactivityHandler timeout={timeout}>
+      <Drawer.Navigator
+        drawerContent={DrawerContent}
+        screenOptions={{
+          drawerPosition: 'left',
+          drawerStyle: styles.drawerContainer,
+          headerShown: false,
+          swipeEnabled: false,
+        }}
+        initialRouteName="Tabs">
+        <Drawer.Screen name="Tabs" component={Tabs} />
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="FAQs" component={FAQs} />
+        <Drawer.Screen name="SettingsStack" component={SettingStack} />
+        <Drawer.Screen name="Profile" component={Profile} />
+        <Drawer.Screen name="Privacy" component={TermsAndConditionsView} />
+      </Drawer.Navigator>
+    </InactivityHandler>
   );
 };
 
