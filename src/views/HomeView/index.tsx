@@ -82,7 +82,7 @@ const HomeView: React.FC<HomeViewProps> = ({
             <View>
               <AileronSemiBold
                 name={
-                  user?.UserName.includes('.com')
+                  user?.UserName.includes('aun.raza@integrationxperts.com')
                     ? `Welcome Back,\nImran Naveed Qureshi`
                     : `Welcome Back,\n${user?.UserName}`
                 }
@@ -174,26 +174,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                             numberOfLines={1}
                           />
                         </View>
-
-                        {/* <View style={{flexDirection: 'row', gap: vw * 5}}>
-                          <AileronSemiBold
-                            name={`class: ${homeCardData[0].Policy_CertNo}`}
-                            style={styles.infoCardMiddleTextlight}
-                            numberOfLines={1}
-                          />
-
-                          <AileronSemiBold
-                            name={`Cert No: ${homeCardData[0]?.Policy_Insured_Age}`}
-                            style={styles.infoCardMiddleTextlight}
-                            numberOfLines={1}
-                          />
-
-                          <AileronSemiBold
-                            name={`Age: ${homeCardData[0]?.Policy_Insured_Age}`}
-                            style={styles.infoCardMiddleTextlight}
-                            numberOfLines={1}
-                          />
-                        </View> */}
                       </View>
 
                       <View style={{gap: vh}}>
@@ -317,13 +297,15 @@ const HomeView: React.FC<HomeViewProps> = ({
                                   _item?.Policy_Insured_Relaion !== 'Member',
                               )
                               .map((item, index) => (
-                                <AileronRegular
-                                  key={index}
-                                  name={`${item?.Policy_Insured_Name?.trim()}: ${
-                                    item?.Policy_Insured_Age
-                                  }`}
-                                  style={styles.homeBackCardText}
-                                />
+                                <>
+                                  <AileronRegular
+                                    key={index}
+                                    name={`${item?.Policy_Insured_Name?.trim()}: ${
+                                      item?.Policy_Insured_Age
+                                    }`}
+                                    style={styles.homeBackCardText}
+                                  />
+                                </>
                               ))}
                           </View>
 
@@ -531,34 +513,44 @@ const HomeView: React.FC<HomeViewProps> = ({
             name="Claim Statistics"
           />
         </View>
-        <View style={styles.graphContainer}>
-          <Image style={styles.meterEllipseBlue} source={images.ellipseBlue} />
 
-          <Image style={styles.meterEllipseRed} source={images.ellipseRed} />
-
-          <Image style={styles.dashboardMeterIcon} source={icons.meterIcon} />
-
-          <AileronLight
-            style={styles.meterLightText}
-            name="Total Claim Amount"
-          />
-
-          {!loading ? (
-            <AileronBold
-              style={styles.meterBoldText}
-              name={claimData.totalClaimAmount}
+        {!loading ? (
+          <View style={styles.graphContainer}>
+            <Image
+              style={styles.meterEllipseBlue}
+              source={images.ellipseBlue}
             />
-          ) : (
-            <SimpleLoader color="black" />
-          )}
-        </View>
 
-        <View style={styles.statisticsContainer}>
-          <View style={styles.dashboardMeterDetail}>
-            <View style={styles.totalDeducted}>
-              <Image source={icons.totalDeducted} style={styles.meterIcon} />
+            <Image style={styles.meterEllipseRed} source={images.ellipseRed} />
 
-              {loading ? (
+            <Image style={styles.dashboardMeterIcon} source={icons.meterIcon} />
+
+            <AileronLight
+              style={styles.meterLightText}
+              name="Total Claim Amount"
+            />
+
+            {!loading ? (
+              <AileronBold
+                style={styles.meterBoldText}
+                name={claimData.totalClaimAmount}
+              />
+            ) : (
+              // <SimpleLoader color="black" />
+              <AileronBold name="" />
+            )}
+          </View>
+        ) : (
+          <SimpleLoader color="black" />
+        )}
+
+        {!loading && (
+          <View style={styles.statisticsContainer}>
+            <View style={styles.dashboardMeterDetail}>
+              <View style={styles.totalDeducted}>
+                <Image source={icons.totalDeducted} style={styles.meterIcon} />
+
+                {/* {loading ? (
                 <SimpleLoader />
               ) : (
                 <AileronBold
@@ -566,14 +558,20 @@ const HomeView: React.FC<HomeViewProps> = ({
                   name="Total Deducted"
                   numberOfLines={1}
                 />
-              )}
-            </View>
-            <AileronBold
-              name={claimData?.deductedAmount}
-              style={styles.meterDetailTextBold}
-              numberOfLines={1}
-            />
-            <View style={styles.meterDetailTextEnd}>
+              )} */}
+
+                <AileronBold
+                  style={styles.meterDetailTextLight}
+                  name="Total Deducted"
+                  numberOfLines={1}
+                />
+              </View>
+              <AileronBold
+                name={claimData?.deductedAmount}
+                style={styles.meterDetailTextBold}
+                numberOfLines={1}
+              />
+              {/* <View style={styles.meterDetailTextEnd}>
               <Image source={icons.arrowUp} style={styles.meterArrowUp} />
 
               <AileronLight
@@ -586,12 +584,12 @@ const HomeView: React.FC<HomeViewProps> = ({
                 numberOfLines={1}
                 style={styles.text}
               />
+            </View> */}
             </View>
-          </View>
-          <View style={styles.dashboardMeterDetail}>
-            <View style={styles.totalDeducted}>
-              <Image style={styles.meterIcon} source={icons.totalPaid} />
-
+            <View style={styles.dashboardMeterDetail}>
+              <View style={styles.totalDeducted}>
+                <Image style={styles.meterIcon} source={icons.totalPaid} />
+                {/* 
               {loading ? (
                 <SimpleLoader />
               ) : (
@@ -600,16 +598,26 @@ const HomeView: React.FC<HomeViewProps> = ({
                   name="Total Paid"
                   numberOfLines={1}
                 />
+              )} */}
+
+                <AileronBold
+                  style={styles.meterDetailTextLight}
+                  name="Total Paid"
+                  numberOfLines={1}
+                />
+              </View>
+
+              {loading ? (
+                <SimpleLoader />
+              ) : (
+                <AileronBold
+                  name={claimData?.paidAmount}
+                  style={styles.meterDetailTextBold}
+                  numberOfLines={1}
+                />
               )}
-            </View>
 
-            <AileronBold
-              name={claimData?.paidAmount}
-              style={styles.meterDetailTextBold}
-              numberOfLines={1}
-            />
-
-            <View style={styles.meterDetailTextEnd}>
+              {/* <View style={styles.meterDetailTextEnd}>
               <Image source={icons.arrowUp} style={styles.meterArrowUp} />
 
               <AileronLight
@@ -623,9 +631,11 @@ const HomeView: React.FC<HomeViewProps> = ({
                 numberOfLines={1}
                 style={styles.text}
               />
+            </View> */}
             </View>
           </View>
-        </View>
+        )}
+
         <View>
           <View style={styles.claimStatistics}>
             <Image

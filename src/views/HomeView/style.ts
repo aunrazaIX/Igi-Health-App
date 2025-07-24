@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
       height: 1,
     },
     // borderWidth: 2,
-    // minHeight: 28 * vh,
+    minHeight: 30 * vh,
 
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
@@ -119,6 +119,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: vw * 3,
+    // borderWidth:2
   },
   statisticsHeader: {
     fontSize: vh * 2.3,
@@ -130,6 +131,7 @@ export const styles = StyleSheet.create({
     marginBottom: vh * 2.5,
     alignItems: 'center',
     position: 'relative',
+    // borderWidth:2
   },
   meterEllipseBlue: {
     width: vw * 64,
@@ -398,7 +400,8 @@ export const styles = StyleSheet.create({
   },
   associatedContainer: {
     flexDirection: 'row',
-    gap: '2%',
+    gap: vh,
+    // borderWidth:2
   },
   associatedTittle: {
     textAlign: 'left',
@@ -408,19 +411,21 @@ export const styles = StyleSheet.create({
   },
   associatedImageContainer: {
     width: '49%',
+
     padding: vw * 1,
     backgroundColor: COLORS.white,
-    borderRadius: vh * 2.5,
+    borderRadius: vh * 2,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    // borderWidth:2,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
   },
   associatedImage: {
     width: vw * 30,
@@ -450,5 +455,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: vw * 2,
+    
+
   },
 });
