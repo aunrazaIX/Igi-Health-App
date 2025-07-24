@@ -454,7 +454,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       type: 'PriorApproval',
     },
     {
-      logo: cardIcons.hospital,
+      logo: icons.hospital,
       name: 'Network Hospitals',
       image: icons.forwardArrow,
       backgroundColor: COLORS.cardBackgroundRed,
