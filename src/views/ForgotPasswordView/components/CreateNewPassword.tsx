@@ -22,7 +22,11 @@ const CreateNewPassword = ({
         placeholder="Enter new password"
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
-        containerStyle={style.inputContainer}
+        containerStyle={
+          updatePasswordApiData?.error_newPassword
+            ? style.inputContainerError
+            : style.inputContainer
+        }
         value={updatePasswordApiData?.newPassword}
         onChangeText={text => {
           setterForUpdatePasswordApiData('newPassword', text);
@@ -39,7 +43,7 @@ const CreateNewPassword = ({
         labelStyle={style.labelStyle}
         inputStyle={style.inputStyle}
         containerStyle={
-          updatePasswordApiData?.error_confirmPassword?.length > 2
+          updatePasswordApiData?.error_confirmPassword?.length > 1
             ? style.inputContainerError
             : style.inputContainer
         }
@@ -79,16 +83,16 @@ export default CreateNewPassword;
 
 const style = StyleSheet.create({
   inputContainer: {
-    borderWidth: 2,
+    // borderWidth: 2,
     flexDirection: 'column',
 
     paddingHorizontal: vw * 1,
-    marginTop: vh * 2,
+    // marginTop: vh * 2,
   },
   inputContainerError: {
-    borderWidth: 2,
     flexDirection: 'column',
-    marginTop: vh * 2,
+    // marginTop: vh * 2,
+    marginBottom: vh * 4,
 
     paddingHorizontal: vw * 1,
   },
