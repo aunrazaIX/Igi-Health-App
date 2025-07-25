@@ -42,6 +42,8 @@ const ForgotPasswordView = ({
   updatePasswordLoading,
   verifiedUserData,
   savedDataForVerification,
+  test12,
+  flushOtp,
 }: {
   step: number;
   onPressBack: () => void;
@@ -66,6 +68,7 @@ const ForgotPasswordView = ({
   disabled: () => void;
   updatePasswordLoading: boolean;
   verifiedUserData: any;
+  test2: any;
   savedDataForVerification: any;
 }) => {
   const {user} = useSelector((state: RootState) => state.auth);
@@ -76,8 +79,10 @@ const ForgotPasswordView = ({
     1: <EnterEmailView setterForApiData={setterForApiData} apiData={apiData} />,
     2: (
       <OtpView
+        flushOtp={flushOtp}
         setOtp={setOtp}
         sendOtp={sendOtp}
+        otp={otp}
         onPressResend={onPressResend}
         showResend={showResend}
         countdownKey={countdownKey}
@@ -99,7 +104,7 @@ const ForgotPasswordView = ({
   };
   const returnDescription: Record<number, string> = {
     1: 'Please enter the required information to reset your password',
-    2: `An authentication code has been sent to ${savedDataForVerification?.UserName} `,
+    2: `An authentication code has been sent to ${test12()?.UserName} `,
     3: 'At least 8 characters, with uppercase and lowercase letters.',
   };
   const returnButtonName: Record<number, string> = {
@@ -158,7 +163,7 @@ const ForgotPasswordView = ({
       <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
-        frameImage={icons.ModalSuccessfull}
+        frameImage={icons.modelSuccessful}
         confirmationMessage={'Your password has been changed successfully.'}
         closeButton
         Successfull

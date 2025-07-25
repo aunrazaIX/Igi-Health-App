@@ -13,6 +13,8 @@ const OtpView = ({
   showResend,
   countdownKey,
   setShowResend,
+  otp,
+  flushOtp,
 }: {
   setOtp: (otp: string) => void;
   sendOtp: () => void;
@@ -20,12 +22,14 @@ const OtpView = ({
   showResend: boolean;
   countdownKey: number;
   setShowResend: () => void;
+  otp: any;
 }) => {
   return (
     <Fragment>
       <OtpInput
         numberOfDigits={6}
         focusColor={COLORS.black}
+        key={String(flushOtp)}
         autoFocus={true}
         hideStick={true}
         placeholder="-------"

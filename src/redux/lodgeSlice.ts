@@ -36,9 +36,9 @@ export const updateTreatments = createAsyncThunk(
     ) {
       thunkApi.dispatch(
         setErrorModal({
-          message: 'Please enter all details',
+          message: 'Please Enter All Details',
           detail:
-            'Some fields are missing all feilds must be required to update a claim',
+            'Some fields are missing all fields must be required to update a claim',
         }),
       );
       return;

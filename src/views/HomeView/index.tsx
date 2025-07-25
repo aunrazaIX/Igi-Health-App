@@ -69,6 +69,87 @@ const HomeView: React.FC<HomeViewProps> = ({
 
   console.log(homeCardData, 'homeCardData');
 
+  // let myArray = [
+  //   {
+  //     Policy_Number: 'AS000436',
+  //     Policy_Insured_Name: 'WAHAB ALI           ',
+  //     Policy_Insured_DOB: 19910428,
+  //     Policy_Insured_Relaion: 'Member',
+  //     Policy_Insured_Age: 33,
+  //     Policy_Start_Date: 20250101,
+  //     Policy_Expiry_Date: 20251231,
+  //     Policy_Class: '001',
+  //     Policy_CertNo: '00004',
+  //     Policy_Daily_RoomLimit: 0,
+  //     Policy_MatLimit: 50000,
+  //   },
+  //   {
+  //     Policy_Number: 'AS000436',
+  //     Policy_Insured_Name: 'FASIHA KHAN         ',
+  //     Policy_Insured_DOB: 19960915,
+  //     Policy_Insured_Relaion: 'Wife',
+  //     Policy_Insured_Age: 33,
+  //     Policy_Start_Date: 20250101,
+  //     Policy_Expiry_Date: 20251231,
+  //     Policy_Class: '001',
+  //     Policy_CertNo: '00004',
+  //     Policy_Daily_RoomLimit: 0,
+  //     Policy_MatLimit: 50000,
+  //   },
+  //   {
+  //     Policy_Number: 'AS000436',
+  //     Policy_Insured_Name: 'WAHAB ALI           ',
+  //     Policy_Insured_DOB: 19910428,
+  //     Policy_Insured_Relaion: 'Member',
+  //     Policy_Insured_Age: 33,
+  //     Policy_Start_Date: 20250101,
+  //     Policy_Expiry_Date: 20251231,
+  //     Policy_Class: '001',
+  //     Policy_CertNo: '00004',
+  //     Policy_Daily_RoomLimit: 0,
+  //     Policy_MatLimit: 0,
+  //   },
+  //   {
+  //     Policy_Number: 'AS000436',
+  //     Policy_Insured_Name: 'FASIHA KHAN         ',
+  //     Policy_Insured_DOB: 19960915,
+  //     Policy_Insured_Relaion: 'Wife',
+  //     Policy_Insured_Age: 33,
+  //     Policy_Start_Date: 20250101,
+  //     Policy_Expiry_Date: 20251231,
+  //     Policy_Class: '001',
+  //     Policy_CertNo: '00004',
+  //     Policy_Daily_RoomLimit: 0,
+  //     Policy_MatLimit: 0,
+  //   },
+  //   {
+  //     Policy_Number: 'AS000436',
+  //     Policy_Insured_Name: 'FASIHA KHAN         ',
+  //     Policy_Insured_DOB: 19960915,
+  //     Policy_Insured_Relaion: 'Wife',
+  //     Policy_Insured_Age: 33,
+  //     Policy_Start_Date: 20250101,
+  //     Policy_Expiry_Date: 20251231,
+  //     Policy_Class: '001',
+  //     Policy_CertNo: '00004',
+  //     Policy_Daily_RoomLimit: 0,
+  //     Policy_MatLimit: 0,
+  //   },
+  //   {
+  //     Policy_Number: 'AS000436',
+  //     Policy_Insured_Name: 'FASIHA KHAN         ',
+  //     Policy_Insured_DOB: 19960915,
+  //     Policy_Insured_Relaion: 'Wife',
+  //     Policy_Insured_Age: 33,
+  //     Policy_Start_Date: 20250101,
+  //     Policy_Expiry_Date: 20251231,
+  //     Policy_Class: '001',
+  //     Policy_CertNo: '00004',
+  //     Policy_Daily_RoomLimit: 0,
+  //     Policy_MatLimit: 0,
+  //   },
+  // ];
+
   return (
     <ScrollView>
       <LinearGradient
@@ -284,27 +365,41 @@ const HomeView: React.FC<HomeViewProps> = ({
                           style={{
                             flexDirection: 'row',
                             justifyContent: 'space-between',
-                            alignItems: 'flex-end',
+                            // alignItems: 'flex-end',
+                            height: vh * 12,
+                            // borderWidth: 2,
                           }}>
                           <View
-                            style={{
-                              flexDirection: 'col',
-                              gap: vh * 1.2,
-                            }}>
+                            style={
+                              {
+                                // gap: vh * 1,
+                                // height: vh * 12,
+                                // overflow: 'hidden',
+                                // borderWidth: 2,
+                              }
+                            }>
                             {homeCardData
                               ?.filter(
                                 _item =>
                                   _item?.Policy_Insured_Relaion !== 'Member',
                               )
+                              .slice(0, 4)
                               .map((item, index) => (
                                 <>
-                                  <AileronRegular
-                                    key={index}
-                                    name={`${item?.Policy_Insured_Name?.trim()}: ${
-                                      item?.Policy_Insured_Age
-                                    }`}
-                                    style={styles.homeBackCardText}
-                                  />
+                                  {index < 3 ? (
+                                    <AileronRegular
+                                      key={index}
+                                      name={`${item?.Policy_Insured_Name?.trim()}: ${
+                                        item?.Policy_Insured_Age
+                                      }`}
+                                      style={styles.homeBackCardText}
+                                    />
+                                  ) : (
+                                    <AileronRegular
+                                      name="..."
+                                      style={styles.homeBackCardDottedText}
+                                    />
+                                  )}
                                 </>
                               ))}
                           </View>

@@ -17,6 +17,8 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: vw * 3,
     textAlign: 'left',
+
+    minWidth: vh * 15,
   },
   wrapper: {
     paddingBottom: vh * 2,
@@ -57,7 +59,6 @@ export const styles = StyleSheet.create({
   homeInfoContainer: {
     width: '100%',
     paddingHorizontal: vw * 4,
-
     paddingVertical: vh * 3,
     borderRadius: vw * 6,
     backgroundColor: COLORS.white,
@@ -68,11 +69,9 @@ export const styles = StyleSheet.create({
       width: 0,
       height: 1,
     },
-    // borderWidth: 2,
-    minHeight: 30 * vh,
-
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
+    height: vh * 30,
   },
 
   flipCardContainer: {
@@ -80,6 +79,7 @@ export const styles = StyleSheet.create({
     // borderWidth: 2,
     marginTop: vh * 2,
     // borderWidth: 2,
+    // minHeight: vh * 30,
   },
   flipBackCard: {
     marginTop: -vh * 30,
@@ -172,6 +172,7 @@ export const styles = StyleSheet.create({
   infoCardTextBold: {
     fontSize: vh * 1.6,
     color: COLORS.textBlackShade,
+    maxWidth: vh * 30,
     // textAlign: 'left',
     // borderWidth: 2,
   },
@@ -196,6 +197,8 @@ export const styles = StyleSheet.create({
     color: COLORS.textColor,
     textAlign: 'left',
     lineHeight: vh * 2,
+    maxWidth: vh * 25,
+    // borderWidth: 2,
   },
   homeInfoContainerMiddleTextLogo: {
     flexDirection: 'row',
@@ -364,6 +367,13 @@ export const styles = StyleSheet.create({
     // borderWidth: 2,
     lineHeight: vh * 1.99,
   },
+  homeBackCardDottedText: {
+    fontSize: vw * 5,
+    textAlign: 'left',
+    color: COLORS.textBlackShade,
+    // borderWidth: 2,
+    // lineHeight: vh * 1.99,
+  },
   homeBackCardRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -455,7 +465,5 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: vw * 2,
-    
-
   },
 });

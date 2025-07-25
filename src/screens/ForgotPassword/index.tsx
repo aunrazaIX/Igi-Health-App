@@ -17,6 +17,7 @@ const ForgotPassword = ({route}: {route: any}) => {
     countdownKey,
     updatePasswordLoading,
     verifiedUserData,
+    flushOtp,
     savedDataForVerification,
   } = states;
   const {
@@ -31,6 +32,7 @@ const ForgotPassword = ({route}: {route: any}) => {
     sendOtp,
     onPressResend,
     setShowResend,
+    test12,
     disabled,
     onCloseSuccessModal,
   } = functions;
@@ -45,6 +47,7 @@ const ForgotPassword = ({route}: {route: any}) => {
       openConfimationModal={openConfimationModal}
       setOtp={setOtp}
       verifyOtpLoading={verifyOtpLoading}
+      flushOtp={flushOtp}
       setterForApiData={setterForApiData}
       handleNext={handleNext}
       apiData={apiData}
@@ -62,6 +65,7 @@ const ForgotPassword = ({route}: {route: any}) => {
       updatePasswordLoading={updatePasswordLoading}
       verifiedUserData={verifiedUserData}
       savedDataForVerification={savedDataForVerification}
+      test12={test12}
     />
   );
 };

@@ -45,10 +45,14 @@ const useForgotPasswordViewModel = ({
   const [savedDataForVerification, setSavedDataforVerification] =
     useState(null);
   const [confirmationModal, setConfirmationModal] = useState(false);
-  const [otp, setOtp] = useState<number | string>('');
+  const [otp, setOtp] = useState<number | string>();
 
   const [showResend, setShowResend] = useState(false);
+
+  const [flushOtp, setFlushOtp] = useState(0);
   const [countdownKey, setCountdownKey] = useState(0);
+
+  console.log(otp, 'otp is');
 
   console.log(step);
 
@@ -148,6 +152,7 @@ const useForgotPasswordViewModel = ({
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
+      console.log(res, 'mera response');
       setStep(2);
       ForgotpasswordResetStates();
     },
@@ -167,22 +172,7 @@ const useForgotPasswordViewModel = ({
     setConfirmationModal(true);
   };
 
-  const onPressResend = () => {
-    let id = generateUUID();
-    setShowResend(false);
-
-    sendOtp({
-      userId: test12()?.UserID,
-      uuid: id,
-      user_email: test12()?.UserEmail,
-      user_cellnumber: test12()?.UserCellNumber,
-      opt_reason: 'for Forgot Password Request',
-      opt_typeID: '2',
-      ClientCode: test12()?.ClientCode,
-    });
-    setCountdownKey(prev => prev + 1);
-  };
-
+  console.log('test12()', test12());
   const {
     trigger: triggerVerifyOtp,
     loading: verifyOtpLoading,
@@ -192,31 +182,47 @@ const useForgotPasswordViewModel = ({
     method: 'post',
     argsOrBody: {
       otp: otp,
-      uuid: test12()?.uuid,
+      uuid: 'usman',
       userId: test12()?.UserID,
       ClientCode: test12()?.ClientCode,
     },
+
     onSuccess: res => {
+      console.log(
+        test12()?.uuid,
+        otp,
+        test12()?.UserID,
+        test12()?.ClientCode,
+        'resend verifyotp data',
+      );
       if (res.Data) {
         setStep(3);
       } else {
+        setFlushOtp(flushOtp + 1);
         dispatch(
           setErrorModal({
             Show: true,
             message: 'Invalid OTP',
             detail:
-              'The OTP you entered is incorrect. Please check and try again.',
+              'The OTP you entered is incorrect. Please check and try againnn.',
           }),
         );
+        setOtp('');
       }
     },
     onError: error => {
+      setFlushOtp(flushOtp + 1);
       setOtp('');
-      dispatch(setErrorModal({Show: true, message: 'Incorrect OTP'}));
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Incorrect OTP',
+          detail:
+            'The OTP you entered is incorrect. Please check and try again.',
+        }),
+      );
     },
   });
-
-  console.log('test12()', test12());
 
   const {
     trigger: triggerUpdatePassword,
@@ -241,9 +247,27 @@ const useForgotPasswordViewModel = ({
     },
     onError: error => {
       console.log('error', error);
-      dispatch(setErrorModal({show: true, message: error}));
+      dispatch(setErrorModal({show: true, message: error, detail: ''}));
     },
   });
+
+  const onPressResend = () => {
+    let id = generateUUID();
+    setShowResend(false);
+
+    sendOtp({
+      userId: test12()?.UserID,
+      uuid: 'usman',
+      user_email: test12()?.UserEmail,
+      user_cellnumber: test12()?.UserCellNumber,
+      opt_reason: 'for Forgot Password Request',
+      opt_typeID: '2',
+      ClientCode: test12()?.ClientCode,
+    });
+    setCountdownKey(prev => prev + 1);
+  };
+
+  console.log('test12()', test12());
 
   const handleNext = () => {
     if (step == 1 && type == 'forgot') {
@@ -274,14 +298,26 @@ const useForgotPasswordViewModel = ({
         !updatePasswordApiData.newPassword ||
         !updatePasswordApiData.confirmPassword
       ) {
-        dispatch(setErrorModal({Show: true, message: 'Fill Both Password'}));
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Fill Both Passwords',
+            detail: '',
+          }),
+        );
         return;
       }
       if (
         updatePasswordApiData.newPassword !==
         updatePasswordApiData.confirmPassword
       ) {
-        dispatch(setErrorModal({Show: true, message: 'Password Not Matched'}));
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Password Not Matched',
+            detail: '',
+          }),
+        );
         return;
       }
       triggerUpdatePassword();
@@ -303,6 +339,7 @@ const useForgotPasswordViewModel = ({
       otp,
       showResend,
       countdownKey,
+      flushOtp,
       savedDataForVerification,
     },
     functions: {
@@ -318,6 +355,7 @@ const useForgotPasswordViewModel = ({
       onPressResend,
       setShowResend,
       onCloseSuccessModal,
+      test12: test12,
     },
   };
 };
