@@ -148,6 +148,32 @@ const HomeView: React.FC<HomeViewProps> = ({
   //     Policy_Daily_RoomLimit: 0,
   //     Policy_MatLimit: 0,
   //   },
+  //   {
+  //     Policy_Number: 'AS000436',
+  //     Policy_Insured_Name: 'FASIHA KHAN         ',
+  //     Policy_Insured_DOB: 19960915,
+  //     Policy_Insured_Relaion: 'Wife',
+  //     Policy_Insured_Age: 33,
+  //     Policy_Start_Date: 20250101,
+  //     Policy_Expiry_Date: 20251231,
+  //     Policy_Class: '001',
+  //     Policy_CertNo: '00004',
+  //     Policy_Daily_RoomLimit: 0,
+  //     Policy_MatLimit: 0,
+  //   },
+  //   {
+  //     Policy_Number: 'AS000436',
+  //     Policy_Insured_Name: 'FASIHA KHAN         ',
+  //     Policy_Insured_DOB: 19960915,
+  //     Policy_Insured_Relaion: 'Wife',
+  //     Policy_Insured_Age: 33,
+  //     Policy_Start_Date: 20250101,
+  //     Policy_Expiry_Date: 20251231,
+  //     Policy_Class: '001',
+  //     Policy_CertNo: '00004',
+  //     Policy_Daily_RoomLimit: 0,
+  //     Policy_MatLimit: 0,
+  //   },
   // ];
 
   return (
@@ -383,10 +409,10 @@ const HomeView: React.FC<HomeViewProps> = ({
                                 _item =>
                                   _item?.Policy_Insured_Relaion !== 'Member',
                               )
-                              .slice(0, 4)
+                              .slice(0, 5)
                               .map((item, index) => (
                                 <>
-                                  {index < 3 ? (
+                                  {index < 4 ? (
                                     <AileronRegular
                                       key={index}
                                       name={`${item?.Policy_Insured_Name?.trim()}: ${
