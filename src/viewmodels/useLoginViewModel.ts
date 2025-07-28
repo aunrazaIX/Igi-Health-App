@@ -79,6 +79,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     userName: rememberMe ? credentials?.userName : null,
     password: rememberMe ? credentials?.password : null,
   });
+
   const {
     checkForError: signupCheckForError,
     resetStates: signupResetStates,
@@ -142,7 +143,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      let id = 'usman';
+      let id = generateUUID();
       test.current = {...res?.Data, uuid: id};
       let apiData = {
         userId: res?.Data?.UserID,

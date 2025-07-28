@@ -47,6 +47,9 @@ const useApiHook = <T>({
       let dataToSave = null;
       setLoading(true);
       let _method = method === 'get' ? get : post;
+
+      console.log(`Endpoint:${apiEndpoint}method:${method}`);
+      console.log(data ? data : argsOrBody);
       const res = await _method(
         apiEndpoint,
         data ? data : argsOrBody,

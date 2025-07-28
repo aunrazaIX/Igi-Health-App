@@ -411,7 +411,7 @@ export const styles = StyleSheet.create({
   associatedContainer: {
     flexDirection: 'row',
     gap: vh,
-    // borderWidth:2
+    // borderWidth: 2,
   },
   associatedTittle: {
     textAlign: 'left',
@@ -421,7 +421,6 @@ export const styles = StyleSheet.create({
   },
   associatedImageContainer: {
     width: '49%',
-
     padding: vw * 1,
     backgroundColor: COLORS.white,
     borderRadius: vh * 2,
@@ -429,13 +428,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     elevation: 5,
     // borderWidth:2,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 3.84,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   associatedImage: {
     width: vw * 30,

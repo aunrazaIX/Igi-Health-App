@@ -60,16 +60,11 @@ const AppContent = () => {
   //     if (timer.current) clearTimeout(timer.current);
   //   };
   // }, [user]);
-
+  829;
   return (
     <NavigationContainer theme={MyTheme}>
       <SafeAreaView style={{flex: 1, backgroundColor: COLORS.loginContainer}}>
-        {Platform.OS === 'ios' && (
-          <StatusBar
-            barStyle={'dark-content'}
-            backgroundColor={COLORS.loginContainer}
-          />
-        )}
+        <StatusBar translucent backgroundColor="transparent" />
         <MainStack />
         <View>
           <ErrorModal />

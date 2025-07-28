@@ -40,7 +40,10 @@ const useForgotPasswordViewModel = ({
   route: any;
 }): UseForgotPasswordViewModelReturnType => {
   const test = useRef(null);
+
   const {step: _step, verifiedUserData, type} = route?.params || {};
+
+  console.log(verifiedUserData, 'meri signup ki uuid');
   const [step, setStep] = useState<number>(_step ? _step : 1);
   const [savedDataForVerification, setSavedDataforVerification] =
     useState(null);
@@ -51,10 +54,6 @@ const useForgotPasswordViewModel = ({
 
   const [flushOtp, setFlushOtp] = useState(0);
   const [countdownKey, setCountdownKey] = useState(0);
-
-  console.log(otp, 'otp is');
-
-  console.log(step);
 
   // useEffect(() => {
   //   setStep(_step);
@@ -172,7 +171,6 @@ const useForgotPasswordViewModel = ({
     setConfirmationModal(true);
   };
 
-  console.log('test12()', test12());
   const {
     trigger: triggerVerifyOtp,
     loading: verifyOtpLoading,
@@ -182,19 +180,12 @@ const useForgotPasswordViewModel = ({
     method: 'post',
     argsOrBody: {
       otp: otp,
-      uuid: 'usman',
+      uuid: test12()?.uuid,
       userId: test12()?.UserID,
       ClientCode: test12()?.ClientCode,
     },
 
     onSuccess: res => {
-      console.log(
-        test12()?.uuid,
-        otp,
-        test12()?.UserID,
-        test12()?.ClientCode,
-        'resend verifyotp data',
-      );
       if (res.Data) {
         setStep(3);
       } else {
@@ -254,16 +245,23 @@ const useForgotPasswordViewModel = ({
   const onPressResend = () => {
     let id = generateUUID();
     setShowResend(false);
-
     sendOtp({
       userId: test12()?.UserID,
-      uuid: 'usman',
+      uuid: id,
       user_email: test12()?.UserEmail,
       user_cellnumber: test12()?.UserCellNumber,
       opt_reason: 'for Forgot Password Request',
-      opt_typeID: '2',
+      opt_typeID: type == 'signup' ? '3' : '2',
       ClientCode: test12()?.ClientCode,
     });
+    if (type == 'signup') {
+      verifiedUserData.uuid = id;
+    } else {
+      if (test.current) {
+        test.current.uuid = id;
+      }
+    }
+
     setCountdownKey(prev => prev + 1);
   };
 

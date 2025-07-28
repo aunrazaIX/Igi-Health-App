@@ -28,7 +28,7 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
       [`error_${key}`]:
         value === ''
           ? key === 'userName'
-            ? 'email address is required'
+            ? 'Email address is required'
             : key === 'receiptNumber'
             ? 'Receipt number is required'
             : `${key} is required`

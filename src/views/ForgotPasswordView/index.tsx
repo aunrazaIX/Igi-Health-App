@@ -44,6 +44,7 @@ const ForgotPasswordView = ({
   savedDataForVerification,
   test12,
   flushOtp,
+  type,
 }: {
   step: number;
   onPressBack: () => void;
@@ -70,6 +71,7 @@ const ForgotPasswordView = ({
   verifiedUserData: any;
   test2: any;
   savedDataForVerification: any;
+  type: any;
 }) => {
   const {user} = useSelector((state: RootState) => state.auth);
 
@@ -115,7 +117,7 @@ const ForgotPasswordView = ({
   const returnHeaderName: Record<number, string> = {
     1: 'Forgot Password',
     2: 'OTP Verification',
-    3: 'Create Password & Continue',
+    3: type === 'signup' ? 'Create Password & Continue' : 'Change Password',
   };
   const returnHeaderIcon: Record<number, ImageSourcePropType | null> = {
     1: icons.forgotPassword,
@@ -164,7 +166,11 @@ const ForgotPasswordView = ({
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
         frameImage={icons.modelSuccessful}
-        confirmationMessage={'Your password has been changed successfully.'}
+        confirmationMessage={
+          type === 'signup'
+            ? 'Your password has been created successfully.'
+            : 'Your password has been changed successfully.'
+        }
         closeButton
         Successfull
         onClose={onCloseSuccessModal}

@@ -66,7 +66,7 @@ const LoginForm = ({
             loginSetterForApiData('error_userName', errorMsg);
           }}
           errorMessage={
-            loginApiData?.error_userName
+            typeof loginApiData?.error_userName === 'string'
               ? loginApiData.error_userName.charAt(0).toUpperCase() +
                 loginApiData.error_userName.slice(1)
               : undefined
