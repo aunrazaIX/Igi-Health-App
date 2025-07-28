@@ -62,11 +62,12 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
   const {data: claimData, loading: claimDataLoading} = useApiHook({
     apiEndpoint: endpoints.claimHistory.getAllClaim,
     method: 'get',
-    argsOrBody: {userid: '776'},
+    argsOrBody: {userid: user?.UserId},
     onSuccess: res => {
       setData(
         res?.Data?.map(item => ({
           headerLabel: `Claim #${item.ClaimID}`,
+          ClaimStatus: item?.ClaimStatus,
           headerIcon: icons.taskEdit,
           RelationName: item.RelationName,
           items: [

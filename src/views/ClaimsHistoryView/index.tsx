@@ -158,12 +158,13 @@ const ClaimsHistoryView: React.FC<claimsHistoryViewProps> = ({
               }}
               data={data}
               keyExtractor={(_, index) => index.toString()}
-              renderItem={({item}) => (
+              renderItem={({item, index}) => (
                 <DetailsContainer
+                  key={index}
                   headerIcon={
-                    item.ClaimStatus === '1'
+                    item?.ClaimStatus === '8'
                       ? icons.claimPaid
-                      : item.ClaimStatus === '0'
+                      : item?.ClaimStatus === '3'
                       ? icons.rejected
                       : icons.pending
                   }
