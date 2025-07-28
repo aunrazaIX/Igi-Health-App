@@ -8,6 +8,8 @@ import {logout} from '../../redux/authSlice';
 
 const InactivityHandler = ({children, timeout}) => {
   const dispatch = useDispatch();
+
+  //useRef
   const timeoutRef = useRef(null);
   const lastBackgroundTimeRef = useRef(null);
 

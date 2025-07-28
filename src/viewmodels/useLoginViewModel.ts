@@ -142,7 +142,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      let id = generateUUID();
+      let id = 'usman';
       test.current = {...res?.Data, uuid: id};
       let apiData = {
         userId: res?.Data?.UserID,
