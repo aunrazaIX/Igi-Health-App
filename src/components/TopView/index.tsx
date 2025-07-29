@@ -61,7 +61,6 @@ const TopView = ({
                 return;
               }
 
-              console.log('continueeeee');
               const stackRoutes = navigation?.getState()?.routes;
               const currentRouteIndex = stackRoutes?.findIndex(
                 _route => _route.name === route.name,

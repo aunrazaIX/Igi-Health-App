@@ -15,6 +15,7 @@ import AileronSemiBold from '../AileronSemiBold';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from '../Button';
 import AileronRegular from '../AileronRegular';
+import {useNavigation} from '@react-navigation/native';
 
 type StyleObject = Record<string, string | number | boolean>;
 
@@ -37,7 +38,8 @@ type ConfimationModalProps = {
   submitButton?: boolean;
   handleSubmit?: () => void;
   type: any;
-  isUpdate : any
+  isUpdate: any;
+  isChangedPassword: any;
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -58,10 +60,16 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   submitButton,
   handleSubmit,
   type,
-  isUpdate
+  isUpdate,
+  isChangedPassword,
 }) => {
+  const naviagation = useNavigation();
   const handleClose = () => {
     setConfirmationModalVisible(false);
+    if (isChangedPassword) {
+      naviagation.navigate('Home');
+    }
+
     if (onClose) {
       onClose();
     }
@@ -107,7 +115,9 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                   name={
                     confirmationType === 'update'
                       ? 'Confirm Edit Request'
-                      : isUpdate ? "Confirm Edit Request" : 'Successful!'
+                      : isUpdate
+                      ? 'Confirm Edit Request'
+                      : 'Successful!'
                   }
                   style={styles.confirmation}
                 />

@@ -19,6 +19,7 @@ const ForgotPassword = ({route}: {route: any}) => {
     verifiedUserData,
     flushOtp,
     savedDataForVerification,
+    isChangedPassword,
   } = states;
   const {
     handleStep,
@@ -36,7 +37,6 @@ const ForgotPassword = ({route}: {route: any}) => {
     disabled,
     onCloseSuccessModal,
   } = functions;
-
   return (
     <ForgotPasswordView
       onPressBack={onPressBack}
@@ -66,6 +66,7 @@ const ForgotPassword = ({route}: {route: any}) => {
       verifiedUserData={verifiedUserData}
       savedDataForVerification={savedDataForVerification}
       test12={test12}
+      isChangedPassword={isChangedPassword}
     />
   );
 };
