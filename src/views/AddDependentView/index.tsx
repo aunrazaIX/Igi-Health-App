@@ -72,10 +72,10 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
   handleSubmitRequest,
   isUpdate,
 }) => {
-  // Determine if gender should be disabled
   const relationship = dependentApiData?.dependentTypeID?.label;
+
   const isSpouse = relationship === 'Spouse';
-  const genderDisabled = !isSpouse;
+  const genderDisabled = true;
 
   return (
     <>
@@ -120,14 +120,19 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               onSelectOption={option => {
                 dependentSetterForApiData('dependentTypeID', option);
 
-                if (option.label === 'Son' || option.label === 'Father') {
+                if (
+                  option.label === 'Son' ||
+                  option.label === 'Father' ||
+                  option.label === 'Husband'
+                ) {
                   dependentSetterForApiData('gender', {
                     label: 'Male',
                     value: 'Male',
                   });
                 } else if (
                   option.label === 'Daughter' ||
-                  option.label === 'Mother'
+                  option.label === 'Mother' ||
+                  option.label === 'Wife'
                 ) {
                   dependentSetterForApiData('gender', {
                     label: 'Female',

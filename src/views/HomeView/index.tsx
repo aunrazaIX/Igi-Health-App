@@ -188,11 +188,7 @@ const HomeView: React.FC<HomeViewProps> = ({
 
             <View>
               <AileronSemiBold
-                name={
-                  user?.UserName.includes('aun.raza@integrationxperts.com')
-                    ? `Welcome Back,\nImran Naveed Qureshi`
-                    : `Welcome Back,\n${user?.UserName}`
-                }
+                name={`Welcome Back, \n ${user?.UserName}`}
                 style={styles.profileTittle}
               />
             </View>

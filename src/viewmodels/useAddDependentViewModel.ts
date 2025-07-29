@@ -16,19 +16,13 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
   const {dependentData, dependentIndex, isUpdate} = route?.params || {};
 
-  console.log(dependentData, 'data add dependent');
+  console.log(dependentData, 'data add dependent comes from');
 
   const navigation = useNavigation();
 
   const [confirmationType, setConfirmatonType] = useState('');
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
-
-  const formatAgeString = (rawDate: string | undefined): string | null => {
-    if (!rawDate) return null;
-    const digitsOnly = rawDate.replace(/\D/g, '');
-    return digitsOnly;
-  };
 
   const prefilledData = {
     dependentName: dependentData?.dependentDetail[0]?.value,
@@ -43,6 +37,8 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
     age: dependentData?.dependentDetail[3]?.value,
   };
+
+  console.log(prefilledData, 'prefilled data');
 
   const formatAgeToDate = (raw: string): string => {
     if (!raw) return '';
@@ -61,20 +57,20 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     dependentName: prefilledData.dependentName ?? null,
     cnic: user?.cnic,
     clientCode: user?.ClientCode,
-    dependentTypeID: {label: prefilledData.relationship.label},
+    dependentTypeID: {
+      label: prefilledData.relationship.label,
+      value: prefilledData.relationship.value,
+    },
     dependentRequestTypesID: dependentIndex ? 2 : 1,
     dependentRequestID: 0,
     gender: {
       label: prefilledData.gender.label,
       Value: prefilledData.gender.value,
     },
-
     Age: prefilledData?.age?.toString() ?? null,
     dependentRequestStatus: true,
     createdBy: 1,
   });
-
-  console.log(dependentApiData, 'dataaaaaa usman');
 
   const genderOptions: personalDetail[] = [
     {value: 'Male', label: 'Male'},
@@ -89,6 +85,8 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       value: 'DependentTypeID',
     },
   });
+
+  console.log(relationsOptions, 'realtionshipssss');
 
   const {
     trigger,
@@ -108,21 +106,44 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
     onError: error => {
       console.log(error, 'Error');
+
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: `"Incorrect Data May be api goes to on Error"`,
+          detail:
+            'An error has occurred, please fill all require feilds. If the problem persists, contact IGI Life',
+        }),
+      );
     },
   });
 
   const handleSubmitRequest = () => {
-    // const filled = dependentCheckForError();
-    // if (!filled) return;
-
+    console.log('handleSubmit is trigger');
     let _apiData = {
       ...dependentApiData,
-      dependentTypeID: dependentApiData?.dependentTypeID?.value,
+      dependentTypeID:
+        dependentApiData?.dependentTypeID?.value === 'Main Member' &&
+        dependentApiData?.gender?.label === 'Male'
+          ? 1
+          : dependentApiData?.dependentTypeID?.value === 'Main Member' &&
+            dependentApiData?.gender?.label === 'Female'
+          ? 6
+          : dependentApiData?.dependentTypeID?.value === 'Spouse' &&
+            dependentApiData?.gender?.label === 'Male'
+          ? 6
+          : dependentApiData?.dependentTypeID?.value === 'Spouse' &&
+            dependentApiData?.gender?.label === 'Female'
+          ? 1
+          : dependentApiData?.dependentTypeID?.value,
+
       gender: dependentApiData?.gender?.label,
       Age: dependentApiData?.Age
         ? moment(dependentApiData.Age, 'D-MMM-YYYY').format('DDMMYYYY')
         : '',
     };
+
+    console.log('data going after confirmation', _apiData);
 
     if (
       !dependentApiData?.dependentName ||
@@ -146,19 +167,35 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     }
   };
   const onPressSubmit = () => {
-    console.log('onPressSubmit CAlled');
     const filled = dependentCheckForError();
 
     // if (!filled) return;
 
     let _apiData = {
       ...dependentApiData,
-      dependentTypeID: dependentApiData?.dependentTypeID?.value,
+      dependentTypeID:
+        dependentApiData?.dependentTypeID?.value === 'Main Member' &&
+        dependentApiData?.gender?.label === 'Male'
+          ? 1
+          : dependentApiData?.dependentTypeID?.value === 'Main Member' &&
+            dependentApiData?.gender?.label === 'Female'
+          ? 6
+          : dependentApiData?.dependentTypeID?.value === 'Spouse' &&
+            dependentApiData?.gender?.label === 'Male'
+          ? 6
+          : dependentApiData?.dependentTypeID?.value === 'Spouse' &&
+            dependentApiData?.gender?.label === 'Female'
+          ? 1
+          : dependentApiData?.dependentTypeID?.value,
+
       gender: dependentApiData?.gender?.label,
       Age: dependentApiData?.Age
         ? moment(dependentApiData.Age, 'D-MMM-YYYY').format('DDMMYYYY')
         : '',
     };
+
+    console.log(dependentApiData?.gender?.label, 'gender value while going');
+    console.log(_apiData, 'data going');
 
     if (
       !dependentApiData?.dependentName ||
@@ -169,7 +206,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       dispatch(
         setErrorModal({
           Show: true,
-          message: `"Please fill all require feilds"`,
+          message: `"Please fill all require feildsss"`,
           detail:
             'An error has occurred, please fill all require feilds. If the problem persists, contact IGI Life',
         }),
