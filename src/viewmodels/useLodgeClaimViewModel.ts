@@ -213,14 +213,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
 
   const dependantsData =
     covergaeTypesData?.map((item: any) => ({
-      label:
-        item?.CoverageType?.charAt(0).toUpperCase() +
-        item?.CoverageType?.slice(1).toLowerCase(),
+      label: item?.CoverageType,
       value: item?.CoverageId,
     })) ?? [];
-
-  console.log(dependantsData);
-  console.log();
 
   const {data: dependants, loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,

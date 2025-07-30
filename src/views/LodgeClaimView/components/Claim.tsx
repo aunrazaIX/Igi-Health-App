@@ -38,7 +38,7 @@ const Claim: React.FC<ClaimProps> = ({
             />
           ))
         ) : (
-          <NoDataView name={'No Treatments found'} />
+          <NoDataView name={'No Treatments Found'} />
         )}
       </View>
     </View>

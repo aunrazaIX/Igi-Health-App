@@ -438,7 +438,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
     {
       logo: newCardsIcons.lodgeClaim,
-      name: 'Lodge a Claim',
+      name: 'Lodge A Claim',
       image: icons.forwardArrow,
       // backgroundColor: COLORS.cardBackgroundBlue,
       mainParent: 'Tabs',

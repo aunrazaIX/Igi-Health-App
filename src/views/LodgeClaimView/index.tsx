@@ -172,7 +172,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         onPressBack={
           type === 'priorApproval' || 'lodgeClaim' ? handleGOBack : goBack
         }
-        title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge Claim'}
+        title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge A Claim'}
         titleStyle={{lineHeight: vh * 3}}
         resetStates={resetStates}
       />

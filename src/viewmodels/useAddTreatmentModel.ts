@@ -38,6 +38,7 @@ const useAddTreatmentModel = ({
   });
 
   const apiParams = useMemo(() => {
+    console.log(selectedType, 'Seeessssss');
     const typeValue = selectedType?.value;
 
     const endpointKey =
