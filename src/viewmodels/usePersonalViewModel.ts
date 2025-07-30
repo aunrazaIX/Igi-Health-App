@@ -51,8 +51,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
 
   const [deleteDependent, setDeleteDependent] = useState<any>();
 
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
+  const [expandedIndex, setExpandedIndex] = useState<number[]>([]);
   const [isUpdate, setIsUpdate] = useState(false);
 
   const navigation = useNavigation();
@@ -174,7 +173,9 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
     trigger(_apiData);
   };
   const toggleExpand = (index: number) => {
-    setExpandedIndex(prevIndex => (prevIndex === index ? null : index));
+    setExpandedIndex(prev =>
+      prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index],
+    );
   };
 
   return {

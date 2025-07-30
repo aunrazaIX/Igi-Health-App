@@ -21,6 +21,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import {vh} from '../../assets/theme/dimension';
+import {useSelector} from 'react-redux';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -113,6 +114,8 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   handleBackButton,
   handleGOBack,
 }) => {
+  const treatment = useSelector(state => state.lodge.treatments);
+  console.log(treatment, 'iioio');
   const renderStep = {
     personalDetails: (
       <PersonalDetails
@@ -153,7 +156,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
 
   const navigation = useNavigation();
 
-  console.log(type, 'typeeee');
+  console.log(confirmationType, 'typeeee');
 
   return (
     <>
@@ -193,7 +196,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             <Button
               containerStyle={{marginBottom: vh}}
               onPress={navigateTreatment}
-              name="Create Claim"
+              name={treatment.length > 1 ? 'Create More Claim' : 'Create Claim'}
             />
           ) : null}
 
@@ -242,7 +245,11 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
       <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
-        frameImage={type === 'back' ? icons.addSquare : icons.modelSuccessful}
+        frameImage={
+          ['back', 'delete', 'submit'].includes(confirmationType)
+            ? icons.ModalSuccessfull
+            : icons.modelSuccessful
+        }
         confirmationMessage={
           confirmationType === 'delete'
             ? 'Are you sure you want to delete this treatment?'

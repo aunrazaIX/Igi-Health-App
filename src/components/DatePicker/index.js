@@ -42,8 +42,11 @@ const DatePicker = ({
           <AileronRegular
             style={[
               styles.pickerText,
-              placeholder && {color: COLORS.black},
-              disabled && {color: COLORS.black + '55'},
+              disabled
+                ? {color: COLORS.black + '55'}
+                : value
+                ? {color: COLORS.personalValue}
+                : {color: COLORS.textGrayShade},
             ]}
             name={value ? value : placeholder}
           />

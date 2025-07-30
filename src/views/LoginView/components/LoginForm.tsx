@@ -163,7 +163,7 @@ const style = StyleSheet.create({
   },
   inputStyle: {
     fontSize: vw * 3.5,
-    fontWeight: '700',
+    // fontWeight: '700',
   },
   inputFeilds: {
     marginTop: vh,

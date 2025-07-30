@@ -75,6 +75,7 @@ const PersonalView: React.FC<Props> = ({
   modalType,
   onPressDelete,
 }) => {
+  console.log(data, 'dataaa');
   return (
     <Container>
       <TopView
@@ -121,7 +122,7 @@ const PersonalView: React.FC<Props> = ({
                         />
 
                         <View style={styles.iconsROw}>
-                          {expandedIndex === index && (
+                          {expandedIndex.includes(index) && (
                             <View style={styles.deleteEditRow}>
                               <TouchableOpacity
                                 onPress={() => manageUpdate(dependent, index)}>
@@ -131,15 +132,22 @@ const PersonalView: React.FC<Props> = ({
                                 />
                               </TouchableOpacity>
 
-                              <TouchableOpacity
-                                onPress={() =>
-                                  deleteDepenedent(dependent, index)
-                                }>
-                                <Image
-                                  source={icons.delete}
-                                  style={styles.deleteIcon}
-                                />
-                              </TouchableOpacity>
+                              {dependent.dependentDetail.find(
+                                item =>
+                                  item.label === 'Relationship :' &&
+                                  item.value !== 'Main Member' &&
+                                  item.value !== 'Member',
+                              ) && (
+                                <TouchableOpacity
+                                  onPress={() =>
+                                    deleteDepenedent(dependent, index)
+                                  }>
+                                  <Image
+                                    source={icons.delete}
+                                    style={styles.deleteIcon}
+                                  />
+                                </TouchableOpacity>
+                              )}
                             </View>
                           )}
                           <Image
@@ -153,7 +161,7 @@ const PersonalView: React.FC<Props> = ({
                         </View>
                       </View>
 
-                      {expandedIndex === index && (
+                      {expandedIndex.includes(index) && (
                         <View style={styles.details}>
                           {dependent?.dependentDetail?.map((item, index) => (
                             <>
@@ -200,7 +208,11 @@ const PersonalView: React.FC<Props> = ({
       <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
-        frameImage={icons.ModalSuccessfull}
+        frameImage={
+          modalType === 'delete'
+            ? icons.ModalSuccessfull
+            : icons.modelSuccessful
+        }
         confirmationMessage={
           modalType === 'delete'
             ? 'Are you sure you want to apply for deletion request of selected dependent ?'

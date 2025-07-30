@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
+import {fonts} from '../../assets/fonts';
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
   selectLabel: {
     textAlign: 'left',
     color: COLORS.textBlackShade,
+    // color: COLORS.black + '55',
     fontSize: vw * 3.6,
     lineHeight: vh * 2,
     minHeight: vh * 2,
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
     marginTop: vh * -0.7,
     marginLeft: 0,
     color: COLORS.personalValue,
+    fontFamily: fonts.Aileron.regular,
     fontSize: vw * 4,
     fontWeight: '500',
     paddingLeft: 0,

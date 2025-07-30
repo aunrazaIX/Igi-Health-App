@@ -6,9 +6,13 @@ const styles = StyleSheet.create({
   accordion: {
     // marginBottom: vh * 2,
     borderRadius: vh * 4,
+
+    marginVertical: vh,
   },
   wrapper: {
-    padding: vh * 3.5,
+    // padding: vh * 2,
+    paddingHorizontal: vw * 8,
+    paddingVertical: vh * 1.5,
   },
   headerRow: {
     flexDirection: 'row',

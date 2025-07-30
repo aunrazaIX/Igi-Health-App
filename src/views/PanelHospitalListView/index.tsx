@@ -73,7 +73,11 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
       />
 
       <CurvedView
-        containerStyle={selectedTabRight === 'map' && styles.curvedMapView}>
+        containerStyle={
+          selectedTabRight === 'map'
+            ? styles.curvedMapView
+            : styles.curvedListView
+        }>
         <View style={styles.infoContainerHeader}>
           {selectedTabRight === 'list' && (
             <InputField

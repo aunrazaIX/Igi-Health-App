@@ -72,7 +72,7 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.buttonBorder,
     // paddingVertical: vh,
     paddingHorizontal: vw * 3,
-    borderRadius: vw * 8,
+    borderRadius: vw * 5,
     gap: vw * 1.5,
     alignItems: 'center',
   },
