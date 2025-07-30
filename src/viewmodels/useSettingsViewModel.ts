@@ -49,37 +49,17 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
       icon: icons.faceIDIcon,
       to: 'Face ID/ Finger Print',
     },
-    // {
-    //   id: 3,
-    //   label: 'Privacy',
-    //   icon: icons.privacy,
-    //   to: 'Privacy',
-    // },
+
     {
       id: 4,
       label: 'Change Password',
+      params: {
+        step: 3,
+        isChangedPassword: true,
+      },
+      to: 'ForgotPassword',
       icon: icons.resetPasswordIcon,
-      mainParent: 'DrawerStack',
-      stChild: 'SettingsStack',
-      ndChild: 'ForgotPassword',
     },
-
-    // {
-    //   id: 7,
-    //   label: 'Notifications',
-    //   icon: icons.bellNotification,
-    //   mainParent: 'Tabs',
-    //   stChild: 'HomeStack',
-    //   ndChild: 'Notifications',
-    // },
-
-    // {
-    //   id: 8,
-    //   label: 'Help',
-    //   icon: icons.help,
-    //   mainParent: 'Tabs',
-    //   stChild: 'Helpline',
-    // },
   ];
 
   const goBack = () => {
@@ -87,25 +67,36 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
   };
 
   const onPressMenu = (data: SettingsList) => {
+    let params = {};
+    if (data?.params) {
+      params = {...params, ...data?.params};
+    }
     if (data?.to) {
-      navigation.navigate(data?.to);
+      navigation.navigate(data?.to, params);
       return;
-    }
-    if (data?.mainParent && data?.stChild && data?.ndChild) {
-      navigation.navigate(data?.mainParent, {
-        screen: data?.stChild,
-        params: {
-          screen: data?.ndChild,
-        },
-      });
-      return;
-    }
-    if (data?.mainParent && data.stChild) {
-      navigation.navigate(data.mainParent, {
-        screen: data.stChild,
-      });
     }
   };
+  // if (data?.mainParent && data?.stChild && data?.ndChild) {
+  //   if (data?.stChild === 'SettingsStack') {
+  //     console.log('from login');
+  //     navigation.navigate(data?.mainParent, {
+  //       screen: data?.stChild,
+  //       params: {
+  //         screen: data?.ndChild,
+  //         step: 3,
+  //       },
+  //     });
+  //   } else {
+  //     navigation.navigate(data?.mainParent, {
+  //       screen: data?.stChild,
+  //       params: {
+  //         screen: data?.ndChild,
+  //       },
+  //     });
+  //   }
+
+  //   return;
+  // }
 
   return {
     states: {

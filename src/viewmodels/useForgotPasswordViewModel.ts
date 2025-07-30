@@ -3,7 +3,7 @@ import {useEffect, useMemo, useRef, useState} from 'react';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setErrorModal} from '../redux/generalSlice';
 import {generateUUID} from '../utils';
 
@@ -41,7 +41,26 @@ const useForgotPasswordViewModel = ({
 }): UseForgotPasswordViewModelReturnType => {
   const test = useRef(null);
 
-  const {step: _step, verifiedUserData, type} = route?.params || {};
+  const {
+    step: _step,
+    verifiedUserData,
+    type,
+    isChangedPassword,
+  } = route?.params || {};
+
+  const {
+    rememberMe,
+    credentials,
+    deviceId,
+    biometrics,
+    user,
+    isToggle,
+    faceIdCredentials,
+  } = useSelector((state: RootState) => state.auth);
+
+  console.log('current userr', user);
+
+  console.log(isChangedPassword, 'typee');
 
   console.log(verifiedUserData, 'meri signup ki uuid');
   const [step, setStep] = useState<number>(_step ? _step : 1);
@@ -77,6 +96,12 @@ const useForgotPasswordViewModel = ({
     //   setStep(step - 1);
     //   return;
     // }
+
+    if (isChangedPassword) {
+      navigation.goBack();
+      return;
+    }
+
     if (step == 1) {
       navigation.goBack();
       return;
@@ -95,6 +120,7 @@ const useForgotPasswordViewModel = ({
     if (type == 'signup') {
       return verifiedUserData;
     }
+
     return test.current;
   };
 
@@ -223,15 +249,17 @@ const useForgotPasswordViewModel = ({
     apiEndpoint: endpoints.auth.updatePassword,
     method: 'post',
     argsOrBody: {
-      OldPassword: test12()?.UserPassword,
-      userId: test12()?.UserID,
+      OldPassword: isChangedPassword
+        ? user?.UserPassword
+        : test12()?.UserPassword,
+      userId: isChangedPassword ? user?.UserId : test12()?.UserID,
       isPassEncrypted: true,
       NewPassword: updatePasswordApiData.confirmPassword,
     },
 
     onSuccess: res => {
-      console.log('RE', res);
       if (res?.Data) {
+        console.log('RE', res);
         updatePasswordResetStates();
         setConfirmationModal(true);
       }
@@ -269,6 +297,7 @@ const useForgotPasswordViewModel = ({
 
   const handleNext = () => {
     if (step == 1 && type == 'forgot') {
+      console.log('from login id reset pass');
       if (!apiData.cellNumber || !apiData.email || !apiData.cnic) {
         dispatch(
           setErrorModal({
@@ -291,7 +320,10 @@ const useForgotPasswordViewModel = ({
       triggerVerifyOtp();
       return;
     }
-    if (step == 3 && (type == 'forgot' || type == 'signup')) {
+    if (
+      step == 3 &&
+      (type == 'forgot' || type == 'signup' || isChangedPassword)
+    ) {
       if (
         !updatePasswordApiData.newPassword ||
         !updatePasswordApiData.confirmPassword
@@ -318,6 +350,7 @@ const useForgotPasswordViewModel = ({
         );
         return;
       }
+
       triggerUpdatePassword();
     }
   };
@@ -339,6 +372,7 @@ const useForgotPasswordViewModel = ({
       countdownKey,
       flushOtp,
       savedDataForVerification,
+      isChangedPassword,
     },
     functions: {
       handleStep,

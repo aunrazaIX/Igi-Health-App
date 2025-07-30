@@ -197,11 +197,7 @@ const DrawerStack = () => {
             <View style={styles.profileContainer}>
               <View style={styles.profileRow}>
                 <AileronSemiBold
-                  name={
-                    user?.UserName.includes('.com')
-                      ? 'Imran Naveed Qureshi'
-                      : user?.UserName
-                  }
+                  name={user?.UserName}
                   style={styles.profileTittle}
                 />
               </View>
@@ -363,7 +359,8 @@ const styles = StyleSheet.create({
   },
   profileTittle: {
     // width: vw * 35,
-    fontSize: vw * 4.5,
+    fontSize: vw * 3.5,
+    lineHeight: vh * 2,
     textAlign: 'left',
     // borderWidth: 2,
   },

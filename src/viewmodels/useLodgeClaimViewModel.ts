@@ -224,7 +224,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
     argsOrBody: {
-      cnic: '14102-5322315-7',
+      cnic: user?.cnic,
       ClientCode: 'DEMO',
     },
     transform: {
@@ -242,6 +242,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   });
 
+  console.log(dependants, 'dependants dataaa');
   const {data: hospitalData, loading: hospitalLoading} = useApiHook({
     apiEndpoint: endpoints.panelHospital.getPanelHospitals,
     method: 'get',

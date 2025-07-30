@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: vh * 3,
+    marginTop: vh * 3.5,
     // paddingBottom: vh * 1.4,
     // borderWidth: 2,
   },

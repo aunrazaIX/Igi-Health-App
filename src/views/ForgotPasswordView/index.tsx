@@ -45,6 +45,7 @@ const ForgotPasswordView = ({
   test12,
   flushOtp,
   type,
+  isChangedPassword,
 }: {
   step: number;
   onPressBack: () => void;
@@ -72,6 +73,7 @@ const ForgotPasswordView = ({
   test2: any;
   savedDataForVerification: any;
   type: any;
+  isChangedPassword: any;
 }) => {
   const {user} = useSelector((state: RootState) => state.auth);
 
@@ -174,6 +176,7 @@ const ForgotPasswordView = ({
         closeButton
         Successfull
         onClose={onCloseSuccessModal}
+        isChangedPassword={isChangedPassword}
       />
     </Container>
   );

@@ -59,16 +59,11 @@ const ProfileView: React.FC<Props> = ({
                     </TouchableOpacity> */}
 
           <View style={styles.profileDetail}>
-            <AileronBold
-              name={
-                user?.UserName.includes('.com') ? 'Aun Raza' : user?.UserName
-              }
-              style={styles.ProfileName}
-            />
-            <AileronRegular
+            <AileronBold name={user?.UserName} style={styles.ProfileName} />
+            {/* <AileronRegular
               name={user?.UserEmail}
               style={styles.profileEmail}
-            />
+            /> */}
           </View>
           {ProfileData?.map((item, index) => (
             <DependentBox

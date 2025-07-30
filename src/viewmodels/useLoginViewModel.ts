@@ -117,6 +117,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     apiEndpoint: endpoints.auth.login,
     method: 'post',
     onSuccess: res => {
+      console.log(res, 'login ka response');
       loginResponse.current = res;
       let apiData = {
         ClientCode: res?.Data?.ClientCode,
@@ -125,6 +126,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       getCovergaeApi(apiData);
     },
     onError: error => {
+      console.log(error, 'login ka response');
       const errorMessage = error?.error || error?.message || '';
 
       dispatch(

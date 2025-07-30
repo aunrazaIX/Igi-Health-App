@@ -1,16 +1,15 @@
-import { personalDetail, UsePersonalModalTypes } from "../types/personalTypes";
-
+import {personalDetail, UsePersonalModalTypes} from '../types/personalTypes';
 
 const usePersonalModalViewModel = (): UsePersonalModalTypes => {
   const gender: personalDetail[] = [
-    { id: 1, name: 'Male' },
-    { id: 2, name: 'Female' },
+    {id: 1, name: 'Male'},
+    {id: 2, name: 'Female'},
   ];
 
   const relation: personalDetail[] = [
-    { id: 1, name: 'Father' },
-    { id: 2, name: 'Son' },
-    { id: 3, name: 'Husband' },
+    {id: 1, name: 'Father'},
+    {id: 2, name: 'Son'},
+    {id: 3, name: 'Husband'},
   ];
 
   return {
