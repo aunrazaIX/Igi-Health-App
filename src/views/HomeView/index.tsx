@@ -527,7 +527,10 @@ const HomeView: React.FC<HomeViewProps> = ({
                           <AileronSemiBold
                             style={styles.homeBackCardText}
                             name={
-                              homeCardData[0]?.Policy_MatLimit > 0
+                              homeCardData?.find(
+                                item =>
+                                  item?.Policy_Insured_Relaion == 'Member',
+                              )?.Policy_MatLimit > 0
                                 ? 'Available'
                                 : 'Not Available'
                             }
