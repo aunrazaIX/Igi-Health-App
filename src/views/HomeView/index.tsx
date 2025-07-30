@@ -271,10 +271,10 @@ const HomeView: React.FC<HomeViewProps> = ({
                               homeCardData.find(
                                 item =>
                                   item.Policy_Insured_Relaion === 'Member',
-                              )?.Policy_Insured_Name
+                              )?.SURNAME ?? ' --'
                             }`}
                             style={styles.infoCardMiddleTextlight}
-                            numberOfLines={1}
+                            numberOfLines={2}
                           />
                         </View>
                       </View>
@@ -559,10 +559,11 @@ const HomeView: React.FC<HomeViewProps> = ({
             />
           </View>
           <FlatList
-            horizontal
+            // horizontal
             data={cardData}
             keyExtractor={_item => _item?.name}
             showsHorizontalScrollIndicator={false}
+            numColumns={4}
             renderItem={({item}) => (
               // <TouchableOpacity
               //   onPress={() => onPressMenu(item)}

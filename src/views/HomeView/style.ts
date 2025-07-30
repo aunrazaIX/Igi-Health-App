@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: vh * 3.5,
+    marginTop: vh * 4.8,
     // paddingBottom: vh * 1.4,
     // borderWidth: 2,
   },
@@ -269,17 +269,28 @@ export const styles = StyleSheet.create({
   dashboardContainerCards: {
     // width: '80%',
     backgroundColor: COLORS.cardBackgroundBlue,
-    width: vw * 22,
+    width: vw * 20,
     marginRight: vw * 3,
     borderRadius: vw * 4,
     paddingHorizontal: vw * 3.5,
     // paddingVertical: vw * 2.5,
-    height: vw * 22,
+    height: vw * 20,
+    borderWidth: 2,
+    borderColor: COLORS.borderColor,
+    shadowColor: 'white',
+    // elevation: vw * 2,
   },
   cardsContainer: {
     marginTop: vh * 1.8,
     marginBottom: vh * 1.8,
     gap: vh,
+    // borderWidth: 2,
+    // flexDirection: 'row',
+
+    // flexDirection: "row"
+    // borderWidth: 2,
+    // width: '50%',
+    // flexDirection: 'row',
   },
   cardLogoContainer: {
     marginVertical: vh * 1,
@@ -287,8 +298,8 @@ export const styles = StyleSheet.create({
   },
   cardLogo: {
     // marginVertical: vh*1.5,
-    width: vw * 14,
-    height: vh * 10,
+    width: vw * 12,
+    height: vh * 8,
     resizeMode: 'contain',
   },
   cardContent: {

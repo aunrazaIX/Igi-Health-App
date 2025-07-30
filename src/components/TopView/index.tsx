@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   headerName: {
     width: '65%',
     color: COLORS.white,
-    fontSize: vw * 5,
+    fontSize: vw * 4,
     textAlign: 'center',
     marginLeft: vw * 2.2,
 

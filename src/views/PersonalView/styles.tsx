@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   dependentBoxStyle: {
     // padding: vw * 3.5,
-    // paddingVertical: v,
+    paddingVertical: vw * 2.5,
     // marginBottom: vh * 2,
   },
 });

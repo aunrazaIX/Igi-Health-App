@@ -91,6 +91,7 @@ const SignUpView = ({
         label="CNIC Number"
         placeholder="Enter CNIC"
         allowCopyPaste={true}
+        labelStyle={style.labelStyle}
         rightIcon={icons.cnic}
         onChangeText={text => {
           signupSetterForApiData('cnic', text);
