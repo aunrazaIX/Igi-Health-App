@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react';
-import {cardIcons, icons} from '../assets';
+import {newCardsIcons, icons, cardIcons} from '../assets';
 import {COLORS} from '../assets/theme/colors';
 import {Alert, Animated, Linking, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -422,72 +422,72 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   const cardData: CardItemData[] = [
     {
-      logo: cardIcons.benefits,
+      logo: newCardsIcons.benefits,
       name: 'Entitled Benefits',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundBlue,
+      // backgroundColor: COLORS.cardBackgroundBlue,
       to: 'Benefits',
     },
     {
-      logo: cardIcons.personal,
+      logo: newCardsIcons.personal,
       name: 'Family Details',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundRed,
+      // backgroundColor: COLORS.cardBackgroundRed,
       to: 'Personal',
     },
 
     {
-      logo: cardIcons.lodgeClaim,
+      logo: newCardsIcons.lodgeClaim,
       name: 'Lodge a Claim',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundBlue,
+      // backgroundColor: COLORS.cardBackgroundBlue,
       mainParent: 'Tabs',
       stChild: 'LodgeClaim',
     },
     user?.showPriorApproval && {
-      logo: cardIcons.taskDone,
+      logo: newCardsIcons.taskDone,
       name: 'Prior Approval',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundLightBlue,
+      // backgroundColor: COLORS.cardBackgroundLightBlue,
       mainParent: 'Tabs',
       stChild: 'PriorApproval',
       type: 'PriorApproval',
     },
     {
-      logo: icons.hospital,
+      logo: newCardsIcons.hospital,
       name: 'Network Hospitals',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundRed,
+      // backgroundColor: COLORS.cardBackgroundRed,
       to: 'Hospitals',
     },
     {
-      logo: cardIcons.discountedCenters,
+      logo: newCardsIcons.discountedCenters,
       name: 'Discount Centers',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundBlue,
+      // backgroundColor: COLORS.cardBackgroundBlue,
       to: 'PanelHospitalList',
     },
     {
-      logo: cardIcons.lodgeClaim,
+      logo: newCardsIcons.lodgeClaim,
       name: 'Claim History',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundBlue,
+      // backgroundColor: COLORS.cardBackgroundBlue,
       to: 'ClaimHistory',
     },
     {
-      logo: cardIcons.helpLine,
+      logo: newCardsIcons.helpLine,
       name: 'Helplines',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundLightBlue,
+      // backgroundColor: COLORS.cardBackgroundLightBlue,
       mainParent: 'Tabs',
       stChild: 'Helpline',
     },
 
     {
-      logo: cardIcons.complaint,
+      logo: newCardsIcons.complaint,
       name: 'Complaint',
       image: icons.forwardArrow,
-      backgroundColor: COLORS.cardBackgroundRed,
+      // backgroundColor: COLORS.cardBackgroundRed,
       link: 'corporate.services@igi.com.pk',
     },
   ].filter(Boolean);

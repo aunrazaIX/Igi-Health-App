@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   },
   wrapper: {padding: vh * 0.7},
   logo: {
-    marginTop: vh * 3,
+    marginTop: vh * 4.8,
     height: vh * 10,
     width: vw * 60,
     resizeMode: 'contain',
@@ -128,8 +128,7 @@ export const styles = StyleSheet.create({
   orText: {
     fontSize: vw * 5,
 
-    marginVertical: vh *2,
+    marginVertical: vh * 2,
     // borderWidth:2
-
   },
 });

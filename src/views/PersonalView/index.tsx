@@ -100,87 +100,89 @@ const PersonalView: React.FC<Props> = ({
             <AileronBold name={'Covered '} style={styles.dependentText} />
             <AileronBold name={'Family Members!'} style={styles.detailsText} />
           </View>
- <ScrollView>
+          <ScrollView>
+            <View style={{marginBottom: vh * 12}}>
+              {data?.map((dependent, index) => (
+                <>
+                  {console.log('depende', dependent)}
 
-         
-         <View style={{marginBottom : vh*12}}> 
-            {data?.map((dependent, index) => (
-              <>
-                {console.log('depende', dependent)}
-
-                <DependentBox
-                  key={index}
-                  containerStyle={styles.dependentBoxStyle}>
-                  <TouchableOpacity onPress={() => toggleExpand(index)}>
-                    <View style={styles.header}>
-                      <Image source={dependent?.image} style={styles.avatar} />
-                      <AileronBold
-                        style={styles.headerText}
-                        name={dependent.dependentDetail[0].value}
-                      />
-
-                      <View style={styles.iconsROw}>
-                        {expandedIndex === index && (
-                          <View style={styles.deleteEditRow}>
-                            <TouchableOpacity
-                              onPress={() => manageUpdate(dependent, index)}>
-                              <Image
-                                source={icons.edit}
-                                style={styles.editIcon}
-                              />
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                              onPress={() =>
-                                deleteDepenedent(dependent, index)
-                              }>
-                              <Image
-                                source={icons.delete}
-                                style={styles.deleteIcon}
-                              />
-                            </TouchableOpacity>
-                          </View>
-                        )}
+                  <DependentBox
+                    key={index}
+                    containerStyle={styles.dependentBoxStyle}>
+                    <TouchableOpacity onPress={() => toggleExpand(index)}>
+                      <View style={styles.header}>
                         <Image
-                          source={
-                            expandedIndex === index
-                              ? icons.selectArrowUp
-                              : icons.arrowDown
-                          }
-                          style={styles.icon}
+                          source={dependent?.image}
+                          style={styles.avatar}
                         />
-                      </View>
-                    </View>
+                        <AileronBold
+                          style={styles.headerText}
+                          name={dependent.dependentDetail[0].value}
+                        />
 
-                    {expandedIndex === index && (
-                      <View style={styles.details}>
-                        {dependent?.dependentDetail?.map((item, index) => (
-                          <>
-                            {console.log(item, 'pppp')}
+                        <View style={styles.iconsROw}>
+                          {expandedIndex === index && (
+                            <View style={styles.deleteEditRow}>
+                              <TouchableOpacity
+                                onPress={() => manageUpdate(dependent, index)}>
+                                <Image
+                                  source={icons.edit}
+                                  style={styles.editIcon}
+                                />
+                              </TouchableOpacity>
 
-                            <View style={styles.detailRow} key={index}>
-                              {item.label !== 'Name :' && (
-                                <>
-                                  <AileronSemiBold
-                                    name={item?.label}
-                                    style={styles.detailLabel}
-                                  />
-
-                                  <AileronSemiBold
-                                    name={item?.value}
-                                    style={styles.detailvalue}
-                                  />
-                                </>
-                              )}
+                              <TouchableOpacity
+                                onPress={() =>
+                                  deleteDepenedent(dependent, index)
+                                }>
+                                <Image
+                                  source={icons.delete}
+                                  style={styles.deleteIcon}
+                                />
+                              </TouchableOpacity>
                             </View>
-                          </>
-                        ))}
+                          )}
+                          <Image
+                            source={
+                              expandedIndex === index
+                                ? icons.selectArrowUp
+                                : icons.arrowDown
+                            }
+                            style={styles.icon}
+                          />
+                        </View>
                       </View>
-                    )}
-                  </TouchableOpacity>
-                </DependentBox>
-              </>
-            ))}</View>
+
+                      {expandedIndex === index && (
+                        <View style={styles.details}>
+                          {dependent?.dependentDetail?.map((item, index) => (
+                            <>
+                              {console.log(item, 'pppp')}
+
+                              <View style={styles.detailRow} key={index}>
+                                {item.label !== 'Name :' && (
+                                  <>
+                                    <AileronSemiBold
+                                      name={item?.label}
+                                      style={styles.detailLabel}
+                                    />
+
+                                    <AileronSemiBold
+                                      name={item?.value}
+                                      style={styles.detailvalue}
+                                    />
+                                  </>
+                                )}
+                              </View>
+                            </>
+                          ))}
+                        </View>
+                      )}
+                    </TouchableOpacity>
+                  </DependentBox>
+                </>
+              ))}
+            </View>
           </ScrollView>
         </View>
 

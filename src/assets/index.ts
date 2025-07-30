@@ -126,7 +126,7 @@ export const icons = {
   claimPaid: require('./icons/paid.png'),
   rejected: require('./icons/rejected.png'),
   pending: require('./icons/pending.png'),
-  successful  : require('./icons/successful.png'),
+  successful: require('./icons/successful.png'),
 };
 
 export const drawerIcons = {
@@ -167,4 +167,15 @@ export const cardIcons = {
   discountedCenters: require('./icons/labs.png'),
   helpLine: require('./icons/helpline.png'),
   complaint: require('./icons/Complaint.png'),
+};
+
+export const newCardsIcons = {
+  benefits: require('./icons/newbenefits.png'),
+  personal: require('./icons/newpersonal.png'),
+  lodgeClaim: require('./icons/newlodge.png'),
+  taskDone: require('./icons/newprior.png'),
+  hospital: require('./icons/newhospital.png'),
+  discountedCenters: require('./icons/newdiscounts.png'),
+  helpLine: require('./icons/newhelpline.png'),
+  complaint: require('./icons/newcomplaint.png'),
 };

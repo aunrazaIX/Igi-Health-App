@@ -87,6 +87,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   } = useSelector(state => state.lodge);
   const {user} = useSelector(state => state.auth);
 
+  console.log(user, 'useerr');
+
   console.log(selectedType, 'selectedType');
 
   const resetStates = () => {
@@ -187,8 +189,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     apiEndpoint: endpoints.bank.getBankDetails,
     method: 'get',
     argsOrBody: {
-      cnic: '14102-5322315-7',
-      ClientCode: 'DEMO',
+      cnic: user?.cnic,
+      ClientCode: user?.ClientCode,
     },
     transform: {
       keyToLoop: 'Data',
@@ -202,7 +204,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       apiEndpoint: endpoints.coverage.getCoverage,
       method: 'get',
       argsOrBody: {
-        ClientCode: 'ERC',
+        ClientCode: user?.ClientCode,
       },
       onSuccess: res => {
         console.log(res, 'coverage ka response');
@@ -225,7 +227,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     method: 'get',
     argsOrBody: {
       cnic: user?.cnic,
-      ClientCode: 'DEMO',
+      ClientCode: user?.ClientCode,
     },
     transform: {
       keyToLoop: 'Data',

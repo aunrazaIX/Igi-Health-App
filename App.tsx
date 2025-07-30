@@ -19,6 +19,7 @@ import {logout} from './src/redux/authSlice';
 import {setErrorModal} from './src/redux/generalSlice';
 import NetInfo from '@react-native-community/netinfo';
 import {EventRegister} from 'react-native-event-listeners';
+import {vh} from './src/assets/theme/dimension';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -63,8 +64,13 @@ const AppContent = () => {
   829;
   return (
     <NavigationContainer theme={MyTheme}>
-      <SafeAreaView style={{flex: 1, backgroundColor: COLORS.loginContainer}}>
-        <StatusBar translucent backgroundColor="transparent" />
+      <StatusBar translucent backgroundColor="transparent" />
+      <SafeAreaView
+        style={{
+          flex: 1,
+
+          backgroundColor: COLORS.loginContainer,
+        }}>
         <MainStack />
         <View>
           <ErrorModal />

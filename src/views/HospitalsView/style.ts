@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     gap: vw * 2,
+    // borderWidth: 2,
   },
   infoContainerHeaderRightMap: {
     flexDirection: 'row',
@@ -54,10 +55,10 @@ export const styles = StyleSheet.create({
 
   rightTab: {
     flexDirection: 'row',
-    borderWidth: 2,
+    // borderWidth: 2,
     borderColor: COLORS.buttonBorder,
     borderRadius: vw * 5,
-    paddingHorizontal: vw * 2,
+    paddingHorizontal: vw * 2.5,
     paddingVertical: vh * 1,
     alignItems: 'center',
     backgroundColor: COLORS.buttonBorder,
@@ -67,8 +68,8 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.cardBackgroundRed,
   },
   listIcon: {
-    width: vw * 5,
-    height: vw * 5,
+    width: vw * 3,
+    height: vw * 3,
     resizeMode: 'contain',
   },
   activeTabRightText: {
