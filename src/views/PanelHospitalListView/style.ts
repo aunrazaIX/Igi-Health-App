@@ -25,6 +25,9 @@ export const styles = StyleSheet.create({
   curvedMapView: {
     paddingHorizontal: 0 * vw,
   },
+  curvedListView: {
+    paddingBottom: vh * 3,
+  },
   rightTab: {
     flexDirection: 'row',
     borderColor: COLORS.buttonBorder,
@@ -40,8 +43,8 @@ export const styles = StyleSheet.create({
     gap: vw * 2,
   },
   listIcon: {
-    width: vw * 5,
-    height: vw * 5,
+    width: vw * 3,
+    height: vw * 3,
     resizeMode: 'contain',
   },
 

@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     justifyContent: 'center',
     alignItems: 'center',
+
     height: vh * 6.8,
   },
 });

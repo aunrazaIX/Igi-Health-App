@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
   },
   loginContent: {
     gap: vh * 2.5,
+    marginTop: vh * 4,
     flex: 1,
     paddingHorizontal: vw * 4,
     alignItems: 'center',

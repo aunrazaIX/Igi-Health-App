@@ -116,7 +116,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             <Select
               selectData={relationsOptions}
               selectLabel={'Relationship'}
-              selectPlaceholder={'-- Select Relation --'}
+              selectPlaceholder={'Select Relation'}
               onSelectOption={option => {
                 dependentSetterForApiData('dependentTypeID', option);
 
@@ -148,7 +148,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             <Select
               selectData={genderOptions}
               selectLabel={'Gender'}
-              selectPlaceholder={'-- Select Gender --'}
+              selectPlaceholder={'Select Gender'}
               onSelectOption={option =>
                 dependentSetterForApiData('gender', option)
               }

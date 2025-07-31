@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
     borderColor: COLORS.buttonBorder,
     borderRadius: vw * 5,
     paddingHorizontal: vw * 2.5,
-    paddingVertical: vh * 1,
+    paddingVertical: vh,
     alignItems: 'center',
     backgroundColor: COLORS.buttonBorder,
     gap: vw * 1,

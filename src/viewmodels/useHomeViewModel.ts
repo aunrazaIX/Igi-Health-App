@@ -307,7 +307,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
         Alert.alert(
           'Download Complete ✔',
-          'Your policy card has been downloaded. Do you want to open it now?',
+          'Your E-card has been downloaded. Do you want to open it now?',
           [
             {text: 'Cancel', style: 'cancel'},
             {
@@ -438,7 +438,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
     {
       logo: newCardsIcons.lodgeClaim,
-      name: 'Lodge a Claim',
+      name: 'Lodge A Claim',
       image: icons.forwardArrow,
       // backgroundColor: COLORS.cardBackgroundBlue,
       mainParent: 'Tabs',

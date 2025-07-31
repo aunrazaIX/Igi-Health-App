@@ -1,7 +1,7 @@
 import {icons} from '../assets';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {
   useFocusEffect,
   NavigationProp,
@@ -23,6 +23,7 @@ import {
   setSelectedMaternityType,
   setTreatments,
   setResetTreaments,
+  setUserEmail,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
@@ -76,6 +77,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const [confirmationType, setConfirmationType] = useState<string>('');
   const [deletedIndex, setDeletedIndex] = useState<any>(null);
   const [deletedFileIndex, setDeletedFileIndex] = useState(null);
+  const [isView, setIsView] = useState(null);
+  const [viewIndex, setViewIndex] = useState();
 
   const {
     selectedDocuments,
@@ -84,7 +87,10 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     selectedPatient,
     selectedType,
     selectedHospital,
+    userPassword,
   } = useSelector(state => state.lodge);
+
+  console.log(userPassword, 'userPPP');
   const {user} = useSelector(state => state.auth);
 
   console.log(user, 'useerr');
@@ -100,6 +106,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     setterForclaimData('claimComments', '');
     dispatch(setStep(1));
   };
+
+  dispatch(setUserEmail(user?.UserEmail));
+
   const {setterForApiData: setterForclaimData, apiData: claimData} =
     useErrorHandlingHook({
       claimComments: '',
@@ -205,6 +214,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       method: 'get',
       argsOrBody: {
         ClientCode: user?.ClientCode,
+        // ClientCode: 'PTC',
       },
       onSuccess: res => {
         console.log(res, 'coverage ka response');
@@ -213,14 +223,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
 
   const dependantsData =
     covergaeTypesData?.map((item: any) => ({
-      label:
-        item?.CoverageType?.charAt(0).toUpperCase() +
-        item?.CoverageType?.slice(1).toLowerCase(),
+      label: item?.CoverageType,
       value: item?.CoverageId,
     })) ?? [];
-
-  console.log(dependantsData);
-  console.log();
 
   const {data: dependants, loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
@@ -423,6 +428,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               message: 'File size should not exceed 25MB',
             }),
           );
+
           return;
         } else {
           if (!isDuplicate) {
@@ -458,6 +464,13 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     // dispatch(onDeleteDocuments(index));
   };
 
+  const onView = (index: string) => {
+    console.log(index, 'SAdadasd');
+
+    setViewIndex(index);
+    setIsView(true);
+  };
+
   const handleDeleteFile = deletedFileIndex => {
     dispatch(onDeleteDocuments(deletedFileIndex));
   };
@@ -486,6 +499,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       confirmationType,
       deletedIndex,
       deletedFileIndex,
+      isView,
+      viewIndex,
     },
     functions: {
       goBack,
@@ -509,6 +524,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       handleDeleteFile,
       handleBackButton,
       handleGOBack,
+      onView,
+      setIsView,
     },
   };
 };

@@ -63,7 +63,12 @@ const Select: React.FC<SelectProps> = ({
           }}
           style={[styles.selectBox, disabled && {opacity: 0.5}]}>
           <AileronRegular
-            style={styles.selectText}
+            style={[
+              styles.selectText,
+              {
+                color: value ? COLORS.personalValue : COLORS.textGrayShade,
+              },
+            ]}
             name={value || selectPlaceholder}
           />
           {!disabled && (
@@ -91,6 +96,7 @@ const styles = StyleSheet.create({
   Patient: {
     textAlign: 'left',
     fontSize: vw * 3.6,
+    color: COLORS.textBlackShade,
   },
   selectBox: {
     flexDirection: 'row',
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selectText: {
-    color: COLORS.personalValue,
+    color: COLORS.textGrayShade,
     fontSize: vh * 1.7,
     marginTop: vh * 0.5,
     lineHeight: vh * 2.2,
@@ -132,6 +138,6 @@ const styles = StyleSheet.create({
     // marginBottom: vh * 3,
   },
   dependentContainer: {
-    padding: vw * 3.5,
+    padding: vh * 1.3,
   },
 });

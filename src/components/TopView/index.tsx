@@ -119,6 +119,7 @@ export default TopView;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    // borderWidth: 2,
   },
   wrapper: {
     paddingTop: vh * 3.5,
@@ -134,6 +135,9 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
     marginBottom: vh * 3,
+    marginTop: vh * 1.5,
+
+    // borderWidth: 2,
     width: '100%',
   },
   backIconContainer: {
@@ -168,6 +172,7 @@ const styles = StyleSheet.create({
   TopViewIcon: {
     width: vw * 8,
     height: vw * 8,
+    marginRight: vw * 1.4,
   },
   headerIcon: {
     flexDirection: 'row',

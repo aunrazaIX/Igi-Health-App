@@ -82,147 +82,147 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
       <TopView title="Network Hospitals" type="default" />
       <CurvedView
         containerStyle={selectedTabRight === 'map' && styles.cruvedMapView}>
-        <KeyboardAwareScrollView>
-          <View>
-            <View style={styles.mapTextContainer}>
-              <View style={styles.moreFilter}>
-                {selectedTabRight === 'list' && (
-                  <InputField
-                    value={searchText}
-                    placeholder="Search city / Address / Town .."
-                    placeholderTextColor={COLORS.textGrayShade}
-                    onChangeText={text => setSearchText(text)}
-                    searchFieldRight={styles.searchFieldRight}
-                    searchFieldRightIcon={styles.searchFieldRightIcon}
-                    inputStyle={styles.inputStyle}
-                    containerStyle={styles.inputFeild}
-                  />
-                )}
-              </View>
-            </View>
-            <View
-              style={
-                selectedTabRight === 'map'
-                  ? styles.infoContainerHeaderRightMap
-                  : styles.infoContainerHeaderRight
-              }>
-              <TouchableOpacity
-                onPress={() => onPressRightTab('list')}
-                style={[
-                  styles.rightTab,
-                  selectedTabRight === 'list' && styles.activeTabRight,
-                ]}>
-                {selectedTabRight === 'list' ? (
-                  <Image style={styles.listIcon} source={icons.listActive} />
-                ) : (
-                  <Image style={styles.listIcon} source={icons.listIcon} />
-                )}
-
-                <AileronBold
-                  style={[
-                    styles.infoContainerHeaderText,
-                    selectedTabRight === 'list' && styles.activeTabRightText,
-                  ]}
-                  name="List"
-                  numberOfLines={1}
+        {/* <KeyboardAwareScrollView> */}
+        <View>
+          <View style={styles.mapTextContainer}>
+            <View style={styles.moreFilter}>
+              {selectedTabRight === 'list' && (
+                <InputField
+                  value={searchText}
+                  placeholder="Search city / Address / Town .."
+                  placeholderTextColor={COLORS.textGrayShade}
+                  onChangeText={text => setSearchText(text)}
+                  searchFieldRight={styles.searchFieldRight}
+                  searchFieldRightIcon={styles.searchFieldRightIcon}
+                  inputStyle={styles.inputStyle}
+                  containerStyle={styles.inputFeild}
                 />
-              </TouchableOpacity>
+              )}
+            </View>
+          </View>
+          <View
+            style={
+              selectedTabRight === 'map'
+                ? styles.infoContainerHeaderRightMap
+                : styles.infoContainerHeaderRight
+            }>
+            <TouchableOpacity
+              onPress={() => onPressRightTab('list')}
+              style={[
+                styles.rightTab,
+                selectedTabRight === 'list' && styles.activeTabRight,
+              ]}>
+              {selectedTabRight === 'list' ? (
+                <Image style={styles.listIcon} source={icons.listActive} />
+              ) : (
+                <Image style={styles.listIcon} source={icons.listIcon} />
+              )}
 
-              <TouchableOpacity
+              <AileronBold
                 style={[
-                  styles.rightTab,
-                  selectedTabRight === 'map' && styles.activeTabRight,
+                  styles.infoContainerHeaderText,
+                  selectedTabRight === 'list' && styles.activeTabRightText,
                 ]}
-                onPress={() => onPressRightTab('map')}>
-                {selectedTabRight === 'map' ? (
-                  <Image style={styles.listIcon} source={icons.map} />
-                ) : (
-                  <Image style={styles.listIcon} source={icons.mapInactive} />
-                )}
+                name="List"
+                numberOfLines={1}
+              />
+            </TouchableOpacity>
 
-                <AileronBold
-                  style={[
-                    styles.infoContainerHeaderText,
-                    selectedTabRight === 'map' && styles.activeTabRightText,
-                  ]}
-                  name="Map"
-                  numberOfLines={1}
-                />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              style={[
+                styles.rightTab,
+                selectedTabRight === 'map' && styles.activeTabRight,
+              ]}
+              onPress={() => onPressRightTab('map')}>
+              {selectedTabRight === 'map' ? (
+                <Image style={styles.listIcon} source={icons.map} />
+              ) : (
+                <Image style={styles.listIcon} source={icons.mapInactive} />
+              )}
 
-            {selectedTabRight === 'list' && (
-              <View style={styles.mapTabsContainer}>
-                <FlatList
-                  data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={styles.mapTabsContainer}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({item}) => (
-                    <ProvinceTab
-                      onPressMapTab={onPressMapTab}
-                      selectedMapTab={selectedMapTab}
-                      provinceName={item}
-                      icon={true}
-                    />
-                  )}
-                />
-              </View>
-            )}
+              <AileronBold
+                style={[
+                  styles.infoContainerHeaderText,
+                  selectedTabRight === 'map' && styles.activeTabRightText,
+                ]}
+                name="Map"
+                numberOfLines={1}
+              />
+            </TouchableOpacity>
           </View>
 
           {selectedTabRight === 'list' && (
-            <>
-              {tabChanging ? (
-                <SimpleLoader color={COLORS.black} />
-              ) : (
-                <FlatList
-                  data={data}
-                  keyExtractor={(_, index) => index.toString()}
-                  ListEmptyComponent={() => {
-                    if (tabChanging) {
-                      return (
-                        <View style={{padding: 20, alignItems: 'center'}}>
-                          <SimpleLoader
-                            size="large"
-                            color={COLORS.cardBackgroundBlue}
-                          />
-                        </View>
-                      );
-                    }
-                    return hospitalLoading ||
-                      tabChanging ||
-                      data.length !== 0 ? null : (
-                      <NoDataView name="No hospitals found" />
-                    );
-                  }}
-                  renderItem={({item}) => (
-                    <>
-                      <DetailsContainer
-                        detailsTextLabel={styles.detailsTextLabel}
-                        detailsTextValue={styles.detailsTextValue}
-                        headerIcon={[icons.arrowDirection]}
-                        data={item}
-                        onPress={handleMapDirection}
-                      />
-                    </>
-                  )}
-                />
-              )}
-            </>
+            <View style={styles.mapTabsContainer}>
+              <FlatList
+                data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.mapTabsContainer}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({item}) => (
+                  <ProvinceTab
+                    onPressMapTab={onPressMapTab}
+                    selectedMapTab={selectedMapTab}
+                    provinceName={item}
+                    icon={true}
+                  />
+                )}
+              />
+            </View>
           )}
+        </View>
 
-          {selectedTabRight === 'map' && (
-            <View
-              style={{
-                width: '100%',
-                height: vh * 58,
-                // marginHorizontal: vw * 10,
-                // flex: 1,
-                marginTop: vh * 2,
-              }}>
-              {/* <MapView
+        {selectedTabRight === 'list' && (
+          <>
+            {tabChanging ? (
+              <SimpleLoader color={COLORS.black} />
+            ) : (
+              <FlatList
+                data={data}
+                keyExtractor={(_, index) => index.toString()}
+                ListEmptyComponent={() => {
+                  if (tabChanging) {
+                    return (
+                      <View style={{padding: 20, alignItems: 'center'}}>
+                        <SimpleLoader
+                          size="large"
+                          color={COLORS.cardBackgroundBlue}
+                        />
+                      </View>
+                    );
+                  }
+                  return hospitalLoading ||
+                    tabChanging ||
+                    data.length !== 0 ? null : (
+                    <NoDataView name="No hospitals found" />
+                  );
+                }}
+                renderItem={({item}) => (
+                  <>
+                    <DetailsContainer
+                      detailsTextLabel={styles.detailsTextLabel}
+                      detailsTextValue={styles.detailsTextValue}
+                      headerIcon={[icons.arrowDirection]}
+                      data={item}
+                      onPress={handleMapDirection}
+                    />
+                  </>
+                )}
+              />
+            )}
+          </>
+        )}
+
+        {selectedTabRight === 'map' && (
+          <View
+            style={{
+              width: '100%',
+              height: vh * 58,
+              // marginHorizontal: vw * 10,
+              // flex: 1,
+              marginTop: vh * 2,
+            }}>
+            {/* <MapView
                 showsUserLocation
                 key={selectedTabRight}
                 style={{flex: 1}}
@@ -265,9 +265,9 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
                   );
                 })}
               </MapView> */}
-            </View>
-          )}
-        </KeyboardAwareScrollView>
+          </View>
+        )}
+        {/* </KeyboardAwareScrollView> */}
 
         <ModalLoading loading={hospitalLoading} />
       </CurvedView>

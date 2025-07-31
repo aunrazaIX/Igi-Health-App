@@ -21,6 +21,8 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import {vh} from '../../assets/theme/dimension';
+import {useSelector} from 'react-redux';
+import ImageModal from './components/ImageModal';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -65,6 +67,10 @@ type LodgeClaimViewProps = {
   deletedFileIndex: any;
   handleBackButton: any;
   handleGOBack: any;
+  isView: any;
+  onView: any;
+  setIsView: any;
+  viewIndex: any;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -112,7 +118,16 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   deletedFileIndex,
   handleBackButton,
   handleGOBack,
+  isView,
+  onView,
+  setIsView,
+  viewIndex,
 }) => {
+  const treatment = useSelector(state => state.lodge.treatments);
+  const doc = useSelector(state => state.lodge.selectedDocuments);
+  console.log(doc, 'iioio');
+  // console.log(doc[viewIndex].uri, 'pppp');
+
   const renderStep = {
     personalDetails: (
       <PersonalDetails
@@ -147,13 +162,14 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         handleCancelFile={handleCancelFile}
         claimData={claimData}
         setterForclaimData={setterForclaimData}
+        onView={onView}
       />
     ),
   };
 
   const navigation = useNavigation();
 
-  console.log(type, 'typeeee');
+  console.log(confirmationType, 'typeeee');
 
   return (
     <>
@@ -172,7 +188,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         onPressBack={
           type === 'priorApproval' || 'lodgeClaim' ? handleGOBack : goBack
         }
-        title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge Claim'}
+        title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge A Claim'}
         titleStyle={{lineHeight: vh * 3}}
         resetStates={resetStates}
       />
@@ -187,13 +203,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             componentList={renderStep}
           />
 
-          {(currentStep === 2 && selectedType?.value === 1) ||
+          {(currentStep === 2 && selectedType?.label === 'OPD - Outpatient') ||
           (currentStep === 2 && claimsDetails?.length < 1) ||
           (type === 'priorApproval' && currentStep === 2) ? (
             <Button
               containerStyle={{marginBottom: vh}}
               onPress={navigateTreatment}
-              name="Create Claim"
+              name={treatment.length > 0 ? 'Create More Claim' : 'Create Claim'}
             />
           ) : null}
 
@@ -242,7 +258,11 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
       <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
-        frameImage={type === 'back' ? icons.addSquare : icons.modelSuccessful}
+        frameImage={
+          ['back', 'delete', 'submit'].includes(confirmationType)
+            ? icons.ModalSuccessfull
+            : icons.modelSuccessful
+        }
         confirmationMessage={
           confirmationType === 'delete'
             ? 'Are you sure you want to delete this treatment?'
@@ -317,6 +337,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             : null
         }
       />
+
+      {isView && (
+        <ImageModal
+          image={doc[viewIndex].uri}
+          onClose={() => setIsView(false)}
+        />
+      )}
     </>
   );
 };

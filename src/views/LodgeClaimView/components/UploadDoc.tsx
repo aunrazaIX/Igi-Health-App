@@ -6,7 +6,11 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {AileronSemiBold, ConfirmationModal} from '../../../components';
+import {
+  AileronBold,
+  AileronSemiBold,
+  ConfirmationModal,
+} from '../../../components';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
 import {icons, images} from '../../../assets';
@@ -18,6 +22,7 @@ type UploadDocProps = {
   handleCancelFile: () => void;
   claimData: any;
   setterForclaimData: any;
+  onView: any;
 };
 
 const UploadDoc: React.FC<UploadDocProps> = ({
@@ -27,6 +32,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
   isUplaoded = false,
   claimData,
   setterForclaimData,
+  onView,
 }) => {
   return (
     <View style={styles.uploadFileContainer}>
@@ -95,6 +101,10 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                     } MB`}
                     style={styles.fileSizeText}
                   />
+
+                  <TouchableOpacity onPress={() => onView(index)}>
+                    <AileronBold name={'view file'} style={styles.viewFile} />
+                  </TouchableOpacity>
                 </View>
               </View>
             );
@@ -128,9 +138,10 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderStyle: 'dashed',
     borderRadius: vh * 0.5,
-    padding: vh * 2.5,
+    padding: vh,
     alignItems: 'center',
     marginTop: vh * 2,
+    // borderEndWidth: 2,
   },
   uploadImage: {
     width: vh * 7,
@@ -138,16 +149,16 @@ const styles = StyleSheet.create({
   },
   supporting: {
     marginVertical: vh * 2,
-    fontSize: vh * 2.3,
+    fontSize: vh * 1.6,
     color: COLORS.insuredPrice,
   },
   ClickUpload: {
     color: COLORS.benefitTitle,
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.5,
     marginBottom: vh * 0.7,
   },
   maxFile: {
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.3,
     color: COLORS.maxFile,
     fontWeight: '400',
   },
@@ -156,7 +167,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginTop: vh * 2,
     borderRadius: vh * 0.7,
-    padding: vh * 2,
+    padding: vh,
   },
   documentBoxInside: {
     flexDirection: 'row',
@@ -183,6 +194,11 @@ const styles = StyleSheet.create({
     fontSize: vh * 1.4,
     color: COLORS.cardBackgroundRed,
     // textAlign: 'left',
+    marginTop: vh,
+  },
+  viewFile: {
+    fontSize: vw * 4,
+    color: COLORS.downloadGreen,
     marginTop: vh,
   },
   documentSize: {
@@ -232,7 +248,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: vh * 1,
     borderRadius: vh * 2,
-    marginTop : vh
+    marginTop: vh,
   },
   addRemarks: {
     marginVertical: vh * 1,
@@ -255,6 +271,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'space-between',
     minHeight: '100%',
+    // borderWidth: 2,
   },
   uploadButton: {
     marginVertical: vh * 2,

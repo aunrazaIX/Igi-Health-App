@@ -42,8 +42,11 @@ const DatePicker = ({
           <AileronRegular
             style={[
               styles.pickerText,
-              placeholder && {color: COLORS.black},
-              disabled && {color: COLORS.black + '55'},
+              disabled
+                ? {color: COLORS.black + '55'}
+                : value
+                ? {color: COLORS.personalValue}
+                : {color: COLORS.textGrayShade},
             ]}
             name={value ? value : placeholder}
           />
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: vw * 2,
   },
   pickerText: {
-    fontSize: vh * 1.5,
+    fontSize: vh * 1.7,
     textAlign: 'left',
     color: COLORS.black,
     width: '75%',

@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderWidth: 1,
     borderColor: COLORS.black + '22',
-    height: vh * 8,
+    height: vh * 6.9,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
     marginVertical: vh * 1.5,
@@ -171,9 +171,10 @@ const styles = StyleSheet.create({
   textInput: {
     width: '85%',
     height: '100%',
-    fontSize: vw * 3.55,
-    color: COLORS.textBlackShade,
-    fontFamily: fonts.Aileron.bold,
+    fontSize: vw * 3.2,
+    // borderWidth: 2,
+    color: COLORS.personalValue,
+    fontFamily: fonts.Aileron.regular,
     bottom: vh * 0.5,
   },
   iconView: {
