@@ -65,9 +65,6 @@ const HomeView: React.FC<HomeViewProps> = ({
   handleCardDownload,
 }) => {
   const user = useSelector(state => state.auth.user);
-  console.log(user, 'userrrr');
-
-  console.log(homeCardData, 'homeCardData');
 
   // let myArray = [
   //   {

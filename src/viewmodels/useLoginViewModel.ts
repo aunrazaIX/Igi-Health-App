@@ -60,10 +60,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
   const test = useRef(null);
 
-  console.log(biometrics, 'bioemtrics ');
-  console.log(faceIdCredentials, 'faceiDDDDD');
-  console.log(user, ' userrrrrr ');
-
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [verifiedUserData, setVerifiedUserData] = useState(null);
   const [checked, setChecked] = useState(rememberMe);
@@ -117,7 +113,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     apiEndpoint: endpoints.auth.login,
     method: 'post',
     onSuccess: res => {
-      console.log(res, 'login ka response');
       loginResponse.current = res;
       let apiData = {
         ClientCode: res?.Data?.ClientCode,
@@ -126,7 +121,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       getCovergaeApi(apiData);
     },
     onError: error => {
-      console.log(error, 'login ka response');
       const errorMessage = error?.error || error?.message || '';
 
       dispatch(
@@ -167,8 +161,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
             'We couldn’t find your details in our records. Please check your information or contact IGI Life.',
         }),
       );
-
-      console.log('oo');
     },
   });
 
@@ -180,7 +172,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
-      console.log('YE CASAAd', test.current);
       navigation.navigate('ForgotPassword', {
         step: 2,
         verifiedUserData: test.current,

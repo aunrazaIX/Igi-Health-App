@@ -16,8 +16,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
   const {dependentData, dependentIndex, isUpdate} = route?.params || {};
 
-  console.log(dependentData, 'data add dependent comes from');
-
   const navigation = useNavigation();
 
   const [confirmationType, setConfirmatonType] = useState('');
@@ -37,8 +35,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
 
     age: dependentData?.dependentDetail[3]?.value,
   };
-
-  console.log(prefilledData, 'prefilled data');
 
   const formatAgeToDate = (raw: string): string => {
     if (!raw) return '';
@@ -86,8 +82,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     },
   });
 
-  console.log(relationsOptions, 'realtionshipssss');
-
   const {
     trigger,
     loading: addDependentLoading,
@@ -105,8 +99,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     },
 
     onError: error => {
-      console.log(error, 'Error');
-
       dispatch(
         setErrorModal({
           Show: true,
@@ -119,7 +111,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   });
 
   const handleSubmitRequest = () => {
-    console.log('handleSubmit is trigger');
     let _apiData = {
       ...dependentApiData,
       dependentTypeID:
@@ -143,8 +134,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         : '',
     };
 
-    console.log('data going after confirmation', _apiData);
-
     if (
       !dependentApiData?.dependentName ||
       !dependentApiData?.gender?.label ||
@@ -160,8 +149,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         }),
       );
     } else {
-      console.log('triggering updating');
-      console.log('apiData', _apiData);
       trigger(_apiData);
       // setConfirmatonType('update');
     }
@@ -194,9 +181,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         : '',
     };
 
-    console.log(dependentApiData?.gender?.label, 'gender value while going');
-    console.log(_apiData, 'data going');
-
     if (
       !dependentApiData?.dependentName ||
       !dependentApiData?.gender?.label ||
@@ -217,7 +201,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         setConfirmationModal(true);
         setConfirmatonType('update');
       } else {
-        console.log(_apiData, 'usman');
         trigger(_apiData);
         // setConfirmationModal(true);
         // setConfirmatonType('update');
