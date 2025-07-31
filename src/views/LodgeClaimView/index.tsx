@@ -22,6 +22,7 @@ import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import {vh} from '../../assets/theme/dimension';
 import {useSelector} from 'react-redux';
+import ImageModal from './components/ImageModal';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
@@ -66,6 +67,10 @@ type LodgeClaimViewProps = {
   deletedFileIndex: any;
   handleBackButton: any;
   handleGOBack: any;
+  isView: any;
+  onView: any;
+  setIsView: any;
+  viewIndex: any;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -113,9 +118,16 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   deletedFileIndex,
   handleBackButton,
   handleGOBack,
+  isView,
+  onView,
+  setIsView,
+  viewIndex,
 }) => {
   const treatment = useSelector(state => state.lodge.treatments);
-  console.log(treatment, 'iioio');
+  const doc = useSelector(state => state.lodge.selectedDocuments);
+  console.log(doc, 'iioio');
+  // console.log(doc[viewIndex].uri, 'pppp');
+
   const renderStep = {
     personalDetails: (
       <PersonalDetails
@@ -150,6 +162,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         handleCancelFile={handleCancelFile}
         claimData={claimData}
         setterForclaimData={setterForclaimData}
+        onView={onView}
       />
     ),
   };
@@ -324,6 +337,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             : null
         }
       />
+
+      {isView && (
+        <ImageModal
+          image={doc[viewIndex].uri}
+          onClose={() => setIsView(false)}
+        />
+      )}
     </>
   );
 };

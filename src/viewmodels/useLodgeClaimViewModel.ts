@@ -77,6 +77,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const [confirmationType, setConfirmationType] = useState<string>('');
   const [deletedIndex, setDeletedIndex] = useState<any>(null);
   const [deletedFileIndex, setDeletedFileIndex] = useState(null);
+  const [isView, setIsView] = useState(null);
+  const [viewIndex, setViewIndex] = useState();
 
   const {
     selectedDocuments,
@@ -427,8 +429,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
             }),
           );
 
-          useEffect(() => {}, [user?.UserPassword]);
-
           return;
         } else {
           if (!isDuplicate) {
@@ -464,6 +464,13 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     // dispatch(onDeleteDocuments(index));
   };
 
+  const onView = (index: string) => {
+    console.log(index, 'SAdadasd');
+
+    setViewIndex(index);
+    setIsView(true);
+  };
+
   const handleDeleteFile = deletedFileIndex => {
     dispatch(onDeleteDocuments(deletedFileIndex));
   };
@@ -492,6 +499,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       confirmationType,
       deletedIndex,
       deletedFileIndex,
+      isView,
+      viewIndex,
     },
     functions: {
       goBack,
@@ -515,6 +524,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       handleDeleteFile,
       handleBackButton,
       handleGOBack,
+      onView,
+      setIsView,
     },
   };
 };

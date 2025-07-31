@@ -3,6 +3,7 @@ import LodgeClaimView from '../../views/LodgeClaimView';
 import useLodgeClaimViewModel from '../../viewmodels/useLodgeClaimViewModel';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
+import {View} from 'react-native-reanimated/lib/typescript/Animated';
 
 type RootStackParamList = {
   LodgeClaim: {
@@ -43,6 +44,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     confirmationType,
     deletedIndex,
     deletedFileIndex,
+    isView,
+    viewIndex,
   } = states;
 
   const {
@@ -67,6 +70,8 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     handleDeleteFile,
     handleBackButton,
     handleGOBack,
+    onView,
+    setIsView,
   } = functions;
 
   return (
@@ -115,6 +120,10 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       deletedFileIndex={deletedFileIndex}
       handleBackButton={handleBackButton}
       handleGOBack={handleGOBack}
+      isView={isView}
+      onView={onView}
+      setIsView={setIsView}
+      viewIndex={viewIndex}
     />
   );
 };

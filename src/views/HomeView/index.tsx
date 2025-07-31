@@ -589,10 +589,7 @@ const HomeView: React.FC<HomeViewProps> = ({
               <View style={styles.cardsContainer}>
                 <TouchableOpacity
                   onPress={() => onPressMenu(item)}
-                  style={[
-                    styles.dashboardContainerCards,
-                    {backgroundColor: item.backgroundColor},
-                  ]}>
+                  style={[styles.dashboardContainerCards]}>
                   <Image style={styles.cardLogo} source={item.logo} />
                   {/* 
                 <View style={styles.cardContent}>
