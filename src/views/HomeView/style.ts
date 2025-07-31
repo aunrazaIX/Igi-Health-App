@@ -311,7 +311,7 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCardText: {
     // textAlign: 'left',
-    fontSize: vw * 3.5,
+    fontSize: vw * 3.1,
     color: COLORS.black,
     letterSpacing: vw * 0.11,
     lineHeight: vh * 2,
