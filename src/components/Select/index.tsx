@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   selectText: {
     color: COLORS.textGrayShade,
-    fontSize: vh * 1.7,
+    fontSize: vw * 3.5,
     marginTop: vh * 0.5,
     lineHeight: vh * 2.2,
   },
@@ -136,8 +136,10 @@ const styles = StyleSheet.create({
     width: '100%',
     // borderWidth: 2,
     // marginBottom: vh * 3,
+    // borderWidth: 2,
   },
   dependentContainer: {
     padding: vh * 1.3,
+    paddingVertical: vh * 0.9,
   },
 });

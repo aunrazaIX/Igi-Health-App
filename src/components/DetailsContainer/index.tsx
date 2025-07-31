@@ -32,6 +32,12 @@ const DetailsContainer: React.FC<Props> = ({
   patientName,
 }) => {
   const [isArrowUp, setIsArrowUp] = useState<boolean>(false);
+  const formatValue = (value: string) => {
+    if (!isNaN(Number(value))) {
+      return Number(value).toLocaleString();
+    }
+    return value;
+  };
 
   return (
     <View style={[styles.card]}>
@@ -93,7 +99,12 @@ const DetailsContainer: React.FC<Props> = ({
               />
               <AileronBold
                 style={[styles.detailsValue, detailsTextValue]}
-                name={item.value}
+                name={
+                  item.label.toLowerCase().includes('amount claimed') ||
+                  item.label.toLowerCase().includes('amount paid')
+                    ? formatValue(item.value)
+                    : item.value
+                }
               />
             </View>
           ))}

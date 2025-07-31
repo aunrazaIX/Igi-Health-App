@@ -21,7 +21,7 @@ import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ModalLoading from '../../components/ModalLoading';
-import {vh} from '../../assets/theme/dimension';
+import {vh, vw} from '../../assets/theme/dimension';
 
 type AddTreatmentViewProps = {
   treatmentTypes: any[];
@@ -73,7 +73,7 @@ const AddTreatmentView = ({
               value={apiData?.treatment?.label}
               onSelectOption={option => setterForApiData('treatment', option)}
               selectData={treatmentTypes}
-              selectLabel={'Treatment Or Service Type --'}
+              selectLabel={'Treatment Or Service Type'}
               selectPlaceholder={'Select treatment/service from list'}
               isSearch={true}
               selectContainer={{
@@ -84,7 +84,8 @@ const AddTreatmentView = ({
 
             <InputField
               placeholderTextColor={COLORS.textGrayShade}
-              labelStyle={{color: COLORS.textBlackShade}}
+              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
+              inputStyle={{fontSize: vw * 3.5}}
               containerStyle={
                 apiData?.error_receiptNumber
                   ? {marginBottom: vh * 2.5, paddingVertical: vh}
@@ -102,7 +103,8 @@ const AddTreatmentView = ({
             />
 
             <InputField
-              labelStyle={{color: COLORS.textBlackShade}}
+              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
+              inputStyle={{fontSize: vw * 3.5}}
               containerStyle={
                 apiData?.error_amount
                   ? {marginBottom: vh * 2, paddingVertical: vh}
@@ -121,7 +123,8 @@ const AddTreatmentView = ({
             />
 
             <InputField
-              labelStyle={{color: COLORS.textBlackShade}}
+              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
+              inputStyle={{fontSize: vw * 3.5}}
               containerStyle={
                 apiData?.error_description
                   ? {marginBottom: vh * 3, paddingVertical: vh}

@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     borderWidth: vh * 0.3,
     // padding: vw * 3.5,
 
-    paddingBottom: vh * 0,
+    paddingBottom: vh * -2,
   },
   selectLabel: {
     textAlign: 'left',
@@ -61,15 +61,22 @@ const styles = StyleSheet.create({
     fontSize: vw * 3.6,
     lineHeight: vh * 2,
     minHeight: vh * 2,
+    marginBottom: vh * 0,
+    marginTop: vh * -1,
+    // paddingLeft: vw * -2,
+    marginLeft: vw * -1,
   },
   popupInput: {
     marginTop: vh * -0.9,
-    marginLeft: 0,
+    marginLeft: vw * -1.8,
     color: COLORS.personalValue,
     fontFamily: fonts.Aileron.regular,
-    fontSize: vw * 4,
+    fontSize: vw * 3.5,
     fontWeight: '500',
-    paddingLeft: 0,
+    // paddingLeft: vw * -3,
+
+    // paddingBottom: vh * -0.9,
+    marginBottom: vh * -0.8,
   },
   modalAddButton: {
     marginTop: vh * 2,

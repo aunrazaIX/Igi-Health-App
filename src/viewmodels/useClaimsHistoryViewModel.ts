@@ -79,10 +79,10 @@ const useClaimsHistoryViewModel = (): UseClaimsHistoryViewModel => {
               ),
             },
             {label: 'Claim Type:', value: item?.ClaimsSubTypeName},
-            {
-              label: 'Claim Value:',
-              value: Number(item?.SubmiitedClaim).toLocaleString('en-PK'),
-            },
+            // {
+            //   label: 'Claim Value:',
+            //   value: Number(item?.SubmiitedClaim).toLocaleString('en-PK'),
+            // },
             {label: 'Status:', value: item?.ClaimStatusName},
             {label: 'Amount Claimed', value: item?.SubmiitedClaim},
             {label: 'Amount Paid', value: item?.TotalPaid},

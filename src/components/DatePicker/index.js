@@ -79,6 +79,9 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     marginBottom: vh * 3,
+    // borderWidth: 2,
+    marginTop: vh * -0.6,
+    marginLeft: vw * -1,
   },
   subContainer: {
     height: vh * 3,
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     borderRadius: vw * 2,
   },
   pickerText: {
-    fontSize: vh * 1.7,
+    fontSize: vw * 3.5,
     textAlign: 'left',
     color: COLORS.black,
     width: '75%',
@@ -120,5 +123,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: vh * 1.55,
     color: COLORS.black,
+    // paddingTop: vh * -2,
   },
 });

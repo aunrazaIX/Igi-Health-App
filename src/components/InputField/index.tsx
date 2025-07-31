@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
     marginVertical: vh * 1.5,
-    paddingHorizontal: vw * 2,
+    paddingHorizontal: vw * 1,
     flexDirection: 'column',
     paddingVertical: vh,
   },
@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: vw * 3,
     color: COLORS.textBlackShade,
+    // marginRight: vw,
   },
   textInput: {
     width: '85%',
