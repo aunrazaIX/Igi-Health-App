@@ -1,7 +1,7 @@
 import {icons} from '../assets';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {
   useFocusEffect,
   NavigationProp,
@@ -23,6 +23,7 @@ import {
   setSelectedMaternityType,
   setTreatments,
   setResetTreaments,
+  setUserEmail,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
@@ -84,7 +85,10 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     selectedPatient,
     selectedType,
     selectedHospital,
+    userPassword,
   } = useSelector(state => state.lodge);
+
+  console.log(userPassword, 'userPPP');
   const {user} = useSelector(state => state.auth);
 
   console.log(user, 'useerr');
@@ -100,6 +104,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     setterForclaimData('claimComments', '');
     dispatch(setStep(1));
   };
+
+  dispatch(setUserEmail(user?.UserEmail));
+
   const {setterForApiData: setterForclaimData, apiData: claimData} =
     useErrorHandlingHook({
       claimComments: '',
@@ -205,6 +212,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       method: 'get',
       argsOrBody: {
         ClientCode: user?.ClientCode,
+        // ClientCode: 'PTC',
       },
       onSuccess: res => {
         console.log(res, 'coverage ka response');
@@ -418,6 +426,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               message: 'File size should not exceed 25MB',
             }),
           );
+
+          useEffect(() => {}, [user?.UserPassword]);
+
           return;
         } else {
           if (!isDuplicate) {

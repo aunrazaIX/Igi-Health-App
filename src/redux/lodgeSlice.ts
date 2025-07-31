@@ -12,6 +12,7 @@ const initialState: {
   remarks: string;
   treatments: any[];
   isError: boolean;
+  userPassword: any;
 } = {
   currentStep: 1,
   selectedPatient: null,
@@ -21,6 +22,7 @@ const initialState: {
   treatments: [],
   isError: false,
   remarks: '',
+  userPassword: '',
 };
 
 export const updateTreatments = createAsyncThunk(
@@ -169,6 +171,11 @@ export const lodgeSlice = createSlice({
     setRemarks: (state, {payload}) => {
       state.remarks = payload;
     },
+
+    setUserEmail: (state, {payload}) => {
+      console.log(payload, 'payload');
+      state.userPassword = payload;
+    },
   },
 });
 
@@ -185,5 +192,6 @@ export const {
   setSelectedType,
   setSelectedMaternityType,
   setResetTreaments,
+  setUserEmail,
 } = lodgeSlice.actions;
 export const lodegeReducer = lodgeSlice.reducer;

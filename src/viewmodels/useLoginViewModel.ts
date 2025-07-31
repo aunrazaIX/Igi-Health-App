@@ -121,7 +121,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       loginResponse.current = res;
       let apiData = {
         ClientCode: res?.Data?.ClientCode,
-        // ClientCode: 'ERC',
+        // ClientCode: 'PTC',
       };
       getCovergaeApi(apiData);
     },

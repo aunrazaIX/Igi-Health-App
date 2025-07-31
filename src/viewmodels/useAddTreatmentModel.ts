@@ -39,14 +39,14 @@ const useAddTreatmentModel = ({
 
   const apiParams = useMemo(() => {
     console.log(selectedType, 'Seeessssss');
-    const typeValue = selectedType?.value;
+    const typeValue = selectedType?.label;
 
     const endpointKey =
       claimType === 'priorApproval'
         ? 'IPDTypesForPriorApproval'
-        : typeValue === 2
+        : typeValue === 'IPD - Hospitalization'
         ? 'getIPDTypes'
-        : typeValue === 1
+        : typeValue === 'OPD - Outpatient'
         ? 'getTypes'
         : 'getMATTypes';
 

@@ -190,13 +190,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             componentList={renderStep}
           />
 
-          {(currentStep === 2 && selectedType?.value === 1) ||
+          {(currentStep === 2 && selectedType?.label === 'OPD - Outpatient') ||
           (currentStep === 2 && claimsDetails?.length < 1) ||
           (type === 'priorApproval' && currentStep === 2) ? (
             <Button
               containerStyle={{marginBottom: vh}}
               onPress={navigateTreatment}
-              name={treatment.length > 1 ? 'Create More Claim' : 'Create Claim'}
+              name={treatment.length > 0 ? 'Create More Claim' : 'Create Claim'}
             />
           ) : null}
 
