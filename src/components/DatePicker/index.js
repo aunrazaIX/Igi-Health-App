@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: vw * 2,
   },
   pickerText: {
-    fontSize: vh * 1.5,
+    fontSize: vh * 1.7,
     textAlign: 'left',
     color: COLORS.black,
     width: '75%',

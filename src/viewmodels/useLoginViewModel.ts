@@ -104,7 +104,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       let data = loginResponse.current;
       data.Data.coverageType = res;
       data.Data.showPriorApproval = res?.some(
-        item => item?.CoverageType === 'IPD',
+        item => item?.CoverageType === 'IPD - Hospitalization',
       );
       dispatch(setUserData(data));
     },

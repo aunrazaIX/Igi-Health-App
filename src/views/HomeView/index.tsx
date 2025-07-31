@@ -265,7 +265,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
                         </View>
 
-                        <View>
+                        {/* <View>
                           <AileronSemiBold
                             name={`Policy Name: ${
                               homeCardData.find(
@@ -276,10 +276,28 @@ const HomeView: React.FC<HomeViewProps> = ({
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={2}
                           />
+                        </View> */}
+                        <View style={styles.infoCardFooterLeft}>
+                          <AileronSemiBold
+                            name={'Card Holder Name'}
+                            style={styles.infoCardMiddleTextlight}
+                            numberOfLines={1}
+                          />
+
+                          <AileronBold
+                            name={homeCardData
+                              ?.find(
+                                item =>
+                                  item?.Policy_Insured_Relaion == 'Member',
+                              )
+                              ?.Policy_Insured_Name.trim()}
+                            style={styles.infoCardTextBold}
+                            numberOfLines={1}
+                          />
                         </View>
                       </View>
 
-                      <View style={{gap: vh}}>
+                      <View style={{gap: vh, marginBottom: vh * 3}}>
                         <AileronSemiBold
                           name={`Class: ${
                             homeCardData.find(
@@ -287,7 +305,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                             )?.Policy_Class
                           }`}
                           style={styles.infoCardMiddleTextlight}
-                          numberOfLines={2}
+                          numberOfLines={1}
                         />
 
                         <AileronSemiBold
@@ -314,7 +332,7 @@ const HomeView: React.FC<HomeViewProps> = ({
                   </View>
 
                   <View style={styles.infoCardFooter}>
-                    <View style={styles.infoCardFooterLeft}>
+                    {/* <View style={styles.infoCardFooterLeft}>
                       <AileronSemiBold
                         name={'Card Holder Name'}
                         style={styles.infoCardMiddleTextlight}
@@ -329,6 +347,18 @@ const HomeView: React.FC<HomeViewProps> = ({
                           ?.Policy_Insured_Name.trim()}
                         style={styles.infoCardTextBold}
                         numberOfLines={1}
+                      />
+                    </View> */}
+
+                    <View>
+                      <AileronSemiBold
+                        name={`Policy Name: ${
+                          homeCardData.find(
+                            item => item.Policy_Insured_Relaion === 'Member',
+                          )?.SURNAME ?? ' --'
+                        }`}
+                        style={styles.infoCardMiddleTextlight}
+                        numberOfLines={2}
                       />
                     </View>
 

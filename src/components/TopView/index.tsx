@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
   TopViewIcon: {
     width: vw * 8,
     height: vw * 8,
+    marginRight: vw * 1.4,
   },
   headerIcon: {
     flexDirection: 'row',

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     minHeight: vh * 2,
   },
   popupInput: {
-    marginTop: vh * -0.7,
+    marginTop: vh * -0.9,
     marginLeft: 0,
     color: COLORS.personalValue,
     fontFamily: fonts.Aileron.regular,

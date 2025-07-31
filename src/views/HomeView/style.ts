@@ -170,7 +170,7 @@ export const styles = StyleSheet.create({
     height: vh * 2,
   },
   infoCardTextBold: {
-    fontSize: vh * 1.6,
+    fontSize: vh * 2,
     color: COLORS.textBlackShade,
     maxWidth: vh * 30,
     // textAlign: 'left',
@@ -197,7 +197,7 @@ export const styles = StyleSheet.create({
     color: COLORS.textColor,
     textAlign: 'left',
     lineHeight: vh * 2,
-    maxWidth: vh * 25,
+    // maxWidth: vh * 25,
     // borderWidth: 2,
   },
   homeInfoContainerMiddleTextLogo: {
