@@ -16,6 +16,7 @@ import {RootState} from '../redux/store';
 import {DetailsContainer} from '../components';
 import {Platform} from 'react-native';
 import {generateUUID} from '../utils';
+import {getToken} from '../utils/firebase';
 
 export type UserDetails = {
   name: string;
@@ -60,9 +61,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
   const test = useRef(null);
 
-  console.log(biometrics, 'bioemtrics ');
-  console.log(faceIdCredentials, 'faceiDDDDD');
-  console.log(user, ' userrrrrr ');
+  console.log(getToken());
 
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [verifiedUserData, setVerifiedUserData] = useState(null);
@@ -201,6 +200,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   });
 
   const handleLogin = async () => {
+    const deviceToken = getToken();
     const filled = LoginCheckForError();
     if (!filled) return;
     const Buffer = require('buffer').Buffer;
@@ -208,7 +208,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     let apiData = {
       userName: loginApiData?.userName,
       password: encodedAuth,
-      DeviceId: '21312321302138013203231',
+      DeviceId: deviceToken ? deviceToken : '21313131',
       LoginDeviceName: 'Emulator',
     };
     dispatch(

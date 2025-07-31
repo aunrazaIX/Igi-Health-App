@@ -5,8 +5,7 @@ import {
   SafeAreaView,
   StatusBar,
   View,
-  TouchableWithoutFeedback,
-  Alert,
+  PermissionsAndroid,
 } from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {Provider, useDispatch, useSelector} from 'react-redux';
@@ -14,12 +13,15 @@ import {persistor, store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import ErrorModal from './src/components/Modal/ErrorModal';
 import {COLORS} from './src/assets/theme/colors';
-import {logout} from './src/redux/authSlice';
 
-import {setErrorModal} from './src/redux/generalSlice';
-import NetInfo from '@react-native-community/netinfo';
-import {EventRegister} from 'react-native-event-listeners';
-import {vh} from './src/assets/theme/dimension';
+import {getApp} from '@react-native-firebase/app';
+import {
+  getMessaging,
+  requestPermission,
+  getToken,
+  AuthorizationStatus,
+} from '@react-native-firebase/messaging';
+import {setToken} from './src/utils/firebase';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -28,40 +30,51 @@ const MyTheme = {
   },
 };
 
-const INACTIVITY_LIMIT = 3 * 60 * 1000;
-
 const AppContent = () => {
-  const {user} = useSelector((state: RootState) => state.auth);
+  useEffect(() => {
+    requestPermissionHandler()
+      .then(bool => {
+        if (bool) {
+          const messagingInstance = getMessaging(getApp());
+          getToken(messagingInstance)
+            .then(token => {
+              setToken(token);
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        }
+      })
+      .catch(e => {
+        console.log('E', e);
+      });
+  }, []);
 
-  const dispatch = useDispatch();
-  const timer = useRef(null);
-
-  // const resetTimer = () => {
-  //   if (!user) return;
-
-  //   if (timer.current) clearTimeout(timer.current);
-  //   timer.current = setTimeout(() => {
-  //     dispatch(logout());
-  //     dispatch(
-  //       setErrorModal({
-  //         Show: true,
-  //         message: 'Session Expired',
-  //         detail:
-  //           'Your session has timed out due to inactivity. Please log in again to continue.',
-  //       }),
-  //     );
-  //   }, INACTIVITY_LIMIT);
-  // };
-
-  // useEffect(() => {
-  //   if (!user) return;
-  //   resetTimer();
-
-  //   return () => {
-  //     if (timer.current) clearTimeout(timer.current);
-  //   };
-  // }, [user]);
-  829;
+  const requestPermissionHandler = async () => {
+    let allowed = false;
+    if (Platform.OS === 'ios') {
+      const messagingInstance = getMessaging(getApp());
+      const authStatus = await requestPermission(messagingInstance);
+      const enabled =
+        authStatus === AuthorizationStatus.AUTHORIZED ||
+        authStatus === AuthorizationStatus.PROVISIONAL;
+      if (enabled) {
+        allowed = true;
+      }
+    } else {
+      if (Platform.Version >= 33) {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          allowed = true;
+        }
+      } else {
+        allowed = true;
+      }
+    }
+    return allowed;
+  };
   return (
     <NavigationContainer theme={MyTheme}>
       <StatusBar translucent backgroundColor="transparent" />
