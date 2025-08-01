@@ -93,6 +93,7 @@ const SignUpView = ({
         allowCopyPaste={true}
         labelStyle={style.labelStyle}
         rightIcon={icons.cnic}
+        keyboardType="numeric"
         onChangeText={text => {
           signupSetterForApiData('cnic', text);
           const errorMsg = validateCNIC(text);
@@ -163,7 +164,15 @@ const SignUpView = ({
         name="Create Account"
         onPress={handleSignup}
         loading={loadingSignup}
-        disabled={loadingSignup ? true : false}
+        disabled={
+          signupApiData?.error_cellNumber ||
+          signupApiData?.error_cnic ||
+          signupApiData?.error_email
+            ? true
+            : loadingSignup
+            ? true
+            : false
+        }
       />
     </>
   );

@@ -65,7 +65,7 @@ const AppContent = () => {
   return (
     <NavigationContainer theme={MyTheme}>
       <StatusBar translucent backgroundColor="transparent" />
-      <SafeAreaView
+      <View
         style={{
           flex: 1,
 
@@ -75,7 +75,7 @@ const AppContent = () => {
         <View>
           <ErrorModal />
         </View>
-      </SafeAreaView>
+      </View>
     </NavigationContainer>
   );
 };

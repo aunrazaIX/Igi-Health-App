@@ -139,18 +139,20 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      let id = generateUUID();
-      test.current = {...res?.Data, uuid: id};
-      let apiData = {
-        userId: res?.Data?.UserID,
-        uuid: id,
-        user_email: res?.Data?.UserEmail,
-        user_cellnumber: res?.Data?.UserCellNumber,
-        opt_reason: 'Register New User',
-        opt_typeID: '3',
-        ClientCode: res?.Data?.ClientCode,
-      };
-      sendOtp(apiData);
+      if (res?.Data) {
+        let id = generateUUID();
+        test.current = {...res?.Data, uuid: id};
+        let apiData = {
+          userId: res?.Data?.UserID,
+          uuid: id,
+          user_email: res?.Data?.UserEmail,
+          user_cellnumber: res?.Data?.UserCellNumber,
+          opt_reason: 'Register New User',
+          opt_typeID: '3',
+          ClientCode: res?.Data?.ClientCode,
+        };
+        sendOtp(apiData);
+      }
     },
     onError: () => {
       dispatch(
