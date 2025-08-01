@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, Modal, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS} from '../../../assets/theme/colors';
 import {icons} from '../../../assets';
-import {vw} from '../../../assets/theme/dimension';
+import {vh, vw} from '../../../assets/theme/dimension';
 
 const ImageModal = ({image, onClose}) => {
   return (
@@ -12,7 +12,7 @@ const ImageModal = ({image, onClose}) => {
           <Image source={icons.CancelIcon} style={styles.cross} />
         </TouchableOpacity>
         <Image
-          style={{height: 100, width: 100, backgroundColor: 'red'}}
+          style={{height: vh * 60, width: vw * 90, borderRadius: vw * 2}}
           source={{uri: image}}
         />
       </View>
@@ -33,5 +33,6 @@ const styles = StyleSheet.create({
 
     borderWidth: 1,
     borderRadius: vw * 6,
+    // fontSize: vw * 4,
   },
 });

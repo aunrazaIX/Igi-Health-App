@@ -72,6 +72,8 @@ const styles = StyleSheet.create({
   },
   activeMapTab: {
     // borderWidth: 2,
+    paddingVertical: vh * 1.2,
+    paddingHorizontal: vw * 2,
   },
   card: {
     width: '33.33%',

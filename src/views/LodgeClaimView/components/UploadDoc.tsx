@@ -167,7 +167,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginTop: vh * 2,
     borderRadius: vh * 0.7,
-    padding: vh,
+    paddingVertical: vh * 0.8,
+    paddingHorizontal: vw * 2,
   },
   documentBoxInside: {
     flexDirection: 'row',
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
   documentText: {
     textAlign: 'left',
     color: COLORS.maxFile,
-    fontSize: vh * 1.7,
+    fontSize: vh * 1.4,
     lineHeight: vh * 3,
     flexShrink: 1,
     flexWrap: 'wrap',
@@ -190,16 +191,19 @@ const styles = StyleSheet.create({
   },
   fileSizeText: {
     // borderWidth: 2,
+    textAlign: 'left',
     // backgroundColor: 'red',
     fontSize: vh * 1.4,
     color: COLORS.cardBackgroundRed,
     // textAlign: 'left',
-    marginTop: vh,
+    marginTop: vh * 0.5,
   },
   viewFile: {
-    fontSize: vw * 4,
+    fontSize: vw * 3,
     color: COLORS.downloadGreen,
-    marginTop: vh,
+    marginTop: vh * 0.3,
+    // borderWidth: 2,
+    textAlign: 'left',
   },
   documentSize: {
     textAlign: 'left',

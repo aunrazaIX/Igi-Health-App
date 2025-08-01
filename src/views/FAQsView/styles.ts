@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     // marginBottom: vh * 2,
     borderRadius: vh * 4,
 
-    marginVertical: vh,
+    marginVertical: vh * 0.45,
   },
   wrapper: {
     // padding: vh * 2,
