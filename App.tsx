@@ -61,7 +61,7 @@ const AppContent = () => {
   //     if (timer.current) clearTimeout(timer.current);
   //   };
   // }, [user]);
-  829;
+  
   return (
     <NavigationContainer theme={MyTheme}>
       <StatusBar translucent backgroundColor="transparent" />
