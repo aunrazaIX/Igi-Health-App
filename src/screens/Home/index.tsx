@@ -12,6 +12,7 @@ const Home = () => {
     loading,
     homeCardData,
     homeCardDataLoading,
+    showDependantModal,
   } = states;
   const {
     animateCard,
@@ -20,6 +21,7 @@ const Home = () => {
     onPressHeaderIcon,
     handleAssociatedApps,
     handleCardDownload,
+    handleDependantsModal,
   } = functions;
 
   return (
@@ -29,6 +31,7 @@ const Home = () => {
       toggleDrawer={toggleDrawer}
       onPressMenu={onPressMenu}
       onPressHeaderIcon={onPressHeaderIcon}
+      handleDependantsModal={handleDependantsModal}
       backAnimatedStyle={backAnimatedStyle}
       frontAnimatedStyle={frontAnimatedStyle}
       homeCardData={homeCardData}
@@ -37,6 +40,7 @@ const Home = () => {
       homeCardDataLoading={homeCardDataLoading}
       handleAssociatedApps={handleAssociatedApps}
       handleCardDownload={handleCardDownload}
+      showDependantModal={showDependantModal}
     />
   );
 };

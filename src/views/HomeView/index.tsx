@@ -20,6 +20,7 @@ import {useSelector} from 'react-redux';
 import ModalLoading from '../../components/ModalLoading';
 import moment from 'moment';
 import SimpleLoader from '../../components/SimpleLoader';
+import DependantsModal from './components/DependantsModal';
 
 type CardItem = {
   logo: ImageSourcePropType;
@@ -63,6 +64,8 @@ const HomeView: React.FC<HomeViewProps> = ({
   homeCardDataLoading,
   handleAssociatedApps,
   handleCardDownload,
+  handleDependantsModal,
+  showDependantModal,
 }) => {
   const user = useSelector(state => state.auth.user);
 
@@ -216,15 +219,6 @@ const HomeView: React.FC<HomeViewProps> = ({
               <Animated.View
                 style={[styles.homeInfoContainer, frontAnimatedStyle]}>
                 <TouchableOpacity onPress={animateCard}>
-                  {/* <TouchableOpacity
-                    style={styles.downloadIcon}
-                    onPress={handleCardDownload}>
-                    <Image
-                      style={styles.downloadIconImage}
-                      source={icons.download}
-                    />
-                  </TouchableOpacity> */}
-
                   <View style={styles.homeInfoContainerHeader}>
                     <View>
                       <Image style={styles.logo} source={icons.logo} />
@@ -262,18 +256,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
                         </View>
 
-                        {/* <View>
-                          <AileronSemiBold
-                            name={`Policy Name: ${
-                              homeCardData.find(
-                                item =>
-                                  item.Policy_Insured_Relaion === 'Member',
-                              )?.SURNAME ?? ' --'
-                            }`}
-                            style={styles.infoCardMiddleTextlight}
-                            numberOfLines={2}
-                          />
-                        </View> */}
                         <View style={styles.infoCardFooterLeft}>
                           <AileronSemiBold
                             name={'Card Holder Name'}
@@ -329,24 +311,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                   </View>
 
                   <View style={styles.infoCardFooter}>
-                    {/* <View style={styles.infoCardFooterLeft}>
-                      <AileronSemiBold
-                        name={'Card Holder Name'}
-                        style={styles.infoCardMiddleTextlight}
-                        numberOfLines={1}
-                      />
-
-                      <AileronBold
-                        name={homeCardData
-                          ?.find(
-                            item => item?.Policy_Insured_Relaion == 'Member',
-                          )
-                          ?.Policy_Insured_Name.trim()}
-                        style={styles.infoCardTextBold}
-                        numberOfLines={1}
-                      />
-                    </View> */}
-
                     <View>
                       <AileronSemiBold
                         name={`Policy Name: ${
@@ -358,20 +322,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                         numberOfLines={2}
                       />
                     </View>
-
-                    {/* <View style={styles.infoCardFooterRight}>
-                      <AileronSemiBold
-                        name={'Expiry Date'}
-                        style={styles.infoCardMiddleTextlight}
-                        numberOfLines={1}
-                      />
-
-                      <AileronBold
-                        name={'02/07/2025'}
-                        style={styles.infoCardFooterTextBold}
-                        numberOfLines={1}
-                      />
-                    </View> */}
                   </View>
                 </TouchableOpacity>
               </Animated.View>
@@ -387,7 +337,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                     <View
                       style={{
                         justifyContent: 'space-between',
-                        // gap: vh * 1.5,
                       }}>
                       <View style={styles.homeBackCardHeading}>
                         <View style={{flexDirection: 'row', gap: vw}}>
@@ -414,19 +363,9 @@ const HomeView: React.FC<HomeViewProps> = ({
                           style={{
                             flexDirection: 'row',
                             justifyContent: 'space-between',
-                            // alignItems: 'flex-end',
                             height: vh * 12,
-                            // borderWidth: 2,
                           }}>
-                          <View
-                            style={
-                              {
-                                // gap: vh * 1,
-                                // height: vh * 12,
-                                // overflow: 'hidden',
-                                // borderWidth: 2,
-                              }
-                            }>
+                          <View>
                             {homeCardData
                               ?.filter(
                                 _item =>
@@ -444,21 +383,19 @@ const HomeView: React.FC<HomeViewProps> = ({
                                       style={styles.homeBackCardText}
                                     />
                                   ) : (
-                                    <AileronRegular
-                                      name="..."
-                                      style={styles.homeBackCardDottedText}
-                                    />
+                                    <TouchableOpacity
+                                      onPress={() =>
+                                        handleDependantsModal(true)
+                                      }>
+                                      <AileronRegular
+                                        name="..."
+                                        style={styles.homeBackCardDottedText}
+                                      />
+                                    </TouchableOpacity>
                                   )}
                                 </>
                               ))}
                           </View>
-
-                          {/* <TouchableOpacity onPress={animateCard}>
-                          <Image
-                            style={styles.flipCardIcon}
-                            source={images.flipCard}
-                          />
-                        </TouchableOpacity> */}
                         </View>
 
                         <View style={styles.validity}>
@@ -828,6 +765,13 @@ const HomeView: React.FC<HomeViewProps> = ({
           </View>
         </View>
       </View>
+      <DependantsModal
+        dependants={homeCardData?.filter(
+          _item => _item?.Policy_Insured_Relaion !== 'Member',
+        )}
+        show={showDependantModal}
+        onClose={() => handleDependantsModal(false)}
+      />
       <ModalLoading loading={homeCardDataLoading} />
     </ScrollView>
   );

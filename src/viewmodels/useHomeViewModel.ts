@@ -84,6 +84,8 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   const navigate = useNavigation<DrawerNavigationProp<DrawerStackParamList>>();
   const [selectedTab, setSelectedTab] = useState<string>('login');
+
+  const [showDependantModal, setShowDependantModal] = useState(false);
   const [data, setData] = useState<ClaimStats>({
     totalClaimAmount: '0',
     deductedAmount: '0',
@@ -283,6 +285,10 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     } catch (err) {
       return false;
     }
+  };
+
+  const handleDependantsModal = value => {
+    setShowDependantModal(value);
   };
 
   const handleCardDownload = async () => {
@@ -562,6 +568,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       claimData: data,
       loading,
       homeCardDataLoading,
+      showDependantModal,
     },
     functions: {
       onPressTab,
@@ -571,6 +578,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       onPressHeaderIcon,
       handleAssociatedApps,
       handleCardDownload,
+      handleDependantsModal,
     },
   };
 };

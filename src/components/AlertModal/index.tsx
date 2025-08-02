@@ -77,14 +77,16 @@ const styles = StyleSheet.create({
   },
 
   textStyle: {
+    color: COLORS.black,
     fontSize: vh * 2,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: vh * 1.2,
   },
   descriptionStyle: {
+    color:COLORS.black,
     fontWeight: '400',
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: vh * 1.6,
   },
 });
