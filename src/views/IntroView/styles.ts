@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   paraText: {
     fontSize: vw * 4.8,
-    color: 'black' + 45,
+    color: COLORS.black,
     lineHeight: vh * 3.5,
     alignItems: 'flex-start',
     textAlign: 'left',
