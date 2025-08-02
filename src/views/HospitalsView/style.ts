@@ -202,8 +202,6 @@ export const styles = StyleSheet.create({
 
     // backgroundColor: 'yellow',
     color: COLORS.textBlackShade,
-
-    // fontFamily: fonts.Aileron.bold,
   },
 
   moreFilterText: {

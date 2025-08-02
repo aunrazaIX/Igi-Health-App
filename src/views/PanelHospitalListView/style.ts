@@ -137,7 +137,7 @@ export const styles = StyleSheet.create({
     fontSize: vw * 3.5,
     height: vh * 4.4,
     color: COLORS.textBlackShade,
-    fontFamily: fonts.Aileron.bold,
+    fontFamily: fonts.inter.bold,
     alignItems: 'center',
   },
   tabText: {

@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     marginTop: vh * -0.9,
     marginLeft: vw * -1.8,
     color: COLORS.personalValue,
-    fontFamily: fonts.Aileron.regular,
+    fontFamily: fonts.inter.regular,
     fontSize: vw * 3.5,
     fontWeight: '500',
     // paddingLeft: vw * -3,
