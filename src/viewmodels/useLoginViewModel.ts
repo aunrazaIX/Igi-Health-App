@@ -8,14 +8,22 @@ import {
   setRememberMe,
   setUserData,
   setFaceIdCredentials,
+  setDeviceToken,
 } from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {setErrorModal} from '../redux/generalSlice';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import {RootState} from '../redux/store';
 import {DetailsContainer} from '../components';
-import {Platform} from 'react-native';
+import {PermissionsAndroid, Platform} from 'react-native';
 import {generateUUID} from '../utils';
+import {
+  AuthorizationStatus,
+  getMessaging,
+  getToken,
+  requestPermission,
+} from "@react-native-firebase/messaging";
+import { getApp } from "@react-native-firebase/app";
 
 export type UserDetails = {
   name: string;
@@ -51,14 +59,13 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const {
     rememberMe,
     credentials,
-    deviceId,
     biometrics,
-    user,
     isToggle,
-    faceIdCredentials,
+    deviceToken,
   } = useSelector((state: RootState) => state.auth);
 
   const test = useRef(null);
+
 
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [verifiedUserData, setVerifiedUserData] = useState(null);
@@ -66,6 +73,53 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const loginResponse = useRef(null);
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+
+
+  useEffect(() => {
+    requestPermissionHandler()
+      .then((bool) => {
+        if (bool) {
+          const messagingInstance = getMessaging(getApp());
+          getToken(messagingInstance)
+            .then((token) => {
+              dispatch(setDeviceToken(token));
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        }
+      })
+      .catch((e) => {
+        console.log("E", e);
+      });
+  }, []);
+
+    const requestPermissionHandler = async () => {
+    let allowed = false;
+    if (Platform.OS === "ios") {
+      const messagingInstance = getMessaging(getApp());
+      const authStatus = await requestPermission(messagingInstance);
+      const enabled =
+        authStatus === AuthorizationStatus.AUTHORIZED ||
+        authStatus === AuthorizationStatus.PROVISIONAL;
+      if (enabled) {
+        allowed = true;
+      }
+    } else {
+      if (Platform.Version >= 33) {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          allowed = true;
+        }
+      } else {
+        allowed = true;
+      }
+    }
+    return allowed;
+  };
 
   const {
     setterForApiData: loginSetterForApiData,
@@ -201,7 +255,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     let apiData = {
       userName: loginApiData?.userName,
       password: encodedAuth,
-      DeviceId: '21312321302138013203231',
+      DeviceId: deviceToken? deviceToken:"--",
       LoginDeviceName: 'Emulator',
     };
     dispatch(
@@ -227,8 +281,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
             setBiometrics({
               userName: loginApiData.userName,
               password: loginApiData?.password,
-              deviceId: '23232323232',
-              LoginDeviceName: 'Mobile',
               biometryType: biometryType,
             }),
           );
@@ -349,8 +401,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
 
       if (
         !biometrics?.userName ||
-        !biometrics?.password ||
-        !biometrics?.deviceId
+        !biometrics?.password 
       ) {
         throw new Error(
           'Missing stored biometric credentials. Please login manually first...',
@@ -363,8 +414,8 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       const apiData = {
         userName: biometrics.userName,
         password: encodedAuth,
-        DeviceId: biometrics.deviceId,
-        LoginDeviceName: 'mobile',
+        DeviceId: deviceToken?deviceToken:"--",
+        LoginDeviceName: 'Emulator',
       };
 
       await trigger(apiData);
@@ -438,8 +489,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
               setBiometrics({
                 userName: loginApiData.userName,
                 password: loginApiData?.password,
-                deviceId: '23232323232',
-                LoginDeviceName: 'Mobile',
                 biometryType: biometryType,
               }),
             );

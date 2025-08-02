@@ -31,14 +31,14 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to show nearby hospitals</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need your location even when the app is in the background to provide location-based services</string>
 	<key>NSCameraUsageDescription</key>
 	<string>For adding Attachment in leave request</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Permission required for Face ID login</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need your location even when the app is in the background to provide location-based services</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show nearby hospitals</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>For adding Attachment in leave request</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -49,6 +49,11 @@
 		<string>Inter-Medium.ttf</string>
 		<string>Inter-Regular.ttf</string>
 		<string>Inter-SemiBold.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

@@ -20,6 +20,8 @@ import {setErrorModal} from './src/redux/generalSlice';
 import NetInfo from '@react-native-community/netinfo';
 import {EventRegister} from 'react-native-event-listeners';
 import {vh} from './src/assets/theme/dimension';
+import Toast from "react-native-toast-message";
+
 
 const MyTheme = {
   ...DefaultTheme,
@@ -74,7 +76,10 @@ const AppContent = () => {
         <MainStack />
         <View>
           <ErrorModal />
+          
         </View>
+            <Toast />
+
       </View>
     </NavigationContainer>
   );

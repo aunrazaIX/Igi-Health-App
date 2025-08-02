@@ -10,6 +10,7 @@ interface User {
 interface AuthState {
   user: User | null;
   token: string | null;
+  deviceToken:string | null
 
   rememberMe: boolean;
   credentials: {
@@ -44,6 +45,8 @@ const initialState: AuthState = {
   biometrics: null,
   faceIdCredentials: null,
   isToggle: false,
+  deviceToken:null
+
 };
 
 interface SetUserDataPayload {
@@ -81,6 +84,9 @@ export const authSlice = createSlice({
     SetIsToggle: (state, {payload}) => {
       state.isToggle = payload;
     },
+    setDeviceToken: (state, action) => {
+      state.deviceToken = action.payload;
+    },
   },
 });
 
@@ -91,5 +97,6 @@ export const {
   setBiometrics,
   setFaceIdCredentials,
   SetIsToggle,
+  setDeviceToken
 } = authSlice.actions;
 export const authReducer = authSlice.reducer;
