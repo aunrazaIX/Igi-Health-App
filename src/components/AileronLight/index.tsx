@@ -31,7 +31,7 @@ export default AileronLight;
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontFamily: fonts.Aileron.light,
+    fontFamily: fonts.inter.light,
     textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,

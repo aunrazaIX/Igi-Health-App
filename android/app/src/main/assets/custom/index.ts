@@ -1,22 +1,22 @@
 import {Platform} from 'react-native';
 
 export const fonts = {
-  Aileron: {
+  inter: {
     bold: Platform.select({
-      android: 'Aileron-Bold',
-      ios: 'Aileron-Bold',
+      android: 'Inter-Bold',
+      ios: 'Inter-Bold',
     }),
     regular: Platform.select({
-      android: 'Aileron-Regular',
-      ios: 'Aileron-Regular',
+      android: 'Inter-Regular',
+      ios: 'Inter-Regular',
     }),
-    light: Platform.select({
-      android: 'Aileron-Light',
-      ios: 'Aileron-Light',
+    medium: Platform.select({
+      android: 'Inter-Medium',
+      ios: 'Inter-Medium',
     }),
     semibold: Platform.select({
-      android: 'Aileron-SemiBold',
-      ios: 'Aileron-SemiBold',
+      android: 'Inter-SemiBold',
+      ios: 'Inter-SemiBold',
     }),
   },
 };

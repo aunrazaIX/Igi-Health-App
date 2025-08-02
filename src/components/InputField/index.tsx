@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     fontSize: vw * 3.2,
     // borderWidth: 2,
     color: COLORS.personalValue,
-    fontFamily: fonts.Aileron.regular,
+    fontFamily: fonts.inter.regular,
     bottom: vh * 0.5,
   },
   iconView: {

@@ -2,24 +2,24 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "src/assets/fonts/Aileron-Bold.otf",
-      "sha1": "4cab3574a70b6c2b65b87121074adcd21b0d1b96"
+      "path": "src/assets/fonts/Inter-Bold.ttf",
+      "sha1": "47ff07c75746682133b81e7ac0537ce50a4c9916"
     },
     {
-      "path": "src/assets/fonts/Aileron-Light.otf",
-      "sha1": "f369e6be35775f2fb8b979129ab12edc2b199bcf"
+      "path": "src/assets/fonts/Inter-Medium.ttf",
+      "sha1": "e76f580811e031813e7150131a0724811cdd737a"
     },
     {
-      "path": "src/assets/fonts/Aileron-Regular.otf",
-      "sha1": "950adda857e71cf983192b79501b535f7e85da49"
+      "path": "src/assets/fonts/Inter-Regular.ttf",
+      "sha1": "cfa780d0b50b2bb7eacb82984f1b18a95aaa40c5"
     },
     {
-      "path": "src/assets/fonts/Aileron-SemiBold.otf",
-      "sha1": "6cf804659ab13f09971fafe59d10e92567ef2a0a"
+      "path": "src/assets/fonts/Inter-SemiBold.ttf",
+      "sha1": "5e0c44e57e7e090252d79f622899e67585bb892c"
     },
     {
       "path": "src/assets/fonts/index.ts",
-      "sha1": "fbe7d5e2b90e3bf30aaf47ab88ef92c1c4e533b2"
+      "sha1": "301f28ccb20110c1aa7041c000ee654b902b8bf0"
     }
   ]
 }

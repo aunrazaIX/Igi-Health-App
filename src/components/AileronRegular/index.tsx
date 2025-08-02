@@ -31,7 +31,7 @@ export default AileronRegular;
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontFamily: fonts.Aileron.regular,
+    fontFamily: fonts.inter.regular,
     textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,
