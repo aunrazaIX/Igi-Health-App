@@ -3,7 +3,7 @@ import {Modal, StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 import {COLORS} from '../../../assets/theme/colors';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {icons} from '../../../assets';
-import {AileronBold} from '../../../components';
+import {AileronBold, AileronRegular} from '../../../components';
 
 const DependantsModal = ({show, dependants, onClose}) => {
   return (
@@ -11,17 +11,21 @@ const DependantsModal = ({show, dependants, onClose}) => {
       <View style={styles.container}>
         <View style={styles.subContainer}>
           <View style={styles.row}>
-            <AileronBold style={styles.title} name={'Dependants'} />
+            <AileronBold style={styles.title} name={'List of Dependents'} />
             <TouchableOpacity onPress={onClose} style={styles.close}>
               <Image source={icons.errorPopup} style={styles.closeIcon} />
             </TouchableOpacity>
           </View>
           {dependants?.length > 0 &&
             dependants?.map((person, index) => (
-              <AileronBold
+              <AileronRegular
                 style={styles.dependantsName}
                 key={index}
-                name={person?.Policy_Insured_Name}
+                name={`${
+                  typeof person?.Policy_Insured_Name === 'string'
+                    ? person.Policy_Insured_Name.trim()
+                    : person?.Policy_Insured_Name
+                }: ${person?.Policy_Insured_Age}`}
               />
             ))}
         </View>
