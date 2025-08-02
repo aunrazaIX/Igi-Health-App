@@ -51,7 +51,7 @@ const NotificationView = ({
                 'DD-MMM YYYY hh:mm',
               )}
             />
-            {item?.isRead && (
+            {!item?.isRead && (
               <Fragment>
                 {item?.PushNotificationID == selectedNotification &&
                 markLoading ? (
