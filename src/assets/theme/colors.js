@@ -3,7 +3,6 @@ export const COLORS = {
   black: '#000000',
   textBlackShade: 'rgba(41, 41, 39, 1)',
   textGrayShade: 'rgba(16, 16, 16, 0.5)',
-  black: '#000000',
   transparent: 'transparent',
   loginContainer: 'rgba(255, 255, 255, 0.7)',
   activeTab: 'rgba(0, 143, 213, 1)',

@@ -85,7 +85,6 @@ const AddTreatmentView = ({
             <InputField
               placeholderTextColor={COLORS.textGrayShade}
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              inputStyle={{fontSize: vw * 3.5}}
               containerStyle={
                 apiData?.error_receiptNumber
                   ? {marginBottom: vh * 2.5, paddingVertical: vh}
@@ -104,7 +103,6 @@ const AddTreatmentView = ({
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              inputStyle={{fontSize: vw * 3.5}}
               containerStyle={
                 apiData?.error_amount
                   ? {marginBottom: vh * 2, paddingVertical: vh}
@@ -124,7 +122,6 @@ const AddTreatmentView = ({
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              inputStyle={{fontSize: vw * 3.5}}
               containerStyle={
                 apiData?.error_description
                   ? {marginBottom: vh * 3, paddingVertical: vh}

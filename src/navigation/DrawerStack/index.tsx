@@ -121,15 +121,6 @@ const DrawerStack = () => {
     //   stChild: 'Helpline',
     // },
 
-    // {
-    //   id: 11,
-    //   name: 'Notifications',
-    //   icon: drawerIcons.drawerNotification,
-    //   mainParent: 'Tabs',
-    //   stChild: 'HomeStack',
-    //   ndChild: 'Notifications',
-    // },
-
     {
       id: 10,
       name: 'Privacy',
@@ -143,6 +134,16 @@ const DrawerStack = () => {
       icon: drawerIcons.drawerFAQ,
       to: 'FAQs',
     },
+
+    {
+      id: 11,
+      name: 'Notifications',
+      icon: drawerIcons.drawerNotification,
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'Notifications',
+    },
+
     {
       id: 13,
       name: 'Settings',

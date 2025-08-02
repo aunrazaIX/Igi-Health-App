@@ -344,8 +344,9 @@ const useForgotPasswordViewModel = ({
         dispatch(
           setErrorModal({
             Show: true,
-            message: 'Password Not Matched',
-            detail: '',
+            message: 'Password Mismatched',
+            detail:
+              'Please ensure the new password and confirmation fields contain the same value before proceeding.',
           }),
         );
         return;

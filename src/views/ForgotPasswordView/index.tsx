@@ -77,8 +77,6 @@ const ForgotPasswordView = ({
 }) => {
   const {user} = useSelector((state: RootState) => state.auth);
 
-  console.log(savedDataForVerification, 'ppppppppppppppppppp');
-
   const returnComponent: Record<number, JSX.Element> = {
     1: <EnterEmailView setterForApiData={setterForApiData} apiData={apiData} />,
     2: (
@@ -170,13 +168,14 @@ const ForgotPasswordView = ({
         frameImage={icons.modelSuccessful}
         confirmationMessage={
           type === 'signup'
-            ? 'Your password has been created successfully.'
+            ? 'Welcome aboard! Your account has been created successfully.'
             : 'Your password has been changed successfully.'
         }
         closeButton
         Successfull
         onClose={onCloseSuccessModal}
         isChangedPassword={isChangedPassword}
+        buttonName={type === 'signup' ? 'Login Now' : 'Close'}
       />
     </Container>
   );

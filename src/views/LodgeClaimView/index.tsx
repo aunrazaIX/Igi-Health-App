@@ -232,7 +232,9 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
                 : undefined
             }
             disabled={
-              currentStep === 1
+              claimLoading
+                ? true
+                : currentStep === 1
                 ? !selectedPatient
                   ? true
                   : false

@@ -40,6 +40,7 @@ type ConfimationModalProps = {
   type: any;
   isUpdate: any;
   isChangedPassword: any;
+  buttonName: string;
 };
 
 const ConfirmationModal: React.FC<ConfimationModalProps> = ({
@@ -62,6 +63,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   type,
   isUpdate,
   isChangedPassword,
+  buttonName,
 }) => {
   const naviagation = useNavigation();
   const handleClose = () => {
@@ -117,7 +119,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                       ? 'Confirm Edit Request'
                       : isUpdate
                       ? 'Confirm Edit Request'
-                      : 'Successful!'
+                      : 'Signup Successful!'
                   }
                   style={styles.confirmation}
                 />
@@ -211,7 +213,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
           {closeButton && (
             <View>
               <Button
-                name="Close"
+                name={buttonName}
                 inputStyle={styles.closeButton}
                 onPress={handleClose}
               />

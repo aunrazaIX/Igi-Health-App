@@ -66,20 +66,19 @@ const ProfileView: React.FC<Props> = ({
             /> */}
           </View>
           {ProfileData?.map((item, index) => (
-            <DependentBox
+            <InputField
               key={index}
               containerStyle={
                 editable ? styles.inputBox : styles.dependentOuterStyle
-              }>
-              <AileronSemiBold name={item?.label} style={styles.selectLabel} />
-              <TextInput
-                value={item?.value}
-                style={styles.popupInput}
-                placeholder={item?.placeholder}
-                placeholderTextColor={COLORS.selectPlaceholder}
-                editable={inputDisable}
-              />
-            </DependentBox>
+              }
+              maxLength={20}
+              value={item?.value}
+              label={item?.label}
+              editable={inputDisable}
+              placeholder={item?.placeholder}
+              placeholderTextColor={COLORS.selectPlaceholder}
+              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
+            />
           ))}
 
           {/* <DependentBox containerStyle={editable ? styles.inputBox : styles.dependentOuterStyle}>

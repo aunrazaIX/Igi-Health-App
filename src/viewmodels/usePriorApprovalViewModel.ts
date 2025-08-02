@@ -9,7 +9,7 @@ const usePriorApprovalViewModel = () => {
       key: 'personalDetails',
     },
     {label: 'Claim', key: 'claim'},
-    {label: 'Upload Doc', key: 'uploadDoc'},
+    {label: 'Upload Document', key: 'uploadDoc'},
   ];
   const personalData = [
     {

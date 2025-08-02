@@ -10,13 +10,14 @@ import {
   ConfirmationModal,
   CurvedView,
   DependentBox,
+  InputField,
   Select,
   TopView,
 } from '../../components';
 import styles from './styles';
 import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {vh} from '../../assets/theme/dimension';
+import {vh, vw} from '../../assets/theme/dimension';
 import DatePicker from '../../components/DatePicker';
 import moment from 'moment';
 
@@ -100,18 +101,17 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               />
             </View> */}
 
-            <DependentBox containerStyle={styles.dependentOuterStyle}>
-              <AileronBold name="Dependent Name" style={styles.selectLabel} />
-              <TextInput
-                value={dependentApiData.dependentName ?? null}
-                style={styles.popupInput}
-                placeholder="Enter Name"
-                placeholderTextColor={COLORS.textGrayShade}
-                onChangeText={text =>
-                  dependentSetterForApiData('dependentName', text)
-                }
-              />
-            </DependentBox>
+            <InputField
+              placeholderTextColor={COLORS.textGrayShade}
+              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
+              value={dependentApiData.dependentName ?? null}
+              onChangeText={text => {
+                dependentSetterForApiData('dependentName', text);
+              }}
+              maxLength={20}
+              label="Dependent Name"
+              placeholder="Enter Name"
+            />
 
             <Select
               selectData={relationsOptions}
