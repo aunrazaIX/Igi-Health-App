@@ -7,16 +7,41 @@ const useNotificationsViewModel = () => {
   const {user} = useSelector(state => state.auth);
   const [showDropDown, setShowDropDown] = useState(false);
   const [selectedType, setSelectedType] = useState('All');
+  const [selectedNotification, setSelectedNotification] = useState(null);
+
   const types = useMemo(() => {
     return ['All', 'Read', 'Unread'];
   }, []);
-  const {data, loading} = useApiHook({
+  const {
+    data,
+    loading,
+    trigger: reftchAllNotifications,
+  } = useApiHook({
     apiEndpoint: endpoints.notifications.getAll,
+    method: 'get',
     argsOrBody: {
-      cnic: '42301-6974801-1',
-      userid: '906',
+      cnic: user?.cnic,
+      userid: user?.UserId,
     },
   });
+
+  const {trigger, loading: markLoading} = useApiHook({
+    apiEndpoint: endpoints.notifications.markAsRead,
+    method: 'post',
+    onSuccess: () => {
+      reftchAllNotifications();
+    },
+  });
+
+  const onPressMarkNotification = notificationId => {
+    setSelectedNotification(notificationId);
+    let apiData = {
+      cnic: user?.cnic,
+      userid: user?.UserId,
+      id: notificationId,
+    };
+    trigger(apiData);
+  };
 
   const onSelectType = type => {
     setSelectedType(type);
@@ -32,10 +57,13 @@ const useNotificationsViewModel = () => {
       types,
       showDropDown,
       selectedType,
+      markLoading,
+      selectedNotification,
     },
     functions: {
       onSelectType,
       onPressTypeDropDown,
+      onPressMarkNotification,
     },
   };
 };

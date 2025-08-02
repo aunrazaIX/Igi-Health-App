@@ -22,6 +22,9 @@ const NotificationView = ({
   onSelectType,
   showDropDown,
   onPressTypeDropDown,
+  selectedNotification,
+  onPressMarkNotification,
+  markLoading,
 }) => {
   const renderNotifications = ({item, index}) => {
     const lastIndex = index === data.length - 1;
@@ -48,13 +51,28 @@ const NotificationView = ({
                 'DD-MMM YYYY hh:mm',
               )}
             />
-            {!item?.isRead && (
-              <TouchableOpacity style={styles.markAsReadView}>
-                <AileronSemiBold
-                  style={styles.markAseadText}
-                  name={'Mark as Read'}
-                />
-              </TouchableOpacity>
+            {item?.isRead && (
+              <Fragment>
+                {item?.PushNotificationID == selectedNotification &&
+                markLoading ? (
+                  <SimpleLoader
+                    style={styles.simpleLoading}
+                    color={COLORS.loginButton}
+                    size={'small'}
+                  />
+                ) : (
+                  <TouchableOpacity
+                    onPress={() =>
+                      onPressMarkNotification(item?.PushNotificationID)
+                    }
+                    style={styles.markAsReadView}>
+                    <AileronSemiBold
+                      style={styles.markAseadText}
+                      name={'Mark as Read'}
+                    />
+                  </TouchableOpacity>
+                )}
+              </Fragment>
             )}
           </View>
         </View>

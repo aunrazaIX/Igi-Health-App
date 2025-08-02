@@ -3,8 +3,17 @@ import useNotificationViewModel from '../../viewmodels/useNotificationViewModel'
 
 const Notification = () => {
   const {states, functions} = useNotificationViewModel();
-  const {data, loading, types, selectedType, showDropDown} = states;
-  const {onSelectType, onPressTypeDropDown} = functions;
+  const {
+    data,
+    loading,
+    types,
+    selectedType,
+    showDropDown,
+    selectedNotification,
+    markLoading
+  } = states;
+  const {onSelectType, onPressTypeDropDown, onPressMarkNotification} =
+    functions;
   return (
     <NotificationView
       onSelectType={onSelectType}
@@ -14,6 +23,9 @@ const Notification = () => {
       types={types}
       data={data}
       loading={loading}
+      markLoading={markLoading}
+      selectedNotification={selectedNotification}
+      onPressMarkNotification={onPressMarkNotification}
     />
   );
 };

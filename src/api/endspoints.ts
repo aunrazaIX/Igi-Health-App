@@ -55,7 +55,8 @@ const endpoints = {
       `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
   },
   notifications:{
-    getAll:"PushNotification/getNotifications"
+    getAll:"PushNotification/getNotifications",
+    markAsRead:"PushNotification/readNotification"
   }
 };
 

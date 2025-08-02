@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   },
   unreadArrow: {
     width: vw * 3,
+    marginLeft: vw,
     height: vw * 3,
   },
   markAs: {
@@ -133,6 +134,9 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     height: vh * 5,
     borderRadius: vw,
+  },
+  simpleLoading: {
+    width: '15%',
   },
 });
 
