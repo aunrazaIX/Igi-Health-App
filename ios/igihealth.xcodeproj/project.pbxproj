@@ -9,32 +9,32 @@
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		30E7ED5F1426E828A28D31B2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		41EA4C58122D4CF4B24E0D32 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 529D55DFD81E45BF869BE188 /* Inter-SemiBold.ttf */; };
+		661F872704ED4F2AA1A4D199 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A40313CF9284FD6865B4DD1 /* Inter-Bold.ttf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		866E6D8F74B24F119CD8FE30 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 8998585687DF497EAE52306B /* index.ts */; };
 		8B03B11DA66429A7235D65E5 /* libPods-igihealth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7813B037EF9D5028C5610C1 /* libPods-igihealth.a */; };
-		661F872704ED4F2AA1A4D199 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A40313CF9284FD6865B4DD1 /* Inter-Bold.ttf */; };
 		A59AAB34B4C441FA94D1D191 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 077B487874254CB892F9B247 /* Inter-Medium.ttf */; };
 		C344ED968C3B45AA92A9CC26 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3F1DAFAC21D4EF684102EB6 /* Inter-Regular.ttf */; };
-		41EA4C58122D4CF4B24E0D32 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 529D55DFD81E45BF869BE188 /* Inter-SemiBold.ttf */; };
-		866E6D8F74B24F119CD8FE30 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 8998585687DF497EAE52306B /* index.ts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		077B487874254CB892F9B247 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* igihealth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = igihealth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = igihealth/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = igihealth/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = igihealth/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2A40313CF9284FD6865B4DD1 /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../src/assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; };
+		529D55DFD81E45BF869BE188 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-SemiBold.ttf"; path = "../src/assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		5C1CAF31E3F20AA7795B0AF0 /* Pods-igihealth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-igihealth.debug.xcconfig"; path = "Target Support Files/Pods-igihealth/Pods-igihealth.debug.xcconfig"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = igihealth/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = igihealth/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8998585687DF497EAE52306B /* index.ts */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = index.ts; path = ../src/assets/fonts/index.ts; sourceTree = "<group>"; };
 		917A975D57C04B2F49899E7F /* Pods-igihealth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-igihealth.release.xcconfig"; path = "Target Support Files/Pods-igihealth/Pods-igihealth.release.xcconfig"; sourceTree = "<group>"; };
+		C3F1DAFAC21D4EF684102EB6 /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../src/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		E7813B037EF9D5028C5610C1 /* libPods-igihealth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-igihealth.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		2A40313CF9284FD6865B4DD1 /* Inter-Bold.ttf */ = {isa = PBXFileReference; name = "Inter-Bold.ttf"; path = "../src/assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		077B487874254CB892F9B247 /* Inter-Medium.ttf */ = {isa = PBXFileReference; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C3F1DAFAC21D4EF684102EB6 /* Inter-Regular.ttf */ = {isa = PBXFileReference; name = "Inter-Regular.ttf"; path = "../src/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		529D55DFD81E45BF869BE188 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; name = "Inter-SemiBold.ttf"; path = "../src/assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8998585687DF497EAE52306B /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../src/assets/fonts/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

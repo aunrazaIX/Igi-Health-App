@@ -17,20 +17,19 @@ const styles = StyleSheet.create({
   notificationSelectRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 3,
   },
   notificationTittle: {
-    fontSize: vw * 4.3,
+    fontSize: vw * 3.5,
     color: COLORS.textBlackShade,
   },
   unread: {
-    fontSize: vw * 4,
+    fontSize: vw * 3.5,
+    marginLeft: vw * 2,
     color: COLORS.unread,
   },
   unreadselectRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 2,
   },
   unreadArrow: {
     width: vw * 3,
@@ -42,22 +41,20 @@ const styles = StyleSheet.create({
   markAsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 1,
   },
   checkIcon: {
     width: vw * 4,
     height: vw * 4,
   },
   notificationContainer: {
-    gap: vh * 1,
-    paddingVertical: vh * 2,
     borderBottomWidth: vw * 0.3,
     borderColor: COLORS.borderColor,
+    paddingVertical: vh,
   },
   notificationIconRow: {
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 3,
   },
   icon: {
     width: vw * 11,
@@ -70,13 +67,15 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: vw * 3.5,
-    marginLeft: vw * 11,
+    marginLeft: vw * 4,
+    marginTop: vh * 0.5,
     color: COLORS.time,
     textAlign: 'left',
   },
   requestTittle: {
-    fontSize: vw * 4.4,
-    fontWeight: '700',
+    width: '55%',
+    fontSize: vw * 3.7,
+    marginLeft: vw * 4,
     textAlign: 'left',
   },
   requestRow: {
@@ -108,9 +107,33 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: vh * 1.7,
   },
-  notificationStyles:{
-    paddingBottom: vh * 20
-  }
+  notificationStyles: {
+    paddingBottom: vh * 20,
+  },
+  notificationBody: {
+    width: '55%',
+    textAlign: 'left',
+    marginLeft: vw * 4,
+    fontSize: vw * 3,
+    marginTop: vh,
+  },
+  markAsReadView: {
+    width: '25%',
+    marginLeft: vw * 4,
+  },
+  markAseadText: {
+    fontSize: vw * 3.5,
+    textDecorationLine: 'underline',
+    color: COLORS.black + '88',
+    textAlign: 'left',
+    marginTop: vh * 0.5,
+  },
+  selectContainer: {
+    width: '40%',
+    alignSelf: 'flex-end',
+    height: vh * 5,
+    borderRadius: vw,
+  },
 });
 
 export default styles;

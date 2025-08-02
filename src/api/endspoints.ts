@@ -54,6 +54,9 @@ const endpoints = {
     attachment: (userId: string, myuuid: string, ClientCode: string) =>
       `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
   },
+  notifications:{
+    getAll:"PushNotification/getNotifications"
+  }
 };
 
 export default endpoints;

@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     noDataText: {
-        fontSize: vw * 3
+        fontSize: vw * 3.5,
+        marginTop:vh
     },
     noDataView: {
 
