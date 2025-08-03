@@ -64,6 +64,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
   isUpdate,
   isChangedPassword,
   buttonName,
+  claimLoading,
 }) => {
   const naviagation = useNavigation();
   const handleClose = () => {
@@ -161,7 +162,6 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                   </View>
                 </LinearGradient>
               </TouchableOpacity>
-
               <TouchableOpacity
                 style={styles.deleteButtonContainer}
                 onPress={() => {
@@ -190,9 +190,9 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                   name="Submit"
                   inputStyle={styles.closeButton}
                   onPress={handleSubmit}
+                  disabled={claimLoading}
                 />
               </View>
-
               <View>
                 <TouchableOpacity
                   style={styles.cancelButtonSubmit}
@@ -213,7 +213,8 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
           {closeButton && (
             <View>
               <Button
-                name={buttonName}
+                // name={buttonName}
+                name="Close"
                 inputStyle={styles.closeButton}
                 onPress={handleClose}
               />
