@@ -96,9 +96,8 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
           isSearch={true}
         />
       )}
-      {data?.map((data, index) => (
-        <Box data={data} key={index} />
-      ))}
+      {type !== 'priorApproval' &&
+        data?.map((data, index) => <Box data={data} key={index} />)}
     </View>
   );
 };

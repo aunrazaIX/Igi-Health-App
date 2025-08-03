@@ -263,8 +263,15 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   });
 
   const steps: Step[] = [
-    {label: 'Personal Details', key: 'personalDetails'},
-    {label: 'Claim', key: 'claim'},
+    {
+      label:
+        type === 'priorApproval' ? 'Patient & Hospital' : 'Personal Details',
+      key: 'personalDetails',
+    },
+    {
+      label: type === 'priorApproval' ? 'Treatment Information' : 'Claim',
+      key: 'claim',
+    },
     {label: 'Upload Document', key: 'uploadDoc'},
   ];
 
@@ -460,7 +467,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         cameraType: 'back',
         selectionLimit: 1,
       };
-      let result = await launchImageLibrary(options);
+      let result = await launchCamera(options);
       let res = result?.assets[0];
       let _img = {
         uri: res?.uri,
