@@ -71,6 +71,8 @@ type LodgeClaimViewProps = {
   onView: any;
   setIsView: any;
   viewIndex: any;
+  showOptionModal: boolean;
+  viewOptionModal: () => void;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
@@ -122,11 +124,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   onView,
   setIsView,
   viewIndex,
+  showOptionModal,
+  viewOptionModal,
+  openCamera,
 }) => {
-  const treatment = useSelector(state => state.lodge.treatments);
-  const doc = useSelector(state => state.lodge.selectedDocuments);
-  console.log(doc, 'iioio');
-  // console.log(doc[viewIndex].uri, 'pppp');
+  const logdeState = useSelector(state => state.lodge);
+  const treatment = logdeState.modules[logdeState.activeModule]?.treatments;
+  const doc = logdeState.modules[logdeState.activeModule]?.selectedDocuments;
 
   const renderStep = {
     personalDetails: (
@@ -163,13 +167,14 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         claimData={claimData}
         setterForclaimData={setterForclaimData}
         onView={onView}
+        showOptionModal={showOptionModal}
+        viewOptionModal={viewOptionModal}
+        openCamera={openCamera}
       />
     ),
   };
 
   const navigation = useNavigation();
-
-  console.log(confirmationType, 'typeeee');
 
   return (
     <>
@@ -331,6 +336,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? () => goBack()
             : null
         }
+        claimLoading={claimLoading}
         handleSubmit={
           confirmationType === 'submit'
             ? () => {
