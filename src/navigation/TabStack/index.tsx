@@ -7,7 +7,7 @@ import {tabIcons} from '../../assets';
 import HomeStack from '../HomeStack';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
-import PriorApproval from '../../screens/PriorApproval';
+
 import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaimStack from '../LodgeClaimStack';
@@ -110,10 +110,13 @@ const Tabs = () => {
                   }}>
                   Prior Approval
                 </AileronRegular>
-
                 <AileronRegular
                   name="Prior Approval"
-                  style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
+                  style={{
+                    color: 'black',
+                    fontSize: vw * 2.95,
+                    lineHeight: vh * 2,
+                  }}
                 />
               </View>
             ),
@@ -131,9 +134,9 @@ const Tabs = () => {
                       style={[styles.iconStyle, {tintColor: 'white'}]}
                       source={tabIcons.note}
                     />
-                    <Text style={{color: 'white', fontSize: vw * 3}}>
+                    {/* <Text style={{color: 'white', fontSize: vw * 3}}>
                       Prior Approval
-                    </Text>
+                    </Text> */}
                   </View>
                 </LinearGradient>
               ) : (
@@ -218,7 +221,6 @@ const Tabs = () => {
                 }}>
                 Helpline
               </AileronRegular>
-
               <AileronRegular
                 name="Helpline"
                 style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
