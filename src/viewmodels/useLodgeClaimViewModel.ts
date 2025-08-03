@@ -29,7 +29,7 @@ import {
 import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
-import {launchCamera} from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 interface Treatment {
   receiptNumber?: string;
@@ -90,7 +90,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     selectedType,
     selectedHospital,
     userPassword,
-  } = useSelector(state => state?.lodge?.modules[state.lodge.activeModule]);
+  } = useSelector(
+    state => state?.lodge?.modules?.[state?.lodge?.activeModule] || {},
+  );
 
   const {user} = useSelector(state => state.auth);
 
@@ -455,6 +457,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   };
 
   const openCamera = async () => {
+    console.log("!@#!@31231")
     try {
       const res = await launchCamera({
         mediaType: 'photo',

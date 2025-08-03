@@ -128,9 +128,12 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   viewOptionModal,
   openCamera,
 }) => {
-  const logdeState = useSelector(state => state.lodge);
-  const treatment = logdeState.modules[logdeState.activeModule]?.treatments;
-  const doc = logdeState.modules[logdeState.activeModule]?.selectedDocuments;
+  const lodgeState = useSelector(state => state?.lodge || {});
+  const activeModule = lodgeState?.activeModule;
+  const moduleData = lodgeState?.modules?.[activeModule] || {};
+
+  const treatment = moduleData?.treatments || [];
+  const doc = moduleData?.selectedDocuments || [];
 
   const renderStep = {
     personalDetails: (

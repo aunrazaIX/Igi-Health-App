@@ -105,13 +105,13 @@ const Tabs = () => {
               <View style={{alignItems: 'center'}}>
                 <AileronRegular
                   style={{
-                    color: focused ? 'black' : 'black',
+                    color: 'black',
                     fontSize: vw,
                   }}>
-                  Prior Approval
+                  P Approval
                 </AileronRegular>
                 <AileronRegular
-                  name="Prior Approval"
+                  name="P Approval"
                   style={{
                     color: 'black',
                     fontSize: vw * 2.95,
@@ -121,7 +121,6 @@ const Tabs = () => {
               </View>
             ),
             popToTopOnBlur: true,
-            // tabBarStyle: {display: 'none'},
             tabBarIcon: ({focused}) =>
               focused ? (
                 <LinearGradient
@@ -134,17 +133,13 @@ const Tabs = () => {
                       style={[styles.iconStyle, {tintColor: 'white'}]}
                       source={tabIcons.note}
                     />
-                    {/* <Text style={{color: 'white', fontSize: vw * 3}}>
-                      Prior Approval
-                    </Text> */}
+            
                   </View>
                 </LinearGradient>
               ) : (
                 <View style={[styles.gradientBorder, styles.wrapper]}>
                   <Image style={styles.iconStyleprior} source={tabIcons.note} />
-                  {/* <Text style={{color: 'black', fontSize: 12, marginTop: 2}}>
-                    Prior Approval
-                  </Text> */}
+  
                 </View>
               ),
           }}
