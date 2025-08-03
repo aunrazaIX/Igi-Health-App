@@ -42,7 +42,6 @@ const IntroView = ({
           <TouchableOpacity style={styles.buttonContainer}>
             <Button
               onPress={() => {
-                console.log('Touchable Pressed');
                 handleNextButton('Login');
               }}
               showIconRight={icons.rightArrowNext}

@@ -158,9 +158,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       );
       dispatch(setUserData(data));
     },
-    onError: e => {
-      console.log('error in seocnd APi ', e);
-    },
   });
 
   const {loading, trigger} = useApiHook({
