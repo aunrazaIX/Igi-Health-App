@@ -98,7 +98,7 @@ const get = async (endpoint, params = {}) => {
 };
 const post = async (endpoint, data = {}, isFormData = false) => {
   let abc = await checkInternet();
-  console.log('abc', abc);
+
   if (abc) {
     return api.post(endpoint, isFormData ? jsonToFormdata(data) : data);
   }
