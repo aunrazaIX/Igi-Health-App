@@ -22,8 +22,9 @@ import {
   getMessaging,
   getToken,
   requestPermission,
-} from "@react-native-firebase/messaging";
-import { getApp } from "@react-native-firebase/app";
+} from '@react-native-firebase/messaging';
+import {getApp} from '@react-native-firebase/app';
+import {resetAllModules} from '../redux/lodgeSlice';
 
 export type UserDetails = {
   name: string;
@@ -56,16 +57,10 @@ type UseLoginViewModelReturn = {
 };
 
 const useLoginViewModel = (): UseLoginViewModelReturn => {
-  const {
-    rememberMe,
-    credentials,
-    biometrics,
-    isToggle,
-    deviceToken,
-  } = useSelector((state: RootState) => state.auth);
+  const {rememberMe, credentials, biometrics, isToggle, deviceToken, user} =
+    useSelector((state: RootState) => state.auth);
 
   const test = useRef(null);
-
 
   const [selectedTab, setSelectedTab] = useState<string>('login');
   const [verifiedUserData, setVerifiedUserData] = useState(null);
@@ -74,30 +69,28 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-
-
   useEffect(() => {
     requestPermissionHandler()
-      .then((bool) => {
+      .then(bool => {
         if (bool) {
           const messagingInstance = getMessaging(getApp());
           getToken(messagingInstance)
-            .then((token) => {
+            .then(token => {
               dispatch(setDeviceToken(token));
             })
-            .catch((e) => {
+            .catch(e => {
               console.log(e);
             });
         }
       })
-      .catch((e) => {
-        console.log("E", e);
+      .catch(e => {
+        console.log('E', e);
       });
   }, []);
 
-    const requestPermissionHandler = async () => {
+  const requestPermissionHandler = async () => {
     let allowed = false;
-    if (Platform.OS === "ios") {
+    if (Platform.OS === 'ios') {
       const messagingInstance = getMessaging(getApp());
       const authStatus = await requestPermission(messagingInstance);
       const enabled =
@@ -109,7 +102,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     } else {
       if (Platform.Version >= 33) {
         const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           allowed = true;
@@ -165,6 +158,16 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     method: 'post',
     onSuccess: res => {
       loginResponse.current = res;
+      if (res?.Data.UserName !== credentials?.userName) {
+        dispatch(resetAllModules());
+      }
+      dispatch(
+        setRememberMe({
+          userName: loginApiData.userName,
+          password: loginApiData?.password,
+          rememberMe: checked,
+        }),
+      );
       let apiData = {
         ClientCode: res?.Data?.ClientCode,
         // ClientCode: 'PTC',
@@ -252,28 +255,20 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     let apiData = {
       userName: loginApiData?.userName,
       password: encodedAuth,
-      DeviceId: deviceToken? deviceToken:"--",
+      DeviceId: deviceToken ? deviceToken : '--',
       LoginDeviceName: 'Emulator',
     };
-    dispatch(
-      setRememberMe({
-        userName: loginApiData.userName,
-        password: loginApiData?.password,
-        rememberMe: checked,
-      }),
-    );
+
     if (isToggle) {
       try {
         const rnBiometrics = new ReactNativeBiometrics({
           allowDeviceCredentials: true,
         });
-
         const {available, biometryType} =
           await rnBiometrics.isSensorAvailable();
         if (available) {
           await rnBiometrics.deleteKeys();
           await rnBiometrics.createKeys();
-
           dispatch(
             setBiometrics({
               userName: loginApiData.userName,
@@ -396,10 +391,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
         );
       }
 
-      if (
-        !biometrics?.userName ||
-        !biometrics?.password 
-      ) {
+      if (!biometrics?.userName || !biometrics?.password) {
         throw new Error(
           'Missing stored biometric credentials. Please login manually first...',
         );
@@ -411,7 +403,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       const apiData = {
         userName: biometrics.userName,
         password: encodedAuth,
-        DeviceId: deviceToken?deviceToken:"--",
+        DeviceId: deviceToken ? deviceToken : '--',
         LoginDeviceName: 'Emulator',
       };
 

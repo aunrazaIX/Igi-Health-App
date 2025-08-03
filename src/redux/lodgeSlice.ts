@@ -191,6 +191,14 @@ export const lodgeSlice = createSlice({
     setUserEmail: (state, {payload}) => {
       state.modules[state.activeModule].userPassword = payload;
     },
+    resetAllModules: state => {
+      console.log('Resetting all modules test');
+      state.modules = {
+        lodgeClaim: {...initialModuleState},
+        priorApproval: {...initialModuleState},
+      };
+      state.activeModule = 'lodgeClaim';
+    },
   },
 });
 
@@ -209,5 +217,6 @@ export const {
   setResetTreaments,
   setUserEmail,
   setActiveModule,
+  resetAllModules,
 } = lodgeSlice.actions;
 export const lodegeReducer = lodgeSlice.reducer;

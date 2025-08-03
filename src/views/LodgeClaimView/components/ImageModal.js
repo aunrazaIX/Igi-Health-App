@@ -5,7 +5,6 @@ import {icons} from '../../../assets';
 import {vh, vw} from '../../../assets/theme/dimension';
 
 const ImageModal = ({image, onClose}) => {
-  console.log('ImageModal', image);
   return (
     <Modal visible transparent statusBarTranslucent>
       <View style={styles.container}>

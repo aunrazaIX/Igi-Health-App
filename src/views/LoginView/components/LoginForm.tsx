@@ -61,7 +61,7 @@ const LoginForm = ({
           inputStyle={style.inputStyle}
           value={loginApiData?.userName ?? undefined}
           onChangeText={text => {
-            loginSetterForApiData('userName', text);
+            loginSetterForApiData('userName', text.toLowerCase());
             const errorMsg = validateEmail(text);
             loginSetterForApiData('error_userName', errorMsg);
           }}

@@ -11,7 +11,6 @@ const DocumentOptionsModal = ({
   showOptionModal,
   viewOptionModal,
 }) => {
-  console.log('showOptionModal', showOptionModal);
   return (
     <Modal transparent={true} visible={showOptionModal} statusBarTranslucent>
       <View style={styles.centeredView}>

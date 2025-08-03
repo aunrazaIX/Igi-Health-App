@@ -173,7 +173,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       claimTrigger(apiData);
     },
   });
-  console.log('uploadError', uploadError);
+
   const {
     loading: claimLoading,
     trigger: claimTrigger,
@@ -417,11 +417,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         const fileSizeInMB = item?.size / (1024 * 1024);
 
         if (fileSizeInMB > 25) {
-          console.log(
-            `File "${item?.name}" exceeds 25MB (${fileSizeInMB.toFixed(
-              2,
-            )} MB). Skipped.`,
-          );
           dispatch(
             setErrorModal({
               show: true,
@@ -467,7 +462,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
 
       if (res?.assets?.length > 0) {
         const fileSizeInMB = res?.assets[0]?.fileSize / (1024 * 1024);
-        console.log(res);
         if (fileSizeInMB > 25) {
           dispatch(
             setErrorModal({
