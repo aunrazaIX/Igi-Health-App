@@ -32,7 +32,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>For adding Attachment in leave request</string>
+	<string>We need access to your camera to take photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to select photos.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Permission required for Face ID login</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
