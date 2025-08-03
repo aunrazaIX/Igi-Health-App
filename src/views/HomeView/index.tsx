@@ -66,6 +66,8 @@ const HomeView: React.FC<HomeViewProps> = ({
   handleCardDownload,
   handleDependantsModal,
   showDependantModal,
+  maternityData,
+  maternityLoading,
 }) => {
   const user = useSelector(state => state.auth.user);
 
@@ -380,7 +382,10 @@ const HomeView: React.FC<HomeViewProps> = ({
                                       name={`${item?.Policy_Insured_Name?.trim()}: ${
                                         item?.Policy_Insured_Age
                                       }`}
-                                      style={styles.homeBackCardText}
+                                      style={[
+                                        styles.homeBackCardText,
+                                        {width: '80%'},
+                                      ]}
                                     />
                                   ) : (
                                     <TouchableOpacity
@@ -398,9 +403,12 @@ const HomeView: React.FC<HomeViewProps> = ({
                           </View>
                         </View>
 
-                        <View style={styles.validity}>
+                        <View style={[styles.validity, {width: '40%'}]}>
                           <AileronBold
-                            style={{textAlign: 'left', fontSize: vw * 3.25}}
+                            style={{
+                              textAlign: 'left',
+                              fontSize: vw * 3.25,
+                            }}
                             name={`Valid from : ${moment(
                               homeCardData[0]?.Policy_Start_Date,
                               'YYYYMMDD',
@@ -491,10 +499,8 @@ const HomeView: React.FC<HomeViewProps> = ({
                           <AileronSemiBold
                             style={styles.homeBackCardText}
                             name={
-                              homeCardData?.find(
-                                item =>
-                                  item?.Policy_Insured_Relaion == 'Member',
-                              )?.Policy_MatLimit > 0
+                              maternityData?.length > 0 &&
+                              maternityData[0]?.Policy_MatLimit > 0
                                 ? 'Available'
                                 : 'Not Available'
                             }
@@ -772,7 +778,7 @@ const HomeView: React.FC<HomeViewProps> = ({
         show={showDependantModal}
         onClose={() => handleDependantsModal(false)}
       />
-      <ModalLoading loading={homeCardDataLoading} />
+      <ModalLoading loading={homeCardDataLoading || maternityLoading} />
     </ScrollView>
   );
 };

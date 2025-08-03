@@ -42,6 +42,7 @@ const endpoints = {
   policy: {
     getPolicyTypes: 'Policy/GetPolicyTypes',
     getPolicyDetails: 'Policy/GetPolicyDetails',
+    getMaternity: 'Policy/GetPolicyDetailsMAT',
   },
   Benefits: {
     getBenefits: 'Benefits/GetActiveBenefits',
@@ -54,10 +55,10 @@ const endpoints = {
     attachment: (userId: string, myuuid: string, ClientCode: string) =>
       `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
   },
-  notifications:{
-    getAll:"PushNotification/getNotifications",
-    markAsRead:"PushNotification/readNotification"
-  }
+  notifications: {
+    getAll: 'PushNotification/getNotifications',
+    markAsRead: 'PushNotification/readNotification',
+  },
 };
 
 export default endpoints;

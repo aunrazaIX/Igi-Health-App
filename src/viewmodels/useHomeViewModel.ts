@@ -396,6 +396,15 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     method: 'get',
     skip: true,
   });
+  const {
+    data: maternityData,
+    loading: maternityLoading,
+    trigger: maternityTrigger,
+  } = useApiHook({
+    apiEndpoint: endpoints.policy.getMaternity,
+    method: 'get',
+    skip: true,
+  });
 
   // 1st api call
   const {data: policyData, loading: Loading} = useApiHook({
@@ -423,6 +432,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
         cnic: user.cnic,
       };
       trigger(apiData);
+      maternityTrigger(apiData);
     },
   });
 
@@ -566,6 +576,8 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       frontAnimatedStyle,
       homeCardData,
       claimData: data,
+      maternityData,
+      maternityLoading,
       loading,
       homeCardDataLoading,
       showDependantModal,

@@ -13,6 +13,8 @@ const Home = () => {
     homeCardData,
     homeCardDataLoading,
     showDependantModal,
+    maternityLoading,
+    maternityData,
   } = states;
   const {
     animateCard,
@@ -41,6 +43,8 @@ const Home = () => {
       handleAssociatedApps={handleAssociatedApps}
       handleCardDownload={handleCardDownload}
       showDependantModal={showDependantModal}
+      maternityData={maternityData}
+      maternityLoading={maternityLoading}
     />
   );
 };

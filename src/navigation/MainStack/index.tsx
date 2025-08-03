@@ -3,7 +3,6 @@ import DrawerStack from '../DrawerStack';
 import AuthStack from '../AuthStack';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
-import Home from '../../screens/Home';
 import {useEffect} from 'react';
 import {EventRegister} from 'react-native-event-listeners';
 import {setErrorModal} from '../../redux/generalSlice';
@@ -26,16 +25,16 @@ const MainStack = () => {
         }),
       );
     });
-    // const app = getApp();
-    // const messaging = getMessaging(app);
-    // const unsubscribe = onMessage(messaging, remoteMessage => {
-    //   Toast.show({
-    //     type: 'info',
-    //     text1: 'Notification',
-    //     text2: remoteMessage?.notification?.body,
-    //   });
-    // });
-    // return unsubscribe;
+    const app = getApp();
+    const messaging = getMessaging(app);
+    const unsubscribe = onMessage(messaging, remoteMessage => {
+      Toast.show({
+        type: 'info',
+        text1: 'Notification',
+        text2: remoteMessage?.notification?.body,
+      });
+    });
+    return unsubscribe;
   }, []);
 
   return (
