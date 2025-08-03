@@ -194,18 +194,18 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                 />
               </View>
               <View>
-                <TouchableOpacity
+                <LinearGradient
                   style={styles.cancelButtonSubmit}
-                  onPress={() => setConfirmationModalVisible(false)}>
-                  <LinearGradient
+                  colors={COLORS.deleteButtonGradient}>
+                  <TouchableOpacity
                     style={styles.buttonCancel}
-                    colors={COLORS.deleteButtonGradient}>
+                    onPress={() => setConfirmationModalVisible(false)}>
                     <AileronBold
                       name="Cancel"
                       style={styles.cancelButtonText}
                     />
-                  </LinearGradient>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                </LinearGradient>
               </View>
             </>
           )}
