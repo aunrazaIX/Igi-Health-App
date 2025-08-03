@@ -51,7 +51,10 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
         },
         {
           label: 'Account Number:',
-          value: personalDetails?.Data?.accountNumber ?? '--',
+          value:
+            personalDetails?.Data?.bankacckey?.trim() == ''
+              ? '--'
+              : personalDetails?.Data?.bankacckey?.trim(),
         },
         {
           label: 'Bank IBAN:',
@@ -93,7 +96,6 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
           isSearch={true}
         />
       )}
-
       {data?.map((data, index) => (
         <Box data={data} key={index} />
       ))}
