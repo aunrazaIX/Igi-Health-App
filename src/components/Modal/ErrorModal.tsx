@@ -35,19 +35,25 @@ const ErrorModal: React.FC<ErrorModalProps> = ({containerStyle}) => {
                 style={styles.confirmation}
               />
             </View>
-            {errorDetail ? (
+            {errorDetail && (
               <AileronSemiBold
                 name={errorDetail}
                 style={styles.confirmationDetail}
               />
-            ) : null}
+            )}
           </View>
           <View>
             <Button
               name={'Close'}
               inputStyle={styles.closeButton}
               onPress={() =>
-                dispatch(setErrorModal({show: false, errorMessage: null}))
+                dispatch(
+                  setErrorModal({
+                    show: false,
+                    errorMessage: null,
+                    detail: null,
+                  }),
+                )
               }
               gradientColors={COLORS.PriorGradient}
             />
