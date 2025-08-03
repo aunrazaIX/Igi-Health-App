@@ -130,11 +130,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
     onSuccess: res => {
-      console.log('succesgull');
       setConfirmationModal(true);
-    },
-    onError: e => {
-      console.log('error', e);
     },
   });
 
@@ -169,7 +165,6 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       createdBy: 1,
     };
 
-    console.log(_apiData, 'myAPi DATA');
     trigger(_apiData);
   };
   const toggleExpand = (index: number) => {

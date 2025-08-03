@@ -75,7 +75,6 @@ const PersonalView: React.FC<Props> = ({
   modalType,
   onPressDelete,
 }) => {
-  console.log(data, 'dataaa');
   return (
     <Container>
       <TopView
@@ -105,8 +104,6 @@ const PersonalView: React.FC<Props> = ({
             <View style={{marginBottom: vh * 12}}>
               {data?.map((dependent, index) => (
                 <>
-                  {console.log('depende', dependent)}
-
                   <DependentBox
                     key={index}
                     containerStyle={styles.dependentBoxStyle}>
@@ -165,8 +162,6 @@ const PersonalView: React.FC<Props> = ({
                         <View style={styles.details}>
                           {dependent?.dependentDetail?.map((item, index) => (
                             <>
-                              {console.log(item, 'pppp')}
-
                               <View style={styles.detailRow} key={index}>
                                 {item.label !== 'Name :' && (
                                   <>

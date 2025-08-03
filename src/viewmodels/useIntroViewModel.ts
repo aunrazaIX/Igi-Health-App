@@ -12,7 +12,6 @@ const useIntroViewModel = (): useIntroViewProps => {
   const dispatch = useDispatch();
 
   const handleNextButton = (route: string) => {
-    console.log('trighering');
     navigation.navigate(route);
     dispatch(setIntroSlider(false));
   };

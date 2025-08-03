@@ -60,8 +60,6 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
   handleMapDirection,
   position,
 }) => {
-  // console.log(data, 'dataaaaaaafeta');
-
   const cleanCoordinate = (value: string): number | null => {
     if (!value || typeof value !== 'string') return null;
 

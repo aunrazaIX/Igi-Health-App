@@ -17,5 +17,3 @@ const file = fs.readFileSync(filePath);
 const base64 = file.toString('base64');
 const base64Maternity = maternity.toString('base64');
 const base64CardRoom = cardRoom.toString('base64');
-console.log('room');
-console.log(base64CardRoom);

@@ -58,11 +58,6 @@ const useForgotPasswordViewModel = ({
     faceIdCredentials,
   } = useSelector((state: RootState) => state.auth);
 
-  console.log('current userr', user);
-
-  console.log(isChangedPassword, 'typee');
-
-  console.log(verifiedUserData, 'meri signup ki uuid');
   const [step, setStep] = useState<number>(_step ? _step : 1);
   const [savedDataForVerification, setSavedDataforVerification] =
     useState(null);
@@ -177,7 +172,6 @@ const useForgotPasswordViewModel = ({
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
-      console.log(res, 'mera response');
       setStep(2);
       ForgotpasswordResetStates();
     },
@@ -259,13 +253,11 @@ const useForgotPasswordViewModel = ({
 
     onSuccess: res => {
       if (res?.Data) {
-        console.log('RE', res);
         updatePasswordResetStates();
         setConfirmationModal(true);
       }
     },
     onError: error => {
-      console.log('error', error);
       dispatch(setErrorModal({show: true, message: error, detail: ''}));
     },
   });
@@ -293,11 +285,8 @@ const useForgotPasswordViewModel = ({
     setCountdownKey(prev => prev + 1);
   };
 
-  console.log('test12()', test12());
-
   const handleNext = () => {
     if (step == 1 && type == 'forgot') {
-      console.log('from login id reset pass');
       if (!apiData.cellNumber || !apiData.email || !apiData.cnic) {
         dispatch(
           setErrorModal({

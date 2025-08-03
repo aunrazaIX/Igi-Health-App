@@ -104,7 +104,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
       Geolocation.getCurrentPosition(
         pos => {
           const crd = pos.coords;
-          console.log(crd);
+
           setPosition({
             latitude: crd.latitude,
             longitude: crd.longitude,

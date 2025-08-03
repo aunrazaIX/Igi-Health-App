@@ -45,9 +45,6 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   handleMapDirection,
   position,
 }) => {
-  console.log(position, 'positionss');
-  console.log(data, 'usman');
-
   const cleanCoordinate = (value: string): number | null => {
     if (!value || typeof value !== 'string') return null;
 
