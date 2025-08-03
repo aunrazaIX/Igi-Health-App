@@ -24,10 +24,12 @@ import {
   setTreatments,
   setResetTreaments,
   setUserEmail,
+  setActiveModule,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import {launchCamera} from 'react-native-image-picker';
 
 interface Treatment {
   receiptNumber?: string;
@@ -78,8 +80,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const [deletedIndex, setDeletedIndex] = useState<any>(null);
   const [deletedFileIndex, setDeletedFileIndex] = useState(null);
   const [isView, setIsView] = useState(null);
+  const [showOptionModal, setShowOptionModal] = useState(false);
   const [viewIndex, setViewIndex] = useState();
-
   const {
     selectedDocuments,
     currentStep,
@@ -88,14 +90,15 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     selectedType,
     selectedHospital,
     userPassword,
-  } = useSelector(state => state.lodge);
+  } = useSelector(state => state?.lodge?.modules[state.lodge.activeModule]);
 
-  console.log(userPassword, 'userPPP');
   const {user} = useSelector(state => state.auth);
 
-  console.log(user, 'useerr');
-
-  console.log(selectedType, 'selectedType');
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(setActiveModule(type));
+    }, []),
+  );
 
   const resetStates = () => {
     dispatch(_setTreatmentData([]));
@@ -168,7 +171,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       claimTrigger(apiData);
     },
   });
-
+  console.log('uploadError', uploadError);
   const {
     loading: claimLoading,
     trigger: claimTrigger,
@@ -182,9 +185,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     onSuccess: res => {
       setConfirmationModal(true);
       setConfirmationType('');
+      resetStates();
     },
     onError: e => {
-      console.log(e, 'error');
       dispatch(
         setErrorModal({
           show: true,
@@ -216,9 +219,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         ClientCode: user?.ClientCode,
         // ClientCode: 'PTC',
       },
-      onSuccess: res => {
-        console.log(res, 'coverage ka response');
-      },
     });
 
   const dependantsData =
@@ -249,7 +249,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   });
 
-  console.log(dependants, 'dependants dataaa');
   const {data: hospitalData, loading: hospitalLoading} = useApiHook({
     apiEndpoint: endpoints.panelHospital.getPanelHospitals,
     method: 'get',
@@ -410,10 +409,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       let documents = [];
 
       res?.forEach((item: any) => {
-        const isDuplicate = selectedDocuments.some(
+        const isDuplicate = selectedDocuments?.some(
           doc => doc?.name === item?.name,
         );
-
         const fileSizeInMB = item?.size / (1024 * 1024);
 
         if (fileSizeInMB > 25) {
@@ -456,6 +454,40 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     }
   };
 
+  const openCamera = async () => {
+    try {
+      const res = await launchCamera({
+        mediaType: 'photo',
+        includeBase64: true,
+        quality: 0.5,
+      });
+
+      if (res?.assets?.length > 0) {
+        const fileSizeInMB = res?.assets[0]?.fileSize / (1024 * 1024);
+        console.log(res);
+        if (fileSizeInMB > 25) {
+          dispatch(
+            setErrorModal({
+              show: true,
+              message: 'File size should not exceed 25MB',
+            }),
+          );
+          return;
+        }
+
+        const document = {
+          uri: res?.assets[0]?.uri,
+          type: res?.assets[0]?.type,
+          name: res?.assets[0]?.fileName || `image_${Date.now()}.jpg`,
+          fileSizeInMB: fileSizeInMB,
+        };
+        dispatch(setSelectedDocuments([document]));
+      }
+    } catch (e) {
+      console.log('Error', e);
+    }
+  };
+
   const handleCancelFile = (item, index) => {
     setConfirmationType('fileDelete');
     setConfirmationModal(true);
@@ -465,10 +497,12 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   };
 
   const onView = (index: string) => {
-    console.log(index, 'SAdadasd');
-
     setViewIndex(index);
     setIsView(true);
+  };
+
+  const viewOptionModal = boolean => {
+    setShowOptionModal(boolean);
   };
 
   const handleDeleteFile = deletedFileIndex => {
@@ -501,6 +535,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       deletedFileIndex,
       isView,
       viewIndex,
+      showOptionModal,
     },
     functions: {
       goBack,
@@ -526,6 +561,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       handleGOBack,
       onView,
       setIsView,
+      viewOptionModal,
+      openCamera,
     },
   };
 };
