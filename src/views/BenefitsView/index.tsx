@@ -114,7 +114,7 @@ const BenefitsView: React.FC<Props> = ({
           <FlatList
             data={['Inpatient', 'Outpatient', 'Maternity']}
             horizontal
-            showsHorizontalScrollIndicator={false}
+            showsHorizontalScrollIndicator={true}
             contentContainerStyle={styles.mapTabsContainerList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => (
@@ -141,7 +141,7 @@ const BenefitsView: React.FC<Props> = ({
         <FlatList
           ItemSeparatorComponent={renderSeperator}
           ListHeaderComponent={headerComponent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
           data={data}
           ListEmptyComponent={
             !benefitsloading ? (

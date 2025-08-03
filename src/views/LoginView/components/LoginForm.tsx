@@ -42,7 +42,6 @@ const LoginForm = ({
   return (
     <>
       <AileronSemiBold
-        numberOfLines={2}
         name={
           'Please enter your registered email address and password to access your account.'
         }

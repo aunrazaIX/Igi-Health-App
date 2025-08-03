@@ -39,7 +39,6 @@ export const styles = StyleSheet.create({
 
   loginContainerText: {
     color: COLORS.textColorLight,
-
     fontSize: vw * 4,
     textAlign: 'left',
   },

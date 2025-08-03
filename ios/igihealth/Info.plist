@@ -43,8 +43,6 @@
 	<string>We need your location to show nearby hospitals</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>For adding Attachment in leave request</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>For adding Attachment in leave request</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Bold.ttf</string>

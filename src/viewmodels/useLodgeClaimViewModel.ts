@@ -82,6 +82,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const [isView, setIsView] = useState(null);
   const [showOptionModal, setShowOptionModal] = useState(false);
   const [viewIndex, setViewIndex] = useState();
+
+  const [pickerLoading, setPickerLoading] = useState(false);
   const {
     selectedDocuments,
     currentStep,
@@ -452,36 +454,22 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   };
 
   const openCamera = async () => {
-    console.log("!@#!@31231")
     try {
-      const res = await launchCamera({
-        mediaType: 'photo',
-        includeBase64: true,
-        quality: 0.5,
-      });
-
-      if (res?.assets?.length > 0) {
-        const fileSizeInMB = res?.assets[0]?.fileSize / (1024 * 1024);
-        if (fileSizeInMB > 25) {
-          dispatch(
-            setErrorModal({
-              show: true,
-              message: 'File size should not exceed 25MB',
-            }),
-          );
-          return;
-        }
-
-        const document = {
-          uri: res?.assets[0]?.uri,
-          type: res?.assets[0]?.type,
-          name: res?.assets[0]?.fileName || `image_${Date.now()}.jpg`,
-          fileSizeInMB: fileSizeInMB,
-        };
-        dispatch(setSelectedDocuments([document]));
-      }
+      let options = {
+        quality: 1,
+        cameraType: 'back',
+        selectionLimit: 1,
+      };
+      let result = await launchImageLibrary(options);
+      let res = result?.assets[0];
+      let _img = {
+        uri: res?.uri,
+        type: res?.type,
+        name: res?.fileName,
+      };
+      dispatch(setSelectedDocuments([_img]));
     } catch (e) {
-      console.log('Error', e);
+      console.log('Error from opending camera or image picker', e);
     }
   };
 

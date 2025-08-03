@@ -532,7 +532,7 @@ const HomeView: React.FC<HomeViewProps> = ({
             // horizontal
             data={cardData}
             keyExtractor={_item => _item?.name}
-            showsHorizontalScrollIndicator={false}
+            showsHorizontalScrollIndicator={true}
             numColumns={4}
             renderItem={({item}) => (
               // <TouchableOpacity

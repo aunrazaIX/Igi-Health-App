@@ -72,7 +72,7 @@ const Stepper: React.FC<StepperProps> = ({
           ))}
         </View>
         <ScrollView
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
           contentContainerStyle={styles.contentContainer}>
           {componentList[steps[currentStep - 1]?.key]}
         </ScrollView>

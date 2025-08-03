@@ -55,7 +55,7 @@ const AddTreatmentView = ({
         <KeyboardAwareScrollView
           extraScrollHeight={20}
           keyboardShouldPersistTaps="always"
-          showsVerticalScrollIndicator={false}>
+          showsVerticalScrollIndicator={true}>
           <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>

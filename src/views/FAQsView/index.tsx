@@ -48,7 +48,7 @@ const FAQsView = ({
           contentContainerStyle={{
             paddingVertical: vh * 1.5,
           }}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
         />
       </CurvedView>
     </Container>
