@@ -170,7 +170,7 @@ export const styles = StyleSheet.create({
     height: vh * 2,
   },
   infoCardTextBold: {
-    fontSize: vh * 2,
+    fontSize: vw * 4,
     color: COLORS.textBlackShade,
     maxWidth: vh * 30,
     // textAlign: 'left',
@@ -183,7 +183,6 @@ export const styles = StyleSheet.create({
   },
   homeInfoContainerHeaderText: {
     gap: vh * 0.5,
-
     alignItems: 'flex-end',
   },
   homeInfoContainerMiddle: {
@@ -193,7 +192,7 @@ export const styles = StyleSheet.create({
   },
   homeInfoContainerMiddleText: {},
   infoCardMiddleTextlight: {
-    fontSize: vw * 3.7,
+    fontSize: vw * 3.5,
     color: COLORS.textColor,
     textAlign: 'left',
     lineHeight: vh * 2,
@@ -203,7 +202,6 @@ export const styles = StyleSheet.create({
   homeInfoContainerMiddleTextLogo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignItems: 'center',
   },
   homeCardMainDetails: {
@@ -221,7 +219,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   validity: {
-    gap: vh * 2,
+    gap: vh * 1.2,
     // borderWidth: 2,
 
     marginTop: vh,
