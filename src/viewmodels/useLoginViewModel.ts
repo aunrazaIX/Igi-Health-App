@@ -158,8 +158,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     method: 'post',
     onSuccess: res => {
       loginResponse.current = res;
-      console.log(credentials, 'user in login res');
-      console.log(res, 'login res');
       if (res?.Data.UserName !== credentials?.userName) {
         dispatch(resetAllModules());
       }
