@@ -2,7 +2,9 @@ import {createAsyncThunk, createSlice, current} from '@reduxjs/toolkit';
 
 import {setErrorModal} from './generalSlice';
 
-const initialState: {
+const moduleNames = ['lodgeClaim', 'priorApproval'];
+
+const initialModuleState: {
   currentStep: number;
   selectedPatient: any | null;
   selectedType: any | null;
@@ -25,11 +27,20 @@ const initialState: {
   userPassword: '',
 };
 
+const initialState = {
+  activeModule: 'lodgeClaim',
+  modules: {
+    lodgeClaim: {...initialModuleState},
+    priorApproval: {...initialModuleState},
+  },
+};
+
 export const updateTreatments = createAsyncThunk(
   'lodge/update',
   async (_data, thunkApi) => {
     const {index, data, navigateOnSuccess} = _data;
-    const {treatments} = thunkApi.getState()?.lodge;
+    const state = thunkApi.getState()?.lodge;
+    const treatments = state.modules[state.activeModule].treatments;
     if (
       !data?.receiptNumber ||
       !data?.amount ||
@@ -66,7 +77,9 @@ export const updateTreatments = createAsyncThunk(
 export const setTreatments = createAsyncThunk(
   'lodge/add',
   async (_data, thunkApi) => {
-    const {treatments} = thunkApi.getState()?.lodge;
+    const state = thunkApi.getState()?.lodge;
+
+    const treatments = state.modules[state.activeModule].treatments;
     const isDuplicate = treatments?.some(
       treatment => treatment?.receiptNumber == _data?.receiptNumber,
     );
@@ -86,7 +99,6 @@ export const setTreatments = createAsyncThunk(
       );
       return;
     }
-
     if (_data?.amount <= 0) {
       thunkApi.dispatch(
         setErrorModal({message: 'Amount must be greater than zero'}),
@@ -105,76 +117,79 @@ export const lodgeSlice = createSlice({
   name: 'lodgeSlice',
   initialState,
   reducers: {
+    setActiveModule: (state, {payload}) => {
+      if (moduleNames.includes(payload)) {
+        state.activeModule = payload;
+      }
+    },
     setSelectedPatient: (state, {payload}) => {
-      state.selectedPatient = payload;
+      state.modules[state.activeModule].selectedPatient = payload;
     },
     setSelectedType: (state, {payload}) => {
-      state.selectedType = payload;
+      state.modules[state.activeModule].selectedType = payload;
     },
     setSelectedMaternityType: (state, {payload}) => {
-      state.selectedMaternityType = payload;
+      state.modules[state.activeModule].selectedMaternityType = payload;
     },
     setSelectedHospital: (state, {payload}) => {
-      state.selectedHospital = payload;
+      state.modules[state.activeModule].selectedHospital = payload;
     },
 
     setResetTreaments: state => {
-      state.treatments = [];
+      state.modules[state.activeModule].treatments = [];
     },
     _setTreatmentData: (state, {payload}) => {
       if (payload?._data) {
         const {_data} = payload;
-
         _data?.navigateOnSuccess();
         delete _data?.navigateOnSuccess;
-        state.treatments = [...state.treatments, _data];
+        state.modules[state.activeModule].treatments.push(_data);
       } else {
-        state.treatments = [];
+        state.modules[state.activeModule].treatments = [];
       }
     },
 
     _updateTreatmentData: (state, {payload}) => {
       const {index, data, navigateOnSuccess} = payload;
       navigateOnSuccess();
-      state.treatments[index] = data;
+      state.modules[state.activeModule].treatments[index] = data;
     },
 
     setStep: (state, action) => {
-      state.currentStep = action.payload;
+      state.modules[state.activeModule].currentStep = action.payload;
     },
 
     setSelectedDocuments: (state, action) => {
       if (action?.payload?.length > 0) {
-        state.selectedDocuments = [
-          ...state.selectedDocuments,
+        state.modules[state.activeModule].selectedDocuments = [
+          ...state.modules[state.activeModule].selectedDocuments,
           ...action.payload,
         ];
       } else {
-        state.selectedDocuments = [];
+        state.modules[state.activeModule].selectedDocuments = [];
       }
     },
 
     onDeleteDocuments: (state, {payload}) => {
-      let temp = [...state.selectedDocuments];
+      let temp = [...state.modules[state.activeModule].selectedDocuments];
 
       temp.splice(payload, 1);
 
-      state.selectedDocuments = temp;
+      state.modules[state.activeModule].selectedDocuments = temp;
     },
 
     onDeleteTreatment: (state, {payload}) => {
-      let temp = [...state.treatments];
+      let temp = [...state.modules[state.activeModule].treatments];
       temp.splice(payload, 1);
-      state.treatments = temp;
+      state.modules[state.activeModule].treatments = temp;
     },
 
     setRemarks: (state, {payload}) => {
-      state.remarks = payload;
+      state.modules[state.activeModule].remarks = payload;
     },
 
     setUserEmail: (state, {payload}) => {
-      console.log(payload, 'payload');
-      state.userPassword = payload;
+      state.modules[state.activeModule].userPassword = payload;
     },
   },
 });
@@ -193,5 +208,6 @@ export const {
   setSelectedMaternityType,
   setResetTreaments,
   setUserEmail,
+  setActiveModule,
 } = lodgeSlice.actions;
 export const lodegeReducer = lodgeSlice.reducer;

@@ -15,9 +15,9 @@ const useAddTreatmentModel = ({
 }) => {
   const dispatch = useDispatch();
 
-  const isError = useSelector((state: RootState) => state.lodge.isError);
-
-  const selectedType = useSelector(state => state.lodge.selectedType);
+  const {isError, selectedType} = useSelector(
+    state => state?.lodge?.modules[state.lodge.activeModule],
+  );
 
   const [confirmationModal, setConfirmationModal] = useState(false);
 
@@ -38,7 +38,6 @@ const useAddTreatmentModel = ({
   });
 
   const apiParams = useMemo(() => {
-    console.log(selectedType, 'Seeessssss');
     const typeValue = selectedType?.label;
 
     const endpointKey =
