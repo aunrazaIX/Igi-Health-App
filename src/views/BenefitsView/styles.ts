@@ -34,10 +34,15 @@ const styles = StyleSheet.create({
     marginTop: vh * 1.5,
     color: '#004984',
   },
+  selectedTitle: {
+    fontSize: vh * 2.7,
+    textAlign: 'left',
+    color: COLORS.benefitTitle,
+  },
   BenefitsTitle: {
     fontSize: vw * 5.5,
     textAlign: 'left',
-    color: '#EE2560',
+    color: '#004984',
   },
   coverage: {
     flexDirection: 'row',
