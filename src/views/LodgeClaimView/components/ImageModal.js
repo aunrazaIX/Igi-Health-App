@@ -5,16 +5,14 @@ import {icons} from '../../../assets';
 import {vh, vw} from '../../../assets/theme/dimension';
 
 const ImageModal = ({image, onClose}) => {
+  console.log('ImageModal', image);
   return (
     <Modal visible transparent statusBarTranslucent>
       <View style={styles.container}>
         <TouchableOpacity onPress={onClose}>
           <Image source={icons.CancelIcon} style={styles.cross} />
         </TouchableOpacity>
-        <Image
-          style={{height: vh * 60, width: vw * 90, borderRadius: vw * 2}}
-          source={{uri: image}}
-        />
+        <Image style={styles.image} source={{uri: image}} />
       </View>
     </Modal>
   );
@@ -34,5 +32,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: vw * 6,
     // fontSize: vw * 4,
+  },
+  image: {
+    height: vh * 60,
+    width: vw * 90,
+    borderRadius: vw * 2,
+    resizeMode: 'contain',
   },
 });
