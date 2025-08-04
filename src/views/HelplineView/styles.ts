@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     marginTop: vh * 1.5,
   },
   headingText: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3.2,
     textAlign: 'left',
     marginTop: vh * 1.5,
   },

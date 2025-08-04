@@ -1,50 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
-import {Alert, Linking, Platform} from 'react-native';
+import {Alert, Linking} from 'react-native';
 
-export type ContactInfo = {
-  name: string;
-  tel: string;
-  fax: string;
-  emergencyTel: string;
-  claimsTel: string;
-  address: string;
-};
-
-export type ClaimAssistance = {
-  title: string;
-  name: string;
-  phone: string;
-  position?: string;
-  cell?: string;
-};
-export type Hotlines = {
-  cities: HotlineCity[];
-  emails: HotlineEmail[];
-  website: string;
-};
-export type HotlineEmail = {
-  label: string;
-  email: string;
-};
-export type HotlineCity = {
-  city: string;
-  mobile: string;
-};
-type UseHelplineViewModelReturnType = {
-  states: {
-    contactInfo: ContactInfo;
-    claimAssistance: ClaimAssistance[];
-    hotlines: Hotlines;
-  };
-  functions: {
-    goBack: () => void;
-    onPress: () => void;
-  };
-};
-
-const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
+const useHelplineViewModel = () => {
   const navigation = useNavigation();
-  const contactInfo: ContactInfo = {
+  const contactInfo = {
     name: 'Amber Inayat Ali',
     tel: '+92-21-35369626',
     fax: '+92-21-35290042 | 021-35290043',
@@ -54,7 +13,7 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
       'IGI Life Insurance Limited 7th Floor, The Forum, Suit No. 701-713, G-20 Khayaban-e-Jami, Block 9, Clifton Karachi 75600, Pakistan',
   };
 
-  const claimAssistance: ClaimAssistance[] = [
+  const claimAssistance = [
     {
       title: 'For Claims Assistance',
       name: 'Mr. Muhammad Salman',
@@ -92,7 +51,7 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
       cell: '0308-8173118',
     },
   ];
-  const hotlines: Hotlines = {
+  const hotlines = {
     cities: [
       {city: 'Islamabad', mobile: '0302-5440150'},
       {city: 'Karachi', mobile: '0300-9284674 | 0300-8266930'},
@@ -119,7 +78,7 @@ const useHelplineViewModel = (): UseHelplineViewModelReturnType => {
     navigation.goBack();
   };
 
-  const onPress = (type: 'call' | 'mail' | 'map', value: string) => {
+  const onPress = (type, value) => {
     let url;
     if (type == 'call') {
       url = `tel:${value}`;

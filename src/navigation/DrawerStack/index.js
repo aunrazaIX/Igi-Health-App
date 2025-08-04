@@ -24,7 +24,7 @@ import {logout} from '../../redux/authSlice';
 import SettingStack from '../SettingStack';
 import {useNavigation} from '@react-navigation/native';
 import Profile from '../../screens/Profile';
-import TermsAndConditionsView from '../../views/TermsAndConditionsView';
+import TermsAndConditionsView from '../../views/PrivacyPolicyView';
 import InactivityHandler from '../../components/InActivity';
 
 const DrawerStack = () => {

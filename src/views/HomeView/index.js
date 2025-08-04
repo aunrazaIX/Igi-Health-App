@@ -67,6 +67,7 @@ const HomeView = ({
                     source={icons.notification}
                     style={styles.headerIcons}
                   />
+                  <View style={styles.notifiationBageView}></View>
                 </TouchableOpacity>
               </View>
 

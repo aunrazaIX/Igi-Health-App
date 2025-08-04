@@ -11,32 +11,32 @@ import styles from '../styles';
 const ContactInfoView = ({onPress}) => {
   return (
     <View style={styles.box}>
-      <AileronSemiBold style={styles.title} name="Contact information" />
-      <AileronBold style={styles.subtitle} name="Approval Center:" />
-      <AileronSemiBold
+      <AileronBold style={styles.title} name="Contact information" />
+      <AileronSemiBold style={styles.subtitle} name="Approval Center:" />
+      <AileronRegular
         style={styles.headingText}
         name={'Tel : +92-(042) 34503333'}
       />
-      <AileronSemiBold
+      <AileronRegular
         style={styles.headingText}
         name={`Email: approvalsubmission.pakistan@igi.com.pk `}
       />
 
-      <AileronBold style={styles.subHeading} name={`Customer Services:`} />
-      <AileronSemiBold
+      <AileronSemiBold style={styles.subHeading} name={`Customer Services:`} />
+      <AileronRegular
         style={styles.headingText}
         name={`UAN : 021-111-111-711`}
       />
-      <AileronSemiBold
+      <AileronRegular
         style={styles.headingText}
         name={`WhatsApp : +92-300-8208489`}
       />
-      <AileronSemiBold
+      <AileronRegular
         style={styles.headingText}
         name={`Email: corporate.services@igi.com.pk`}
       />
-      <AileronBold style={styles.address} name={'Address:'} />
-      <AileronSemiBold
+      <AileronSemiBold style={styles.address} name={'Address:'} />
+      <AileronRegular
         name={`7th Floor, The Forum, Block -9, Khayaban – e - Jami, Clifton, Karachi, Pakistan.`}
         style={styles.headingText}
       />

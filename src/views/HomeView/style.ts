@@ -471,4 +471,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: vw * 2,
   },
+  notifiationBageView: {
+    height: vw * 4,
+    width: vw * 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: (vw * 4) / 2,
+    position: 'absolute',
+    right: -vw * 2,
+    bottom: vh * 1.5,
+
+    backgroundColor: COLORS.faqsSubHeading,
+  },
 });
