@@ -8,6 +8,7 @@ import SimpleLoader from '../../components/SimpleLoader';
 import {COLORS} from '../../assets/theme/colors';
 import {styles} from './style';
 import RemarksModal from '../../screens/ClaimsHistory/components/RemarksModal';
+import NoDataView from '../../components/NoDataView';
 
 const ClaimsHistoryView = ({
   data,
@@ -73,12 +74,19 @@ const ClaimsHistoryView = ({
           </TouchableOpacity>
         </View>
         <FlatList
+          ListFooterComponent={
+            claimDataLoading && (
+              <SimpleLoader color={COLORS.cardBackgroundRed} />
+            )
+          }
+          ListEmptyComponent={
+            !claimDataLoading && <NoDataView name={'No Data Found'} />
+          }
           contentContainerStyle={styles.containerStyle}
           data={data}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
         />
-        {claimDataLoading && <SimpleLoader color={COLORS.cardBackgroundRed} />}
 
         <RemarksModal
           onClose={onCloseRemarksModal}

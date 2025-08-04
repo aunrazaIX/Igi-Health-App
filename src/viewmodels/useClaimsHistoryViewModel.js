@@ -38,11 +38,12 @@ const useClaimsHistoryViewModel = () => {
           isInProcess ? 'YYYY-MMM-DD' : 'YYYY-MM-DD',
         ).format('DD-MMM-YYYY'),
       },
-      {label: 'Claim Type:', value: claim.ClaimsSubTypeName},
       claim.ActionClosed && {
         label: 'Claim Paid Date:',
         value: moment(claim.ActionClosed, 'YYYY-MM-DD').format('DD-MMM-YYYY'),
       },
+      {label: 'Claim Type:', value: claim.ClaimsSubTypeName},
+
       {label: 'Status:', value: claim.ClaimStatusName},
       {
         label: 'Amount Claimed',
@@ -91,6 +92,7 @@ const useClaimsHistoryViewModel = () => {
 
   const onPressType = _type => {
     setType(_type);
+    setData([]);
     _type === 'Processed' ? getDxcClaims() : geInProcessClaims();
   };
 
