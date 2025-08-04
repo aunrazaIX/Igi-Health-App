@@ -51,7 +51,6 @@ const Tabs = () => {
                 style={{
                   color: 'black',
                   fontSize: vw * 2.4,
-                  bottom: vh * 0.5,
                 }}
               />
             </View>
@@ -101,7 +100,6 @@ const Tabs = () => {
                   style={{
                     color: 'black',
                     fontSize: vw * 2.4,
-                    bottom: vh * 0.5,
                   }}
                 />
               </View>
@@ -152,7 +150,6 @@ const Tabs = () => {
                   style={{
                     color: 'black',
                     fontSize: vw * 2.4,
-                    bottom: vh * 0.5,
                     lineHeight: vh * 2,
                   }}
                 />
@@ -202,7 +199,7 @@ const Tabs = () => {
               </AileronRegular>
               <AileronRegular
                 name="Helpline"
-                style={{color: 'black', fontSize: vw * 2.4, bottom: vh * 0.5}}
+                style={{color: 'black', fontSize: vw * 2.4}}
               />
             </View>
           ),

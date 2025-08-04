@@ -137,6 +137,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       files: selectedDocuments,
     },
     onSuccess: res => {
+      console.log('success upload');
       let apiData =
         type === 'priorApproval'
           ? treatments?.map(item => ({
@@ -189,6 +190,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         ? endpoints.priorApproval.addPriorApproval
         : endpoints.claimLogde.lodge,
     onSuccess: res => {
+      console.log('success claim');
       setConfirmationModal(true);
       setConfirmationType('');
       resetStates();
@@ -399,6 +401,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   };
 
   const onPressSubmitClaim = () => {
+    setConfirmationModal(false);
     trigger();
   };
 
@@ -499,6 +502,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       }
     });
   };
+
+  console.log(claimLoading, 'claim', uploadLoading, 'upload');
 
   return {
     states: {
