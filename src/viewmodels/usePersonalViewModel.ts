@@ -7,6 +7,7 @@ import endpoints from '../api/endspoints';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import {formatName} from '../utils';
 
 type UsePersonalViewModal = {
   states: {
@@ -69,8 +70,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
           dependent: 'Dependent Detail',
           image: item?.CLTSEX === 'M' ? icons.genderFrame : icons.frame,
           dependentDetail: [
-            {label: 'Name :', value: item?.LGIVNAME.trim()},
-
+            {label: 'Name :', value: formatName(item?.LGIVNAME.trim())},
             {
               label: 'Gender :',
               value:

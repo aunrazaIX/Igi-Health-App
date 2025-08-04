@@ -174,15 +174,14 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       };
       getCovergaeApi(apiData);
     },
-    onError: error => {
-      const errorMessage = error?.error || error?.message || '';
+    onError: e => {
+      const errorMessage = e?.error || e?.message || '';
 
       dispatch(
         setErrorModal({
           Show: true,
-          message: `"Incorrect Credentials"`,
-          detail:
-            "We couldn't find an account with these details. Please check your username and password and try again.",
+          message: e?.header,
+          detail: e?.error,
         }),
       );
     },
@@ -208,13 +207,12 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
         sendOtp(apiData);
       }
     },
-    onError: () => {
+    onError: e => {
       dispatch(
         setErrorModal({
           Show: true,
-          message: 'Signup Failed',
-          detail:
-            'We couldn’t find your details in our records. Please check your information or contact IGI Life.',
+          message: e?.header,
+          detail: e?.error,
         }),
       );
     },

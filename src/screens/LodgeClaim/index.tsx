@@ -22,7 +22,6 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
 
   const {
     steps,
-    personalData,
     claimsDetails,
     patientOptions,
     dependants,
@@ -81,7 +80,6 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     <LodgeClaimView
       goBack={goBack}
       steps={steps}
-      personalData={personalData}
       dependantsData={dependantsData}
       claimsDetails={claimsDetails}
       selectedPatient={selectedPatient}

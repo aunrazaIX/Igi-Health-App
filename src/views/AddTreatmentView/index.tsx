@@ -46,10 +46,15 @@ const AddTreatmentView = ({
   loading,
   isError,
   treatmentIndex,
+  claimType,
 }: AddTreatmentViewProps) => {
   return (
     <>
-      <TopView title={'Enter Treatment Details'} />
+      <TopView
+        title={`Enter ${
+          claimType === 'lodgeClaim' ? 'Claim' : 'Treatment'
+        } Details`}
+      />
 
       <CurvedView containerStyle={styles.curveStyle}>
         <KeyboardAwareScrollView
@@ -59,10 +64,12 @@ const AddTreatmentView = ({
           <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>
-              {/* <AileronBold
-                name="Add receipt and"
-                style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
-              /> */}
+              {claimType === 'lodgeClaim' && (
+                <AileronBold
+                  name="Add receipt and"
+                  style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
+                />
+              )}
               <AileronBold
                 name="Treatment information"
                 style={[styles.text, {color: COLORS.cardBackgroundRed}]}
@@ -96,9 +103,17 @@ const AddTreatmentView = ({
                 setterForApiData('receiptNumber', alphanumericOnly);
               }}
               maxLength={20}
-              label="Admission/Mr No."
+              label={
+                claimType === 'lodgeClaim'
+                  ? 'Receipt Number'
+                  : 'Admission/Mr No.'
+              }
               errorMessage={apiData?.error_receiptNumber}
-              placeholder="Enter Hospital Admission/Mr No."
+              placeholder={
+                claimType === 'lodgeClaim'
+                  ? 'Enter Receipt Number'
+                  : 'Enter Hospital Admission/Mr No.'
+              }
             />
 
             <InputField
@@ -116,8 +131,12 @@ const AddTreatmentView = ({
                 const cleanedText = text.replace(/[^0-9]/g, '');
                 setterForApiData('amount', cleanedText);
               }}
-              label="Estimated Cost"
-              placeholder="Enter Estimated Cost provided by hospital"
+              label={claimType === 'lodgeClaim' ? 'Amount' : 'Estimated Cost'}
+              placeholder={
+                claimType === 'lodgeClaim'
+                  ? 'Enter Amount'
+                  : 'Enter Estimated Cost'
+              }
             />
 
             <InputField

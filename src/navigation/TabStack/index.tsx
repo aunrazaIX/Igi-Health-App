@@ -111,10 +111,10 @@ const Tabs = () => {
                   P Approval
                 </AileronRegular>
                 <AileronRegular
-                  name="P Approval"
+                  name="Prior Approval"
                   style={{
                     color: 'black',
-                    fontSize: vw * 2.95,
+                    fontSize: vw * 2.8,
                     lineHeight: vh * 2,
                   }}
                 />
@@ -133,13 +133,11 @@ const Tabs = () => {
                       style={[styles.iconStyle, {tintColor: 'white'}]}
                       source={tabIcons.note}
                     />
-            
                   </View>
                 </LinearGradient>
               ) : (
                 <View style={[styles.gradientBorder, styles.wrapper]}>
                   <Image style={styles.iconStyleprior} source={tabIcons.note} />
-  
                 </View>
               ),
           }}

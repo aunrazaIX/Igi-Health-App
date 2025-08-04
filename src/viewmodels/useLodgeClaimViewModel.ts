@@ -30,6 +30,7 @@ import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {formatName} from '../utils';
 
 interface Treatment {
   receiptNumber?: string;
@@ -74,7 +75,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const randomId = Math.random().toString().substr(2, 6);
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-
+  const [dependants, setDependants] = useState<[]>([]);
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   const [confirmationType, setConfirmationType] = useState<string>('');
   const [deletedIndex, setDeletedIndex] = useState<any>(null);
@@ -231,17 +232,21 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       value: item?.CoverageId,
     })) ?? [];
 
-  const {data: dependants, loading: dependantLoading} = useApiHook({
+  const {data: _dependents, loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
     argsOrBody: {
       cnic: user?.cnic,
       ClientCode: user?.ClientCode,
     },
-    transform: {
-      keyToLoop: 'Data',
-      label: 'LGIVNAME',
-      value: 'CLNTNUM',
+    onSuccess: data => {
+      setDependants(
+        data?.Data.map((item: any) => ({
+          ...item,
+          label: formatName(item?.LGIVNAME),
+          value: item?.CLNTNUM,
+        })),
+      );
     },
     onUnmount: () => {
       const state = navigation.getState();
@@ -273,21 +278,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       key: 'claim',
     },
     {label: 'Upload Document', key: 'uploadDoc'},
-  ];
-
-  const personalData: PersonalInfoSection[] = [
-    {
-      sectionTitle: 'Personal Details',
-      icon: icons.personalDetail,
-      edit: false,
-      delete: false,
-      info: [
-        {label: 'Name of Employee:', value: 'Imran Naveed Qureshi'},
-        {label: 'Bank Name:', value: 'Bank Al Habib'},
-        {label: 'Account Number:', value: '1234-5678-9101112-3'},
-        {label: 'Bank IBAN:', value: 'PK47 XYZ 1234 5678 9101112 3 0'},
-      ],
-    },
   ];
 
   const claimsDetails: ClaimDetail[] = treatments?.map((item: Treatment) => ({
@@ -504,7 +494,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   return {
     states: {
       steps,
-      personalData,
       claimsDetails,
       dependantLoading,
       currentStep,

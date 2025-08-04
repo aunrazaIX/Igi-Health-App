@@ -26,7 +26,6 @@ import ImageModal from './components/ImageModal';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
-  personalData: PersonelDataSection[];
   dependantsData: DependantList[];
   claimsDetails: ClaimDetailSection[] | undefined;
   goBack: () => void;
@@ -77,7 +76,6 @@ type LodgeClaimViewProps = {
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   steps,
-  personalData,
   claimsDetails,
   dependantsData,
   dependants,
@@ -141,7 +139,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         selectedPatient={selectedPatient}
         selectedType={selectedType}
         onSelectPatient={onSelectPatient}
-        personalData={personalData}
         patientOptions={dependantsData}
         dependants={dependants}
         personalDetails={personalDetails}
