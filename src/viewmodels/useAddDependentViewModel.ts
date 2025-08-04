@@ -9,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import {setErrorModal} from '../redux/generalSlice';
 import {DetailsContainer} from '../components';
 import moment from 'moment';
+import {formatName} from '../utils';
 
 const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   let {user} = useSelector((state: RootState) => state.auth);
@@ -23,7 +24,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
   const prefilledData = {
-    dependentName: dependentData?.dependentDetail[0]?.value,
+    dependentName: formatName(dependentData?.dependentDetail[0]?.value),
     gender: {
       label: dependentData?.dependentDetail[1]?.value,
       value: dependentData?.dependentDetail[1]?.value,

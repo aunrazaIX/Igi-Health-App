@@ -20,7 +20,6 @@ export function generateUUID() {
 
 export const universalSearch = (query, searchableFields, data) => {
   const lowerQuery = typeof query === 'string' ? query.toLowerCase() : '';
-
   return data?.filter(item =>
     searchableFields.some(field => {
       const value = item[field];
@@ -32,11 +31,11 @@ export const universalSearch = (query, searchableFields, data) => {
 };
 
 export function formatName(name) {
-  if (typeof name !== 'string') return '';
+  if (name && typeof name !== 'string') return '';
 
   return name
-    .trim() // Remove leading/trailing whitespace
-    .split(/\s+/) // Split by one or more spaces
+    .trim()
+    .split(/\s+/)
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ');
 }
