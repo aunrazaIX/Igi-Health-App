@@ -31,6 +31,7 @@ import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {formatName} from '../utils';
+import {InteractionManager} from 'react-native';
 
 interface Treatment {
   receiptNumber?: string;
@@ -407,15 +408,12 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         allowMultiSelection: true,
         type: [types.docx, types.pdf, types.images],
       });
-
       let documents = [];
-
       res?.forEach((item: any) => {
         const isDuplicate = selectedDocuments?.some(
           doc => doc?.name === item?.name,
         );
         const fileSizeInMB = item?.size / (1024 * 1024);
-
         if (fileSizeInMB > 25) {
           dispatch(
             setErrorModal({
@@ -433,7 +431,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               name: item?.name,
               fileSizeInMB: fileSizeInMB,
             });
-            dispatch(setSelectedDocuments(documents));
           } else {
             dispatch(
               setErrorModal({
@@ -446,6 +443,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
           }
         }
       });
+      dispatch(setSelectedDocuments(documents));
     } catch (e) {
       console.log('Error', e);
     }
@@ -491,6 +489,16 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const handleDeleteFile = deletedFileIndex => {
     dispatch(onDeleteDocuments(deletedFileIndex));
   };
+  const uploadDocument = e => {
+    setShowOptionModal(false);
+    InteractionManager.runAfterInteractions(() => {
+      if (e === 'file') {
+        onSelectDocument();
+      } else {
+        openCamera();
+      }
+    });
+  };
 
   return {
     states: {
@@ -527,7 +535,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       onPressEdit,
       onPressStep,
       onSelectPatient,
-      onSelectDocument,
       handleCancelFile,
       setConfirmationModal,
       resetStates,
@@ -544,7 +551,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       onView,
       setIsView,
       viewOptionModal,
-      openCamera,
+      uploadDocument,
     },
   };
 };
