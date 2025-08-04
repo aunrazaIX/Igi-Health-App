@@ -172,9 +172,7 @@ export const lodgeSlice = createSlice({
 
     onDeleteDocuments: (state, {payload}) => {
       let temp = [...state.modules[state.activeModule].selectedDocuments];
-
       temp.splice(payload, 1);
-
       state.modules[state.activeModule].selectedDocuments = temp;
     },
 

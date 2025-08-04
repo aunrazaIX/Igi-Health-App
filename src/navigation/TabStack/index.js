@@ -23,6 +23,7 @@ const Tabs = () => {
     <Tab.Navigator
       initialRouteName="HomeStack"
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         popToTopOnBlur: true,
         tabBarStyle: styles.tabBarStyle,
         tabBarItemStyle: {},
@@ -39,6 +40,7 @@ const Tabs = () => {
               <AileronRegular
                 style={{
                   color: focused ? 'black' : 'black',
+
                   fontSize: vw,
                 }}>
                 Home
@@ -46,7 +48,11 @@ const Tabs = () => {
 
               <AileronRegular
                 name="Home"
-                style={{color: 'black', fontSize: vw * 3}}
+                style={{
+                  color: 'black',
+                  fontSize: vw * 2.4,
+                  bottom: vh * 0.5,
+                }}
               />
             </View>
           ),
@@ -94,7 +100,8 @@ const Tabs = () => {
                   name="Prior Approval"
                   style={{
                     color: 'black',
-                    fontSize: vw * 2.8,
+                    fontSize: vw * 2.4,
+                    bottom: vh * 0.5,
                   }}
                 />
               </View>
@@ -142,7 +149,12 @@ const Tabs = () => {
 
                 <AileronRegular
                   name="Lodge Claim"
-                  style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
+                  style={{
+                    color: 'black',
+                    fontSize: vw * 2.4,
+                    bottom: vh * 0.5,
+                    lineHeight: vh * 2,
+                  }}
                 />
               </View>
             ),
@@ -190,7 +202,7 @@ const Tabs = () => {
               </AileronRegular>
               <AileronRegular
                 name="Helpline"
-                style={{color: 'black', fontSize: vw * 3}}
+                style={{color: 'black', fontSize: vw * 2.4, bottom: vh * 0.5}}
               />
             </View>
           ),

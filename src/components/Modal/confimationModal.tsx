@@ -199,14 +199,16 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                 <LinearGradient
                   style={styles.cancelButtonSubmit}
                   colors={COLORS.deleteButtonGradient}>
-                  <TouchableOpacity
-                    style={styles.buttonCancel}
-                    onPress={() => setConfirmationModalVisible(false)}>
-                    <AileronBold
-                      name="Cancel"
-                      style={styles.cancelButtonText}
-                    />
-                  </TouchableOpacity>
+                  <View>
+                    <TouchableOpacity
+                      style={styles.buttonCancel}
+                      onPress={() => setConfirmationModalVisible(false)}>
+                      <AileronBold
+                        name="Cancel"
+                        style={styles.cancelButtonText}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </LinearGradient>
               </View>
             </>
@@ -333,12 +335,12 @@ const styles = StyleSheet.create({
     color: COLORS.white,
   },
   buttonCancel: {
-    paddingVertical: vh * 2,
-    paddingHorizontal: vh * 1.5,
+    paddingVertical: vw * 4,
+    paddingHorizontal: vw * 3,
     borderRadius: vh * 1.3,
   },
   closeButton: {
-    fontSize: vw * 4.7,
+    fontSize: vw * 4.4,
     fontWeight: '700',
     color: COLORS.white,
   },

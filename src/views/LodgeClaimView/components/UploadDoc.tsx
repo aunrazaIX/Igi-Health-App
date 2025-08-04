@@ -13,7 +13,6 @@ import {icons, images} from '../../../assets';
 import DocumentOptionsModal from './DocumentOptionsModal';
 
 type UploadDocProps = {
-  onSelectDocument: () => void;
   handleCancelFile: () => void;
   claimData: any;
   setterForclaimData: any;
@@ -23,7 +22,6 @@ type UploadDocProps = {
 };
 
 const UploadDoc: React.FC<UploadDocProps> = ({
-  onSelectDocument,
   selectedDocuments,
   handleCancelFile,
   isUplaoded = false,
@@ -32,7 +30,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
   onView,
   showOptionModal,
   viewOptionModal,
-  openCamera,
+  uploadDocument,
 }) => {
   return (
     <View style={styles.uploadFileContainer}>
@@ -129,8 +127,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
       </View>
       <DocumentOptionsModal
         viewOptionModal={viewOptionModal}
-        uploadDocument={onSelectDocument}
-        openCamera={openCamera}
+        uploadDocument={uploadDocument}
         showOptionModal={showOptionModal}
       />
     </View>

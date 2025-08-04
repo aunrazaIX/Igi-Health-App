@@ -8,7 +8,6 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const DocumentOptionsModal = ({
   uploadDocument,
-  openCamera,
   showOptionModal,
   viewOptionModal,
 }) => {
@@ -19,18 +18,12 @@ const DocumentOptionsModal = ({
           <Button
             name="Open Camera"
             inputStyle={styles.closeButton}
-            onPress={() => {
-              openCamera();
-              viewOptionModal(false);
-            }}
+            onPress={() => uploadDocument('camera')}
           />
           <Button
             name="Upload from Gallery"
             inputStyle={styles.closeButton}
-            onPress={() => {
-              uploadDocument();
-              viewOptionModal(false);
-            }}
+            onPress={() => uploadDocument('file')}
           />
           <LinearGradient
             style={styles.cancelButtonWrapper}

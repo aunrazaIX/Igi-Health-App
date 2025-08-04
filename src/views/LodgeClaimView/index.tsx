@@ -88,7 +88,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   onPressEdit,
   onPressStep,
   onSelectPatient,
-  onSelectDocument,
   selectedDocuments,
   selectedPatient,
   dependantLoading,
@@ -124,7 +123,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   viewIndex,
   showOptionModal,
   viewOptionModal,
-  openCamera,
+  uploadDocument,
 }) => {
   const lodgeState = useSelector(state => state?.lodge || {});
   const activeModule = lodgeState?.activeModule;
@@ -162,14 +161,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
     uploadDoc: (
       <UploadDoc
         selectedDocuments={selectedDocuments}
-        onSelectDocument={onSelectDocument}
         handleCancelFile={handleCancelFile}
         claimData={claimData}
         setterForclaimData={setterForclaimData}
         onView={onView}
         showOptionModal={showOptionModal}
         viewOptionModal={viewOptionModal}
-        openCamera={openCamera}
+        uploadDocument={uploadDocument}
       />
     ),
   };
@@ -213,7 +211,15 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             <Button
               containerStyle={{marginBottom: vh}}
               onPress={navigateTreatment}
-              name={treatment.length > 0 ? 'Create More Claim' : 'Create Claim'}
+              name={
+                treatment.length > 0
+                  ? type === 'priorApproval'
+                    ? 'Add More Treatment'
+                    : 'Create More Claim'
+                  : type === 'priorApproval'
+                  ? 'Add treatment'
+                  : 'Create Claim'
+              }
             />
           ) : null}
 
