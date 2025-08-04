@@ -49,7 +49,7 @@ const AddTreatmentView = ({
 }: AddTreatmentViewProps) => {
   return (
     <>
-      <TopView title={'Enter Claim Details'} />
+      <TopView title={'Enter Treatment Details'} />
 
       <CurvedView containerStyle={styles.curveStyle}>
         <KeyboardAwareScrollView
@@ -59,12 +59,12 @@ const AddTreatmentView = ({
           <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>
-              <AileronBold
+              {/* <AileronBold
                 name="Add receipt and"
                 style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
-              />
+              /> */}
               <AileronBold
-                name="treatment information"
+                name="Treatment information"
                 style={[styles.text, {color: COLORS.cardBackgroundRed}]}
               />
             </View>
@@ -96,9 +96,9 @@ const AddTreatmentView = ({
                 setterForApiData('receiptNumber', alphanumericOnly);
               }}
               maxLength={20}
-              label="Receipt Number"
+              label="Admission/Mr No."
               errorMessage={apiData?.error_receiptNumber}
-              placeholder="Enter receipt/bill no."
+              placeholder="Enter Hospital Admission/Mr No."
             />
 
             <InputField
@@ -116,8 +116,8 @@ const AddTreatmentView = ({
                 const cleanedText = text.replace(/[^0-9]/g, '');
                 setterForApiData('amount', cleanedText);
               }}
-              label="Amount"
-              placeholder="Enter Amount"
+              label="Estimated Cost"
+              placeholder="Enter Estimated Cost provided by hospital"
             />
 
             <InputField
