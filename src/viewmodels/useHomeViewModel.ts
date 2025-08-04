@@ -81,7 +81,6 @@ type ClaimStats = {
 
 const useHomeViewModel = (): UseHomeViewModelReturn => {
   const user = useSelector((state: RootState) => state.auth.user);
-
   const navigate = useNavigation<DrawerNavigationProp<DrawerStackParamList>>();
   const [selectedTab, setSelectedTab] = useState<string>('login');
 
@@ -102,7 +101,6 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
 
   const generateCardHTML = (data, user) => `
  
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -451,8 +449,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
       // backgroundColor: COLORS.cardBackgroundRed,
       to: 'Personal',
     },
-
-    {
+    user?.coverageType?.some(obj => obj?.isAllowed === true) && {
       logo: newCardsIcons.lodgeClaim,
       name: 'Lodge A Claim',
       image: icons.forwardArrow,
@@ -509,7 +506,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   ].filter(Boolean);
 
   const {data: rawClaimData, loading} = useApiHook({
-    apiEndpoint: endpoints.claimHistory.getAllClaim,
+    apiEndpoint: endpoints.claimHistory.getDxcClaims,
     method: 'get',
     argsOrBody: {userid: user?.UserId},
     onSuccess: res => {
