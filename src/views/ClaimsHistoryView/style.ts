@@ -123,4 +123,29 @@ export const styles = StyleSheet.create({
   cardText: {
     fontSize: vh * 2,
   },
+  containerStyle: {
+    paddingBottom: vh * 15,
+    paddingTop: vh * 2,
+  },
+  row: {
+    borderRadius: vw,
+    borderWidth: 1,
+    paddingVertical: vh * 0.5,
+    paddingHorizontal: vw,
+    borderColor: COLORS.grey,
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+  },
+  tabView: {
+    borderRadius: vw * 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: vh * 5,
+    width: '50%',
+  },
+  claimStatusText: {
+    color: COLORS.black,
+    fontSize: vw * 3,
+  },
 });

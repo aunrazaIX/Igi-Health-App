@@ -25,6 +25,7 @@ const endpoints = {
   },
   claimHistory: {
     getAllClaim: 'Claims/getClaimsView',
+    getDxcClaims: 'Claims/getClaimsHisotry',
   },
   panelHospital: {
     getPanelHospitals: 'PanelHospital/GetActivePanelHospitals',
