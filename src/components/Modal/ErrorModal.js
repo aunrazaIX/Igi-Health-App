@@ -1,5 +1,5 @@
 import {View, Modal, StyleSheet, Image} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import Button from '../Button';
@@ -8,18 +8,10 @@ import AileronSemiBold from '../AileronSemiBold';
 import AileronBold from '../AileronBold';
 import {useDispatch, useSelector} from 'react-redux';
 import {setErrorModal} from '../../redux/generalSlice';
-import {RootState} from '../../redux/store';
 
-type StyleObject = Record<string, string | number | boolean>;
-
-type ErrorModalProps = {
-  containerStyle?: StyleObject | StyleObject[];
-  errorModalVisible: boolean;
-};
-
-const ErrorModal: React.FC<ErrorModalProps> = ({containerStyle}) => {
+const ErrorModal = ({containerStyle}) => {
   const {showErrorModal, errorMessage, errorDetail} = useSelector(
-    (state: RootState) => state.general,
+    state => state.general,
   );
   const dispatch = useDispatch();
   return (
