@@ -64,8 +64,7 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'Personal',
     },
-
-    {
+    user?.coverageType?.some(obj => obj?.isAllowed === true) && {
       id: 4,
       name: 'Lodge Claim',
       icon: drawerIcons.drawerLodgeClaim,

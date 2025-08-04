@@ -472,15 +472,19 @@ export const styles = StyleSheet.create({
     gap: vw * 2,
   },
   notifiationBageView: {
-    height: vw * 4,
-    width: vw * 4,
+    height: vw * 5,
+    width: vw * 5,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: (vw * 4) / 2,
+    borderRadius: (vw * 5) / 2,
     position: 'absolute',
     right: -vw * 2,
     bottom: vh * 1.5,
 
     backgroundColor: COLORS.faqsSubHeading,
+  },
+  notificationCountText: {
+    color: COLORS.white,
+    fontSize: vw * 2,
   },
 });

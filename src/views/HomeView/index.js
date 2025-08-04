@@ -40,8 +40,10 @@ const HomeView = ({
   showDependantModal,
   maternityData,
   maternityLoading,
+  notificationCount,
 }) => {
   const user = useSelector(state => state.auth.user);
+
   return (
     <ScrollView>
       <LinearGradient
@@ -67,7 +69,16 @@ const HomeView = ({
                     source={icons.notification}
                     style={styles.headerIcons}
                   />
-                  <View style={styles.notifiationBageView}></View>
+                  {notificationCount > 0 && (
+                    <View style={styles.notifiationBageView}>
+                      <AileronRegular
+                        style={styles.notificationCountText}
+                        name={
+                          notificationCount > 99 ? '99+' : notificationCount
+                        }
+                      />
+                    </View>
+                  )}
                 </TouchableOpacity>
               </View>
 

@@ -76,7 +76,6 @@ const NotificationView = ({
             )}
           </View>
         </View>
-        <View></View>
       </View>
     );
   };
@@ -91,10 +90,7 @@ const NotificationView = ({
       <CurvedView>
         <View style={styles.notificationRow}>
           <View style={styles.notificationSelectRow}>
-            <AileronBold
-              name="Notifications"
-              style={styles.notificationTittle}
-            />
+            <AileronBold name="Filter" style={styles.notificationTittle} />
             <TouchableOpacity
               onPress={() => onPressTypeDropDown()}
               style={styles.unreadselectRow}>

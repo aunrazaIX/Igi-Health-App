@@ -15,6 +15,7 @@ const Home = () => {
     showDependantModal,
     maternityLoading,
     maternityData,
+    notificationCount,
   } = states;
   const {
     animateCard,
@@ -44,6 +45,7 @@ const Home = () => {
       handleCardDownload={handleCardDownload}
       showDependantModal={showDependantModal}
       maternityData={maternityData}
+      notificationCount={notificationCount}
       maternityLoading={maternityLoading}
     />
   );
