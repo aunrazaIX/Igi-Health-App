@@ -4,14 +4,17 @@ import useClaimsHistoryViewModel from '../../viewmodels/useClaimsHistoryViewMode
 
 const ClaimsHistory = () => {
   const {states, functions} = useClaimsHistoryViewModel();
-  const {data, claimDataLoading, type} = states;
-  const {goBack, onPressType} = functions;
+  const {data, claimDataLoading, type, showRemarks, remarks} = states;
+  const {goBack, onPressType, onCloseRemarksModal} = functions;
   return (
     <ClaimsHistoryView
       data={data}
       goBack={goBack}
       onPressType={onPressType}
+      onCloseRemarksModal={onCloseRemarksModal}
       type={type}
+      showRemarks={showRemarks}
+      remarks={remarks}
       claimDataLoading={claimDataLoading}
     />
   );
