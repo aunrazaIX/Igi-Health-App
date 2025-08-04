@@ -506,7 +506,7 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   ].filter(Boolean);
 
   const {data: rawClaimData, loading} = useApiHook({
-    apiEndpoint: endpoints.claimHistory.getAllClaim,
+    apiEndpoint: endpoints.claimHistory.getDxcClaims,
     method: 'get',
     argsOrBody: {userid: user?.UserId},
     onSuccess: res => {
