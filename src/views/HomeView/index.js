@@ -5,7 +5,6 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
-  ImageSourcePropType,
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -23,35 +22,7 @@ import SimpleLoader from '../../components/SimpleLoader';
 import DependantsModal from './components/DependantsModal';
 import {formatName} from '../../utils';
 
-type CardItem = {
-  logo: ImageSourcePropType;
-  name: string;
-  image: ImageSourcePropType;
-  backgroundColor: any;
-  to: any;
-};
-
-type HomeViewProps = {
-  cardData: CardItem[];
-  animateCard: () => void;
-  backAnimatedStyle: {};
-  frontAnimatedStyle: {};
-  toggleDrawer: () => void;
-  onPressMenu: (value: CardItem) => void;
-  onPressHeaderIcon: (value: string) => void;
-  homeCardData: any;
-  claimData: {
-    totalClaimAmount: string;
-    deductedAmount: string;
-    paidAmount: string;
-  };
-  loading: boolean;
-  handleAssociatedApps: any;
-  homeCardDataLoading: any;
-  handleCardDownload: any;
-};
-
-const HomeView: React.FC<HomeViewProps> = ({
+const HomeView = ({
   cardData,
   animateCard,
   toggleDrawer,
@@ -71,124 +42,12 @@ const HomeView: React.FC<HomeViewProps> = ({
   maternityLoading,
 }) => {
   const user = useSelector(state => state.auth.user);
-
-  // let myArray = [
-  //   {
-  //     Policy_Number: 'AS000436',
-  //     Policy_Insured_Name: 'WAHAB ALI           ',
-  //     Policy_Insured_DOB: 19910428,
-  //     Policy_Insured_Relaion: 'Member',
-  //     Policy_Insured_Age: 33,
-  //     Policy_Start_Date: 20250101,
-  //     Policy_Expiry_Date: 20251231,
-  //     Policy_Class: '001',
-  //     Policy_CertNo: '00004',
-  //     Policy_Daily_RoomLimit: 0,
-  //     Policy_MatLimit: 50000,
-  //   },
-  //   {
-  //     Policy_Number: 'AS000436',
-  //     Policy_Insured_Name: 'FASIHA KHAN         ',
-  //     Policy_Insured_DOB: 19960915,
-  //     Policy_Insured_Relaion: 'Wife',
-  //     Policy_Insured_Age: 33,
-  //     Policy_Start_Date: 20250101,
-  //     Policy_Expiry_Date: 20251231,
-  //     Policy_Class: '001',
-  //     Policy_CertNo: '00004',
-  //     Policy_Daily_RoomLimit: 0,
-  //     Policy_MatLimit: 50000,
-  //   },
-  //   {
-  //     Policy_Number: 'AS000436',
-  //     Policy_Insured_Name: 'WAHAB ALI           ',
-  //     Policy_Insured_DOB: 19910428,
-  //     Policy_Insured_Relaion: 'Member',
-  //     Policy_Insured_Age: 33,
-  //     Policy_Start_Date: 20250101,
-  //     Policy_Expiry_Date: 20251231,
-  //     Policy_Class: '001',
-  //     Policy_CertNo: '00004',
-  //     Policy_Daily_RoomLimit: 0,
-  //     Policy_MatLimit: 0,
-  //   },
-  //   {
-  //     Policy_Number: 'AS000436',
-  //     Policy_Insured_Name: 'FASIHA KHAN         ',
-  //     Policy_Insured_DOB: 19960915,
-  //     Policy_Insured_Relaion: 'Wife',
-  //     Policy_Insured_Age: 33,
-  //     Policy_Start_Date: 20250101,
-  //     Policy_Expiry_Date: 20251231,
-  //     Policy_Class: '001',
-  //     Policy_CertNo: '00004',
-  //     Policy_Daily_RoomLimit: 0,
-  //     Policy_MatLimit: 0,
-  //   },
-  //   {
-  //     Policy_Number: 'AS000436',
-  //     Policy_Insured_Name: 'FASIHA KHAN         ',
-  //     Policy_Insured_DOB: 19960915,
-  //     Policy_Insured_Relaion: 'Wife',
-  //     Policy_Insured_Age: 33,
-  //     Policy_Start_Date: 20250101,
-  //     Policy_Expiry_Date: 20251231,
-  //     Policy_Class: '001',
-  //     Policy_CertNo: '00004',
-  //     Policy_Daily_RoomLimit: 0,
-  //     Policy_MatLimit: 0,
-  //   },
-  //   {
-  //     Policy_Number: 'AS000436',
-  //     Policy_Insured_Name: 'FASIHA KHAN         ',
-  //     Policy_Insured_DOB: 19960915,
-  //     Policy_Insured_Relaion: 'Wife',
-  //     Policy_Insured_Age: 33,
-  //     Policy_Start_Date: 20250101,
-  //     Policy_Expiry_Date: 20251231,
-  //     Policy_Class: '001',
-  //     Policy_CertNo: '00004',
-  //     Policy_Daily_RoomLimit: 0,
-  //     Policy_MatLimit: 0,
-  //   },
-  //   {
-  //     Policy_Number: 'AS000436',
-  //     Policy_Insured_Name: 'FASIHA KHAN         ',
-  //     Policy_Insured_DOB: 19960915,
-  //     Policy_Insured_Relaion: 'Wife',
-  //     Policy_Insured_Age: 33,
-  //     Policy_Start_Date: 20250101,
-  //     Policy_Expiry_Date: 20251231,
-  //     Policy_Class: '001',
-  //     Policy_CertNo: '00004',
-  //     Policy_Daily_RoomLimit: 0,
-  //     Policy_MatLimit: 0,
-  //   },
-  //   {
-  //     Policy_Number: 'AS000436',
-  //     Policy_Insured_Name: 'FASIHA KHAN         ',
-  //     Policy_Insured_DOB: 19960915,
-  //     Policy_Insured_Relaion: 'Wife',
-  //     Policy_Insured_Age: 33,
-  //     Policy_Start_Date: 20250101,
-  //     Policy_Expiry_Date: 20251231,
-  //     Policy_Class: '001',
-  //     Policy_CertNo: '00004',
-  //     Policy_Daily_RoomLimit: 0,
-  //     Policy_MatLimit: 0,
-  //   },
-  // ];
-
   return (
     <ScrollView>
       <LinearGradient
         colors={['rgba(11, 74, 152, 1)', 'rgba(72, 195, 255, 1)']}>
         <View style={styles.wrapper}>
           <View style={styles.homeHeader}>
-            {/* <View>
-              <Image style={styles.headerLogo} source={images.logoWhite} />
-            </View> */}
-
             <View>
               <AileronSemiBold
                 name={`Welcome Back, \n ${user?.UserName}`}
@@ -427,47 +286,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
                         </View>
                       </View>
-
-                      {/* <View style={styles.homeBackCardRow}>
-                        <View style={styles.homeBackCardRowText}>
-                          <AileronRegular
-                            style={styles.homeBackCardText}
-                            name={`Tariq Imran Qureshi: ${
-                              homeCardData?.find(
-                                item =>
-                                  item?.Policy_Insured_Relaion == 'Member',
-                              )?.Policy_Insured_Age
-                            }`}
-                          />
-                          <AileronRegular
-                            name={`Emaan Imran Qureshi: ${
-                              homeCardData?.find(
-                                item =>
-                                  item?.Policy_Insured_Relaion == 'Member',
-                              )?.Policy_Insured_Age
-                            }`}
-                            style={styles.homeBackCardText}
-                          />
-                        </View>
-                        <TouchableOpacity onPress={animateCard}>
-                          <Image source={images.flipCard} />
-                        </TouchableOpacity>
-                      </View> */}
-
-                      {/* <View style={styles.homeBackCardTextRow}>
-                        <AileronSemiBold
-                          style={styles.homeBackCardText}
-                          name={`Class : ${homeCardData[0].Policy_CertNo}`}
-                        />
-                        <AileronSemiBold
-                          style={styles.homeBackCardText}
-                          name={`Cert No: ${homeCardData[0].Policy_CertNo}`}
-                        />
-                        <AileronSemiBold
-                          style={styles.homeBackCardText}
-                          name={`Age : ${homeCardData[0]?.Policy_Insured_Age}`}
-                        />
-                      </View> */}
                     </View>
                     <View style={styles.backCardFooter}>
                       <View style={styles.backCardFooterBox}>
@@ -532,64 +350,26 @@ const HomeView: React.FC<HomeViewProps> = ({
             />
           </View>
           <FlatList
-            // horizontal
             data={cardData}
             keyExtractor={_item => _item?.name}
             showsHorizontalScrollIndicator={true}
             numColumns={4}
             renderItem={({item}) => (
-              // <TouchableOpacity
-              //   onPress={() => onPressMenu(item)}
-              //   style={[
-              //     styles.dashboardContainerCards,
-              //     {backgroundColor: item.backgroundColor},
-              //   ]}>
-              //   <Image style={styles.cardLogo} source={item.logo} />
-
-              //   <View style={styles.cardContent}>
-              //     <View style={{width: '81%'}}>
-              //       <AileronRegular
-              //         style={styles.dashboardContainerCardText}
-              //         name={item.name}
-              //         numberOfLines={2}
-              //       />
-              //     </View>
-
-              //     <Image source={item.image} style={styles.cardsArrow} />
-              //   </View>
-              // </TouchableOpacity>
-
               <View style={styles.cardsContainer}>
                 <TouchableOpacity
                   onPress={() => onPressMenu(item)}
                   style={[styles.dashboardContainerCards]}>
                   <Image style={styles.cardLogo} source={item.logo} />
-                  {/* 
-                <View style={styles.cardContent}>
-                  <View style={{width: '81%'}}>
-                    <AileronRegular
-                      style={styles.dashboardContainerCardText}
-                      name={item.name}
-                      numberOfLines={2}
-                    />
-                  </View>
-
-                  <Image source={item.image} style={styles.cardsArrow} />
-                </View> */}
                 </TouchableOpacity>
 
                 <View
                   style={{
                     width: vw * 22,
-                    // alignItems: 'center',
                     justifyContent: 'center',
-                    // alignSelf: 'center',
-                    // borderWidth: 2,
                   }}>
                   <AileronBold
                     style={styles.dashboardContainerCardText}
                     name={item.name}
-                    // numberOfLines={1}
                   />
                 </View>
               </View>
@@ -627,7 +407,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                 name={claimData.totalClaimAmount}
               />
             ) : (
-              // <SimpleLoader color="black" />
               <AileronBold name="" />
             )}
           </View>
@@ -641,16 +420,6 @@ const HomeView: React.FC<HomeViewProps> = ({
               <View style={styles.totalDeducted}>
                 <Image source={icons.totalDeducted} style={styles.meterIcon} />
 
-                {/* {loading ? (
-                <SimpleLoader />
-              ) : (
-                <AileronBold
-                  style={styles.meterDetailTextLight}
-                  name="Total Deducted"
-                  numberOfLines={1}
-                />
-              )} */}
-
                 <AileronBold
                   style={styles.meterDetailTextLight}
                   name="Total Deducted"
@@ -662,34 +431,10 @@ const HomeView: React.FC<HomeViewProps> = ({
                 style={styles.meterDetailTextBold}
                 numberOfLines={1}
               />
-              {/* <View style={styles.meterDetailTextEnd}>
-              <Image source={icons.arrowUp} style={styles.meterArrowUp} />
-
-              <AileronLight
-                name={'19.6%'}
-                numberOfLines={1}
-                style={styles.textRed}
-              />
-              <AileronLight
-                name={'44.714'}
-                numberOfLines={1}
-                style={styles.text}
-              />
-            </View> */}
             </View>
             <View style={styles.dashboardMeterDetail}>
               <View style={styles.totalDeducted}>
                 <Image style={styles.meterIcon} source={icons.totalPaid} />
-                {/* 
-              {loading ? (
-                <SimpleLoader />
-              ) : (
-                <AileronBold
-                  style={styles.meterDetailTextLight}
-                  name="Total Paid"
-                  numberOfLines={1}
-                />
-              )} */}
 
                 <AileronBold
                   style={styles.meterDetailTextLight}
@@ -707,22 +452,6 @@ const HomeView: React.FC<HomeViewProps> = ({
                   numberOfLines={1}
                 />
               )}
-
-              {/* <View style={styles.meterDetailTextEnd}>
-              <Image source={icons.arrowUp} style={styles.meterArrowUp} />
-
-              <AileronLight
-                name={'19.6%'}
-                numberOfLines={1}
-                style={styles.textRed}
-              />
-
-              <AileronLight
-                name={'44.714'}
-                numberOfLines={1}
-                style={styles.text}
-              />
-            </View> */}
             </View>
           </View>
         )}

@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   View,
   StyleSheet,
@@ -13,14 +13,10 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import Home from '../../screens/Home';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
-import {
-  DrawerContentComponentProps,
-  useDrawerStatus,
-} from '@react-navigation/drawer';
+import {useDrawerStatus} from '@react-navigation/drawer';
 import {drawerIcons, icons, images} from '../../assets';
 import {AileronBold, AileronSemiBold} from '../../components';
 import Tabs from '../TabStack';
-import ClaimsHistory from '../../screens/ClaimsHistory';
 import FAQs from '../../screens/FAQs';
 import LinearGradient from 'react-native-linear-gradient';
 import {useDispatch, useSelector} from 'react-redux';
@@ -113,13 +109,6 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'PanelHospitalList',
     },
-    // {
-    //   id: 10,
-    //   name: 'Helpline',
-    //   icon: drawerIcons.drawerHelpline,
-    //   mainParent: 'Tabs',
-    //   stChild: 'Helpline',
-    // },
 
     {
       id: 10,
@@ -166,12 +155,13 @@ const DrawerStack = () => {
     },
   ].filter(Boolean);
 
-  const DrawerContent = ({navigation}: DrawerContentComponentProps) => {
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const DrawerContent = ({navigation}) => {
     const handleProfile = () => {
       navigation.navigate('Profile');
     };
 
-    const scrollRef = useRef<ScrollView>(null);
+    const scrollRef = useRef < ScrollView > null;
     const isDrawerOpen = useDrawerStatus() === 'open';
 
     useEffect(() => {
@@ -267,7 +257,7 @@ const DrawerStack = () => {
                     }
                   }}>
                   <Image style={styles.icon} source={route?.icon} />
-                  <AileronBold style={styles.title} name={route?.name} />
+                  <AileronSemiBold style={styles.title} name={route?.name} />
                 </TouchableOpacity>
               ))}
           </View>
@@ -324,22 +314,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 4,
     alignItems: 'center',
-    // borderWidth: 2,
   },
   icon: {
     width: vw * 7,
-    height: vw * 7,
+    height: vh * 3,
     resizeMode: 'contain',
   },
   title: {
     fontSize: vw * 4,
-    letterSpacing: vw * 0.121,
     color: COLORS.textBlackShade,
-    lineHeight: vh * 2.4,
   },
   menuContainer: {
-    gap: vh * 4.5,
-    marginBottom: vh * 4.5,
+    gap: vh * 2.2,
   },
   drawerClose: {
     width: vw * 7,
@@ -352,7 +338,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 4,
     alignItems: 'center',
-    // justifyContent: 'center',
   },
   profileIcon: {
     width: vw * 15,
@@ -360,11 +345,9 @@ const styles = StyleSheet.create({
     borderRadius: vh * 1.5,
   },
   profileTittle: {
-    // width: vw * 35,
     fontSize: vw * 3.5,
     lineHeight: vh * 2,
     textAlign: 'left',
-    // borderWidth: 2,
   },
   Buttontext: {
     fontSize: vw * 3.5,

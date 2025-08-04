@@ -127,6 +127,7 @@ export const icons = {
   rejected: require('./icons/rejected.png'),
   pending: require('./icons/pending.png'),
   successful: require('./icons/successful.png'),
+  benefits2: require('./icons/benefits2.png'),
 };
 
 export const drawerIcons = {

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import {
   AileronBold,
@@ -10,36 +11,18 @@ import {FlatList, Image, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {COLORS} from '../../assets/theme/colors';
-import {ImageSourcePropType} from 'react-native';
 import ModalLoading from '../../components/ModalLoading';
 import NoDataView from '../../components/NoDataView';
-import {vh, vw} from '../../assets/theme/dimension';
-import {Text} from 'react-native-gesture-handler';
 import ProvinceTab from '../../components/provinceTab';
 
-type Item = {
-  title: string;
-  price: string;
-  image: ImageSourcePropType;
-};
-
-type Props = {
-  data: Item[];
-  benefitsloading: any;
-  goBack: () => void;
-  onPressTab: any;
-  selectedTab: any;
-};
-
-const BenefitsView: React.FC<Props> = ({
+const BenefitsView = ({
   data,
-  goBack,
   onPressTab,
   selectedTab,
 
   benefitsloading,
 }) => {
-  const RenderBenefits = ({item}: {item: Item}) => (
+  const RenderBenefits = ({item}) => (
     <View style={styles.card}>
       <LinearGradient
         colors={['#0B4A98', '#0f8dd7']}

@@ -1,42 +1,21 @@
 import {useNavigation} from '@react-navigation/native';
 import {icons} from '../assets';
-import {ImageSourcePropType} from 'react-native';
 import {useSelector} from 'react-redux';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useState} from 'react';
-import {RootState} from '../redux/store';
 
-type UseBenefitsViewModel = {
-  states: {
-    data: CoverageBenefit[];
-
-    benefitsloading: any;
-    selectedTab: any;
-  };
-  functions: {
-    goBack: () => void;
-    onPressTab: any;
-  };
-};
-
-type CoverageBenefit = {
-  title: string;
-  price: string;
-  image: ImageSourcePropType;
-};
-
-const useBenefitsViewModel = (): UseBenefitsViewModel => {
-  let {user} = useSelector((state: RootState) => state.auth);
+const useBenefitsViewModel = () => {
+  let {user} = useSelector(state => state.auth);
 
   const [allBenefits, setAllBenefits] = useState([]);
   const [selectedTab, setSelectedTab] = useState('Inpatient');
 
-  const onPressTab = (tab: string) => {
+  const onPressTab = tab => {
     setSelectedTab(tab);
   };
 
-  const formatPrice = (value: any) => {
+  const formatPrice = value => {
     if (!value) return '0';
 
     const number = Number(value);
@@ -46,7 +25,7 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
   };
   const navigation = useNavigation();
 
-  const {data: benefitsData, loading: benefitsloading} = useApiHook({
+  const {loading: benefitsloading} = useApiHook({
     apiEndpoint: endpoints.Benefits.getBenefits,
     method: 'get',
     argsOrBody: {
@@ -58,7 +37,7 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
   });
 
   let filteredData = allBenefits
-    ?.filter((item: any) => {
+    ?.filter(item => {
       if (selectedTab === 'Outpatient') {
         return item.BenefitTypeName === 'OPD';
       } else if (selectedTab === 'Inpatient') {
@@ -68,14 +47,11 @@ const useBenefitsViewModel = (): UseBenefitsViewModel => {
       }
       return false;
     })
-    .map(
-      (item: any): CoverageBenefit => ({
-        title: item.BenefitDetails,
-        price: formatPrice(item?.EntitlementLimits),
-        image: icons.medicalList,
-        // imageDisabled : icons.
-      }),
-    );
+    .map(item => ({
+      title: item.BenefitDetails,
+      price: formatPrice(item?.EntitlementLimits),
+      image: icons.benefits2,
+    }));
 
   const goBack = () => {
     navigation.goBack();

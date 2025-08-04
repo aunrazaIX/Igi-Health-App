@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
   benefitTitle: {
     fontSize: vh * 2.3,
     color: COLORS.benefitTitle,
-    lineHeight: vh * 3,
   },
   mapTabsContainer: {
     flexDirection: 'row',

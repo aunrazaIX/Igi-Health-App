@@ -1,19 +1,11 @@
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import AileronBold from '../AileronBold';
 import {vh, vw} from '../../assets/theme/dimension';
 import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 
-type ProvinceTabProps = {
-  onPressMapTab: (tab: string) => void;
-  selectedMapTab: string;
-  provinceName: string;
-  icon: any;
-  activeMapTab: any;
-};
-
-const ProvinceTab: React.FC<ProvinceTabProps> = ({
+const ProvinceTab = ({
   onPressMapTab,
   selectedMapTab,
   provinceName,
@@ -58,22 +50,22 @@ const style = StyleSheet.create({
   mapTabActive: {
     flexDirection: 'row',
     backgroundColor: COLORS.cardBackgroundRed,
-    // padding: vw * 4,
     paddingVertical: vh,
-    paddingHorizontal: vw * 2,
+    width: vw * 25,
     justifyContent: 'center',
     borderRadius: vw * 8,
     gap: vw * 1.5,
     alignItems: 'center',
-    // borderWidth: 2,
   },
   mapTab: {
     flexDirection: 'row',
+    width: vw * 25,
     backgroundColor: COLORS.buttonBorder,
-    // paddingVertical: vh,
     paddingHorizontal: vw * 3,
     borderRadius: vw * 5,
     gap: vw * 1.5,
+    justifyContent: 'center',
+
     alignItems: 'center',
   },
   mapTextColor: {
