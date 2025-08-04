@@ -506,11 +506,12 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
   ].filter(Boolean);
 
   const {data: rawClaimData, loading} = useApiHook({
-    apiEndpoint: endpoints.claimHistory.getDxcClaims,
+    apiEndpoint: endpoints.claimHistory.getAllClaim,
     method: 'get',
     argsOrBody: {userid: user?.UserId},
     onSuccess: res => {
-      setData(sortClaimData(res?.Data));
+      let temp = sortClaimData(res?.Data);
+      setData(temp);
     },
   });
 
@@ -544,24 +545,21 @@ const useHomeViewModel = (): UseHomeViewModelReturn => {
     }
   };
 
-  const sortClaimData = (item: ClaimItem[] = []) => {
-    const totalClaimAmount = item?.reduce(
-      (acc, curr) => acc + (curr?.SubmiitedClaim || 0),
-      0,
-    );
-    const deductedAmount = item?.reduce(
-      (acc, curr) => acc + (curr?.DeductedAmount || 0),
-      0,
-    );
-    const paidAmount = item?.reduce(
-      (acc, curr) => acc + (curr?.TotalPaid || 0),
-      0,
-    );
+  const sortClaimData = (items: ClaimItem[] = []) => {
+    let totalClaimAmount = 0;
+    let deductedAmount = 0;
+    let paidAmount = 0;
+
+    for (const item of items) {
+      totalClaimAmount += item.SubmiitedClaim ?? 0;
+      deductedAmount += item.DeductedAmount ?? 0;
+      paidAmount += item.TotalPaid ?? 0;
+    }
 
     return {
-      totalClaimAmount: formatCurrency(totalClaimAmount),
-      deductedAmount: formatCurrency(deductedAmount),
-      paidAmount: formatCurrency(paidAmount),
+      totalClaimAmount,
+      deductedAmount,
+      paidAmount,
     };
   };
 

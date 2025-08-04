@@ -42,6 +42,7 @@ const HomeView = ({
   maternityLoading,
 }) => {
   const user = useSelector(state => state.auth.user);
+
   return (
     <ScrollView>
       <LinearGradient
