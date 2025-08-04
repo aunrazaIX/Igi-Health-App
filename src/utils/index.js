@@ -1,4 +1,4 @@
-const formatCurrency = amount => {
+export const formatCurrency = amount => {
   const num =
     typeof amount === 'string' ? Number(amount.replace(/,/g, '')) : amount;
   if (typeof num === 'number' && !isNaN(num)) {
@@ -7,6 +7,26 @@ const formatCurrency = amount => {
       maximumFractionDigits: 0,
     });
   }
+  return 'PKR 0';
+};
+export const formatCurrencyWithPKR = amount => {
+  const num =
+    typeof amount === 'string'
+      ? Number(amount.replace(/[^0-9.-]/g, ''))
+      : typeof amount === 'number'
+      ? amount
+      : 0;
+
+  if (!isNaN(num)) {
+    return (
+      'PKR ' +
+      num.toLocaleString('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      })
+    );
+  }
+
   return 'PKR 0';
 };
 
@@ -31,13 +51,10 @@ export const universalSearch = (query, searchableFields, data) => {
 };
 
 export function formatName(name) {
-  if (name && typeof name !== 'string') return '';
-
+  if (!name && typeof name !== 'string') return '';
   return name
     .trim()
     .split(/\s+/)
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ');
 }
-
-export default formatCurrency;

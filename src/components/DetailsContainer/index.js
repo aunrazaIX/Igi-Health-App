@@ -1,29 +1,13 @@
-import {
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  ImageSourcePropType,
-  Text,
-} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {COLORS} from '../../assets/theme/colors';
 import {icons} from '../../assets';
 import AileronBold from '../AileronBold';
 import {vh, vw} from '../../assets/theme/dimension';
-import {PanelHospitalGroup} from '../../viewmodels/usePanelHospitalListViewModel';
+import AileronSemiBold from '../AileronSemiBold';
+import AileronRegular from '../AileronRegular';
 
-type Props = {
-  data?: PanelHospitalGroup;
-  detailsTextLabel?: {};
-  detailsText?: {};
-  detailsTextValue?: {};
-  headerIcon?: ImageSourcePropType | null | ImageSourcePropType[];
-  onPress: any;
-  patientName: any;
-};
-
-const DetailsContainer: React.FC<Props> = ({
+const DetailsContainer = ({
   data,
   detailsTextLabel,
   detailsTextValue,
@@ -31,13 +15,7 @@ const DetailsContainer: React.FC<Props> = ({
   onPress,
   patientName,
 }) => {
-  const [isArrowUp, setIsArrowUp] = useState<boolean>(false);
-  const formatValue = (value: string) => {
-    if (!isNaN(Number(value))) {
-      return Number(value).toLocaleString();
-    }
-    return value;
-  };
+  const [isArrowUp, setIsArrowUp] = useState(false);
 
   return (
     <View style={[styles.card]}>
@@ -91,23 +69,32 @@ const DetailsContainer: React.FC<Props> = ({
         <>
           <View style={styles.cardHorizontalLine} />
 
-          {data?.items?.map((item, index) => (
-            <View key={index} style={styles.cardDetails}>
-              <AileronBold
-                style={[styles.detailsLabel, detailsTextLabel]}
-                name={item.label}
-              />
-              <AileronBold
-                style={[styles.detailsValue, detailsTextValue]}
-                name={
-                  item.label.toLowerCase().includes('amount claimed') ||
-                  item.label.toLowerCase().includes('amount paid')
-                    ? formatValue(item.value)
-                    : item.value
-                }
-              />
-            </View>
-          ))}
+          {data?.items?.map((item, index) => {
+            let Container = item?.onPress ? TouchableOpacity : View;
+            return (
+              <View key={index} style={styles.cardDetails}>
+                <AileronBold
+                  style={[styles.detailsLabel, detailsTextLabel]}
+                  name={item?.label}
+                />
+                <Container
+                  style={styles.detailsContainer}
+                  onPress={() => item?.onPress()}>
+                  <AileronRegular
+                    style={[
+                      styles.detailsValue,
+                      detailsTextValue,
+                      item?.isUnderLine && {
+                        textDecorationLine: 'underline',
+                        color: COLORS.faqsSubHeading,
+                      },
+                    ]}
+                    name={item?.value}
+                  />
+                </Container>
+              </View>
+            );
+          })}
         </>
       )}
     </View>
@@ -139,7 +126,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: vh * 0.5,
-    // borderWidth: 2,
   },
 
   cardHeaderLeft: {
@@ -151,7 +137,6 @@ export const styles = StyleSheet.create({
   cardHeaderLeftText: {
     fontSize: vw * 3.5,
     color: COLORS.black,
-    // borderWidth: 2,
     width: vw * 47,
     textAlign: 'left',
     marginLeft: vw,
@@ -166,7 +151,6 @@ export const styles = StyleSheet.create({
 
   cardHorizontalLine: {
     borderBottomWidth: vw * 0.4,
-    // height: vh * 0.4,
     borderStyle: 'dashed',
     width: '100%',
 
@@ -174,28 +158,26 @@ export const styles = StyleSheet.create({
     marginBottom: vh * 2,
     opacity: 0.4,
   },
-  claimsHistoryCardDetailsContainer: {},
   cardDetails: {
-    marginBottom: vh * 1,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
   },
   detailsLabel: {
     fontSize: vw * 3.5,
-    width: '30%',
+    width: '40%',
     textAlign: 'left',
   },
   detailsValue: {
     fontSize: vw * 3.5,
     color: COLORS.textBlackShade,
     textAlign: 'right',
-    width: '70%',
   },
   headerArrow: {
     width: vw * 7.5,
     height: vw * 7.5,
-    // borderWidth: 2,
+  },
+  detailsContainer: {
+    width: '60%',
   },
 });
