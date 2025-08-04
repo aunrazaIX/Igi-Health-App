@@ -20,6 +20,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {vh, vw} from '../../assets/theme/dimension';
 import DatePicker from '../../components/DatePicker';
 import moment from 'moment';
+import {formatName} from '../../utils';
 
 type OptionType = {
   label: string;

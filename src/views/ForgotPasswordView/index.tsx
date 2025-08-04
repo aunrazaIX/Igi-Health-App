@@ -169,7 +169,7 @@ const ForgotPasswordView = ({
         confirmationMessage={
           type === 'signup'
             ? 'Welcome aboard! Your account has been created successfully.'
-            : 'Your password has been changed successfully.'
+            : 'Your password has been updated successfully.'
         }
         closeButton
         Successfull

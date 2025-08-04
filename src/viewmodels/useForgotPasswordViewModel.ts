@@ -164,7 +164,9 @@ const useForgotPasswordViewModel = ({
         sendOtp(apiData);
       },
       onError: e => {
-        dispatch(setErrorModal({show: true, message: e?.error, detail: ''}));
+        dispatch(
+          setErrorModal({show: true, message: e?.header, detail: e?.error}),
+        );
       },
     });
 
@@ -175,13 +177,12 @@ const useForgotPasswordViewModel = ({
       setStep(2);
       ForgotpasswordResetStates();
     },
-    onError: res => {
+    onError: e => {
       dispatch(
         setErrorModal({
           Show: true,
-          message: 'Reset Failed',
-          detail:
-            'We couldn’t find an account with the details you provided. Please check your information and try again or contact IGI Life.',
+          message: e?.header,
+          detail: e?.error,
         }),
       );
     },
@@ -215,21 +216,20 @@ const useForgotPasswordViewModel = ({
             Show: true,
             message: 'Invalid OTP',
             detail:
-              'The OTP you entered is incorrect. Please check and try againnn.',
+              'The OTP you entered is incorrect. Please check and try again.',
           }),
         );
         setOtp('');
       }
     },
-    onError: error => {
+    onError: e => {
       setFlushOtp(flushOtp + 1);
       setOtp('');
       dispatch(
         setErrorModal({
           Show: true,
-          message: 'Incorrect OTP',
-          detail:
-            'The OTP you entered is incorrect. Please check and try again.',
+          message: e?.header,
+          detail: e?.error,
         }),
       );
     },
@@ -257,8 +257,14 @@ const useForgotPasswordViewModel = ({
         setConfirmationModal(true);
       }
     },
-    onError: error => {
-      dispatch(setErrorModal({show: true, message: error, detail: ''}));
+    onError: e => {
+      dispatch(
+        setErrorModal({
+          show: true,
+          message: e?.header,
+          detail: e?.error,
+        }),
+      );
     },
   });
 

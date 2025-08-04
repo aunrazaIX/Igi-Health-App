@@ -104,6 +104,7 @@ const useAddTreatmentModel = ({
       treatmentIndex,
       isError,
       confirmationModal,
+      claimType,
     },
     functions: {
       setterForApiData,

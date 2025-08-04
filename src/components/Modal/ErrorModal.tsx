@@ -31,13 +31,13 @@ const ErrorModal: React.FC<ErrorModalProps> = ({containerStyle}) => {
 
             <View style={styles.confirmationContainer}>
               <AileronBold
-                name={errorMessage || 'Something went wrong'}
+                name={errorMessage || 'Error'}
                 style={styles.confirmation}
               />
             </View>
             {errorDetail && (
               <AileronSemiBold
-                name={errorDetail}
+                name={errorDetail || 'Something went wrong'}
                 style={styles.confirmationDetail}
               />
             )}

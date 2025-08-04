@@ -5,10 +5,10 @@ import {vh} from '../../../assets/theme/dimension';
 import Box from './Box';
 import {PersonelDataSection} from '../typeInterface';
 import {icons} from '../../../assets';
+import {formatName} from '../../../utils';
 
 type PersonalDetailsProps = {
   patientOptions: any[];
-  personalData: PersonelDataSection[];
   type: string;
   personalDetails: any;
   dependants: any;
@@ -40,7 +40,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
       info: [
         {
           label: 'Name of Employee:',
-          value: personalDetails?.Data?.lgivname.trim() ?? '--',
+          value: formatName(personalDetails?.Data?.lgivname.trim()) ?? '--',
         },
         {
           label: 'Bank Name:',
