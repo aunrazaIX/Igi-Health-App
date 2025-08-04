@@ -9,6 +9,7 @@ export const COLORS = {
   tabText: 'white',
   textColor: '#393939',
   loginButton: 'rgba(0, 143, 213, 1)',
+  loginButtonLight: '#008FD5',
   buttonText: 'white',
   textColorLight: '#5C5E5A',
   forgotPass: 'rgba(41, 41, 39, 1)',

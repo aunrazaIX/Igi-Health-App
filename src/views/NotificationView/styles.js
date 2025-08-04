@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: vh * 1.5,
+    alignSelf: 'flex-end',
     marginHorizontal: vh * 0.5,
   },
   notificationSelectRow: {
@@ -50,12 +51,14 @@ const styles = StyleSheet.create({
   notificationContainer: {
     borderBottomWidth: vw * 0.3,
     borderColor: COLORS.borderColor,
+    marginBottom: vh,
     paddingVertical: vh,
+    paddingHorizontal: vw * 2,
+    borderRadius: vw * 3,
   },
   notificationIconRow: {
     width: '100%',
     flexDirection: 'row',
-    alignItems: 'center',
   },
   icon: {
     width: vw * 11,
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: vw * 3.5,
-    marginLeft: vw * 4,
+    marginLeft: vw * 3,
     marginTop: vh * 0.5,
     color: COLORS.time,
     textAlign: 'left',
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
   requestTittle: {
     width: '55%',
     fontSize: vw * 3.7,
-    marginLeft: vw * 4,
+    marginLeft: vw * 3,
     textAlign: 'left',
   },
   requestRow: {
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
   },
   listText: {
     textAlign: 'left',
-    fontSize: vh * 1.7,
+    fontSize: vw * 3,
   },
   notificationStyles: {
     paddingBottom: vh * 20,
@@ -114,13 +117,13 @@ const styles = StyleSheet.create({
   notificationBody: {
     width: '55%',
     textAlign: 'left',
-    marginLeft: vw * 4,
+    marginLeft: vw * 3,
     fontSize: vw * 3,
     marginTop: vh,
   },
   markAsReadView: {
     width: '25%',
-    marginLeft: vw * 4,
+    marginLeft: vw * 3,
   },
   markAseadText: {
     fontSize: vw * 3.5,
@@ -137,6 +140,19 @@ const styles = StyleSheet.create({
   },
   simpleLoading: {
     width: '15%',
+  },
+  circleView: {
+    height: vw * 10,
+    width: vw * 10,
+    backgroundColor: COLORS.loginButton,
+    borderRadius: (vw * 10) / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notificationIcon: {
+    height: '50%',
+    width: '50%',
+    resizeMode: 'contain',
   },
 });
 

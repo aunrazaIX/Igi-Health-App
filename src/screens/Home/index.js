@@ -25,6 +25,7 @@ const Home = () => {
     handleAssociatedApps,
     handleCardDownload,
     handleDependantsModal,
+    onPullToRefresh,
   } = functions;
 
   return (
@@ -35,6 +36,7 @@ const Home = () => {
       onPressMenu={onPressMenu}
       onPressHeaderIcon={onPressHeaderIcon}
       handleDependantsModal={handleDependantsModal}
+      onPullToRefresh={onPullToRefresh}
       backAnimatedStyle={backAnimatedStyle}
       frontAnimatedStyle={frontAnimatedStyle}
       homeCardData={homeCardData}

@@ -116,7 +116,9 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <View style={styles.confirmationContainer}>
                 <AileronBold
                   name={
-                    confirmationType === 'update'
+                    isChangedPassword
+                      ? 'Password Updated'
+                      : confirmationType === 'update'
                       ? 'Confirm Edit Request'
                       : isUpdate
                       ? 'Confirm Edit Request'

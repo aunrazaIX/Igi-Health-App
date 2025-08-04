@@ -5,6 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
+  RefreshControl,
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -41,11 +42,20 @@ const HomeView = ({
   maternityData,
   maternityLoading,
   notificationCount,
+  onPullToRefresh,
 }) => {
-  const user = useSelector(state => state.auth.user);
+  const {user} = useSelector(state => state.auth);
 
   return (
-    <ScrollView>
+    <ScrollView
+      refreshControl={
+        <RefreshControl
+          refreshing={maternityLoading || loading || homeCardDataLoading}
+          onRefresh={onPullToRefresh}
+          tintColor="#000"
+          colors={['#0B4A98']}
+        />
+      }>
       <LinearGradient
         colors={['rgba(11, 74, 152, 1)', 'rgba(72, 195, 255, 1)']}>
         <View style={styles.wrapper}>

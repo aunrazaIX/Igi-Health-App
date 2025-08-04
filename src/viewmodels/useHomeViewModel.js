@@ -38,6 +38,11 @@ const useHomeViewModel = () => {
     },
   });
 
+  const onPullToRefresh = () => {
+    reftchAllNotifications();
+    fetchPolicyType();
+  };
+
   const animateValue = useRef(new Animated.Value(0)).current;
   const currentValue = useRef(0);
 
@@ -70,7 +75,6 @@ const useHomeViewModel = () => {
   const handleDependantsModal = value => {
     setShowDependantModal(value);
   };
-
   const handleCardDownload = async () => {
     try {
       const permissionGranted = await requestStoragePermission();
@@ -85,7 +89,6 @@ const useHomeViewModel = () => {
           directory: 'Documents',
           base64: true,
         };
-
         const file = await RNHTMLtoPDF.convert(options);
         const base64Data = file.base64;
         if (!base64Data) throw new Error('PDF generation failed.');
@@ -163,8 +166,6 @@ const useHomeViewModel = () => {
     transform: [{perspective: 1000}, {rotateY: rotateBack}],
   };
 
-  // second APi Call
-
   const {
     data: homeCardData,
     loading: homeCardDataLoading,
@@ -184,17 +185,14 @@ const useHomeViewModel = () => {
     skip: true,
   });
 
-  // 1st api call
-  const {data: policyData, loading: Loading} = useApiHook({
+  const {trigger: fetchPolicyType} = useApiHook({
     apiEndpoint: endpoints.policy.getPolicyTypes,
     method: 'get',
     argsOrBody: {
       ClientCode: user?.ClientCode,
     },
-
     onSuccess: res => {
       let policyNumber;
-
       if (res?.length > 1) {
         res?.forEach(item => {
           if (item?.PolicyCode?.startsWith('G' || 'g')) {
@@ -276,7 +274,7 @@ const useHomeViewModel = () => {
     },
   ].filter(Boolean);
 
-  const {data: rawClaimData, loading} = useApiHook({
+  const {loading} = useApiHook({
     apiEndpoint: endpoints.claimHistory.getDxcClaims,
     method: 'get',
     argsOrBody: {userid: user?.UserId},
@@ -358,6 +356,7 @@ const useHomeViewModel = () => {
       handleAssociatedApps,
       handleCardDownload,
       handleDependantsModal,
+      onPullToRefresh,
     },
   };
 };

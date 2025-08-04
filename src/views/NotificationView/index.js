@@ -33,9 +33,15 @@ const NotificationView = ({
         style={[
           styles.notificationContainer,
           lastIndex && {borderBottomWidth: 0},
+          !item?.isRead && {backgroundColor: COLORS.loginButtonLight + '22'},
         ]}>
         <View style={styles.notificationIconRow}>
-          <Image source={icons.notificationIcon} style={styles.icon} />
+          <View style={styles.circleView}>
+            <Image
+              style={styles.notificationIcon}
+              source={icons.notification}
+            />
+          </View>
           <View>
             <AileronSemiBold
               style={styles.requestTittle}
@@ -82,11 +88,7 @@ const NotificationView = ({
 
   return (
     <Fragment>
-      <TopView
-        title="Notifications"
-        TopViewFirstIcon={icons.notificationPlan}
-        containerStyleIcon={styles.BellIcon}
-      />
+      <TopView title="Notifications" containerStyleIcon={styles.BellIcon} />
       <CurvedView>
         <View style={styles.notificationRow}>
           <View style={styles.notificationSelectRow}>
@@ -113,7 +115,7 @@ const NotificationView = ({
                     <TouchableOpacity
                       style={styles.dropdownItem}
                       onPress={() => onSelectType(item)}>
-                      <AileronBold name={item} style={styles.listText} />
+                      <AileronRegular name={item} style={styles.listText} />
                     </TouchableOpacity>
                   )}
                 />
