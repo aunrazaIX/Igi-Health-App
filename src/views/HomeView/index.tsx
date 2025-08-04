@@ -21,6 +21,7 @@ import ModalLoading from '../../components/ModalLoading';
 import moment from 'moment';
 import SimpleLoader from '../../components/SimpleLoader';
 import DependantsModal from './components/DependantsModal';
+import {formatName} from '../../utils';
 
 type CardItem = {
   logo: ImageSourcePropType;
@@ -266,12 +267,14 @@ const HomeView: React.FC<HomeViewProps> = ({
                           />
 
                           <AileronBold
-                            name={homeCardData
-                              ?.find(
-                                item =>
-                                  item?.Policy_Insured_Relaion == 'Member',
-                              )
-                              ?.Policy_Insured_Name.trim()}
+                            name={formatName(
+                              homeCardData
+                                ?.find(
+                                  item =>
+                                    item?.Policy_Insured_Relaion == 'Member',
+                                )
+                                ?.Policy_Insured_Name.trim(),
+                            )}
                             style={styles.infoCardTextBold}
                             numberOfLines={1}
                           />
@@ -379,9 +382,9 @@ const HomeView: React.FC<HomeViewProps> = ({
                                   {index < 4 ? (
                                     <AileronRegular
                                       key={index}
-                                      name={`${item?.Policy_Insured_Name?.trim()}: ${
-                                        item?.Policy_Insured_Age
-                                      }`}
+                                      name={`${formatName(
+                                        item?.Policy_Insured_Name?.trim(),
+                                      )}: ${item?.Policy_Insured_Age}`}
                                       style={[
                                         styles.homeBackCardText,
                                         {width: '80%'},

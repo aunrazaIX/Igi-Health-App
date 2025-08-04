@@ -31,4 +31,14 @@ export const universalSearch = (query, searchableFields, data) => {
   );
 };
 
+export function formatName(name) {
+  if (typeof name !== 'string') return '';
+
+  return name
+    .trim() // Remove leading/trailing whitespace
+    .split(/\s+/) // Split by one or more spaces
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+}
+
 export default formatCurrency;

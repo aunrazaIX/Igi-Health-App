@@ -311,11 +311,7 @@ const styles = StyleSheet.create({
     // backgroundColor: COLORS.activeButtonGradient,
   },
   cancelButtonSubmit: {
-    // width: '48%',
-    borderWidth: vh * 0.2,
     borderRadius: vw * 4,
-    // padding: vh * 2,
-    borderColor: COLORS.cancelButtonBorder,
     backgroundColor: COLORS.cancelBottonBackground,
     marginTop: vh,
   },
