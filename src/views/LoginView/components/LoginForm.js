@@ -18,7 +18,6 @@ import {icons} from '../../../assets';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
 import {validateEmail} from '../../../validations/authValidations';
-import ModalLoading from '../../../components/ModalLoading';
 
 const LoginForm = ({
   onPressforgotPassword,
@@ -29,15 +28,6 @@ const LoginForm = ({
   handleCheck,
   checked,
   onPressToucdId,
-}: {
-  onPressforgotPassword: (to: string) => void;
-  handleLogin: () => void;
-  loading: boolean;
-  loginApiData: any;
-  loginSetterForApiData: (key: string, value: any) => void;
-  handleCheck: () => void;
-  checked: boolean;
-  onPressToucdId: any;
 }) => {
   return (
     <>
@@ -129,8 +119,6 @@ const LoginForm = ({
           </TouchableOpacity>
         )}
 
-        {/* <View style={styles.verticalLine} /> */}
-
         {Platform.OS === 'android' && (
           <TouchableOpacity
             onPress={onPressToucdId}
@@ -158,11 +146,9 @@ const style = StyleSheet.create({
   },
   labelStyle: {
     fontSize: vw * 3.5,
-    // color: COLORS.textGrayShade,
   },
   inputStyle: {
     fontSize: vw * 3.5,
-    // fontWeight: '700',
   },
   inputFeilds: {
     marginTop: vh,

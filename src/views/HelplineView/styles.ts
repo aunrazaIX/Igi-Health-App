@@ -30,12 +30,10 @@ const styles = StyleSheet.create({
     marginBottom: vh * 2,
     textAlign: 'left',
     color: COLORS.textBlackShade,
-    lineHeight: vh * 2.5,
   },
   subtitle: {
     fontSize: vw * 5,
     textAlign: 'left',
-    lineHeight: vh * 3,
   },
   label: {
     fontSize: vh * 1.7,
@@ -45,19 +43,16 @@ const styles = StyleSheet.create({
     fontSize: vw * 5,
     textAlign: 'left',
     marginTop: vh * 1.5,
-    lineHeight: vh * 2,
   },
   headingText: {
     fontSize: vw * 3.5,
     textAlign: 'left',
     marginTop: vh * 1.5,
-    lineHeight: vh * 2,
   },
   address: {
     marginTop: vh * 2,
     fontSize: vw * 5,
     textAlign: 'left',
-    lineHeight: vh * 2,
   },
   name: {
     fontSize: vh * 2,
@@ -93,7 +88,6 @@ const styles = StyleSheet.create({
   addressDetail: {
     fontSize: vw * 3.7,
     textAlign: 'left',
-    lineHeight: vh * 3,
   },
   callTittle: {
     fontSize: vw * 3.3,

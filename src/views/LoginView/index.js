@@ -1,5 +1,5 @@
 import {View, ImageBackground, Image, TouchableOpacity} from 'react-native';
-import React, {JSX} from 'react';
+import React from 'react';
 import {images, icons} from '../../assets';
 import {styles} from './styles';
 import {COLORS} from '../../assets/theme/colors';
@@ -7,8 +7,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {AileronSemiBold, CurvedView} from '../../components';
 import {LoginForm, SignUpView} from './components';
-import ModalLoading from '../../components/ModalLoading';
-import {vh} from '../../assets/theme/dimension';
 
 const LoginView = ({
   onPressTab,
@@ -26,28 +24,11 @@ const LoginView = ({
   handleCheck,
   checked,
   onPressToucdId,
-}: {
-  onPressTab: (name: string) => void;
-  selectedTab: string;
-  tabs: string[];
-  onPressforgotPassword: (to: string) => void;
-  handleLogin: () => void;
-  loading: boolean;
-  handleSignup: () => void;
-  signupSetterForApiData: (key: string, value: any) => void;
-  signupApiData: any;
-  loadingSignup: boolean;
-  loginApiData: any;
-  loginSetterForApiData: (key: string, value: any) => void;
-  handleCheck: () => void;
-  rememberMe: boolean;
-  checked: boolean;
-  onPressToucdId: any;
 }) => {
-  const Wrapper = (tab: string) =>
+  const Wrapper = tab =>
     selectedTab === tab ? LinearGradient : TouchableOpacity;
 
-  const renderForm: Record<string, JSX.Element> = {
+  const renderForm = {
     login: (
       <LoginForm
         onPressforgotPassword={onPressforgotPassword}

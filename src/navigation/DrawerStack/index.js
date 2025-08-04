@@ -346,7 +346,6 @@ const styles = StyleSheet.create({
   },
   profileTittle: {
     fontSize: vw * 3.5,
-    lineHeight: vh * 2,
     textAlign: 'left',
   },
   Buttontext: {

@@ -53,7 +53,7 @@ const Tabs = () => {
 
               <AileronRegular
                 name="Home"
-                style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
+                style={{color: 'black', fontSize: vw * 3}}
               />
             </View>
           ),
@@ -115,7 +115,6 @@ const Tabs = () => {
                   style={{
                     color: 'black',
                     fontSize: vw * 2.8,
-                    lineHeight: vh * 2,
                   }}
                 />
               </View>
@@ -162,7 +161,7 @@ const Tabs = () => {
 
               <AileronRegular
                 name="Lodge Claim"
-                style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
+                style={{color: 'black', fontSize: vw * 3}}
               />
             </View>
           ),
@@ -216,7 +215,7 @@ const Tabs = () => {
               </AileronRegular>
               <AileronRegular
                 name="Helpline"
-                style={{color: 'black', fontSize: vw * 3, lineHeight: vh * 2}}
+                style={{color: 'black', fontSize: vw * 3}}
               />
             </View>
           ),

@@ -280,14 +280,12 @@ const styles = StyleSheet.create({
     color: COLORS.textBlackShade,
     marginTop: vh * 1.5,
     marginBottom: vh * 1.5,
-    lineHeight: vh * 2.5,
   },
   confirmationDetailWithNote: {
     fontSize: vw * 5,
     color: COLORS.textBlackShade,
     marginTop: vh * 1.5,
     marginBottom: vh * 1.5,
-    lineHeight: vh * 2.5,
   },
   confirmationDetailNote: {
     fontSize: vw * 3.4,
@@ -295,7 +293,6 @@ const styles = StyleSheet.create({
     // marginTop: vh * 1.5,
     fontStyle: 'italic',
     marginBottom: vh * 2.5,
-    lineHeight: vh * 2.2,
   },
   confirmationButtonContainer: {
     flexDirection: 'row',

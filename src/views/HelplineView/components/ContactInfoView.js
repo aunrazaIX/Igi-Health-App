@@ -7,15 +7,8 @@ import {
 } from '../../../components';
 import {icons} from '../../../assets';
 import styles from '../styles';
-import {ContactInfo} from '../../../viewmodels/useHelplineViewModel';
 
-const ContactInfoView = ({
-  data,
-  onPress,
-}: {
-  data: ContactInfo;
-  onPress: () => void;
-}) => {
+const ContactInfoView = ({onPress}) => {
   return (
     <View style={styles.box}>
       <AileronSemiBold style={styles.title} name="Contact information" />

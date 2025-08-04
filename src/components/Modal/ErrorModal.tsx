@@ -116,6 +116,5 @@ const styles = StyleSheet.create({
     color: COLORS.confimationDetail,
     marginTop: vh * 1.5,
     marginBottom: vh * 2.5,
-    lineHeight: vh * 2.7,
   },
 });

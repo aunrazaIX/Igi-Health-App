@@ -11,7 +11,6 @@ const Login = () => {
     signupApiData,
     loadingSignup,
     loginApiData,
-    rememberMe,
     checked,
   } = states;
   const {
@@ -41,7 +40,6 @@ const Login = () => {
       loginSetterForApiData={loginSetterForApiData}
       handleCheck={handleCheck}
       checked={checked}
-      rememberMe={rememberMe}
       onPressToucdId={onPressToucdId}
     />
   );

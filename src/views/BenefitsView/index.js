@@ -2,6 +2,7 @@
 import React from 'react';
 import {
   AileronBold,
+  AileronRegular,
   AileronSemiBold,
   CurvedView,
   TopView,
@@ -37,7 +38,7 @@ const BenefitsView = ({
         </View>
       </LinearGradient>
 
-      <AileronSemiBold
+      <AileronRegular
         name={item.title}
         style={
           item.price === 'Not Covered'

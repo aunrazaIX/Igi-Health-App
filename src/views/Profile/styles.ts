@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   },
   profileEmail: {
     fontSize: vw * 4,
-    lineHeight: vh * 2.3,
   },
   dependentOuterStyle: {
     // width: '100%',

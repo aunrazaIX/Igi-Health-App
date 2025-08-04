@@ -191,7 +191,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.maxFile,
     fontSize: vh * 1.4,
-    lineHeight: vh * 3,
     flexShrink: 1,
     flexWrap: 'wrap',
     maxWidth: vw * 55, // adjust as per your layout

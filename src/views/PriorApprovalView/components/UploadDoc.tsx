@@ -177,7 +177,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.maxFile,
     fontSize: vh * 1.7,
-    lineHeight: vh * 3,
   },
   documentSize: {
     textAlign: 'left',

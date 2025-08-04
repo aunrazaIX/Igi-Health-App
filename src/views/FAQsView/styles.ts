@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.black,
     width: '100%',
-    lineHeight: vh * 3,
   },
   headertitle: {
     fontSize: vw * 4.5,
@@ -36,7 +35,6 @@ const styles = StyleSheet.create({
     color: COLORS.faqsSubHeading,
     marginBottom: vh * 2,
     textAlign: 'left',
-    lineHeight: vh * 3,
   },
   icon: {
     objectFit: 'contain',

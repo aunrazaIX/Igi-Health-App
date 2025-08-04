@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
 import {useEffect, useRef, useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
@@ -7,14 +8,11 @@ import {
   setBiometrics,
   setRememberMe,
   setUserData,
-  setFaceIdCredentials,
   setDeviceToken,
 } from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {setErrorModal} from '../redux/generalSlice';
 import ReactNativeBiometrics from 'react-native-biometrics';
-import {RootState} from '../redux/store';
-import {DetailsContainer} from '../components';
 import {PermissionsAndroid, Platform} from 'react-native';
 import {generateUUID} from '../utils';
 import {
@@ -26,44 +24,13 @@ import {
 import {getApp} from '@react-native-firebase/app';
 import {resetAllModules} from '../redux/lodgeSlice';
 
-export type UserDetails = {
-  name: string;
-  cnicNum: string;
-  email: string;
-};
-
-type UseLoginViewModelReturn = {
-  states: {
-    selectedTab: string;
-    tabs: string[];
-    loading: boolean;
-    signupApiData: any;
-    loadingSignup: boolean;
-    loginApiData: any;
-    rememberMe: boolean;
-    checked: boolean;
-  };
-  functions: {
-    onPressTab: (name: string) => void;
-    onPressforgotPassword: (to: keyof RootStackParamList) => void;
-    handleLogin: () => void;
-    handleSignup: () => void;
-    signupSetterForApiData: (key: string, value: any) => void;
-    loginSetterForApiData: (key: string, value: any) => void;
-    handleCheck: () => void;
-    onPressToucdId: any;
-    // onPressFaceId: any;
-  };
-};
-
-const useLoginViewModel = (): UseLoginViewModelReturn => {
+const useLoginViewModel = () => {
   const {rememberMe, credentials, biometrics, isToggle, deviceToken, user} =
-    useSelector((state: RootState) => state.auth);
+    useSelector(state => state.auth);
 
   const test = useRef(null);
 
-  const [selectedTab, setSelectedTab] = useState<string>('login');
-  const [verifiedUserData, setVerifiedUserData] = useState(null);
+  const [selectedTab, setSelectedTab] = useState('login');
   const [checked, setChecked] = useState(rememberMe);
   const loginResponse = useRef(null);
   const navigation = useNavigation();
@@ -124,7 +91,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   });
 
   const {
-    checkForError: signupCheckForError,
     resetStates: signupResetStates,
     setterForApiData: signupSetterForApiData,
     apiData: signupApiData,
@@ -134,11 +100,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     cnic: '',
   });
 
-  const {
-    data: getCoverageData,
-    loading: getCoverageLoading,
-    trigger: getCovergaeApi,
-  } = useApiHook({
+  const {trigger: getCovergaeApi} = useApiHook({
     apiEndpoint: endpoints.coverage.getCoverage,
     method: 'get',
     skip: true,
@@ -170,13 +132,10 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       );
       let apiData = {
         ClientCode: res?.Data?.ClientCode,
-        // ClientCode: 'PTC',
       };
       getCovergaeApi(apiData);
     },
     onError: e => {
-      const errorMessage = e?.error || e?.message || '';
-
       dispatch(
         setErrorModal({
           Show: true,
@@ -218,11 +177,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     },
   });
 
-  const {
-    trigger: sendOtp,
-    loading: sendOtpLoading,
-    error: sendOtpError,
-  } = useApiHook({
+  const {trigger: sendOtp} = useApiHook({
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
@@ -282,65 +237,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     trigger(apiData);
   };
 
-  // face ID func
-  // const onPressFaceId = async () => {
-  //   try {
-  //     if (!isToggle) {
-  //       throw new Error('Please enable FaceId login from settings first');
-  //     }
-  //     const rnBiometrics = new ReactNativeBiometrics({
-  //       allowDeviceCredentials: true,
-  //     });
-
-  //     const {available, biometryType} = await rnBiometrics.isSensorAvailable();
-
-  //     if (!available || biometryType !== ReactNativeBiometrics.FaceId) {
-  //       throw new Error('Face ID is not available on this device');
-  //     }
-
-  //     // Generate keys if they don't exist
-  //     const {keysExist} = await rnBiometrics.biometricKeysExist();
-  //     if (!keysExist) {
-  //       await rnBiometrics.createKeys();
-  //     }
-
-  //     const {success} = await rnBiometrics.createSignature({
-  //       promptMessage: 'Confirm Face ID to login',
-  //       payload: '22',
-  //     });
-  //     if (!success) {
-  //       throw new Error('Face ID authentication failed');
-  //     }
-  //     if (
-  //       !faceIdCredentials?.userName ||
-  //       !faceIdCredentials?.password ||
-  //       !deviceId
-  //     ) {
-  //       throw new Error('Missing stored Face ID credentials');
-  //     }
-  //     const Buffer = require('buffer').Buffer;
-  //     let encodedAuth = new Buffer(faceIdCredentials.password).toString(
-  //       'base64',
-  //     );
-  //     const apiData = {
-  //       userName: faceIdCredentials.userName,
-  //       password: encodedAuth,
-  //       DeviceId: faceIdCredentials.deviceId,
-  //       LoginDeviceName: 'Mobile',
-  //     };
-  //     await trigger(apiData);
-  //   } catch (e) {
-  //     console.log(e?.message || e, 'face id login error');
-  //     dispatch(
-  //       setErrorModal({
-  //         Show: true,
-  //         message: e?.message || 'Face ID login failed',
-  //       }),
-  //     );
-  //   }
-  // };
-
-  // Fngprnt func
   const onPressToucdId = async () => {
     try {
       if (!isToggle) {
@@ -406,8 +302,7 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       };
 
       await trigger(apiData);
-    } catch (error: any) {
-      console.log('Biometric login error:', error);
+    } catch (error) {
       if (Platform.OS === 'ios') {
         dispatch(
           setErrorModal({
@@ -431,9 +326,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
   };
 
   const handleSignup = () => {
-    // const filled = signupCheckForError();
-    // if (!filled) return;
-
     if (signupApiData.email && signupApiData.cellNumber && signupApiData.cnic) {
       triggerSignup();
     } else {
@@ -448,9 +340,9 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
     }
   };
 
-  const onPressTab = (name: string) => setSelectedTab(name);
+  const onPressTab = name => setSelectedTab(name);
 
-  const onPressforgotPassword = (to: keyof RootStackParamList) => {
+  const onPressforgotPassword = to => {
     navigation.navigate(to, {step: 1, type: 'forgot'});
   };
 
@@ -497,8 +389,6 @@ const useLoginViewModel = (): UseLoginViewModelReturn => {
       loadingSignup,
       loginApiData,
       checked,
-      rememberMe,
-      verifiedUserData,
     },
     functions: {
       onPressTab,

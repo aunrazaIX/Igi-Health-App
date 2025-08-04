@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: vw * 3.9,
     color: COLORS.textBlackShade,
-    lineHeight: vh*2.2
   },
   termsAndConditionsText: {
     textAlign: 'left',
@@ -38,13 +37,11 @@ export const styles = StyleSheet.create({
   },
   bullet: {
     fontSize: vw * 6,
-    lineHeight: vh * 2,
   },
   pointsText: {
     textAlign: 'left',
     maxWidth: '95%',
     fontSize: vw * 3.7,
-    lineHeight: vh * 2.5,
     color: COLORS.textBlackShade,
   },
 });

@@ -9,7 +9,9 @@ export const styles = StyleSheet.create({
   imageStyle: {
     height: vh * 100,
   },
-  wrapper: {padding: vh * 0.7},
+  wrapper: {
+    padding: vh * 0.7,
+  },
   logo: {
     marginTop: vh * 4.8,
     height: vh * 10,
@@ -22,7 +24,7 @@ export const styles = StyleSheet.create({
     paddingBottom: vh,
   },
   loginContent: {
-    gap: vh * 2.5,
+    gap: vh,
     marginTop: vh * 4,
     flex: 1,
     paddingHorizontal: vw * 4,
@@ -32,14 +34,13 @@ export const styles = StyleSheet.create({
     width: '100%',
     borderRadius: vw * 5,
 
-    // paddingVertical: vh * 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
   loginContainerText: {
     color: COLORS.textColorLight,
-    fontSize: vw * 4,
+    fontSize: vw * 3.5,
     textAlign: 'left',
   },
 
@@ -62,37 +63,31 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 1.5,
     borderColor: 'white',
-
-    marginBottom: vh * 2,
+    marginBottom: vh,
   },
   tab: {
     width: '47%',
     justifyContent: 'center',
     alignItems: 'center',
-    // paddingVertical: vh * 0.7,
     borderRadius: vw * 6,
   },
   tabText: {
     paddingVertical: vh * 0.4,
     fontSize: vw * 3.6,
-    lineHeight: vh * 2,
   },
   forgetPassword: {
     fontSize: vw * 3.4,
     color: COLORS.forgotPass,
-    lineHeight: vh * 2,
-
-    // backgroundColor: 'red',
   },
   loginButton: {
-    marginTop: vh * 2,
+    marginTop: vh,
     height: vh * 7.8,
   },
   loginOptionContainer: {
     flexDirection: 'row',
     backgroundColor: COLORS.white,
     borderRadius: vw * 6,
-    paddingVertical: vh * 3,
+    paddingVertical: vh,
     width: '110%',
     alignSelf: 'center',
     justifyContent: 'center',

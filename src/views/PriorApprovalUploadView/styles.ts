@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.maxFile,
     fontSize: vh * 1.7,
-    lineHeight: vh * 3,
   },
   documentSize: {
     textAlign: 'left',
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
   uploadFileContainer: {
     flex: 1,
     justifyContent: 'space-between',
-    minHeight: '100%'
+    minHeight: '100%',
   },
   submitButton: {
     borderRadius: vh * 1.5,
@@ -113,16 +112,16 @@ const styles = StyleSheet.create({
     padding: vh * 1,
     borderRadius: vh * 2,
   },
-  addRemarks:{
-    marginVertical: vh * 3
+  addRemarks: {
+    marginVertical: vh * 3,
   },
-  remarksInput:{
+  remarksInput: {
     color: COLORS.placeholderColor,
     fontSize: vh * 1.5,
   },
-  confimationContainer:{
-    height: '52%'
-  }
+  confimationContainer: {
+    height: '52%',
+  },
 });
 
 export default styles;

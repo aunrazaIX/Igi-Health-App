@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     color: COLORS.textGrayShade,
     fontSize: vw * 3.2,
     marginTop: vh * 0.5,
-    lineHeight: vh * 2.2,
   },
   arrow: {
     width: vh * 2,

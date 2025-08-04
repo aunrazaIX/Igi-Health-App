@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     color: COLORS.textBlackShade,
     // color: COLORS.black + '55',
     fontSize: vw * 3.6,
-    lineHeight: vh * 2,
     minHeight: vh * 2,
     marginBottom: vh * 0,
     marginTop: vh * -1,
