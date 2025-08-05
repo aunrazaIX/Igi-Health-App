@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginLeft: vw * 2,
   },
-  iconView: {},
-  buttonDisabled: {},
-  buttonEnabled: {},
+  pinCodeText: {
+    color: COLORS.black,
+  },
 });
 
 export default styles;

@@ -128,6 +128,7 @@ const useForgotPasswordViewModel = ({
     cellNumber: '',
     email: '',
     cnic: '',
+    verify_type: '1',
   });
 
   const {
@@ -155,6 +156,7 @@ const useForgotPasswordViewModel = ({
           userId: res?.Data?.UserID,
           uuid: id,
           user_email: res?.Data?.UserEmail,
+
           user_cellnumber: res?.Data?.UserCellNumber,
           opt_reason: 'for Forgot Password Request',
           opt_typeID: '2',

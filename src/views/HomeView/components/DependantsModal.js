@@ -4,8 +4,10 @@ import {COLORS} from '../../../assets/theme/colors';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {icons} from '../../../assets';
 import {AileronBold, AileronRegular} from '../../../components';
+import {formatName} from '../../../utils';
 
 const DependantsModal = ({show, dependants, onClose}) => {
+  console.log('dependants', dependants);
   return (
     <Modal animationType="fade" visible={show} transparent statusBarTranslucent>
       <View style={styles.container}>
@@ -23,7 +25,7 @@ const DependantsModal = ({show, dependants, onClose}) => {
                 key={index}
                 name={`${
                   typeof person?.Policy_Insured_Name === 'string'
-                    ? person.Policy_Insured_Name.trim()
+                    ? formatName(person.Policy_Insured_Name.trim())
                     : person?.Policy_Insured_Name
                 }: ${person?.Policy_Insured_Age}`}
               />

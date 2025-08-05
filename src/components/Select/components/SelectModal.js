@@ -13,7 +13,7 @@ import {vh, vw} from '../../../assets/theme/dimension';
 import AileronBold from '../../AileronBold';
 import NoDataView from '../../NoDataView';
 import InputField from '../../InputField';
-import {universalSearch} from '../../../utils';
+import {formatName, universalSearch} from '../../../utils';
 
 const SelectModal = ({
   visible,
@@ -50,7 +50,7 @@ const SelectModal = ({
       <AileronBold
         name={
           item?.label && typeof item?.label === 'string'
-            ? item?.label?.trim()
+            ? formatName(item?.label?.trim())
             : '--'
         }
         style={styles.listText}

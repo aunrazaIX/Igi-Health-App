@@ -98,6 +98,7 @@ const useLoginViewModel = () => {
     email: '',
     cellNumber: '',
     cnic: '',
+    verify_type: '0',
   });
 
   const {trigger: getCovergaeApi} = useApiHook({
