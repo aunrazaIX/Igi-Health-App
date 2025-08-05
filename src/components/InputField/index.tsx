@@ -271,22 +271,25 @@ const styles = StyleSheet.create({
     marginVertical: vh * 1.5,
     paddingHorizontal: vw * 1.5,
     flexDirection: 'row',
-    paddingVertical: vh,
+    paddingVertical: vh * 0.5,
   },
   inheritStyles: {
     flex: 1,
     // backgroundColor: 'red',
   },
   label: {
+    height: '35%',
     textAlign: 'left',
-    fontSize: vw * 3,
+    fontSize: vw * 2.75,
+    // backgroundColor: 'black',
     color: COLORS.textBlackShade,
+    paddingVertical: vh * 0.2,
   },
   textInput: {
+    height: '65%',
     color: COLORS.personalValue,
     fontFamily: fonts.inter.regular,
     padding: 0,
-
     width: '100%',
   },
   iconView: {
