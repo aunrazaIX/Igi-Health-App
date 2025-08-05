@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
+import {useMemo, useState} from 'react';
 import {icons} from '../assets';
 import endpoints from '../api/endspoints';
 import {useSelector} from 'react-redux';
@@ -18,6 +18,21 @@ const useClaimsHistoryViewModel = () => {
 
   const goBack = () => navigation.goBack();
   const onCloseRemarksModal = () => setShowRemarks(false);
+
+  const getHeadingSubHeading = useMemo(() => {
+    return {
+      'In-Process': {
+        heading: 'In-Process Claims',
+        messsage:
+          'Claims initiated via the app or portal that are currently being evaluated.',
+      },
+      Processed: {
+        heading: 'Processed Claims',
+        messsage:
+          'All finalized claims from our system, including hospital visits, reimbursements, and portal submissions.',
+      },
+    };
+  }, []);
 
   const transformClaimData = (claim, isInProcess) => ({
     headerLabel: `Claim #${claim.ClaimID}`,
@@ -103,6 +118,7 @@ const useClaimsHistoryViewModel = () => {
       type,
       showRemarks,
       remarks,
+      getHeadingSubHeading,
     },
     functions: {
       goBack,

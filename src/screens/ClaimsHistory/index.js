@@ -4,7 +4,14 @@ import useClaimsHistoryViewModel from '../../viewmodels/useClaimsHistoryViewMode
 
 const ClaimsHistory = () => {
   const {states, functions} = useClaimsHistoryViewModel();
-  const {data, claimDataLoading, type, showRemarks, remarks} = states;
+  const {
+    data,
+    claimDataLoading,
+    type,
+    showRemarks,
+    remarks,
+    getHeadingSubHeading,
+  } = states;
   const {goBack, onPressType, onCloseRemarksModal} = functions;
   return (
     <ClaimsHistoryView
@@ -15,6 +22,7 @@ const ClaimsHistory = () => {
       type={type}
       showRemarks={showRemarks}
       remarks={remarks}
+      getHeadingSubHeading={getHeadingSubHeading}
       claimDataLoading={claimDataLoading}
     />
   );
