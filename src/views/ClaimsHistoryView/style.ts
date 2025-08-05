@@ -148,4 +148,10 @@ export const styles = StyleSheet.create({
     color: COLORS.black,
     fontSize: vw * 3,
   },
+  claimSubHeadingText: {
+    color: COLORS.black,
+    marginTop: vh,
+    textAlign: 'left',
+    fontSize: vw * 3.5,
+  },
 });

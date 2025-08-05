@@ -2,13 +2,14 @@ import {View, FlatList, TouchableOpacity} from 'react-native';
 import React, {Fragment} from 'react';
 import TopView from '../../components/TopView';
 import {icons} from '../../assets';
-import {AileronSemiBold, CurvedView} from '../../components';
+import {AileronRegular, AileronSemiBold, CurvedView} from '../../components';
 import DetailsContainer from '../../components/DetailsContainer';
 import SimpleLoader from '../../components/SimpleLoader';
 import {COLORS} from '../../assets/theme/colors';
 import {styles} from './style';
 import RemarksModal from '../../screens/ClaimsHistory/components/RemarksModal';
 import NoDataView from '../../components/NoDataView';
+import {vh, vw} from '../../assets/theme/dimension';
 
 const ClaimsHistoryView = ({
   data,
@@ -19,6 +20,7 @@ const ClaimsHistoryView = ({
   showRemarks,
   remarks,
   onCloseRemarksModal,
+  getHeadingSubHeading,
 }) => {
   const renderItem = ({item, index}) => (
     <DetailsContainer
@@ -73,6 +75,18 @@ const ClaimsHistoryView = ({
             />
           </TouchableOpacity>
         </View>
+
+        <AileronSemiBold
+          style={styles.claimSubHeadingText}
+          name={getHeadingSubHeading[type]?.heading}
+        />
+        <AileronRegular
+          style={[
+            styles.claimSubHeadingText,
+            {marginTop: vh * 0.5, fontSize: vw * 3},
+          ]}
+          name={getHeadingSubHeading[type]?.messsage}
+        />
         <FlatList
           ListFooterComponent={
             claimDataLoading && (

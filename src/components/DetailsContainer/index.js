@@ -163,12 +163,12 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   detailsLabel: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3.3,
     width: '40%',
     textAlign: 'left',
   },
   detailsValue: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3.3,
     color: COLORS.textBlackShade,
     textAlign: 'right',
   },

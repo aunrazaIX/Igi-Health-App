@@ -4,14 +4,14 @@ import SimpleLoader from '../../components/SimpleLoader';
 import {COLORS} from '../../assets/theme/colors';
 import {CurvedView, TopView} from '../../components';
 
-const PrivacyPolicyView = ({onNavigate, loading, onLoadEnd}) => {
+const PrivacyPolicyView = ({loading, onLoadEnd, webKey}) => {
   return (
     <>
       <TopView title={'Privacy Policy'} />
       <CurvedView>
         {loading && <SimpleLoader color={COLORS.cardBackgroundRed} />}
         <WebView
-          onNavigationStateChange={onNavigate}
+          key={webKey}
           scrollEnabled
           onLoadEnd={onLoadEnd}
           source={{

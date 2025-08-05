@@ -23,8 +23,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../redux/authSlice';
 import SettingStack from '../SettingStack';
 import Profile from '../../screens/Profile';
-import TermsAndConditionsView from '../../views/PrivacyPolicyView';
 import InactivityHandler from '../../components/InActivity';
+import PrivacyPolicy from '../../screens/PrivacyPolicy';
 
 const DrawerStack = () => {
   const {user} = useSelector(state => state.auth);
@@ -281,7 +281,7 @@ const DrawerStack = () => {
         <Drawer.Screen name="FAQs" component={FAQs} />
         <Drawer.Screen name="SettingsStack" component={SettingStack} />
         <Drawer.Screen name="Profile" component={Profile} />
-        <Drawer.Screen name="Privacy" component={TermsAndConditionsView} />
+        <Drawer.Screen name="Privacy" component={PrivacyPolicy} />
       </Drawer.Navigator>
     </InactivityHandler>
   );
