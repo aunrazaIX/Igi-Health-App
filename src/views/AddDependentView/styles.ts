@@ -4,6 +4,9 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {fonts} from '../../assets/fonts';
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    borderWidth: 2,
+  },
   centeredView: {
     flex: 1,
     justifyContent: 'flex-end',

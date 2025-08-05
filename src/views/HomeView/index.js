@@ -423,7 +423,7 @@ const HomeView = ({
 
             <AileronLight
               style={styles.meterLightText}
-              name="Total Claim Amount"
+              name="Total Claimed Amount"
             />
 
             {!loading ? (
@@ -535,7 +535,7 @@ const HomeView = ({
         show={showDependantModal}
         onClose={() => handleDependantsModal(false)}
       />
-      <ModalLoading loading={homeCardDataLoading || maternityLoading} />
+      {/* <ModalLoading loading={homeCardDataLoading || maternityLoading} /> */}
     </ScrollView>
   );
 };

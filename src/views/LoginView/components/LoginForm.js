@@ -140,9 +140,6 @@ export default LoginForm;
 const style = StyleSheet.create({
   inputContainer: {
     borderWidth: 2,
-    flexDirection: 'column',
-
-    paddingHorizontal: vw * 1,
   },
   labelStyle: {
     fontSize: vw * 3.5,
@@ -152,6 +149,7 @@ const style = StyleSheet.create({
   },
   inputFeilds: {
     marginTop: vh,
+    width: '100%',
   },
 
   style: {

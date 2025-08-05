@@ -1,4 +1,10 @@
-import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Pressable,
+} from 'react-native';
 import React, {useState} from 'react';
 import {COLORS} from '../../assets/theme/colors';
 import {icons} from '../../assets';
@@ -14,8 +20,11 @@ const DetailsContainer = ({
   headerIcon,
   onPress,
   patientName,
+  headerIconPressable,
 }) => {
   const [isArrowUp, setIsArrowUp] = useState(false);
+
+  const Wrapper = headerIconPressable === true ? TouchableOpacity : View;
 
   return (
     <View style={[styles.card]}>
@@ -53,11 +62,10 @@ const DetailsContainer = ({
                 ) : null,
               )
             ) : (
-              <TouchableOpacity onPress={onPress}>
+              <Wrapper onPress={onPress}>
                 <Image style={styles.headerArrow} source={headerIcon} />
-              </TouchableOpacity>
+              </Wrapper>
             ))}
-
           <Image
             style={styles.headerArrow}
             source={isArrowUp ? icons.toggleTop : icons.toggleBottom}
@@ -154,7 +162,7 @@ export const styles = StyleSheet.create({
     width: '100%',
 
     borderColor: COLORS.textGrayShade,
-    marginBottom: vh * 2,
+    marginBottom: vw * 1,
     opacity: 0.4,
   },
   cardDetails: {
@@ -178,5 +186,6 @@ export const styles = StyleSheet.create({
   },
   detailsContainer: {
     width: '60%',
+    alignItems: 'flex-end',
   },
 });

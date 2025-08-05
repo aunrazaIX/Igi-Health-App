@@ -100,7 +100,7 @@ const DrawerStack = () => {
     },
     {
       id: 9,
-      name: 'Discounted Centers',
+      name: 'Discount Centers',
       icon: drawerIcons.drawerDiscountedCenters,
       mainParent: 'Tabs',
       stChild: 'HomeStack',

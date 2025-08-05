@@ -111,9 +111,6 @@ export default EnterEmailView;
 const style = StyleSheet.create({
   inputContainer: {
     borderWidth: 2,
-    flexDirection: 'column',
-
-    paddingHorizontal: vw * 1,
   },
   labelStyle: {
     fontSize: vw * 3.5,

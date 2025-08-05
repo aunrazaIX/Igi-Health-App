@@ -32,6 +32,7 @@ const ClaimsHistoryView = ({
           ? icons.rejected
           : icons.pending
       }
+      headerIconPressable={false}
       patientName={item.RelationName}
       data={item}
     />
