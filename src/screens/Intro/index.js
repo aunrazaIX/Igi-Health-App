@@ -3,8 +3,14 @@ import IntroView from '../../views/IntroView';
 import useIntroViewModel from '../../viewmodels/useIntroViewModel';
 
 const Intro = () => {
-  const {functions} = useIntroViewModel();
+  const {functions, states} = useIntroViewModel();
+  const {backgroundImages} = states;
   const {handleNextButton} = functions;
-  return <IntroView handleNextButton={handleNextButton} />;
+  return (
+    <IntroView
+      backgroundImages={backgroundImages}
+      handleNextButton={handleNextButton}
+    />
+  );
 };
 export default Intro;

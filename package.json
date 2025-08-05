@@ -26,6 +26,7 @@
     "patch-package": "^8.0.0",
     "react": "19.0.0",
     "react-native": "0.78.1",
+    "react-native-app-intro-slider": "^4.0.4",
     "react-native-asset": "^2.1.1",
     "react-native-biometrics": "^3.0.1",
     "react-native-calendars": "^1.1310.0",
