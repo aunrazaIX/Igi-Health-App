@@ -84,13 +84,11 @@ export default CreateNewPassword;
 const style = StyleSheet.create({
   inputContainer: {
     // borderWidth: 2,
-    flexDirection: 'column',
 
     paddingHorizontal: vw * 1,
     // marginTop: vh * 2,
   },
   inputContainerError: {
-    flexDirection: 'column',
     // marginTop: vh * 2,
     marginBottom: vh * 4,
 
