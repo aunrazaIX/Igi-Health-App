@@ -22,6 +22,7 @@ import moment from 'moment';
 import SimpleLoader from '../../components/SimpleLoader';
 import DependantsModal from './components/DependantsModal';
 import {formatName} from '../../utils';
+import {COLORS} from '../../assets/theme/colors';
 
 const HomeView = ({
   cardData,
@@ -48,6 +49,7 @@ const HomeView = ({
 
   return (
     <ScrollView
+      indicatorStyle={'black'}
       refreshControl={
         <RefreshControl
           refreshing={maternityLoading || loading || homeCardDataLoading}
@@ -372,6 +374,7 @@ const HomeView = ({
             />
           </View>
           <FlatList
+            indicatorStyle="black"
             data={cardData}
             keyExtractor={_item => _item?.name}
             showsHorizontalScrollIndicator={true}

@@ -98,6 +98,7 @@ const BenefitsView = ({
           <FlatList
             data={['Inpatient', 'Outpatient', 'Maternity']}
             horizontal
+            indicatorStyle="black"
             showsHorizontalScrollIndicator={true}
             contentContainerStyle={styles.mapTabsContainerList}
             keyExtractor={(item, index) => index.toString()}
@@ -123,6 +124,7 @@ const BenefitsView = ({
       <TopView title={'Entitled Benefits'} />
       <CurvedView containerStyle={styles.CurvedView}>
         <FlatList
+          indicatorStyle="black"
           ItemSeparatorComponent={renderSeperator}
           ListHeaderComponent={headerComponent}
           showsVerticalScrollIndicator={true}

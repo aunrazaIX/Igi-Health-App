@@ -255,6 +255,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             (selectedTab === 'DiscountedCenters' &&
               selectedTabRight === 'list')) && (
             <FlatList
+              indicatorStyle="black"
               data={data}
               contentContainerStyle={{paddingBottom: vh * 15}}
               keyExtractor={(_, index) => index.toString()}

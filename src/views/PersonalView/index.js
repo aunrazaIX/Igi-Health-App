@@ -15,6 +15,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {vh} from '../../assets/theme/dimension';
 import ModalLoading from '../../components/ModalLoading';
 import NoDataView from '../../components/NoDataView';
+import {COLORS} from '../../assets/theme/colors';
 
 const PersonalView = ({
   data,
@@ -55,7 +56,7 @@ const PersonalView = ({
             <AileronBold name={'Covered '} style={styles.dependentText} />
             <AileronBold name={'Family Members!'} style={styles.detailsText} />
           </View>
-          <ScrollView>
+          <ScrollView indicatorStyle={'black'}>
             <View style={{marginBottom: vh * 12}}>
               {data?.length > 0
                 ? data?.map((dependent, index) => (

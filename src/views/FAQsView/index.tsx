@@ -42,6 +42,7 @@ const FAQsView = ({
           style={styles.faqsSubHeading}
         />
         <FlatList
+          indicatorStyle="black"
           data={faqsData}
           keyExtractor={item => item?.id?.toString()}
           renderItem={renderItem}

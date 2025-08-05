@@ -35,6 +35,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,
-    // letterSpacing: vw * 0.121,
   },
 });

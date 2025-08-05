@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, {ReactNode} from 'react';
 import {
   View,
   StyleSheet,
@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { vh, vw } from '../../assets/theme/dimension';
+import {vh, vw} from '../../assets/theme/dimension';
 import AileronSemiBold from '../AileronSemiBold';
-import { COLORS } from '../../assets/theme/colors';
-import { useSelector } from 'react-redux';
+import {COLORS} from '../../assets/theme/colors';
+import {useSelector} from 'react-redux';
 
 type Step = {
   key: string;
@@ -72,6 +72,7 @@ const Stepper: React.FC<StepperProps> = ({
           ))}
         </View>
         <ScrollView
+          indicatorStyle={'black'}
           showsVerticalScrollIndicator={true}
           contentContainerStyle={styles.contentContainer}>
           {componentList[steps[currentStep - 1]?.key]}
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: vh * 1.5,
   },
-  wrapper: { padding: vh * 2 },
+  wrapper: {padding: vh * 2},
   priorNext: {
     textAlign: 'center',
     color: COLORS.white,

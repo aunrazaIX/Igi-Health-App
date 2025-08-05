@@ -131,7 +131,6 @@ const ForgotPasswordView = ({
         onPressBack={onPressBack}
         icon={returnHeaderIcon[step]}
         title={returnHeaderName[step]}
-        titleStyle={{letterSpacing: vw * 0.2}}
       />
       <CurvedView containerStyle={styles.curvedStyle}>
         <KeyboardAwareScrollView>

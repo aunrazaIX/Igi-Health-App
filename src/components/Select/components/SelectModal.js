@@ -77,6 +77,8 @@ const SelectModal = ({
               />
             )}
             <FlatList
+              indicatorStyle="black"
+              showsVerticalScrollIndicator
               ListEmptyComponent={() => <NoDataView name={'No Data Found'} />}
               data={search ? filterData : data}
               renderItem={renderItem}

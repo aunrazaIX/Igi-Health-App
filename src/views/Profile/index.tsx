@@ -49,7 +49,7 @@ const ProfileView: React.FC<Props> = ({
 
   return (
     <>
-      <TopView title="Profile" titleStyle={{letterSpacing: vw * 0.18}} />
+      <TopView title="Profile" />
       <CurvedView containerStyle={styles.curvedStyle}>
         <View style={styles.profileDetailContainer}>
           {/* 

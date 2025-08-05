@@ -110,6 +110,7 @@ const NotificationView = ({
             {showDropDown && (
               <View style={styles.dropdown}>
                 <FlatList
+                  indicatorStyle="black"
                   data={types}
                   renderItem={({item}) => (
                     <TouchableOpacity
@@ -124,6 +125,7 @@ const NotificationView = ({
           </View>
         </View>
         <FlatList
+          indicatorStyle="black"
           data={
             selectedType == 'All'
               ? data

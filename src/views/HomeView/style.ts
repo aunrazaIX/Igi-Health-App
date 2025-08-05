@@ -310,7 +310,6 @@ export const styles = StyleSheet.create({
     // textAlign: 'left',
     fontSize: vw * 3.1,
     color: COLORS.black,
-    letterSpacing: vw * 0.11,
     // borderWidth: 2,
     // justifyContent: 'center',
     // alignItems: 'center',

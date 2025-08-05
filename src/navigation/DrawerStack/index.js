@@ -15,14 +15,13 @@ import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import {useDrawerStatus} from '@react-navigation/drawer';
 import {drawerIcons, icons, images} from '../../assets';
-import {AileronBold, AileronSemiBold} from '../../components';
+import {AileronSemiBold} from '../../components';
 import Tabs from '../TabStack';
 import FAQs from '../../screens/FAQs';
 import LinearGradient from 'react-native-linear-gradient';
 import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../redux/authSlice';
 import SettingStack from '../SettingStack';
-import {useNavigation} from '@react-navigation/native';
 import Profile from '../../screens/Profile';
 import TermsAndConditionsView from '../../views/PrivacyPolicyView';
 import InactivityHandler from '../../components/InActivity';
@@ -35,7 +34,6 @@ const DrawerStack = () => {
   }, []);
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   if (!user) {
     return null;
@@ -182,7 +180,10 @@ const DrawerStack = () => {
           </TouchableOpacity>
         </View>
 
-        <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
+        <ScrollView
+          showsVerticalScrollIndicator={true}
+          indicatorStyle={'black'}
+          ref={scrollRef}>
           <View style={styles.menuContainer}>
             <View style={styles.profileContainer}>
               <View style={styles.profileRow}>
@@ -350,7 +351,6 @@ const styles = StyleSheet.create({
   Buttontext: {
     fontSize: vw * 3.5,
     color: COLORS.white,
-    letterSpacing: vw * 0.15,
   },
   ButtonContainer: {
     width: '80%',

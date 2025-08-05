@@ -152,6 +152,7 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
           {selectedTabRight === 'list' && (
             <View style={styles.mapTabsContainer}>
               <FlatList
+                indicatorStyle="black"
                 data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}
                 horizontal
                 showsHorizontalScrollIndicator={true}
@@ -176,6 +177,7 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
               <SimpleLoader color={COLORS.black} />
             ) : (
               <FlatList
+                indicatorStyle="black"
                 data={data}
                 keyExtractor={(_, index) => index.toString()}
                 ListEmptyComponent={() => {
