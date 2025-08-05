@@ -95,7 +95,7 @@ export default SelectModal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.black + '66',
+    backgroundColor: COLORS.black + '22',
     justifyContent: 'center',
     alignItems: 'center',
   },

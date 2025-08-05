@@ -112,6 +112,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               maxLength={20}
               label="Dependent Name"
               placeholder="Enter Name"
+              containerStyle={styles.inputContainer}
             />
 
             <Select

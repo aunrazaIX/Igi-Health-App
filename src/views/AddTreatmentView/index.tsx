@@ -106,7 +106,7 @@ const AddTreatmentView = ({
               label={
                 claimType === 'lodgeClaim'
                   ? 'Receipt Number'
-                  : 'Admission/Mr No.'
+                  : 'Admission/M.R. No.'
               }
               errorMessage={apiData?.error_receiptNumber}
               placeholder={

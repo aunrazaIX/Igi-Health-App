@@ -60,7 +60,6 @@ const LoginView = ({
         style={styles.imageContainer}>
         <View style={styles.loginContent}>
           <Image source={icons.logo} style={styles.logo} />
-
           <CurvedView
             containerStyle={styles.curvedStyle}
             backColor={{backgroundColor: 'transparent'}}>
@@ -93,7 +92,6 @@ const LoginView = ({
                   );
                 })}
               </View>
-
               {renderForm[selectedTab]}
             </View>
           </CurvedView>
