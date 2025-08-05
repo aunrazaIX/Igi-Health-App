@@ -183,7 +183,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
     //   </>
     // );
     return (
-      <View style={{width: '100%'}}>
+      <View style={{width: '100%', marginVertical: vh * 1.5}}>
         <View
           style={[
             styles.container,
@@ -268,7 +268,6 @@ const styles = StyleSheet.create({
     height: vh * 7.5,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
-    marginVertical: vh * 1.5,
     paddingHorizontal: vw * 1.5,
     flexDirection: 'row',
     paddingVertical: vh * 0.5,

@@ -89,9 +89,6 @@ const style = StyleSheet.create({
     // marginTop: vh * 2,
   },
   inputContainerError: {
-    // marginTop: vh * 2,
-    marginBottom: vh * 4,
-
     paddingHorizontal: vw * 1,
   },
   labelStyle: {
