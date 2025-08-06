@@ -1,10 +1,11 @@
 import React from 'react';
-import {Modal, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Image, Modal, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS} from '../../../assets/theme/colors';
 
 import {vh, vw} from '../../../assets/theme/dimension';
 import {AileronBold, Button} from '../../../components';
 import LinearGradient from 'react-native-linear-gradient';
+import {icons} from '../../../assets';
 
 const DocumentOptionsModal = ({
   uploadDocument,
@@ -15,6 +16,14 @@ const DocumentOptionsModal = ({
     <Modal transparent={true} visible={showOptionModal} statusBarTranslucent>
       <View style={styles.centeredView}>
         <View style={[styles.modalView]}>
+          <TouchableOpacity
+            onPress={() => {
+              viewOptionModal(false);
+            }}
+            style={styles.close}>
+            <Image source={icons.errorPopup} style={styles.closeIcon} />
+          </TouchableOpacity>
+
           <Button
             name="Open Camera"
             inputStyle={styles.closeButton}
@@ -25,17 +34,6 @@ const DocumentOptionsModal = ({
             inputStyle={styles.closeButton}
             onPress={() => uploadDocument('file')}
           />
-          <LinearGradient
-            style={styles.cancelButtonWrapper}
-            colors={COLORS.deleteButtonGradient}>
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={() => {
-                viewOptionModal(false);
-              }}>
-              <AileronBold name="Cancel" style={styles.cancelButtonText} />
-            </TouchableOpacity>
-          </LinearGradient>
         </View>
       </View>
     </Modal>
@@ -93,5 +91,13 @@ const styles = StyleSheet.create({
     fontSize: vw * 4.7,
     fontWeight: '700',
     color: COLORS.white,
+  },
+  closeIcon: {
+    height: vh * 4.5,
+    width: vh * 4.5,
+    resizeMode: 'contain',
+  },
+  close: {
+    alignSelf: 'flex-end',
   },
 });

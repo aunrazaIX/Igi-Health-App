@@ -122,43 +122,6 @@ const SignUpView = ({
           /\d/,
         ]}
       />
-
-      {/* <View style={style.signupTextContainer}>
-        <View style={style.signupText}>
-          <AileronSemiBold name="•" style={styles.loginContainerText} />
-
-          <AileronSemiBold
-            numberOfLines={3}
-            name={
-              'Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character.'
-            }
-            style={styles.loginContainerText}
-          />
-        </View>
-
-        <View style={style.signupText}>
-          <AileronSemiBold name="•" style={styles.loginContainerText} />
-
-          <AileronSemiBold
-            numberOfLines={3}
-            name={
-              "Special characters can include digits and punctuation (e.g., !@#$%^&*()_+|~-={}[]:;'<>?,./)."
-            }
-            style={styles.loginContainerText}
-          />
-        </View>
-
-        <View style={style.signupText}>
-          <AileronSemiBold name="•" style={styles.loginContainerText} />
-
-          <AileronSemiBold
-            numberOfLines={3}
-            name={'Case sensitivity is mandatory.'}
-            style={styles.loginContainerText}
-          />
-        </View>
-      </View> */}
-
       <Button
         containerStyle={styles.loginButton}
         name="Create Account"

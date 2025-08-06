@@ -462,10 +462,12 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       };
       let result = await launchCamera(options);
       let res = result?.assets[0];
+      console.log(res, 'res');
       let _img = {
         uri: res?.uri,
         type: res?.type,
-        name: res?.fileName,
+        name: `${Math.random().toString()}.jpeg`,
+        fileSizeInMB: res?.fileSize / (1024 * 1024),
       };
       dispatch(setSelectedDocuments([_img]));
     } catch (e) {
