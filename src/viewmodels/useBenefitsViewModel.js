@@ -7,6 +7,7 @@ import {useState} from 'react';
 
 const useBenefitsViewModel = () => {
   let {user} = useSelector(state => state.auth);
+  let {policyClass} = useSelector(state => state.general);
 
   const [allBenefits, setAllBenefits] = useState([]);
   const [selectedTab, setSelectedTab] = useState('Inpatient');
@@ -25,11 +26,12 @@ const useBenefitsViewModel = () => {
   };
   const navigation = useNavigation();
 
-  const {loading: benefitsloading} = useApiHook({
+  const {loading: benefitsloading, error} = useApiHook({
     apiEndpoint: endpoints.Benefits.getBenefits,
     method: 'get',
     argsOrBody: {
       ClientCode: user?.ClientCode,
+      Policy_Class: policyClass,
     },
     onSuccess: res => {
       setAllBenefits(res);
