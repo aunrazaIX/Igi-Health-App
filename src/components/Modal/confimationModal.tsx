@@ -122,7 +122,9 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                       ? 'Confirm Edit Request'
                       : isUpdate
                       ? 'Confirm Edit Request'
-                      : 'Signup Successful!'
+                      : `${
+                          type === 'signup' ? 'Signup' : 'Password changed'
+                        } Successful!`
                   }
                   style={styles.confirmation}
                 />
