@@ -61,7 +61,7 @@ export const generateCardHTML = (data, user) => `
                       <span>Policy Name: </span><span>${
                         data.find(
                           item => item.Policy_Insured_Relaion === 'Member',
-                        )?.Policy_Insured_Name
+                        )?.SURNAME
                       }</span>
                     </td>
                     <td style="text-align: end; padding-bottom: 5px">
