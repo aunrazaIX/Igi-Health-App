@@ -328,8 +328,9 @@ const useForgotPasswordViewModel = ({
         dispatch(
           setErrorModal({
             Show: true,
-            message: 'Fill Both Passwords',
-            detail: '',
+            message: 'Missing Password Fields',
+            detail:
+              'Please enter both Password and Confirm Password to continue',
           }),
         );
         return;

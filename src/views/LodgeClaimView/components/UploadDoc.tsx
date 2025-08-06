@@ -90,7 +90,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                     )}
                   </View>
                 </View>
-
+                {console.log(item, 'item')}
                 <View style={styles.fileViewContainer}>
                   <AileronSemiBold
                     name={`File Size : ${
@@ -102,7 +102,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                   {(item?.type === 'image/png' ||
                     item?.type === 'image/jpeg') && (
                     <TouchableOpacity onPress={() => onView(index)}>
-                      <AileronBold name={'i'} style={styles.viewFile} />
+                      <Image source={icons.eyeOpen} style={styles.eye} />
                     </TouchableOpacity>
                   )}
                 </View>
@@ -294,6 +294,14 @@ const styles = StyleSheet.create({
   },
   fileViewContainer: {
     flexDirection: 'row',
-    gap: vw * 2,
+    gap: vw * 5,
+    alignItems: 'center',
+    paddingLeft: vh * 3.5,
+    justifyContent: 'space-between',
+  },
+  eye: {
+    height: vw * 8,
+    width: vw * 8,
+    resizeMode: 'contain',
   },
 });

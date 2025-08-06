@@ -137,7 +137,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       files: selectedDocuments,
     },
     onSuccess: res => {
-      console.log('success upload');
       let apiData =
         type === 'priorApproval'
           ? treatments?.map(item => ({
@@ -152,11 +151,13 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               dxcCode: item?.treatment?.value,
               uuid: randomId,
               clientCode: user?.ClientCode,
+              claim_submit_type: 'MB',
               requestAddedDateTime: new Date().toISOString(),
             }))
           : {
               UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
               CLNTNUM: selectedPatient?.CLNTNUM?.toString(),
+              claim_submit_type: 'MB',
               ClaimsData: treatments?.map(item => ({
                 ClaimSNO: '0',
                 ClaimID: res?.Data?.toString(),
@@ -461,10 +462,12 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       };
       let result = await launchCamera(options);
       let res = result?.assets[0];
+      console.log(res, 'res');
       let _img = {
         uri: res?.uri,
         type: res?.type,
-        name: res?.fileName,
+        name: `${Math.random().toString()}.jpeg`,
+        fileSizeInMB: res?.fileSize / (1024 * 1024),
       };
       dispatch(setSelectedDocuments([_img]));
     } catch (e) {
@@ -502,8 +505,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       }
     });
   };
-
-  console.log(claimLoading, 'claim', uploadLoading, 'upload');
 
   return {
     states: {

@@ -62,128 +62,8 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
     const InputComponent = mask ? MaskInput : TextInput;
     const [showPassword, setShowPassword] = useState(secureTextEntry);
 
-    // return (
-    //   <>
-    //     <View
-    //       style={[
-    //         styles.container,
-    //         containerStyle,
-    //         multiline && {height: vh * 11},
-    //       ]}>
-    //       {/* {label && (
-    //         <View style={styles.labelContainer}>
-    //           <AileronBold style={[styles.label, labelStyle]} name={label} />
-    //         </View>
-    //       )} */}
-    //       <View style={styles.inheritStyles}>
-    //         <View>
-    //           {label && (
-    //             <View style={styles.labelContainer}>
-    //               <AileronBold
-    //                 style={[styles.label, labelStyle]}
-    //                 name={label}
-    //               />
-    //               <InputComponent
-    //                 ref={ref}
-    //                 autoFocus={autoFocus}
-    //                 keyboardType={keyboardType}
-    //                 multiline={multiline}
-    //                 maxLength={maxLength}
-    //                 style={[
-    //                   styles.textInput,
-    //                   inputStyle,
-    //                   !label && {bottom: 0},
-    //                   !editable && {color: COLORS.black + '55'},
-    //                 ]}
-    //                 placeholder={placeholder}
-    //                 placeholderTextColor={
-    //                   placeholderTextColor ??
-    //                   (multiline && editable
-    //                     ? COLORS.textGrayShade
-    //                     : editable
-    //                     ? COLORS.textGrayShade
-    //                     : COLORS.black + '44')
-    //                 }
-    //                 value={value}
-    //                 editable={editable}
-    //                 onSubmitEditing={onSubmitEditing}
-    //                 onChangeText={onChangeText}
-    //                 autoCapitalize="none"
-    //                 secureTextEntry={showPassword}
-    //                 returnKeyType={returnKeyType}
-    //                 contextMenuHidden={!allowCopyPaste}
-    //                 selectTextOnFocus={allowCopyPaste}
-    //                 textAlignVertical={multiline ? 'top' : 'auto'}
-    //                 mask={mask}
-    //                 {...rest}
-    //               />
-    //             </View>
-    //           )}
-    //         </View>
-    //         {/* <InputComponent
-    //           ref={ref}
-    //           autoFocus={autoFocus}
-    //           keyboardType={keyboardType}
-    //           multiline={multiline}
-    //           maxLength={maxLength}
-    //           style={[
-    //             styles.textInput,
-    //             inputStyle,
-    //             !label && {bottom: 0},
-    //             !editable && {color: COLORS.black + '55'},
-    //           ]}
-    //           placeholder={placeholder}
-    //           placeholderTextColor={
-    //             placeholderTextColor ??
-    //             (multiline && editable
-    //               ? COLORS.textGrayShade
-    //               : editable
-    //               ? COLORS.textGrayShade
-    //               : COLORS.black + '44')
-    //           }
-    //           value={value}
-    //           editable={editable}
-    //           onSubmitEditing={onSubmitEditing}
-    //           onChangeText={onChangeText}
-    //           autoCapitalize="none"
-    //           secureTextEntry={showPassword}
-    //           returnKeyType={returnKeyType}
-    //           contextMenuHidden={!allowCopyPaste}
-    //           selectTextOnFocus={allowCopyPaste}
-    //           textAlignVertical={multiline ? 'top' : 'auto'}
-    //           mask={mask}
-    //           {...rest}
-    //         /> */}
-    //         {(secureTextEntry || rightIcon) && (
-    //           <TouchableOpacity
-    //             disabled={!secureTextEntry}
-    //             onPress={() => setShowPassword(!showPassword)}
-    //             style={[styles.iconView, iconViewStyle]}>
-    //             <Image
-    //               style={styles.eyeIcon}
-    //               source={
-    //                 rightIcon ||
-    //                 (showPassword ? icons.eyeClosed : icons.eyeOpen)
-    //               }
-    //             />
-    //           </TouchableOpacity>
-    //         )}
-    //       </View>
-    //     </View>
-    //     {typeof errorMessage == 'string' && (
-    //       <AileronBold
-    //         style={styles.errorText}
-    //         name={
-    //           errorMessage
-    //             ? errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1)
-    //             : ''
-    //         }
-    //       />
-    //     )}
-    //   </>
-    // );
     return (
-      <View style={{width: '100%'}}>
+      <View style={{width: '100%', marginVertical: vh * 1.5}}>
         <View
           style={[
             styles.container,
@@ -243,7 +123,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             </TouchableOpacity>
           )}
         </View>
-        {typeof errorMessage == 'string' && (
+        {errorMessage && typeof errorMessage == 'string' && (
           <AileronBold
             style={styles.errorText}
             name={
@@ -268,7 +148,6 @@ const styles = StyleSheet.create({
     height: vh * 7.5,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
-    marginVertical: vh * 1.5,
     paddingHorizontal: vw * 1.5,
     flexDirection: 'row',
     paddingVertical: vh * 0.5,
@@ -278,7 +157,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
   },
   label: {
-    height: '35%',
+    height: '38%',
     textAlign: 'left',
     fontSize: vw * 2.75,
     // backgroundColor: 'black',

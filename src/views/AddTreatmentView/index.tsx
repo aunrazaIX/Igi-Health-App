@@ -92,11 +92,11 @@ const AddTreatmentView = ({
             <InputField
               placeholderTextColor={COLORS.textGrayShade}
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              containerStyle={
-                apiData?.error_receiptNumber
-                  ? {marginBottom: vh * 2.5, paddingVertical: vh}
-                  : {marginVertical: vh, paddinsdgVertical: vh}
-              }
+              // containerStyle={
+              //   apiData?.error_receiptNumber
+              //     ? {marginBottom: vh * 2.5, paddingVertical: vh}
+              //     : {marginVertical: vh, paddinsdgVertical: vh}
+              // }
               value={apiData?.receiptNumber}
               onChangeText={text => {
                 const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
@@ -118,11 +118,11 @@ const AddTreatmentView = ({
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              containerStyle={
-                apiData?.error_amount
-                  ? {marginBottom: vh * 2, paddingVertical: vh}
-                  : {marginVertical: vh, paddinsdgVertical: vh}
-              }
+              // containerStyle={
+              //   apiData?.error_amount
+              //     ? {marginBottom: vh * 2, paddingVertical: vh}
+              //     : {marginVertical: vh, paddinsdgVertical: vh}
+              // }
               placeholderTextColor={COLORS.textGrayShade}
               maxLength={7}
               value={apiData?.amount}
@@ -141,11 +141,11 @@ const AddTreatmentView = ({
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              containerStyle={
-                apiData?.error_description
-                  ? {marginBottom: vh * 3, paddingVertical: vh}
-                  : {marginVertical: vh, paddinsdgVertical: vh}
-              }
+              // containerStyle={
+              //   apiData?.error_description
+              //     ? {marginBottom: vh * 3, paddingVertical: vh}
+              //     : {marginVertical: vh, paddinsdgVertical: vh}
+              // }
               value={apiData?.description}
               maxLength={200}
               errorMessage={apiData?.error_description}
