@@ -4,15 +4,17 @@ import {Alert, Animated, Linking, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {PermissionsAndroid} from 'react-native';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import FileViewer from 'react-native-file-viewer';
 import RNFetchBlob from 'rn-fetch-blob';
 import {generateCardHTML} from '../utils/base64';
+import {setPolicyClass} from '../redux/generalSlice';
 
 const useHomeViewModel = () => {
   const {user} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigation();
   const [selectedTab, setSelectedTab] = useState('login');
   const [showDependantModal, setShowDependantModal] = useState(false);
@@ -174,7 +176,14 @@ const useHomeViewModel = () => {
     apiEndpoint: endpoints.policy.getPolicyDetails,
     method: 'get',
     skip: true,
+    onSuccess: data => {
+      console.log(data);
+      if (data?.length > 1) {
+        dispatch(setPolicyClass(data[0]?.Policy_Class));
+      }
+    },
   });
+
   const {
     data: maternityData,
     loading: maternityLoading,
