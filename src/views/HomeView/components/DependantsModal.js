@@ -7,7 +7,6 @@ import {AileronBold, AileronRegular} from '../../../components';
 import {formatName} from '../../../utils';
 
 const DependantsModal = ({show, dependants, onClose}) => {
-  console.log('dependants', dependants);
   return (
     <Modal animationType="fade" visible={show} transparent statusBarTranslucent>
       <View style={styles.container}>
