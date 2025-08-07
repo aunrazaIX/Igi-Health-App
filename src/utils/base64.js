@@ -91,7 +91,7 @@ export const generateCardHTML = (data, user) => `
                     <td>
                       <table>
                         <tbody>
-                         <tr><td style="width:300px">Name</td><td style="width:100px">Relation</td><td>Age</td></tr>
+                         <tr><td style="width:500px">Name</td><td style="width:200px">Relation</td><td>Age</td></tr>
                          
                          
                         </tbody>
@@ -110,8 +110,8 @@ export const generateCardHTML = (data, user) => `
                             ?.map(
                               dep => `
                               <tr>
-                                <td style="width:300px">${dep?.Policy_Insured_Name?.trim()}:</td>
-                                <td>${dep?.Policy_Insured_Relaion?.trim()}</td>
+                                <td style="width:500px">${dep?.Policy_Insured_Name?.trim()}</td>
+                                <td style="width:200px">${dep?.Policy_Insured_Relaion?.trim()}</td>
                                 <td>${dep?.Policy_Insured_Age}</td>
                               </tr>`,
                             )
