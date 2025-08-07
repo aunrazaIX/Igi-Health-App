@@ -25,15 +25,26 @@ import SettingStack from '../SettingStack';
 import Profile from '../../screens/Profile';
 import InactivityHandler from '../../components/InActivity';
 import PrivacyPolicy from '../../screens/PrivacyPolicy';
+import useApiHook from '../../hooks/useApiHook';
+import endpoints from '../../api/endspoints';
 
 const DrawerStack = () => {
-  const {user} = useSelector(state => state.auth);
+  const {user, deviceToken} = useSelector(state => state.auth);
 
   const timeout = useMemo(() => {
     return 3 * 60 * 1000;
   }, []);
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
+
+  const {trigger: userLogout} = useApiHook({
+    skip: true,
+    endpoints: endpoints.auth.logout,
+    method: 'POST',
+    argsOrBody: {
+      LoginDevicesID: deviceToken,
+    },
+  });
 
   if (!user) {
     return null;
@@ -220,6 +231,7 @@ const DrawerStack = () => {
                   style={styles.row}
                   onPress={async () => {
                     if (route.id === 14) {
+                      userLogout();
                       dispatch(logout());
                       return;
                     }

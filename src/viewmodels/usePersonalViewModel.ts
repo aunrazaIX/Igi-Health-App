@@ -161,8 +161,8 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
 
       Age: formatAgeString(deleteDependent?.dependentDetail[3].value),
       dependentRequestStatus: true,
-      createdAt: '2025-05-15T15:01:31.6552852+05:00',
-      createdBy: 1,
+      createdAt: new Date().toISOString(),
+      createdBy: user?.UserId,
     };
 
     trigger(_apiData);

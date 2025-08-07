@@ -5,6 +5,7 @@ const endpoints = {
     sendOtp: 'OTP/getOTPforpasswordChanged',
     verifyOTP: 'OTP/VerifyOTP',
     updatePassword: 'Password/changePassword',
+    logout: 'Login/Logout',
   },
   bank: {
     getBankDetails: 'Bank/GetBankDetails',
