@@ -1,7 +1,7 @@
 import {icons} from '../assets';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
   useFocusEffect,
   NavigationProp,
@@ -191,7 +191,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         ? endpoints.priorApproval.addPriorApproval
         : endpoints.claimLogde.lodge,
     onSuccess: res => {
-      console.log('success claim');
       setConfirmationModal(true);
       setConfirmationType('');
       resetStates();
@@ -406,6 +405,14 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     trigger();
   };
 
+  const totalFileSize = useMemo(() => {
+    if (!selectedDocuments || selectedDocuments.length === 0) return 0;
+
+    return selectedDocuments.reduce((total, item) => {
+      return total + (item?.fileSizeInMB || 0);
+    }, 0);
+  }, [selectedDocuments]);
+
   const onSelectDocument = async () => {
     try {
       const res = await pick({
@@ -413,19 +420,21 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         type: [types.docx, types.pdf, types.images],
       });
       let documents = [];
+      let upload = false;
       res?.forEach((item: any) => {
         const isDuplicate = selectedDocuments?.some(
           doc => doc?.name === item?.name,
         );
-        const fileSizeInMB = item?.size / (1024 * 1024);
-        if (fileSizeInMB > 25) {
+        const fileSizeInMB = item?.size / (1000 * 1000);
+        if (fileSizeInMB > 25 || fileSizeInMB > 25 - totalFileSize) {
           dispatch(
             setErrorModal({
               show: true,
-              message: 'File size should not exceed 25MB',
+              message: 'Upload Limit Exceeded',
+              detail:
+                'The total size of your selected file(s) must not exceed 25MB.Please adjust your selection',
             }),
           );
-
           return;
         } else {
           if (!isDuplicate) {
@@ -435,6 +444,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               name: item?.name,
               fileSizeInMB: fileSizeInMB,
             });
+            upload = true;
           } else {
             dispatch(
               setErrorModal({
@@ -447,7 +457,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
           }
         }
       });
-      dispatch(setSelectedDocuments(documents));
+      if (upload) {
+        dispatch(setSelectedDocuments(documents));
+      }
     } catch (e) {
       console.log('Error', e);
     }
@@ -462,13 +474,16 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       };
       let result = await launchCamera(options);
       let res = result?.assets[0];
-      console.log(res, 'res');
       let _img = {
         uri: res?.uri,
         type: res?.type,
-        name: `${Math.random().toString()}.jpeg`,
-        fileSizeInMB: res?.fileSize / (1024 * 1024),
+        name: `${Math.floor(1000000000 + Math.random() * 9000000000)}.${
+          res?.type?.split('/')[1]
+        }`,
+        fileSizeInMB: res?.fileSize / (1000 * 1000),
       };
+      if (_img.fileSizeInMB > 25 - totalFileSize) {
+      }
       dispatch(setSelectedDocuments([_img]));
     } catch (e) {
       console.log('Error from opending camera or image picker', e);

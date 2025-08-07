@@ -217,6 +217,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             handleSubmit={handleSubmitRequest}
             confirmationType={confirmatonType}
             isUpdate={isUpdate}
+            heading="Request Submitted"
           />
         </KeyboardAwareScrollView>
       </CurvedView>

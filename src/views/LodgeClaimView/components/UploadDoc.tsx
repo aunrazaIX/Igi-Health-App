@@ -6,7 +6,11 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {AileronBold, AileronSemiBold} from '../../../components';
+import {
+  AileronBold,
+  AileronRegular,
+  AileronSemiBold,
+} from '../../../components';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
 import {icons, images} from '../../../assets';
@@ -44,6 +48,10 @@ const UploadDoc: React.FC<UploadDocProps> = ({
             name={'Upload Supporting\nDocuments'}
             style={styles.supporting}
           />
+          <AileronRegular
+            name={'Supported file types: .jpg, .jpeg, .png, .pdf.webp'}
+            style={styles.supportingSubText}
+          />
           <TouchableOpacity onPress={() => viewOptionModal(true)}>
             <AileronSemiBold
               name="Click to Upload"
@@ -67,12 +75,10 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                         source={icons.document}
                         style={styles.documentIcon}
                       />
-                      <View>
-                        <AileronSemiBold
-                          name={item?.name || ''}
-                          style={styles.documentText}
-                        />
-                      </View>
+                      <AileronSemiBold
+                        name={item?.name || ''}
+                        style={styles.documentText}
+                      />
                     </View>
 
                     <TouchableOpacity
@@ -90,7 +96,6 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                     )}
                   </View>
                 </View>
-                {console.log(item, 'item')}
                 <View style={styles.fileViewContainer}>
                   <AileronSemiBold
                     name={`File Size : ${
@@ -154,6 +159,11 @@ const styles = StyleSheet.create({
   supporting: {
     marginVertical: vh * 2,
     fontSize: vh * 1.6,
+    color: COLORS.insuredPrice,
+  },
+  supportingSubText: {
+    marginVertical: vh,
+    fontSize: vh * 1.3,
     color: COLORS.insuredPrice,
   },
   ClickUpload: {
@@ -231,8 +241,8 @@ const styles = StyleSheet.create({
     width: vh * 5.1,
   },
   documentIcon: {
-    width: vh * 3.5,
-    height: vh * 3.5,
+    width: vw * 7.5,
+    height: vw * 7.5,
   },
   downloadUpSide: {
     flex: 1,
@@ -296,8 +306,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 5,
     alignItems: 'center',
-    paddingLeft: vh * 3.5,
+    paddingLeft: vw * 8.7,
     justifyContent: 'space-between',
+    marginTop: vh,
   },
   eye: {
     height: vw * 8,
