@@ -159,7 +159,7 @@ export const generateCardHTML = (data, user) => `
                     )
                     ?.map(dep => (
                       <tr style="font-size: 14px">
-                        <td style="width: 50%">{dep.Policy_Insured_Relaion}</td>
+                        <td style="width: 50%">{dep.Policy_Insured_Name}</td>
                         <td style="width: 25%; font-weight: 600">
                           {dep.Policy_Insured_Relaion}
                         </td>
@@ -248,5 +248,4 @@ export const generateCardHTML = (data, user) => `
     </table>
   </body>
 </html>
-
 `;
