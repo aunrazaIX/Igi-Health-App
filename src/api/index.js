@@ -43,6 +43,11 @@ api.interceptors.response.use(
     if (status == 401) {
       EventRegister.emit('logout');
     }
+    if (error.message === 'Network Error') {
+      return Promise.reject({
+        message: 'Please check your internet connection.',
+      });
+    }
     return Promise.reject(data ?? error);
   },
 );
@@ -99,7 +104,6 @@ const get = async (endpoint, params = {}) => {
 };
 const post = async (endpoint, data = {}, isFormData = false) => {
   let abc = await checkInternet();
-
   if (abc) {
     return api.post(endpoint, isFormData ? jsonToFormdata(data) : data);
   }
