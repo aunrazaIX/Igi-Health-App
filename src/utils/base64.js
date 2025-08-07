@@ -13,7 +13,7 @@ export const generateCardHTML = (data, user) => `
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Card</title>
+    <title>Document</title>
   </head>
 
   <body>
@@ -22,65 +22,122 @@ export const generateCardHTML = (data, user) => `
         <tr>
           <td>
             <div style="padding: 20px">
-              <table style="width: 396px; border-radius: 24px; box-shadow: 0px 2px 12.1px rgba(0,0,0,0.25); padding: 20px; background: #fff; margin: auto; font-size: 16px; color: #393939;">
+              <table
+                style="
+                  width: 396px;
+                  border-radius: 24px;
+                  box-shadow: 0px 2px 12.1px 0px rgba(0, 0, 0, 0.25);
+                  padding: 20px;
+                  background-color: #ffffff;
+                  margin: 0 auto;
+                  font-size: 16px;
+                  color: #393939;
+                  min-height: 237px;
+                "
+              >
                 <tbody>
-                  <tr><td style="padding-bottom: 15px"><img src="data:image/png;base64,${cancelIconBase64}" style="width: 107px; height: 48px" /></td></tr>
-
                   <tr>
-                    <td style="padding-bottom: 5px">
-                      <span>Policy Number: </span><span>${
-                        data.find(
-                          item => item.Policy_Insured_Relaion === 'Member',
-                        )?.Policy_Number
-                      }</span>
-                    </td>
-                    <td style="text-align: end; padding-bottom: 5px">
-                      <span>Classs: </span><span>${
-                        data.find(
-                          item => item.Policy_Insured_Relaion === 'Member',
-                        )?.Policy_Class
-                      }</span>
+                    <td style="padding-bottom: 15px">
+                      <img
+                        src="Logo.png"
+                        alt=""
+                        style="width: 107px; height: 48px"
+                      />
                     </td>
                   </tr>
 
                   <tr>
                     <td style="padding-bottom: 5px">
-                      <span>CNIC: </span><span>${user?.cnic}</span>
+                      <span>Policy Number: </span>
+                      <span
+                        >${
+                          data.find(
+                            item => item.Policy_Insured_Relaion === 'Member',
+                          )?.Policy_Number
+                        }</span
+                      >
                     </td>
                     <td style="text-align: end; padding-bottom: 5px">
-                      <span>Cert No: </span><span>${
-                        data.find(
-                          item => item.Policy_Insured_Relaion === 'Member',
-                        )?.Policy_CertNo
-                      }</span>
+                      <span>Class: </span>
+                      <span
+                        >${
+                          data.find(
+                            item => item.Policy_Insured_Relaion === 'Member',
+                          )?.Policy_Class
+                        }</span
+                      >
                     </td>
                   </tr>
 
                   <tr>
                     <td style="padding-bottom: 5px">
-                      <span>Policy Name: </span><span>${
-                        data.find(
-                          item => item.Policy_Insured_Relaion === 'Member',
-                        )?.SURNAME
-                      }</span>
+                      <span>CNIC: </span>
+                      <span>${user?.cnic}</span>
                     </td>
                     <td style="text-align: end; padding-bottom: 5px">
-                      <span>Age: </span><span>${
-                        data.find(
-                          item => item.Policy_Insured_Relaion === 'Member',
-                        )?.Policy_Insured_Age
-                      }</span>
+                      <span>Cert No: </span>
+                      <span
+                        >${
+                          data.find(
+                            item => item.Policy_Insured_Relaion === 'Member',
+                          )?.Policy_CertNo
+                        }</span
+                      >
                     </td>
                   </tr>
 
-                  <tr><td style="padding: 15px 0 5px">Card Holder Name</td></tr>
-                  <tr><td style="font-size: 17px; font-weight: 600">${data
-                    ?.find(item => item?.Policy_Insured_Relaion == 'Member')
-                    ?.Policy_Insured_Name.trim()}</td></tr>
+                  <tr>
+                    <td style="padding-bottom: 5px">
+                      <span>Policy Name: </span>
+                      <span
+                        >${
+                          data.find(
+                            item => item.Policy_Insured_Relaion === 'Member',
+                          )?.SURNAME
+                        }</span
+                      >
+                    </td>
+                    <td style="text-align: end; padding-bottom: 5px">
+                      <span>Age: </span>
+                      <span
+                        >${
+                          data.find(
+                            item => item.Policy_Insured_Relaion === 'Member',
+                          )?.Policy_Insured_Age
+                        }</span
+                      >
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="padding-bottom: 5px; padding-top: 15px">
+                      Card Holder Name
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="font-size: 17px; font-weight: 600">
+                      ${data
+                        ?.find(item => item?.Policy_Insured_Relaion == 'Member')
+                        ?.Policy_Insured_Name.trim()}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
 
-              <table style="width: 396px; border-radius: 24px; box-shadow: 0px 2px 12.1px rgba(0,0,0,0.25); padding: 20px; background: #fff; margin: 20px auto 0 auto; font-size: 16px; color: #393939;">
+              <table
+                style="
+                  width: 396px;
+                  border-radius: 24px;
+                  box-shadow: 0px 2px 12.1px 0px rgba(0, 0, 0, 0.25);
+                  padding: 20px;
+                  background-color: #ffffff;
+                  margin: 20px auto 0 auto;
+                  font-size: 16px;
+                  color: #393939;
+                  min-height: 237px;
+                "
+              >
                 <tbody>
                   <tr style="font-size: 20px">
                     <td style="padding-bottom: 5px; font-weight: 700">
@@ -88,50 +145,49 @@ export const generateCardHTML = (data, user) => `
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <table>
-                        <tbody>
-                         <tr><td style="width:500px">Name</td><td style="width:200px">Relation</td><td>Age</td></tr>
-                         
-                         
-                        </tbody>
-                      </table>
+                    <td
+                      style="font-weight: 600; width: 50%; margin-bottom: 5px"
+                    >
+                      Name:
                     </td>
+                    <td style="width: 25%; font-weight: 600">Relation</td>
+                    <td style="width: 25%; font-weight: 600">Age</td>
                   </tr>
-                  <tr>
-                    <td>
-                      <table>
-                        <tbody>
-                          ${data
-                            ?.filter(
-                              _item =>
-                                _item?.Policy_Insured_Relaion !== 'Member',
-                            )
-                            ?.map(
-                              dep => `
-                              <tr>
-                                <td style="width:500px">${dep?.Policy_Insured_Name?.trim()}</td>
-                                <td style="width:200px">${dep?.Policy_Insured_Relaion?.trim()}</td>
-                                <td>${dep?.Policy_Insured_Age}</td>
-                              </tr>`,
-                            )
-                            .join('')}
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
+                  ${data
+                    ?.filter(
+                      _item => _item?.Policy_Insured_Relaion !== 'Member',
+                    )
+                    ?.map(dep => (
+                      <tr style="font-size: 14px">
+                        <td style="width: 50%">{dep.Policy_Insured_Relaion}</td>
+                        <td style="width: 25%; font-weight: 600">
+                          {dep.Policy_Insured_Relaion}
+                        </td>
+                        <td style="width: 25%">${dep?.Policy_Insured_Age}</td>
+                      </tr>
+                    ))}
 
                   <tr>
-                    <td>
+                    <td style="margin-top: 20px">
                       <table>
                         <tbody>
                           <tr>
-                            <td><img src="data:image/png;base64,${cardRoomBase64}" style="width: 30px; height: 30px" /></td>
+                            <td>
+                              <img
+                                src="data:image/png;base64,${cardRoomBase64}"
+                                alt=""
+                                style="width: 30px; height: 30px"
+                              />
+                            </td>
                             <td style="font-size: 14px; padding-left: 5px">
-                              <p style="margin: 0">Max. Room & Board</p>
-                              <p style="margin: 0">Rs. Per Day: ${
-                                data[0]?.Policy_Daily_RoomLimit
-                              }</p>
+                              <p style="margin: 0px; width: max-content">
+                                Max. Room & Board
+                              </p>
+                              <p style="margin: 0px">
+                                Rs. Per Day:<span>
+                                  ${data[0]?.Policy_Daily_RoomLimit}</span
+                                >
+                              </p>
                             </td>
                           </tr>
                         </tbody>
@@ -141,14 +197,22 @@ export const generateCardHTML = (data, user) => `
                       <table>
                         <tbody>
                           <tr>
-                            <td><img src="data:image/png;base64,${maternityBase64}" style="width: 21px; height: 34px" /></td>
+                            <td>
+                              <img
+                                src="data:image/png;base64,${maternityBase64}"
+                                alt=""
+                                style="width: 21px; height: 34px"
+                              />
+                            </td>
                             <td style="font-size: 14px; padding-left: 5px">
-                              <p style="margin: 0">Maternity</p>
-                              <p style="margin: 0">${
-                                data[0]?.Policy_MatLimit > 0
-                                  ? 'Available'
-                                  : 'Not Available'
-                              }</p>
+                              <p style="margin: 0px">Maternity</p>
+                              <p style="margin: 0px; width: max-content">
+                                ${
+                                  data[0]?.Policy_MatLimit > 0
+                                    ? 'Available'
+                                    : 'Not Available'
+                                }
+                              </p>
                             </td>
                           </tr>
                         </tbody>
@@ -156,33 +220,23 @@ export const generateCardHTML = (data, user) => `
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td style="padding-bottom: 15px">Valid from:</td><td style="padding-bottom: 15px">
-                        ${moment(data[0]?.Policy_Start_Date, 'YYYYMMDD').format(
-                          'DD-MM-YYYY',
-                        )}
-                        </td>
-                        
-                          </tr>
-                        </tbody>
-                      </table>
+                    <td style="width: 50%">
+                      <span>Valid From:</span>
+                      <span
+                        >${moment(
+                          data[0]?.Policy_Start_Date,
+                          'YYYYMMDD',
+                        ).format('DD-MM-YYYY')}</span
+                      >
                     </td>
-                    <td>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td style="padding-bottom: 15px">Valid till:</td><td style="padding-bottom: 15px">
-                        ${moment(
+                    <td style="width: 50%">
+                      <span>Valid Till:</span>
+                      <span
+                        >${moment(
                           data[0]?.Policy_Expiry_Date,
                           'YYYYMMDD',
-                        ).format('DD-MM-YYYY')}
-                        </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                        ).format('DD-MM-YYYY')}</span
+                      >
                     </td>
                   </tr>
                 </tbody>
@@ -194,4 +248,5 @@ export const generateCardHTML = (data, user) => `
     </table>
   </body>
 </html>
+
 `;
