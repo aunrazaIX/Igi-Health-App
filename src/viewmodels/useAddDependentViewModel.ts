@@ -66,7 +66,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     },
     Age: prefilledData?.age?.toString() ?? null,
     dependentRequestStatus: true,
-    createdBy: 1,
+    createdBy: user?.UserId,
   });
 
   const genderOptions: personalDetail[] = [
@@ -100,10 +100,11 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     },
 
     onError: error => {
+      console.log(error, 'error');
       dispatch(
         setErrorModal({
           Show: true,
-          message: `"Incorrect Data May be api goes to on Error"`,
+          message: 'Something Went Wrong',
           detail:
             'An error has occurred, please fill all require feilds. If the problem persists, contact IGI Life',
         }),
@@ -154,6 +155,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       // setConfirmatonType('update');
     }
   };
+
   const onPressSubmit = () => {
     const filled = dependentCheckForError();
 
@@ -197,6 +199,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         }),
       );
     } else {
+      console.log(_apiData, 'apiData');
       if (isUpdate) {
         // trigger(_apiData);
         setConfirmationModal(true);
