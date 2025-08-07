@@ -39,7 +39,7 @@ export const generateCardHTML = (data, user) => `
                   <tr>
                     <td style="padding-bottom: 15px">
                       <img
-                        src="Logo.png"
+                        src="data:image/png;base64,${cancelIconBase64}"
                         alt=""
                         style="width: 107px; height: 48px"
                       />
@@ -157,16 +157,16 @@ export const generateCardHTML = (data, user) => `
                     ?.filter(
                       _item => _item?.Policy_Insured_Relaion !== 'Member',
                     )
-                    ?.map(dep => (
+                    ?.map(
+                      dep => `
                       <tr style="font-size: 14px">
-                        <td style="width: 50%">{dep.Policy_Insured_Name}</td>
+                        <td style="width: 50%">${dep?.Policy_Insured_Name}</td>
                         <td style="width: 25%; font-weight: 600">
-                          {dep.Policy_Insured_Relaion}
+                          ${dep?.Policy_Insured_Relaion}
                         </td>
                         <td style="width: 25%">${dep?.Policy_Insured_Age}</td>
-                      </tr>
-                    ))}
-
+                      </tr>`,
+                    )}
                   <tr>
                     <td style="margin-top: 20px">
                       <table>
