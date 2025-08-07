@@ -115,13 +115,16 @@ const Tabs = () => {
                   <View style={styles.wrapper}>
                     <Image
                       style={[styles.iconStyle, {tintColor: 'white'}]}
-                      source={tabIcons.note}
+                      source={tabIcons.PriorApproval}
                     />
                   </View>
                 </LinearGradient>
               ) : (
                 <View style={[styles.gradientBorder, styles.wrapper]}>
-                  <Image style={styles.iconStyleprior} source={tabIcons.note} />
+                  <Image
+                    style={styles.iconStyleprior}
+                    source={tabIcons.PriorApproval}
+                  />
                 </View>
               ),
           }}
@@ -166,16 +169,13 @@ const Tabs = () => {
                   <View style={styles.wrapper}>
                     <Image
                       style={[styles.iconStyle, {tintColor: 'white'}]}
-                      source={tabIcons.PriorApproval}
+                      source={tabIcons.note}
                     />
                   </View>
                 </LinearGradient>
               ) : (
                 <View style={[styles.gradientBorder, styles.wrapper]}>
-                  <Image
-                    style={[styles.iconStyle]}
-                    source={tabIcons.PriorApproval}
-                  />
+                  <Image style={[styles.iconStyle]} source={tabIcons.note} />
                 </View>
               ),
           }}
