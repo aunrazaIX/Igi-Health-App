@@ -61,7 +61,7 @@ export const generateCardHTML = (data, user) => `
                       <span>Policy Name: </span><span>${
                         data.find(
                           item => item.Policy_Insured_Relaion === 'Member',
-                        )?.Policy_Insured_Name
+                        )?.SURNAME
                       }</span>
                     </td>
                     <td style="text-align: end; padding-bottom: 5px">
@@ -87,7 +87,17 @@ export const generateCardHTML = (data, user) => `
                       Dependent <span style="color: #ee2560">Details</span>
                     </td>
                   </tr>
-
+                  <tr>
+                    <td>
+                      <table>
+                        <tbody>
+                         <tr><td style="width:500px">Name</td><td style="width:200px">Relation</td><td>Age</td></tr>
+                         
+                         
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
                   <tr>
                     <td>
                       <table>
@@ -100,27 +110,13 @@ export const generateCardHTML = (data, user) => `
                             ?.map(
                               dep => `
                               <tr>
-                                <td>${dep?.Policy_Insured_Name?.trim()}:</td>
+                                <td style="width:500px">${dep?.Policy_Insured_Name?.trim()}</td>
+                                <td style="width:200px">${dep?.Policy_Insured_Relaion?.trim()}</td>
                                 <td>${dep?.Policy_Insured_Age}</td>
                               </tr>`,
                             )
                             .join('')}
                         </tbody>
-                      </table>
-                    </td>
-                    <td>
-                      <table style="font-weight: 600">
-                        <tr><td style="padding-bottom: 15px">Valid from:</td><td style="padding-bottom: 15px">
-                        ${moment(data[0]?.Policy_Start_Date, 'YYYYMMDD').format(
-                          'DD-MM-YYYY',
-                        )}
-                        </td></tr>
-                        <tr><td>Valid till:</td><td>
-
-                      ${moment(data[0]?.Policy_Expiry_Date, 'YYYYMMDD').format(
-                        'DD-MM-YYYY',
-                      )}
-                        </td></tr>
                       </table>
                     </td>
                   </tr>
@@ -154,6 +150,36 @@ export const generateCardHTML = (data, user) => `
                                   : 'Not Available'
                               }</p>
                             </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td style="padding-bottom: 15px">Valid from:</td><td style="padding-bottom: 15px">
+                        ${moment(data[0]?.Policy_Start_Date, 'YYYYMMDD').format(
+                          'DD-MM-YYYY',
+                        )}
+                        </td>
+                        
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td style="padding-bottom: 15px">Valid till:</td><td style="padding-bottom: 15px">
+                        ${moment(
+                          data[0]?.Policy_Expiry_Date,
+                          'YYYYMMDD',
+                        ).format('DD-MM-YYYY')}
+                        </td>
                           </tr>
                         </tbody>
                       </table>

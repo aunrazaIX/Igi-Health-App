@@ -165,7 +165,7 @@ const PersonalView = ({
         confirmationMessage={
           modalType === 'delete'
             ? 'Are you sure you want to apply for deletion request of selected dependent ?'
-            : 'Your request of deletion has been successfully applied'
+            : 'Your deletion request for the dependent has been submitted successfully.Our Team will review and process it shortly'
         }
         closeButton={modalType === 'delete' ? false : true}
         deleteButton={modalType === 'delete' ? true : false}
@@ -175,6 +175,7 @@ const PersonalView = ({
         Successfull={modalType === 'delete' ? false : true}
         CloseButtonText={'Continue To Login'}
         onClose={resetStates}
+        heading={'Request Submitted'}
       />
     </Container>
   );

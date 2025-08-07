@@ -15,11 +15,11 @@ const ProvinceTab = ({
   return (
     <TouchableOpacity
       onPress={() => onPressMapTab(provinceName)}
-      style={
-        selectedMapTab === provinceName
-          ? [style.mapTabActive, activeMapTab]
-          : style.mapTab
-      }>
+      style={[
+        style.mapTab,
+        selectedMapTab === provinceName && style.mapTabActive,
+        activeMapTab,
+      ]}>
       {icon && (
         <View>
           {selectedMapTab === provinceName ? (
@@ -48,25 +48,18 @@ export default ProvinceTab;
 
 const style = StyleSheet.create({
   mapTabActive: {
-    flexDirection: 'row',
     backgroundColor: COLORS.cardBackgroundRed,
-    paddingVertical: vh,
-    width: vw * 25,
-    justifyContent: 'center',
-    borderRadius: vw * 8,
-    gap: vw * 1.5,
-    alignItems: 'center',
   },
   mapTab: {
     flexDirection: 'row',
-    width: vw * 25,
+    // width: vw * 25,
     backgroundColor: COLORS.buttonBorder,
     paddingHorizontal: vw * 3,
     borderRadius: vw * 5,
     gap: vw * 1.5,
     justifyContent: 'center',
-
     alignItems: 'center',
+    paddingVertical: vh,
   },
   mapTextColor: {
     color: COLORS.cardBackgroundRed,

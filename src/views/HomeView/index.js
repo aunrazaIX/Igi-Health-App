@@ -21,7 +21,7 @@ import ModalLoading from '../../components/ModalLoading';
 import moment from 'moment';
 import SimpleLoader from '../../components/SimpleLoader';
 import DependantsModal from './components/DependantsModal';
-import {formatName} from '../../utils';
+import {formatCurrency, formatName} from '../../utils';
 import {COLORS} from '../../assets/theme/colors';
 
 const HomeView = ({
@@ -246,68 +246,78 @@ const HomeView = ({
                         </TouchableOpacity>
                       </View>
 
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          gap: vw * 4,
+                          width: '100%',
+                        }}>
+                        <AileronSemiBold
+                          name="Name"
+                          style={[styles.homeBackCardText, {width: '65%'}]}
+                        />
+                        <AileronSemiBold
+                          name="Relation"
+                          style={[styles.homeBackCardText, {width: '17%'}]}
+                        />
+                        <AileronSemiBold
+                          name="Age"
+                          style={[styles.homeBackCardText]}
+                        />
+                      </View>
                       <View style={styles.backCardDetails}>
                         <View
                           style={{
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            height: vh * 12,
+                            flexDirection: 'column',
+                            height: vh * 8,
+                            width: '100%',
                           }}>
-                          <View>
-                            {homeCardData
-                              ?.filter(
-                                _item =>
-                                  _item?.Policy_Insured_Relaion !== 'Member',
-                              )
-                              .slice(0, 5)
-                              .map((item, index) => (
-                                <>
-                                  {index < 4 ? (
-                                    <AileronRegular
-                                      key={index}
-                                      name={`${formatName(
-                                        item?.Policy_Insured_Name?.trim(),
-                                      )}: ${item?.Policy_Insured_Age}`}
-                                      style={[
-                                        styles.homeBackCardText,
-                                        {width: '80%'},
-                                      ]}
-                                    />
-                                  ) : (
-                                    <TouchableOpacity
-                                      onPress={() =>
-                                        handleDependantsModal(true)
-                                      }>
-                                      <AileronRegular
-                                        name="..."
-                                        style={styles.homeBackCardDottedText}
-                                      />
-                                    </TouchableOpacity>
-                                  )}
-                                </>
-                              ))}
-                          </View>
-                        </View>
-
-                        <View style={[styles.validity, {width: '40%'}]}>
-                          <AileronBold
-                            style={{
-                              textAlign: 'left',
-                              fontSize: vw * 3.25,
-                            }}
-                            name={`Valid from : ${moment(
-                              homeCardData[0]?.Policy_Start_Date,
-                              'YYYYMMDD',
-                            ).format('DD-MMM-YYYY')}`}
-                          />
-
-                          <AileronBold
-                            style={{textAlign: 'left', fontSize: vw * 3.25}}
-                            name={`Valid till : ${moment(
-                              homeCardData[0]?.Policy_Expiry_Date,
-                              'YYYYMMDD',
-                            ).format('DD-MMM-YYYY')}`}
-                          />
+                          {homeCardData
+                            ?.filter(
+                              _item =>
+                                _item?.Policy_Insured_Relaion !== 'Member',
+                            )
+                            .slice(0, 4)
+                            .map((item, index) =>
+                              index < 3 ? (
+                                <View
+                                  key={index}
+                                  style={{
+                                    width: '100%',
+                                    flexDirection: 'row',
+                                    gap: vw * 4,
+                                  }}>
+                                  <AileronSemiBold
+                                    name={`${formatName(
+                                      item?.Policy_Insured_Name?.trim(),
+                                    )}`}
+                                    style={[
+                                      styles.homeBackCardText,
+                                      {width: '65%'},
+                                    ]}
+                                  />
+                                  <AileronSemiBold
+                                    name={item?.Policy_Insured_Relaion?.trim()}
+                                    style={[
+                                      styles.homeBackCardText,
+                                      {width: '17%'},
+                                    ]}
+                                  />
+                                  <AileronSemiBold
+                                    name={item?.Policy_Insured_Age}
+                                    style={[styles.homeBackCardText]}
+                                  />
+                                </View>
+                              ) : (
+                                <TouchableOpacity
+                                  onPress={() => handleDependantsModal(true)}>
+                                  <AileronRegular
+                                    name="View more details..."
+                                    style={styles.homeBackCardDottedText}
+                                  />
+                                </TouchableOpacity>
+                              ),
+                            )}
                         </View>
                       </View>
                     </View>
@@ -335,7 +345,6 @@ const HomeView = ({
                           style={styles.backCardFooterSecondIcon}
                           source={icons.flipCardMaternity}
                         />
-
                         <View style={styles.backCardFooterText}>
                           <AileronSemiBold
                             style={styles.homeBackCardText}
@@ -352,6 +361,30 @@ const HomeView = ({
                           />
                         </View>
                       </View>
+                    </View>
+                    <View
+                      style={{
+                        justifyContent: 'space-between',
+                        flexDirection: 'row',
+                      }}>
+                      <AileronBold
+                        style={{
+                          textAlign: 'left',
+                          fontSize: vw * 3.25,
+                        }}
+                        name={`Valid from : ${moment(
+                          homeCardData[0]?.Policy_Start_Date,
+                          'YYYYMMDD',
+                        ).format('DD-MMM-YYYY')}`}
+                      />
+
+                      <AileronBold
+                        style={{textAlign: 'left', fontSize: vw * 3.25}}
+                        name={`Valid till : ${moment(
+                          homeCardData[0]?.Policy_Expiry_Date,
+                          'YYYYMMDD',
+                        ).format('DD-MMM-YYYY')}`}
+                      />
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -429,7 +462,10 @@ const HomeView = ({
             {!loading ? (
               <AileronBold
                 style={styles.meterBoldText}
-                name={claimData.totalClaimAmount}
+                name={
+                  claimData.totalClaimAmount &&
+                  formatCurrency(claimData.totalClaimAmount)
+                }
               />
             ) : (
               <AileronBold name="" />
@@ -452,7 +488,10 @@ const HomeView = ({
                 />
               </View>
               <AileronBold
-                name={claimData?.deductedAmount}
+                name={
+                  claimData?.deductedAmount &&
+                  formatCurrency(claimData.deductedAmount)
+                }
                 style={styles.meterDetailTextBold}
                 numberOfLines={1}
               />
@@ -472,7 +511,10 @@ const HomeView = ({
                 <SimpleLoader />
               ) : (
                 <AileronBold
-                  name={claimData?.paidAmount}
+                  name={
+                    claimData?.paidAmount &&
+                    formatCurrency(claimData.paidAmount)
+                  }
                   style={styles.meterDetailTextBold}
                   numberOfLines={1}
                 />

@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     paddingVertical: vh * 1.2,
     paddingHorizontal: vw * 2,
+    width: vw * 25,
   },
   card: {
     width: '33.33%',

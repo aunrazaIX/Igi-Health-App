@@ -341,6 +341,8 @@ const useHomeViewModel = () => {
     };
   };
 
+  console.log(homeCardData, 'homeCardData');
+
   return {
     states: {
       selectedTab,

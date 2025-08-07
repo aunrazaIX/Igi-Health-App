@@ -368,16 +368,14 @@ export const styles = StyleSheet.create({
     color: COLORS.cardBackgroundRed,
   },
   homeBackCardText: {
-    fontSize: vw * 3.7,
+    fontSize: vw * 3.25,
     textAlign: 'left',
     color: COLORS.textBlackShade,
-    // borderWidth: 2,
   },
   homeBackCardDottedText: {
-    fontSize: vw * 5,
+    fontSize: vw * 3.25,
     textAlign: 'left',
-    color: COLORS.textBlackShade,
-    // borderWidth: 2,
+    color: 'red',
   },
   homeBackCardRow: {
     flexDirection: 'row',
