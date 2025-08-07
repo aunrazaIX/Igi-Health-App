@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   requestTittle: {
-    width: '55%',
+    width: '100%',
     fontSize: vw * 3.7,
     marginLeft: vw * 3,
     textAlign: 'left',
@@ -115,14 +115,14 @@ const styles = StyleSheet.create({
     paddingBottom: vh * 20,
   },
   notificationBody: {
-    width: '55%',
+    // width: '55%',
     textAlign: 'left',
     marginLeft: vw * 3,
     fontSize: vw * 3,
     marginTop: vh,
   },
   markAsReadView: {
-    width: '25%',
+    width: '50%',
     marginLeft: vw * 3,
   },
   markAseadText: {

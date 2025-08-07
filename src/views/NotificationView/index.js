@@ -42,7 +42,7 @@ const NotificationView = ({
               source={icons.notification}
             />
           </View>
-          <View>
+          <View style={{width: '85%'}}>
             <AileronSemiBold
               style={styles.requestTittle}
               name={item.PushNotificationHead}
