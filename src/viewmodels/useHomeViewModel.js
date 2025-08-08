@@ -177,7 +177,6 @@ const useHomeViewModel = () => {
     method: 'get',
     skip: true,
     onSuccess: data => {
-      console.log(data);
       if (data?.length > 1) {
         dispatch(setPolicyClass(data[0]?.Policy_Class));
       }
@@ -340,8 +339,6 @@ const useHomeViewModel = () => {
       paidAmount,
     };
   };
-
-  console.log(homeCardData, 'homeCardData');
 
   return {
     states: {

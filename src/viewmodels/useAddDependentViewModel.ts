@@ -199,7 +199,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         }),
       );
     } else {
-      console.log(_apiData, 'apiData');
       if (isUpdate) {
         // trigger(_apiData);
         setConfirmationModal(true);
