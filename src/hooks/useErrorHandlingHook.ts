@@ -90,7 +90,6 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
               ? 'Receipt number is required'
               : `${keys} is required`;
           isAllowedForProceeding = false;
-          console.log(temp, 'temp');
         }
       }
     }

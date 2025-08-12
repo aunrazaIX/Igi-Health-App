@@ -60,7 +60,7 @@ const BenefitsView = ({
     </View>
   );
 
-  const headerComponent = () => (
+  const HeaderComponent = () => (
     <View>
       <LinearGradient
         start={{x: 0, y: 0}}
@@ -126,10 +126,11 @@ const BenefitsView = ({
     <>
       <TopView title={'Entitled Benefits'} />
       <CurvedView containerStyle={styles.CurvedView}>
+        <HeaderComponent />
         <FlatList
           indicatorStyle="black"
           ItemSeparatorComponent={renderSeperator}
-          ListHeaderComponent={headerComponent}
+          // ListHeaderComponent={headerComponent}
           showsVerticalScrollIndicator={true}
           data={data}
           ListEmptyComponent={

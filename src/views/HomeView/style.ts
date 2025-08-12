@@ -189,7 +189,7 @@ export const styles = StyleSheet.create({
   },
   homeInfoContainerMiddleText: {},
   infoCardMiddleTextlight: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3.2,
     color: COLORS.textColor,
     textAlign: 'left',
   },

@@ -20,7 +20,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   const [confirmationType, setConfirmatonType] = useState('');
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   const [relationsOptions, setRelationsOptions] = useState([]);
-  console.log(isUpdate, 'isUpdate');
   const {data: _relationsOptions} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependentType,
     method: 'get',
@@ -168,7 +167,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
       trigger(_apiData);
     }
   };
-  console.log(addDependentLoading, 'addDependentLoading');
 
   const onPressSubmit = () => {
     const filled = dependentCheckForError();

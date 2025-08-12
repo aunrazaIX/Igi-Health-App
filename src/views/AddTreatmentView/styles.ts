@@ -65,6 +65,11 @@ const styles = StyleSheet.create({
     color: COLORS.black + 88,
     fontSize: vh * 2,
   },
+  dependentOuterStyle: {
+    width: '100%',
+    borderWidth: vh * 0.3,
+    paddingBottom: vh * -2,
+  },
 });
 
 export default styles;

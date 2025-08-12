@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   uploadBox: {
     borderColor: COLORS.UploadBorder,
     borderWidth: 1.5,
-    borderStyle: 'dashed',
+
     borderRadius: vh * 0.5,
     padding: vh * 2.5,
     alignItems: 'center',

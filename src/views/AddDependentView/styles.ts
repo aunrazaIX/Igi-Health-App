@@ -47,8 +47,6 @@ const styles = StyleSheet.create({
   dependentOuterStyle: {
     width: '100%',
     borderWidth: vh * 0.3,
-    // padding: vw * 3.5,
-
     paddingBottom: vh * -2,
   },
   selectLabel: {

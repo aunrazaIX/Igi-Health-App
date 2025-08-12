@@ -146,6 +146,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               userRelationCode: selectedPatient?.CLNTNUM?.toString(),
               requestComments: item?.description,
               amount: item.amount,
+              admission_date: item?.admissionDate,
               hospitalID: selectedHospital.value,
               treatmentTypeID: item?.treatment?.IPDTreatmentTypesID,
               dxcCode: item?.treatment?.value,
@@ -176,6 +177,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               userId: user?.UserId,
               claimId: res?.Data?.toString(),
             };
+      console.log(apiData);
       claimTrigger(apiData);
     },
   });
@@ -290,12 +292,17 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     info: [
       {
         key: 'receiptNumber',
-        label: 'Receipt Number:',
+        label: type === 'lodgeClaim' ? 'Receipt Number:' : 'Admission/M.R. No.',
         value: item?.receiptNumber ?? '--',
       },
       {
+        key: 'admission_date',
+        label: 'Admission/Procedure Date:',
+        value: item?.admissionDate ?? '--',
+      },
+      {
         key: 'amount',
-        label: 'Amount:',
+        label: type === 'lodgeClaim' ? 'Amount:' : 'Estimated Cost:',
         value: item?.amount ?? '--',
         total: true,
       },
@@ -373,7 +380,19 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const onPressNext = () => {
     try {
       if (currentStep === 1) {
-        if (!selectedPatient) {
+        if (
+          !selectedPatient || type === 'priorAprroval'
+            ? !selectedType
+            : !selectedHospital
+        ) {
+          dispatch(
+            setErrorModal({
+              show: true,
+              message: 'Please select all fields',
+              detail:
+                'Some fields are missing. All fields are required to continue',
+            }),
+          );
           throw new Error('Please Select Patient');
         }
       }

@@ -77,10 +77,10 @@ const ClaimsHistoryView = ({
           </TouchableOpacity>
         </View>
 
-        <AileronSemiBold
+        {/* <AileronSemiBold
           style={styles.claimSubHeadingText}
           name={getHeadingSubHeading[type]?.heading}
-        />
+        /> */}
         <AileronRegular
           style={[
             styles.claimSubHeadingText,

@@ -27,14 +27,14 @@ const Hospitals = () => {
   } = states;
   return (
     <>
-      <AlertModal
+      {/* <AlertModal
         title="Notice"
         description={
           'IGI Life Insurance reserves the right to de-panel any listed network hospital without prior notice. Additionally, services at a network hospital may be temporarily halted due to unforeseen circumstances.\n\nIf you encounter any issues with a network hospital, please contact IGI Life Insurance at 042-34503333 for assistance.'
         }
         modalVisible={modalVisible}
         setModalVisible={modalVisible => setModalVisible(modalVisible)}
-      />
+      /> */}
       <HospitalsView
         selectedTabRight={selectedTabRight}
         selectedTab={selectedTab}

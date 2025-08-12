@@ -125,7 +125,7 @@ export const styles = StyleSheet.create({
   },
   containerStyle: {
     paddingBottom: vh * 15,
-    paddingTop: vh * 2,
+    paddingTop: vh * 1,
   },
   row: {
     borderRadius: vw,
@@ -151,7 +151,7 @@ export const styles = StyleSheet.create({
   claimSubHeadingText: {
     color: COLORS.black,
     marginTop: vh,
-    textAlign: 'left',
+    textAlign: 'center',
     fontSize: vw * 3.5,
   },
 });

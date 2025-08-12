@@ -11,6 +11,7 @@ import {
   AileronSemiBold,
   ConfirmationModal,
   CurvedView,
+  DependentBox,
   InputField,
   Select,
   TopView,
@@ -22,6 +23,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ModalLoading from '../../components/ModalLoading';
 import {vh, vw} from '../../assets/theme/dimension';
+import DatePicker from '../../components/DatePicker';
 
 type AddTreatmentViewProps = {
   treatmentTypes: any[];
@@ -112,9 +114,26 @@ const AddTreatmentView = ({
               placeholder={
                 claimType === 'lodgeClaim'
                   ? 'Enter Receipt Number'
-                  : 'Enter Hospital Admission/Mr No.'
+                  : 'Enter Hospital Admission/M.R. No.'
               }
             />
+
+            <DependentBox containerStyle={styles.dependentOuterStyle}>
+              <DatePicker
+                onSelectValue={(date: Date) => {
+                  setterForApiData('admissionDate', date);
+                }}
+                placeholder={'Select Admission/Procedure Date'}
+                label={'Adminsion/Procedure Date'}
+                value={apiData?.admissionDate}
+                disabled={false}
+                labelStyle={{}}
+                containerStyle={{}}
+                mode="date"
+                maximumDate={new Date()}
+                minimumDate={undefined}
+              />
+            </DependentBox>
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}

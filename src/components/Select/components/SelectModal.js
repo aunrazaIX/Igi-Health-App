@@ -109,19 +109,18 @@ const styles = StyleSheet.create({
   },
   listText: {
     textAlign: 'left',
-    fontSize: vh * 1.7,
+    fontSize: vh * 1.4,
   },
   optionStyles: {
     backgroundColor: COLORS.grey,
-    marginTop: vh,
-    paddingVertical: vh * 1.5,
+    marginTop: vh * 0.5,
+    paddingVertical: vh * 1,
     borderRadius: vw * 3,
     justifyContent: 'center',
     alignItems: 'center',
   },
   inputContainer: {
     paddingVertical: 0,
-    paddingHorizontal: 0,
     height: vh * 6,
   },
   inputStyle: {
@@ -129,7 +128,6 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-
     height: vh * 6.8,
   },
 });

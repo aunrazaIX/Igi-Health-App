@@ -148,7 +148,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             <Select
               selectData={genderOptions}
               selectLabel={'Gender'}
-              selectPlaceholder={'Select Gender'}
+              // selectPlaceholder={'Select Gender'}
               onSelectOption={option =>
                 dependentSetterForApiData('gender', option)
               }
@@ -199,7 +199,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             }
             confirmationMessage={
               confirmatonType === 'update'
-                ? 'Are you sure you want to submit the request to IGI Life to edit the records?'
+                ? 'Are you sure you want to submit the request to edit the records?'
                 : isUpdate
                 ? 'Your request has been submitted.\nNote: All edit requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation.'
                 : 'Your request has been submitted.\nNote: All new additions requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation..'

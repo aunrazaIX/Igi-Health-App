@@ -49,7 +49,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
             style={styles.supporting}
           />
           <AileronRegular
-            name={'Supported file types: .jpg, .jpeg, .png, .pdf.webp'}
+            name={'Supported file types: .jpg, .jpeg, .png, .pdf, .webp'}
             style={styles.supportingSubText}
           />
           <TouchableOpacity onPress={() => viewOptionModal(true)}>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   uploadBox: {
     borderColor: COLORS.UploadBorder,
     borderWidth: 1.5,
-    borderStyle: 'dashed',
+
     borderRadius: vh * 0.5,
     padding: vh,
     alignItems: 'center',

@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderTopWidth: 2,
     borderTopColor: COLORS.dependentBorder,
-    borderStyle: 'dashed',
+
     paddingTop: vh * 1,
     rowGap: vh,
   },

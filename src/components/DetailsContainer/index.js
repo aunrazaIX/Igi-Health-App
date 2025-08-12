@@ -118,16 +118,16 @@ export const styles = StyleSheet.create({
     borderRadius: vw * 5,
     backgroundColor: COLORS.white,
     paddingHorizontal: vw * 2,
-    paddingVertical: vh,
+    paddingVertical: vh * 0.5,
     // marginVertical: vh * 1.5,
     // alignItems: 'center',
-    gap: vh * 1,
+    gap: vh * 0.5,
     elevation: 2,
     shadowColor: '#000',
     shadowOpacity: 0.14,
     shadowOffset: {width: 0, height: 1},
     shadowRadius: 2,
-    marginBottom: vh * 2,
+    marginBottom: vh * 1,
   },
 
   cardHeader: {
@@ -158,9 +158,7 @@ export const styles = StyleSheet.create({
 
   cardHorizontalLine: {
     borderBottomWidth: vw * 0.4,
-    borderStyle: 'dashed',
     width: '100%',
-
     borderColor: COLORS.textGrayShade,
     marginBottom: vw * 1,
     opacity: 0.4,
@@ -171,12 +169,12 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   detailsLabel: {
-    fontSize: vw * 3.3,
+    fontSize: vw * 3,
     width: '40%',
     textAlign: 'left',
   },
   detailsValue: {
-    fontSize: vw * 3.3,
+    fontSize: vw * 3,
     color: COLORS.textBlackShade,
     textAlign: 'right',
   },

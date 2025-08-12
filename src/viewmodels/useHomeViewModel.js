@@ -75,7 +75,9 @@ const useHomeViewModel = () => {
   };
 
   const handleDependantsModal = value => {
-    setShowDependantModal(value);
+    if (currentValue.current >= 90) {
+      setShowDependantModal(value);
+    }
   };
   const handleCardDownload = async () => {
     try {
@@ -135,8 +137,6 @@ const useHomeViewModel = () => {
       }).start();
     }
   };
-
-  console.log(currentValue);
 
   const handleAssociatedApps = url => {
     if (url) {

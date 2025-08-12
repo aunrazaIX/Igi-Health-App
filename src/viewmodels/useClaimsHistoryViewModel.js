@@ -29,7 +29,7 @@ const useClaimsHistoryViewModel = () => {
       Processed: {
         heading: 'Processed Claims',
         messsage:
-          'All finalized claims from our system, including hospital visits, reimbursements, and portal submissions.',
+          'All finalized claims, including hospital visits, reimbursements, rejections and portal submissions.',
       },
     };
   }, []);
@@ -111,7 +111,6 @@ const useClaimsHistoryViewModel = () => {
     argsOrBody: {userid: user?.UserId},
     skip: true,
     onSuccess: res => {
-      console.log(res, 'resClaims');
       setData(res?.Data?.map(claim => transformClaimData(claim, false)));
     },
   });
@@ -121,7 +120,6 @@ const useClaimsHistoryViewModel = () => {
     method: 'get',
     argsOrBody: {userid: user?.UserId},
     onSuccess: res => {
-      console.log(res, 'resProcess');
       setData(res?.Data?.map(claim => transformClaimData(claim, true)));
     },
   });

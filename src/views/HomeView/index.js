@@ -196,14 +196,21 @@ const HomeView = ({
                       </View>
                     </View>
                   </View>
-                  <AileronSemiBold
+                  <AileronBold
                     name={` ${
-                      homeCardData.find(
-                        item => item.Policy_Insured_Relaion === 'Member',
-                      )?.SURNAME ?? ' --'
+                      homeCardData
+                        .find(item => item.Policy_Insured_Relaion === 'Member')
+                        ?.SURNAME.trim('') ?? ' --'
                     }`}
                     // name="dasopdkjawpodjawdpoawjdawpiodjawdiopwadjawoidja"
-                    style={[styles.infoCardMiddleTextlight, {width: '100%'}]}
+                    style={[
+                      styles.infoCardMiddleTextlight,
+                      {
+                        width: '100%',
+                        color: COLORS.black,
+                        marginLeft: vw * -1,
+                      },
+                    ]}
                     numberOfLines={2}
                   />
                   <View style={[styles.infoCardFooter, {width: '100%'}]}>
@@ -240,8 +247,8 @@ const HomeView = ({
                           styles.infoCardTextBold,
                           {
                             fontSize: vw * 4,
-                            color: COLORS.cardBackgroundRed,
-
+                            color: COLORS.black,
+                            textAlign: 'left',
                             width: '100%',
                           },
                         ]}
@@ -289,16 +296,18 @@ const HomeView = ({
                           flexDirection: 'row',
                           gap: vw * 4,
                           width: '100%',
+                          borderBottomWidth: 1,
+                          borderColor: COLORS.black + 44,
                         }}>
-                        <AileronSemiBold
+                        <AileronBold
                           name="Name"
-                          style={[styles.homeBackCardText, {width: '65%'}]}
+                          style={[styles.homeBackCardText, {width: '63%'}]}
                         />
-                        <AileronSemiBold
+                        <AileronBold
                           name="Relation"
-                          style={[styles.homeBackCardText, {width: '17%'}]}
+                          style={[styles.homeBackCardText, {width: '20%'}]}
                         />
-                        <AileronSemiBold
+                        <AileronBold
                           name="Age"
                           style={[styles.homeBackCardText]}
                         />
@@ -326,28 +335,39 @@ const HomeView = ({
                                     gap: vw * 4,
                                   }}>
                                   <AileronSemiBold
-                                    name={`${formatName(
-                                      item?.Policy_Insured_Name?.trim(),
-                                    )}`}
+                                    name={
+                                      item?.Policy_Insured_Name?.trim().length >
+                                      25
+                                        ? `${formatName(
+                                            item?.Policy_Insured_Name?.trim(),
+                                          )}`.slice(0, 25) + '...'
+                                        : `${formatName(
+                                            item?.Policy_Insured_Name?.trim(),
+                                          )}`
+                                    }
                                     style={[
                                       styles.homeBackCardText,
-                                      {width: '65%'},
+                                      {width: '60%'},
                                     ]}
                                   />
                                   <AileronSemiBold
                                     name={item?.Policy_Insured_Relaion?.trim()}
                                     style={[
                                       styles.homeBackCardText,
-                                      {width: '17%'},
+                                      {width: '22%', textAlign: 'center'},
                                     ]}
                                   />
                                   <AileronSemiBold
                                     name={item?.Policy_Insured_Age}
-                                    style={[styles.homeBackCardText]}
+                                    style={[
+                                      styles.homeBackCardText,
+                                      {textAlign: 'center', flex: 1},
+                                    ]}
                                   />
                                 </View>
                               ) : (
                                 <TouchableOpacity
+                                  style={{width: '40%'}}
                                   onPress={() => handleDependantsModal(true)}>
                                   <AileronRegular
                                     name="View more details..."

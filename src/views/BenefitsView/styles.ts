@@ -5,7 +5,6 @@ import {COLORS} from '../../assets/theme/colors';
 const styles = StyleSheet.create({
   BenefitsGradients: {
     borderRadius: vw * 3,
-    marginTop: vh * 3,
     height: vh * 22,
   },
   Maximum: {
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   coverage: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: vh * 3,
+    marginTop: vh * 1,
   },
   coverageTitle: {
     fontSize: vh * 2.3,
@@ -62,8 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 1.5,
     marginBottom: vh,
-    marginTop: vh * 2,
-
+    marginTop: vh * 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -89,7 +87,6 @@ const styles = StyleSheet.create({
   seperator: {
     width: '100%',
     borderBottomWidth: 1,
-    borderStyle: 'dashed',
     borderBottomColor: COLORS.black + '44',
     marginVertical: vh * 0.25,
   },

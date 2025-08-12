@@ -21,8 +21,9 @@ const styles = StyleSheet.create({
   detailBox: {
     borderColor: COLORS.dependentBorder,
     borderWidth: 2,
-    padding: vh * 2,
+    paddingHorizontal: vh * 2,
+    paddingVertical: vh * 1,
     borderRadius: vh * 2,
-    marginTop: vh * 2,
+    marginTop: vh * 1,
   },
 });
