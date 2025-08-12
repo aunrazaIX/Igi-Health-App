@@ -41,12 +41,16 @@ export const updateTreatments = createAsyncThunk(
     const {index, data, navigateOnSuccess} = _data;
     const state = thunkApi.getState()?.lodge;
     const treatments = state.modules[state.activeModule].treatments;
-    if (
-      !data?.receiptNumber ||
-      !data?.amount ||
-      !data?.description ||
-      !data?.treatment
-    ) {
+    const requiredFields = [
+      data?.receiptNumber,
+      data?.amount,
+      data?.description,
+      data?.treatment,
+    ];
+    if (data?.claimType === 'priorApproval') {
+      requiredFields.push(data?.admissionDate);
+    }
+    if (requiredFields.some(field => !String(field ?? '').trim())) {
       thunkApi.dispatch(
         setErrorModal({
           message: 'Please enter all details',
@@ -83,13 +87,17 @@ export const setTreatments = createAsyncThunk(
     const isDuplicate = treatments?.some(
       treatment => treatment?.receiptNumber == _data?.receiptNumber,
     );
+    const requiredFields = [
+      _data?.receiptNumber,
+      _data?.amount,
+      _data?.description,
+      _data?.treatment,
+    ];
+    if (_data?.claimType === 'priorApproval') {
+      requiredFields.push(_data?.admissionDate);
+    }
 
-    if (
-      !_data?.receiptNumber ||
-      !_data?.amount ||
-      !_data?.description ||
-      !_data?.treatment
-    ) {
+    if (requiredFields.some(field => !String(field ?? '').trim())) {
       thunkApi.dispatch(
         setErrorModal({
           message: 'Please enter all details',
