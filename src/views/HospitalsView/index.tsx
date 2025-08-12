@@ -153,7 +153,15 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
             <View style={styles.mapTabsContainer}>
               <FlatList
                 indicatorStyle="black"
-                data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}
+                data={[
+                  'All',
+                  'Sindh',
+                  'Punjab',
+                  'Balochistan',
+                  'KPK',
+                  'Islamabad',
+                  'GILGIT - BALTISTAN',
+                ]}
                 horizontal
                 showsHorizontalScrollIndicator={true}
                 contentContainerStyle={styles.mapTabsContainer}

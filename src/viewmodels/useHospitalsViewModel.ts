@@ -78,10 +78,12 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
 
     let filtered: any[] = allData;
 
-    if (selectedMapTab) {
+    if (selectedMapTab && selectedMapTab !== 'All') {
       filtered = filtered.filter(
         (item: any) => item.ProvinceName === selectedMapTab,
       );
+    } else {
+      filtered = allData;
     }
 
     if (searchText.trim()) {
@@ -97,6 +99,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
     setData(filtered);
     setTabChanging(false);
   }, [searchText, selectedMapTab, allData]);
+  console.log('data', allData);
 
   const {loading: hospitalLoading} = useApiHook({
     apiEndpoint: endpoints.panelHospital.getPanelHospitals,
