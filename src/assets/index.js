@@ -135,6 +135,11 @@ export const icons = {
   benefits2: require('./icons/benefits2.png'),
   uploadFileIcon: require('./icons/uploadFileIcon.png'),
   cameraIcon: require('./icons/cameraIcon.png'),
+  mother: require('./icons/mother.png'),
+  member: require('./icons/member.png'),
+  husband: require('./icons/husband.png'),
+  father: require('./icons/father.png'),
+  wife: require('./icons/wife.png'),
 };
 
 export const drawerIcons = {
