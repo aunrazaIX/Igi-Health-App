@@ -11,6 +11,7 @@ const ClaimsHistory = () => {
     showRemarks,
     remarks,
     getHeadingSubHeading,
+    isInProcessAllowed,
   } = states;
   const {goBack, onPressType, onCloseRemarksModal} = functions;
   return (
@@ -24,6 +25,7 @@ const ClaimsHistory = () => {
       remarks={remarks}
       getHeadingSubHeading={getHeadingSubHeading}
       claimDataLoading={claimDataLoading}
+      isInProcessAllowed={isInProcessAllowed}
     />
   );
 };

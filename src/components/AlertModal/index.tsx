@@ -1,5 +1,14 @@
 import React from 'react';
-import {Modal, StyleSheet, Text, Pressable, View, Image} from 'react-native';
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Image,
+  Touchable,
+  TouchableOpacity,
+} from 'react-native';
 import {COLORS} from '../../assets/theme/colors';
 import {vh} from '../../assets/theme/dimension';
 import {icons} from '../../assets';
@@ -22,17 +31,14 @@ const AlertModal: React.FC<AlertModalProps> = ({
       animationType="fade"
       statusBarTranslucent
       transparent
-      visible={true}
-      onRequestClose={() => {
-        setModalVisible(!modalVisible);
-      }}>
+      visible={modalVisible}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Pressable
+          <TouchableOpacity
             style={styles.close}
-            onPress={() => setModalVisible(!modalVisible)}>
-            <Image source={icons.errorPopup} style={styles.personalFrameIMG} />
-          </Pressable>
+            onPress={() => setModalVisible(false)}>
+            <Image source={icons.CancelIcon} style={styles.personalFrameIMG} />
+          </TouchableOpacity>
           <Text style={styles.textStyle}>{title}</Text>
           <Text style={styles.descriptionStyle}>{description}</Text>
         </View>

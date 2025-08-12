@@ -21,6 +21,7 @@ const ClaimsHistoryView = ({
   remarks,
   onCloseRemarksModal,
   getHeadingSubHeading,
+  isInProcessAllowed,
 }) => {
   const renderItem = ({item, index}) => (
     <DetailsContainer
@@ -44,9 +45,9 @@ const ClaimsHistoryView = ({
         <View style={styles.row}>
           <TouchableOpacity
             onPress={() => onPressType('In-Process')}
+            disabled={isInProcessAllowed}
             style={[
               styles.tabView,
-
               type == 'In-Process' && {backgroundColor: COLORS.faqsSubHeading},
             ]}>
             <AileronSemiBold

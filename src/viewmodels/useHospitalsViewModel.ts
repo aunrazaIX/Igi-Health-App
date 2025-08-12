@@ -41,6 +41,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
   const [searchText, setSearchText] = useState('');
   const [allData, setAllData] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
+  const [modalVisible, setModalVisible] = useState<boolean>(true);
 
   const [position, setPosition] = useState({
     latitude: 10,
@@ -151,6 +152,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       hospitalLoading,
       tabChanging,
       position,
+      modalVisible,
     },
     functions: {
       onPressTab,
@@ -159,6 +161,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       goBack,
       setSearchText,
       handleMapDirection,
+      setModalVisible,
     },
   };
 };
