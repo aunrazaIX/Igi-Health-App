@@ -7,12 +7,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     borderWidth: 2,
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    backgroundColor: COLORS.black + 40,
-  },
   modalView: {
     backgroundColor: COLORS.white,
     borderTopRightRadius: vw * 6,

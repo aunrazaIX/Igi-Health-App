@@ -3,7 +3,7 @@ import {Image, Modal, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {COLORS} from '../../../assets/theme/colors';
 
 import {vh, vw} from '../../../assets/theme/dimension';
-import {AileronBold, Button} from '../../../components';
+import {AileronBold} from '../../../components';
 import LinearGradient from 'react-native-linear-gradient';
 import {icons} from '../../../assets';
 
@@ -21,19 +21,34 @@ const DocumentOptionsModal = ({
               viewOptionModal(false);
             }}
             style={styles.close}>
-            <Image source={icons.errorPopup} style={styles.closeIcon} />
+            <Image source={icons.CancelIcon} style={styles.closeIcon} />
           </TouchableOpacity>
-
-          <Button
-            name="Open Camera"
-            inputStyle={styles.closeButton}
-            onPress={() => uploadDocument('camera')}
-          />
-          <Button
-            name="Upload from Gallery"
-            inputStyle={styles.closeButton}
-            onPress={() => uploadDocument('file')}
-          />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+              marginBottom: vh * 2,
+            }}>
+            <TouchableOpacity
+              onPress={() => uploadDocument('camera')}
+              style={styles?.buttonPress}>
+              <Image
+                source={icons.cameraIcon}
+                style={styles?.buttonPressImage}
+              />
+              <AileronBold style={styles?.buttonText} name="Upload File" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => uploadDocument('file')}
+              style={styles?.buttonPress}>
+              <Image
+                source={icons.uploadFileIcon}
+                style={styles?.buttonPressImage}
+              />
+              <AileronBold style={styles?.buttonText} name="Upload File" />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -44,15 +59,14 @@ export default DocumentOptionsModal;
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#5d605f3d',
+    backgroundColor: COLORS.black + '66',
   },
   modalView: {
     backgroundColor: COLORS.white,
-    borderTopRightRadius: vw * 6,
-    borderTopLeftRadius: vw * 6,
-    width: '100%',
+    borderRadius: vw * 6,
+    width: '90%',
     paddingHorizontal: vh * 2,
     paddingTop: vh * 2.5,
     paddingBottom: vh * 2,
@@ -63,7 +77,8 @@ const styles = StyleSheet.create({
     elevation: vw * 7,
     gap: vh * 1.5,
   },
-  buttonText: {fontSize: vw * 4.5, color: COLORS.white},
+
+  buttonText: {fontSize: vw * 4},
   button: {
     alignSelf: 'center',
     marginBottom: vh * 1.5,
@@ -73,31 +88,35 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: vh * 50,
   },
-  cancelButtonWrapper: {
-    marginBottom: vh * 1.5,
-    width: '100%',
-    borderRadius: vw * 4,
-  },
+
   cancelButton: {
     paddingVertical: vh * 2,
     paddingHorizontal: vh * 1.5,
   },
-  cancelButtonText: {
-    fontSize: vw * 4.5,
-    color: COLORS.white,
-    textAlign: 'center',
-  },
-  closeButton: {
-    fontSize: vw * 4.7,
-    fontWeight: '700',
-    color: COLORS.white,
-  },
+
   closeIcon: {
-    height: vh * 4.5,
-    width: vh * 4.5,
+    height: vh * 4.25,
+    width: vh * 4.25,
     resizeMode: 'contain',
   },
   close: {
     alignSelf: 'flex-end',
+    borderWidth: 2,
+    borderRadius: vw * 50,
+    height: vw * 8,
+    width: vw * 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonPress: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: vw * 2,
+  },
+  buttonPressImage: {
+    height: vh * 5,
+    width: vh * 5,
+    resizeMode: 'contain',
   },
 });

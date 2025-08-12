@@ -421,12 +421,19 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       });
       let documents = [];
       let upload = false;
+      let tempFileSize = 0;
       res?.forEach((item: any) => {
         const isDuplicate = selectedDocuments?.some(
           doc => doc?.name === item?.name,
         );
         const fileSizeInMB = item?.size / (1000 * 1000);
-        if (fileSizeInMB > 25 || fileSizeInMB > 25 - totalFileSize) {
+        tempFileSize += fileSizeInMB;
+
+        if (
+          fileSizeInMB > 25 ||
+          fileSizeInMB > 25 - totalFileSize ||
+          tempFileSize > 25
+        ) {
           dispatch(
             setErrorModal({
               show: true,
@@ -435,6 +442,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
                 'The total size of your selected file(s) must not exceed 25MB.Please adjust your selection',
             }),
           );
+          upload = false;
           return;
         } else {
           if (!isDuplicate) {
@@ -458,6 +466,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         }
       });
       if (upload) {
+        console.log(upload);
         dispatch(setSelectedDocuments(documents));
       }
     } catch (e) {

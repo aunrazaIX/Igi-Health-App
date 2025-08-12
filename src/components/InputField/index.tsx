@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderWidth: 2,
     borderColor: COLORS.black + '22',
-    height: vh * 7.5,
+    height: vh * 7.6,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
     paddingHorizontal: vw * 1.5,
@@ -154,17 +154,16 @@ const styles = StyleSheet.create({
   },
   inheritStyles: {
     flex: 1,
-    // backgroundColor: 'red',
   },
   label: {
-    height: '38%',
+    height: '41%',
     textAlign: 'left',
     fontSize: vw * 2.75,
-    // backgroundColor: 'black',
     color: COLORS.textBlackShade,
     paddingVertical: vh * 0.2,
   },
   textInput: {
+    fontSize: vw * 3.6,
     height: '65%',
     color: COLORS.personalValue,
     fontFamily: fonts.inter.regular,

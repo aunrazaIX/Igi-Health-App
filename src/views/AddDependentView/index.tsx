@@ -101,7 +101,6 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
                 style={styles.DependentText}
               />
             </View> */}
-
             <InputField
               placeholderTextColor={COLORS.textGrayShade}
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
@@ -114,14 +113,12 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               placeholder="Enter Name"
               containerStyle={styles.inputContainer}
             />
-
             <Select
               selectData={relationsOptions}
               selectLabel={'Relationship'}
               selectPlaceholder={'Select Relation'}
               onSelectOption={option => {
                 dependentSetterForApiData('dependentTypeID', option);
-
                 if (
                   option.label === 'Son' ||
                   option.label === 'Father' ||
@@ -145,6 +142,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
                 }
               }}
               value={dependentApiData?.dependentTypeID?.label ?? null}
+              disabled={dependentApiData?.dependentTypeID?.value === 'Member'}
             />
 
             <Select
@@ -157,7 +155,6 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               value={dependentApiData?.gender?.label ?? ''}
               disabled={genderDisabled}
             />
-
             <DependentBox containerStyle={styles.dependentOuterStyle}>
               <DatePicker
                 onSelectValue={(date: Date) => {
@@ -183,10 +180,7 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             <Button
               name="Cancel"
               containerStyle={styles.modalCancelButton}
-              gradientColors={[
-                ' rgba(251, 88, 136, 1)',
-                ' rgba(238, 37, 96, 1)',
-              ]}
+              gradientColors={COLORS.deleteButtonGradient}
               inputStyle={styles.modalCancelText}
               onPress={handleCancel}
             />

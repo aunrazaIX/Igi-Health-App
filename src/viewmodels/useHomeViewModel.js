@@ -136,6 +136,8 @@ const useHomeViewModel = () => {
     }
   };
 
+  console.log(currentValue);
+
   const handleAssociatedApps = url => {
     if (url) {
       let finalUrl;

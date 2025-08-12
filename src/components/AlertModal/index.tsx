@@ -22,7 +22,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
       animationType="fade"
       statusBarTranslucent
       transparent
-      visible={modalVisible}
+      visible={true}
       onRequestClose={() => {
         setModalVisible(!modalVisible);
       }}>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: vh * 1.2,
   },
   descriptionStyle: {
-    color:COLORS.black,
+    color: COLORS.black,
     fontWeight: '400',
     textAlign: 'left',
     fontSize: vh * 1.6,

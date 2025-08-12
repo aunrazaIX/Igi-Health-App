@@ -47,9 +47,16 @@ const useClaimsHistoryViewModel = () => {
           : '--',
       },
       claim.ClaimSubmittedDate && {
-        label: 'Services Date:',
+        label: 'Incurred Date:',
         value: moment(
           claim.ClaimSubmittedDate,
+          isInProcess ? 'YYYY-MMM-DD' : 'YYYY-MM-DD',
+        ).format('DD-MMM-YYYY'),
+      },
+      claim.ClaimReceivedDate && {
+        label: 'Received Date:',
+        value: moment(
+          claim.ClaimReceivedDate,
           isInProcess ? 'YYYY-MMM-DD' : 'YYYY-MM-DD',
         ).format('DD-MMM-YYYY'),
       },
@@ -60,6 +67,18 @@ const useClaimsHistoryViewModel = () => {
       {label: 'Claim Type:', value: claim.ClaimsSubTypeName},
 
       {label: 'Status:', value: claim.ClaimStatusName},
+      {
+        label: 'Provider Name:',
+        value: claim?.Provider_Name ? claim?.Provider_Name?.trim('') : '--',
+      },
+      {
+        label: 'Diagnosis:',
+        value: claim?.Diagnosis_Desc ? claim?.Diagnosis_Desc?.trim('') : '--',
+      },
+      {
+        label: 'Mode of Payment:',
+        value: claim?.Payment_type ? claim?.Payment_type?.trim('') : '--',
+      },
       {
         label: 'Amount Claimed',
         value: formatCurrencyWithPKR(claim.SubmiitedClaim),
@@ -92,6 +111,7 @@ const useClaimsHistoryViewModel = () => {
     argsOrBody: {userid: user?.UserId},
     skip: true,
     onSuccess: res => {
+      console.log(res, 'resClaims');
       setData(res?.Data?.map(claim => transformClaimData(claim, false)));
     },
   });
@@ -101,6 +121,7 @@ const useClaimsHistoryViewModel = () => {
     method: 'get',
     argsOrBody: {userid: user?.UserId},
     onSuccess: res => {
+      console.log(res, 'resProcess');
       setData(res?.Data?.map(claim => transformClaimData(claim, true)));
     },
   });

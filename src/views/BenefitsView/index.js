@@ -47,10 +47,13 @@ const BenefitsView = ({
         }
       />
       <AileronBold
-        name={`${item.price}${/\d[\d,]*/.test(item.price) ? ' /-' : ''}`}
+        // name={`${item.price}${/\d[\d,]*/.test(item?.price) ? '/-' : ''}`}
+        name={`${
+          /^\d[\d,]*$/.test(item?.price) ? item.price + '/-' : item.price
+        }`}
         style={
           item.price === 'Not Covered'
-            ? styles.insuredTitle
+            ? styles.subTitle
             : styles.insuredTitleCovered
         }
       />

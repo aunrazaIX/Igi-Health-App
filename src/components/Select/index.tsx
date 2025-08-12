@@ -53,7 +53,10 @@ const Select: React.FC<SelectProps> = ({
   return (
     <View style={[styles.selectContainer, selectContainer]}>
       <DependentBox containerStyle={styles.dependentContainer}>
-        <AileronBold name={selectLabel} style={styles.Patient} />
+        <AileronBold
+          name={selectLabel}
+          style={[styles.Patient, disabled && {opacity: 0.5}]}
+        />
         <TouchableOpacity
           disabled={disabled}
           onPress={() => {
@@ -104,8 +107,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selectText: {
-    color: COLORS.textGrayShade,
-    fontSize: vw * 3.2,
+    color: COLORS.textBlackShade,
+    fontSize: vw * 3.6,
     marginTop: vh * 0.5,
   },
   arrow: {

@@ -160,10 +160,14 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                 colors={COLORS.activeButtonGradient}>
                 <View style={styles.wrapper}>
                   <TouchableOpacity
-                    onPress={() => setConfirmationModalVisible(false)}>
+                    onPress={() => {
+                      if (handleDelete) handleDelete();
+                      if (setConfirmationModalVisible)
+                        setConfirmationModalVisible(false);
+                    }}>
                     <AileronBold
-                      name="Cancel"
-                      style={styles.cancelButtonText}
+                      name={confirmationType === 'back' ? 'Continue' : 'Delete'}
+                      style={styles.deleteButtonText}
                     />
                   </TouchableOpacity>
                 </View>
@@ -173,14 +177,10 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                 colors={COLORS.deleteButtonGradient}>
                 <View style={styles.wrapper}>
                   <TouchableOpacity
-                    onPress={() => {
-                      if (handleDelete) handleDelete();
-                      if (setConfirmationModalVisible)
-                        setConfirmationModalVisible(false);
-                    }}>
+                    onPress={() => setConfirmationModalVisible(false)}>
                     <AileronBold
-                      name={confirmationType === 'back' ? 'Continue' : 'Delete'}
-                      style={styles.deleteButtonText}
+                      name="Cancel"
+                      style={styles.cancelButtonText}
                     />
                   </TouchableOpacity>
                 </View>
@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
     marginTop: vh,
   },
   wrapper: {
-    paddingVertical: vh * 2,
+    paddingVertical: vh * 1.5,
     // paddingHorizontal: vh * 1.5,
   },
   cancelButtonText: {

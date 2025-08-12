@@ -83,14 +83,15 @@ const styles = StyleSheet.create({
     width: '33.33%',
     alignItems: 'center',
     marginTop: vh * 2.5,
-    paddingBottom: vh * 2.5,
+    paddingBottom: vh * 1,
+    justifyContent: 'space-between',
   },
   seperator: {
     width: '100%',
     borderBottomWidth: 1,
     borderStyle: 'dashed',
     borderBottomColor: COLORS.black + '44',
-    marginVertical: vh * 1,
+    marginVertical: vh * 0.25,
   },
   CardBox: {
     borderRadius: vh * 1.5,
@@ -112,15 +113,25 @@ const styles = StyleSheet.create({
     borderRadius: vh * 1.5,
   },
   insuredTitle: {
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.25,
     color: COLORS.insuredPrice,
     marginVertical: vh * 1,
     fontWeight: '600',
     width: vh * 12,
     // backgroundColor: 'red',
   },
+
+  subTitle: {
+    fontSize: vh * 1.35,
+    color: COLORS.insuredPrice,
+    marginVertical: vh * 1,
+    fontWeight: '600',
+    width: vh * 12,
+    // backgroundColor: 'red',
+  },
+
   insuredTitleCovered: {
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.35,
     color: COLORS.cardBackgroundRed,
     marginVertical: vh * 1,
     fontWeight: '800',

@@ -48,31 +48,56 @@ const useErrorHandlingHook = (data: ApiData): UseErrorHandlingHookReturn => {
     });
   };
 
-  const checkForError = (): boolean => {
+  // const checkForError = (): boolean => {
+  //   let isAllowedForProceeding = true;
+  //   setApiData(prevData => {
+  //     const updatedData = {...prevData};
+  //     Object.keys(prevData).forEach(key => {
+  //       if (
+  //         !key.startsWith('error_') &&
+  //         (prevData[key] === null ||
+  //           prevData[key] === '' ||
+  //           prevData[key] === undefined)
+  //       ) {
+  //         updatedData[`error_${key}`] =
+  //           key === 'userName'
+  //             ? 'Email address is required'
+  //             : key === 'receiptNumber'
+  //             ? 'Receipt number is required'
+  //             : `${key} is required`;
+  //         isAllowedForProceeding = false;
+  //       }
+  //     });
+  //     return updatedData;
+  //   });
+  //   return isAllowedForProceeding;
+  // };
+
+  const checkForError = () => {
     let isAllowedForProceeding = true;
-    setApiData(prevData => {
-      const updatedData = {...prevData};
-      Object.keys(prevData).forEach(key => {
+    const temp = {...apiData};
+    for (let keys in apiData) {
+      if (!keys.startsWith('error_')) {
         if (
-          !key.startsWith('error_') &&
-          (prevData[key] === null ||
-            prevData[key] === '' ||
-            prevData[key] === undefined)
+          apiData[keys] == null ||
+          apiData[keys] == undefined ||
+          apiData[keys] == ''
         ) {
-          updatedData[`error_${key}`] =
-            key === 'userName'
+          temp[`error_${keys}`] =
+            keys === 'userName'
               ? 'Email address is required'
-              : key === 'receiptNumber'
+              : keys === 'receiptNumber'
               ? 'Receipt number is required'
-              : `${key} is required`;
+              : `${keys} is required`;
           isAllowedForProceeding = false;
+          console.log(temp, 'temp');
         }
-      });
-      return updatedData;
-    });
+      }
+    }
+    setApiData(temp);
+
     return isAllowedForProceeding;
   };
-
   return {
     apiData,
     setterForApiData,

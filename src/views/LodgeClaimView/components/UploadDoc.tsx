@@ -83,10 +83,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
 
                     <TouchableOpacity
                       onPress={() => handleCancelFile(item, index)}>
-                      <Image
-                        style={styles.errorIcon}
-                        source={icons.errorPopup}
-                      />
+                      <Image style={styles.errorIcon} source={icons.delete} />
                     </TouchableOpacity>
                   </View>
 
@@ -295,8 +292,8 @@ const styles = StyleSheet.create({
     marginVertical: vh * 2,
   },
   errorIcon: {
-    height: vw * 8,
-    width: vw * 8,
+    height: vw * 7,
+    width: vw * 7,
   },
   docDetails: {
     flexDirection: 'row',

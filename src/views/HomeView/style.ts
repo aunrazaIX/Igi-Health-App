@@ -172,7 +172,6 @@ export const styles = StyleSheet.create({
   infoCardTextBold: {
     fontSize: vw * 4,
     color: COLORS.textBlackShade,
-    maxWidth: vh * 30,
     // textAlign: 'left',
     // borderWidth: 2,
   },
@@ -186,17 +185,13 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   homeInfoContainerMiddle: {
-    marginTop: vh * 1.2,
-
-    // justifyContent: 'space-between',/
+    marginTop: vh * 0.5,
   },
   homeInfoContainerMiddleText: {},
   infoCardMiddleTextlight: {
     fontSize: vw * 3.5,
     color: COLORS.textColor,
     textAlign: 'left',
-    // maxWidth: vh * 25,
-    // borderWidth: 2,
   },
   homeInfoContainerMiddleTextLogo: {
     flexDirection: 'row',
@@ -205,7 +200,7 @@ export const styles = StyleSheet.create({
   },
   homeCardMainDetails: {
     // borderWidth: 2,
-    gap: vh * 0.9,
+    gap: vh * 0.5,
   },
 
   flipCardIcon: {
@@ -227,18 +222,15 @@ export const styles = StyleSheet.create({
   infoCardFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: vh * 2.5,
+    marginTop: vh * 1.25,
+
     // borderWidth: 2
   },
   infoCardFooterTextBold: {
     fontSize: vh * 1.6,
     color: COLORS.textBlackShade,
   },
-  infoCardFooterLeft: {
-    gap: vh * 0.9,
 
-    alignItems: 'flex-start',
-  },
   infoCardFooterRight: {
     alignItems: 'flex-end',
     gap: vh * 0.5,

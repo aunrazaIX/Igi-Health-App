@@ -11,6 +11,7 @@ import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import SimpleLoader from '../SimpleLoader';
 import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewModel';
+import AileronBold from '../AileronBold';
 
 interface ButtonProps extends TouchableOpacityProps {
   name: string;
@@ -52,7 +53,7 @@ const Button: React.FC<ButtonProps> = ({
         {loading ? (
           <SimpleLoader size={'small'} />
         ) : (
-          <Text style={[styles.buttonText, inputStyle]}>{name}</Text>
+          <AileronBold name={name} style={[styles.buttonText, inputStyle]} />
         )}
         {showIconRight && (
           <Image style={styles.buttonIcon} source={showIconRight} />
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
 
   buttonText: {
     color: COLORS.buttonText,
-    fontWeight: 'bold',
     fontSize: vw * 4.5,
     justifyContent: 'center',
     alignItems: 'center',

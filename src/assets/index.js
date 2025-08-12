@@ -133,6 +133,8 @@ export const icons = {
   pending: require('./icons/pending.png'),
   successful: require('./icons/successful.png'),
   benefits2: require('./icons/benefits2.png'),
+  uploadFileIcon: require('./icons/uploadFileIcon.png'),
+  cameraIcon: require('./icons/cameraIcon.png'),
 };
 
 export const drawerIcons = {
