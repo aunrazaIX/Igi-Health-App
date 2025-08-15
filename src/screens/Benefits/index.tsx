@@ -4,8 +4,8 @@ import useBenefitsViewModel from '../../viewmodels/useBenefitsViewModel';
 
 const Benefits = () => {
   const {states, functions} = useBenefitsViewModel();
-  const {data, benefitsloading, selectedTab} = states;
-  const {goBack, onPressTab} = functions;
+  const {data, benefitsloading, selectedTab, modalVisible} = states;
+  const {goBack, onPressTab, setModalData} = functions;
 
   return (
     <BenefitsView
@@ -14,6 +14,8 @@ const Benefits = () => {
       goBack={goBack}
       selectedTab={selectedTab}
       onPressTab={onPressTab}
+      modalVisible={modalVisible}
+      setModalData={setModalData}
     />
   );
 };

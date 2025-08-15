@@ -32,7 +32,7 @@ const DrawerStack = () => {
   const {user} = useSelector(state => state.auth);
 
   const timeout = useMemo(() => {
-    return 10 * 60 * 1000;
+    return 3 * 60 * 1000;
   }, []);
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();

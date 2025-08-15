@@ -67,9 +67,10 @@ export default Box;
 const styles = StyleSheet.create({
   boxContainer: {
     padding: vh,
-    width: '100%',
+    width: '99%',
     // paddingVertical: vh * 2,
     // marginVertical: vh * 1.5,
+    alignSelf: 'center',
     borderRadius: vh * 2,
     elevation: 3,
     backgroundColor: COLORS.white,
@@ -96,19 +97,18 @@ const styles = StyleSheet.create({
     color: COLORS.insuredPrice,
   },
   details: {
-    marginTop: 10,
+    marginTop: vh * 0.5,
     borderTopWidth: 2,
     borderTopColor: COLORS.dependentBorder,
-
     paddingTop: vh * 1,
-    rowGap: vh,
+    rowGap: vh * 0.3,
   },
   detailLabel: {
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.4,
     color: COLORS.personalLabel,
   },
   detailvalue: {
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.4,
     color: COLORS.personalValue,
     maxWidth: vw * 50,
   },

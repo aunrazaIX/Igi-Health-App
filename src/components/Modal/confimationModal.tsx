@@ -144,7 +144,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                 />
               </>
             ) : (
-              <AileronRegular
+              <AileronSemiBold
                 name={confirmationMessage}
                 style={styles.confirmationDetail}
               />
@@ -190,7 +190,6 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
             <>
               <Button
                 name="Submit"
-                inputStyle={styles.closeButton}
                 onPress={handleSubmit}
                 disabled={claimLoading}
               />
@@ -215,7 +214,6 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <Button
                 // name={buttonName}
                 name="Close"
-                inputStyle={styles.closeButton}
                 onPress={handleClose}
               />
             </View>
@@ -272,7 +270,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   required: {
-    fontSize: vw * 6.5,
+    fontSize: vw * 5,
     color: COLORS.benefitTitle,
     fontWeight: '700',
   },
@@ -289,9 +287,8 @@ const styles = StyleSheet.create({
     marginBottom: vh * 1.5,
   },
   confirmationDetailNote: {
-    fontSize: vw * 3,
+    fontSize: vw * 2.9,
     color: COLORS.confimationDetail,
-
     fontStyle: 'italic',
     marginBottom: vh * 2.5,
   },
@@ -321,11 +318,11 @@ const styles = StyleSheet.create({
     // paddingHorizontal: vh * 1.5,
   },
   cancelButtonText: {
-    fontSize: vw * 4.4,
+    fontSize: vw * 3,
     color: COLORS.white,
   },
   deleteButtonText: {
-    fontSize: vw * 4.4,
+    fontSize: vw * 3,
     color: COLORS.white,
   },
 

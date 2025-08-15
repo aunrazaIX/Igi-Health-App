@@ -70,11 +70,12 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: vw * 4,
     justifyContent: 'center',
+    height: vh * 6,
   },
 
   buttonText: {
     color: COLORS.buttonText,
-    fontSize: vw * 4.5,
+    fontSize: vw * 3.5,
     justifyContent: 'center',
     alignItems: 'center',
   },

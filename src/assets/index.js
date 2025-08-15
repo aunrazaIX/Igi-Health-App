@@ -21,6 +21,7 @@ export const images = {
   3: require('./images/3.jpg'),
   4: require('./images/4.jpg'),
   5: require('./images/5.jpg'),
+  secureFuture2: require('./images/secure-future-2.png'),
 };
 
 export const icons = {

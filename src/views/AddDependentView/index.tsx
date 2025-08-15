@@ -174,14 +174,12 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
             <Button
               name={dependentIndex != undefined ? 'Submit Request' : 'Submit'}
               containerStyle={styles.modalAddButton}
-              inputStyle={styles.modalAddText}
               onPress={onPressSubmit}
             />
             <Button
               name="Cancel"
               containerStyle={styles.modalCancelButton}
               gradientColors={COLORS.deleteButtonGradient}
-              inputStyle={styles.modalCancelText}
               onPress={handleCancel}
             />
           </View>

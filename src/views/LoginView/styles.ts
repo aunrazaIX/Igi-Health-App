@@ -80,8 +80,7 @@ export const styles = StyleSheet.create({
     color: COLORS.forgotPass,
   },
   loginButton: {
-    marginTop: vh * 2.2,
-    height: vh * 7.8,
+    marginTop: vh * 4,
   },
   loginOptionContainer: {
     flexDirection: 'row',

@@ -94,11 +94,7 @@ const AddTreatmentView = ({
             <InputField
               placeholderTextColor={COLORS.textGrayShade}
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              // containerStyle={
-              //   apiData?.error_receiptNumber
-              //     ? {marginBottom: vh * 2.5, paddingVertical: vh}
-              //     : {marginVertical: vh, paddinsdgVertical: vh}
-              // }
+              containerStyle={styles.inputContainerStyle}
               value={apiData?.receiptNumber}
               onChangeText={text => {
                 const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
@@ -123,12 +119,10 @@ const AddTreatmentView = ({
                 onSelectValue={(date: Date) => {
                   setterForApiData('admissionDate', date);
                 }}
-                placeholder={'Select Admission/Procedure Date'}
-                label={'Adminsion/Procedure Date'}
+                placeholder={'Select Date'}
+                label={'Admission/Procedure Date'}
                 value={apiData?.admissionDate}
                 disabled={false}
-                labelStyle={{}}
-                containerStyle={{}}
                 mode="date"
                 maximumDate={new Date()}
                 minimumDate={undefined}
@@ -137,13 +131,9 @@ const AddTreatmentView = ({
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              // containerStyle={
-              //   apiData?.error_amount
-              //     ? {marginBottom: vh * 2, paddingVertical: vh}
-              //     : {marginVertical: vh, paddinsdgVertical: vh}
-              // }
               placeholderTextColor={COLORS.textGrayShade}
               maxLength={7}
+              containerStyle={styles.inputContainerStyle}
               value={apiData?.amount}
               errorMessage={apiData?.error_amount}
               onChangeText={text => {
@@ -160,11 +150,7 @@ const AddTreatmentView = ({
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              // containerStyle={
-              //   apiData?.error_description
-              //     ? {marginBottom: vh * 3, paddingVertical: vh}
-              //     : {marginVertical: vh, paddinsdgVertical: vh}
-              // }
+              containerStyle={styles.inputContainerStyle}
               value={apiData?.description}
               maxLength={200}
               errorMessage={apiData?.error_description}

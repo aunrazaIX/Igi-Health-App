@@ -42,7 +42,7 @@ const PersonalView = ({
       <CurvedView>
         <View style={{paddingBottom: vh * 21}}>
           <ImageBackground
-            source={images.SecureFuture}
+            source={images.secureFuture2}
             style={styles.personalImage}>
             <View style={styles.secureTextGrp}>
               <AileronSemiBold
@@ -146,7 +146,7 @@ const PersonalView = ({
                       </DependentBox>
                     </>
                   ))
-                : !dependantLoading && <NoDataView name={'No Memeber Found'} />}
+                : !dependantLoading && <NoDataView name={'No Member Found'} />}
             </View>
           </ScrollView>
         </View>
@@ -172,6 +172,7 @@ const PersonalView = ({
         handleDelete={() => {
           onPressDelete();
         }}
+        confirmationRequired={modalType === 'delete' ? true : false}
         Successfull={modalType === 'delete' ? false : true}
         CloseButtonText={'Continue To Login'}
         onClose={resetStates}

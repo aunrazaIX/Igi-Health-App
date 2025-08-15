@@ -12,6 +12,9 @@ import {
 import {COLORS} from '../../assets/theme/colors';
 import {vh} from '../../assets/theme/dimension';
 import {icons} from '../../assets';
+import AileronBold from '../AileronBold';
+import AileronSemiBold from '../AileronSemiBold';
+import AileronRegular from '../AileronRegular';
 
 interface AlertModalProps {
   title: string;
@@ -25,6 +28,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
   description,
   modalVisible,
   setModalVisible,
+  subtitle,
 }) => {
   return (
     <Modal
@@ -39,8 +43,11 @@ const AlertModal: React.FC<AlertModalProps> = ({
             onPress={() => setModalVisible(false)}>
             <Image source={icons.CancelIcon} style={styles.personalFrameIMG} />
           </TouchableOpacity>
-          <Text style={styles.textStyle}>{title}</Text>
-          <Text style={styles.descriptionStyle}>{description}</Text>
+          <AileronBold style={styles.textStyle} name={title} />
+          {subtitle && (
+            <AileronRegular name={subtitle} style={styles.subtitle} />
+          )}
+          <AileronRegular style={styles.descriptionStyle} name={description} />
         </View>
       </View>
     </Modal>
@@ -85,15 +92,21 @@ const styles = StyleSheet.create({
   textStyle: {
     color: COLORS.black,
     fontSize: vh * 2,
-    fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: vh * 1.2,
   },
   descriptionStyle: {
     color: COLORS.black,
-    fontWeight: '400',
     textAlign: 'left',
     fontSize: vh * 1.6,
+    alignSelf: 'flex-start',
+  },
+  subtitle: {
+    color: COLORS.black,
+    fontSize: vh * 1.6,
+    textAlign: 'left',
+    marginBottom: vh * 1.2,
+    alignSelf: 'flex-start',
   },
 });
 

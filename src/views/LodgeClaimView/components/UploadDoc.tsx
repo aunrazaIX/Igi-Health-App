@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   remarks: {
     textAlign: 'left',
-    fontSize: vh * 2,
+    fontSize: vh * 1.5,
     color: COLORS.black,
     marginBlock: vh * 1.5,
   },

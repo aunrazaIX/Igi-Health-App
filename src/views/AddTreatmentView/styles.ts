@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   priorNext: {
     textAlign: 'center',
     color: COLORS.white,
-    fontSize: vh * 2,
+    fontSize: vw * 3,
   },
   cancelButtonwrapper: {
     width: '100%',
@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
     width: '100%',
     borderWidth: vh * 0.3,
     paddingBottom: vh * -2,
+  },
+  inputContainerStyle: {
+    paddingHorizontal: vh * 2.25,
   },
 });
 

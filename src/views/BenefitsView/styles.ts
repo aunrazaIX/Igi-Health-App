@@ -80,8 +80,9 @@ const styles = StyleSheet.create({
   card: {
     width: '33.33%',
     alignItems: 'center',
-    marginTop: vh * 2.5,
+    marginTop: vh * 1,
     paddingBottom: vh * 1,
+
     justifyContent: 'space-between',
   },
   seperator: {
@@ -124,15 +125,17 @@ const styles = StyleSheet.create({
     marginVertical: vh * 1,
     fontWeight: '600',
     width: vh * 12,
+
     // backgroundColor: 'red',
   },
 
   insuredTitleCovered: {
     fontSize: vh * 1.35,
     color: COLORS.cardBackgroundRed,
-    marginVertical: vh * 1,
+    marginVertical: vh * 0.5,
     fontWeight: '800',
     width: vh * 12,
+
     // borderWidth: 2,
   },
   insuredPrice: {
@@ -156,6 +159,10 @@ const styles = StyleSheet.create({
     width: vh * 4,
     tintColor: COLORS.white,
     resizeMode: 'contain',
+  },
+  details: {
+    color: COLORS.cardBackgroundRed,
+    fontSize: vw * 2.5,
   },
 });
 

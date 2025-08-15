@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     marginLeft: vw,
   },
   titleText: {
-    fontSize: vh * 2.4,
+    fontSize: vw * 5,
     textAlign: 'left',
     color: COLORS.placeholderColor,
   },
@@ -17,8 +17,9 @@ const styles = StyleSheet.create({
   },
   description: {
     textAlign: 'left',
-    fontSize: vw * 4,
+    fontSize: vw * 3.5,
     marginTop: vh,
+    color: COLORS.textColorLight,
   },
   button: {
     // marginVertical: vh * 2.5,

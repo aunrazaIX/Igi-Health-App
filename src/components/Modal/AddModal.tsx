@@ -7,15 +7,15 @@ import {
   TextInput,
 } from 'react-native';
 import React from 'react';
-import { COLORS } from '../../assets/theme/colors';
-import { vh, vw } from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
+import {vh, vw} from '../../assets/theme/dimension';
 import AileronBold from '../AileronBold';
 import DependentBox from '../DependentBox';
 import AileronRegular from '../AileronRegular';
 import Select from '../Select';
 import Button from '../Button';
-import { icons, images } from '../../assets';
-import { personalDetail } from '../../types/personalTypes';
+import {icons, images} from '../../assets';
+import {personalDetail} from '../../types/personalTypes';
 
 type ModalCustomProps = {
   modalVisible: boolean;
@@ -97,7 +97,6 @@ const AddModal: React.FC<ModalCustomProps> = ({
             <Button
               name="Submit"
               containerStyle={styles.modalAddButton}
-              inputStyle={styles.modalAddText}
               onPress={onPressSubmit}
             />
 
@@ -105,7 +104,6 @@ const AddModal: React.FC<ModalCustomProps> = ({
               name="Cancel"
               containerStyle={styles.modalCancelButton}
               gradientColors={['#E1E3E6', '#E1E3E6']}
-              inputStyle={styles.modalCancelText}
               onPress={() => setModalVisible(false)}
             />
           </View>
@@ -134,7 +132,7 @@ const styles = StyleSheet.create({
     paddingTop: vh * 3.5,
     paddingBottom: vh * 2,
     shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
     shadowRadius: vw * 6,
     elevation: vw * 5,

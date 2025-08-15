@@ -128,9 +128,9 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   const lodgeState = useSelector(state => state?.lodge || {});
   const activeModule = lodgeState?.activeModule;
   const moduleData = lodgeState?.modules?.[activeModule] || {};
-
   const treatment = moduleData?.treatments || [];
   const doc = moduleData?.selectedDocuments || [];
+  console.log(console.log(confirmationType, 'djsaiodjasio'));
 
   const renderStep = {
     personalDetails: (
@@ -320,9 +320,10 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             : true
         }
         confirmationRequired={
-          confirmationType === 'delete'
-            ? true
-            : confirmationType === 'fileDelete'
+          confirmationType === 'delete' ||
+          confirmationType === 'submit' ||
+          confirmationType === 'fileDelete' ||
+          confirmationType === 'back'
             ? true
             : false
         }

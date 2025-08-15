@@ -11,6 +11,7 @@ const useBenefitsViewModel = () => {
 
   const [allBenefits, setAllBenefits] = useState([]);
   const [selectedTab, setSelectedTab] = useState('Inpatient');
+  const [modalVisible, setModalVisible] = useState({show: false, note: ''});
 
   const onPressTab = tab => {
     setSelectedTab(tab);
@@ -37,6 +38,7 @@ const useBenefitsViewModel = () => {
       setAllBenefits(res);
     },
   });
+  console.log(allBenefits);
 
   let filteredData = allBenefits
     ?.filter(item => {
@@ -53,10 +55,19 @@ const useBenefitsViewModel = () => {
       title: item.BenefitDetails,
       price: formatPrice(item?.EntitlementLimits),
       image: icons.benefits2,
+      CoverageEligibility: `Coverage Eligibility: ${item?.CoverageEligibility}`,
+      note: item?.Note !== '-' ? `Note: ${item?.Note}` : null,
     }));
 
   const goBack = () => {
     navigation.goBack();
+  };
+
+  const setModalData = ({show, itemData}) => {
+    setModalVisible({
+      itemData: itemData,
+      show: show,
+    });
   };
 
   return {
@@ -64,10 +75,12 @@ const useBenefitsViewModel = () => {
       data: filteredData,
       selectedTab,
       benefitsloading,
+      modalVisible,
     },
     functions: {
       goBack,
       onPressTab,
+      setModalData,
     },
   };
 };

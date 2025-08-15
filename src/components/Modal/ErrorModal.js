@@ -38,7 +38,6 @@ const ErrorModal = ({containerStyle}) => {
 
           <Button
             name={'Close'}
-            inputStyle={styles.closeButton}
             onPress={() =>
               dispatch(
                 setErrorModal({
@@ -83,11 +82,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: vh * 1.5,
   },
-  closeButton: {
-    fontSize: vw * 4.7,
-    fontWeight: '700',
-    color: COLORS.white,
-  },
   personalFrameIMG: {
     width: vh * 7,
     height: vh * 7,
@@ -103,7 +97,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   confirmationDetail: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3,
     color: COLORS.confimationDetail,
     marginTop: vh * 1,
   },

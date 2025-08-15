@@ -380,20 +380,30 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const onPressNext = () => {
     try {
       if (currentStep === 1) {
-        if (
-          !selectedPatient || type === 'priorAprroval'
-            ? !selectedType
-            : !selectedHospital
-        ) {
-          dispatch(
-            setErrorModal({
-              show: true,
-              message: 'Please select all fields',
-              detail:
-                'Some fields are missing. All fields are required to continue',
-            }),
-          );
-          throw new Error('Please Select Patient');
+        if (type === 'priorApproval') {
+          if (!selectedPatient || !selectedHospital) {
+            dispatch(
+              setErrorModal({
+                show: true,
+                message: 'Please select all fields',
+                detail:
+                  'Some fields are missing. All fields are required to continue',
+              }),
+            );
+            throw new Error('Please Select Patient');
+          }
+        } else {
+          if (!selectedPatient || !selectedType) {
+            dispatch(
+              setErrorModal({
+                show: true,
+                message: 'Please select all fields',
+                detail:
+                  'Some fields are missing. All fields are required to continue',
+              }),
+            );
+            throw new Error('Please Select Patient');
+          }
         }
       }
 
