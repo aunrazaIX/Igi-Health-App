@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: vw * 3.4,
     textAlign: 'left',
     color: COLORS.black,
-    width: '75%',
+    // width: '75%',
     // borderWidth: 2,
   },
   iconView: {
