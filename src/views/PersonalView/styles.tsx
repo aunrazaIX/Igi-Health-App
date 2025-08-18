@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
   },
   dependentBox: {
     flexDirection: 'row',
-    marginTop: vh * 3,
+    marginTop: vh * 1,
+    marginBottom: vh * 0.5,
   },
   dependentText: {
     fontSize: vh * 2.2,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
   headerText: {
     flex: 1,
     textAlign: 'left',
-    fontSize: vh * 1.8,
+    fontSize: vw * 3.25,
     color: COLORS.insuredPrice,
   },
   icon: {
@@ -61,10 +62,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderTopWidth: 2,
     borderTopColor: COLORS.dependentBorder,
-    borderStyle: 'dashed',
-    paddingTop: vh * 1,
-    gap: vh * 1.5,
-    // marginBottom : vh*12
+    gap: vh * 0.5,
   },
   detailRow: {
     flexDirection: 'row',
@@ -100,7 +98,7 @@ const styles = StyleSheet.create({
   },
   dependentBoxStyle: {
     // padding: vw * 3.5,
-    paddingVertical: vw * 2.5,
+    paddingVertical: vw * 1.25,
     // marginBottom: vh * 2,
   },
 });

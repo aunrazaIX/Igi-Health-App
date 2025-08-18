@@ -54,7 +54,6 @@ api.interceptors.response.use(
 
 const checkInternet = async () => {
   let netState = await fetch();
-  console.log(netState);
   if (!netState.isConnected) {
     EventRegister.emitEvent('aun');
   }

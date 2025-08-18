@@ -29,7 +29,7 @@ import useApiHook from '../../hooks/useApiHook';
 import endpoints from '../../api/endspoints';
 
 const DrawerStack = () => {
-  const {user, deviceToken} = useSelector(state => state.auth);
+  const {user} = useSelector(state => state.auth);
 
   const timeout = useMemo(() => {
     return 3 * 60 * 1000;
@@ -39,10 +39,10 @@ const DrawerStack = () => {
 
   const {trigger: userLogout} = useApiHook({
     skip: true,
-    endpoints: endpoints.auth.logout,
-    method: 'POST',
+    apiEndpoint: endpoints.auth.logout,
+    method: 'post',
     argsOrBody: {
-      LoginDevicesID: deviceToken,
+      LoginDevicesID: user?.LoginDevicesID,
     },
   });
 

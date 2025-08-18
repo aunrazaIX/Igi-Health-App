@@ -6,6 +6,7 @@ import {icons} from '../../assets';
 import {
   AileronBold,
   AileronRegular,
+  AileronSemiBold,
   Button,
   Container,
   CurvedView,
@@ -136,7 +137,7 @@ const ForgotPasswordView = ({
         <KeyboardAwareScrollView>
           <View style={styles.curvedViewContent}>
             <AileronBold style={styles.titleText} name={returnTitle[step]} />
-            <AileronRegular
+            <AileronSemiBold
               style={styles.description}
               name={returnDescription[step]}
             />

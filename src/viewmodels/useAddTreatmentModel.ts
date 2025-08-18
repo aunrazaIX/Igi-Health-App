@@ -20,19 +20,24 @@ const useAddTreatmentModel = ({
   );
 
   const [confirmationModal, setConfirmationModal] = useState(false);
-
   const {treatmentIndex, treatmentData, claimType} = route?.params || {};
-
+  console.log('treatmentData', treatmentData);
   const extractedData = {
     treatment: treatmentData?.treatment,
-    receiptNumber: treatmentData?.info?.[0].value,
-    amount: treatmentData?.info?.[1].value,
-    description: treatmentData?.info?.[2].value,
+    receiptNumber: treatmentData?.info?.[0]?.value,
+    ...(claimType === 'priorApproval' && {
+      admissionDate: treatmentData?.info?.[1]?.value,
+    }),
+    amount: treatmentData?.info?.[2]?.value,
+    description: treatmentData?.info?.[3]?.value,
   };
 
   const {setterForApiData, apiData} = useErrorHandlingHook({
     treatment: extractedData.treatment ?? {},
     receiptNumber: extractedData.receiptNumber ?? '',
+    ...(claimType === 'priorApproval' && {
+      admissionDate: extractedData.admissionDate ?? '',
+    }),
     amount: extractedData.amount ?? '',
     description: extractedData.description ?? '',
   });
@@ -67,6 +72,10 @@ const useAddTreatmentModel = ({
     const treatmentObj = {
       treatment: apiData?.treatment,
       receiptNumber: apiData?.receiptNumber,
+      ...(claimType === 'priorApproval' && {
+        admissionDate: apiData?.admissionDate,
+      }),
+      claimType: claimType,
       amount: apiData?.amount,
       description: apiData?.description,
     };

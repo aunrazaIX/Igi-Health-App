@@ -10,11 +10,18 @@ import {formatCurrencyWithPKR, formatName} from '../utils';
 const useClaimsHistoryViewModel = () => {
   const {user} = useSelector(state => state.auth);
   const navigation = useNavigation();
-
-  const [type, setType] = useState('In-Process');
+  const [type, setType] = useState(
+    user?.coverageType?.some(obj => obj?.isAllowed !== true)
+      ? 'Processed'
+      : 'In-Process',
+  );
   const [data, setData] = useState([]);
   const [showRemarks, setShowRemarks] = useState(false);
   const [remarks, setRemarks] = useState('');
+
+  const isInProcessAllowed = user?.coverageType?.some(
+    obj => obj?.isAllowed !== true,
+  );
 
   const goBack = () => navigation.goBack();
   const onCloseRemarksModal = () => setShowRemarks(false);
@@ -29,7 +36,7 @@ const useClaimsHistoryViewModel = () => {
       Processed: {
         heading: 'Processed Claims',
         messsage:
-          'All finalized claims from our system, including hospital visits, reimbursements, and portal submissions.',
+          'All finalized claims, including hospital visits, reimbursements, rejections and portal submissions.',
       },
     };
   }, []);
@@ -47,9 +54,16 @@ const useClaimsHistoryViewModel = () => {
           : '--',
       },
       claim.ClaimSubmittedDate && {
-        label: 'Services Date:',
+        label: 'Incurred Date:',
         value: moment(
           claim.ClaimSubmittedDate,
+          isInProcess ? 'YYYY-MMM-DD' : 'YYYY-MM-DD',
+        ).format('DD-MMM-YYYY'),
+      },
+      claim.ClaimReceivedDate && {
+        label: 'Received Date:',
+        value: moment(
+          claim.ClaimReceivedDate,
           isInProcess ? 'YYYY-MMM-DD' : 'YYYY-MM-DD',
         ).format('DD-MMM-YYYY'),
       },
@@ -60,6 +74,18 @@ const useClaimsHistoryViewModel = () => {
       {label: 'Claim Type:', value: claim.ClaimsSubTypeName},
 
       {label: 'Status:', value: claim.ClaimStatusName},
+      {
+        label: 'Provider Name:',
+        value: claim?.Provider_Name ? claim?.Provider_Name?.trim('') : '--',
+      },
+      {
+        label: 'Diagnosis:',
+        value: claim?.Diagnosis_Desc ? claim?.Diagnosis_Desc?.trim('') : '--',
+      },
+      {
+        label: 'Mode of Payment:',
+        value: claim?.Payment_type ? claim?.Payment_type?.trim('') : '--',
+      },
       {
         label: 'Amount Claimed',
         value: formatCurrencyWithPKR(claim.SubmiitedClaim),
@@ -90,7 +116,7 @@ const useClaimsHistoryViewModel = () => {
     apiEndpoint: endpoints.claimHistory.getDxcClaims,
     method: 'get',
     argsOrBody: {userid: user?.UserId},
-    skip: true,
+    skip: !isInProcessAllowed,
     onSuccess: res => {
       setData(res?.Data?.map(claim => transformClaimData(claim, false)));
     },
@@ -100,6 +126,7 @@ const useClaimsHistoryViewModel = () => {
     apiEndpoint: endpoints.claimHistory.getAllClaim,
     method: 'get',
     argsOrBody: {userid: user?.UserId},
+    skip: isInProcessAllowed,
     onSuccess: res => {
       setData(res?.Data?.map(claim => transformClaimData(claim, true)));
     },
@@ -119,6 +146,7 @@ const useClaimsHistoryViewModel = () => {
       showRemarks,
       remarks,
       getHeadingSubHeading,
+      isInProcessAllowed,
     },
     functions: {
       goBack,

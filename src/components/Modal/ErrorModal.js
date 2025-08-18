@@ -13,6 +13,7 @@ const ErrorModal = ({containerStyle}) => {
   const {showErrorModal, errorMessage, errorDetail} = useSelector(
     state => state.general,
   );
+
   const dispatch = useDispatch();
   return (
     <Modal transparent={true} visible={showErrorModal} statusBarTranslucent>
@@ -34,22 +35,20 @@ const ErrorModal = ({containerStyle}) => {
               />
             )}
           </View>
-          <View>
-            <Button
-              name={'Close'}
-              inputStyle={styles.closeButton}
-              onPress={() =>
-                dispatch(
-                  setErrorModal({
-                    show: false,
-                    errorMessage: null,
-                    detail: null,
-                  }),
-                )
-              }
-              gradientColors={COLORS.PriorGradient}
-            />
-          </View>
+
+          <Button
+            name={'Close'}
+            onPress={() =>
+              dispatch(
+                setErrorModal({
+                  show: false,
+                  errorMessage: null,
+                  detail: null,
+                }),
+              )
+            }
+            gradientColors={COLORS.PriorGradient}
+          />
         </View>
       </View>
     </Modal>
@@ -70,24 +69,18 @@ const styles = StyleSheet.create({
     borderTopRightRadius: vw * 6,
     borderTopLeftRadius: vw * 6,
     width: '100%',
-    minHeight: '38%',
     paddingHorizontal: vh * 3,
-    paddingTop: vh * 2.5,
+    paddingTop: vh * 1,
     paddingBottom: vh * 3,
     shadowColor: COLORS.black,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
     shadowRadius: vw * 6,
     elevation: vw * 7,
-    justifyContent: 'space-between',
   },
   personalFrameContainer: {
     alignItems: 'center',
-  },
-  closeButton: {
-    fontSize: vw * 4.7,
-    fontWeight: '700',
-    color: COLORS.white,
+    marginBottom: vh * 1.5,
   },
   personalFrameIMG: {
     width: vh * 7,
@@ -96,17 +89,16 @@ const styles = StyleSheet.create({
   confirmationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: vh * 3,
+    marginTop: vh * 1,
   },
   confirmation: {
-    fontSize: vw * 6.5,
+    fontSize: vw * 5,
     color: COLORS.black,
     fontWeight: '700',
   },
   confirmationDetail: {
-    fontSize: vw * 4.2,
+    fontSize: vw * 3,
     color: COLORS.confimationDetail,
-    marginTop: vh * 1.5,
-    marginBottom: vh * 2.5,
+    marginTop: vh * 1,
   },
 });

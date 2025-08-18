@@ -74,7 +74,6 @@ const HomeView = ({
                 <TouchableOpacity onPress={handleCardDownload}>
                   <Image source={icons.download} style={styles.headerIcons} />
                 </TouchableOpacity>
-
                 <TouchableOpacity
                   onPress={() => onPressHeaderIcon('Notifications')}>
                   <Image
@@ -123,7 +122,7 @@ const HomeView = ({
                       <View style={styles.homeCardMainDetails}>
                         <View>
                           <AileronSemiBold
-                            name={`Policy Number: ${
+                            name={`Policy # : ${
                               homeCardData.find(
                                 item =>
                                   item.Policy_Insured_Relaion === 'Member',
@@ -142,29 +141,29 @@ const HomeView = ({
                           />
                         </View>
 
-                        <View style={styles.infoCardFooterLeft}>
+                        <View>
                           <AileronSemiBold
-                            name={'Card Holder Name'}
+                            name={'Policy Name:'}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
-
-                          <AileronBold
-                            name={formatName(
-                              homeCardData
-                                ?.find(
-                                  item =>
-                                    item?.Policy_Insured_Relaion == 'Member',
-                                )
-                                ?.Policy_Insured_Name.trim(),
-                            )}
-                            style={styles.infoCardTextBold}
-                            numberOfLines={1}
-                          />
+                          {/* <AileronSemiBold
+                            name={` ${
+                              homeCardData.find(
+                                item =>
+                                  item.Policy_Insured_Relaion === 'Member',
+                              )?.SURNAME ?? ' --'
+                            }`}
+                            style={[
+                              styles.infoCardMiddleTextlight,
+                              {width: '100%', backgroundColor: 'red'},
+                            ]}
+                            numberOfLines={2}
+                          /> */}
                         </View>
                       </View>
 
-                      <View style={{gap: vh, marginBottom: vh * 3}}>
+                      <View style={{gap: vh * 0.5, marginBottom: vh * 1}}>
                         <AileronSemiBold
                           name={`Class: ${
                             homeCardData.find(
@@ -176,7 +175,7 @@ const HomeView = ({
                         />
 
                         <AileronSemiBold
-                          name={`Cert No: ${
+                          name={`Cert #: ${
                             homeCardData.find(
                               item => item.Policy_Insured_Relaion === 'Member',
                             )?.Policy_CertNo
@@ -197,17 +196,63 @@ const HomeView = ({
                       </View>
                     </View>
                   </View>
-
-                  <View style={styles.infoCardFooter}>
+                  <AileronBold
+                    name={` ${
+                      homeCardData
+                        .find(item => item.Policy_Insured_Relaion === 'Member')
+                        ?.SURNAME.trim('') ?? ' --'
+                    }`}
+                    // name="dasopdkjawpodjawdpoawjdawpiodjawdiopwadjawoidja"
+                    style={[
+                      styles.infoCardMiddleTextlight,
+                      {
+                        width: '100%',
+                        color: COLORS.black,
+                        marginLeft: vw * -1,
+                      },
+                    ]}
+                    numberOfLines={2}
+                  />
+                  <View style={[styles.infoCardFooter, {width: '100%'}]}>
                     <View>
                       <AileronSemiBold
-                        name={`Policy Name: ${
-                          homeCardData.find(
-                            item => item.Policy_Insured_Relaion === 'Member',
-                          )?.SURNAME ?? ' --'
-                        }`}
+                        name={'Card Holder Name:'}
                         style={styles.infoCardMiddleTextlight}
-                        numberOfLines={2}
+                        numberOfLines={1}
+                      />
+                      <AileronBold
+                        name={
+                          homeCardData
+                            ?.find(
+                              item => item?.Policy_Insured_Relaion == 'Member',
+                            )
+                            ?.Policy_Insured_Name.trim().length > 30
+                            ? homeCardData
+                                ?.find(
+                                  item =>
+                                    item?.Policy_Insured_Relaion == 'Member',
+                                )
+                                ?.Policy_Insured_Name.trim()
+                                .toUpperCase()
+                                .slice(0, 30) + '...'
+                            : homeCardData
+                                ?.find(
+                                  item =>
+                                    item?.Policy_Insured_Relaion == 'Member',
+                                )
+                                ?.Policy_Insured_Name.trim()
+                                .toUpperCase()
+                        }
+                        style={[
+                          styles.infoCardTextBold,
+                          {
+                            fontSize: vw * 4,
+                            color: COLORS.black,
+                            textAlign: 'left',
+                            width: '100%',
+                          },
+                        ]}
+                        numberOfLines={1}
                       />
                     </View>
                   </View>
@@ -251,16 +296,18 @@ const HomeView = ({
                           flexDirection: 'row',
                           gap: vw * 4,
                           width: '100%',
+                          borderBottomWidth: 1,
+                          borderColor: COLORS.black + 44,
                         }}>
-                        <AileronSemiBold
+                        <AileronBold
                           name="Name"
-                          style={[styles.homeBackCardText, {width: '65%'}]}
+                          style={[styles.homeBackCardText, {width: '63%'}]}
                         />
-                        <AileronSemiBold
+                        <AileronBold
                           name="Relation"
-                          style={[styles.homeBackCardText, {width: '17%'}]}
+                          style={[styles.homeBackCardText, {width: '20%'}]}
                         />
-                        <AileronSemiBold
+                        <AileronBold
                           name="Age"
                           style={[styles.homeBackCardText]}
                         />
@@ -288,28 +335,39 @@ const HomeView = ({
                                     gap: vw * 4,
                                   }}>
                                   <AileronSemiBold
-                                    name={`${formatName(
-                                      item?.Policy_Insured_Name?.trim(),
-                                    )}`}
+                                    name={
+                                      item?.Policy_Insured_Name?.trim().length >
+                                      25
+                                        ? `${formatName(
+                                            item?.Policy_Insured_Name?.trim(),
+                                          )}`.slice(0, 25) + '...'
+                                        : `${formatName(
+                                            item?.Policy_Insured_Name?.trim(),
+                                          )}`
+                                    }
                                     style={[
                                       styles.homeBackCardText,
-                                      {width: '65%'},
+                                      {width: '60%'},
                                     ]}
                                   />
                                   <AileronSemiBold
                                     name={item?.Policy_Insured_Relaion?.trim()}
                                     style={[
                                       styles.homeBackCardText,
-                                      {width: '17%'},
+                                      {width: '22%', textAlign: 'center'},
                                     ]}
                                   />
                                   <AileronSemiBold
                                     name={item?.Policy_Insured_Age}
-                                    style={[styles.homeBackCardText]}
+                                    style={[
+                                      styles.homeBackCardText,
+                                      {textAlign: 'center', flex: 1},
+                                    ]}
                                   />
                                 </View>
                               ) : (
                                 <TouchableOpacity
+                                  style={{width: '40%'}}
                                   onPress={() => handleDependantsModal(true)}>
                                   <AileronRegular
                                     name="View more details..."

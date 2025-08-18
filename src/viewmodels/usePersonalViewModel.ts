@@ -68,7 +68,18 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       setGetData(
         res?.Data?.map((item, index) => ({
           dependent: 'Dependent Detail',
-          image: item?.CLTSEX === 'M' ? icons.genderFrame : icons.frame,
+          image:
+            item?.DPNTTYPE === 'Wife'
+              ? icons.wife
+              : item?.DPNTTYPE === 'Husband'
+              ? icons.husband
+              : item?.DPNTTYPE === 'Member'
+              ? icons.member
+              : item?.DPNTTYPE === 'Father'
+              ? icons.father
+              : item?.DPNTTYPE === 'Mother'
+              ? icons.mother
+              : icons.frame,
           dependentDetail: [
             {label: 'Name :', value: formatName(item?.LGIVNAME.trim())},
             {
@@ -93,6 +104,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
         })),
       ),
   });
+  console.log(getData, 'getData');
 
   const resetStates = () => {
     navigation.navigate('Personal');

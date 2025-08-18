@@ -49,7 +49,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
             style={styles.supporting}
           />
           <AileronRegular
-            name={'Supported file types: .jpg, .jpeg, .png, .pdf.webp'}
+            name={'Supported file types: .jpg, .jpeg, .png, .pdf, .webp'}
             style={styles.supportingSubText}
           />
           <TouchableOpacity onPress={() => viewOptionModal(true)}>
@@ -83,10 +83,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
 
                     <TouchableOpacity
                       onPress={() => handleCancelFile(item, index)}>
-                      <Image
-                        style={styles.errorIcon}
-                        source={icons.errorPopup}
-                      />
+                      <Image style={styles.errorIcon} source={icons.delete} />
                     </TouchableOpacity>
                   </View>
 
@@ -145,7 +142,7 @@ const styles = StyleSheet.create({
   uploadBox: {
     borderColor: COLORS.UploadBorder,
     borderWidth: 1.5,
-    borderStyle: 'dashed',
+
     borderRadius: vh * 0.5,
     padding: vh,
     alignItems: 'center',
@@ -257,7 +254,7 @@ const styles = StyleSheet.create({
   },
   remarks: {
     textAlign: 'left',
-    fontSize: vh * 2,
+    fontSize: vh * 1.5,
     color: COLORS.black,
     marginBlock: vh * 1.5,
   },
@@ -295,8 +292,8 @@ const styles = StyleSheet.create({
     marginVertical: vh * 2,
   },
   errorIcon: {
-    height: vw * 8,
-    width: vw * 8,
+    height: vw * 7,
+    width: vw * 7,
   },
   docDetails: {
     flexDirection: 'row',

@@ -199,8 +199,6 @@ export const styles = StyleSheet.create({
   inputStyle: {
     fontSize: vw * 3.8,
     height: vh * 4.2,
-
-    // backgroundColor: 'yellow',
     color: COLORS.textBlackShade,
   },
 
@@ -209,12 +207,11 @@ export const styles = StyleSheet.create({
     color: COLORS.black,
   },
   detailsTextLabel: {
-    width: '20%',
+    width: '18%',
     textAlign: 'left',
   },
-
   detailsTextValue: {
-    width: '60%',
+    width: '100%',
     textAlign: 'right',
   },
 });

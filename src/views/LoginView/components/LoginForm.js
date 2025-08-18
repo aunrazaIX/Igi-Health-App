@@ -141,12 +141,6 @@ const style = StyleSheet.create({
   inputContainer: {
     borderWidth: 2,
   },
-  labelStyle: {
-    fontSize: vw * 3.5,
-  },
-  inputStyle: {
-    fontSize: vw * 3.5,
-  },
   inputFeilds: {
     marginTop: vh,
     width: '100%',

@@ -107,12 +107,12 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.buttonBorder,
   },
   detailsTextLabel: {
-    width: '20%',
+    width: '18%',
     textAlign: 'left',
   },
 
   detailsTextValue: {
-    width: '60%',
+    width: '100%',
     textAlign: 'right',
   },
   inputFeild: {

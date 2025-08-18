@@ -1,8 +1,20 @@
 import React from 'react';
-import {Modal, StyleSheet, Text, Pressable, View, Image} from 'react-native';
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Image,
+  Touchable,
+  TouchableOpacity,
+} from 'react-native';
 import {COLORS} from '../../assets/theme/colors';
 import {vh} from '../../assets/theme/dimension';
 import {icons} from '../../assets';
+import AileronBold from '../AileronBold';
+import AileronSemiBold from '../AileronSemiBold';
+import AileronRegular from '../AileronRegular';
 
 interface AlertModalProps {
   title: string;
@@ -16,25 +28,26 @@ const AlertModal: React.FC<AlertModalProps> = ({
   description,
   modalVisible,
   setModalVisible,
+  subtitle,
 }) => {
   return (
     <Modal
       animationType="fade"
       statusBarTranslucent
       transparent
-      visible={modalVisible}
-      onRequestClose={() => {
-        setModalVisible(!modalVisible);
-      }}>
+      visible={modalVisible}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Pressable
+          <TouchableOpacity
             style={styles.close}
-            onPress={() => setModalVisible(!modalVisible)}>
-            <Image source={icons.errorPopup} style={styles.personalFrameIMG} />
-          </Pressable>
-          <Text style={styles.textStyle}>{title}</Text>
-          <Text style={styles.descriptionStyle}>{description}</Text>
+            onPress={() => setModalVisible(false)}>
+            <Image source={icons.CancelIcon} style={styles.personalFrameIMG} />
+          </TouchableOpacity>
+          <AileronBold style={styles.textStyle} name={title} />
+          {subtitle && (
+            <AileronRegular name={subtitle} style={styles.subtitle} />
+          )}
+          <AileronRegular style={styles.descriptionStyle} name={description} />
         </View>
       </View>
     </Modal>
@@ -79,15 +92,21 @@ const styles = StyleSheet.create({
   textStyle: {
     color: COLORS.black,
     fontSize: vh * 2,
-    fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: vh * 1.2,
   },
   descriptionStyle: {
-    color:COLORS.black,
-    fontWeight: '400',
+    color: COLORS.black,
     textAlign: 'left',
     fontSize: vh * 1.6,
+    alignSelf: 'flex-start',
+  },
+  subtitle: {
+    color: COLORS.black,
+    fontSize: vh * 1.6,
+    textAlign: 'left',
+    marginBottom: vh * 1.2,
+    alignSelf: 'flex-start',
   },
 });
 

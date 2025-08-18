@@ -6,12 +6,7 @@ import {fonts} from '../../assets/fonts';
 const styles = StyleSheet.create({
   inputContainer: {
     borderWidth: 2,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    backgroundColor: COLORS.black + 40,
+    paddingHorizontal: vw * 3.5,
   },
   modalView: {
     backgroundColor: COLORS.white,
@@ -53,8 +48,6 @@ const styles = StyleSheet.create({
   dependentOuterStyle: {
     width: '100%',
     borderWidth: vh * 0.3,
-    // padding: vw * 3.5,
-
     paddingBottom: vh * -2,
   },
   selectLabel: {
@@ -84,19 +77,11 @@ const styles = StyleSheet.create({
     marginTop: vh * 2,
     borderRadius: vw * 3.5,
   },
-  modalAddText: {
-    fontSize: vw * 4.4,
-    fontWeight: '700',
-  },
   modalCancelButton: {
     marginTop: vh * 2,
     borderRadius: vw * 3.5,
   },
-  modalCancelText: {
-    color: COLORS.white,
-    fontSize: vw * 4.4,
-    fontWeight: '700',
-  },
+
   curvedStyle: {
     paddingBottom: vh * 12,
   },

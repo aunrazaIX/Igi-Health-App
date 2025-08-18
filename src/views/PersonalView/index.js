@@ -42,7 +42,7 @@ const PersonalView = ({
       <CurvedView>
         <View style={{paddingBottom: vh * 21}}>
           <ImageBackground
-            source={images.SecureFuture}
+            source={images.secureFuture2}
             style={styles.personalImage}>
             <View style={styles.secureTextGrp}>
               <AileronSemiBold
@@ -146,7 +146,7 @@ const PersonalView = ({
                       </DependentBox>
                     </>
                   ))
-                : !dependantLoading && <NoDataView name={'No Memeber Found'} />}
+                : !dependantLoading && <NoDataView name={'No Member Found'} />}
             </View>
           </ScrollView>
         </View>
@@ -165,13 +165,14 @@ const PersonalView = ({
         confirmationMessage={
           modalType === 'delete'
             ? 'Are you sure you want to apply for deletion request of selected dependent ?'
-            : 'Your deletion request for the dependent has been submitted successfully.Our Team will review and process it shortly'
+            : 'Your deletion request for the dependent has been successfully submitted. Our team will review and process it shortly.'
         }
         closeButton={modalType === 'delete' ? false : true}
         deleteButton={modalType === 'delete' ? true : false}
         handleDelete={() => {
           onPressDelete();
         }}
+        confirmationRequired={modalType === 'delete' ? true : false}
         Successfull={modalType === 'delete' ? false : true}
         CloseButtonText={'Continue To Login'}
         onClose={resetStates}

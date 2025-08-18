@@ -8,56 +8,69 @@ import {
   TopView,
 } from '../../components';
 import {images} from '../../assets';
-import {FlatList, Image, View} from 'react-native';
+import {FlatList, Image, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 import NoDataView from '../../components/NoDataView';
 import ProvinceTab from '../../components/provinceTab';
+import {vh, vw} from '../../assets/theme/dimension';
+import AlertModal from '../../components/AlertModal';
 
 const BenefitsView = ({
   data,
   onPressTab,
   selectedTab,
-
+  modalVisible,
+  setModalData,
   benefitsloading,
 }) => {
   const RenderBenefits = ({item}) => (
     <View style={styles.card}>
-      <LinearGradient
-        colors={['#0B4A98', '#0f8dd7']}
-        start={{x: 1, y: 0}}
-        end={{x: 0, y: 1}}
-        style={styles.CardBox}>
-        <View
+      <View>
+        <LinearGradient
+          colors={['#0B4A98', '#0f8dd7']}
+          start={{x: 1, y: 0}}
+          end={{x: 0, y: 1}}
+          style={styles.CardBox}>
+          <View
+            style={
+              item?.price === 'Not Covered' ? styles.disabled : styles.wrapper
+            }>
+            <Image source={item.image} style={styles.coverageCardImage} />
+          </View>
+        </LinearGradient>
+        <AileronRegular
+          name={item.title}
           style={
-            item?.price === 'Not Covered' ? styles.disabled : styles.wrapper
-          }>
-          <Image source={item.image} style={styles.coverageCardImage} />
-        </View>
-      </LinearGradient>
-
-      <AileronRegular
-        name={item.title}
-        style={
-          item.price === 'Not Covered'
-            ? styles.insuredTitle
-            : styles.insuredTitle
-        }
-      />
+            item.price === 'Not Covered'
+              ? styles.insuredTitle
+              : styles.insuredTitle
+          }
+        />
+      </View>
       <AileronBold
-        name={`${item.price}${/\d[\d,]*/.test(item.price) ? ' /-' : ''}`}
+        // name={`${item.price}${/\d[\d,]*/.test(item?.price) ? '/-' : ''}`}
+        name={`${
+          /^\d[\d,]*$/.test(item?.price) ? item.price + '/-' : item.price
+        }`}
         style={
           item.price === 'Not Covered'
-            ? styles.insuredTitle
+            ? styles.subTitle
             : styles.insuredTitleCovered
         }
       />
+      {item?.note && (
+        <TouchableOpacity
+          onPress={() => setModalData({show: true, itemData: item})}>
+          <AileronBold name="View details.." style={styles.details} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 
-  const headerComponent = () => (
+  const HeaderComponent = () => (
     <View>
       <LinearGradient
         start={{x: 0, y: 0}}
@@ -123,10 +136,11 @@ const BenefitsView = ({
     <>
       <TopView title={'Entitled Benefits'} />
       <CurvedView containerStyle={styles.CurvedView}>
+        <HeaderComponent />
         <FlatList
           indicatorStyle="black"
           ItemSeparatorComponent={renderSeperator}
-          ListHeaderComponent={headerComponent}
+          // ListHeaderComponent={headerComponent}
           showsVerticalScrollIndicator={true}
           data={data}
           ListEmptyComponent={
@@ -143,6 +157,14 @@ const BenefitsView = ({
         />
 
         <ModalLoading loading={benefitsloading} />
+        <AlertModal
+          description={modalVisible?.itemData?.note}
+          subtitle={modalVisible?.itemData?.CoverageEligibility}
+          modalVisible={modalVisible?.show}
+          setModalVisible={modalVisible =>
+            setModalData({show: modalVisible, note: ''})
+          }
+        />
       </CurvedView>
     </>
   );

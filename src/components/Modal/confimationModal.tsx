@@ -117,14 +117,12 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <View style={styles.confirmationContainer}>
                 <AileronBold
                   name={
-                    heading
-                      ? heading
-                      : isChangedPassword
+                    isChangedPassword
                       ? 'Password Updated'
                       : confirmationType === 'update'
                       ? 'Confirm Edit Request'
-                      : isUpdate
-                      ? 'Confirm Edit Request'
+                      : heading
+                      ? heading
                       : `${
                           type === 'signup' ? 'Signup' : 'Password changed'
                         } Successful!`
@@ -146,7 +144,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                 />
               </>
             ) : (
-              <AileronRegular
+              <AileronSemiBold
                 name={confirmationMessage}
                 style={styles.confirmationDetail}
               />
@@ -158,19 +156,6 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <LinearGradient
                 style={styles.deleteButtonContainer}
                 colors={COLORS.activeButtonGradient}>
-                <View style={styles.wrapper}>
-                  <TouchableOpacity
-                    onPress={() => setConfirmationModalVisible(false)}>
-                    <AileronBold
-                      name="Cancel"
-                      style={styles.cancelButtonText}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </LinearGradient>
-              <LinearGradient
-                style={styles.deleteButtonContainer}
-                colors={COLORS.deleteButtonGradient}>
                 <View style={styles.wrapper}>
                   <TouchableOpacity
                     onPress={() => {
@@ -185,6 +170,19 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
                   </TouchableOpacity>
                 </View>
               </LinearGradient>
+              <LinearGradient
+                style={styles.deleteButtonContainer}
+                colors={COLORS.deleteButtonGradient}>
+                <View style={styles.wrapper}>
+                  <TouchableOpacity
+                    onPress={() => setConfirmationModalVisible(false)}>
+                    <AileronBold
+                      name="Cancel"
+                      style={styles.cancelButtonText}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </LinearGradient>
             </View>
           )}
 
@@ -192,7 +190,6 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
             <>
               <Button
                 name="Submit"
-                inputStyle={styles.closeButton}
                 onPress={handleSubmit}
                 disabled={claimLoading}
               />
@@ -217,7 +214,6 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
               <Button
                 // name={buttonName}
                 name="Close"
-                inputStyle={styles.closeButton}
                 onPress={handleClose}
               />
             </View>
@@ -243,7 +239,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: vw * 6,
     width: '100%',
     paddingHorizontal: vh * 2,
-    paddingTop: vh * 2.5,
+    paddingTop: vh * 1,
     paddingBottom: vh * 2,
     shadowColor: COLORS.black,
     shadowOffset: {width: 0, height: 2},
@@ -261,38 +257,38 @@ const styles = StyleSheet.create({
   personalFrameIMG: {
     width: vh * 9.5,
     height: vh * 9.5,
+    resizeMode: 'contain',
   },
   confirmationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: vh * 3,
+    // marginTop: vh * 1,
   },
   confirmation: {
-    fontSize: vw * 6.5,
+    fontSize: vw * 5,
     color: COLORS.coverageTitle,
     fontWeight: '700',
   },
   required: {
-    fontSize: vw * 6.5,
+    fontSize: vw * 5,
     color: COLORS.benefitTitle,
     fontWeight: '700',
   },
   confirmationDetail: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3,
     color: COLORS.textBlackShade,
-    marginTop: vh * 1.5,
+    marginTop: vh * 1,
     marginBottom: vh * 1.5,
   },
   confirmationDetailWithNote: {
-    fontSize: vw * 5,
+    fontSize: vw * 3,
     color: COLORS.textBlackShade,
-    marginTop: vh * 1.5,
+    marginTop: vh * 1,
     marginBottom: vh * 1.5,
   },
   confirmationDetailNote: {
-    fontSize: vw * 3.4,
+    fontSize: vw * 2.9,
     color: COLORS.confimationDetail,
-
     fontStyle: 'italic',
     marginBottom: vh * 2.5,
   },
@@ -318,15 +314,15 @@ const styles = StyleSheet.create({
     marginTop: vh,
   },
   wrapper: {
-    paddingVertical: vh * 2,
+    paddingVertical: vh * 1.5,
     // paddingHorizontal: vh * 1.5,
   },
   cancelButtonText: {
-    fontSize: vw * 4.4,
+    fontSize: vw * 3,
     color: COLORS.white,
   },
   deleteButtonText: {
-    fontSize: vw * 4.4,
+    fontSize: vw * 3,
     color: COLORS.white,
   },
 

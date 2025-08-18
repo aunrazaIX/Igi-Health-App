@@ -146,6 +146,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               userRelationCode: selectedPatient?.CLNTNUM?.toString(),
               requestComments: item?.description,
               amount: item.amount,
+              admission_date: item?.admissionDate,
               hospitalID: selectedHospital.value,
               treatmentTypeID: item?.treatment?.IPDTreatmentTypesID,
               dxcCode: item?.treatment?.value,
@@ -176,6 +177,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               userId: user?.UserId,
               claimId: res?.Data?.toString(),
             };
+      console.log(apiData);
       claimTrigger(apiData);
     },
   });
@@ -290,12 +292,17 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     info: [
       {
         key: 'receiptNumber',
-        label: 'Receipt Number:',
+        label: type === 'lodgeClaim' ? 'Receipt Number:' : 'Admission/M.R. No.',
         value: item?.receiptNumber ?? '--',
       },
       {
+        key: 'admission_date',
+        label: 'Admission/Procedure Date:',
+        value: item?.admissionDate ?? '--',
+      },
+      {
         key: 'amount',
-        label: 'Amount:',
+        label: type === 'lodgeClaim' ? 'Amount:' : 'Estimated Cost:',
         value: item?.amount ?? '--',
         total: true,
       },
@@ -373,8 +380,30 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const onPressNext = () => {
     try {
       if (currentStep === 1) {
-        if (!selectedPatient) {
-          throw new Error('Please Select Patient');
+        if (type === 'priorApproval') {
+          if (!selectedPatient || !selectedHospital) {
+            dispatch(
+              setErrorModal({
+                show: true,
+                message: 'Please select all fields',
+                detail:
+                  'Some fields are missing. All fields are required to continue',
+              }),
+            );
+            throw new Error('Please Select Patient');
+          }
+        } else {
+          if (!selectedPatient || !selectedType) {
+            dispatch(
+              setErrorModal({
+                show: true,
+                message: 'Please select all fields',
+                detail:
+                  'Some fields are missing. All fields are required to continue',
+              }),
+            );
+            throw new Error('Please Select Patient');
+          }
         }
       }
 
@@ -421,12 +450,19 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       });
       let documents = [];
       let upload = false;
+      let tempFileSize = 0;
       res?.forEach((item: any) => {
         const isDuplicate = selectedDocuments?.some(
           doc => doc?.name === item?.name,
         );
         const fileSizeInMB = item?.size / (1000 * 1000);
-        if (fileSizeInMB > 25 || fileSizeInMB > 25 - totalFileSize) {
+        tempFileSize += fileSizeInMB;
+
+        if (
+          fileSizeInMB > 25 ||
+          fileSizeInMB > 25 - totalFileSize ||
+          tempFileSize > 25
+        ) {
           dispatch(
             setErrorModal({
               show: true,
@@ -435,6 +471,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
                 'The total size of your selected file(s) must not exceed 25MB.Please adjust your selection',
             }),
           );
+          upload = false;
           return;
         } else {
           if (!isDuplicate) {
@@ -458,6 +495,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         }
       });
       if (upload) {
+        console.log(upload);
         dispatch(setSelectedDocuments(documents));
       }
     } catch (e) {

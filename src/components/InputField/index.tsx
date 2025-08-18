@@ -123,7 +123,6 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             </TouchableOpacity>
           )}
         </View>
-        {console.log('errorMessage', errorMessage)}
         {typeof errorMessage === 'string' && errorMessage && (
           <AileronBold
             style={styles.errorText}
@@ -146,7 +145,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderWidth: 2,
     borderColor: COLORS.black + '22',
-    height: vh * 7.5,
+    height: vh * 7,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
     paddingHorizontal: vw * 1.5,
@@ -155,18 +154,17 @@ const styles = StyleSheet.create({
   },
   inheritStyles: {
     flex: 1,
-    // backgroundColor: 'red',
   },
   label: {
-    height: '38%',
+    height: '41%',
     textAlign: 'left',
-    fontSize: vw * 2.75,
-    // backgroundColor: 'black',
+    fontSize: vw * 3.5,
     color: COLORS.textBlackShade,
     paddingVertical: vh * 0.2,
   },
   textInput: {
-    height: '65%',
+    fontSize: vw * 3.4,
+    height: '58%',
     color: COLORS.personalValue,
     fontFamily: fonts.inter.regular,
     padding: 0,

@@ -21,6 +21,7 @@ export const images = {
   3: require('./images/3.jpg'),
   4: require('./images/4.jpg'),
   5: require('./images/5.jpg'),
+  secureFuture2: require('./images/secure-future-2.png'),
 };
 
 export const icons = {
@@ -133,6 +134,13 @@ export const icons = {
   pending: require('./icons/pending.png'),
   successful: require('./icons/successful.png'),
   benefits2: require('./icons/benefits2.png'),
+  uploadFileIcon: require('./icons/uploadFileIcon.png'),
+  cameraIcon: require('./icons/cameraIcon.png'),
+  mother: require('./icons/mother.png'),
+  member: require('./icons/member.png'),
+  husband: require('./icons/husband.png'),
+  father: require('./icons/father.png'),
+  wife: require('./icons/wife.png'),
 };
 
 export const drawerIcons = {

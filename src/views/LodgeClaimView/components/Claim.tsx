@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   seperator: {
     width: '100%',
     height: vh * 0.1,
-    borderStyle: 'dashed',
+
     backgroundColor: COLORS.black + 44,
   },
   CardBox: {

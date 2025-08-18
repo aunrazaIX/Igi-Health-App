@@ -41,6 +41,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
   const [searchText, setSearchText] = useState('');
   const [allData, setAllData] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
+  const [modalVisible, setModalVisible] = useState<boolean>(true);
 
   const [position, setPosition] = useState({
     latitude: 10,
@@ -78,10 +79,12 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
 
     let filtered: any[] = allData;
 
-    if (selectedMapTab) {
+    if (selectedMapTab && selectedMapTab !== 'All') {
       filtered = filtered.filter(
         (item: any) => item.ProvinceName === selectedMapTab,
       );
+    } else {
+      filtered = allData;
     }
 
     if (searchText.trim()) {
@@ -97,6 +100,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
     setData(filtered);
     setTabChanging(false);
   }, [searchText, selectedMapTab, allData]);
+  console.log('data', allData);
 
   const {loading: hospitalLoading} = useApiHook({
     apiEndpoint: endpoints.panelHospital.getPanelHospitals,
@@ -148,6 +152,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       hospitalLoading,
       tabChanging,
       position,
+      modalVisible,
     },
     functions: {
       onPressTab,
@@ -156,6 +161,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       goBack,
       setSearchText,
       handleMapDirection,
+      setModalVisible,
     },
   };
 };
