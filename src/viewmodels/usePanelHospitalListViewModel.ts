@@ -132,6 +132,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
           items: [
             {label: 'Phone:', value: item?.HospitalContact},
             {label: 'Address:', value: item?.HospitalAddress},
+            {label: 'Discount Available:', value: item?.DisAvailable},
             {label: 'City:', value: item?.CityName},
           ],
         })) || [];
@@ -156,6 +157,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
           items: [
             {label: 'Phone:', value: item?.DisCenContact},
             {label: 'Address:', value: item?.DisCenAddress},
+            {label: 'Discount Available:', value: item?.DisAvailable},
             {label: 'City:', value: item?.CityName},
           ],
         })) || [];
