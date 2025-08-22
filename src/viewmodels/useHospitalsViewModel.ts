@@ -100,7 +100,6 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
     setData(filtered);
     setTabChanging(false);
   }, [searchText, selectedMapTab, allData]);
-  console.log('data', allData);
 
   const {loading: hospitalLoading} = useApiHook({
     apiEndpoint: endpoints.panelHospital.getPanelHospitals,

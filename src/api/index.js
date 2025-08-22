@@ -45,7 +45,7 @@ api.interceptors.response.use(
     }
     if (error.message === 'Network Error') {
       return Promise.reject({
-        header: 'Please check your internet connection.',
+        header: 'Something went wrong, please try again later',
       });
     }
     return Promise.reject(data ?? error);

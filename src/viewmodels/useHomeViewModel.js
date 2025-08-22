@@ -244,7 +244,7 @@ const useHomeViewModel = () => {
     },
     user?.showPriorApproval && {
       logo: newCardsIcons.taskDone,
-      name: 'Prior Approval',
+      name: 'Prior\nApproval',
       image: icons.forwardArrow,
       mainParent: 'Tabs',
       stChild: 'PriorApproval',
@@ -262,12 +262,19 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       to: 'PanelHospitalList',
     },
+    user?.showPriorApproval && {
+      logo: newCardsIcons.taskDone,
+      name: 'Prior Approval History',
+      image: icons.forwardArrow,
+      to: 'PriorApprovalHistory',
+    },
     {
       logo: newCardsIcons.lodgeClaim,
       name: 'Claim History',
       image: icons.forwardArrow,
       to: 'ClaimHistory',
     },
+
     {
       logo: newCardsIcons.helpLine,
       name: 'Helplines',

@@ -104,7 +104,6 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
         })),
       ),
   });
-  console.log(getData, 'getData');
 
   const resetStates = () => {
     navigation.navigate('Personal');

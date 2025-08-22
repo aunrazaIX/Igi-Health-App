@@ -24,7 +24,6 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     apiEndpoint: endpoints.dependent.getDependentType,
     method: 'get',
     onSuccess: res => {
-      console.log(res);
       setRelationsOptions(
         !isUpdate
           ? res
