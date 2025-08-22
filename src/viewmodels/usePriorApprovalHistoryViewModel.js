@@ -19,9 +19,9 @@ const usePriorApprovalHistoryViewModel = () => {
 
   const transformClaimData = (claim, isInProcess) => ({
     headerLabel: `Prior Approval #${claim.RequestID}`,
-    ClaimStatus: claim.RequestStatus,
+    ClaimStatus: claim?.RequestStatus,
     headerIcon: icons.taskEdit,
-    RelationName: claim.RelationName,
+    RelationName: claim?.UserRelationName,
     items: [
       {
         label: 'Patient Name:',
@@ -37,7 +37,7 @@ const usePriorApprovalHistoryViewModel = () => {
       {label: 'Treatment/Service:', value: claim?.TreatmentTypeName?.trim()},
       {label: 'Admission/M.R.#:', value: claim?.admission_number ?? '--'},
       {
-        label: 'Admission/Procedure Date:',
+        label: 'Adm./Procedure Date:',
         value: claim?.admission_date
           ? moment(claim?.admission_date).format('DD-MMM-YYYY')
           : '--',
@@ -59,7 +59,7 @@ const usePriorApprovalHistoryViewModel = () => {
           : '--',
       },
       {
-        label: 'Approved Center Remarks:',
+        label: 'DecisionRemarks:',
         value: claim?.request_closed_remarks || '--',
       },
     ].filter(Boolean),
