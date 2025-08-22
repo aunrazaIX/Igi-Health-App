@@ -5,6 +5,7 @@ import {fetch} from '@react-native-community/netinfo';
 const api = axios.create({
   // baseURL: 'http://10.9.0.55:8088/api/',
   baseURL: 'https://testportal.igi.com.pk:8801/api',
+  // baseURL: 'https://eportal.igi.com.pk/api',
   timeout: 60000,
 });
 

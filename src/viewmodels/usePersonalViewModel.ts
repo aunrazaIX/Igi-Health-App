@@ -79,6 +79,8 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
               ? icons.father
               : item?.DPNTTYPE === 'Mother'
               ? icons.mother
+              : item?.DPNTTYPE === 'Son'
+              ? icons.genderFrame
               : icons.frame,
           dependentDetail: [
             {label: 'Name :', value: formatName(item?.LGIVNAME.trim())},

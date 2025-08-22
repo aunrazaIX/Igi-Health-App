@@ -125,8 +125,7 @@ const AddTreatmentView = ({
                   value={apiData?.admissionDate}
                   disabled={false}
                   mode="date"
-                  maximumDate={new Date()}
-                  minimumDate={undefined}
+                  minimumDate={new Date()}
                 />
               </DependentBox>
             )}
