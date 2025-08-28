@@ -15,7 +15,7 @@ import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import {useDrawerStatus} from '@react-navigation/drawer';
 import {drawerIcons, icons, images} from '../../assets';
-import {AileronSemiBold} from '../../components';
+import {AileronRegular, AileronSemiBold} from '../../components';
 import Tabs from '../TabStack';
 import FAQs from '../../screens/FAQs';
 import LinearGradient from 'react-native-linear-gradient';
@@ -32,7 +32,7 @@ const DrawerStack = () => {
   const {user} = useSelector(state => state.auth);
 
   const timeout = useMemo(() => {
-    return 3 * 60 * 1000;
+    return 5 * 60 * 1000;
   }, []);
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
@@ -269,7 +269,7 @@ const DrawerStack = () => {
                     }
                   }}>
                   <Image style={styles.icon} source={route?.icon} />
-                  <AileronSemiBold style={styles.title} name={route?.name} />
+                  <AileronRegular style={styles.title} name={route?.name} />
                 </TouchableOpacity>
               ))}
           </View>

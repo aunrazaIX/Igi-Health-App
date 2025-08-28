@@ -21,7 +21,6 @@ const ErrorModal = ({containerStyle}) => {
         <View style={[styles.modalView, containerStyle]}>
           <View style={styles.personalFrameContainer}>
             <Image source={icons.errorPopup} style={styles.personalFrameIMG} />
-
             <View style={styles.confirmationContainer}>
               <AileronBold
                 name={errorMessage || 'Error'}

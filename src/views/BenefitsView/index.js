@@ -64,7 +64,7 @@ const BenefitsView = ({
       {item?.note && (
         <TouchableOpacity
           onPress={() => setModalData({show: true, itemData: item})}>
-          <AileronBold name="View details.." style={styles.details} />
+          <AileronBold name="Learn More.." style={styles.details} />
         </TouchableOpacity>
       )}
     </View>

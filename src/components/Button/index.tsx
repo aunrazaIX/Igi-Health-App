@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     color: COLORS.buttonText,
-    fontSize: vw * 3.5,
+    fontSize: vw * 3,
     justifyContent: 'center',
     alignItems: 'center',
   },

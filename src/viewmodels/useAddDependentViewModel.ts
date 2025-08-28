@@ -159,7 +159,7 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
           Show: true,
           message: `"Please fill all required fields"`,
           detail:
-            'An error has occurred, please fill all required feilds. If the problem persists, contact IGI Life',
+            'An error has occurred, please fill all required fields. If the problem persists, contact IGI Life',
         }),
       );
     } else {

@@ -370,7 +370,7 @@ const HomeView = ({
                                   style={{width: '40%'}}
                                   onPress={() => handleDependantsModal(true)}>
                                   <AileronRegular
-                                    name="View more details..."
+                                    name="View more..."
                                     style={styles.homeBackCardDottedText}
                                   />
                                 </TouchableOpacity>
@@ -483,7 +483,7 @@ const HomeView = ({
                     width: vw * 22,
                     justifyContent: 'center',
                   }}>
-                  <AileronBold
+                  <AileronSemiBold
                     style={styles.dashboardContainerCardText}
                     name={item.name}
                   />

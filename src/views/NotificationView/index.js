@@ -13,6 +13,7 @@ import moment from 'moment';
 import NoDataView from '../../components/NoDataView';
 import SimpleLoader from '../../components/SimpleLoader';
 import {COLORS} from '../../assets/theme/colors';
+import {formatDate} from '../../utils';
 
 const NotificationView = ({
   data,
@@ -53,9 +54,11 @@ const NotificationView = ({
             />
             <AileronSemiBold
               style={styles.date}
-              name={moment(item?.PushNotificationDate).format(
-                'DD-MMM YYYY hh:mm',
-              )}
+              name={
+                item?.PushNotificationDate
+                  ? formatDate(item?.PushNotificationDate)
+                  : '-'
+              }
             />
             {!item?.isRead && (
               <Fragment>

@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     color: COLORS.textBlackShade,
     fontSize: vw * 3.4,
     marginTop: vh * 0.5,
+    textAlign: 'left',
   },
   arrow: {
     width: vh * 2,

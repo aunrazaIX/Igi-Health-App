@@ -92,7 +92,7 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
               {selectedTabRight === 'list' && (
                 <InputField
                   value={searchText}
-                  placeholder="Search city / Address / Town .."
+                  placeholder="Search City / Address / Town .."
                   placeholderTextColor={COLORS.textGrayShade}
                   onChangeText={text => setSearchText(text)}
                   searchFieldRight={styles.searchFieldRight}

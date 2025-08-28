@@ -50,6 +50,7 @@ const SignUpView = ({
           signupApiData?.error_cellNumber?.charAt(0).toUpperCase() +
           signupApiData?.error_cellNumber?.slice(1)
         }
+        editable={!loadingSignup}
         keyboardType="numeric"
         mask={[
           /\d/,
@@ -85,6 +86,7 @@ const SignUpView = ({
           signupApiData?.error_email?.charAt(0).toUpperCase() +
           signupApiData?.error_email?.slice(1)
         }
+        editable={!loadingSignup}
       />
 
       <InputField
@@ -121,6 +123,7 @@ const SignUpView = ({
           '-',
           /\d/,
         ]}
+        editable={!loadingSignup}
       />
       <Button
         containerStyle={styles.loginButton}

@@ -4,8 +4,8 @@ import {store} from '../redux/store';
 import {fetch} from '@react-native-community/netinfo';
 const api = axios.create({
   // baseURL: 'http://10.9.0.55:8088/api/',
-  // baseURL: 'https://testportal.igi.com.pk:8801/api',
-  baseURL: 'https://eportal.igi.com.pk/api',
+  baseURL: 'https://testportal.igi.com.pk:8801/api',
+  // baseURL: 'https://eportal.igi.com.pk/api',
   timeout: 60000,
 });
 
@@ -46,7 +46,8 @@ api.interceptors.response.use(
     }
     if (error.message === 'Network Error') {
       return Promise.reject({
-        header: 'Something went wrong, please try again later',
+        header: 'Error',
+        error: 'Something went wrong, please try again later',
       });
     }
     return Promise.reject(data ?? error);

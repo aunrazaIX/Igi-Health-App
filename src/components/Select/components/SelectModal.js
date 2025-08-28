@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: vw * 3,
   },
   listText: {
-    textAlign: 'left',
+    textAlign: 'center',
     fontSize: vh * 1.4,
   },
   optionStyles: {

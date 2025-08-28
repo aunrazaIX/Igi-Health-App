@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     height: vh * 7,
     borderRadius: vw * 4,
     backgroundColor: COLORS.white,
-    paddingHorizontal: vw * 1.5,
+    paddingHorizontal: vw * 3.5,
     flexDirection: 'row',
     paddingVertical: vh * 0.5,
   },
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     paddingVertical: vh * 0.2,
   },
   textInput: {
-    fontSize: vw * 3.4,
+    fontSize: vw * 3.2,
     height: '58%',
     color: COLORS.personalValue,
     fontFamily: fonts.inter.regular,
@@ -186,5 +186,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: vw * 3,
     color: COLORS.benefitTitle,
+    marginLeft: vw * 2,
   },
 });

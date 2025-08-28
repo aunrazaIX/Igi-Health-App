@@ -8,6 +8,7 @@ import {
   Image,
   Touchable,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {COLORS} from '../../assets/theme/colors';
 import {vh} from '../../assets/theme/dimension';
@@ -36,20 +37,20 @@ const AlertModal: React.FC<AlertModalProps> = ({
       statusBarTranslucent
       transparent
       visible={modalVisible}>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <TouchableOpacity
-            style={styles.close}
-            onPress={() => setModalVisible(false)}>
-            <Image source={icons.CancelIcon} style={styles.personalFrameIMG} />
-          </TouchableOpacity>
-          <AileronBold style={styles.textStyle} name={title} />
-          {subtitle && (
-            <AileronRegular name={subtitle} style={styles.subtitle} />
-          )}
-          <AileronRegular style={styles.descriptionStyle} name={description} />
+      <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <AileronBold style={styles.textStyle} name={title} />
+            {subtitle && (
+              <AileronRegular name={subtitle} style={styles.subtitle} />
+            )}
+            <AileronRegular
+              style={styles.descriptionStyle}
+              name={description}
+            />
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   },
 
   textStyle: {
-    color: COLORS.black,
+    color: COLORS.cardBackgroundRed,
     fontSize: vh * 2,
     textAlign: 'center',
     marginBottom: vh * 1.2,
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
   descriptionStyle: {
     color: COLORS.black,
     textAlign: 'left',
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.2,
     alignSelf: 'flex-start',
   },
   subtitle: {

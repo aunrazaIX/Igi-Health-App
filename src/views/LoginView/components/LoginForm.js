@@ -45,7 +45,7 @@ const LoginForm = ({
           rightIcon={icons.email}
           containerStyle={style.inputContainer}
           labelStyle={style.labelStyle}
-          editable={true}
+          editable={!loading}
           allowCopyPaste={true}
           inputStyle={style.inputStyle}
           value={loginApiData?.userName ?? undefined}
@@ -79,6 +79,7 @@ const LoginForm = ({
               : undefined
           }
           maxLength={25}
+          editable={!loading}
         />
       </View>
 

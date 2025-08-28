@@ -93,7 +93,7 @@ const AddTreatmentView = ({
 
             <InputField
               placeholderTextColor={COLORS.textGrayShade}
-              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
+              labelStyle={{color: COLORS.textBlackShade}}
               containerStyle={styles.inputContainerStyle}
               value={apiData?.receiptNumber}
               onChangeText={text => {
@@ -114,24 +114,26 @@ const AddTreatmentView = ({
               }
             />
 
-            {claimType === 'priorApproval' && (
-              <DependentBox containerStyle={styles.dependentOuterStyle}>
-                <DatePicker
-                  onSelectValue={(date: Date) => {
-                    setterForApiData('admissionDate', date);
-                  }}
-                  placeholder={'Select Date'}
-                  label={'Admission/Procedure Date'}
-                  value={apiData?.admissionDate}
-                  disabled={false}
-                  mode="date"
-                  minimumDate={new Date()}
-                />
-              </DependentBox>
-            )}
+            <DependentBox containerStyle={styles.dependentOuterStyle}>
+              <DatePicker
+                onSelectValue={(date: Date) => {
+                  setterForApiData('admissionDate', date);
+                }}
+                placeholder={'Select Date'}
+                label={
+                  claimType === 'lodgeClaim'
+                    ? 'Receipt Date'
+                    : 'Admission/Procedure Date'
+                }
+                value={apiData?.admissionDate}
+                disabled={false}
+                mode="date"
+                minimumDate={new Date()}
+              />
+            </DependentBox>
 
             <InputField
-              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
+              labelStyle={{color: COLORS.textBlackShade}}
               placeholderTextColor={COLORS.textGrayShade}
               maxLength={7}
               containerStyle={styles.inputContainerStyle}
@@ -150,7 +152,7 @@ const AddTreatmentView = ({
             />
 
             <InputField
-              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
+              labelStyle={{color: COLORS.textBlackShade}}
               containerStyle={styles.inputContainerStyle}
               value={apiData?.description}
               maxLength={200}

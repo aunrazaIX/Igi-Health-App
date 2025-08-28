@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.appBackground,
   },
   pickerText: {
-    fontSize: vw * 3.4,
+    fontSize: vw * 3.2,
     textAlign: 'left',
     color: COLORS.black,
     // width: '75%',

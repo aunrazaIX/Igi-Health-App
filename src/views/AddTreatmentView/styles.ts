@@ -70,9 +70,6 @@ const styles = StyleSheet.create({
     borderWidth: vh * 0.3,
     paddingBottom: vh * -2,
   },
-  inputContainerStyle: {
-    paddingHorizontal: vh * 2.25,
-  },
 });
 
 export default styles;

@@ -199,8 +199,8 @@ const AddDependentView: React.FC<AddDependentViewProps> = ({
               confirmatonType === 'update'
                 ? 'Are you sure you want to submit the request to edit the records?'
                 : isUpdate
-                ? 'Your request has been submitted.\nNote: All edit requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation.'
-                : 'Your request has been submitted.\nNote: All new additions requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation..'
+                ? 'Note: All edit requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation.'
+                : 'Note: All new additions requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation..'
             }
             closeButton={confirmatonType === 'update' ? false : true}
             Successfull={true}

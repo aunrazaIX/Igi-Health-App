@@ -270,8 +270,8 @@ export const styles = StyleSheet.create({
     elevation: vw * 0.5,
   },
   cardsContainer: {
-    marginTop: vh * 1.8,
-    marginBottom: vh * 1.8,
+    marginTop: vh * 1.2,
+    // marginBottom: vh * 0.4,
     gap: vh,
     // borderWidth: 2,
     // borderWidth: 2,
@@ -300,7 +300,7 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCardText: {
     // textAlign: 'left',
-    fontSize: vw * 3.1,
+    fontSize: vw * 2.8,
     color: COLORS.black,
     // borderWidth: 2,
     // justifyContent: 'center',
@@ -459,6 +459,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: vw * 2,
+    marginTop: vh * 2,
   },
   notifiationBageView: {
     height: vw * 5,

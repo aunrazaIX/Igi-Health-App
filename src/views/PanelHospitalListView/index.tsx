@@ -65,7 +65,6 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
     Linking.openURL(url);
   };
 
-  console.log(modalVisible);
   return (
     <>
       <TopView

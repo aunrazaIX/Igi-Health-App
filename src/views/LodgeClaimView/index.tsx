@@ -216,7 +216,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
                     ? 'Add More Treatment'
                     : 'Create More Claim'
                   : type === 'priorApproval'
-                  ? 'Add treatment'
+                  ? 'Add Treatment'
                   : 'Create Claim'
               }
             />
@@ -283,7 +283,9 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? 'Are you sure you want to delete this file?'
             : confirmationType === 'back'
             ? 'Going back will return you to the home screen. Do you want to continue?'
-            : 'Thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims.'
+            : `Thank you for submitting your ${
+                type === 'priorApproval' ? 'request' : 'claim'
+              }. You will soon receive a confirmation email.`
         }
         claimSubmission={
           confirmationType === 'delete'

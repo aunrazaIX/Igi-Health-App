@@ -30,7 +30,7 @@ import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {formatName} from '../utils';
+import {formatCurrencyWithPKR, formatName} from '../utils';
 import {InteractionManager} from 'react-native';
 
 interface Treatment {
@@ -147,7 +147,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               userRelationCode: selectedPatient?.CLNTNUM?.toString(),
               requestComments: item?.description,
               amount: item.amount,
-              admission_date: item?.admissionDate,
+              admission_date: new Date(item?.admissionDate),
               hospitalID: selectedHospital.value,
               treatmentTypeID: item?.treatment?.IPDTreatmentTypesID,
               dxcCode: item?.treatment?.value,
@@ -169,6 +169,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
                 UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
                 ClaimReceipt: item?.receiptNumber,
                 ClaimsComments: item?.description,
+                receiptDate: new Date(item?.admissionDate),
                 ClaimsSubTypeID: item?.treatment?.value,
                 ClaimAddedDateTime: moment().format('YYYY-MM-DD'),
                 UUID: randomId,
@@ -182,6 +183,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       claimTrigger(apiData);
     },
   });
+
+  console.log(treatments, 'errorFiles');
 
   const {
     loading: claimLoading,
@@ -207,6 +210,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       );
     },
   });
+  console.log(addClaimError, 'addClaimError');
 
   const {data: personalDetails, loading: personalDetailsLoading} = useApiHook({
     apiEndpoint: endpoints.bank.getBankDetails,
@@ -298,13 +302,14 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       },
       {
         key: 'admission_date',
-        label: 'Admission/Procedure Date:',
+        label:
+          type === 'lodgeClaim' ? 'Reciept Date:' : 'Admission/Procedure Date:',
         value: item?.admissionDate ?? '--',
       },
       {
         key: 'amount',
         label: type === 'lodgeClaim' ? 'Amount:' : 'Estimated Cost:',
-        value: item?.amount ?? '--',
+        value: item?.amount ? formatCurrencyWithPKR(item?.amount) : '--',
         total: true,
       },
       {
@@ -469,7 +474,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               show: true,
               message: 'Upload Limit Exceeded',
               detail:
-                'The total size of your selected file(s) must not exceed 25MB.Please adjust your selection',
+                'The total size of your selected file(s) must not exceed 25MB. Please adjust your selection',
             }),
           );
           upload = false;

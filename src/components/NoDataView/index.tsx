@@ -14,7 +14,7 @@ const NoDataView = ({
 }) => {
   return (
     <View style={styles.noDataView}>
-      <Image style={[styles.noDataIcon, iconStyle]} source={icons.noData} />
+      <Image style={[styles.noDataIcon, iconStyle]} source={icons.noDataTwo} />
       <AileronBold style={[styles.noDataText, text]} name={name} />
     </View>
   );

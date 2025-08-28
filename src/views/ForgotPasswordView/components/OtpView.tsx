@@ -15,6 +15,7 @@ const OtpView = ({
   setShowResend,
   otp,
   flushOtp,
+  verifyOtpLoading,
 }: {
   setOtp: (otp: string) => void;
   sendOtp: () => void;

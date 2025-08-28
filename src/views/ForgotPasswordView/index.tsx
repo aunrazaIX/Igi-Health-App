@@ -79,7 +79,13 @@ const ForgotPasswordView = ({
   const {user} = useSelector((state: RootState) => state.auth);
 
   const returnComponent: Record<number, JSX.Element> = {
-    1: <EnterEmailView setterForApiData={setterForApiData} apiData={apiData} />,
+    1: (
+      <EnterEmailView
+        ForgotPasswordLoading={ForgotPasswordLoading}
+        setterForApiData={setterForApiData}
+        apiData={apiData}
+      />
+    ),
     2: (
       <OtpView
         flushOtp={flushOtp}
@@ -90,12 +96,14 @@ const ForgotPasswordView = ({
         showResend={showResend}
         countdownKey={countdownKey}
         setShowResend={setShowResend}
+        verifyOtpLoading={verifyOtpLoading}
       />
     ),
     3: (
       <CreateNewPassword
         setterForUpdatePasswordApiData={setterForUpdatePasswordApiData}
         updatePasswordApiData={updatePasswordApiData}
+        updatePasswordLoading={updatePasswordLoading}
       />
     ),
   };

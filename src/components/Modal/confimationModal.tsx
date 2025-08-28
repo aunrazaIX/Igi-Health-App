@@ -78,6 +78,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
       onClose();
     }
   };
+  console.log(type, 'typetesting');
   return (
     <Modal
       transparent={true}
@@ -106,10 +107,12 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
             {claimSubmission && (
               <View style={styles.claimContainer}>
                 <AileronBold
-                  name="Claim Submission"
+                  name={`${
+                    type === 'priorApproval' ? 'Request' : 'Claim'
+                  } Submitted`}
                   style={styles.confirmation}
                 />
-                <AileronBold name="Confirmation" style={styles.required} />
+                {/* <AileronBold name="Confirmation" style={styles.required} /> */}
               </View>
             )}
 
@@ -133,16 +136,10 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
             )}
 
             {confirmationMessage && confirmationMessage.includes('Note:') ? (
-              <>
-                <AileronSemiBold
-                  name={confirmationMessage.split('Note:')[0].trim()}
-                  style={styles.confirmationDetailWithNote}
-                />
-                <AileronSemiBold
-                  name={'Note:' + confirmationMessage.split('Note:')[1]}
-                  style={styles.confirmationDetailNote}
-                />
-              </>
+              <AileronSemiBold
+                name={'Note:' + confirmationMessage.split('Note:')[1]}
+                style={styles.confirmationDetailNote}
+              />
             ) : (
               <AileronSemiBold
                 name={confirmationMessage}
@@ -291,6 +288,7 @@ const styles = StyleSheet.create({
     color: COLORS.confimationDetail,
     fontStyle: 'italic',
     marginBottom: vh * 2.5,
+    marginTop: vh * 1,
   },
   confirmationButtonContainer: {
     flexDirection: 'row',

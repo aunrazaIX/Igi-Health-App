@@ -11,7 +11,7 @@ import styles from '../styles';
 const ContactInfoView = ({onPress}) => {
   return (
     <View style={styles.box}>
-      <AileronBold style={styles.title} name="Contact information" />
+      <AileronBold style={styles.title} name="Contact Information" />
       <AileronSemiBold style={styles.subtitle} name="Approval Center:" />
       <AileronRegular
         style={styles.headingText}

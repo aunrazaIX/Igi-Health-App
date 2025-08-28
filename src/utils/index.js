@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const formatCurrency = amount => {
   const num =
     typeof amount === 'string' ? Number(amount.replace(/,/g, '')) : amount;
@@ -58,3 +60,23 @@ export function formatName(name) {
     ?.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     ?.join(' ');
 }
+
+export const formatDate = date => {
+  if (!date) return '';
+
+  const mDate = moment(date);
+  const now = moment();
+
+  // Check if within last 6 hours
+  if (now.diff(mDate, 'hours') < 6) {
+    return mDate.fromNow(); // e.g. "2 hours ago"
+  }
+
+  if (mDate.isSame(now, 'day')) {
+    return `Today ${mDate.format('hh:mm A')}`;
+  } else if (mDate.isSame(now.clone().subtract(1, 'day'), 'day')) {
+    return `Yesterday ${mDate.format('hh:mm A')}`;
+  } else {
+    return mDate.format('DD-MMM YYYY hh:mm A');
+  }
+};

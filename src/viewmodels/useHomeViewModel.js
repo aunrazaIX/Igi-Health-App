@@ -237,7 +237,7 @@ const useHomeViewModel = () => {
     },
     user?.coverageType?.some(obj => obj?.isAllowed === true) && {
       logo: newCardsIcons.lodgeClaim,
-      name: 'Lodge A Claim',
+      name: 'Lodge Claim',
       image: icons.forwardArrow,
       mainParent: 'Tabs',
       stChild: 'LodgeClaim',

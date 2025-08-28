@@ -8,7 +8,7 @@ export const validateMobileNumber = (text: string): string => {
 };
 
 export const validateEmail = (text: string): string => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.(com|com\.pk)$/;
+  const emailRegex = /^[^@\s]+@[^@\s]+$/;
   if (!text) return 'Email is required';
   if (!emailRegex.test(text)) return 'Invalid email address';
   return '';

@@ -40,24 +40,24 @@ const UploadDoc: React.FC<UploadDocProps> = ({
     <View style={styles.uploadFileContainer}>
       <View>
         <View style={styles.uploadBox}>
-          <View>
-            <Image source={images.priorUpload} style={styles.uploadImage} />
-          </View>
-
           <AileronSemiBold
-            name={'Upload Supporting\nDocuments'}
+            name={'Upload Documents'}
             style={styles.supporting}
           />
-          <AileronRegular
-            name={'Supported file types: .jpg, .jpeg, .png, .pdf, .webp'}
-            style={styles.supportingSubText}
-          />
           <TouchableOpacity onPress={() => viewOptionModal(true)}>
+            <Image source={images.priorUpload} style={styles.uploadImage} />
+          </TouchableOpacity>
+
+          <View>
             <AileronSemiBold
               name="Click to Upload"
               style={styles.ClickUpload}
             />
-          </TouchableOpacity>
+            <AileronRegular
+              name={'Supported file types: .jpg, .jpeg, .png, .pdf, .webp'}
+              style={styles.supportingSubText}
+            />
+          </View>
           <AileronSemiBold
             name="(Max. File Size: 25 MB)"
             style={styles.maxFile}
@@ -146,15 +146,14 @@ const styles = StyleSheet.create({
     borderRadius: vh * 0.5,
     padding: vh,
     alignItems: 'center',
-    marginTop: vh * 2,
-    // borderEndWidth: 2,
+    marginTop: vh * 0.5,
   },
   uploadImage: {
     width: vh * 7,
     height: vh * 7,
   },
   supporting: {
-    marginVertical: vh * 2,
+    marginBottom: vh * 2,
     fontSize: vh * 1.6,
     color: COLORS.insuredPrice,
   },
@@ -164,7 +163,7 @@ const styles = StyleSheet.create({
     color: COLORS.insuredPrice,
   },
   ClickUpload: {
-    color: COLORS.benefitTitle,
+    color: COLORS.black,
     fontSize: vh * 1.5,
     marginBottom: vh * 0.7,
   },
@@ -194,19 +193,17 @@ const styles = StyleSheet.create({
   documentText: {
     textAlign: 'left',
     color: COLORS.maxFile,
-    fontSize: vh * 1.4,
+    fontSize: vh * 1.25,
     flexShrink: 1,
     flexWrap: 'wrap',
     maxWidth: vw * 55, // adjust as per your layout
   },
   fileSizeText: {
-    // borderWidth: 2,
     textAlign: 'left',
-    // backgroundColor: 'red',
-    fontSize: vh * 1.4,
+    fontSize: vh * 1.1,
     color: COLORS.cardBackgroundRed,
-    // textAlign: 'left',
     marginTop: vh * 0.5,
+    fontStyle: 'italic',
   },
   viewFile: {
     fontSize: vw * 3,

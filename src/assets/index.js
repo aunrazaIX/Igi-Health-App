@@ -141,6 +141,7 @@ export const icons = {
   husband: require('./icons/husband.png'),
   father: require('./icons/father.png'),
   wife: require('./icons/wife.png'),
+  noDataTwo: require('./icons/noDataTwo.png'),
 };
 
 export const drawerIcons = {

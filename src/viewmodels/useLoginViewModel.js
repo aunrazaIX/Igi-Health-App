@@ -333,7 +333,7 @@ const useLoginViewModel = () => {
       dispatch(
         setErrorModal({
           Show: true,
-          message: 'Please fill all feilds',
+          message: 'Please fill all fields',
           detail:
             'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life.',
         }),

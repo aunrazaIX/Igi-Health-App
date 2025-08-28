@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     width: '85%',
   },
   date: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3,
     marginLeft: vw * 3,
     marginTop: vh * 0.5,
     color: COLORS.time,
