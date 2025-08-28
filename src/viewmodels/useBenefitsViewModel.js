@@ -38,7 +38,6 @@ const useBenefitsViewModel = () => {
       setAllBenefits(res);
     },
   });
-  console.log(allBenefits);
 
   let filteredData = allBenefits
     ?.filter(item => {

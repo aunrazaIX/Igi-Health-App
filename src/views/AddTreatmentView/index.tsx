@@ -114,20 +114,21 @@ const AddTreatmentView = ({
               }
             />
 
-            <DependentBox containerStyle={styles.dependentOuterStyle}>
-              <DatePicker
-                onSelectValue={(date: Date) => {
-                  setterForApiData('admissionDate', date);
-                }}
-                placeholder={'Select Date'}
-                label={'Admission/Procedure Date'}
-                value={apiData?.admissionDate}
-                disabled={false}
-                mode="date"
-                maximumDate={new Date()}
-                minimumDate={undefined}
-              />
-            </DependentBox>
+            {claimType === 'priorApproval' && (
+              <DependentBox containerStyle={styles.dependentOuterStyle}>
+                <DatePicker
+                  onSelectValue={(date: Date) => {
+                    setterForApiData('admissionDate', date);
+                  }}
+                  placeholder={'Select Date'}
+                  label={'Admission/Procedure Date'}
+                  value={apiData?.admissionDate}
+                  disabled={false}
+                  mode="date"
+                  minimumDate={new Date()}
+                />
+              </DependentBox>
+            )}
 
             <InputField
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}

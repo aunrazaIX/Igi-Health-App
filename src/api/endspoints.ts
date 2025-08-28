@@ -61,6 +61,9 @@ const endpoints = {
     getAll: 'PushNotification/getNotifications',
     markAsRead: 'PushNotification/readNotification',
   },
+  PriorApprovalHistory: {
+    getPriorApprovalRequests: 'PriorApprovals/GetPriorApprovalRequests',
+  },
 };
 
 export default endpoints;

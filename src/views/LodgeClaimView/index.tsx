@@ -130,7 +130,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   const moduleData = lodgeState?.modules?.[activeModule] || {};
   const treatment = moduleData?.treatments || [];
   const doc = moduleData?.selectedDocuments || [];
-  console.log(console.log(confirmationType, 'djsaiodjasio'));
 
   const renderStep = {
     personalDetails: (

@@ -110,6 +110,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     dispatch(_setTreatmentData([]));
     // navigation.navigate('HomeStack');
     dispatch(setSelectedDocuments([]));
+    dispatch(setSelectedHospital(null));
     dispatch(setSelectedPatient(null));
     dispatch(setSelectedType(null));
     setterForclaimData('claimComments', '');
@@ -177,7 +178,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               userId: user?.UserId,
               claimId: res?.Data?.toString(),
             };
-      console.log(apiData);
+
       claimTrigger(apiData);
     },
   });
@@ -495,7 +496,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         }
       });
       if (upload) {
-        console.log(upload);
         dispatch(setSelectedDocuments(documents));
       }
     } catch (e) {
