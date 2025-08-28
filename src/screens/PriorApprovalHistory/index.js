@@ -4,8 +4,9 @@ import PriorApprovalHistoryView from '../../views/PriorApprovalHistoryVIew';
 
 const PriorApprovalHistory = () => {
   const {states, functions} = usePriorApprovalHistoryViewModel();
-  const {data, claimDataLoading, type, showRemarks, remarks} = states;
-  const {goBack, onCloseRemarksModal} = functions;
+  const {data, claimDataLoading, type, showRemarks, remarks, searchText} =
+    states;
+  const {goBack, onCloseRemarksModal, setSearchText} = functions;
   return (
     <PriorApprovalHistoryView
       data={data}
@@ -15,6 +16,8 @@ const PriorApprovalHistory = () => {
       showRemarks={showRemarks}
       remarks={remarks}
       claimDataLoading={claimDataLoading}
+      searchText={searchText}
+      setSearchText={setSearchText}
     />
   );
 };

@@ -12,8 +12,9 @@ const ClaimsHistory = () => {
     remarks,
     getHeadingSubHeading,
     isInProcessAllowed,
+    searchText,
   } = states;
-  const {goBack, onPressType, onCloseRemarksModal} = functions;
+  const {goBack, onPressType, onCloseRemarksModal, setSearchText} = functions;
   return (
     <ClaimsHistoryView
       data={data}
@@ -26,6 +27,8 @@ const ClaimsHistory = () => {
       getHeadingSubHeading={getHeadingSubHeading}
       claimDataLoading={claimDataLoading}
       isInProcessAllowed={isInProcessAllowed}
+      searchText={searchText}
+      setSearchText={setSearchText}
     />
   );
 };

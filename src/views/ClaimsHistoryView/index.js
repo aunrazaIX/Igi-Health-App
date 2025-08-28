@@ -2,7 +2,12 @@ import {View, FlatList, TouchableOpacity} from 'react-native';
 import React, {Fragment} from 'react';
 import TopView from '../../components/TopView';
 import {icons} from '../../assets';
-import {AileronRegular, AileronSemiBold, CurvedView} from '../../components';
+import {
+  AileronRegular,
+  AileronSemiBold,
+  CurvedView,
+  InputField,
+} from '../../components';
 import DetailsContainer from '../../components/DetailsContainer';
 import SimpleLoader from '../../components/SimpleLoader';
 import {COLORS} from '../../assets/theme/colors';
@@ -22,6 +27,8 @@ const ClaimsHistoryView = ({
   onCloseRemarksModal,
   getHeadingSubHeading,
   isInProcessAllowed,
+  searchText,
+  setSearchText,
 }) => {
   const renderItem = ({item, index}) => (
     <DetailsContainer
@@ -88,6 +95,14 @@ const ClaimsHistoryView = ({
             {marginTop: vh * 0.5, fontSize: vw * 3},
           ]}
           name={getHeadingSubHeading[type]?.messsage}
+        />
+        <InputField
+          placeholder="Search..."
+          placeholderTextColor={COLORS.textGrayShade}
+          inputStyle={styles.inputStyle}
+          containerStyle={styles.inputFeild}
+          value={searchText}
+          onChangeText={text => setSearchText(text)}
         />
         <FlatList
           ListFooterComponent={

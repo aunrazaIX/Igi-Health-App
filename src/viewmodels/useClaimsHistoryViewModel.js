@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {icons} from '../assets';
 import endpoints from '../api/endspoints';
 import {useSelector} from 'react-redux';
@@ -18,6 +18,8 @@ const useClaimsHistoryViewModel = () => {
   const [data, setData] = useState([]);
   const [showRemarks, setShowRemarks] = useState(false);
   const [remarks, setRemarks] = useState('');
+  const [allData, setAllData] = useState([]);
+  const [searchText, setSearchText] = useState('');
 
   const isInProcessAllowed = user?.coverageType?.some(
     obj => obj?.isAllowed !== true,
@@ -45,7 +47,9 @@ const useClaimsHistoryViewModel = () => {
     headerLabel: `Claim #${claim.ClaimID}`,
     ClaimStatus: claim.ClaimStatus,
     headerIcon: icons.taskEdit,
-    RelationName: claim.RelationName,
+    RelationName: claim?.RelationName
+      ? formatName(claim?.RelationName.trim())
+      : '--',
     items: [
       {
         label: 'Patient Name:',
@@ -118,7 +122,7 @@ const useClaimsHistoryViewModel = () => {
     argsOrBody: {userid: user?.UserId},
     skip: !isInProcessAllowed,
     onSuccess: res => {
-      setData(res?.Data?.map(claim => transformClaimData(claim, false)));
+      setAllData(res?.Data?.map(claim => transformClaimData(claim, false)));
     },
   });
 
@@ -128,7 +132,7 @@ const useClaimsHistoryViewModel = () => {
     argsOrBody: {userid: user?.UserId},
     skip: isInProcessAllowed,
     onSuccess: res => {
-      setData(res?.Data?.map(claim => transformClaimData(claim, true)));
+      setAllData(res?.Data?.map(claim => transformClaimData(claim, true)));
     },
   });
 
@@ -137,6 +141,21 @@ const useClaimsHistoryViewModel = () => {
     setData([]);
     _type === 'Processed' ? getDxcClaims() : geInProcessClaims();
   };
+
+  useEffect(() => {
+    const lowerText = searchText.toLowerCase();
+    let currentData = allData;
+    if (searchText.trim()) {
+      currentData = currentData.filter(
+        item =>
+          item.headerLabel?.toLowerCase().includes(lowerText) ||
+          item.items?.some(subItem =>
+            subItem.value?.toLowerCase().includes(lowerText),
+          ),
+      );
+    }
+    setData(currentData);
+  }, [searchText, allData]);
 
   return {
     states: {
@@ -147,11 +166,13 @@ const useClaimsHistoryViewModel = () => {
       remarks,
       getHeadingSubHeading,
       isInProcessAllowed,
+      searchText,
     },
     functions: {
       goBack,
       onPressType,
       onCloseRemarksModal,
+      setSearchText,
     },
   };
 };

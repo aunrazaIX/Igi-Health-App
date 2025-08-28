@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
+import {fonts} from '../../assets/fonts';
 
 export const styles = StyleSheet.create({
   claimHistoryContainer: {
@@ -14,6 +15,22 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.buttonBackground,
     paddingVertical: vh * 0.3,
     paddingHorizontal: vw * 0.5,
+  },
+  inputStyle: {
+    fontSize: vw * 3.5,
+    height: vh * 4.4,
+    color: COLORS.textBlackShade,
+    fontFamily: fonts.inter.bold,
+    alignItems: 'center',
+  },
+  inputFeild: {
+    borderWidth: 2,
+    // paddingHorizontal: vw * 2,
+    // marginHorizontal: vw * 2,
+    height: vh * 6,
+
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   button: {
