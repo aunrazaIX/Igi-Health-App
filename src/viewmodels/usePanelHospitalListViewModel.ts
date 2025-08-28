@@ -1,7 +1,7 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useState, useEffect, useCallback} from 'react';
 import {ImageSourcePropType, Linking} from 'react-native';
-import {cardIcons, drawerIcons, icons} from '../assets';
+import {drawerIcons, icons} from '../assets';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import Geolocation from '@react-native-community/geolocation';
@@ -28,6 +28,7 @@ type usePanelHospitalListViewModel = {
     searchText: string;
     loading: boolean;
     position: any;
+    modalVisible: boolean;
   };
   functions: {
     onPressTab: (tab: string) => void;
@@ -35,6 +36,7 @@ type usePanelHospitalListViewModel = {
     goBack: () => void;
     setSearchText: (text: string) => void;
     handleMapDirection: any;
+    showModal: () => void;
   };
 };
 
@@ -48,6 +50,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
     latitudeDelta: 0.001,
     longitudeDelta: 0.001,
   });
+  const [modalVisible, setModalVisible] = useState(true);
   const [searchText, setSearchText] = useState('');
   const [allData, setAllData] = useState<{
     panelHospitals: PanelHospitalGroup[];
@@ -167,6 +170,10 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
     },
   });
 
+  const showModal = () => {
+    setModalVisible(false);
+  };
+
   return {
     states: {
       data,
@@ -175,6 +182,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
       searchText,
       loading: loadingPanelHospitals || loadingDiscountedCenters,
       position,
+      modalVisible,
     },
     functions: {
       onPressTab,
@@ -182,6 +190,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
       goBack,
       setSearchText,
       handleMapDirection,
+      showModal,
     },
   };
 };

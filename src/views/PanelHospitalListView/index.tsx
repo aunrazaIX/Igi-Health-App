@@ -17,6 +17,7 @@ import {PanelHospitalGroup} from '../../viewmodels/usePanelHospitalListViewModel
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 import MapView, {Callout, Marker} from 'react-native-maps';
+import AlertModal from '../../components/AlertModal';
 
 type HomeViewProps = {
   data: PanelHospitalGroup[];
@@ -30,6 +31,8 @@ type HomeViewProps = {
   loading: any;
   handleMapDirection: any;
   position: any;
+  modalVisible: boolean;
+  showModal: () => void;
 };
 
 const PanelHospitalListView: React.FC<HomeViewProps> = ({
@@ -44,6 +47,8 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
   loading,
   handleMapDirection,
   position,
+  modalVisible,
+  showModal,
 }) => {
   const cleanCoordinate = (value: string): number | null => {
     if (!value || typeof value !== 'string') return null;
@@ -59,6 +64,8 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
     const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
     Linking.openURL(url);
   };
+
+  console.log(modalVisible);
   return (
     <>
       <TopView
@@ -278,7 +285,14 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             />
           )}
         </View>
-
+        <AlertModal
+          title="Notice"
+          description={
+            'IGI Life Insurance reserves the right to de-panel any listed discount center without prior notice. Additionally, services or discounts at a discount center may be temporarily halted due to unforeseen circumstances.\n\nIf you encounter any issues with a discount center, please contact IGI Life Insurance at 042-34503333 for assistance.'
+          }
+          modalVisible={modalVisible}
+          setModalVisible={showModal}
+        />
         <ModalLoading loading={loading} />
       </CurvedView>
     </>

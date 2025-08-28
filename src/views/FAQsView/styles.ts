@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
   accordion: {
     // marginBottom: vh * 2,
     borderRadius: vh * 4,
-
     marginVertical: vh * 0.45,
   },
   wrapper: {
