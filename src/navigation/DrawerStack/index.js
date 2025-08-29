@@ -95,12 +95,22 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'Personal',
     },
-    // {
-    //   id: 7,
-    //   name: 'Claims History',
-    //   icon: drawerIcons.drawerClaimHistory,
-    //   to: 'ClaimsHistory',
-    // },
+    {
+      id: 7,
+      name: 'Prior Approval History',
+      icon: drawerIcons.drawerClaimHistory,
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'PriorApprovalHistory',
+    },
+    {
+      id: 7,
+      name: 'Claims History',
+      icon: drawerIcons.drawerClaimHistory,
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'ClaimHistory',
+    },
     {
       id: 8,
       name: 'Hospital Directory',
