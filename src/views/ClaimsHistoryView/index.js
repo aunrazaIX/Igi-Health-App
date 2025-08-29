@@ -100,7 +100,7 @@ const ClaimsHistoryView = ({
           placeholder="Search..."
           placeholderTextColor={COLORS.textGrayShade}
           inputStyle={styles.inputStyle}
-          containerStyle={styles.inputFeild}
+          containerStyle={styles.inputField}
           value={searchText}
           onChangeText={text => setSearchText(text)}
         />

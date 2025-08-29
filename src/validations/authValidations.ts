@@ -3,7 +3,7 @@ export const validateMobileNumber = (text: string): string => {
   // const mobileRegex = /^923\d{2}-\d{7}$/;
   if (!text) return 'Mobile number is required';
   if (!mobileRegex.test(text))
-    return 'Invalid mobile number. Format: 92XXXXXXXXX';
+    return 'Invalid mobile number. Format: 923XXXXXXXX';
   return '';
 };
 

@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.inter.bold,
     alignItems: 'center',
   },
-  inputFeild: {
+  inputField: {
     borderWidth: 2,
     // paddingHorizontal: vw * 2,
     // marginHorizontal: vw * 2,
