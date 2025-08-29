@@ -70,7 +70,7 @@ const useApiHook = <T>({
         }
       }
       setData(dataToSave);
-      if (onSuccess) {
+      if (onSuccess && res) {
         onSuccess(dataToSave);
       }
 
