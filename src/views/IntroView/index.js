@@ -20,7 +20,7 @@ const IntroView = ({handleNextButton, backgroundImages}) => {
   );
   const DoneButton = () => (
     <View style={styles.buttonContainer}>
-      <AileronSemiBold name={'Done'} style={styles.buttonText} />
+      <AileronSemiBold name={'Get Started'} style={styles.buttonText} />
     </View>
   );
 

@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: vw * 3,
   },
+  buttonsView: {flexDirection: 'row', justifyContent: 'space-between'},
 });
 
 export default styles;

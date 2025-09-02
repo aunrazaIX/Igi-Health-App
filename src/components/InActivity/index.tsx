@@ -98,8 +98,7 @@ const InactivityHandler = ({children, timeout, warningBefore}) => {
               style={styles.label}
             />
 
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View style={styles.buttonsView}>
               <TouchableOpacity
                 onPress={userLogout}
                 style={[styles.buttonContainer, styles.signoutButton]}>
