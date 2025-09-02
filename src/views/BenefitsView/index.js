@@ -72,40 +72,10 @@ const BenefitsView = ({
 
   const HeaderComponent = () => (
     <View>
-      <LinearGradient
-        start={{x: 0, y: 0}}
-        end={{x: 0.8, y: 0}}
-        colors={COLORS.benefitsCardGradient}
-        style={styles.BenefitsGradients}>
-        <View style={styles.Maximum}>
-          <View style={styles.MaximumLeftBox}>
-            <Image source={images.Logo} style={styles.benefitsLogo} />
-            <AileronBold name="Entitled" style={styles.MaximumTitle} />
-            <AileronBold
-              name={
-                selectedTab === 'Inpatient'
-                  ? 'Inpatient'
-                  : selectedTab === 'Outpatient'
-                  ? 'Outpatient'
-                  : 'Maternity'
-              }
-              style={styles.selectedTitle}
-            />
-            <AileronBold name={'Benefits!'} style={styles.BenefitsTitle} />
-          </View>
-          <View style={styles.MaximumRightBox}>
-            <Image
-              style={styles.benefitsImage}
-              source={images.maximumBenefits}
-            />
-          </View>
-        </View>
-      </LinearGradient>
-      <View style={styles.coverage}>
+      {/* <View style={styles.coverage}>
         <AileronBold name={'Coverage &'} style={styles.coverageTitle} />
         <AileronBold name={' Benefits!'} style={styles.benefitTitle} />
-      </View>
-
+      </View> */}
       <View>
         <View style={styles.mapTabsContainer}>
           <FlatList
@@ -132,6 +102,35 @@ const BenefitsView = ({
 
   const renderSeperator = () => <View style={styles.seperator} />;
 
+  const headComponent = () => (
+    <LinearGradient
+      start={{x: 0, y: 0}}
+      end={{x: 0.8, y: 0}}
+      colors={COLORS.benefitsCardGradient}
+      style={styles.BenefitsGradients}>
+      <View style={styles.Maximum}>
+        <View style={styles.MaximumLeftBox}>
+          <Image source={images.Logo} style={styles.benefitsLogo} />
+          <AileronBold name="Entitled" style={styles.MaximumTitle} />
+          <AileronBold
+            name={
+              selectedTab === 'Inpatient'
+                ? 'Inpatient'
+                : selectedTab === 'Outpatient'
+                ? 'Outpatient'
+                : 'Maternity'
+            }
+            style={styles.selectedTitle}
+          />
+          <AileronBold name={'Benefits!'} style={styles.BenefitsTitle} />
+        </View>
+        <View style={styles.MaximumRightBox}>
+          <Image style={styles.benefitsImage} source={images.maximumBenefits} />
+        </View>
+      </View>
+    </LinearGradient>
+  );
+
   return (
     <>
       <TopView title={'Entitled Benefits'} />
@@ -140,7 +139,7 @@ const BenefitsView = ({
         <FlatList
           indicatorStyle="black"
           ItemSeparatorComponent={renderSeperator}
-          // ListHeaderComponent={headerComponent}
+          ListHeaderComponent={headComponent}
           showsVerticalScrollIndicator={true}
           data={data}
           ListEmptyComponent={

@@ -78,7 +78,7 @@ const ConfirmationModal: React.FC<ConfimationModalProps> = ({
       onClose();
     }
   };
-  console.log(type, 'typetesting');
+
   return (
     <Modal
       transparent={true}

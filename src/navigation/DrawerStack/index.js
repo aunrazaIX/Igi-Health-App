@@ -34,6 +34,9 @@ const DrawerStack = () => {
   const timeout = useMemo(() => {
     return 5 * 60 * 1000;
   }, []);
+  const warningBefore = useMemo(() => {
+    return 4 * 60 * 1000;
+  });
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
 
@@ -58,7 +61,7 @@ const DrawerStack = () => {
     },
     {
       id: 2,
-      name: 'Benefits',
+      name: 'Coverage & Benefits',
       icon: drawerIcons.drawerBenefits,
       mainParent: 'Tabs',
       stChild: 'HomeStack',
@@ -67,7 +70,7 @@ const DrawerStack = () => {
 
     {
       id: 3,
-      name: 'Personal',
+      name: 'Family Details',
       icon: drawerIcons.drawerPersonal,
       mainParent: 'Tabs',
       stChild: 'HomeStack',
@@ -87,7 +90,7 @@ const DrawerStack = () => {
       mainParent: 'Tabs',
       stChild: 'PriorApproval',
     },
-    {
+    user?.coverageType?.some(obj => obj?.isRecordAdditionAllowed === true) && {
       id: 6,
       name: 'Add Dependent',
       icon: drawerIcons.drawerAddDependent,
@@ -288,7 +291,7 @@ const DrawerStack = () => {
     );
   };
   return (
-    <InactivityHandler timeout={timeout}>
+    <InactivityHandler timeout={timeout} warningBefore={warningBefore}>
       <Drawer.Navigator
         drawerContent={DrawerContent}
         screenOptions={{

@@ -1,5 +1,12 @@
 import React from 'react';
-import {Modal, StyleSheet, View, TouchableOpacity, Image} from 'react-native';
+import {
+  Modal,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {COLORS} from '../../../assets/theme/colors';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {icons} from '../../../assets';
@@ -8,17 +15,13 @@ import {AileronBold, AileronRegular} from '../../../components';
 const RemarksModal = ({show, remarks, onClose}) => {
   return (
     <Modal animationType="fade" visible={show} transparent statusBarTranslucent>
-      <View style={styles.container}>
-        <View style={styles.subContainer}>
-          <View style={styles.row}>
-            <AileronBold style={styles.title} name={'Remarks'} />
-            <TouchableOpacity onPress={onClose} style={styles.close}>
-              <Image source={icons.errorPopup} style={styles.closeIcon} />
-            </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={onClose}>
+        <View style={styles.container}>
+          <View style={styles.subContainer}>
+            <AileronRegular style={styles.text} name={remarks} />
           </View>
-          <AileronRegular style={styles.text} name={remarks} />
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };

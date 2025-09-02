@@ -3,28 +3,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import {useCallback, useState} from 'react';
 import {get, post} from '../api';
 
-type ApiHookParams = {
-  apiEndpoint: string;
-  argsOrBody?: Record<string, any>;
-  method: string;
-  refetchOnArgumentChange?: boolean;
-  transform?: any;
-  onSuccess?: (data: any) => void;
-  onError?: (data: any) => void;
-  isFormData?: boolean;
-  skip?: boolean;
-  onUnmount?: () => void;
-};
-
-type ApiHookReturn<T> = {
-  loading: boolean;
-  data: T | null;
-  error: Error | null;
-  trigger: (data?: any) => Promise<void>;
-  transformResponse: (response: any) => void;
-};
-
-const useApiHook = <T>({
+const useApiHook = ({
   apiEndpoint,
   method = 'get',
   argsOrBody = {},
@@ -35,12 +14,12 @@ const useApiHook = <T>({
   onSuccess,
   skip = false,
   onUnmount,
-}: ApiHookParams): ApiHookReturn<T> => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState<T | null>(null);
-  const [error, setError] = useState<Error | null>(null);
+}) => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
-  const apiCallingFunction = async (data?: any) => {
+  const apiCallingFunction = async data => {
     setError(null);
     setData(null);
     try {
@@ -56,14 +35,14 @@ const useApiHook = <T>({
       dataToSave = res;
       if (transform) {
         const {keyToLoop, ...mappings} = transform;
-        const list = keyToLoop ? res[keyToLoop] : res;
+        const key = res[keyToLoop];
+        const list = keyToLoop ? key : res;
         if (Array.isArray(list)) {
-          const transformed = list.map(item => {
-            const transformedItem: Record<string, any> = {...item};
+          const transformed = list?.map(item => {
+            const transformedItem = {...item};
             Object.entries(mappings).forEach(([newKey, sourceKey]) => {
               transformedItem[newKey] = item[sourceKey];
             });
-
             return transformedItem;
           });
           dataToSave = transformed;
@@ -77,16 +56,16 @@ const useApiHook = <T>({
       return;
     } catch (e) {
       if (onError) {
-        onError(e as Error);
+        onError(e);
       }
-      setError(e as Error);
+      setError(e);
       return;
     } finally {
       setLoading(false);
     }
   };
 
-  const transformResponse = (response: any) => {
+  const transformResponse = response => {
     setData(response);
   };
 

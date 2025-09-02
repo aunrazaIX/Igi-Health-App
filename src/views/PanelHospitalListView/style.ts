@@ -134,7 +134,7 @@ export const styles = StyleSheet.create({
     width: vw * 4,
   },
   inputStyle: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3,
     height: vh * 4.4,
     color: COLORS.textBlackShade,
     fontFamily: fonts.inter.bold,

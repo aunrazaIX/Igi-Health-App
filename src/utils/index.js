@@ -75,7 +75,7 @@ export const formatDate = date => {
   if (mDate.isSame(now, 'day')) {
     return `Today ${mDate.format('hh:mm A')}`;
   } else if (mDate.isSame(now.clone().subtract(1, 'day'), 'day')) {
-    return `Yesterday ${mDate.format('hh:mm A')}`;
+    return `Yesterday at ${mDate.format('hh:mm A')}`;
   } else {
     return mDate.format('DD-MMM YYYY hh:mm A');
   }

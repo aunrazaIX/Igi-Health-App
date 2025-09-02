@@ -6,7 +6,7 @@ import {vh, vw} from '../../../assets/theme/dimension';
 
 const ImageModal = ({image, onClose}) => {
   return (
-    <Modal visible transparent statusBarTranslucent>
+    <Modal visible backdropColor={'#5d605f3d'} statusBarTranslucent>
       <View style={styles.container}>
         <TouchableOpacity onPress={onClose}>
           <Image source={icons.CancelIcon} style={styles.cross} />
@@ -23,11 +23,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.black + '88',
+    backgroundColor: COLORS.black + '99',
   },
   cross: {
     backgroundColor: 'white',
-
     borderWidth: 1,
     borderRadius: vw * 6,
     // fontSize: vw * 4,

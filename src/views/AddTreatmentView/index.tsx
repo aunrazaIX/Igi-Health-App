@@ -133,6 +133,7 @@ const AddTreatmentView = ({
             </DependentBox>
 
             <InputField
+              inputMode="numeric"
               labelStyle={{color: COLORS.textBlackShade}}
               placeholderTextColor={COLORS.textGrayShade}
               maxLength={7}

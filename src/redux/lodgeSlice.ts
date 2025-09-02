@@ -109,7 +109,10 @@ export const setTreatments = createAsyncThunk(
     }
     if (_data?.amount <= 0) {
       thunkApi.dispatch(
-        setErrorModal({message: 'Amount must be greater than zero'}),
+        setErrorModal({
+          message: 'Error',
+          detail: 'Amount must be greater than zero',
+        }),
       );
       return;
     }

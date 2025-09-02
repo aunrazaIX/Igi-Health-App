@@ -294,6 +294,8 @@ const styles = StyleSheet.create({
   },
   docDetails: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     gap: vw * 1.2,
   },
   fileViewContainer: {

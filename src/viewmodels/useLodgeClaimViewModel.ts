@@ -184,8 +184,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   });
 
-  console.log(treatments, 'errorFiles');
-
   const {
     loading: claimLoading,
     trigger: claimTrigger,
@@ -210,7 +208,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       );
     },
   });
-  console.log(addClaimError, 'addClaimError');
 
   const {data: personalDetails, loading: personalDetailsLoading} = useApiHook({
     apiEndpoint: endpoints.bank.getBankDetails,
@@ -308,8 +305,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       },
       {
         key: 'amount',
-        label: type === 'lodgeClaim' ? 'Amount:' : 'Estimated Cost:',
-        value: item?.amount ? formatCurrencyWithPKR(item?.amount) : '--',
+        label:
+          type === 'lodgeClaim' ? 'Amount (PKR):' : 'Estimated Cost (PKR):',
+        value: item?.amount ? item?.amount : '--',
         total: true,
       },
       {

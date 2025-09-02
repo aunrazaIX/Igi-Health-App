@@ -31,12 +31,15 @@ const PersonalView = ({
   dependantLoading,
   modalType,
   onPressDelete,
+  userData,
 }) => {
   return (
     <Container>
       <TopView
         title={'Family Details'}
-        TopViewFirstIcon={images.AddNew}
+        TopViewFirstIcon={
+          userData.isRecordAdditionAllowed ? images.AddNew : null
+        }
         FirstOpenModal={openAddDependent}
       />
       <CurvedView>
@@ -76,36 +79,37 @@ const PersonalView = ({
                             />
 
                             <View style={styles.iconsROw}>
-                              {expandedIndex.includes(index) && (
-                                <View style={styles.deleteEditRow}>
-                                  <TouchableOpacity
-                                    onPress={() =>
-                                      manageUpdate(dependent, index)
-                                    }>
-                                    <Image
-                                      source={icons.edit}
-                                      style={styles.editIcon}
-                                    />
-                                  </TouchableOpacity>
-
-                                  {dependent.dependentDetail.find(
-                                    item =>
-                                      item.label === 'Relationship :' &&
-                                      item.value !== 'Main Member' &&
-                                      item.value !== 'Member',
-                                  ) && (
+                              {expandedIndex.includes(index) &&
+                                userData?.isRecordAdditionAllowed && (
+                                  <View style={styles.deleteEditRow}>
                                     <TouchableOpacity
                                       onPress={() =>
-                                        deleteDepenedent(dependent, index)
+                                        manageUpdate(dependent, index)
                                       }>
                                       <Image
-                                        source={icons.delete}
-                                        style={styles.deleteIcon}
+                                        source={icons.edit}
+                                        style={styles.editIcon}
                                       />
                                     </TouchableOpacity>
-                                  )}
-                                </View>
-                              )}
+
+                                    {dependent.dependentDetail.find(
+                                      item =>
+                                        item.label === 'Relationship :' &&
+                                        item.value !== 'Main Member' &&
+                                        item.value !== 'Member',
+                                    ) && (
+                                      <TouchableOpacity
+                                        onPress={() =>
+                                          deleteDepenedent(dependent, index)
+                                        }>
+                                        <Image
+                                          source={icons.delete}
+                                          style={styles.deleteIcon}
+                                        />
+                                      </TouchableOpacity>
+                                    )}
+                                  </View>
+                                )}
                               <Image
                                 source={
                                   expandedIndex === index

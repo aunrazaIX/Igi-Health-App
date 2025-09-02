@@ -22,6 +22,7 @@ export const images = {
   4: require('./images/4.jpg'),
   5: require('./images/5.jpg'),
   secureFuture2: require('./images/secure-future-2.png'),
+  accountDetails: require('./images/AccountDetails.jpeg'),
 };
 
 export const icons = {
@@ -193,4 +194,6 @@ export const newCardsIcons = {
   discountedCenters: require('./icons/newdiscounts.png'),
   helpLine: require('./icons/newhelpline.png'),
   complaint: require('./icons/newcomplaint.png'),
+  claimHistory: require('./icons/claimHistory.png'),
+  bankDetails: require('./icons/homeBankDetailIcon.png'),
 };

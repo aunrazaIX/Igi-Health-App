@@ -99,6 +99,7 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
                   searchFieldRightIcon={styles.searchFieldRightIcon}
                   inputStyle={styles.inputStyle}
                   containerStyle={styles.inputFeild}
+                  rightIcon={icons.searchBlack}
                 />
               )}
             </View>

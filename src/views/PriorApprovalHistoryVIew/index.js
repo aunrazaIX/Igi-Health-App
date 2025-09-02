@@ -24,7 +24,7 @@ const PriorApprovalHistoryView = ({
     <DetailsContainer
       key={index}
       headerIcon={
-        item?.ClaimStatus === 'Approved'
+        item?.ClaimStatus === 'Completed'
           ? icons.claimPaid
           : item?.ClaimStatus === 'Rejected'
           ? icons.rejected
@@ -49,6 +49,7 @@ const PriorApprovalHistoryView = ({
           containerStyle={styles.inputFeild}
           value={searchText}
           onChangeText={text => setSearchText(text)}
+          rightIcon={icons.searchBlack}
         />
         <FlatList
           ListFooterComponent={

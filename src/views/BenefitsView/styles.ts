@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   BenefitsGradients: {
     borderRadius: vw * 3,
     height: vh * 22,
+    marginVertical: vh * 1,
   },
   Maximum: {
     height: '100%',

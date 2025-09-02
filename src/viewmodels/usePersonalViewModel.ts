@@ -44,7 +44,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
   const [modalVisible, setModalVisible] = useState(false);
   const [getData, setGetData] = useState([]);
 
-  let {user} = useSelector((state: RootState) => state.auth);
+  const {user} = useSelector((state: RootState) => state.auth);
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
@@ -195,6 +195,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       deleteDepenedentLoading,
       dependantLoading,
       modalType,
+      userData: user?.coverageType[0],
     },
     functions: {
       openAddDependent,

@@ -30,21 +30,24 @@ const ClaimsHistoryView = ({
   searchText,
   setSearchText,
 }) => {
-  const renderItem = ({item, index}) => (
-    <DetailsContainer
-      key={index}
-      headerIcon={
-        item?.ClaimStatus == '8'
-          ? icons.claimPaid
-          : item?.ClaimStatus == '3'
-          ? icons.rejected
-          : icons.pending
-      }
-      headerIconPressable={false}
-      patientName={item.RelationName}
-      data={item}
-    />
-  );
+  const renderItem = ({item, index}) => {
+    return (
+      <DetailsContainer
+        key={index}
+        headerIcon={
+          item?.ClaimStatus == '8'
+            ? icons.claimPaid
+            : item?.ClaimStatus == '3' || item?.ClaimStatus == '11'
+            ? icons.rejected
+            : icons.pending
+        }
+        headerIconPressable={false}
+        patientName={item.RelationName}
+        data={item}
+      />
+    );
+  };
+
   return (
     <Fragment>
       <TopView title="Claims History" SecondOpenModal={onPressHeaderIcon} />
@@ -52,7 +55,6 @@ const ClaimsHistoryView = ({
         <View style={styles.row}>
           <TouchableOpacity
             onPress={() => onPressType('In-Process')}
-            disabled={isInProcessAllowed}
             style={[
               styles.tabView,
               type == 'In-Process' && {backgroundColor: COLORS.faqsSubHeading},
@@ -103,6 +105,7 @@ const ClaimsHistoryView = ({
           containerStyle={styles.inputField}
           value={searchText}
           onChangeText={text => setSearchText(text)}
+          rightIcon={icons.searchBlack}
         />
         <FlatList
           ListFooterComponent={

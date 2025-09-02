@@ -8,6 +8,19 @@ const styles = StyleSheet.create({
     height: vh * 100,
     resizeMode: 'stretch',
   },
+  buttonContainer: {
+    width: vw * 20,
+    height: vh * 3,
+    backgroundColor: COLORS.cardBackgroundLightBlue,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: vw * 5,
+    marginTop: vh,
+  },
+  buttonText: {
+    color: COLORS.white,
+    fontSize: vw * 3,
+  },
 });
 
 export default styles;

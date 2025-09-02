@@ -31,41 +31,41 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
   onSelectHospital,
   selectedHospital,
 }) => {
-  let data = [
-    {
-      sectionTitle: 'Personal Details',
-      icon: icons.personalDetail,
-      edit: false,
-      delete: false,
-      info: [
-        {
-          label: 'Name of Employee:',
-          value: formatName(personalDetails?.Data?.lgivname.trim()) ?? '--',
-        },
-        {
-          label: 'Bank Name:',
-          value:
-            personalDetails?.Data?.Bankname?.trim() == ''
-              ? '--'
-              : personalDetails?.Data?.Bankname?.trim(),
-        },
-        {
-          label: 'Account Number:',
-          value:
-            personalDetails?.Data?.bankacckey?.trim() == ''
-              ? '--'
-              : personalDetails?.Data?.bankacckey?.trim(),
-        },
-        {
-          label: 'Bank IBAN:',
-          value:
-            personalDetails?.Data?.IBAN?.trim() == ''
-              ? '--'
-              : personalDetails?.Data?.IBAN?.trim(),
-        },
-      ],
-    },
-  ];
+  // let data = [
+  //   {
+  //     sectionTitle: 'Personal Details',
+  //     icon: icons.personalDetail,
+  //     edit: false,
+  //     delete: false,
+  //     info: [
+  //       {
+  //         label: 'Name of Employee:',
+  //         value: formatName(personalDetails?.Data?.lgivname.trim()) ?? '--',
+  //       },
+  //       {
+  //         label: 'Bank Name:',
+  //         value:
+  //           personalDetails?.Data?.Bankname?.trim() == ''
+  //             ? '--'
+  //             : personalDetails?.Data?.Bankname?.trim(),
+  //       },
+  //       {
+  //         label: 'Account Number:',
+  //         value:
+  //           personalDetails?.Data?.bankacckey?.trim() == ''
+  //             ? '--'
+  //             : personalDetails?.Data?.bankacckey?.trim(),
+  //       },
+  //       {
+  //         label: 'Bank IBAN:',
+  //         value:
+  //           personalDetails?.Data?.IBAN?.trim() == ''
+  //             ? '--'
+  //             : personalDetails?.Data?.IBAN?.trim(),
+  //       },
+  //     ],
+  //   },
+  // ];
 
   return (
     <View style={styles.container}>
@@ -98,8 +98,8 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
           />
         )}
       </View>
-      {type !== 'priorApproval' &&
-        data?.map((data, index) => <Box data={data} key={index} />)}
+      {/* {type !== 'priorApproval' &&
+        data?.map((data, index) => <Box data={data} key={index} />)} */}
     </View>
   );
 };

@@ -179,7 +179,7 @@ const useHomeViewModel = () => {
     method: 'get',
     skip: true,
     onSuccess: data => {
-      if (data?.length > 1) {
+      if (data?.length > 0) {
         dispatch(setPolicyClass(data[0]?.Policy_Class));
       }
     },
@@ -263,13 +263,13 @@ const useHomeViewModel = () => {
       to: 'PanelHospitalList',
     },
     user?.showPriorApproval && {
-      logo: newCardsIcons.taskDone,
+      logo: newCardsIcons.claimHistory,
       name: 'Prior Approval History',
       image: icons.forwardArrow,
       to: 'PriorApprovalHistory',
     },
     {
-      logo: newCardsIcons.lodgeClaim,
+      logo: newCardsIcons.claimHistory,
       name: 'Claim History',
       image: icons.forwardArrow,
       to: 'ClaimHistory',
@@ -288,6 +288,13 @@ const useHomeViewModel = () => {
       name: 'Complaint',
       image: icons.forwardArrow,
       link: 'corporate.services@igi.com.pk',
+    },
+
+    {
+      logo: newCardsIcons.bankDetails,
+      name: 'Payout Account',
+      image: icons.forwardArrow,
+      to: 'AccountDetails',
     },
   ].filter(Boolean);
 

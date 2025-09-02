@@ -55,6 +55,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
       errorMessage,
       allowCopyPaste = true,
       placeholderTextColor,
+      inputMode,
       ...rest
     },
     ref,
@@ -107,6 +108,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
               textAlignVertical={multiline ? 'top' : 'auto'}
               mask={mask}
               {...rest}
+              inputMode={inputMode}
             />
           </View>
           {(secureTextEntry || rightIcon) && (

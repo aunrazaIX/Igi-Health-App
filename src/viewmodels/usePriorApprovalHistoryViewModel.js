@@ -80,7 +80,6 @@ const usePriorApprovalHistoryViewModel = () => {
   useEffect(() => {
     const lowerText = searchText.toLowerCase();
     let currentData = allData;
-    console.log(currentData);
     if (searchText.trim()) {
       currentData = currentData.filter(
         item =>

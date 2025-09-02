@@ -35,12 +35,12 @@ const AlertModal: React.FC<AlertModalProps> = ({
     <Modal
       animationType="fade"
       statusBarTranslucent
-      transparent
+      backdropColor={'#5d605f3d'}
       visible={modalVisible}>
       <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <AileronBold style={styles.textStyle} name={title} />
+            {title && <AileronBold style={styles.textStyle} name={title} />}
             {subtitle && (
               <AileronRegular name={subtitle} style={styles.subtitle} />
             )}
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   descriptionStyle: {
     color: COLORS.black,
     textAlign: 'left',
-    fontSize: vh * 1.2,
+    fontSize: vh * 1.6,
     alignSelf: 'flex-start',
   },
   subtitle: {

@@ -11,6 +11,7 @@ import Login from '../../screens/Login/Index';
 import DependentStack from '../DependentStack';
 import ClaimsHistory from '../../screens/ClaimsHistory';
 import PriorApprovalHistory from '../../screens/PriorApprovalHistory';
+import AccountDetails from '../../screens/AccountDetails';
 
 const HomeStack = () => {
   const Stack = createStackNavigator();
@@ -31,6 +32,7 @@ const HomeStack = () => {
       />
       <Stack.Screen name="Notifications" component={Notification} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+      <Stack.Screen name="AccountDetails" component={AccountDetails} />
       <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   );

@@ -285,7 +285,11 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? 'Going back will return you to the home screen. Do you want to continue?'
             : `Thank you for submitting your ${
                 type === 'priorApproval' ? 'request' : 'claim'
-              }. You will soon receive a confirmation email.`
+              }. ${
+                type !== 'priorApproval'
+                  ? 'You will soon receive a confirmation email.'
+                  : '\n\n Note: Your request has been submitted successfully. It may take up to 24 hours to process. Our team will contact you if any issues arise. You can track the status in the Prior Approval History section, and you will also receive an in-app notification once it is finalized.'
+              }`
         }
         claimSubmission={
           confirmationType === 'delete'

@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   selectText: {
     color: COLORS.textBlackShade,
-    fontSize: vw * 3.4,
+    fontSize: vw * 3.2,
     marginTop: vh * 0.5,
     textAlign: 'left',
   },

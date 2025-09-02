@@ -90,6 +90,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
               containerStyle={styles.inputFeild}
               value={searchText}
               onChangeText={text => setSearchText(text)}
+              rightIcon={icons.searchBlack}
             />
           )}
 
@@ -263,7 +264,9 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
             <FlatList
               indicatorStyle="black"
               data={data}
-              contentContainerStyle={{paddingBottom: vh * 15}}
+              contentContainerStyle={{
+                paddingBottom: vh * 28,
+              }}
               keyExtractor={(_, index) => index.toString()}
               showsVerticalScrollIndicator={true}
               renderItem={({item}) => (
