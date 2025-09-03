@@ -99,12 +99,12 @@ const styles = StyleSheet.create({
   descriptionStyle: {
     color: COLORS.black,
     textAlign: 'left',
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.4,
     alignSelf: 'flex-start',
   },
   subtitle: {
     color: COLORS.black,
-    fontSize: vh * 1.6,
+    fontSize: vh * 1.4,
     textAlign: 'left',
     marginBottom: vh * 1.2,
     alignSelf: 'flex-start',

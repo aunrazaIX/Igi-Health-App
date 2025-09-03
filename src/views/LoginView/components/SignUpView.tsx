@@ -66,6 +66,7 @@ const SignUpView = ({
           /\d/,
           /\d/,
         ]}
+        inputMode="numeric"
       />
 
       <InputField
@@ -87,6 +88,7 @@ const SignUpView = ({
           signupApiData?.error_email?.slice(1)
         }
         editable={!loadingSignup}
+        inputMode="email"
       />
 
       <InputField

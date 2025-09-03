@@ -5,7 +5,12 @@ import {useState} from 'react';
 
 const useAccountDetailsViewModel = () => {
   const {user} = useSelector(state => state.auth);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([
+    {label: 'Bank Name', value: '--'},
+    {label: 'Full Name', value: '--'},
+    {label: 'Account Number', value: '--'},
+    {label: 'IBAN', value: '--'},
+  ]);
 
   const {
     data: details,

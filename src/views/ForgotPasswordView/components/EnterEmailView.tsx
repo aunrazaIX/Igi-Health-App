@@ -88,6 +88,7 @@ const EnterEmailView = ({
           const errorMsg = validateCNIC(text);
           setterForApiData('error_cnic', errorMsg);
         }}
+        keyboardType="number-pad"
         editable={!ForgotPasswordLoading}
         errorMessage={apiData?.error_cnic}
         mask={[

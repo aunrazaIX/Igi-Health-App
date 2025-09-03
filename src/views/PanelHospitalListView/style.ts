@@ -117,10 +117,7 @@ export const styles = StyleSheet.create({
   },
   inputFeild: {
     borderWidth: 2,
-    // paddingHorizontal: vw * 2,
-    // marginHorizontal: vw * 2,
     height: vh * 6,
-
     justifyContent: 'center',
     alignItems: 'center',
   },

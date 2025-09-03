@@ -128,7 +128,8 @@ const AddTreatmentView = ({
                 value={apiData?.admissionDate}
                 disabled={false}
                 mode="date"
-                minimumDate={new Date()}
+                minimumDate={claimType === 'lodgeClaim' ? null : new Date()}
+                maximumDate={claimType === 'lodgeClaim' ? new Date() : null}
               />
             </DependentBox>
 

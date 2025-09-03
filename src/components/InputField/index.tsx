@@ -115,7 +115,11 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
             <TouchableOpacity
               disabled={!secureTextEntry}
               onPress={() => setShowPassword(!showPassword)}
-              style={[styles.iconView, iconViewStyle]}>
+              style={[
+                styles.iconView,
+                iconViewStyle,
+                !label && {marginBottom: vh},
+              ]}>
               <Image
                 style={styles.eyeIcon}
                 source={

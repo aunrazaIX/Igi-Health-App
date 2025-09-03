@@ -37,7 +37,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
 
   const [selectedTab, setSelectedTab] = useState('Panel Hospitals');
   const [selectedTabRight, setSelectedTabRight] = useState('list');
-  const [selectedMapTab, setSelectedMapTab] = useState('Sindh');
+  const [selectedMapTab, setSelectedMapTab] = useState('All');
   const [searchText, setSearchText] = useState('');
   const [allData, setAllData] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);

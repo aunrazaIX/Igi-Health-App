@@ -36,7 +36,7 @@ const CreateNewPassword = ({
           setterForUpdatePasswordApiData('error_newPassword', errorMsg);
         }}
         errorMessage={updatePasswordApiData?.error_newPassword}
-        editable={updatePasswordLoading}
+        editable={!updatePasswordLoading}
       />
 
       <InputField
@@ -57,7 +57,7 @@ const CreateNewPassword = ({
           setterForUpdatePasswordApiData('error_confirmPassword', errorMsg);
         }}
         errorMessage={updatePasswordApiData?.error_confirmPassword}
-        editable={updatePasswordLoading}
+        editable={!updatePasswordLoading}
       />
       <View style={styles.simpleRow}>
         <View style={styles.bullet} />

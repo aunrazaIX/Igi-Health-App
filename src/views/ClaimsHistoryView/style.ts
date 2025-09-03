@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 0.5,
   },
   inputStyle: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3,
     height: vh * 4.4,
     color: COLORS.textBlackShade,
     fontFamily: fonts.inter.bold,
@@ -25,10 +25,7 @@ export const styles = StyleSheet.create({
   },
   inputField: {
     borderWidth: 2,
-    // paddingHorizontal: vw * 2,
-    // marginHorizontal: vw * 2,
     height: vh * 6,
-
     justifyContent: 'center',
     alignItems: 'center',
   },

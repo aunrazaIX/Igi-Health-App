@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
   buttonContainer: {
-    width: vw * 20,
-    height: vh * 3,
+    width: vw * 22,
+    height: vh * 3.3,
     backgroundColor: COLORS.cardBackgroundLightBlue,
     justifyContent: 'center',
     alignItems: 'center',

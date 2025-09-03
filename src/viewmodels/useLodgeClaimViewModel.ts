@@ -524,8 +524,18 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         fileSizeInMB: res?.fileSize / (1000 * 1000),
       };
       if (_img.fileSizeInMB > 25 - totalFileSize) {
+        dispatch(
+          setErrorModal({
+            show: true,
+            message: 'Upload Limit Exceeded',
+            detail:
+              'The total size of your selected file(s) must not exceed 25MB. Please adjust your selection',
+          }),
+        );
+        return;
+      } else {
+        dispatch(setSelectedDocuments([_img]));
       }
-      dispatch(setSelectedDocuments([_img]));
     } catch (e) {
       console.log('Error from opending camera or image picker', e);
     }
