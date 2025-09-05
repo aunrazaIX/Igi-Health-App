@@ -6,7 +6,7 @@ import {vh, vw} from '../../../assets/theme/dimension';
 
 const ImageModal = ({image, onClose}) => {
   return (
-    <Modal visible backdropColor={'#5d605f3d'} statusBarTranslucent>
+    <Modal visible transparent backdropColor={'#5d605f3d'} statusBarTranslucent>
       <View style={styles.container}>
         <TouchableOpacity onPress={onClose}>
           <Image source={icons.CancelIcon} style={styles.cross} />

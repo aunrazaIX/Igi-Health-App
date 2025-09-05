@@ -31,7 +31,7 @@ class AppDelegate: RCTAppDelegate {
   override func bundleURL() -> URL? {
 
 #if DEBUG
-    let url = URL(string: "http://192.168.3.75:8081/index.bundle?platform=ios&dev=true")
+    let url = URL(string: "http://192.168.3.77:8081/index.bundle?platform=ios&dev=true")
     return url
 
 #else
