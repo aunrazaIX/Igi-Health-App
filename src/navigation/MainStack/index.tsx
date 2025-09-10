@@ -9,6 +9,8 @@ import {setErrorModal} from '../../redux/generalSlice';
 import {getApp} from '@react-native-firebase/app';
 import {getMessaging, onMessage} from '@react-native-firebase/messaging';
 import Toast from 'react-native-toast-message';
+import NotificationBanner from '../../components/NotificationBanner';
+import {images} from '../../assets';
 // import {getApp} from '@react-native-firebase/app';
 // import {getMessaging, onMessage} from '@react-native-firebase/messaging';
 // import Toast from 'react-native-toast-message';
@@ -31,11 +33,17 @@ const MainStack = () => {
     const app = getApp();
     const messaging = getMessaging(app);
     const unsubscribe = onMessage(messaging, remoteMessage => {
-      Toast.show({
-        type: 'info',
-        text1: 'Notification',
-        text2: remoteMessage?.notification?.body,
-      });
+      // Toast.show({
+      //   type: 'info',
+      //   text1: 'Notification',
+      //   text2: remoteMessage?.notification?.body,
+      // });
+
+      <NotificationBanner
+        logo={images.logoWhite}
+        name="Notification"
+        message={remoteMessage?.notification?.body}
+      />;
     });
     return unsubscribe;
   }, []);
