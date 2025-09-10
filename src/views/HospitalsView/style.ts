@@ -197,13 +197,11 @@ export const styles = StyleSheet.create({
     width: vw * 4,
   },
   inputStyle: {
-    fontSize: vw * 3.8,
-    height: vh * 4.2,
-
-    // backgroundColor: 'yellow',
+    fontSize: vw * 3,
+    height: vh * 4.4,
     color: COLORS.textBlackShade,
-
-    // fontFamily: fonts.Aileron.bold,
+    fontFamily: fonts.inter.bold,
+    alignItems: 'center',
   },
 
   moreFilterText: {
@@ -211,12 +209,11 @@ export const styles = StyleSheet.create({
     color: COLORS.black,
   },
   detailsTextLabel: {
-    width: '20%',
+    width: '18%',
     textAlign: 'left',
   },
-
   detailsTextValue: {
-    width: '60%',
+    width: '100%',
     textAlign: 'right',
   },
 });

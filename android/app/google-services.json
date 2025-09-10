@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "577127230717",
+    "project_id": "igi-life-health-app",
+    "storage_bucket": "igi-life-health-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577127230717:android:015142e59e718db2eca294",
+        "android_client_info": {
+          "package_name": "com.igilifehealth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZWYV_LG5jEpo3xJduMR9AShBBhRd4tGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

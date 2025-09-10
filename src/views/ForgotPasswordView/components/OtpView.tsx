@@ -15,6 +15,7 @@ const OtpView = ({
   setShowResend,
   otp,
   flushOtp,
+  verifyOtpLoading,
 }: {
   setOtp: (otp: string) => void;
   sendOtp: () => void;
@@ -48,6 +49,7 @@ const OtpView = ({
         }}
         theme={{
           containerStyle: styles.otpContainer,
+          pinCodeTextStyle: styles.pinCodeText,
           focusedPinCodeContainerStyle: styles.otpBoxView,
         }}
         onTextChange={text => {

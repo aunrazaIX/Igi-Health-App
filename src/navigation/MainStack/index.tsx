@@ -3,10 +3,15 @@ import DrawerStack from '../DrawerStack';
 import AuthStack from '../AuthStack';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
-import Home from '../../screens/Home';
 import {useEffect} from 'react';
 import {EventRegister} from 'react-native-event-listeners';
 import {setErrorModal} from '../../redux/generalSlice';
+import {getApp} from '@react-native-firebase/app';
+import {getMessaging, onMessage} from '@react-native-firebase/messaging';
+import Toast from 'react-native-toast-message';
+// import {getApp} from '@react-native-firebase/app';
+// import {getMessaging, onMessage} from '@react-native-firebase/messaging';
+// import Toast from 'react-native-toast-message';
 
 const MainStack = () => {
   const dispatch = useDispatch();
@@ -15,8 +20,6 @@ const MainStack = () => {
 
   useEffect(() => {
     EventRegister.addEventListener('aun', () => {
-      console.log('ASDSADSA3213123');
-
       dispatch(
         setErrorModal({
           show: true,
@@ -25,6 +28,16 @@ const MainStack = () => {
         }),
       );
     });
+    const app = getApp();
+    const messaging = getMessaging(app);
+    const unsubscribe = onMessage(messaging, remoteMessage => {
+      Toast.show({
+        type: 'info',
+        text1: 'Notification',
+        text2: remoteMessage?.notification?.body,
+      });
+    });
+    return unsubscribe;
   }, []);
 
   return (

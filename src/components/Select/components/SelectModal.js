@@ -13,7 +13,7 @@ import {vh, vw} from '../../../assets/theme/dimension';
 import AileronBold from '../../AileronBold';
 import NoDataView from '../../NoDataView';
 import InputField from '../../InputField';
-import {universalSearch} from '../../../utils';
+import {formatName, universalSearch} from '../../../utils';
 
 const SelectModal = ({
   visible,
@@ -50,7 +50,7 @@ const SelectModal = ({
       <AileronBold
         name={
           item?.label && typeof item?.label === 'string'
-            ? item?.label?.trim()
+            ? formatName(item?.label?.trim())
             : '--'
         }
         style={styles.listText}
@@ -77,9 +77,9 @@ const SelectModal = ({
               />
             )}
             <FlatList
-              ListEmptyComponent={() => (
-                <NoDataView name={'No matches for your search'} />
-              )}
+              indicatorStyle="black"
+              showsVerticalScrollIndicator
+              ListEmptyComponent={() => <NoDataView name={'No Data Found'} />}
               data={search ? filterData : data}
               renderItem={renderItem}
               key={'dropDown'}
@@ -108,21 +108,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: vw * 3,
   },
   listText: {
-    textAlign: 'left',
-    fontSize: vh * 1.7,
-    lineHeight: vh * 2.5,
+    textAlign: 'center',
+    fontSize: vh * 1.4,
   },
   optionStyles: {
     backgroundColor: COLORS.grey,
-    marginTop: vh,
-    paddingVertical: vh * 1.5,
+    marginTop: vh * 0.5,
+    paddingVertical: vh * 1,
     borderRadius: vw * 3,
     justifyContent: 'center',
     alignItems: 'center',
   },
   inputContainer: {
     paddingVertical: 0,
-    paddingHorizontal: 0,
     height: vh * 6,
   },
   inputStyle: {
@@ -130,7 +128,6 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-
     height: vh * 6.8,
   },
 });

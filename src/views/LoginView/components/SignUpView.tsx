@@ -50,6 +50,7 @@ const SignUpView = ({
           signupApiData?.error_cellNumber?.charAt(0).toUpperCase() +
           signupApiData?.error_cellNumber?.slice(1)
         }
+        editable={!loadingSignup}
         keyboardType="numeric"
         mask={[
           /\d/,
@@ -65,6 +66,7 @@ const SignUpView = ({
           /\d/,
           /\d/,
         ]}
+        inputMode="numeric"
       />
 
       <InputField
@@ -85,6 +87,8 @@ const SignUpView = ({
           signupApiData?.error_email?.charAt(0).toUpperCase() +
           signupApiData?.error_email?.slice(1)
         }
+        editable={!loadingSignup}
+        inputMode="email"
       />
 
       <InputField
@@ -93,6 +97,7 @@ const SignUpView = ({
         allowCopyPaste={true}
         labelStyle={style.labelStyle}
         rightIcon={icons.cnic}
+        keyboardType="numeric"
         onChangeText={text => {
           signupSetterForApiData('cnic', text);
           const errorMsg = validateCNIC(text);
@@ -120,50 +125,22 @@ const SignUpView = ({
           '-',
           /\d/,
         ]}
+        editable={!loadingSignup}
       />
-
-      {/* <View style={style.signupTextContainer}>
-        <View style={style.signupText}>
-          <AileronSemiBold name="•" style={styles.loginContainerText} />
-
-          <AileronSemiBold
-            numberOfLines={3}
-            name={
-              'Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character.'
-            }
-            style={styles.loginContainerText}
-          />
-        </View>
-
-        <View style={style.signupText}>
-          <AileronSemiBold name="•" style={styles.loginContainerText} />
-
-          <AileronSemiBold
-            numberOfLines={3}
-            name={
-              "Special characters can include digits and punctuation (e.g., !@#$%^&*()_+|~-={}[]:;'<>?,./)."
-            }
-            style={styles.loginContainerText}
-          />
-        </View>
-
-        <View style={style.signupText}>
-          <AileronSemiBold name="•" style={styles.loginContainerText} />
-
-          <AileronSemiBold
-            numberOfLines={3}
-            name={'Case sensitivity is mandatory.'}
-            style={styles.loginContainerText}
-          />
-        </View>
-      </View> */}
-
       <Button
         containerStyle={styles.loginButton}
         name="Create Account"
         onPress={handleSignup}
         loading={loadingSignup}
-        disabled={loadingSignup ? true : false}
+        disabled={
+          signupApiData?.error_cellNumber ||
+          signupApiData?.error_cnic ||
+          signupApiData?.error_email
+            ? true
+            : loadingSignup
+            ? true
+            : false
+        }
       />
     </>
   );

@@ -170,9 +170,8 @@ export const styles = StyleSheet.create({
     height: vh * 2,
   },
   infoCardTextBold: {
-    fontSize: vh * 2,
+    fontSize: vw * 4,
     color: COLORS.textBlackShade,
-    maxWidth: vh * 30,
     // textAlign: 'left',
     // borderWidth: 2,
   },
@@ -183,32 +182,25 @@ export const styles = StyleSheet.create({
   },
   homeInfoContainerHeaderText: {
     gap: vh * 0.5,
-
     alignItems: 'flex-end',
   },
   homeInfoContainerMiddle: {
-    marginTop: vh * 1.2,
-
-    // justifyContent: 'space-between',/
+    marginTop: vh * 0.5,
   },
   homeInfoContainerMiddleText: {},
   infoCardMiddleTextlight: {
-    fontSize: vw * 3.7,
+    fontSize: vw * 3.2,
     color: COLORS.textColor,
     textAlign: 'left',
-    lineHeight: vh * 2,
-    // maxWidth: vh * 25,
-    // borderWidth: 2,
   },
   homeInfoContainerMiddleTextLogo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignItems: 'center',
   },
   homeCardMainDetails: {
     // borderWidth: 2,
-    gap: vh * 0.9,
+    gap: vh * 0.5,
   },
 
   flipCardIcon: {
@@ -221,7 +213,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   validity: {
-    gap: vh * 2,
+    gap: vh * 1.2,
     // borderWidth: 2,
 
     marginTop: vh,
@@ -230,18 +222,15 @@ export const styles = StyleSheet.create({
   infoCardFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: vh * 2.5,
+    marginTop: vh * 1.25,
+
     // borderWidth: 2
   },
   infoCardFooterTextBold: {
     fontSize: vh * 1.6,
     color: COLORS.textBlackShade,
   },
-  infoCardFooterLeft: {
-    gap: vh * 0.9,
 
-    alignItems: 'flex-start',
-  },
   infoCardFooterRight: {
     alignItems: 'flex-end',
     gap: vh * 0.5,
@@ -281,8 +270,8 @@ export const styles = StyleSheet.create({
     elevation: vw * 0.5,
   },
   cardsContainer: {
-    marginTop: vh * 1.8,
-    marginBottom: vh * 1.8,
+    marginTop: vh * 1.2,
+    // marginBottom: vh * 0.4,
     gap: vh,
     // borderWidth: 2,
     // borderWidth: 2,
@@ -311,10 +300,8 @@ export const styles = StyleSheet.create({
   },
   dashboardContainerCardText: {
     // textAlign: 'left',
-    fontSize: vw * 3.1,
+    fontSize: vw * 2.8,
     color: COLORS.black,
-    letterSpacing: vw * 0.11,
-    lineHeight: vh * 2,
     // borderWidth: 2,
     // justifyContent: 'center',
     // alignItems: 'center',
@@ -373,18 +360,14 @@ export const styles = StyleSheet.create({
     color: COLORS.cardBackgroundRed,
   },
   homeBackCardText: {
-    fontSize: vw * 3.7,
+    fontSize: vw * 3.25,
     textAlign: 'left',
     color: COLORS.textBlackShade,
-    // borderWidth: 2,
-    lineHeight: vh * 1.99,
   },
   homeBackCardDottedText: {
-    fontSize: vw * 5,
+    fontSize: vw * 3.25,
     textAlign: 'left',
-    color: COLORS.textBlackShade,
-    // borderWidth: 2,
-    // lineHeight: vh * 1.99,
+    color: 'red',
   },
   homeBackCardRow: {
     flexDirection: 'row',
@@ -476,5 +459,22 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: vw * 2,
+    marginTop: vh * 2,
+  },
+  notifiationBageView: {
+    height: vw * 5,
+    width: vw * 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: (vw * 5) / 2,
+    position: 'absolute',
+    right: -vw * 2,
+    bottom: vh * 1.5,
+
+    backgroundColor: COLORS.faqsSubHeading,
+  },
+  notificationCountText: {
+    color: COLORS.white,
+    fontSize: vw * 2,
   },
 });

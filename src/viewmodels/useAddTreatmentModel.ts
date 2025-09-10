@@ -15,30 +15,29 @@ const useAddTreatmentModel = ({
 }) => {
   const dispatch = useDispatch();
 
-  const isError = useSelector((state: RootState) => state.lodge.isError);
-
-  const selectedType = useSelector(state => state.lodge.selectedType);
+  const {isError, selectedType} = useSelector(
+    state => state?.lodge?.modules[state.lodge.activeModule],
+  );
 
   const [confirmationModal, setConfirmationModal] = useState(false);
-
   const {treatmentIndex, treatmentData, claimType} = route?.params || {};
-
   const extractedData = {
     treatment: treatmentData?.treatment,
-    receiptNumber: treatmentData?.info?.[0].value,
-    amount: treatmentData?.info?.[1].value,
-    description: treatmentData?.info?.[2].value,
+    receiptNumber: treatmentData?.info?.[0]?.value,
+    admissionDate: treatmentData?.info?.[1]?.value,
+    amount: treatmentData?.info?.[2]?.value,
+    description: treatmentData?.info?.[3]?.value,
   };
 
   const {setterForApiData, apiData} = useErrorHandlingHook({
     treatment: extractedData.treatment ?? {},
     receiptNumber: extractedData.receiptNumber ?? '',
+    admissionDate: extractedData.admissionDate ?? '',
     amount: extractedData.amount ?? '',
     description: extractedData.description ?? '',
   });
 
   const apiParams = useMemo(() => {
-    console.log(selectedType, 'Seeessssss');
     const typeValue = selectedType?.label;
 
     const endpointKey =
@@ -68,6 +67,8 @@ const useAddTreatmentModel = ({
     const treatmentObj = {
       treatment: apiData?.treatment,
       receiptNumber: apiData?.receiptNumber,
+      admissionDate: apiData?.admissionDate,
+      claimType: claimType,
       amount: apiData?.amount,
       description: apiData?.description,
     };
@@ -105,6 +106,7 @@ const useAddTreatmentModel = ({
       treatmentIndex,
       isError,
       confirmationModal,
+      claimType,
     },
     functions: {
       setterForApiData,

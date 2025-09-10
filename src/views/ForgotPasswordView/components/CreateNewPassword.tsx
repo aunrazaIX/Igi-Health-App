@@ -10,9 +10,11 @@ import {validatePassword} from '../../../validations/authValidations';
 const CreateNewPassword = ({
   setterForUpdatePasswordApiData,
   updatePasswordApiData,
+  updatePasswordLoading,
 }: {
   setterForUpdatePasswordApiData: (key: string, value: string) => void;
   updatePasswordApiData: any;
+  updatePasswordLoading: boolean;
 }) => {
   return (
     <Fragment>
@@ -34,6 +36,7 @@ const CreateNewPassword = ({
           setterForUpdatePasswordApiData('error_newPassword', errorMsg);
         }}
         errorMessage={updatePasswordApiData?.error_newPassword}
+        editable={!updatePasswordLoading}
       />
 
       <InputField
@@ -54,6 +57,7 @@ const CreateNewPassword = ({
           setterForUpdatePasswordApiData('error_confirmPassword', errorMsg);
         }}
         errorMessage={updatePasswordApiData?.error_confirmPassword}
+        editable={!updatePasswordLoading}
       />
       <View style={styles.simpleRow}>
         <View style={styles.bullet} />
@@ -84,16 +88,11 @@ export default CreateNewPassword;
 const style = StyleSheet.create({
   inputContainer: {
     // borderWidth: 2,
-    flexDirection: 'column',
 
     paddingHorizontal: vw * 1,
     // marginTop: vh * 2,
   },
   inputContainerError: {
-    flexDirection: 'column',
-    // marginTop: vh * 2,
-    marginBottom: vh * 4,
-
     paddingHorizontal: vw * 1,
   },
   labelStyle: {

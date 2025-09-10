@@ -3,12 +3,12 @@ export const validateMobileNumber = (text: string): string => {
   // const mobileRegex = /^923\d{2}-\d{7}$/;
   if (!text) return 'Mobile number is required';
   if (!mobileRegex.test(text))
-    return 'Invalid mobile number. Format: 92XXXXXXXXX';
+    return 'Invalid mobile number. Format: 923XXXXXXXX';
   return '';
 };
 
 export const validateEmail = (text: string): string => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.(com|com\.pk)$/;
+  const emailRegex = /^[^@\s]+@[^@\s]+$/;
   if (!text) return 'Email is required';
   if (!emailRegex.test(text)) return 'Invalid email address';
   return '';

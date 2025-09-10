@@ -26,7 +26,6 @@ import ImageModal from './components/ImageModal';
 
 type LodgeClaimViewProps = {
   steps: StepItem[];
-  personalData: PersonelDataSection[];
   dependantsData: DependantList[];
   claimsDetails: ClaimDetailSection[] | undefined;
   goBack: () => void;
@@ -71,11 +70,12 @@ type LodgeClaimViewProps = {
   onView: any;
   setIsView: any;
   viewIndex: any;
+  showOptionModal: boolean;
+  viewOptionModal: () => void;
 };
 
 const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   steps,
-  personalData,
   claimsDetails,
   dependantsData,
   dependants,
@@ -88,7 +88,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   onPressEdit,
   onPressStep,
   onSelectPatient,
-  onSelectDocument,
   selectedDocuments,
   selectedPatient,
   dependantLoading,
@@ -122,11 +121,15 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
   onView,
   setIsView,
   viewIndex,
+  showOptionModal,
+  viewOptionModal,
+  uploadDocument,
 }) => {
-  const treatment = useSelector(state => state.lodge.treatments);
-  const doc = useSelector(state => state.lodge.selectedDocuments);
-  console.log(doc, 'iioio');
-  // console.log(doc[viewIndex].uri, 'pppp');
+  const lodgeState = useSelector(state => state?.lodge || {});
+  const activeModule = lodgeState?.activeModule;
+  const moduleData = lodgeState?.modules?.[activeModule] || {};
+  const treatment = moduleData?.treatments || [];
+  const doc = moduleData?.selectedDocuments || [];
 
   const renderStep = {
     personalDetails: (
@@ -134,7 +137,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
         selectedPatient={selectedPatient}
         selectedType={selectedType}
         onSelectPatient={onSelectPatient}
-        personalData={personalData}
         patientOptions={dependantsData}
         dependants={dependants}
         personalDetails={personalDetails}
@@ -158,18 +160,18 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
     uploadDoc: (
       <UploadDoc
         selectedDocuments={selectedDocuments}
-        onSelectDocument={onSelectDocument}
         handleCancelFile={handleCancelFile}
         claimData={claimData}
         setterForclaimData={setterForclaimData}
         onView={onView}
+        showOptionModal={showOptionModal}
+        viewOptionModal={viewOptionModal}
+        uploadDocument={uploadDocument}
       />
     ),
   };
 
   const navigation = useNavigation();
-
-  console.log(confirmationType, 'typeeee');
 
   return (
     <>
@@ -189,7 +191,6 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
           type === 'priorApproval' || 'lodgeClaim' ? handleGOBack : goBack
         }
         title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge A Claim'}
-        titleStyle={{lineHeight: vh * 3}}
         resetStates={resetStates}
       />
       <KeyboardAwareScrollView
@@ -209,7 +210,15 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             <Button
               containerStyle={{marginBottom: vh}}
               onPress={navigateTreatment}
-              name={treatment.length > 0 ? 'Create More Claim' : 'Create Claim'}
+              name={
+                treatment.length > 0
+                  ? type === 'priorApproval'
+                    ? 'Add More Treatment'
+                    : 'Create More Claim'
+                  : type === 'priorApproval'
+                  ? 'Add Treatment'
+                  : 'Create Claim'
+              }
             />
           ) : null}
 
@@ -232,7 +241,9 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
                 : undefined
             }
             disabled={
-              currentStep === 1
+              claimLoading
+                ? true
+                : currentStep === 1
                 ? !selectedPatient
                   ? true
                   : false
@@ -272,7 +283,13 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? 'Are you sure you want to delete this file?'
             : confirmationType === 'back'
             ? 'Going back will return you to the home screen. Do you want to continue?'
-            : 'Thank you for submitting your claims. You will soon receive a confirmation email with updates on the progress of your claims.'
+            : `Thank you for submitting your ${
+                type === 'priorApproval' ? 'request' : 'claim'
+              }. ${
+                type !== 'priorApproval'
+                  ? 'You will soon receive a confirmation email.'
+                  : '\n\n Note: Your request has been submitted successfully. It may take up to 24 hours to process. Our team will contact you if any issues arise. You can track the status in the Prior Approval History section, and you will also receive an in-app notification once it is finalized.'
+              }`
         }
         claimSubmission={
           confirmationType === 'delete'
@@ -308,9 +325,10 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             : true
         }
         confirmationRequired={
-          confirmationType === 'delete'
-            ? true
-            : confirmationType === 'fileDelete'
+          confirmationType === 'delete' ||
+          confirmationType === 'submit' ||
+          confirmationType === 'fileDelete' ||
+          confirmationType === 'back'
             ? true
             : false
         }
@@ -329,6 +347,7 @@ const LodgeClaimView: React.FC<LodgeClaimViewProps> = ({
             ? () => goBack()
             : null
         }
+        claimLoading={claimLoading}
         handleSubmit={
           confirmationType === 'submit'
             ? () => {

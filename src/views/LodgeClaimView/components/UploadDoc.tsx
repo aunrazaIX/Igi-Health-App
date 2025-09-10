@@ -5,53 +5,59 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {
   AileronBold,
+  AileronRegular,
   AileronSemiBold,
-  ConfirmationModal,
 } from '../../../components';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {COLORS} from '../../../assets/theme/colors';
 import {icons, images} from '../../../assets';
-import {useDispatch, useSelector} from 'react-redux';
-import {setRemarks} from '../../../redux/lodgeSlice';
+import DocumentOptionsModal from './DocumentOptionsModal';
 
 type UploadDocProps = {
-  onSelectDocument: () => void;
   handleCancelFile: () => void;
   claimData: any;
   setterForclaimData: any;
   onView: any;
+  viewOptionModal: () => boolean;
+  openCamera: () => void;
 };
 
 const UploadDoc: React.FC<UploadDocProps> = ({
-  onSelectDocument,
   selectedDocuments,
   handleCancelFile,
   isUplaoded = false,
   claimData,
   setterForclaimData,
   onView,
+  showOptionModal,
+  viewOptionModal,
+  uploadDocument,
 }) => {
   return (
     <View style={styles.uploadFileContainer}>
       <View>
         <View style={styles.uploadBox}>
-          <View>
-            <Image source={images.priorUpload} style={styles.uploadImage} />
-          </View>
-
           <AileronSemiBold
-            name={'Upload Supporting\nDocuments'}
+            name={'Upload Documents'}
             style={styles.supporting}
           />
-          <TouchableOpacity onPress={onSelectDocument}>
+          <TouchableOpacity onPress={() => viewOptionModal(true)}>
+            <Image source={images.priorUpload} style={styles.uploadImage} />
+          </TouchableOpacity>
+
+          <View>
             <AileronSemiBold
               name="Click to Upload"
               style={styles.ClickUpload}
             />
-          </TouchableOpacity>
+            <AileronRegular
+              name={'Supported file types: .jpg, .jpeg, .png, .pdf, .webp'}
+              style={styles.supportingSubText}
+            />
+          </View>
           <AileronSemiBold
             name="(Max. File Size: 25 MB)"
             style={styles.maxFile}
@@ -60,7 +66,6 @@ const UploadDoc: React.FC<UploadDocProps> = ({
 
         {selectedDocuments?.length > 0 &&
           selectedDocuments?.map((item, index) => {
-            console.log(item, 'oooooooo');
             return (
               <View style={styles.documentBox} key={index}>
                 <View style={styles.documentBoxInside}>
@@ -70,20 +75,15 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                         source={icons.document}
                         style={styles.documentIcon}
                       />
-                      <View>
-                        <AileronSemiBold
-                          name={item?.name || ''}
-                          style={styles.documentText}
-                        />
-                      </View>
+                      <AileronSemiBold
+                        name={item?.name || ''}
+                        style={styles.documentText}
+                      />
                     </View>
 
                     <TouchableOpacity
                       onPress={() => handleCancelFile(item, index)}>
-                      <Image
-                        style={styles.errorIcon}
-                        source={icons.errorPopup}
-                      />
+                      <Image style={styles.errorIcon} source={icons.delete} />
                     </TouchableOpacity>
                   </View>
 
@@ -93,8 +93,7 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                     )}
                   </View>
                 </View>
-
-                <View>
+                <View style={styles.fileViewContainer}>
                   <AileronSemiBold
                     name={`File Size : ${
                       item?.fileSizeInMB?.toFixed(3) || ''
@@ -102,15 +101,17 @@ const UploadDoc: React.FC<UploadDocProps> = ({
                     style={styles.fileSizeText}
                   />
 
-                  <TouchableOpacity onPress={() => onView(index)}>
-                    <AileronBold name={'view file'} style={styles.viewFile} />
-                  </TouchableOpacity>
+                  {(item?.type === 'image/png' ||
+                    item?.type === 'image/jpeg') && (
+                    <TouchableOpacity onPress={() => onView(index)}>
+                      <Image source={icons.eyeOpen} style={styles.eye} />
+                    </TouchableOpacity>
+                  )}
                 </View>
               </View>
             );
           })}
       </View>
-
       <View>
         <View style={styles.addRemarks}>
           <AileronSemiBold name="Add Remarks" style={styles.remarks} />
@@ -126,6 +127,11 @@ const UploadDoc: React.FC<UploadDocProps> = ({
           </View>
         </View>
       </View>
+      <DocumentOptionsModal
+        viewOptionModal={viewOptionModal}
+        uploadDocument={uploadDocument}
+        showOptionModal={showOptionModal}
+      />
     </View>
   );
 };
@@ -136,24 +142,28 @@ const styles = StyleSheet.create({
   uploadBox: {
     borderColor: COLORS.UploadBorder,
     borderWidth: 1.5,
-    borderStyle: 'dashed',
+
     borderRadius: vh * 0.5,
     padding: vh,
     alignItems: 'center',
-    marginTop: vh * 2,
-    // borderEndWidth: 2,
+    marginTop: vh * 0.5,
   },
   uploadImage: {
     width: vh * 7,
     height: vh * 7,
   },
   supporting: {
-    marginVertical: vh * 2,
+    marginBottom: vh * 2,
     fontSize: vh * 1.6,
     color: COLORS.insuredPrice,
   },
+  supportingSubText: {
+    marginVertical: vh,
+    fontSize: vh * 1.3,
+    color: COLORS.insuredPrice,
+  },
   ClickUpload: {
-    color: COLORS.benefitTitle,
+    color: COLORS.black,
     fontSize: vh * 1.5,
     marginBottom: vh * 0.7,
   },
@@ -183,27 +193,25 @@ const styles = StyleSheet.create({
   documentText: {
     textAlign: 'left',
     color: COLORS.maxFile,
-    fontSize: vh * 1.4,
-    lineHeight: vh * 3,
+    fontSize: vh * 1.25,
     flexShrink: 1,
     flexWrap: 'wrap',
     maxWidth: vw * 55, // adjust as per your layout
   },
   fileSizeText: {
-    // borderWidth: 2,
     textAlign: 'left',
-    // backgroundColor: 'red',
-    fontSize: vh * 1.4,
+    fontSize: vh * 1.1,
     color: COLORS.cardBackgroundRed,
-    // textAlign: 'left',
     marginTop: vh * 0.5,
+    fontStyle: 'italic',
   },
   viewFile: {
     fontSize: vw * 3,
-    color: COLORS.downloadGreen,
-    marginTop: vh * 0.3,
-    // borderWidth: 2,
-    textAlign: 'left',
+    color: COLORS.black,
+    borderWidth: 2,
+    borderRadius: vw * 50,
+    height: vw * 5,
+    width: vw * 5,
   },
   documentSize: {
     textAlign: 'left',
@@ -227,8 +235,8 @@ const styles = StyleSheet.create({
     width: vh * 5.1,
   },
   documentIcon: {
-    width: vh * 3.5,
-    height: vh * 3.5,
+    width: vw * 7.5,
+    height: vw * 7.5,
   },
   downloadUpSide: {
     flex: 1,
@@ -243,7 +251,7 @@ const styles = StyleSheet.create({
   },
   remarks: {
     textAlign: 'left',
-    fontSize: vh * 2,
+    fontSize: vh * 1.5,
     color: COLORS.black,
     marginBlock: vh * 1.5,
   },
@@ -281,11 +289,26 @@ const styles = StyleSheet.create({
     marginVertical: vh * 2,
   },
   errorIcon: {
-    height: vw * 8,
-    width: vw * 8,
+    height: vw * 7,
+    width: vw * 7,
   },
   docDetails: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     gap: vw * 1.2,
+  },
+  fileViewContainer: {
+    flexDirection: 'row',
+    gap: vw * 5,
+    alignItems: 'center',
+    paddingLeft: vw * 8.7,
+    justifyContent: 'space-between',
+    marginTop: vh,
+  },
+  eye: {
+    height: vw * 8,
+    width: vw * 8,
+    resizeMode: 'contain',
   },
 });

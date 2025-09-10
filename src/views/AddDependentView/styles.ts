@@ -4,11 +4,9 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {fonts} from '../../assets/fonts';
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    backgroundColor: COLORS.black + 40,
+  inputContainer: {
+    borderWidth: 2,
+    paddingHorizontal: vw * 3.5,
   },
   modalView: {
     backgroundColor: COLORS.white,
@@ -50,8 +48,6 @@ const styles = StyleSheet.create({
   dependentOuterStyle: {
     width: '100%',
     borderWidth: vh * 0.3,
-    // padding: vw * 3.5,
-
     paddingBottom: vh * -2,
   },
   selectLabel: {
@@ -59,7 +55,6 @@ const styles = StyleSheet.create({
     color: COLORS.textBlackShade,
     // color: COLORS.black + '55',
     fontSize: vw * 3.6,
-    lineHeight: vh * 2,
     minHeight: vh * 2,
     marginBottom: vh * 0,
     marginTop: vh * -1,
@@ -70,7 +65,7 @@ const styles = StyleSheet.create({
     marginTop: vh * -0.9,
     marginLeft: vw * -1.8,
     color: COLORS.personalValue,
-    fontFamily: fonts.Aileron.regular,
+    fontFamily: fonts.inter.regular,
     fontSize: vw * 3.5,
     fontWeight: '500',
     // paddingLeft: vw * -3,
@@ -82,19 +77,11 @@ const styles = StyleSheet.create({
     marginTop: vh * 2,
     borderRadius: vw * 3.5,
   },
-  modalAddText: {
-    fontSize: vw * 4.4,
-    fontWeight: '700',
-  },
   modalCancelButton: {
     marginTop: vh * 2,
     borderRadius: vw * 3.5,
   },
-  modalCancelText: {
-    color: COLORS.white,
-    fontSize: vw * 4.4,
-    fontWeight: '700',
-  },
+
   curvedStyle: {
     paddingBottom: vh * 12,
   },

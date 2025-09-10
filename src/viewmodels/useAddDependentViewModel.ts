@@ -4,37 +4,66 @@ import useApiHook from '../hooks/useApiHook';
 import {personalDetail, UsePersonalModalTypes} from '../types/personalTypes';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {RootState} from '../redux/store';
-import {useState} from 'react';
+import {useMemo, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {setErrorModal} from '../redux/generalSlice';
 import {DetailsContainer} from '../components';
 import moment from 'moment';
+import {formatName} from '../utils';
 
 const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
   let {user} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
 
   const {dependentData, dependentIndex, isUpdate} = route?.params || {};
-
   const navigation = useNavigation();
-
   const [confirmationType, setConfirmatonType] = useState('');
-
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
-
-  const prefilledData = {
-    dependentName: dependentData?.dependentDetail[0]?.value,
-    gender: {
-      label: dependentData?.dependentDetail[1]?.value,
-      value: dependentData?.dependentDetail[1]?.value,
+  const [relationsOptions, setRelationsOptions] = useState([]);
+  const {data: _relationsOptions} = useApiHook({
+    apiEndpoint: endpoints.dependent.getDependentType,
+    method: 'get',
+    onSuccess: res => {
+      setRelationsOptions(
+        !isUpdate
+          ? res
+              ?.map(item =>
+                item?.DependentTypeName !== 'Mother' &&
+                item?.DependentTypeName !== 'Father'
+                  ? item
+                  : null,
+              )
+              .filter(Boolean)
+              .map(item => ({
+                label: item?.DependentTypeName,
+                value: item?.DependentTypeID,
+              }))
+          : res.map(item => ({
+              label: item?.DependentTypeName,
+              value: item?.DependentTypeID,
+            })),
+      );
     },
-    relationship: {
-      label: dependentData?.dependentDetail[2]?.value,
-      value: dependentData?.dependentDetail[2]?.value,
-    },
+  });
 
-    age: dependentData?.dependentDetail[3]?.value,
-  };
+  let prefilledData = useMemo(() => {
+    let temp = relationsOptions?.find(
+      item =>
+        item?.DependentTypeName === dependentData?.dependentDetail[2]?.value,
+    );
+    return {
+      dependentName: formatName(dependentData?.dependentDetail[0]?.value),
+      gender: {
+        label: dependentData?.dependentDetail[1]?.value,
+        value: dependentData?.dependentDetail[1]?.value,
+      },
+      relationship: {
+        label: dependentData?.dependentDetail[2]?.value,
+        value: temp,
+      },
+      age: dependentData?.dependentDetail[3]?.value,
+    };
+  }, [relationsOptions]);
 
   const formatAgeToDate = (raw: string): string => {
     if (!raw) return '';
@@ -50,38 +79,28 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
     apiData: dependentApiData,
     checkForError: dependentCheckForError,
   } = useErrorHandlingHook({
-    dependentName: prefilledData.dependentName ?? null,
+    dependentName: prefilledData?.dependentName ?? null,
     cnic: user?.cnic,
     clientCode: user?.ClientCode,
     dependentTypeID: {
-      label: prefilledData.relationship.label,
-      value: prefilledData.relationship.value,
+      label: prefilledData?.relationship?.label,
+      value: prefilledData?.relationship?.value?.value,
     },
     dependentRequestTypesID: dependentIndex ? 2 : 1,
-    dependentRequestID: 0,
+    dependentRequestID: '0',
     gender: {
-      label: prefilledData.gender.label,
-      Value: prefilledData.gender.value,
+      label: prefilledData?.gender?.label,
+      Value: prefilledData?.gender?.value,
     },
     Age: prefilledData?.age?.toString() ?? null,
     dependentRequestStatus: true,
-    createdBy: 1,
+    createdBy: user?.UserId,
   });
 
   const genderOptions: personalDetail[] = [
     {value: 'Male', label: 'Male'},
     {value: 'Female', label: 'Female'},
   ];
-
-  const {data: relationsOptions} = useApiHook({
-    apiEndpoint: endpoints.dependent.getDependentType,
-    method: 'get',
-    transform: {
-      label: 'DependentTypeName',
-      value: 'DependentTypeID',
-    },
-  });
-
   const {
     trigger,
     loading: addDependentLoading,
@@ -94,23 +113,24 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         setConfirmatonType('');
         setConfirmationModal(true);
       }
-
       setConfirmatonType('');
     },
 
     onError: error => {
+      console.log(error, 'error');
       dispatch(
         setErrorModal({
           Show: true,
-          message: `"Incorrect Data May be api goes to on Error"`,
+          message: 'Something Went Wrong',
           detail:
-            'An error has occurred, please fill all require feilds. If the problem persists, contact IGI Life',
+            'An error has occurred, please fill all require fields. If the problem persists, contact IGI Life',
         }),
       );
     },
   });
 
   const handleSubmitRequest = () => {
+    const filled = dependentCheckForError();
     let _apiData = {
       ...dependentApiData,
       dependentTypeID:
@@ -133,31 +153,22 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         ? moment(dependentApiData.Age, 'D-MMM-YYYY').format('DDMMYYYY')
         : '',
     };
-
-    if (
-      !dependentApiData?.dependentName ||
-      !dependentApiData?.gender?.label ||
-      !dependentApiData?.dependentTypeID?.value ||
-      !dependentApiData?.Age
-    ) {
+    if (!filled) {
       dispatch(
         setErrorModal({
           Show: true,
-          message: `"Please fill all require feilds"`,
+          message: `"Please fill all required fields"`,
           detail:
-            'An error has occurred, please fill all require feilds. If the problem persists, contact IGI Life',
+            'An error has occurred, please fill all required fields. If the problem persists, contact IGI Life',
         }),
       );
     } else {
       trigger(_apiData);
-      // setConfirmatonType('update');
     }
   };
+
   const onPressSubmit = () => {
     const filled = dependentCheckForError();
-
-    // if (!filled) return;
-
     let _apiData = {
       ...dependentApiData,
       dependentTypeID:
@@ -181,29 +192,23 @@ const useAddDependentViewModal = ({route}): UsePersonalModalTypes => {
         : '',
     };
 
-    if (
-      !dependentApiData?.dependentName ||
-      !dependentApiData?.gender?.label ||
-      !dependentApiData?.dependentTypeID?.value ||
-      !dependentApiData?.Age
-    ) {
+    if (!filled) {
       dispatch(
         setErrorModal({
           Show: true,
-          message: `"Please fill all require feildsss"`,
+          message: `"Please fill all required fields"`,
           detail:
-            'An error has occurred, please fill all require feilds. If the problem persists, contact IGI Life',
+            'An error has occurred, pleased fill all require fields. If the problem persists, contact IGI Life',
         }),
       );
     } else {
       if (isUpdate) {
         // trigger(_apiData);
+
         setConfirmationModal(true);
         setConfirmatonType('update');
       } else {
         trigger(_apiData);
-        // setConfirmationModal(true);
-        // setConfirmatonType('update');
       }
     }
   };

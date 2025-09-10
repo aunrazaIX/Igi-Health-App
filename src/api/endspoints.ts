@@ -5,6 +5,7 @@ const endpoints = {
     sendOtp: 'OTP/getOTPforpasswordChanged',
     verifyOTP: 'OTP/VerifyOTP',
     updatePassword: 'Password/changePassword',
+    logout: 'Login/Logout',
   },
   bank: {
     getBankDetails: 'Bank/GetBankDetails',
@@ -25,6 +26,7 @@ const endpoints = {
   },
   claimHistory: {
     getAllClaim: 'Claims/getClaimsView',
+    getDxcClaims: 'Claims/getClaimsHisotry',
   },
   panelHospital: {
     getPanelHospitals: 'PanelHospital/GetActivePanelHospitals',
@@ -42,6 +44,7 @@ const endpoints = {
   policy: {
     getPolicyTypes: 'Policy/GetPolicyTypes',
     getPolicyDetails: 'Policy/GetPolicyDetails',
+    getMaternity: 'Policy/GetPolicyDetailsMAT',
   },
   Benefits: {
     getBenefits: 'Benefits/GetActiveBenefits',
@@ -53,6 +56,13 @@ const endpoints = {
     addPriorApproval: 'PriorApprovals/AddPriorApproval',
     attachment: (userId: string, myuuid: string, ClientCode: string) =>
       `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
+  },
+  notifications: {
+    getAll: 'PushNotification/getNotifications',
+    markAsRead: 'PushNotification/readNotification',
+  },
+  PriorApprovalHistory: {
+    getPriorApprovalRequests: 'PriorApprovals/GetPriorApprovalRequests',
   },
 };
 

@@ -58,11 +58,6 @@ const useForgotPasswordViewModel = ({
     faceIdCredentials,
   } = useSelector((state: RootState) => state.auth);
 
-  console.log('current userr', user);
-
-  console.log(isChangedPassword, 'typee');
-
-  console.log(verifiedUserData, 'meri signup ki uuid');
   const [step, setStep] = useState<number>(_step ? _step : 1);
   const [savedDataForVerification, setSavedDataforVerification] =
     useState(null);
@@ -133,6 +128,7 @@ const useForgotPasswordViewModel = ({
     cellNumber: '',
     email: '',
     cnic: '',
+    verify_type: '1',
   });
 
   const {
@@ -160,6 +156,7 @@ const useForgotPasswordViewModel = ({
           userId: res?.Data?.UserID,
           uuid: id,
           user_email: res?.Data?.UserEmail,
+
           user_cellnumber: res?.Data?.UserCellNumber,
           opt_reason: 'for Forgot Password Request',
           opt_typeID: '2',
@@ -169,7 +166,9 @@ const useForgotPasswordViewModel = ({
         sendOtp(apiData);
       },
       onError: e => {
-        dispatch(setErrorModal({show: true, message: e?.error, detail: ''}));
+        dispatch(
+          setErrorModal({show: true, message: e?.header, detail: e?.error}),
+        );
       },
     });
 
@@ -177,17 +176,15 @@ const useForgotPasswordViewModel = ({
     apiEndpoint: endpoints.auth.sendOtp,
     method: 'post',
     onSuccess: res => {
-      console.log(res, 'mera response');
       setStep(2);
       ForgotpasswordResetStates();
     },
-    onError: res => {
+    onError: e => {
       dispatch(
         setErrorModal({
           Show: true,
-          message: 'Reset Failed',
-          detail:
-            'We couldn’t find an account with the details you provided. Please check your information and try again or contact IGI Life.',
+          message: e?.header,
+          detail: e?.error,
         }),
       );
     },
@@ -221,21 +218,20 @@ const useForgotPasswordViewModel = ({
             Show: true,
             message: 'Invalid OTP',
             detail:
-              'The OTP you entered is incorrect. Please check and try againnn.',
+              'The OTP you entered is incorrect. Please check and try again.',
           }),
         );
         setOtp('');
       }
     },
-    onError: error => {
+    onError: e => {
       setFlushOtp(flushOtp + 1);
       setOtp('');
       dispatch(
         setErrorModal({
           Show: true,
-          message: 'Incorrect OTP',
-          detail:
-            'The OTP you entered is incorrect. Please check and try again.',
+          message: e?.header,
+          detail: e?.error,
         }),
       );
     },
@@ -259,14 +255,18 @@ const useForgotPasswordViewModel = ({
 
     onSuccess: res => {
       if (res?.Data) {
-        console.log('RE', res);
         updatePasswordResetStates();
         setConfirmationModal(true);
       }
     },
-    onError: error => {
-      console.log('error', error);
-      dispatch(setErrorModal({show: true, message: error, detail: ''}));
+    onError: e => {
+      dispatch(
+        setErrorModal({
+          show: true,
+          message: e?.header,
+          detail: e?.error,
+        }),
+      );
     },
   });
 
@@ -293,11 +293,8 @@ const useForgotPasswordViewModel = ({
     setCountdownKey(prev => prev + 1);
   };
 
-  console.log('test12()', test12());
-
   const handleNext = () => {
     if (step == 1 && type == 'forgot') {
-      console.log('from login id reset pass');
       if (!apiData.cellNumber || !apiData.email || !apiData.cnic) {
         dispatch(
           setErrorModal({
@@ -331,8 +328,9 @@ const useForgotPasswordViewModel = ({
         dispatch(
           setErrorModal({
             Show: true,
-            message: 'Fill Both Passwords',
-            detail: '',
+            message: 'Missing Password Fields',
+            detail:
+              'Please enter both Password and Confirm Password to continue',
           }),
         );
         return;
@@ -344,8 +342,9 @@ const useForgotPasswordViewModel = ({
         dispatch(
           setErrorModal({
             Show: true,
-            message: 'Password Not Matched',
-            detail: '',
+            message: 'Password Mismatched',
+            detail:
+              'Please ensure the new password and confirmation fields contain the same value before proceeding.',
           }),
         );
         return;

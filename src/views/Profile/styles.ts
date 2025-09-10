@@ -37,20 +37,19 @@ const styles = StyleSheet.create({
   },
   profileEmail: {
     fontSize: vw * 4,
-    lineHeight: vh * 2.3,
   },
   dependentOuterStyle: {
-    width: '100%',
-    borderWidth: vh * 0.3,
-    padding: vw * 3.5,
-    paddingBottom: vh * 0,
+    // width: '100%',
+    // borderWidth: vh * 0.3,
+    // padding: vw * 3.5,
+    // paddingBottom: vh * 0,
     backgroundColor: COLORS.inputBoxDisabled,
   },
   inputBox: {
-    width: '100%',
-    borderWidth: vh * 0.3,
-    padding: vw * 3.5,
-    paddingBottom: vh * 0,
+    // width: '100%',
+    // borderWidth: vh * 0.3,
+    // padding: vw * 3.5,
+    // paddingBottom: vh * 0,
     backgroundColor: COLORS.white,
   },
   selectLabel: {

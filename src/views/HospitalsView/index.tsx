@@ -26,6 +26,7 @@ import ModalLoading from '../../components/ModalLoading';
 import NoDataView from '../../components/NoDataView';
 import SimpleLoader from '../../components/SimpleLoader';
 import MapView, {Callout, Marker} from 'react-native-maps';
+import AlertModal from '../../components/AlertModal';
 
 type HospitalsViewProps = {
   selectedTab: string;
@@ -42,6 +43,8 @@ type HospitalsViewProps = {
   tabChanging: boolean;
   handleMapDirection: any;
   position: any;
+  modalVisible: boolean;
+  setModalVisible: (modalVisible: boolean) => void;
 };
 
 const HospitalsView: React.FC<HospitalsViewProps> = ({
@@ -59,9 +62,9 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
   tabChanging,
   handleMapDirection,
   position,
+  modalVisible,
+  setModalVisible,
 }) => {
-  // console.log(data, 'dataaaaaaafeta');
-
   const cleanCoordinate = (value: string): number | null => {
     if (!value || typeof value !== 'string') return null;
 
@@ -89,13 +92,14 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
               {selectedTabRight === 'list' && (
                 <InputField
                   value={searchText}
-                  placeholder="Search city / Address / Town .."
+                  placeholder="Search City / Address / Town .."
                   placeholderTextColor={COLORS.textGrayShade}
                   onChangeText={text => setSearchText(text)}
                   searchFieldRight={styles.searchFieldRight}
                   searchFieldRightIcon={styles.searchFieldRightIcon}
                   inputStyle={styles.inputStyle}
                   containerStyle={styles.inputFeild}
+                  rightIcon={icons.searchBlack}
                 />
               )}
             </View>
@@ -154,9 +158,18 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
           {selectedTabRight === 'list' && (
             <View style={styles.mapTabsContainer}>
               <FlatList
-                data={['Sindh', 'Punjab', 'Balochistan', 'KPK']}
+                indicatorStyle="black"
+                data={[
+                  'All',
+                  'Sindh',
+                  'Punjab',
+                  'Balochistan',
+                  'KPK',
+                  'Islamabad',
+                  'GILGIT - BALTISTAN',
+                ]}
                 horizontal
-                showsHorizontalScrollIndicator={false}
+                showsHorizontalScrollIndicator={true}
                 contentContainerStyle={styles.mapTabsContainer}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item}) => (
@@ -178,6 +191,7 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
               <SimpleLoader color={COLORS.black} />
             ) : (
               <FlatList
+                indicatorStyle="black"
                 data={data}
                 keyExtractor={(_, index) => index.toString()}
                 ListEmptyComponent={() => {
@@ -269,7 +283,15 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
         )}
         {/* </KeyboardAwareScrollView> */}
 
-        <ModalLoading loading={hospitalLoading} />
+        {/* <ModalLoading loading={hospitalLoading} /> */}
+        <AlertModal
+          title="Notice"
+          description={
+            'IGI Life Insurance reserves the right to de-panel any listed network hospital without prior notice. Additionally, services at a network hospital may be temporarily halted due to unforeseen circumstances.\n\nIf you encounter any issues with a network hospital, please contact IGI Life Insurance at 042-34503333 for assistance.'
+          }
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
       </CurvedView>
     </>
   );

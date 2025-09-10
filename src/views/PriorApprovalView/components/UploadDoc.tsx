@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
   uploadBox: {
     borderColor: COLORS.UploadBorder,
     borderWidth: 1.5,
-    borderStyle: 'dashed',
     borderRadius: vh * 0.5,
     padding: vh * 2.5,
     alignItems: 'center',
@@ -177,7 +176,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: COLORS.maxFile,
     fontSize: vh * 1.7,
-    lineHeight: vh * 3,
   },
   documentSize: {
     textAlign: 'left',

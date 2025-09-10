@@ -42,13 +42,14 @@ const FAQsView = ({
           style={styles.faqsSubHeading}
         />
         <FlatList
+          indicatorStyle="black"
           data={faqsData}
           keyExtractor={item => item?.id?.toString()}
           renderItem={renderItem}
           contentContainerStyle={{
             paddingVertical: vh * 1.5,
           }}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
         />
       </CurvedView>
     </Container>

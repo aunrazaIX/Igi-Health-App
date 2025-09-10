@@ -22,7 +22,6 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
 
   const {
     steps,
-    personalData,
     claimsDetails,
     patientOptions,
     dependants,
@@ -46,6 +45,7 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     deletedFileIndex,
     isView,
     viewIndex,
+    showOptionModal,
   } = states;
 
   const {
@@ -56,7 +56,6 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     onPressEdit,
     onPressStep,
     onSelectPatient,
-    onSelectDocument,
     handleCancelFile,
     setConfirmationModal,
     resetStates,
@@ -72,13 +71,15 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
     handleGOBack,
     onView,
     setIsView,
+    viewOptionModal,
+    openCamera,
+    uploadDocument,
   } = functions;
 
   return (
     <LodgeClaimView
       goBack={goBack}
       steps={steps}
-      personalData={personalData}
       dependantsData={dependantsData}
       claimsDetails={claimsDetails}
       selectedPatient={selectedPatient}
@@ -91,7 +92,6 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       patientOptions={patientOptions}
       navigateTreatment={navigateTreatment}
       onSelectPatient={onSelectPatient}
-      onSelectDocument={onSelectDocument}
       // dependantLoading={dependantLoading}
       uploadLoading={uploadLoading}
       handleCancelFile={handleCancelFile}
@@ -124,6 +124,9 @@ const LodgeClaim: React.FC<LodgeClaimProps> = ({navigation, route}) => {
       onView={onView}
       setIsView={setIsView}
       viewIndex={viewIndex}
+      showOptionModal={showOptionModal}
+      viewOptionModal={viewOptionModal}
+      uploadDocument={uploadDocument}
     />
   );
 };

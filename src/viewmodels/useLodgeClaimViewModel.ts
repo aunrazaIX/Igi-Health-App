@@ -1,7 +1,7 @@
 import {icons} from '../assets';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
   useFocusEffect,
   NavigationProp,
@@ -24,10 +24,14 @@ import {
   setTreatments,
   setResetTreaments,
   setUserEmail,
+  setActiveModule,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {formatCurrencyWithPKR, formatName} from '../utils';
+import {InteractionManager} from 'react-native';
 
 interface Treatment {
   receiptNumber?: string;
@@ -72,14 +76,16 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const randomId = Math.random().toString().substr(2, 6);
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-
+  const [dependants, setDependants] = useState<[]>([]);
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   const [confirmationType, setConfirmationType] = useState<string>('');
   const [deletedIndex, setDeletedIndex] = useState<any>(null);
   const [deletedFileIndex, setDeletedFileIndex] = useState(null);
   const [isView, setIsView] = useState(null);
+  const [showOptionModal, setShowOptionModal] = useState(false);
   const [viewIndex, setViewIndex] = useState();
 
+  const [pickerLoading, setPickerLoading] = useState(false);
   const {
     selectedDocuments,
     currentStep,
@@ -88,19 +94,23 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     selectedType,
     selectedHospital,
     userPassword,
-  } = useSelector(state => state.lodge);
+  } = useSelector(
+    state => state?.lodge?.modules?.[state?.lodge?.activeModule] || {},
+  );
 
-  console.log(userPassword, 'userPPP');
   const {user} = useSelector(state => state.auth);
 
-  console.log(user, 'useerr');
-
-  console.log(selectedType, 'selectedType');
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(setActiveModule(type));
+    }, []),
+  );
 
   const resetStates = () => {
     dispatch(_setTreatmentData([]));
     // navigation.navigate('HomeStack');
     dispatch(setSelectedDocuments([]));
+    dispatch(setSelectedHospital(null));
     dispatch(setSelectedPatient(null));
     dispatch(setSelectedType(null));
     setterForclaimData('claimComments', '');
@@ -137,16 +147,19 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               userRelationCode: selectedPatient?.CLNTNUM?.toString(),
               requestComments: item?.description,
               amount: item.amount,
+              admission_date: new Date(item?.admissionDate),
               hospitalID: selectedHospital.value,
               treatmentTypeID: item?.treatment?.IPDTreatmentTypesID,
               dxcCode: item?.treatment?.value,
               uuid: randomId,
               clientCode: user?.ClientCode,
+              claim_submit_type: 'MB',
               requestAddedDateTime: new Date().toISOString(),
             }))
           : {
               UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
               CLNTNUM: selectedPatient?.CLNTNUM?.toString(),
+              claim_submit_type: 'MB',
               ClaimsData: treatments?.map(item => ({
                 ClaimSNO: '0',
                 ClaimID: res?.Data?.toString(),
@@ -156,6 +169,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
                 UserRelationCode: selectedPatient?.CLNTNUM?.toString(),
                 ClaimReceipt: item?.receiptNumber,
                 ClaimsComments: item?.description,
+                receiptDate: new Date(item?.admissionDate),
                 ClaimsSubTypeID: item?.treatment?.value,
                 ClaimAddedDateTime: moment().format('YYYY-MM-DD'),
                 UUID: randomId,
@@ -165,6 +179,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               userId: user?.UserId,
               claimId: res?.Data?.toString(),
             };
+
       claimTrigger(apiData);
     },
   });
@@ -182,9 +197,9 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     onSuccess: res => {
       setConfirmationModal(true);
       setConfirmationType('');
+      resetStates();
     },
     onError: e => {
-      console.log(e, 'error');
       dispatch(
         setErrorModal({
           show: true,
@@ -216,28 +231,30 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         ClientCode: user?.ClientCode,
         // ClientCode: 'PTC',
       },
-      onSuccess: res => {
-        console.log(res, 'coverage ka response');
-      },
     });
 
-  const dependantsData =
-    covergaeTypesData?.map((item: any) => ({
-      label: item?.CoverageType,
-      value: item?.CoverageId,
-    })) ?? [];
+  const dependantsData = (covergaeTypesData ?? [])
+    .filter((item: CoverageType) => item.isAllowed)
+    .map((item: CoverageType) => ({
+      label: item.CoverageType,
+      value: item.CoverageId,
+    }));
 
-  const {data: dependants, loading: dependantLoading} = useApiHook({
+  const {data: _dependents, loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependants.getDependants,
     method: 'get',
     argsOrBody: {
       cnic: user?.cnic,
       ClientCode: user?.ClientCode,
     },
-    transform: {
-      keyToLoop: 'Data',
-      label: 'LGIVNAME',
-      value: 'CLNTNUM',
+    onSuccess: data => {
+      setDependants(
+        data?.Data.map((item: any) => ({
+          ...item,
+          label: formatName(item?.LGIVNAME),
+          value: item?.CLNTNUM,
+        })),
+      );
     },
     onUnmount: () => {
       const state = navigation.getState();
@@ -249,7 +266,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     },
   });
 
-  console.log(dependants, 'dependants dataaa');
   const {data: hospitalData, loading: hospitalLoading} = useApiHook({
     apiEndpoint: endpoints.panelHospital.getPanelHospitals,
     method: 'get',
@@ -260,24 +276,16 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   });
 
   const steps: Step[] = [
-    {label: 'Personal Details', key: 'personalDetails'},
-    {label: 'Claim', key: 'claim'},
-    {label: 'Upload Doc', key: 'uploadDoc'},
-  ];
-
-  const personalData: PersonalInfoSection[] = [
     {
-      sectionTitle: 'Personal Details',
-      icon: icons.personalDetail,
-      edit: false,
-      delete: false,
-      info: [
-        {label: 'Name of Employee:', value: 'Imran Naveed Qureshi'},
-        {label: 'Bank Name:', value: 'Bank Al Habib'},
-        {label: 'Account Number:', value: '1234-5678-9101112-3'},
-        {label: 'Bank IBAN:', value: 'PK47 XYZ 1234 5678 9101112 3 0'},
-      ],
+      label:
+        type === 'priorApproval' ? 'Patient & Hospital' : 'Personal Details',
+      key: 'personalDetails',
     },
+    {
+      label: type === 'priorApproval' ? 'Treatment Information' : 'Claim',
+      key: 'claim',
+    },
+    {label: 'Upload Document', key: 'uploadDoc'},
   ];
 
   const claimsDetails: ClaimDetail[] = treatments?.map((item: Treatment) => ({
@@ -286,13 +294,20 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
     info: [
       {
         key: 'receiptNumber',
-        label: 'Receipt Number:',
+        label: type === 'lodgeClaim' ? 'Receipt Number:' : 'Admission/M.R. No.',
         value: item?.receiptNumber ?? '--',
       },
       {
+        key: 'admission_date',
+        label:
+          type === 'lodgeClaim' ? 'Reciept Date:' : 'Admission/Procedure Date:',
+        value: item?.admissionDate ?? '--',
+      },
+      {
         key: 'amount',
-        label: 'Amount:',
-        value: item?.amount ?? '--',
+        label:
+          type === 'lodgeClaim' ? 'Amount (PKR):' : 'Estimated Cost (PKR):',
+        value: item?.amount ? item?.amount : '--',
         total: true,
       },
       {
@@ -369,8 +384,30 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   const onPressNext = () => {
     try {
       if (currentStep === 1) {
-        if (!selectedPatient) {
-          throw new Error('Please Select Patient');
+        if (type === 'priorApproval') {
+          if (!selectedPatient || !selectedHospital) {
+            dispatch(
+              setErrorModal({
+                show: true,
+                message: 'Please select all fields',
+                detail:
+                  'Some fields are missing. All fields are required to continue',
+              }),
+            );
+            throw new Error('Please Select Patient');
+          }
+        } else {
+          if (!selectedPatient || !selectedType) {
+            dispatch(
+              setErrorModal({
+                show: true,
+                message: 'Please select all fields',
+                detail:
+                  'Some fields are missing. All fields are required to continue',
+              }),
+            );
+            throw new Error('Please Select Patient');
+          }
         }
       }
 
@@ -397,8 +434,17 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   };
 
   const onPressSubmitClaim = () => {
+    setConfirmationModal(false);
     trigger();
   };
+
+  const totalFileSize = useMemo(() => {
+    if (!selectedDocuments || selectedDocuments.length === 0) return 0;
+
+    return selectedDocuments.reduce((total, item) => {
+      return total + (item?.fileSizeInMB || 0);
+    }, 0);
+  }, [selectedDocuments]);
 
   const onSelectDocument = async () => {
     try {
@@ -406,29 +452,30 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
         allowMultiSelection: true,
         type: [types.docx, types.pdf, types.images],
       });
-
       let documents = [];
-
+      let upload = false;
+      let tempFileSize = 0;
       res?.forEach((item: any) => {
-        const isDuplicate = selectedDocuments.some(
+        const isDuplicate = selectedDocuments?.some(
           doc => doc?.name === item?.name,
         );
+        const fileSizeInMB = item?.size / (1000 * 1000);
+        tempFileSize += fileSizeInMB;
 
-        const fileSizeInMB = item?.size / (1024 * 1024);
-
-        if (fileSizeInMB > 25) {
-          console.log(
-            `File "${item?.name}" exceeds 25MB (${fileSizeInMB.toFixed(
-              2,
-            )} MB). Skipped.`,
-          );
+        if (
+          fileSizeInMB > 25 ||
+          fileSizeInMB > 25 - totalFileSize ||
+          tempFileSize > 25
+        ) {
           dispatch(
             setErrorModal({
               show: true,
-              message: 'File size should not exceed 25MB',
+              message: 'Upload Limit Exceeded',
+              detail:
+                'The total size of your selected file(s) must not exceed 25MB. Please adjust your selection',
             }),
           );
-
+          upload = false;
           return;
         } else {
           if (!isDuplicate) {
@@ -438,7 +485,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
               name: item?.name,
               fileSizeInMB: fileSizeInMB,
             });
-            dispatch(setSelectedDocuments(documents));
+            upload = true;
           } else {
             dispatch(
               setErrorModal({
@@ -451,8 +498,46 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
           }
         }
       });
+      if (upload) {
+        dispatch(setSelectedDocuments(documents));
+      }
     } catch (e) {
       console.log('Error', e);
+    }
+  };
+
+  const openCamera = async () => {
+    try {
+      let options = {
+        quality: 1,
+        cameraType: 'back',
+        selectionLimit: 1,
+      };
+      let result = await launchCamera(options);
+      let res = result?.assets[0];
+      let _img = {
+        uri: res?.uri,
+        type: res?.type,
+        name: `${Math.floor(1000000000 + Math.random() * 9000000000)}.${
+          res?.type?.split('/')[1]
+        }`,
+        fileSizeInMB: res?.fileSize / (1000 * 1000),
+      };
+      if (_img.fileSizeInMB > 25 - totalFileSize) {
+        dispatch(
+          setErrorModal({
+            show: true,
+            message: 'Upload Limit Exceeded',
+            detail:
+              'The total size of your selected file(s) must not exceed 25MB. Please adjust your selection',
+          }),
+        );
+        return;
+      } else {
+        dispatch(setSelectedDocuments([_img]));
+      }
+    } catch (e) {
+      console.log('Error from opending camera or image picker', e);
     }
   };
 
@@ -465,20 +550,31 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
   };
 
   const onView = (index: string) => {
-    console.log(index, 'SAdadasd');
-
     setViewIndex(index);
     setIsView(true);
+  };
+
+  const viewOptionModal = boolean => {
+    setShowOptionModal(boolean);
   };
 
   const handleDeleteFile = deletedFileIndex => {
     dispatch(onDeleteDocuments(deletedFileIndex));
   };
+  const uploadDocument = e => {
+    setShowOptionModal(false);
+    InteractionManager.runAfterInteractions(() => {
+      if (e === 'file') {
+        onSelectDocument();
+      } else {
+        openCamera();
+      }
+    });
+  };
 
   return {
     states: {
       steps,
-      personalData,
       claimsDetails,
       dependantLoading,
       currentStep,
@@ -501,6 +597,7 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       deletedFileIndex,
       isView,
       viewIndex,
+      showOptionModal,
     },
     functions: {
       goBack,
@@ -510,7 +607,6 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       onPressEdit,
       onPressStep,
       onSelectPatient,
-      onSelectDocument,
       handleCancelFile,
       setConfirmationModal,
       resetStates,
@@ -526,6 +622,8 @@ const useLodgeClaimViewModel = ({navigation, route}: Props) => {
       handleGOBack,
       onView,
       setIsView,
+      viewOptionModal,
+      uploadDocument,
     },
   };
 };

@@ -1,5 +1,7 @@
 import PanelHospitalListView from '../../views/PanelHospitalListView';
 import usePanelHospitalListViewModel from '../../viewmodels/usePanelHospitalListViewModel';
+import AlertModal from '../../components/AlertModal';
+import {useState} from 'react';
 
 const PanelHospitalList = ({navigation}) => {
   const {states, functions} = usePanelHospitalListViewModel({navigation});
@@ -10,9 +12,18 @@ const PanelHospitalList = ({navigation}) => {
     goBack,
     setSearchText,
     handleMapDirection,
+    showModal,
   } = functions;
 
-  const {data, selectedTab, selectedTabRight, searchText, loading} = states;
+  const {
+    data,
+    selectedTab,
+    selectedTabRight,
+    searchText,
+    loading,
+    modalVisible,
+  } = states;
+
   return (
     <PanelHospitalListView
       selectedTabRight={selectedTabRight}
@@ -26,6 +37,8 @@ const PanelHospitalList = ({navigation}) => {
       loading={loading}
       handleMapDirection={handleMapDirection}
       position={position}
+      modalVisible={modalVisible}
+      showModal={showModal}
     />
   );
 };

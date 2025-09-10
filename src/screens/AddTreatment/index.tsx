@@ -19,6 +19,7 @@ const AddTreatment = ({
     isError,
     confirmationModal,
     loading,
+    claimType,
   } = states;
   const {
     setterForApiData,
@@ -38,6 +39,7 @@ const AddTreatment = ({
       openConfimationModal={openConfimationModal}
       setConfirmationModal={setConfirmationModal}
       loading={loading}
+      claimType={claimType}
     />
   );
 };

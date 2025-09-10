@@ -18,10 +18,27 @@ const authTransform = createTransform(
   outboundState => outboundState,
   {whitelist: ['auth']},
 );
+
+const generalTransform = createTransform(
+  (inboundState: any) => {
+    const {isIntroSlider, policyClass} = inboundState;
+    return {isIntroSlider, policyClass};
+  },
+
+  (outboundState: any) => {
+    return {
+      ...outboundState,
+      showErrorModal: false,
+      errorMessage: null,
+      errorDetail: null,
+    };
+  },
+  {whitelist: ['general']},
+);
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  transforms: [authTransform],
+  transforms: [authTransform, generalTransform],
 };
 
 const rootReducer = combineReducers({

@@ -14,9 +14,11 @@ import {
 const EnterEmailView = ({
   setterForApiData,
   apiData,
+  ForgotPasswordLoading,
 }: {
   setterForApiData: (key: string, value: string) => void;
   apiData: any;
+  ForgotPasswordLoading: boolean;
 }) => {
   return (
     <Fragment>
@@ -51,6 +53,7 @@ const EnterEmailView = ({
           /\d/,
           /\d/,
         ]}
+        editable={!ForgotPasswordLoading}
       />
 
       <InputField
@@ -68,6 +71,7 @@ const EnterEmailView = ({
           setterForApiData('error_email', errorMsg);
         }}
         errorMessage={apiData?.error_email}
+        editable={!ForgotPasswordLoading}
       />
 
       <InputField
@@ -84,6 +88,8 @@ const EnterEmailView = ({
           const errorMsg = validateCNIC(text);
           setterForApiData('error_cnic', errorMsg);
         }}
+        keyboardType="number-pad"
+        editable={!ForgotPasswordLoading}
         errorMessage={apiData?.error_cnic}
         mask={[
           /\d/,
@@ -111,9 +117,6 @@ export default EnterEmailView;
 const style = StyleSheet.create({
   inputContainer: {
     borderWidth: 2,
-    flexDirection: 'column',
-
-    paddingHorizontal: vw * 1,
   },
   labelStyle: {
     fontSize: vw * 3.5,

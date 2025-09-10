@@ -7,6 +7,7 @@ import endpoints from '../api/endspoints';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import {formatName} from '../utils';
 
 type UsePersonalViewModal = {
   states: {
@@ -43,7 +44,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
   const [modalVisible, setModalVisible] = useState(false);
   const [getData, setGetData] = useState([]);
 
-  let {user} = useSelector((state: RootState) => state.auth);
+  const {user} = useSelector((state: RootState) => state.auth);
 
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
 
@@ -67,10 +68,22 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       setGetData(
         res?.Data?.map((item, index) => ({
           dependent: 'Dependent Detail',
-          image: item?.CLTSEX === 'M' ? icons.genderFrame : icons.frame,
+          image:
+            item?.DPNTTYPE === 'Wife'
+              ? icons.wife
+              : item?.DPNTTYPE === 'Husband'
+              ? icons.husband
+              : item?.DPNTTYPE === 'Member'
+              ? icons.member
+              : item?.DPNTTYPE === 'Father'
+              ? icons.father
+              : item?.DPNTTYPE === 'Mother'
+              ? icons.mother
+              : item?.DPNTTYPE === 'Son'
+              ? icons.genderFrame
+              : icons.frame,
           dependentDetail: [
-            {label: 'Name :', value: item?.LGIVNAME.trim()},
-
+            {label: 'Name :', value: formatName(item?.LGIVNAME.trim())},
             {
               label: 'Gender :',
               value:
@@ -130,11 +143,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
     onSuccess: res => {
-      console.log('succesgull');
       setConfirmationModal(true);
-    },
-    onError: e => {
-      console.log('error', e);
     },
   });
 
@@ -165,11 +174,10 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
 
       Age: formatAgeString(deleteDependent?.dependentDetail[3].value),
       dependentRequestStatus: true,
-      createdAt: '2025-05-15T15:01:31.6552852+05:00',
-      createdBy: 1,
+      createdAt: new Date().toISOString(),
+      createdBy: user?.UserId,
     };
 
-    console.log(_apiData, 'myAPi DATA');
     trigger(_apiData);
   };
   const toggleExpand = (index: number) => {
@@ -187,6 +195,7 @@ const usePersonalViewModal = (): UsePersonalViewModal => {
       deleteDepenedentLoading,
       dependantLoading,
       modalType,
+      userData: user?.coverageType[0],
     },
     functions: {
       openAddDependent,

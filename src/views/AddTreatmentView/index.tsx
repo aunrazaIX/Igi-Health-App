@@ -11,6 +11,7 @@ import {
   AileronSemiBold,
   ConfirmationModal,
   CurvedView,
+  DependentBox,
   InputField,
   Select,
   TopView,
@@ -22,6 +23,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ModalLoading from '../../components/ModalLoading';
 import {vh, vw} from '../../assets/theme/dimension';
+import DatePicker from '../../components/DatePicker';
 
 type AddTreatmentViewProps = {
   treatmentTypes: any[];
@@ -46,25 +48,32 @@ const AddTreatmentView = ({
   loading,
   isError,
   treatmentIndex,
+  claimType,
 }: AddTreatmentViewProps) => {
   return (
     <>
-      <TopView title={'Enter Claim Details'} />
+      <TopView
+        title={`Enter ${
+          claimType === 'lodgeClaim' ? 'Claim' : 'Treatment'
+        } Details`}
+      />
 
       <CurvedView containerStyle={styles.curveStyle}>
         <KeyboardAwareScrollView
           extraScrollHeight={20}
           keyboardShouldPersistTaps="always"
-          showsVerticalScrollIndicator={false}>
+          showsVerticalScrollIndicator={true}>
           <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>
+              {claimType === 'lodgeClaim' && (
+                <AileronBold
+                  name="Add receipt and"
+                  style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
+                />
+              )}
               <AileronBold
-                name="Add receipt and"
-                style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
-              />
-              <AileronBold
-                name="treatment information"
+                name="Treatment information"
                 style={[styles.text, {color: COLORS.cardBackgroundRed}]}
               />
             </View>
@@ -84,52 +93,69 @@ const AddTreatmentView = ({
 
             <InputField
               placeholderTextColor={COLORS.textGrayShade}
-              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              inputStyle={{fontSize: vw * 3.5}}
-              containerStyle={
-                apiData?.error_receiptNumber
-                  ? {marginBottom: vh * 2.5, paddingVertical: vh}
-                  : {marginVertical: vh, paddinsdgVertical: vh}
-              }
+              labelStyle={{color: COLORS.textBlackShade}}
+              containerStyle={styles.inputContainerStyle}
               value={apiData?.receiptNumber}
               onChangeText={text => {
                 const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
                 setterForApiData('receiptNumber', alphanumericOnly);
               }}
               maxLength={20}
-              label="Receipt Number"
+              label={
+                claimType === 'lodgeClaim'
+                  ? 'Receipt Number'
+                  : 'Admission/M.R. No.'
+              }
               errorMessage={apiData?.error_receiptNumber}
-              placeholder="Enter receipt/bill no."
+              placeholder={
+                claimType === 'lodgeClaim'
+                  ? 'Enter Receipt Number'
+                  : 'Enter Hospital Admission/M.R. No.'
+              }
             />
 
+            <DependentBox containerStyle={styles.dependentOuterStyle}>
+              <DatePicker
+                onSelectValue={(date: Date) => {
+                  setterForApiData('admissionDate', date);
+                }}
+                placeholder={'Select Date'}
+                label={
+                  claimType === 'lodgeClaim'
+                    ? 'Receipt Date'
+                    : 'Admission/Procedure Date'
+                }
+                value={apiData?.admissionDate}
+                disabled={false}
+                mode="date"
+                minimumDate={claimType === 'lodgeClaim' ? null : new Date()}
+                maximumDate={claimType === 'lodgeClaim' ? new Date() : null}
+              />
+            </DependentBox>
+
             <InputField
-              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              inputStyle={{fontSize: vw * 3.5}}
-              containerStyle={
-                apiData?.error_amount
-                  ? {marginBottom: vh * 2, paddingVertical: vh}
-                  : {marginVertical: vh, paddinsdgVertical: vh}
-              }
+              inputMode="numeric"
+              labelStyle={{color: COLORS.textBlackShade}}
               placeholderTextColor={COLORS.textGrayShade}
               maxLength={7}
+              containerStyle={styles.inputContainerStyle}
               value={apiData?.amount}
               errorMessage={apiData?.error_amount}
               onChangeText={text => {
                 const cleanedText = text.replace(/[^0-9]/g, '');
                 setterForApiData('amount', cleanedText);
               }}
-              label="Amount"
-              placeholder="Enter Amount"
+              label={claimType === 'lodgeClaim' ? 'Amount' : 'Estimated Cost'}
+              placeholder={
+                claimType === 'lodgeClaim'
+                  ? 'Enter Amount'
+                  : 'Enter Estimated Cost'
+              }
             />
 
             <InputField
-              labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              inputStyle={{fontSize: vw * 3.5}}
-              containerStyle={
-                apiData?.error_description
-                  ? {marginBottom: vh * 3, paddingVertical: vh}
-                  : {marginVertical: vh, paddinsdgVertical: vh}
-              }
+              labelStyle={{color: COLORS.textBlackShade}}
+              containerStyle={styles.inputContainerStyle}
               value={apiData?.description}
               maxLength={200}
               errorMessage={apiData?.error_description}

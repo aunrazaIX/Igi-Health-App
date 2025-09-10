@@ -4,6 +4,7 @@ import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewMo
 import useLoginViewModel from '../../viewmodels/useLoginViewModel';
 
 const ForgotPassword = ({route}: {route: any}) => {
+  const {type} = route?.params || {};
   const {states, functions} = useForgotPasswordViewModel({route});
   const {
     step,
@@ -67,6 +68,7 @@ const ForgotPassword = ({route}: {route: any}) => {
       savedDataForVerification={savedDataForVerification}
       test12={test12}
       isChangedPassword={isChangedPassword}
+      type={type}
     />
   );
 };

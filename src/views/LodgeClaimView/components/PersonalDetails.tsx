@@ -5,10 +5,10 @@ import {vh} from '../../../assets/theme/dimension';
 import Box from './Box';
 import {PersonelDataSection} from '../typeInterface';
 import {icons} from '../../../assets';
+import {formatName} from '../../../utils';
 
 type PersonalDetailsProps = {
   patientOptions: any[];
-  personalData: PersonelDataSection[];
   type: string;
   personalDetails: any;
   dependants: any;
@@ -31,72 +31,75 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({
   onSelectHospital,
   selectedHospital,
 }) => {
-  let data = [
-    {
-      sectionTitle: 'Personal Details',
-      icon: icons.personalDetail,
-      edit: false,
-      delete: false,
-      info: [
-        {
-          label: 'Name of Employee:',
-          value: personalDetails?.Data?.lgivname.trim() ?? '--',
-        },
-        {
-          label: 'Bank Name:',
-          value:
-            personalDetails?.Data?.Bankname?.trim() == ''
-              ? '--'
-              : personalDetails?.Data?.Bankname?.trim(),
-        },
-        {
-          label: 'Account Number:',
-          value: personalDetails?.Data?.accountNumber ?? '--',
-        },
-        {
-          label: 'Bank IBAN:',
-          value:
-            personalDetails?.Data?.IBAN?.trim() == ''
-              ? '--'
-              : personalDetails?.Data?.IBAN?.trim(),
-        },
-      ],
-    },
-  ];
+  // let data = [
+  //   {
+  //     sectionTitle: 'Personal Details',
+  //     icon: icons.personalDetail,
+  //     edit: false,
+  //     delete: false,
+  //     info: [
+  //       {
+  //         label: 'Name of Employee:',
+  //         value: formatName(personalDetails?.Data?.lgivname.trim()) ?? '--',
+  //       },
+  //       {
+  //         label: 'Bank Name:',
+  //         value:
+  //           personalDetails?.Data?.Bankname?.trim() == ''
+  //             ? '--'
+  //             : personalDetails?.Data?.Bankname?.trim(),
+  //       },
+  //       {
+  //         label: 'Account Number:',
+  //         value:
+  //           personalDetails?.Data?.bankacckey?.trim() == ''
+  //             ? '--'
+  //             : personalDetails?.Data?.bankacckey?.trim(),
+  //       },
+  //       {
+  //         label: 'Bank IBAN:',
+  //         value:
+  //           personalDetails?.Data?.IBAN?.trim() == ''
+  //             ? '--'
+  //             : personalDetails?.Data?.IBAN?.trim(),
+  //       },
+  //     ],
+  //   },
+  // ];
 
   return (
     <View style={styles.container}>
-      <Select
-        value={selectedPatient?.label.trim('')}
-        onSelectOption={value => onSelectPatient(value)}
-        selectData={dependants}
-        selectLabel={'Patient Name'}
-        selectPlaceholder={'Select Patient From List'}
-      />
-      {type !== 'priorApproval' && (
+      <View>
         <Select
-          value={selectedType?.label}
-          onSelectOption={value => onSelectType(value)}
-          selectData={patientOptions}
-          selectLabel={'Nature of Claim'}
-          selectPlaceholder={'Select Coverage Type'}
+          value={selectedPatient?.label.trim('')}
+          onSelectOption={value => onSelectPatient(value)}
+          selectData={dependants}
+          selectLabel={'Patient Name'}
+          selectPlaceholder={'Select Patient From List'}
         />
-      )}
+        {type !== 'priorApproval' && (
+          <Select
+            value={selectedType?.label}
+            onSelectOption={value => onSelectType(value)}
+            selectData={patientOptions}
+            selectLabel={'Nature of Claim'}
+            selectPlaceholder={'Select Coverage Type'}
+          />
+        )}
 
-      {type === 'priorApproval' && (
-        <Select
-          value={selectedHospital?.label}
-          onSelectOption={value => onSelectHospital(value)}
-          selectData={hospitalList}
-          selectLabel={'Select Hospital'}
-          selectPlaceholder={'Select Hospital From List'}
-          isSearch={true}
-        />
-      )}
-
-      {data?.map((data, index) => (
-        <Box data={data} key={index} />
-      ))}
+        {type === 'priorApproval' && (
+          <Select
+            value={selectedHospital?.label}
+            onSelectOption={value => onSelectHospital(value)}
+            selectData={hospitalList}
+            selectLabel={'Select Hospital'}
+            selectPlaceholder={'Select Hospital From List'}
+            isSearch={true}
+          />
+        )}
+      </View>
+      {/* {type !== 'priorApproval' &&
+        data?.map((data, index) => <Box data={data} key={index} />)} */}
     </View>
   );
 };

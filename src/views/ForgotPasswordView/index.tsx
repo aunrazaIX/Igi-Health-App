@@ -6,6 +6,7 @@ import {icons} from '../../assets';
 import {
   AileronBold,
   AileronRegular,
+  AileronSemiBold,
   Button,
   Container,
   CurvedView,
@@ -77,10 +78,14 @@ const ForgotPasswordView = ({
 }) => {
   const {user} = useSelector((state: RootState) => state.auth);
 
-  console.log(savedDataForVerification, 'ppppppppppppppppppp');
-
   const returnComponent: Record<number, JSX.Element> = {
-    1: <EnterEmailView setterForApiData={setterForApiData} apiData={apiData} />,
+    1: (
+      <EnterEmailView
+        ForgotPasswordLoading={ForgotPasswordLoading}
+        setterForApiData={setterForApiData}
+        apiData={apiData}
+      />
+    ),
     2: (
       <OtpView
         flushOtp={flushOtp}
@@ -91,12 +96,14 @@ const ForgotPasswordView = ({
         showResend={showResend}
         countdownKey={countdownKey}
         setShowResend={setShowResend}
+        verifyOtpLoading={verifyOtpLoading}
       />
     ),
     3: (
       <CreateNewPassword
         setterForUpdatePasswordApiData={setterForUpdatePasswordApiData}
         updatePasswordApiData={updatePasswordApiData}
+        updatePasswordLoading={updatePasswordLoading}
       />
     ),
   };
@@ -114,7 +121,7 @@ const ForgotPasswordView = ({
   const returnButtonName: Record<number, string> = {
     1: 'Submit',
     2: 'Next',
-    3: 'Create Password & Continue',
+    3: `${type !== 'changePassword' ? 'Create' : 'Update'} Password & Continue`,
   };
   const returnHeaderName: Record<number, string> = {
     1: 'Forgot Password',
@@ -133,13 +140,12 @@ const ForgotPasswordView = ({
         onPressBack={onPressBack}
         icon={returnHeaderIcon[step]}
         title={returnHeaderName[step]}
-        titleStyle={{lineHeight: vh * 3, letterSpacing: vw * 0.2}}
       />
       <CurvedView containerStyle={styles.curvedStyle}>
         <KeyboardAwareScrollView>
           <View style={styles.curvedViewContent}>
             <AileronBold style={styles.titleText} name={returnTitle[step]} />
-            <AileronRegular
+            <AileronSemiBold
               style={styles.description}
               name={returnDescription[step]}
             />
@@ -170,13 +176,14 @@ const ForgotPasswordView = ({
         frameImage={icons.modelSuccessful}
         confirmationMessage={
           type === 'signup'
-            ? 'Your password has been created successfully.'
-            : 'Your password has been changed successfully.'
+            ? 'Welcome aboard! Your account has been created successfully.'
+            : 'Your password has been updated successfully.'
         }
         closeButton
         Successfull
         onClose={onCloseSuccessModal}
         isChangedPassword={isChangedPassword}
+        buttonName={type === 'signup' ? 'Login Now' : 'Close'}
       />
     </Container>
   );

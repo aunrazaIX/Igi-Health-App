@@ -1,7 +1,7 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useState, useEffect, useCallback} from 'react';
 import {ImageSourcePropType, Linking} from 'react-native';
-import {cardIcons, drawerIcons, icons} from '../assets';
+import {drawerIcons, icons} from '../assets';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import Geolocation from '@react-native-community/geolocation';
@@ -28,6 +28,7 @@ type usePanelHospitalListViewModel = {
     searchText: string;
     loading: boolean;
     position: any;
+    modalVisible: boolean;
   };
   functions: {
     onPressTab: (tab: string) => void;
@@ -35,6 +36,7 @@ type usePanelHospitalListViewModel = {
     goBack: () => void;
     setSearchText: (text: string) => void;
     handleMapDirection: any;
+    showModal: () => void;
   };
 };
 
@@ -48,6 +50,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
     latitudeDelta: 0.001,
     longitudeDelta: 0.001,
   });
+  const [modalVisible, setModalVisible] = useState(true);
   const [searchText, setSearchText] = useState('');
   const [allData, setAllData] = useState<{
     panelHospitals: PanelHospitalGroup[];
@@ -104,7 +107,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
       Geolocation.getCurrentPosition(
         pos => {
           const crd = pos.coords;
-          console.log(crd);
+
           setPosition({
             latitude: crd.latitude,
             longitude: crd.longitude,
@@ -132,6 +135,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
           items: [
             {label: 'Phone:', value: item?.HospitalContact},
             {label: 'Address:', value: item?.HospitalAddress},
+            {label: 'Discount:', value: item?.DisAvailable},
             {label: 'City:', value: item?.CityName},
           ],
         })) || [];
@@ -156,16 +160,20 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
           items: [
             {label: 'Phone:', value: item?.DisCenContact},
             {label: 'Address:', value: item?.DisCenAddress},
+            {label: 'Discount:', value: item?.DisAvailable},
             {label: 'City:', value: item?.CityName},
           ],
         })) || [];
-
       setAllData(prev => ({
         ...prev,
         discountedCenters: formattedData,
       }));
     },
   });
+
+  const showModal = () => {
+    setModalVisible(false);
+  };
 
   return {
     states: {
@@ -175,6 +183,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
       searchText,
       loading: loadingPanelHospitals || loadingDiscountedCenters,
       position,
+      modalVisible,
     },
     functions: {
       onPressTab,
@@ -182,6 +191,7 @@ const usePanelHospitalListViewModel = (): usePanelHospitalListViewModel => {
       goBack,
       setSearchText,
       handleMapDirection,
+      showModal,
     },
   };
 };

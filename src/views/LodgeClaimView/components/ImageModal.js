@@ -6,15 +6,12 @@ import {vh, vw} from '../../../assets/theme/dimension';
 
 const ImageModal = ({image, onClose}) => {
   return (
-    <Modal visible transparent statusBarTranslucent>
+    <Modal visible transparent backdropColor={'#5d605f3d'} statusBarTranslucent>
       <View style={styles.container}>
         <TouchableOpacity onPress={onClose}>
           <Image source={icons.CancelIcon} style={styles.cross} />
         </TouchableOpacity>
-        <Image
-          style={{height: vh * 60, width: vw * 90, borderRadius: vw * 2}}
-          source={{uri: image}}
-        />
+        <Image style={styles.image} source={{uri: image}} />
       </View>
     </Modal>
   );
@@ -26,13 +23,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.black + '88',
+    backgroundColor: COLORS.black + '99',
   },
   cross: {
     backgroundColor: 'white',
-
     borderWidth: 1,
     borderRadius: vw * 6,
     // fontSize: vw * 4,
+  },
+  image: {
+    height: vh * 60,
+    width: vw * 90,
+    borderRadius: vw * 2,
+    resizeMode: 'contain',
   },
 });

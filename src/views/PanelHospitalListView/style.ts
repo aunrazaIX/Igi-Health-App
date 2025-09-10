@@ -107,20 +107,17 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.buttonBorder,
   },
   detailsTextLabel: {
-    width: '20%',
+    width: '18%',
     textAlign: 'left',
   },
 
   detailsTextValue: {
-    width: '60%',
+    width: '100%',
     textAlign: 'right',
   },
   inputFeild: {
     borderWidth: 2,
-    // paddingHorizontal: vw * 2,
-    // marginHorizontal: vw * 2,
     height: vh * 6,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -134,10 +131,10 @@ export const styles = StyleSheet.create({
     width: vw * 4,
   },
   inputStyle: {
-    fontSize: vw * 3.5,
+    fontSize: vw * 3,
     height: vh * 4.4,
     color: COLORS.textBlackShade,
-    fontFamily: fonts.Aileron.bold,
+    fontFamily: fonts.inter.bold,
     alignItems: 'center',
   },
   tabText: {

@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
+import {fonts} from '../../assets/fonts';
 
 export const styles = StyleSheet.create({
   claimHistoryContainer: {
@@ -15,7 +16,19 @@ export const styles = StyleSheet.create({
     paddingVertical: vh * 0.3,
     paddingHorizontal: vw * 0.5,
   },
-
+  inputStyle: {
+    fontSize: vw * 3,
+    height: vh * 4.4,
+    color: COLORS.textBlackShade,
+    fontFamily: fonts.inter.bold,
+    alignItems: 'center',
+  },
+  inputField: {
+    borderWidth: 2,
+    height: vh * 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   button: {
     width: '50%',
     backgroundColor: COLORS.buttonBackground,
@@ -122,5 +135,36 @@ export const styles = StyleSheet.create({
 
   cardText: {
     fontSize: vh * 2,
+  },
+  containerStyle: {
+    paddingBottom: vh * 15,
+    paddingTop: vh * 1,
+  },
+  row: {
+    borderRadius: vw,
+    borderWidth: 1,
+    paddingVertical: vh * 0.5,
+    paddingHorizontal: vw,
+    borderColor: COLORS.grey,
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+  },
+  tabView: {
+    borderRadius: vw * 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: vh * 5,
+    width: '50%',
+  },
+  claimStatusText: {
+    color: COLORS.black,
+    fontSize: vw * 3,
+  },
+  claimSubHeadingText: {
+    color: COLORS.black,
+    marginTop: vh,
+    textAlign: 'center',
+    fontSize: vw * 3.5,
   },
 });

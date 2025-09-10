@@ -56,6 +56,7 @@ const useSettingsViewModel = (): UseSettingsViewModelReturnType => {
       params: {
         step: 3,
         isChangedPassword: true,
+        type: 'changePassword',
       },
       to: 'ForgotPassword',
       icon: icons.resetPasswordIcon,

@@ -37,10 +37,11 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
 
   const [selectedTab, setSelectedTab] = useState('Panel Hospitals');
   const [selectedTabRight, setSelectedTabRight] = useState('list');
-  const [selectedMapTab, setSelectedMapTab] = useState('Sindh');
+  const [selectedMapTab, setSelectedMapTab] = useState('All');
   const [searchText, setSearchText] = useState('');
   const [allData, setAllData] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
+  const [modalVisible, setModalVisible] = useState<boolean>(true);
 
   const [position, setPosition] = useState({
     latitude: 10,
@@ -78,10 +79,12 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
 
     let filtered: any[] = allData;
 
-    if (selectedMapTab) {
+    if (selectedMapTab && selectedMapTab !== 'All') {
       filtered = filtered.filter(
         (item: any) => item.ProvinceName === selectedMapTab,
       );
+    } else {
+      filtered = allData;
     }
 
     if (searchText.trim()) {
@@ -125,7 +128,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       Geolocation.getCurrentPosition(
         pos => {
           const crd = pos.coords;
-          console.log(crd);
+
           setPosition({
             latitude: crd.latitude,
             longitude: crd.longitude,
@@ -133,9 +136,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
             longitudeDelta: 0.0421,
           });
         },
-        err => {
-          console.log(err);
-        },
+        err => {},
       );
     }, []),
   );
@@ -150,6 +151,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       hospitalLoading,
       tabChanging,
       position,
+      modalVisible,
     },
     functions: {
       onPressTab,
@@ -158,6 +160,7 @@ const useHospitalsViewModel = (): usePanelHospitalListViewModel => {
       goBack,
       setSearchText,
       handleMapDirection,
+      setModalVisible,
     },
   };
 };

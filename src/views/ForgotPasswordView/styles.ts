@@ -8,19 +8,18 @@ const styles = StyleSheet.create({
     marginLeft: vw,
   },
   titleText: {
-    fontSize: vh * 2.4,
+    fontSize: vw * 5,
     textAlign: 'left',
     color: COLORS.placeholderColor,
-    lineHeight: vh * 3,
-    letterSpacing: vh * 0.1,
   },
   curvedStyle: {
     paddingBottom: vh * 0,
   },
   description: {
     textAlign: 'left',
-    fontSize: vw * 4,
+    fontSize: vw * 3.5,
     marginTop: vh,
+    color: COLORS.textColorLight,
   },
   button: {
     // marginVertical: vh * 2.5,
@@ -55,9 +54,9 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginLeft: vw * 2,
   },
-  iconView: {},
-  buttonDisabled: {},
-  buttonEnabled: {},
+  pinCodeText: {
+    color: COLORS.black,
+  },
 });
 
 export default styles;

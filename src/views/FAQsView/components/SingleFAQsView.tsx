@@ -20,9 +20,9 @@ const SingleFAQsView = ({
   toggleAccordion: (index: number, isClose: boolean) => void;
 }) => {
   return (
-    <TouchableOpacity onPress={() => toggleAccordion(index, false)}>
-      <LinearGradient colors={COLORS.faqsGradient} style={styles.accordion}>
-        <View style={styles.wrapper}>
+    <LinearGradient colors={COLORS.faqsGradient} style={styles.accordion}>
+      <View style={styles.wrapper}>
+        <TouchableOpacity onPress={() => toggleAccordion(index, false)}>
           <View style={styles.headerRow}>
             <AileronSemiBold style={styles.title} name={ques} />
             <Image
@@ -36,9 +36,9 @@ const SingleFAQsView = ({
               <AileronRegular style={styles.description} name={description} />
             </View>
           )}
-        </View>
-      </LinearGradient>
-    </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
+    </LinearGradient>
   );
 };
 
