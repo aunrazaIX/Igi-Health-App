@@ -4,17 +4,20 @@ import AileronBold from '../AileronBold';
 import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 import AileronRegular from '../AileronRegular';
+import LinearGradient from 'react-native-linear-gradient';
 
 const NotificationBanner = ({logo, name, message}) => {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={COLORS.activeButtonGradient}
+      style={styles.container}>
       <Image source={logo} style={styles.avatar} />
 
       <View style={styles.textContainer}>
         <AileronBold style={styles.name} name={name} />
         <AileronRegular style={styles.message} name={message} />
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -22,37 +25,34 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.PriorGradient,
-    paddingVertical: vh,
+
+    backgroundColor: COLORS.activeButtonGradient,
+    paddingVertical: vh * 0.2,
     paddingHorizontal: vw * 2,
     borderRadius: vw * 2,
-    marginHorizontal: 16,
+    marginHorizontal: vw * 1.5,
     marginTop: vh * 3,
     elevation: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
+    gap: vw * 4,
   },
   avatar: {
-    width: vw * 16,
+    width: vw * 18,
     height: vw * 16,
-
     resizeMode: 'contain',
   },
   textContainer: {
     flex: 1,
   },
   name: {
-    fontSize: vw * 3,
+    fontSize: vw * 3.5,
     color: COLORS.white,
     letterSpacing: vw * 0.2,
+    alignSelf: 'flex-start',
   },
   message: {
-    fontSize: vw * 4,
+    fontSize: vw * 3,
     color: COLORS.white,
-  },
-  time: {
-    // fontSize: 12,
-    // marginLeft: 8,
+    alignSelf: 'flex-start',
   },
 });
 

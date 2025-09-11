@@ -9,6 +9,8 @@ import ErrorModal from './src/components/Modal/ErrorModal';
 import {COLORS} from './src/assets/theme/colors';
 
 import Toast from 'react-native-toast-message';
+import NotificationBanner from './src/components/NotificationBanner';
+import {images} from './src/assets';
 
 const MyTheme = {
   ...DefaultTheme,
