@@ -295,7 +295,7 @@ const PanelHospitalListView: React.FC<HomeViewProps> = ({
           modalVisible={modalVisible}
           setModalVisible={showModal}
         />
-        <ModalLoading loading={loading} />
+        {/* <ModalLoading loading={loading} /> */}
       </CurvedView>
     </>
   );

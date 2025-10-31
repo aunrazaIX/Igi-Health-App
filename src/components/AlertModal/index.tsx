@@ -36,6 +36,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
       animationType="fade"
       statusBarTranslucent
       backdropColor={'#5d605f3d'}
+      transparent
       visible={modalVisible}>
       <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
         <View style={styles.centeredView}>

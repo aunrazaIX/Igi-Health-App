@@ -283,7 +283,7 @@ const HospitalsView: React.FC<HospitalsViewProps> = ({
         )}
         {/* </KeyboardAwareScrollView> */}
 
-        <ModalLoading loading={hospitalLoading} />
+        {/* <ModalLoading loading={hospitalLoading} /> */}
         <AlertModal
           title="Notice"
           description={
