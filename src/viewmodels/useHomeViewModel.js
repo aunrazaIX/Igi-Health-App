@@ -85,8 +85,7 @@ const useHomeViewModel = () => {
       if (permissionGranted) {
         const dir = RNFetchBlob.fs.dirs.DocumentDir;
         const filePath = `${dir}/IGIPolicyCard.pdf`;
-
-        const html = generateCardHTML(homeCardData, user);
+        const html = generateCardHTML(homeCardData, user, maternityData);
         const options = {
           html,
           fileName: 'IGIPolicyCard',
