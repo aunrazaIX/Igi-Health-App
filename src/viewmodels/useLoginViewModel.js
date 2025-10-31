@@ -107,7 +107,6 @@ const useLoginViewModel = () => {
     skip: true,
 
     onSuccess: res => {
-      console.log(res);
       let data = loginResponse.current;
       data.Data.coverageType = res;
       data.Data.showPriorApproval = res?.some(
