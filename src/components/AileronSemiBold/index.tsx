@@ -31,10 +31,9 @@ export default AileronSemiBold;
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontFamily: fonts.Aileron.semibold,
+    fontFamily: fonts.inter.semibold,
     textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,
-    // letterSpacing: vw * 0.121,
   },
 });

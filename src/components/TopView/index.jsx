@@ -1,0 +1,140 @@
+import React from 'react';
+import LinearGradient from 'react-native-linear-gradient';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {COLORS} from '../../assets/theme/colors';
+import AileronSemiBold from '../AileronSemiBold';
+import {vh, vw} from '../../assets/theme/dimension';
+import {icons} from '../../assets';
+import {useNavigation} from '@react-navigation/native';
+
+const TopView = ({
+  title,
+  icon,
+  titleStyle,
+  onPressBack,
+  TopViewSecondIcon,
+  tintColrorForTopViewFirstIcon,
+  containerStyle,
+  TopViewFirstIcon,
+  SecondOpenModal,
+  FirstOpenModal,
+  containerStyleIcon,
+}) => {
+  const navigation = useNavigation();
+  return (
+    <LinearGradient style={styles.container} colors={COLORS.PriorGradient}>
+      <View style={styles.wrapper}>
+        <View style={[styles.row, containerStyle]}>
+          <TouchableOpacity
+            onPress={() => {
+              if (onPressBack) {
+                onPressBack();
+                return;
+              } else {
+                navigation?.goBack();
+              }
+            }}
+            style={styles.backIconContainer}>
+            <Image style={styles.backIcon} source={icons.backArrow} />
+          </TouchableOpacity>
+          <AileronSemiBold
+            style={[styles.headerName, titleStyle]}
+            name={title}
+          />
+          {(TopViewSecondIcon || TopViewFirstIcon) && (
+            <View style={styles.headerIcon}>
+              <TouchableOpacity onPress={SecondOpenModal}>
+                <Image style={styles.TopViewIcon} source={TopViewSecondIcon} />
+              </TouchableOpacity>
+
+              {TopViewFirstIcon && (
+                <TouchableOpacity onPress={FirstOpenModal}>
+                  <Image
+                    style={[
+                      styles.TopViewIcon,
+                      containerStyleIcon,
+                      tintColrorForTopViewFirstIcon && {
+                        tintColor: tintColrorForTopViewFirstIcon,
+                      },
+                    ]}
+                    source={TopViewFirstIcon}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
+        </View>
+        <View style={styles.spacedView}>
+          {icon && <Image style={styles.iconStyle} source={icon} />}
+        </View>
+      </View>
+    </LinearGradient>
+  );
+};
+export default TopView;
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    // borderWidth: 2,
+  },
+  wrapper: {
+    paddingTop: vh * 3.5,
+    paddingHorizontal: vw * 3,
+    alignItems: 'center',
+  },
+  headerIcons: {
+    flexDirection: 'row',
+    gap: vw * 2,
+  },
+  row: {
+    alignItems: 'center',
+
+    flexDirection: 'row',
+    marginBottom: vh * 3,
+    marginTop: vh * 1.5,
+
+    // borderWidth: 2,
+    width: '100%',
+  },
+  backIconContainer: {
+    height: vh * 4.7,
+    width: vw * 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: vw * 5,
+    backgroundColor: COLORS.white,
+  },
+  backIcon: {
+    width: '35%',
+    height: '40%',
+    resizeMode: 'contain',
+  },
+  headerName: {
+    width: '65%',
+    color: COLORS.white,
+    fontSize: vw * 4,
+    textAlign: 'center',
+    marginLeft: vw * 2.2,
+
+    // borderWidth: 2,
+  },
+  iconStyle: {
+    height: vw * 32,
+    width: vw * 32,
+    marginTop: vh * 2,
+    marginBottom: vh * 5,
+    resizeMode: 'contain',
+  },
+  TopViewIcon: {
+    width: vw * 8,
+    height: vw * 8,
+    marginRight: vw * 1.4,
+  },
+  headerIcon: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: vh * 8,
+    gap: vh * 1,
+  },
+});

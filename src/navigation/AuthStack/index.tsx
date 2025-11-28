@@ -7,7 +7,6 @@ import {useSelector} from 'react-redux';
 const AuthStack = () => {
   const Stack = createStackNavigator();
   const isIntro = useSelector(state => state.general.isIntroSlider);
-  console.log(isIntro, 'isintrooooooo');
 
   return (
     <Stack.Navigator

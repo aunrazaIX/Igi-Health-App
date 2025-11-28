@@ -5,6 +5,7 @@ const initalState = {
   errorMessage: null,
   errorDetail: null,
   isIntroSlider: true,
+  policyClass: null,
 };
 export const generalSlice = createSlice({
   name: 'generalSlice',
@@ -12,7 +13,6 @@ export const generalSlice = createSlice({
   reducers: {
     setErrorModal: (state, {payload}) => {
       state.showErrorModal = payload?.show;
-
       if (payload?.message !== undefined) {
         state.errorMessage = payload.message;
       }
@@ -20,11 +20,14 @@ export const generalSlice = createSlice({
         state.errorDetail = payload.detail;
       }
     },
-
     setIntroSlider: (state, {payload}) => {
       state.isIntroSlider = payload;
     },
+    setPolicyClass: (state, {payload}) => {
+      state.policyClass = payload;
+    },
   },
 });
-export const {setErrorModal, setIntroSlider} = generalSlice.actions;
+export const {setErrorModal, setIntroSlider, setPolicyClass} =
+  generalSlice.actions;
 export const generalReducer = generalSlice.reducer;

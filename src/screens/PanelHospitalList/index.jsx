@@ -10,9 +10,18 @@ const PanelHospitalList = ({navigation}) => {
     goBack,
     setSearchText,
     handleMapDirection,
+    showModal,
   } = functions;
 
-  const {data, selectedTab, selectedTabRight, searchText, loading} = states;
+  const {
+    data,
+    selectedTab,
+    selectedTabRight,
+    searchText,
+    loading,
+    modalVisible,
+  } = states;
+
   return (
     <PanelHospitalListView
       selectedTabRight={selectedTabRight}
@@ -26,6 +35,8 @@ const PanelHospitalList = ({navigation}) => {
       loading={loading}
       handleMapDirection={handleMapDirection}
       position={position}
+      modalVisible={modalVisible}
+      showModal={showModal}
     />
   );
 };

@@ -31,11 +31,9 @@ export default AileronBold;
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontFamily: fonts.Aileron.bold,
+    fontFamily: fonts.inter.bold,
     textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,
-    // lineHeight: vh * 1.5,
-    // letterSpacing: vw * 0.121,
   },
 });

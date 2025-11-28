@@ -3,7 +3,7 @@ import Settings from '../../screens/Settings';
 import Notification from '../../screens/Notification';
 import ForgotPassword from '../../screens/ForgotPassword';
 import Profile from '../../screens/Profile';
-import TermsAndCondition from '../../views/TermsAndConditionsView';
+import TermsAndCondition from '../../views/PrivacyPolicyView';
 
 const SettingStack = () => {
   const Stack = createStackNavigator();
