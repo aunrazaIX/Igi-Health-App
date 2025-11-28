@@ -10,23 +10,9 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import SimpleLoader from '../SimpleLoader';
-import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewModel';
 import AileronBold from '../AileronBold';
 
-interface ButtonProps extends TouchableOpacityProps {
-  name: string;
-  containerStyle?: Record<string, string | number | boolean>;
-  inputStyle?: Record<string, string | number | boolean>;
-  showIcon?: boolean;
-  gradientColors?: string[];
-  loading?: boolean;
-  disabled?: boolean;
-  ForgotPasswordLoading?: boolean;
-  route?: any;
-  showIconRight: any;
-}
-
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   name,
   containerStyle,
   inputStyle,

@@ -1,20 +1,9 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  ActivityIndicatorProps,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
+import {ActivityIndicator, StyleSheet} from 'react-native';
 import {vh} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
-interface SimpleLoaderProps {
-  color?: string;
-  size?: ActivityIndicatorProps['size'];
-  style?: ViewStyle;
-}
-
-const SimpleLoader: React.FC<SimpleLoaderProps> = ({color, size, style}) => {
+const SimpleLoader = ({color, size, style}) => {
   return (
     <ActivityIndicator
       style={[styles.container, style]}

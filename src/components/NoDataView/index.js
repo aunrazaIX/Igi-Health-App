@@ -3,15 +3,7 @@ import {vh, vw} from '../../assets/theme/dimension';
 import AileronBold from '../AileronBold';
 import {icons} from '../../assets';
 
-const NoDataView = ({
-  name,
-  iconStyle,
-  text,
-}: {
-  name?: string | number;
-  iconStyle?: any;
-  text?: any;
-}) => {
+const NoDataView = ({name, iconStyle, text}) => {
   return (
     <View style={styles.noDataView}>
       <Image style={[styles.noDataIcon, iconStyle]} source={icons.noDataTwo} />

@@ -1,12 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
-import {View, AppState, Modal, Text, TouchableOpacity} from 'react-native';
+import {
+  View,
+  AppState,
+  Modal,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setErrorModal} from '../../redux/generalSlice';
 import {logout} from '../../redux/authSlice';
 import {COLORS} from '../../assets/theme/colors';
 import AileronBold from '../AileronBold';
 import {vh, vw} from '../../assets/theme/dimension';
-import styles from './styles';
 
 const InactivityHandler = ({children, timeout, warningBefore}) => {
   const dispatch = useDispatch();
@@ -118,3 +124,39 @@ const InactivityHandler = ({children, timeout, warningBefore}) => {
 };
 
 export default InactivityHandler;
+
+const styles = StyleSheet.create({
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.black + '66',
+  },
+  modalContainer: {
+    padding: vw * 5,
+    backgroundColor: 'white',
+    borderRadius: vw * 6,
+    width: '80%',
+  },
+  label: {
+    fontSize: vw * 3.5,
+    marginBottom: vh * 2,
+  },
+  buttonContainer: {
+    height: vh * 4,
+    width: vw * 30,
+    borderRadius: vw * 50,
+    justifyContent: 'center',
+  },
+  signoutButton: {
+    backgroundColor: COLORS.cardBackgroundRed,
+  },
+  stayinButton: {
+    backgroundColor: COLORS.cardBackgroundLightBlue,
+  },
+  buttonText: {
+    color: COLORS.white,
+    fontSize: vw * 3,
+  },
+  buttonsView: {flexDirection: 'row', justifyContent: 'space-between'},
+});

@@ -15,17 +15,8 @@ import AileronRegular from '../AileronRegular';
 import Select from '../Select';
 import Button from '../Button';
 import {icons, images} from '../../assets';
-import {personalDetail} from '../../types/personalTypes';
 
-type ModalCustomProps = {
-  modalVisible: boolean;
-  setModalVisible: (val: boolean) => void;
-  gender: personalDetail[];
-  relation: personalDetail[];
-  onPressSubmit?: () => void;
-};
-
-const AddModal: React.FC<ModalCustomProps> = ({
+const AddModal = ({
   modalVisible,
   setModalVisible,
   gender,

@@ -1,6 +1,6 @@
 import React from 'react';
 import MainStack from './src/navigation/MainStack';
-import {StatusBar, View} from 'react-native';
+import {StatusBar, StyleSheet, View} from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {persistor, store} from './src/redux/store';
@@ -21,11 +21,7 @@ const AppContent = () => {
   return (
     <NavigationContainer theme={MyTheme}>
       <StatusBar translucent backgroundColor="transparent" />
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: COLORS.loginContainer,
-        }}>
+      <View style={styles.container}>
         <MainStack />
         <View>
           <ErrorModal />
@@ -44,4 +40,10 @@ const App = () => (
   </Provider>
 );
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.loginContainer,
+  },
+});
 export default App;

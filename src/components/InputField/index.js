@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  TextInputProps,
 } from 'react-native';
 import {fonts} from '../../assets/fonts';
 import {icons} from '../../assets';
@@ -14,24 +13,7 @@ import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import AileronBold from '../AileronBold';
 
-type StyleObject = Record<string, string | number | boolean>;
-
-interface InputFieldProps extends TextInputProps {
-  searchFieldRight?: StyleObject;
-  searchFieldRightIcon?: StyleObject;
-  label?: string;
-  labelStyle?: StyleObject | StyleObject[] | any;
-  containerStyle?: object;
-  inputStyle?: object;
-  mask?: boolean;
-  rightIcon?: any;
-  iconViewStyle?: StyleObject | StyleObject[];
-  errorMessage?: string;
-  allowCopyPaste?: boolean;
-  placeholderTextColor: any;
-}
-
-const InputField = forwardRef<TextInput, InputFieldProps>(
+const InputField = forwardRef(
   (
     {
       label,

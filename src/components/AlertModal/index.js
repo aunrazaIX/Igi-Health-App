@@ -1,30 +1,11 @@
 import React from 'react';
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-  Image,
-  Touchable,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {Modal, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
 import {COLORS} from '../../assets/theme/colors';
 import {vh} from '../../assets/theme/dimension';
-import {icons} from '../../assets';
 import AileronBold from '../AileronBold';
-import AileronSemiBold from '../AileronSemiBold';
 import AileronRegular from '../AileronRegular';
 
-interface AlertModalProps {
-  title: string;
-  description: string;
-  modalVisible: boolean;
-  setModalVisible: (modalVisible: boolean) => void;
-}
-
-const AlertModal: React.FC<AlertModalProps> = ({
+const AlertModal = ({
   title,
   description,
   modalVisible,

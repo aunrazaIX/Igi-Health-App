@@ -1,21 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, TextProps, StyleProp, TextStyle} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {fonts} from '../../assets/fonts';
-import {vh, vw} from '../../assets/theme/dimension';
+import {vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
-interface AileronSemiBoldProps extends TextProps {
-  name: string;
-  style?: StyleProp<TextStyle>;
-  numberOfLines?: number;
-}
-
-const AileronSemiBold: React.FC<AileronSemiBoldProps> = ({
-  name,
-  numberOfLines,
-  style,
-  ...rest
-}) => {
+const AileronSemiBold = ({name, numberOfLines, style, ...rest}) => {
   return (
     <Text
       {...rest}

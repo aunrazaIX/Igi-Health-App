@@ -14,36 +14,9 @@ import AileronBold from '../AileronBold';
 import AileronSemiBold from '../AileronSemiBold';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from '../Button';
-import AileronRegular from '../AileronRegular';
 import {useNavigation} from '@react-navigation/native';
 
-type StyleObject = Record<string, string | number | boolean>;
-
-type ConfimationModalProps = {
-  ConfirmationModalVisible?: boolean;
-  setConfirmationModalVisible?: (val: boolean) => void;
-  frameImage?: ImageSourcePropType;
-  confirmationMessage?: string;
-  closeButton?: boolean;
-  deleteButton?: boolean;
-  confirmationRequired?: boolean;
-  claimSubmission?: boolean;
-  containerStyle?: StyleObject | StyleObject[];
-  handleDelete?: () => void;
-  Successfull?: boolean;
-  CloseButtonText: string;
-  onClose?: () => void;
-  closeIcon?: boolean;
-  confirmationType: any;
-  submitButton?: boolean;
-  handleSubmit?: () => void;
-  type: any;
-  isUpdate: any;
-  isChangedPassword: any;
-  buttonName: string;
-};
-
-const ConfirmationModal: React.FC<ConfimationModalProps> = ({
+const ConfirmationModal = ({
   ConfirmationModalVisible,
   setConfirmationModalVisible,
   frameImage,

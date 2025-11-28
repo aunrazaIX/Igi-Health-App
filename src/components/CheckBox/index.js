@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { vh, vw } from '../../assets/theme/dimension';
-import { COLORS } from '../../assets/theme/colors';
-import AileronBold from '../AileronBold';
-import { icons } from '../../assets';
-import AileronRegular from '../AileronRegular';
+import React from 'react';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {vh, vw} from '../../assets/theme/dimension';
+import {COLORS} from '../../assets/theme/colors';
+import {icons} from '../../assets';
 import AileronSemiBold from '../AileronSemiBold';
 
-type StyleObject = Record<string, string | number | boolean>;
-
-interface CheckBoxProps {
-  description: string;
-  isChecked: boolean;
-  containerStyle?: StyleObject | StyleObject[];
-  onPressCheckBox: any
-}
-
-const CheckBox: React.FC<CheckBoxProps> = ({ onPressCheckBox, isChecked, description, containerStyle }) => {
+const CheckBox = ({
+  onPressCheckBox,
+  isChecked,
+  description,
+  containerStyle,
+}) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <TouchableOpacity
         onPress={() => {
           if (onPressCheckBox) {
-            onPressCheckBox()
+            onPressCheckBox();
           }
         }}
         style={styles.square}>
@@ -47,7 +41,6 @@ const styles = StyleSheet.create({
     borderColor: COLORS.black,
     height: vh * 1.9,
     width: vw * 3.9,
-
   },
   descriptionText: {
     color: COLORS.textColor,
