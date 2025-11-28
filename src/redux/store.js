@@ -20,12 +20,12 @@ const authTransform = createTransform(
 );
 
 const generalTransform = createTransform(
-  (inboundState: any) => {
+  (inboundState) => {
     const {isIntroSlider, policyClass} = inboundState;
     return {isIntroSlider, policyClass};
   },
 
-  (outboundState: any) => {
+  (outboundState) => {
     return {
       ...outboundState,
       showErrorModal: false,
@@ -58,4 +58,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-export type RootState = ReturnType<typeof rootReducer>;

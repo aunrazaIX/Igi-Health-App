@@ -26,8 +26,6 @@ import SettingStack from '../SettingStack';
 import Profile from '../../screens/Profile';
 import InactivityHandler from '../../components/InActivity';
 import PrivacyPolicy from '../../screens/PrivacyPolicy';
-import useApiHook from '../../hooks/useApiHook';
-import endpoints from '../../api/endspoints';
 
 const DrawerStack = () => {
   // const {user} = useSelector(state => state.auth);
@@ -41,13 +39,9 @@ const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
 
-  const {trigger: userLogout} = useApiHook({
-    skip: true,
-    apiEndpoint: endpoints.auth.logout,
-    method: 'post',
-    argsOrBody: {},
-  });
-
+  // if (!user) {
+  //   return null;
+  // }
   const routes = [
     {
       id: 1,

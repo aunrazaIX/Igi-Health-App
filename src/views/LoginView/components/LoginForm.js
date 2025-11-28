@@ -51,12 +51,6 @@ const LoginForm = ({
           onChangeText={text => {
             loginSetterForApiData('userName', text.toLowerCase());
           }}
-          errorMessage={
-            typeof loginApiData?.error_userName === 'string'
-              ? loginApiData.error_userName.charAt(0).toUpperCase() +
-                loginApiData.error_userName.slice(1)
-              : undefined
-          }
           maxLength={50}
         />
 
@@ -69,12 +63,6 @@ const LoginForm = ({
           inputStyle={style.inputStyle}
           value={loginApiData?.password ?? undefined}
           onChangeText={text => loginSetterForApiData('password', text)}
-          errorMessage={
-            loginApiData?.error_password
-              ? loginApiData.error_password.charAt(0).toUpperCase() +
-                loginApiData.error_password.slice(1)
-              : undefined
-          }
           maxLength={25}
           editable={!loading}
         />

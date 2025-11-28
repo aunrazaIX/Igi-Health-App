@@ -53,40 +53,8 @@ const useLoginViewModel = () => {
       verify_type: '0',
     });
 
-  const handleLogin = async () => {    
-    const filled = LoginCheckForError();
-    if (!filled) return;
-    dispatch(
-      setRememberMe({
-        userName: loginApiData.userName,
-        password: loginApiData.password,
-        rememberMe: checked,
-      }),
-    );
-    if (isToggle) {
-      try {
-        const rnBiometrics = new ReactNativeBiometrics({
-          allowDeviceCredentials: true,
-        });
-        const {available, biometryType} =
-          await rnBiometrics.isSensorAvailable();
-
-        if (available) {
-          await rnBiometrics.deleteKeys();
-          await rnBiometrics.createKeys();
-
-          dispatch(
-            setBiometrics({
-              userName: loginApiData.userName,
-              password: loginApiData?.password,
-              biometryType: biometryType,
-            }),
-          );
-        }
-      } catch (error) {
-        console.log('Biometric setup error:', error);
-      }
-    }
+  const handleLogin = () => {
+    navigation.navigate('DrawerStack');
   };
 
   const onPressToucdId = async () => {
@@ -120,7 +88,6 @@ const useLoginViewModel = () => {
       if (!biometrics?.userName || !biometrics?.password) {
         throw new Error('No stored biometric credentials');
       }
-
     } catch (error) {
       dispatch(
         setErrorModal({
@@ -132,17 +99,8 @@ const useLoginViewModel = () => {
     }
   };
 
-  const handleSignup = () => {
-    if (signupApiData.email && signupApiData.cellNumber && signupApiData.cnic) {
-    } else {
-      dispatch(
-        setErrorModal({
-          Show: true,
-          message: 'Fill all fields',
-          detail: 'All fields are required to continue.',
-        }),
-      );
-    }
+  const handleSignup = screen => {
+    navigation.navigate(screen, {step: 2, type: 'signup'});
   };
 
   const onPressTab = name => setSelectedTab(name);

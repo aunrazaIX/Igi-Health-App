@@ -2,22 +2,18 @@ import {createStackNavigator} from '@react-navigation/stack';
 import DrawerStack from '../DrawerStack';
 import AuthStack from '../AuthStack';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../redux/store';
 import {useEffect} from 'react';
 import {EventRegister} from 'react-native-event-listeners';
 import {setErrorModal} from '../../redux/generalSlice';
 import {getApp} from '@react-native-firebase/app';
 import {getMessaging, onMessage} from '@react-native-firebase/messaging';
 import Toast from 'react-native-toast-message';
-// import {getApp} from '@react-native-firebase/app';
-// import {getMessaging, onMessage} from '@react-native-firebase/messaging';
-// import Toast from 'react-native-toast-message';
 
 const MainStack = () => {
   const dispatch = useDispatch();
-  // const {token, user} = useSelector((state: RootState) => state.auth);
-  const user = 'test';
-  const token = 'test-check';
+  const {token, user} = useSelector((state) => state.auth);
+  // const user = 'test';
+  // const token = 'test-check';
   const Stack = createStackNavigator();
 
   useEffect(() => {
@@ -44,11 +40,8 @@ const MainStack = () => {
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      {!token && !user ? (
         <Stack.Screen name={'AuthStack'} component={AuthStack} />
-      ) : (
         <Stack.Screen name={'DrawerStack'} component={DrawerStack} />
-      )}
     </Stack.Navigator>
   );
 };

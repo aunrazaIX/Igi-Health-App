@@ -21,7 +21,7 @@ const endpoints = {
   },
   claimLogde: {
     lodge: 'Claims/AddNewClaim',
-    attachment: (userId: string, myuuid: string, ClientCode: string) =>
+    attachment: (userId, myuuid, ClientCode) =>
       `Attachment/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
   },
   claimHistory: {
@@ -54,7 +54,7 @@ const endpoints = {
   },
   priorApproval: {
     addPriorApproval: 'PriorApprovals/AddPriorApproval',
-    attachment: (userId: string, myuuid: string, ClientCode: string) =>
+    attachment: (userId, myuuid, ClientCode) =>
       `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
   },
   notifications: {

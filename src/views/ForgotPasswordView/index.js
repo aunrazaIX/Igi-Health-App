@@ -131,11 +131,6 @@ const ForgotPasswordView = ({
 
             <Button
               onPress={handleNext}
-              disabled={
-                ForgotPasswordLoading ||
-                verifyOtpLoading ||
-                (step == 2 ? (otp?.length == 6 ? false : true) : false)
-              }
               name={returnButtonName[step]}
               containerStyle={styles.button}
               loading={
@@ -148,7 +143,7 @@ const ForgotPasswordView = ({
         </KeyboardAwareScrollView>
       </CurvedView>
 
-      {/* <ConfirmationModal
+      <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
         frameImage={icons.modelSuccessful}
@@ -162,7 +157,7 @@ const ForgotPasswordView = ({
         onClose={onCloseSuccessModal}
         isChangedPassword={isChangedPassword}
         buttonName={type === 'signup' ? 'Login Now' : 'Close'}
-      /> */}
+      />
     </Container>
   );
 };

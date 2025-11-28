@@ -4,18 +4,7 @@ import {setErrorModal} from './generalSlice';
 
 const moduleNames = ['lodgeClaim', 'priorApproval'];
 
-const initialModuleState: {
-  currentStep: number;
-  selectedPatient: any | null;
-  selectedType: any | null;
-  selectedMaternityType: any | null;
-  selectedHospital: any | null;
-  selectedDocuments: any[];
-  remarks: string;
-  treatments: any[];
-  isError: boolean;
-  userPassword: any;
-} = {
+const initialModuleState = {
   currentStep: 1,
   selectedPatient: null,
   selectedMaternityType: null,

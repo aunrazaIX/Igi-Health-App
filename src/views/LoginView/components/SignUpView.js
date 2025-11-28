@@ -96,15 +96,10 @@ const SignUpView = ({
       <Button
         containerStyle={styles.loginButton}
         name="Create Account"
-        onPress={handleSignup}
+        onPress={() => {
+            handleSignup('ForgotPassword');
+          }}
         loading={loadingSignup}
-        disabled={
-          signupApiData?.error_cellNumber ||
-          signupApiData?.error_cnic ||
-          signupApiData?.error_email
-            ? true
-            : loadingSignup
-        }
       />
     </>
   );
