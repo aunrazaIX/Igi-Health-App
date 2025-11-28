@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   View,
@@ -44,14 +45,9 @@ const DrawerStack = () => {
     skip: true,
     apiEndpoint: endpoints.auth.logout,
     method: 'post',
-    argsOrBody: {
-      // LoginDevicesID: user?.LoginDevicesID,
-    },
+    argsOrBody: {},
   });
 
-  // if (!user) {
-  //   return null;
-  // }
   const routes = [
     {
       id: 1,
@@ -76,7 +72,6 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'Personal',
     },
-    // user?.coverageType?.some(obj => obj?.isAllowed === true) && 
     {
       id: 4,
       name: 'Lodge Claim',
@@ -84,7 +79,6 @@ const DrawerStack = () => {
       mainParent: 'Tabs',
       stChild: 'LodgeClaim',
     },
-    // user?.showPriorApproval && 
     {
       id: 5,
       name: 'Prior Approval',
@@ -92,7 +86,6 @@ const DrawerStack = () => {
       mainParent: 'Tabs',
       stChild: 'PriorApproval',
     },
-    // user?.coverageType?.some(obj => obj?.isRecordAdditionAllowed === true) && 
     {
       id: 6,
       name: 'Add Dependent',
@@ -179,7 +172,6 @@ const DrawerStack = () => {
     },
   ].filter(Boolean);
 
-  // eslint-disable-next-line react/no-unstable-nested-components
   const DrawerContent = ({navigation}) => {
     const handleProfile = () => {
       navigation.navigate('Profile');

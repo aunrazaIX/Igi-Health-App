@@ -13,7 +13,6 @@ export const COLORS = {
   buttonText: 'white',
   textColorLight: '#5C5E5A',
   forgotPass: 'rgba(41, 41, 39, 1)',
-  activeButtonGradient: ['#0B4A98', '#48C3FF'],
   placeholderColor: '#292927',
   selectPlaceholder: 'rgba(193, 193, 193, 1)',
   insuredPrice: 'rgba(18, 18, 18, 1)',
@@ -34,12 +33,9 @@ export const COLORS = {
   confimationDetail: 'rgba(57, 57, 57, 1)',
   deleteButtonGradient: ['#EE2560', '#FF818E'],
   activeButtonGradient: ['#48C3FF', '#0B4A98'],
-  placeholderColor: '#292927',
   cardBackgroundBlue: 'rgba(34, 78, 162, 1)',
   cardBackgroundRed: 'rgba(238, 37, 96, 1)',
   cardBackgroundLightBlue: '#0157C9',
-
-  placeholderColor: '#292927',
   buttonBorder: 'rgba(230, 231, 235, 1)',
   buttonBackground: 'rgba(248, 248, 248, 1)',
   faqsGradient: ['#EBEBEB', '#E2E8EB00'],
@@ -53,4 +49,5 @@ export const COLORS = {
   valueDisabled: 'rgba(108, 108, 108, 1)',
   inputBoxDisabled: 'rgba(243, 243, 243, 1)',
   grey: '#E6EBEB',
+  bottomTabSelectedTabColors: ['#48C3FF', '#0B4A98'],
 };
