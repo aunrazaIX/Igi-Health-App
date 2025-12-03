@@ -17,8 +17,8 @@ const EnterEmailView = ({ setterForApiData, apiData, ForgotPasswordLoading }) =>
         placeholder="Enter Your Official Email Address"
         containerStyle={style.inputContainer}
         value={apiData?.email}
-        onChangeText={text => {}}
-        errorMessage={apiData?.error_email}
+        onChangeText={text => {
+          setterForApiData('email', text);}}
         editable={!ForgotPasswordLoading}
       />
     </Fragment>
