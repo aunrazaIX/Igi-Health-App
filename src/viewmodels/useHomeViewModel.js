@@ -8,7 +8,6 @@ import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import FileViewer from 'react-native-file-viewer';
 import RNFetchBlob from 'rn-fetch-blob';
 import {generateCardHTML} from '../utils/base64';
-import {setPolicyClass} from '../redux/generalSlice';
 
 const useHomeViewModel = () => {
   const {user} = useSelector(state => state.auth);
@@ -17,7 +16,7 @@ const useHomeViewModel = () => {
 
   const [selectedTab, setSelectedTab] = useState('login');
   const [showDependantModal, setShowDependantModal] = useState(false);
-  const [notificationCount, setNotificationCount] = useState(2); // fake unread notifications
+  const [notificationCount, setNotificationCount] = useState(null);
 
   const [data, setData] = useState({
     totalClaimAmount: 45000,
@@ -35,7 +34,6 @@ const useHomeViewModel = () => {
       expiryDate: '31-Dec-2025',
     },
   ];
-  dispatch(setPolicyClass(homeCardData.Policy_Class));
 
   const maternityData = {
     entitlement: 65000,

@@ -1,6 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import {useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
+import endpoints from '../api/endspoints';
+import useApiHook from '../hooks/useApiHook';
+import { setErrorModal } from '../redux/generalSlice';
 
 const useForgotPasswordViewModel = ({route}) => {
   const test = useRef(null);
@@ -16,6 +19,7 @@ const useForgotPasswordViewModel = ({route}) => {
   const [otp, setOtp] = useState('');
   const [showResend, setShowResend] = useState(false);
   const [countdownKey, setCountdownKey] = useState(0);
+  const [flushOtp, setFlushOtp] = useState(0);
   const [apiData, setApiData] = useState({
     cellNumber: '',
     email: '',
@@ -39,43 +43,143 @@ const useForgotPasswordViewModel = ({route}) => {
   };
 
   const handleStep = () => {
-    if (step < 3) setStep(step + 1);
+    if (step < 3) {
+      setStep(step + 1);
+    }
   };
 
   const onPressBack = () => {
-    if (isChangedPassword) return navigation.goBack();
-
-    if (step === 1) return navigation.goBack();
-    if (step === 2) return navigation.goBack();
-    if (step === 3) return navigation.navigate('Login');
+  if (isChangedPassword || step === 1 || step === 2) {
+    return navigation.goBack();
+  }
+  if (step === 3) {
+    return navigation.navigate('Login');
+  }
   };
-
+  
+    const {trigger: sendOtp} = useApiHook({
+    apiEndpoint: endpoints.auth.resendOTP,
+    method: 'post',
+    onSuccess: res => {
+      setStep(2);
+    },
+    onError: e => {
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: e?.message,
+        }),
+      );
+    },
+  });
   const openConfimationModal = () => setConfirmationModal(true);
 
   const test12 = () => {
     if (type === 'signup') return verifiedUserData;
     return test.current;
   };
+ const {
+    trigger: triggerVerifyOtp,
+    loading: verifyOtpLoading,
+    error: errorVerify,
+  } = useApiHook({
+    apiEndpoint: endpoints.auth.verifyOTP,
+    method: 'post',
+    argsOrBody: {
+      OTP: otp,
+      Email: test12()?.email,
+    },
+
+    onSuccess: res => {
+      if (res.Data) {
+        setStep(3);
+      } else {
+        setFlushOtp(flushOtp + 1);
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Invalid OTP',
+            detail:
+              'The OTP you entered is incorrect. Please check and try again.',
+          }),
+        );
+        setOtp('');
+      }
+    },
+    onError: e => {
+      setFlushOtp(flushOtp + 1);
+      setOtp('');
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: e?.message,
+        }),
+      );
+    },
+  });
 
   const onPressResend = () => {
     setShowResend(false);
+    sendOtp({
+      Email: test12()?.UserEmail,
+    });
     setCountdownKey(prev => prev + 1);
   };
 
   const handleNext = () => {
     if (step === 1 && type === 'forgot') {
-      setStep(2);
-      return;
+      if (!apiData.mobileNumber || !apiData.email || !apiData.cnic) {
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Reset Failed',
+            detail:
+              'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life.',
+          }),
+        );
+        return;
+      } else {
+        // triggerForgotPassword();
+        return;
+      }
     }
     if (step === 2 && (type === 'forgot' || type === 'signup')) {
-      setStep(3);
-      return;
+      triggerVerifyOtp();
     }
     if (
       step === 3 &&
       (type === 'forgot' || type === 'signup' || isChangedPassword)
     ) {
-      setConfirmationModal(true);
+     if (
+        !updatePasswordApiData.newPassword ||
+        !updatePasswordApiData.confirmPassword
+      ) {
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Missing Password Fields',
+            detail:
+              'Please enter both Password and Confirm Password to continue',
+          }),
+        );
+        return;
+      }
+      if (
+        updatePasswordApiData.newPassword !==
+        updatePasswordApiData.confirmPassword
+      ) {
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Password Mismatched',
+            detail:
+              'Please ensure the new password and confirmation fields contain the same value before proceeding.',
+          }),
+        );
+        return;
+      }
+
+      triggerUpdatePassword();
     }
   };
   const onCloseSuccessModal = () => {

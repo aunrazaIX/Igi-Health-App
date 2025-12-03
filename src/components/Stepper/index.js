@@ -1,39 +1,13 @@
-import React, {ReactNode} from 'react';
-import {
-  View,
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
-
+import React from 'react';
+import {View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import {vh, vw} from '../../assets/theme/dimension';
 import AileronSemiBold from '../AileronSemiBold';
 import {COLORS} from '../../assets/theme/colors';
 import {useSelector} from 'react-redux';
 
-type Step = {
-  key: string;
-  label: string;
-};
-
-type StepperProps = {
-  steps: Step[];
-  currentStep: number;
-  containerStyle?: StyleProp<ViewStyle>;
-  componentList: Record<string, ReactNode>;
-  onPressStep: (index: number) => void;
-};
-
-const Stepper: React.FC<StepperProps> = ({
-  currentStep,
-  steps,
-  componentList,
-  onPressStep,
-}) => {
-  const renderStep = (stepIndex: number) => {
-    const treatments = useSelector((state: any) => state.lodge.treatments);
+const Stepper = ({currentStep, steps, componentList, onPressStep}) => {
+  const renderStep = stepIndex => {
+    const treatments = useSelector(state => state.lodge.treatments);
     const stepNumber = stepIndex + 1;
     const isActive = currentStep >= stepNumber;
 

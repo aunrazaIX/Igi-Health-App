@@ -4,17 +4,16 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  ImageSourcePropType,
 } from 'react-native';
 import React from 'react';
 import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
-import AileronBold from '../AileronBold';
-import AileronSemiBold from '../AileronSemiBold';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from '../Button';
 import {useNavigation} from '@react-navigation/native';
+import AileronBold from '../AileronBold';
+import AileronSemiBold from '../AileronSemiBold';
 
 const ConfirmationModal = ({
   ConfirmationModalVisible,

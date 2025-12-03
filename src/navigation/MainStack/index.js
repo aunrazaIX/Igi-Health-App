@@ -12,8 +12,6 @@ import Toast from 'react-native-toast-message';
 const MainStack = () => {
   const dispatch = useDispatch();
   const {token, user} = useSelector((state) => state.auth);
-  // const user = 'test';
-  // const token = 'test-check';
   const Stack = createStackNavigator();
 
   useEffect(() => {
@@ -40,8 +38,11 @@ const MainStack = () => {
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
+        {!token && !user ? (
         <Stack.Screen name={'AuthStack'} component={AuthStack} />
+      ) : (
         <Stack.Screen name={'DrawerStack'} component={DrawerStack} />
+      )}
     </Stack.Navigator>
   );
 };

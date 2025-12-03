@@ -28,8 +28,7 @@ import InactivityHandler from '../../components/InActivity';
 import PrivacyPolicy from '../../screens/PrivacyPolicy';
 
 const DrawerStack = () => {
-  // const {user} = useSelector(state => state.auth);
-
+  const {user} = useSelector(state => state.auth);
   const timeout = useMemo(() => {
     return 5 * 60 * 10000;
   }, []);
@@ -39,9 +38,9 @@ const DrawerStack = () => {
   const Drawer = createDrawerNavigator();
   const dispatch = useDispatch();
 
-  // if (!user) {
-  //   return null;
-  // }
+  if (!user) {
+    return null;
+  }
   const routes = [
     {
       id: 1,
@@ -233,7 +232,6 @@ const DrawerStack = () => {
                   style={styles.row}
                   onPress={async () => {
                     if (route.id === 14) {
-                      userLogout();
                       dispatch(logout());
                       return;
                     }

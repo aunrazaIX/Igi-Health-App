@@ -1,9 +1,9 @@
 import React from 'react';
-import { InputField, Button, AileronSemiBold } from '../../../components';
-import { styles } from '../styles';
-import { icons } from '../../../assets';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { StyleSheet } from 'react-native';
+import {InputField, Button, AileronSemiBold} from '../../../components';
+import {styles} from '../styles';
+import {icons} from '../../../assets';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {StyleSheet} from 'react-native';
 
 const SignUpView = ({
   handleSignup,
@@ -28,20 +28,25 @@ const SignUpView = ({
         placeholder="Enter Mobile Number"
         rightIcon={icons.mobNumber}
         onChangeText={text => {
-          signupSetterForApiData('cellNumber', text);
+          signupSetterForApiData('mobileNumber', text);
         }}
-        value={signupApiData?.cellNumber}
-        errorMessage={
-          signupApiData?.error_cellNumber
-            ? signupApiData.error_cellNumber.charAt(0).toUpperCase() +
-              signupApiData.error_cellNumber.slice(1)
-            : ''
-        }
+        value={signupApiData?.mobileNumber}
         editable={!loadingSignup}
         keyboardType="numeric"
         mask={[
-          /\d/, /\d/, /\d/, /\d/, /\d/, /\d/,
-          /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
         ]}
         inputMode="numeric"
       />
@@ -58,12 +63,6 @@ const SignUpView = ({
           signupSetterForApiData('email', text);
         }}
         value={signupApiData?.email}
-        errorMessage={
-          signupApiData?.error_email
-            ? signupApiData.error_email.charAt(0).toUpperCase() +
-              signupApiData.error_email.slice(1)
-            : ''
-        }
         editable={!loadingSignup}
         inputMode="email"
       />
@@ -79,15 +78,21 @@ const SignUpView = ({
           signupSetterForApiData('cnic', text);
         }}
         value={signupApiData?.cnic}
-        errorMessage={
-          signupApiData?.error_cnic
-            ? signupApiData.error_cnic.charAt(0).toUpperCase() +
-              signupApiData.error_cnic.slice(1)
-            : ''
-        }
         mask={[
-          /\d/, /\d/, /\d/, /\d/, /\d/, '-',
-          /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-',
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          '-',
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          '-',
           /\d/,
         ]}
         editable={!loadingSignup}
@@ -96,9 +101,7 @@ const SignUpView = ({
       <Button
         containerStyle={styles.loginButton}
         name="Create Account"
-        onPress={() => {
-            handleSignup('ForgotPassword');
-          }}
+        onPress={handleSignup}
         loading={loadingSignup}
       />
     </>

@@ -1,16 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, TextProps, StyleProp, TextStyle} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {fonts} from '../../assets/fonts';
 import {vh, vw} from '../../assets/theme/dimension';
-import {COLORS} from '../../assets/theme/colors';
+import {COLORS} from '../../assets/theme/colors'
 
-interface AileronBoldProps extends TextProps {
-  name: string | number;
-  style?: StyleProp<TextStyle>;
-  numberOfLines?: number;
-}
-
-const AileronBold: React.FC<AileronBoldProps> = ({
+const AileronBold = ({
   name,
   numberOfLines,
   style,

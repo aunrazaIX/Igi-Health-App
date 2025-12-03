@@ -1,11 +1,12 @@
 const endpoints = {
   auth: {
-    login: 'Login/Login',
-    registerUser: 'VerifyUser/UserVerification',
-    sendOtp: 'OTP/getOTPforpasswordChanged',
-    verifyOTP: 'OTP/VerifyOTP',
-    updatePassword: 'Password/changePassword',
-    logout: 'Login/Logout',
+    login: 'Account/Login',
+    registerUser: 'Account/RegisterUser',
+    sendOtp: 'Account/getOTPforpasswordChanged',
+    verifyOTP: 'Account/Verify-Otp',
+    resendOTP: 'Account/Resend-Otp',
+    setPassword: 'Account/SetPassword',
+    updatePassword: 'Account/UpdatePassword',
   },
   bank: {
     getBankDetails: 'Bank/GetBankDetails',

@@ -15,22 +15,7 @@ import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import SelectModal from './components/SelectModal';
 
-type Options = {
-  value: number;
-  label: string;
-};
-type SelectProps = {
-  selectData: Options[];
-  selectLabel: string;
-  value: string;
-  selectPlaceholder: string;
-  onSelectOption: (item: Options) => void;
-  disabled?: boolean;
-  isSearch?: boolean;
-  selectContainer: any;
-};
-
-const Select: React.FC<SelectProps> = ({
+const Select = ({
   selectData,
   selectLabel,
   selectPlaceholder,
@@ -42,7 +27,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
-  const handleSelect = (item: Options) => {
+  const handleSelect = item => {
     Keyboard.dismiss();
     setDropdownVisible(false);
     if (typeof onSelectOption == 'function') {
@@ -137,9 +122,6 @@ const styles = StyleSheet.create({
   },
   selectContainer: {
     width: '100%',
-    // borderWidth: 2,
-    // marginBottom: vh * 3,
-    // borderWidth: 2,
   },
   dependentContainer: {
     padding: vh * 1.3,

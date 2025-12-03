@@ -426,7 +426,8 @@ const HomeView = ({
             indicatorStyle="black"
             data={cardData}
             keyExtractor={_item => _item?.name}
-            showsHorizontalScrollIndicator={true}
+            scrollEnabled={false}
+            showsHorizontalScrollIndicator={false}
             numColumns={4}
             renderItem={({item}) => (
               <View style={styles.cardsContainer}>

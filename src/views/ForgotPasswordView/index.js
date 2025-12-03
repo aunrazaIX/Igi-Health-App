@@ -1,22 +1,19 @@
 import React from 'react';
 import { CreateNewPassword, EnterEmailView, OtpView } from './components';
-import ConfirmationModal from '../../components/Modal/confimationModal';
 import { icons } from '../../assets';
-
 import {
   AileronBold,
-  AileronRegular,
   AileronSemiBold,
   Button,
+  ConfirmationModal,
   Container,
   CurvedView,
   TopView,
 } from '../../components';
 import styles from './styles';
-import { KeyboardAvoidingView, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { vh, vw } from '../../assets/theme/dimension';
 import { useSelector } from 'react-redux';
+import { View } from 'react-native';
 
 const ForgotPasswordView = ({
   step,
@@ -87,7 +84,7 @@ const ForgotPasswordView = ({
 
   const returnDescription = {
     1: 'Please enter the required information to reset your password',
-    2: `An authentication code has been sent to  `,
+    2: 'An authentication code has been sent',
     3: 'At least 8 characters, with uppercase and lowercase letters.',
   };
 

@@ -2,23 +2,25 @@
 import {useNavigation} from '@react-navigation/native';
 import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {setBiometrics, setRememberMe} from '../redux/authSlice';
+import {setBiometrics, setRememberMe, setUserData} from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {setErrorModal} from '../redux/generalSlice';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import {PermissionsAndroid, Platform} from 'react-native';
+import endpoints from '../api/endspoints';
+import useApiHook from '../hooks/useApiHook';
+import {resetAllModules} from '../redux/lodgeSlice';
+import {Buffer} from 'buffer';
 
 const useLoginViewModel = () => {
   const {rememberMe, credentials, biometrics, isToggle} = useSelector(
     state => state.auth,
   );
-
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
   const [selectedTab, setSelectedTab] = useState('login');
   const [checked, setChecked] = useState(rememberMe);
-
+  const loginResponse = useRef(null);
   useEffect(() => {
     requestPermissionHandler().catch(() => {});
   }, []);
@@ -45,62 +47,204 @@ const useLoginViewModel = () => {
     password: rememberMe ? credentials?.password : null,
   });
 
-  const {setterForApiData: signupSetterForApiData, apiData: signupApiData} =
-    useErrorHandlingHook({
-      email: '',
-      cellNumber: '',
-      cnic: '',
-      verify_type: '0',
-    });
+  const {
+    resetStates: signupResetStates,
+    setterForApiData: signupSetterForApiData,
+    apiData: signupApiData,
+  } = useErrorHandlingHook({
+    email: '',
+    cnic: '',
+    mobileNumber: '',
+    roleId: 14,
+  });
 
-  const handleLogin = () => {
-    navigation.navigate('DrawerStack');
+  const {loading, trigger} = useApiHook({
+    apiEndpoint: endpoints.auth.login,
+    method: 'post',
+    argsOrBody: loginApiData,
+    onSuccess: res => {
+      loginResponse.current = res;
+      if (res?.data.UserName !== credentials?.userName) {
+        dispatch(resetAllModules());
+      }
+      dispatch(
+        setRememberMe({
+          userName: loginApiData.userName,
+          password: loginApiData?.password,
+          rememberMe: checked,
+        }),
+      );
+      dispatch(
+        setUserData({
+          Token: res?.data?.token,
+          Data: res?.data,
+        }),
+      );
+    },
+    onError: e => {
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: e?.message,
+        }),
+      );
+    },
+  });
+  const {trigger: triggerSignup, loading: loadingSignup} = useApiHook({
+    apiEndpoint: endpoints.auth.registerUser,
+    method: 'post',
+    argsOrBody: signupApiData,
+    onSuccess: res => {
+      navigation.navigate('ForgotPassword', {
+        step: 2,
+        type: 'signup',
+      });
+      signupResetStates();
+    },
+    onError: e => {
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: e?.message,
+        }),
+      );
+    },
+  });
+  const handleLogin = async () => {
+    const filled = LoginCheckForError();
+    if (!filled) return;
+    let apiData = {
+      userName: loginApiData?.userName,
+      password: loginApiData?.password,
+    };
+    if (isToggle) {
+      try {
+        const rnBiometrics = new ReactNativeBiometrics({
+          allowDeviceCredentials: true,
+        });
+        const {available, biometryType} =
+          await rnBiometrics.isSensorAvailable();
+        if (available) {
+          await rnBiometrics.deleteKeys();
+          await rnBiometrics.createKeys();
+          dispatch(
+            setBiometrics({
+              userName: loginApiData?.userName,
+              password: loginApiData?.password,
+              biometryType: biometryType,
+            }),
+          );
+        }
+      } catch (error) {
+        console.log('Biometric setup error:', error);
+      }
+    }
+    trigger(apiData);
   };
-
+  console.log(biometrics);
   const onPressToucdId = async () => {
     try {
       if (!isToggle) {
-        throw new Error('Enable biometrics in settings first');
+        throw new Error(
+          'Please enable Fingerprint/FaceId from App  settings first',
+        );
       }
-
       const rnBiometrics = new ReactNativeBiometrics({
         allowDeviceCredentials: true,
       });
+
       const {available, biometryType} = await rnBiometrics.isSensorAvailable();
 
-      if (!available) throw new Error('Biometrics not available');
+      if (!available) {
+        throw new Error('No biometric sensor available on this device');
+      }
+
+      if (biometryType === ReactNativeBiometrics.FaceID && !available) {
+        throw new Error('Face ID is not available on this device');
+      }
+
+      if (biometryType === ReactNativeBiometrics.TouchID && !available) {
+        throw new Error('Fingerprint sensor is not available on this device');
+      }
 
       const {keysExist} = await rnBiometrics.biometricKeysExist();
-      if (!keysExist) await rnBiometrics.createKeys();
+      if (!keysExist) {
+        await rnBiometrics.createKeys();
+      }
 
       const {success} = await rnBiometrics.createSignature({
         promptMessage:
           biometryType === ReactNativeBiometrics.FaceID
-            ? 'Confirm Face ID'
-            : 'Confirm Fingerprint',
-        payload: 'login',
+            ? 'Confirm Face ID to login'
+            : 'Confirm your fingerprint to login',
+        payload: '22',
       });
 
       if (!success) {
-        throw new Error('Biometric authentication failed');
+        throw new Error(
+          `${
+            biometryType === ReactNativeBiometrics.FaceID
+              ? 'Face ID'
+              : 'Fingerprint'
+          } authentication failed`,
+        );
       }
 
       if (!biometrics?.userName || !biometrics?.password) {
-        throw new Error('No stored biometric credentials');
+        throw new Error(
+          'Missing stored biometric credentials. Please login manually first...',
+        );
       }
-    } catch (error) {
-      dispatch(
-        setErrorModal({
-          Show: true,
-          message: 'Biometric Failed',
-          detail: error.message,
-        }),
+
+      const encodedAuth = Buffer.from(biometrics.password, 'utf8').toString(
+        'base64',
       );
+      const apiData = {
+        userName: biometrics.userName,
+        password: encodedAuth,
+      };
+
+      await trigger(apiData);
+    } catch (error) {
+      if (Platform.OS === 'ios') {
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Enable Face ID / Touch ID',
+            detail:
+              ' Please log in with your username and password first. You can turn on Face ID or Touch ID later in the app settings.',
+          }),
+        );
+      } else {
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'Biometric Login Not Set Up',
+            detail:
+              "Please sign in with your username and password first. You can then enable biometric login in the app's settings.",
+          }),
+        );
+      }
     }
   };
 
-  const handleSignup = screen => {
-    navigation.navigate(screen, {step: 2, type: 'signup'});
+  const handleSignup = () => {
+    if (
+      signupApiData.email &&
+      signupApiData.mobileNumber &&
+      signupApiData.cnic
+    ) {
+      triggerSignup(signupApiData);
+    } else {
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Please fill all fields',
+          detail:
+            'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life.',
+        }),
+      );
+    }
   };
 
   const onPressTab = name => setSelectedTab(name);
@@ -112,7 +256,33 @@ const useLoginViewModel = () => {
   const handleCheck = () => setChecked(!checked);
 
   const tabs = ['login', 'signup'];
-
+  useEffect(() => {
+    if (isToggle && credentials?.userName && credentials?.password) {
+      const setupBiometrics = async () => {
+        try {
+          const rnBiometrics = new ReactNativeBiometrics({
+            allowDeviceCredentials: true,
+          });
+          const {available, biometryType} =
+            await rnBiometrics.isSensorAvailable();
+          if (available) {
+            await rnBiometrics.deleteKeys();
+            await rnBiometrics.createKeys();
+            dispatch(
+              setBiometrics({
+                userName: loginApiData.userName,
+                password: loginApiData?.password,
+                biometryType: biometryType,
+              }),
+            );
+          }
+        } catch (error) {
+          console.log('Biometric setup error (toggle):', error);
+        }
+      };
+      setupBiometrics();
+    }
+  }, [isToggle]);
   return {
     states: {
       selectedTab,
@@ -120,6 +290,8 @@ const useLoginViewModel = () => {
       signupApiData,
       loginApiData,
       checked,
+      loading,
+      loadingSignup,
     },
     functions: {
       onPressTab,

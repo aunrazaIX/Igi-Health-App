@@ -1,3 +1,4 @@
+export {default as Container} from './Container';
 export {default as CurvedView} from './CurvedView';
 export {default as Button} from './Button';
 export {default as AileronBold} from './AileronBold';

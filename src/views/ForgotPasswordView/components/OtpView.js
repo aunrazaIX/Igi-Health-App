@@ -20,7 +20,7 @@ const OtpView = ({
   return (
     <Fragment>
       <OtpInput
-        numberOfDigits={6}
+        numberOfDigits={5}
         focusColor={COLORS.black}
         key={String(flushOtp)}
         autoFocus={true}

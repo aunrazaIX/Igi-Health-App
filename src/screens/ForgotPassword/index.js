@@ -1,6 +1,6 @@
 import React from 'react';
-import ForgotPasswordView from '../../views/ForgotPasswordView';
 import useForgotPasswordViewModel from '../../viewmodels/useForgotPasswordViewModel';
+import ForgotPasswordView from '../../views/ForgotPasswordView';
 
 const ForgotPassword = ({route}) => {
   const {type} = route?.params || {};

@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react';
-import InputField from '../../../components/InputField';
 import { StyleSheet, View } from 'react-native';
 import styles from '../styles';
-import AileronRegualr from '../../../components/AileronRegular';
 import { vh, vw } from '../../../assets/theme/dimension';
-import { COLORS } from '../../../assets/theme/colors';
+import { AileronRegular, InputField } from '../../../components';
 
 const CreateNewPassword = ({
   setterForUpdatePasswordApiData,
@@ -53,7 +51,7 @@ const CreateNewPassword = ({
 
       <View style={styles.simpleRow}>
         <View style={styles.bullet} />
-        <AileronRegualr
+        <AileronRegular
           style={styles.ruleText}
           name="Minimum length of 8 characters, including at least one uppercase letter, one number, and one special character."
         />
@@ -61,7 +59,7 @@ const CreateNewPassword = ({
 
       <View style={styles.simpleRow}>
         <View style={styles.bullet} />
-        <AileronRegualr
+        <AileronRegular
           style={styles.ruleText}
           name={`Special characters can include digits and punctuation (e.g., !@#$%^&*()_+|~-={}[]:";'<>?,./).`}
         />
@@ -69,7 +67,7 @@ const CreateNewPassword = ({
 
       <View style={styles.simpleRow}>
         <View style={styles.bullet} />
-        <AileronRegualr
+        <AileronRegular
           style={styles.ruleText}
           name="Case sensitivity is mandatory."
         />

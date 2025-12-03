@@ -12,7 +12,6 @@ const SettingStack = () => {
       initialRouteName="Settings"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="account" component={Profile} />
-
       <Stack.Screen name="Privacy" component={TermsAndCondition} />
       <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
