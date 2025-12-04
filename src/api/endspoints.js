@@ -3,10 +3,10 @@ const endpoints = {
     login: 'Account/Login',
     registerUser: 'Account/RegisterUser',
     sendOtp: 'Account/getOTPforpasswordChanged',
-    verifyOTP: (email, otp) => `Account/Verify-Otp?OTP=${otp}&Email=${email}`,
+    verifyOTP: (otp, email) => `Account/Verify-Otp?OTP=${otp}&Email=${email}`,
     resendOTP: (email) => `Account/Resend-Otp?Email=${email}`,
     setPassword: 'Account/SetPassword',
-    updatePassword: 'Account/UpdatePassword',
+    createPassword: (email, newPassword) => `Account/SetPassword?Email=${email}&NewPassword${newPassword}`,
   },
   bank: {
     getBankDetails: 'Bank/GetBankDetails',

@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import { OtpInput } from 'react-native-otp-entry';
-import { COLORS } from '../../../assets/theme/colors';
+import React, {Fragment} from 'react';
+import {OtpInput} from 'react-native-otp-entry';
+import {COLORS} from '../../../assets/theme/colors';
 import styles from '../styles';
-import { AileronBold, AileronRegular } from '../../../components';
-import { TouchableOpacity, View } from 'react-native';
+import {AileronBold, AileronRegular} from '../../../components';
+import {TouchableOpacity, View} from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
 const OtpView = ({
@@ -21,13 +21,13 @@ const OtpView = ({
     <Fragment>
       <OtpInput
         numberOfDigits={5}
+        onFilled={setOtp}
         focusColor={COLORS.black}
         key={String(flushOtp)}
-        autoFocus={true}
-        hideStick={true}
+        autoFocus
+        hideStick
         placeholder="-------"
-        blurOnFilled={true}
-        disabled={false}
+        blurOnFilled
         type="numeric"
         secureTextEntry={false}
         focusStickBlinkingDuration={500}
@@ -44,9 +44,6 @@ const OtpView = ({
           pinCodeTextStyle: styles.pinCodeText,
           focusedPinCodeContainerStyle: styles.otpBoxView,
         }}
-        onTextChange={text => {
-          setOtp(text);
-        }}
       />
 
       <View
@@ -62,9 +59,9 @@ const OtpView = ({
           size={12}
           until={60}
           onFinish={() => setShowResend(true)}
-          digitStyle={{ backgroundColor: '#FFF' }}
+          digitStyle={{backgroundColor: '#FFF'}}
           timeToShow={['M', 'S']}
-          timeLabels={{ m: '', s: '' }}
+          timeLabels={{m: '', s: ''}}
           showSeparator
         />
       </View>

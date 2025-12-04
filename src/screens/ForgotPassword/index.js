@@ -33,7 +33,6 @@ const ForgotPassword = ({route}) => {
     sendOtp,
     onPressResend,
     setShowResend,
-    test12,
     disabled,
     onCloseSuccessModal,
   } = functions;
@@ -65,7 +64,6 @@ const ForgotPassword = ({route}) => {
       updatePasswordLoading={updatePasswordLoading}
       verifiedUserData={verifiedUserData}
       savedDataForVerification={savedDataForVerification}
-      test12={test12}
       isChangedPassword={isChangedPassword}
       type={type}
     />

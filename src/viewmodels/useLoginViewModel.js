@@ -98,6 +98,7 @@ const useLoginViewModel = () => {
       navigation.navigate('ForgotPassword', {
         step: 2,
         type: 'signup',
+        verifiedUserData: res?.data?.user,
       });
       signupResetStates();
     },

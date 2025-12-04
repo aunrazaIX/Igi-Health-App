@@ -17,8 +17,7 @@ const useForgotPasswordViewModel = ({route}) => {
   } = route?.params || {};
   const [step, setStep] = useState(_step ? _step : 1);
   const [confirmationModal, setConfirmationModal] = useState(false);
-  const [savedDataForVerification, setSavedDataforVerification] =
-    useState(null);
+  const [otpToken, setOtpToken] = useState(null);
   const [otp, setOtp] = useState('');
   const [showResend, setShowResend] = useState(false);
   const [countdownKey, setCountdownKey] = useState(0);
@@ -33,16 +32,11 @@ const useForgotPasswordViewModel = ({route}) => {
     }
   };
   const onPressBack = () => {
-    if (isChangedPassword || step === 1 || step === 2) {
-      return navigation.goBack();
-    }
-    if (step === 3) {
-      return navigation.navigate('Login');
-    }
-  };
-  const test12 = () => {
-    if (type === 'signup') return verifiedUserData;
-    return test.current;
+  if (type === 'signup' || step === 3) return navigation.navigate('Login');
+  if (isChangedPassword) return navigation.goBack();
+  if (step > 1) return setStep(prev => prev - 1);
+
+  return navigation.navigate('Login');
   };
   const {
     setterForApiData,
@@ -81,17 +75,11 @@ const useForgotPasswordViewModel = ({route}) => {
     loading: updatePasswordLoading,
     error: errorUpdatePassword,
   } = useApiHook({
-    apiEndpoint: endpoints.auth.updatePassword,
+    apiEndpoint: endpoints.auth.createPassword(
+      apiData?.email,
+      updatePasswordApiData.newPassword,
+    ),
     method: 'post',
-    argsOrBody: {
-      OldPassword: isChangedPassword
-        ? user?.UserPassword
-        : test12()?.UserPassword,
-      userId: isChangedPassword ? user?.UserId : test12()?.UserID,
-      isPassEncrypted: true,
-      NewPassword: updatePasswordApiData.confirmPassword,
-    },
-
     onSuccess: res => {
       if (res?.Data) {
         updatePasswordResetStates();
@@ -107,8 +95,11 @@ const useForgotPasswordViewModel = ({route}) => {
       );
     },
   });
+
   const {trigger: sendOtp} = useApiHook({
-    apiEndpoint: endpoints.auth.resendOTP(apiData?.email),
+    apiEndpoint: endpoints.auth.resendOTP(
+      apiData?.email || verifiedUserData?.email,
+    ),
     method: 'post',
     onSuccess: res => {
       setStep(2);
@@ -129,28 +120,17 @@ const useForgotPasswordViewModel = ({route}) => {
     loading: verifyOtpLoading,
     error: errorVerify,
   } = useApiHook({
-    apiEndpoint: endpoints.auth.verifyOTP(otp,apiData?.email),
+    apiEndpoint: endpoints.auth.verifyOTP(
+      otp,
+      apiData?.email || verifiedUserData?.email,
+    ),
     method: 'post',
     argsOrBody: {},
     onSuccess: res => {
-      if (res.Data) {
-        setStep(3);
-      } else {
-        setFlushOtp(flushOtp + 1);
-        dispatch(
-          setErrorModal({
-            Show: true,
-            message: 'Invalid OTP',
-            detail:
-              'The OTP you entered is incorrect. Please check and try again.',
-          }),
-        );
-        setOtp('');
-      }
+      setOtpToken(res?.data)
+      setStep(3);
     },
     onError: e => {
-      setFlushOtp(flushOtp + 1);
-      setOtp('');
       dispatch(
         setErrorModal({
           Show: true,
@@ -162,9 +142,7 @@ const useForgotPasswordViewModel = ({route}) => {
 
   const onPressResend = () => {
     setShowResend(false);
-    sendOtp({
-      Email: test12()?.UserEmail,
-    });
+    sendOtp();
     setCountdownKey(prev => prev + 1);
   };
 
@@ -251,7 +229,6 @@ const useForgotPasswordViewModel = ({route}) => {
       onPressResend,
       setShowResend,
       onCloseSuccessModal,
-      test12,
     },
   };
 };
