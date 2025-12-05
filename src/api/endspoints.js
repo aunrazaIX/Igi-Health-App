@@ -6,7 +6,10 @@ const endpoints = {
     verifyOTP: (otp, email) => `Account/Verify-Otp?OTP=${otp}&Email=${email}`,
     resendOTP: (email) => `Account/Resend-Otp?Email=${email}`,
     setPassword: 'Account/SetPassword',
-    createPassword: (email, newPassword) => `Account/SetPassword?Email=${email}&NewPassword${newPassword}`,
+    createPassword: (email, newPassword) => `Account/SetPassword?Email=${email}&NewPassword=${newPassword}`,
+  },
+  Benefits: {
+    getBenefits: 'Benefits/GetUserBenefits',
   },
   bank: {
     getBankDetails: 'Bank/GetBankDetails',
@@ -46,9 +49,6 @@ const endpoints = {
     getPolicyTypes: 'Policy/GetPolicyTypes',
     getPolicyDetails: 'Policy/GetPolicyDetails',
     getMaternity: 'Policy/GetPolicyDetailsMAT',
-  },
-  Benefits: {
-    getBenefits: 'Benefits/GetActiveBenefits',
   },
   coverage: {
     getCoverage: 'Policy/GetPolicyCoverage',

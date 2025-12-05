@@ -1,40 +1,18 @@
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {icons} from '../assets';
 import {useSelector} from 'react-redux';
-import {useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
 
 const useBenefitsViewModel = () => {
   const {user} = useSelector(state => state.auth);
   const {policyClass} = useSelector(state => state.general);
   const navigation = useNavigation();
-  const [allBenefits, setAllBenefits] = useState([
-    {
-      BenefitTypeName: 'IPD',
-      BenefitDetails: 'Hospitalization Coverage',
-      EntitlementLimits: 1000000,
-      CoverageEligibility: 'Eligible after 30 days',
-      Note: 'Includes room charges',
-    },
-    {
-      BenefitTypeName: 'OPD',
-      BenefitDetails: 'Outpatient Visits',
-      EntitlementLimits: 50000,
-      CoverageEligibility: 'Immediate',
-      Note: '-',
-    },
-    {
-      BenefitTypeName: 'MAT',
-      BenefitDetails: 'Maternity Benefits',
-      EntitlementLimits: 200000,
-      CoverageEligibility: 'After 1 year',
-      Note: 'Covers delivery expenses',
-    },
-  ]);
+  const [allBenefits, setAllBenefits] = useState([]);
 
   const [selectedTab, setSelectedTab] = useState('Inpatient');
   const [modalVisible, setModalVisible] = useState({show: false, note: ''});
-  const [benefitsLoading] = useState(false);
-
   const onPressTab = tab => {
     setSelectedTab(tab);
   };
@@ -48,23 +26,39 @@ const useBenefitsViewModel = () => {
     return new Intl.NumberFormat('en-PK').format(number);
   };
 
+const {loading: benefitsloading, trigger} = useApiHook({
+    apiEndpoint: endpoints.Benefits.getBenefits,
+    method: 'post',
+    argsOrBody: ["string"],
+    onSuccess: res => {
+      setAllBenefits(res.data);
+      console.log(res)
+    },
+     onError: e => {
+      console.log(e)}
+  });
+  useFocusEffect(
+  useCallback(() => {
+  trigger();
+}, []))
+console.log(benefitsloading, 'fhgfh');
   const filteredData = allBenefits
     ?.filter(item => {
       if (selectedTab === 'Outpatient') {
-        return item.BenefitTypeName === 'OPD';
+        return item.benefitTypeName === 'OPD';
       } else if (selectedTab === 'Inpatient') {
-        return item.BenefitTypeName === 'IPD';
+        return item.benefitTypeName === 'IPD';
       } else if (selectedTab === 'Maternity') {
-        return item.BenefitTypeName !== 'OPD' && item.BenefitTypeName !== 'IPD';
+        return item.benefitTypeName !== 'OPD' && item.benefitTypeName !== 'IPD';
       }
       return false;
     })
     .map(item => ({
-      title: item.BenefitDetails,
-      price: formatPrice(item?.EntitlementLimits),
+      title: item.benefitDetails,
+      price: formatPrice(item?.entitlementLimits),
       image: icons.benefits2,
-      CoverageEligibility: `Coverage Eligibility: ${item?.CoverageEligibility}`,
-      note: item?.Note !== '-' ? `Note: ${item?.Note}` : null,
+      CoverageEligibility: `Coverage Eligibility: ${item?.coverageEligibility}`,
+      note: item?.note !== '-' ? `Note: ${item?.note}` : null,
     }));
 
   const goBack = () => {
@@ -82,7 +76,7 @@ const useBenefitsViewModel = () => {
     states: {
       data: filteredData,
       selectedTab,
-      benefitsLoading,
+      benefitsloading,
       modalVisible,
     },
     functions: {

@@ -103,10 +103,12 @@ const get = async (endpoint, params = {}) => {
     );
   }
 };
-const post = async (endpoint, data = {}, isFormData = false) => {
+const post = async (endpoint, data = {}, isFormData = false, headers) => {
   let abc = await checkInternet();
   if (abc) {
-    return api.post(endpoint, isFormData ? jsonToFormdata(data) : data);
+    return api.post(endpoint, isFormData ? jsonToFormdata(data) : data, {
+      headers: headers,
+    });
   }
 };
 const put = (endpoint, data = {}) => api.put(endpoint, data);

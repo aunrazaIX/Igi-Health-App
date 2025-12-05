@@ -32,11 +32,11 @@ const useForgotPasswordViewModel = ({route}) => {
     }
   };
   const onPressBack = () => {
-  if (type === 'signup' || step === 3) return navigation.navigate('Login');
-  if (isChangedPassword) return navigation.goBack();
-  if (step > 1) return setStep(prev => prev - 1);
+    if (type === 'signup' || step === 3) return navigation.navigate('Login');
+    if (isChangedPassword) return navigation.goBack();
+    if (step > 1) return setStep(prev => prev - 1);
 
-  return navigation.navigate('Login');
+    return navigation.navigate('Login');
   };
   const {
     setterForApiData,
@@ -76,12 +76,15 @@ const useForgotPasswordViewModel = ({route}) => {
     error: errorUpdatePassword,
   } = useApiHook({
     apiEndpoint: endpoints.auth.createPassword(
-      apiData?.email,
+      apiData?.email || verifiedUserData?.email,
       updatePasswordApiData.newPassword,
     ),
     method: 'post',
+    headers: {
+      Authorization: `Bearer ${otpToken}`,
+    },
     onSuccess: res => {
-      if (res?.Data) {
+      if (res?.data) {
         updatePasswordResetStates();
         setConfirmationModal(true);
       }
@@ -127,7 +130,7 @@ const useForgotPasswordViewModel = ({route}) => {
     method: 'post',
     argsOrBody: {},
     onSuccess: res => {
-      setOtpToken(res?.data)
+      setOtpToken(res?.data);
       setStep(3);
     },
     onError: e => {
@@ -198,7 +201,6 @@ const useForgotPasswordViewModel = ({route}) => {
         );
         return;
       }
-
       triggerUpdatePassword();
     }
   };

@@ -63,6 +63,7 @@ const useLoginViewModel = () => {
     method: 'post',
     argsOrBody: loginApiData,
     onSuccess: res => {
+      
       loginResponse.current = res;
       if (res?.data.UserName !== credentials?.userName) {
         dispatch(resetAllModules());
@@ -114,10 +115,12 @@ const useLoginViewModel = () => {
   const handleLogin = async () => {
     const filled = LoginCheckForError();
     if (!filled) return;
+          console.log(apiData, 'biometric passw')
     let apiData = {
       userName: loginApiData?.userName,
       password: loginApiData?.password,
     };
+    
     if (isToggle) {
       try {
         const rnBiometrics = new ReactNativeBiometrics({
@@ -131,8 +134,10 @@ const useLoginViewModel = () => {
           dispatch(
             setBiometrics({
               userName: loginApiData?.userName,
-              password: loginApiData?.password,
-              biometryType: biometryType,
+              password: Buffer.from(loginApiData.password, 'utf8').toString(
+                'base64',
+              ),
+              biometryType,
             }),
           );
         }
@@ -197,14 +202,11 @@ const useLoginViewModel = () => {
         );
       }
 
-      const encodedAuth = Buffer.from(biometrics.password, 'utf8').toString(
-        'base64',
-      );
       const apiData = {
         userName: biometrics.userName,
-        password: encodedAuth,
+        password: Buffer.from(biometrics.password, 'base64').toString('utf8'),
       };
-
+      console.log(apiData, 'pay');
       await trigger(apiData);
     } catch (error) {
       if (Platform.OS === 'ios') {
@@ -257,33 +259,45 @@ const useLoginViewModel = () => {
   const handleCheck = () => setChecked(!checked);
 
   const tabs = ['login', 'signup'];
-  useEffect(() => {
-    if (isToggle && credentials?.userName && credentials?.password) {
-      const setupBiometrics = async () => {
-        try {
-          const rnBiometrics = new ReactNativeBiometrics({
-            allowDeviceCredentials: true,
-          });
-          const {available, biometryType} =
-            await rnBiometrics.isSensorAvailable();
-          if (available) {
-            await rnBiometrics.deleteKeys();
-            await rnBiometrics.createKeys();
-            dispatch(
-              setBiometrics({
-                userName: loginApiData.userName,
-                password: loginApiData?.password,
-                biometryType: biometryType,
-              }),
-            );
-          }
-        } catch (error) {
-          console.log('Biometric setup error (toggle):', error);
+
+useEffect(() => {
+  if (
+    biometrics?.userName &&
+    loginApiData?.userName &&
+    biometrics.userName !== loginApiData.userName
+  ) {
+    console.log("Prevented biometric setup because username changed");
+    return;
+  }
+
+  if (isToggle && loginApiData?.userName && loginApiData?.password) {
+    const setupBiometrics = async () => {
+      try {
+        const rnBiometrics = new ReactNativeBiometrics({
+          allowDeviceCredentials: true,
+        });
+        const {available, biometryType} =
+          await rnBiometrics.isSensorAvailable();
+        if (available) {
+          await rnBiometrics.deleteKeys();
+          await rnBiometrics.createKeys();
+
+          dispatch(
+            setBiometrics({
+              userName: loginApiData.userName,
+              password: Buffer.from(loginApiData.password, 'utf8').toString('base64'),
+              biometryType,
+            }),
+          );
         }
-      };
-      setupBiometrics();
-    }
-  }, [isToggle]);
+      } catch (error) {
+        console.log('Biometric setup error (toggle):', error);
+      }
+    };
+    setupBiometrics();
+  }
+}, [isToggle, loginApiData?.userName, loginApiData?.password]);
+
   return {
     states: {
       selectedTab,
