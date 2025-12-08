@@ -50,7 +50,7 @@ const BenefitsView = ({
           }
         />
       </View>
-      <AileronBold
+      {item?.price &&(<AileronBold
         // name={`${item.price}${/\d[\d,]*/.test(item?.price) ? '/-' : ''}`}
         name={`${
           /^\d[\d,]*$/.test(item?.price) ? item.price + '/-' : item.price
@@ -60,7 +60,7 @@ const BenefitsView = ({
             ? styles.subTitle
             : styles.insuredTitleCovered
         }
-      />
+      />)}
       {item?.note && (
         <TouchableOpacity
           onPress={() => setModalData({show: true, itemData: item})}>

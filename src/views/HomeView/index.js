@@ -99,7 +99,7 @@ const HomeView = ({
             </View>
           </View>
 
-          {homeCardData?.length > 0 && (
+          {homeCardData && (
             <View style={styles.flipCardContainer}>
               <Animated.View
                 style={[styles.homeInfoContainer, frontAnimatedStyle]}>
@@ -277,7 +277,7 @@ const HomeView = ({
                             height: vh * 8,
                             width: '100%',
                           }}>
-                          {homeCardData
+                          {/* {homeCardData
                             ?.filter(
                               _item =>
                                 _item?.Policy_Insured_Relaion !== 'Member',
@@ -333,7 +333,7 @@ const HomeView = ({
                                   />
                                 </TouchableOpacity>
                               ),
-                            )}
+                            )} */}
                         </View>
                       </View>
                     </View>
@@ -588,9 +588,7 @@ const HomeView = ({
         </View>
       </View>
       <DependantsModal
-        dependants={homeCardData?.filter(
-          _item => _item?.Policy_Insured_Relaion !== 'Member',
-        )}
+        dependants={homeCardData}
         show={showDependantModal}
         onClose={() => handleDependantsModal(false)}
       />

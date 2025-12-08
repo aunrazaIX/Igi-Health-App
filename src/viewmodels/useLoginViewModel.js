@@ -55,7 +55,7 @@ const useLoginViewModel = () => {
     email: '',
     cnic: '',
     mobileNumber: '',
-    roleId: 14,
+    roleId: 16,
   });
 
   const {loading, trigger} = useApiHook({
@@ -70,7 +70,7 @@ const useLoginViewModel = () => {
       }
       dispatch(
         setRememberMe({
-          userName: loginApiData.userName,
+          userName: loginApiData?.userName,
           password: loginApiData?.password,
           rememberMe: checked,
         }),
@@ -134,7 +134,7 @@ const useLoginViewModel = () => {
           dispatch(
             setBiometrics({
               userName: loginApiData?.userName,
-              password: Buffer.from(loginApiData.password, 'utf8').toString(
+              password: Buffer.from(loginApiData?.password, 'utf8').toString(
                 'base64',
               ),
               biometryType,
@@ -233,9 +233,9 @@ const useLoginViewModel = () => {
 
   const handleSignup = () => {
     if (
-      signupApiData.email &&
-      signupApiData.mobileNumber &&
-      signupApiData.cnic
+      signupApiData?.email &&
+      signupApiData?.mobileNumber &&
+      signupApiData?.cnic
     ) {
       triggerSignup(signupApiData);
     } else {
@@ -264,7 +264,7 @@ useEffect(() => {
   if (
     biometrics?.userName &&
     loginApiData?.userName &&
-    biometrics.userName !== loginApiData.userName
+    biometrics?.userName !== loginApiData?.userName
   ) {
     console.log("Prevented biometric setup because username changed");
     return;
@@ -284,8 +284,8 @@ useEffect(() => {
 
           dispatch(
             setBiometrics({
-              userName: loginApiData.userName,
-              password: Buffer.from(loginApiData.password, 'utf8').toString('base64'),
+              userName: loginApiData?.userName,
+              password: Buffer.from(loginApiData?.password, 'utf8').toString('base64'),
               biometryType,
             }),
           );

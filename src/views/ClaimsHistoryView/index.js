@@ -15,6 +15,7 @@ import {styles} from './style';
 import RemarksModal from '../../screens/ClaimsHistory/components/RemarksModal';
 import NoDataView from '../../components/NoDataView';
 import {vh, vw} from '../../assets/theme/dimension';
+import LinearGradient from 'react-native-linear-gradient';
 
 const ClaimsHistoryView = ({
   data,
@@ -29,6 +30,9 @@ const ClaimsHistoryView = ({
   isInProcessAllowed,
   searchText,
   setSearchText,
+  tabs,
+  selectedStatus,
+  onSelectTab,
 }) => {
   const renderItem = ({item, index}) => {
     return (
@@ -107,6 +111,26 @@ const ClaimsHistoryView = ({
           onChangeText={text => setSearchText(text)}
           rightIcon={icons.searchBlack}
         />
+        <View style={styles.buttonContainer}>
+        {tabs?.map(status => (
+            <TouchableOpacity
+              style={styles.statusButton}
+              key={status}
+              onPress={() => onSelectTab(status)}>
+              {selectedStatus === status ? (
+                <LinearGradient
+                  style={styles.gradientButton}
+                  colors={COLORS.deleteButtonGradient}>
+                  <AileronSemiBold style={styles.activeText} name={status} />
+                </LinearGradient>
+              ) : (
+                <View style={styles.button}>
+                  <AileronSemiBold style={styles.buttonText} name={status} />
+                </View>
+              )}
+            </TouchableOpacity>
+          ))}
+      </View>
         <FlatList
           ListFooterComponent={
             claimDataLoading && (

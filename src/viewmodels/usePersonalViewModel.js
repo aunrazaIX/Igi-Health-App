@@ -4,75 +4,68 @@ import {useState} from 'react';
 import moment from 'moment';
 import {formatName} from '../utils';
 import {useSelector} from 'react-redux';
+import endpoints from '../api/endspoints';
+import useApiHook from '../hooks/useApiHook';
 
 const usePersonalViewModal = () => {
   const navigation = useNavigation();
   const {user} = useSelector(state => state.auth);
-
-  const data = [
-    {
-      DPNTTYPE: 'Wife',
-      LGIVNAME: 'Ayesha Khan',
-      CLT: 'F',
-      CLTDOB: '19900412',
-    },
-    {
-      DPNTTYPE: 'Son',
-      LGIVNAME: 'Ali Khan',
-      CLT: 'M',
-      CLTDOB: '20120115',
-    },
-    {
-      DPNTTYPE: 'Mother',
-      LGIVNAME: 'Shahnaz Bibi',
-      CLT: 'F',
-      CLTDOB: '19621206',
-    },
-  ];
-
-  const formattedList = data.map(item => ({
-    dependent: 'Dependent Detail',
-    image:
-      item?.DPNTTYPE === 'Wife'
-        ? icons.wife
-        : item?.DPNTTYPE === 'Husband'
-        ? icons.husband
-        : item?.DPNTTYPE === 'Member'
-        ? icons.member
-        : item?.DPNTTYPE === 'Father'
-        ? icons.father
-        : item?.DPNTTYPE === 'Mother'
-        ? icons.mother
-        : item?.DPNTTYPE === 'Son'
-        ? icons.genderFrame
-        : icons.frame,
-
-    dependentDetail: [
-      {label: 'Name :', value: formatName(item?.LGIVNAME.trim())},
-      {
-        label: 'Gender :',
-        value: item?.CLT === 'M' ? 'Male' : 'Female',
-      },
-      {label: 'Relationship :', value: item?.DPNTTYPE ?? '--'},
-      {
-        label: 'Date of Birth :',
-        value: item?.CLTDOB
-          ? moment(item?.CLTDOB, 'YYYYMMDD').isValid()
-            ? moment(item?.CLTDOB, 'YYYYMMDD').format('DD-MMM-YYYY')
-            : '--'
-          : '--',
-      },
-    ],
-  }));
-
   const [modalVisible, setModalVisible] = useState(false);
-  const [getData, setGetData] = useState(formattedList);
+  const [getData, setGetData] = useState([]);
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const [deleteDependent, setDeleteDependent] = useState(null);
   const [expandedIndex, setExpandedIndex] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
   const goBack = () => navigation.goBack();
+
+  const {data, loading: dependantLoading} = useApiHook({
+    apiEndpoint: endpoints.dependent.getDependents(user?.cnic, 'SSL', 'abc'),
+    method: 'get',
+    onSuccess: res => {
+      console.log(user);
+      setGetData(
+        res?.data?.map((item, index) => ({
+          dependent: 'Dependent Detail',
+          image:
+            item?.relation === 'Wife'
+              ? icons.wife
+              : item?.relation === 'Husband'
+              ? icons.husband
+              : item?.relation === 'MB'
+              ? icons.member
+              : item?.relation === 'Father'
+              ? icons.father
+              : item?.relation === 'Mother'
+              ? icons.mother
+              : item?.relation === 'Son'
+              ? icons.genderFrame
+              : icons.frame,
+          dependentDetail: [
+            {label: 'Name :', value: formatName(item?.memberName.trim())},
+            {
+              label: 'Gender :',
+              value:
+                item?.cltsex === 'M'
+                  ? 'Male'
+                  : item?.cltsex === 'F'
+                  ? 'Female'
+                  : null,
+            },
+            {label: 'Relationship :', value: item?.relation ?? '--'},
+            {
+              label: 'Date of Birth :',
+              value: item?.cltdob
+                ? moment(item?.cltdob, 'YYYYMMDD').isValid()
+                  ? moment(item?.cltdob, 'YYYYMMDD').format('DD-MMM-YYYY')
+                  : '--'
+                : '--',
+            },
+          ],
+        })),
+      );
+    },
+  });
 
   const handleSubmit = () => {
     setModalVisible(false);
@@ -96,11 +89,6 @@ const usePersonalViewModal = () => {
     setModalType('delete');
     setDeleteDependent(dependent);
     setConfirmationModal(true);
-  };
-
-  const formatAgeString = rawDate => {
-    if (!rawDate) return null;
-    return rawDate.replace(/\D/g, '') || null;
   };
 
   const onPressDelete = () => {
@@ -127,10 +115,8 @@ const usePersonalViewModal = () => {
       modalVisible,
       confirmationModal,
       expandedIndex,
-      deleteDepenedentLoading: false,
-      dependantLoading: false,
+      dependantLoading,
       modalType,
-      userData: user?.coverageType?.[0],
     },
     functions: {
       openAddDependent,

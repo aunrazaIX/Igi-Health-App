@@ -9,13 +9,17 @@ const endpoints = {
     createPassword: (email, newPassword) => `Account/SetPassword?Email=${email}&NewPassword=${newPassword}`,
   },
   Benefits: {
-    getBenefits: 'Benefits/GetUserBenefits',
+    getBenefits: 'Benefit/GetUserBenefits',
+  },
+  dependent: {
+    getDependents: (cnic, clientCode,policyType) => `ClaimProcess/GetCustomerDependent?Cnic=${cnic}&ClientCode=${clientCode}&PolicyType=${policyType}`, 
+    addDependentRequest: 'Dependent/',
+  },
+  claimHistory: {
+    getAllClaim: 'ClaimProcess/GetAllClaims',
   },
   bank: {
     getBankDetails: 'Bank/GetBankDetails',
-  },
-  dependants: {
-    getDependants: 'UserRelation/GetOPD',
   },
   treatments: {
     getTypes: 'ClaimsType/getOPDType',
@@ -28,22 +32,11 @@ const endpoints = {
     attachment: (userId, myuuid, ClientCode) =>
       `Attachment/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
   },
-  claimHistory: {
-    getAllClaim: 'Claims/getClaimsView',
-    getDxcClaims: 'Claims/getClaimsHisotry',
-  },
   panelHospital: {
     getPanelHospitals: 'PanelHospital/GetActivePanelHospitals',
   },
   discountedCenters: {
     getDiscountedCenters: 'DiscountCenters/GetActiveDiscCenter',
-  },
-
-  dependent: {
-    getDependentType: 'Dependent/getAllDependentType',
-    getDependetRequestTypes: 'Dependent/getDependentRequestTypes',
-    addDependentRequest: 'Dependent/addDependentRequest',
-    getDependentList: 'UserRelation/GetOPD',
   },
   policy: {
     getPolicyTypes: 'Policy/GetPolicyTypes',

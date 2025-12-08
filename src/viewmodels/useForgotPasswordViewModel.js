@@ -77,7 +77,7 @@ const useForgotPasswordViewModel = ({route}) => {
   } = useApiHook({
     apiEndpoint: endpoints.auth.createPassword(
       apiData?.email || verifiedUserData?.email,
-      updatePasswordApiData.newPassword,
+      updatePasswordApiData?.newPassword,
     ),
     method: 'post',
     headers: {

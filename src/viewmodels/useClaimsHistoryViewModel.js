@@ -4,11 +4,12 @@ import {icons} from '../assets';
 import moment from 'moment';
 import {formatCurrencyWithPKR, formatName} from '../utils';
 import {useSelector} from 'react-redux';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
 
 const useClaimsHistoryViewModel = () => {
   const {user} = useSelector(state => state.auth);
   const navigation = useNavigation();
-
   const [type, setType] = useState(
     user?.coverageType?.some(obj => obj?.isAllowed !== true)
       ? 'Processed'
@@ -19,6 +20,8 @@ const useClaimsHistoryViewModel = () => {
   const [remarks, setRemarks] = useState('');
   const [allData, setAllData] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const tabs = ['Approved', 'Pending', 'Rejected'];
+  const [selectedStatus, setSelectedStatus] = useState('Approved');
 
   const isInProcessAllowed = user?.coverageType?.some(
     obj => obj?.isAllowed !== true,
@@ -104,7 +107,16 @@ const useClaimsHistoryViewModel = () => {
       },
     ].filter(Boolean),
   });
-
+const {loading: claimDataLoading, trigger} = useApiHook({
+    apiEndpoint: endpoints.claimHistory.getAllClaim,
+    method: 'post',
+    argsOrBody: {"pagination": {
+      "isAllRecord" : true
+    }},
+    onSuccess: res => {
+      setAllData(res?.Data?.map(claim => transformClaimData(claim, true)));
+    },
+  });
   const hardcodedClaims = [
     {
       ClaimID: '1001',
@@ -151,7 +163,11 @@ const useClaimsHistoryViewModel = () => {
       ),
     );
   }, [type]);
-
+const onSelectTab = tab => {
+    //setData([]);
+    setSelectedStatus(tab);
+    //setSearch(null);
+  };
   useEffect(() => {
     const lowerText = searchText.toLowerCase();
     let currentData = allData;
@@ -181,12 +197,15 @@ const useClaimsHistoryViewModel = () => {
       getHeadingSubHeading,
       isInProcessAllowed,
       searchText,
+      tabs,
+      selectedStatus,
     },
     functions: {
       goBack,
       onPressType,
       onCloseRemarksModal,
       setSearchText,
+      onSelectTab,
     },
   };
 };

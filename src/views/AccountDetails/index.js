@@ -60,7 +60,7 @@ const AccountDetailsView = ({data}) => {
             style={styles.disclaimer}
           />
         </View>
-        <ModalLoading loading={loading} />
+        {/* <ModalLoading loading={loading} /> */}
       </CurvedView>
     </Container>
   );

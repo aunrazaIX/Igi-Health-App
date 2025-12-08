@@ -23,17 +23,15 @@ const useHomeViewModel = () => {
     deductedAmount: 3000,
     paidAmount: 42000,
   });
-
-  const homeCardData = [
-    {
-      Policy_Class: 'Corporate',
-      memberName: user?.UserName || 'John Doe',
-      memberId: 'IGI-123456',
-      policyNumber: 'G-556677',
-      employeeCode: 'EMP-001',
-      expiryDate: '31-Dec-2025',
-    },
-  ];
+console.log(user.policies[0].policyNumber, 'hgg')
+  const homeCardData = {
+    Policy_Class: 'Corporate',
+    memberName: user?.UserName,
+    memberId: 'IGI-123456',
+    policyNumber: user?.policies?.policyNumber,
+    employeeCode: 'EMP-001',
+    expiryDate: '31-Dec-2025',
+  };
 
   const maternityData = {
     entitlement: 65000,
@@ -195,12 +193,12 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       link: 'corporate.services@igi.com.pk',
     },
-    {
-      logo: newCardsIcons.bankDetails,
-      name: 'Payout Account',
-      image: icons.forwardArrow,
-      to: 'AccountDetails',
-    },
+    // {
+    //   logo: newCardsIcons.bankDetails,
+    //   name: 'Payout Account',
+    //   image: icons.forwardArrow,
+    //   to: 'AccountDetails',
+    // },
   ];
 
   const onPressTab = name => setSelectedTab(name);

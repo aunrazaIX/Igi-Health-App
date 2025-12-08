@@ -25,31 +25,41 @@ const useBenefitsViewModel = () => {
 
     return new Intl.NumberFormat('en-PK').format(number);
   };
-
-const {loading: benefitsloading, trigger} = useApiHook({
+  const payload = JSON.stringify(['abc']);
+  const {loading: benefitsloading, trigger} = useApiHook({
     apiEndpoint: endpoints.Benefits.getBenefits,
     method: 'post',
-    argsOrBody: ["string"],
+    argsOrBody: payload,
     onSuccess: res => {
       setAllBenefits(res.data);
-      console.log(res)
+      console.log(res.data, 'res');
     },
-     onError: e => {
-      console.log(e)}
+    onError: e => {
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: e?.message,
+        }),
+      );
+    },
   });
   useFocusEffect(
-  useCallback(() => {
-  trigger();
-}, []))
-console.log(benefitsloading, 'fhgfh');
+    useCallback(() => {
+      trigger();
+    }, []),
+  );
+
   const filteredData = allBenefits
     ?.filter(item => {
       if (selectedTab === 'Outpatient') {
-        return item.benefitTypeName === 'OPD';
+        return item?.benefitType?.benefitTypeName === 'OPD';
       } else if (selectedTab === 'Inpatient') {
-        return item.benefitTypeName === 'IPD';
+        return item?.benefitType?.benefitTypeName === 'IPD';
       } else if (selectedTab === 'Maternity') {
-        return item.benefitTypeName !== 'OPD' && item.benefitTypeName !== 'IPD';
+        return (
+          item?.benefitType?.benefitTypeName !== 'OPD' &&
+          item?.benefitType?.benefitTypeName !== 'IPD'
+        );
       }
       return false;
     })

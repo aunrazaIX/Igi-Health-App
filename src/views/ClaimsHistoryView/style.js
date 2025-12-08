@@ -167,4 +167,37 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: vw * 3.5,
   },
+    buttonContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: vh,
+  },
+  statusButton: {
+    width: '26%',
+  },
+  button: {
+    paddingVertical: vh,
+    paddingHorizontal: vw,
+    borderRadius: vw * 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.borderColor,
+    borderWidth: 1,
+  },
+  gradientButton: {
+    paddingVertical: vh,
+    paddingHorizontal: vw,
+    borderRadius: vw * 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    fontSize: vw * 3.3,
+  },
+  activeText: {
+    fontSize: vw * 3.3,
+    color: COLORS.white,
+  },
 });
