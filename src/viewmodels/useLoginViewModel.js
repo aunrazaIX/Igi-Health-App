@@ -2,7 +2,12 @@
 import {useNavigation} from '@react-navigation/native';
 import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {setBiometrics, setRememberMe, setUserData} from '../redux/authSlice';
+import {
+  setBiometrics,
+  SetIsToggle,
+  setRememberMe,
+  setUserData,
+} from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {setErrorModal} from '../redux/generalSlice';
 import ReactNativeBiometrics from 'react-native-biometrics';
@@ -63,7 +68,15 @@ const useLoginViewModel = () => {
     method: 'post',
     argsOrBody: loginApiData,
     onSuccess: res => {
-      
+      if (!res?.data?.policies) {
+        dispatch(
+          setErrorModal({
+            Show: true,
+            message: 'You are not allowed to log in.',
+          }),
+        );
+        return;
+      }
       loginResponse.current = res;
       if (res?.data.UserName !== credentials?.userName) {
         dispatch(resetAllModules());
@@ -115,12 +128,11 @@ const useLoginViewModel = () => {
   const handleLogin = async () => {
     const filled = LoginCheckForError();
     if (!filled) return;
-          console.log(apiData, 'biometric passw')
     let apiData = {
       userName: loginApiData?.userName,
       password: loginApiData?.password,
     };
-    
+
     if (isToggle) {
       try {
         const rnBiometrics = new ReactNativeBiometrics({
@@ -147,7 +159,7 @@ const useLoginViewModel = () => {
     }
     trigger(apiData);
   };
-  console.log(biometrics);
+
   const onPressToucdId = async () => {
     try {
       if (!isToggle) {
@@ -206,7 +218,6 @@ const useLoginViewModel = () => {
         userName: biometrics.userName,
         password: Buffer.from(biometrics.password, 'base64').toString('utf8'),
       };
-      console.log(apiData, 'pay');
       await trigger(apiData);
     } catch (error) {
       if (Platform.OS === 'ios') {
@@ -260,43 +271,46 @@ const useLoginViewModel = () => {
 
   const tabs = ['login', 'signup'];
 
-useEffect(() => {
-  if (
-    biometrics?.userName &&
-    loginApiData?.userName &&
-    biometrics?.userName !== loginApiData?.userName
-  ) {
-    console.log("Prevented biometric setup because username changed");
-    return;
-  }
+  useEffect(() => {
+    if (
+      biometrics?.userName &&
+      loginApiData?.userName &&
+      biometrics?.userName !== loginApiData?.userName
+    ) {
+      dispatch(SetIsToggle(false));
+      dispatch(setBiometrics(null));
+      return;
+    }
 
-  if (isToggle && loginApiData?.userName && loginApiData?.password) {
-    const setupBiometrics = async () => {
-      try {
-        const rnBiometrics = new ReactNativeBiometrics({
-          allowDeviceCredentials: true,
-        });
-        const {available, biometryType} =
-          await rnBiometrics.isSensorAvailable();
-        if (available) {
-          await rnBiometrics.deleteKeys();
-          await rnBiometrics.createKeys();
+    if (isToggle && loginApiData?.userName && loginApiData?.password) {
+      const setupBiometrics = async () => {
+        try {
+          const rnBiometrics = new ReactNativeBiometrics({
+            allowDeviceCredentials: true,
+          });
+          const {available, biometryType} =
+            await rnBiometrics.isSensorAvailable();
+          if (available) {
+            await rnBiometrics.deleteKeys();
+            await rnBiometrics.createKeys();
 
-          dispatch(
-            setBiometrics({
-              userName: loginApiData?.userName,
-              password: Buffer.from(loginApiData?.password, 'utf8').toString('base64'),
-              biometryType,
-            }),
-          );
+            dispatch(
+              setBiometrics({
+                userName: loginApiData?.userName,
+                password: Buffer.from(loginApiData?.password, 'utf8').toString(
+                  'base64',
+                ),
+                biometryType,
+              }),
+            );
+          }
+        } catch (error) {
+          console.log('Biometric setup error (toggle):', error);
         }
-      } catch (error) {
-        console.log('Biometric setup error (toggle):', error);
-      }
-    };
-    setupBiometrics();
-  }
-}, [isToggle, loginApiData?.userName, loginApiData?.password]);
+      };
+      setupBiometrics();
+    }
+  }, [isToggle, loginApiData?.userName, loginApiData?.password]);
 
   return {
     states: {

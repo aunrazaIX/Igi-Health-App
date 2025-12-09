@@ -27,7 +27,6 @@ const ClaimsHistoryView = ({
   remarks,
   onCloseRemarksModal,
   getHeadingSubHeading,
-  isInProcessAllowed,
   searchText,
   setSearchText,
   tabs,
@@ -39,9 +38,9 @@ const ClaimsHistoryView = ({
       <DetailsContainer
         key={index}
         headerIcon={
-          item?.ClaimStatus == '8'
+          item?.claimStatus === 'Approved'
             ? icons.claimPaid
-            : item?.ClaimStatus == '3' || item?.ClaimStatus == '11'
+            : item?.ClaimStatus === 'Rejected'
             ? icons.rejected
             : icons.pending
         }

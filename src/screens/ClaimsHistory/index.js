@@ -11,7 +11,6 @@ const ClaimsHistory = () => {
     showRemarks,
     remarks,
     getHeadingSubHeading,
-    isInProcessAllowed,
     searchText,
     tabs,
     selectedStatus,
@@ -28,7 +27,6 @@ const ClaimsHistory = () => {
       remarks={remarks}
       getHeadingSubHeading={getHeadingSubHeading}
       claimDataLoading={claimDataLoading}
-      isInProcessAllowed={isInProcessAllowed}
       searchText={searchText}
       tabs={tabs}
       selectedStatus={selectedStatus}

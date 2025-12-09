@@ -64,7 +64,7 @@ const HomeView = ({
           <View style={styles.homeHeader}>
             <View>
               <AileronSemiBold
-                name={`Welcome Back, \n ${user?.UserName}`}
+                name={`Welcome Back, \n ${user?.firstName}`}
                 style={styles.profileTittle}
               />
             </View>

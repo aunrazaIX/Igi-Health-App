@@ -32,25 +32,9 @@ const HospitalsView = ({
   hospitalLoading,
   tabChanging,
   handleMapDirection,
-  position,
   modalVisible,
   setModalVisible,
 }) => {
-  const cleanCoordinate = value => {
-    if (!value || typeof value !== 'string') return null;
-
-    const match = value.match(/^([\d.]+)\s*°/);
-    if (!match) return null;
-
-    const number = parseFloat(match[1]);
-    return isNaN(number) ? null : number;
-  };
-
-  const openInGoogleMaps = (latitude, longitude) => {
-    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-    Linking.openURL(url);
-  };
-
   return (
     <>
       <TopView title="Network Hospitals" type="default" />
@@ -142,7 +126,7 @@ const HospitalsView = ({
                 horizontal
                 showsHorizontalScrollIndicator={true}
                 contentContainerStyle={styles.mapTabsContainer}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(index) => index.toString()}
                 renderItem={({item}) => (
                   <ProvinceTab
                     onPressMapTab={onPressMapTab}

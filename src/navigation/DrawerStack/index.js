@@ -200,7 +200,7 @@ const DrawerStack = () => {
             <View style={styles.profileContainer}>
               <View style={styles.profileRow}>
                 <AileronSemiBold
-                  name={'Test Client'}
+                  name={user?.userName}
                   style={styles.profileTittle}
                 />
               </View>

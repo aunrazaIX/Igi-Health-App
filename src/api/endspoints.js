@@ -18,9 +18,11 @@ const endpoints = {
   claimHistory: {
     getAllClaim: 'ClaimProcess/GetAllClaims',
   },
-  bank: {
-    getBankDetails: 'Bank/GetBankDetails',
+  discountedCenters: {
+    getDiscountedCenters: 'DiscountCenterAndHospital/GetAllDiscountCentersOrHospitals',
   },
+
+
   treatments: {
     getTypes: 'ClaimsType/getOPDType',
     getIPDTypes: 'ClaimsType/getIPDType',
@@ -31,12 +33,6 @@ const endpoints = {
     lodge: 'Claims/AddNewClaim',
     attachment: (userId, myuuid, ClientCode) =>
       `Attachment/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
-  },
-  panelHospital: {
-    getPanelHospitals: 'PanelHospital/GetActivePanelHospitals',
-  },
-  discountedCenters: {
-    getDiscountedCenters: 'DiscountCenters/GetActiveDiscCenter',
   },
   policy: {
     getPolicyTypes: 'Policy/GetPolicyTypes',

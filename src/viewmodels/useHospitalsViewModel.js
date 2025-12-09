@@ -3,6 +3,8 @@ import {useState, useEffect, useCallback} from 'react';
 import {icons} from '../assets';
 import {Linking} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
 
 const useHospitalsViewModel = () => {
   const navigation = useNavigation();
@@ -15,66 +17,10 @@ const useHospitalsViewModel = () => {
   const [modalVisible, setModalVisible] = useState(true);
   const [tabChanging, setTabChanging] = useState(false);
 
-  const hospitals = [
-    {
-      HospitalName: 'Agha Khan University Hospital',
-      HospitalLong: '67.112233',
-      HospitalLat: '24.928374',
-      ProvinceName: 'Sindh',
-      HospitalContact: '+92-21-111-911-911',
-      HospitalAddress: 'Stadium Road, Karachi',
-      CityName: 'Karachi',
-    },
-    {
-      HospitalName: 'Shaukat Khanum Memorial Hospital',
-      HospitalLong: '74.358749',
-      HospitalLat: '31.520370',
-      ProvinceName: 'Punjab',
-      HospitalContact: '+92-42-35905000',
-      HospitalAddress: 'Johar Town, Lahore',
-      CityName: 'Lahore',
-    },
-    {
-      HospitalName: 'PIMS Hospital',
-      HospitalLong: '73.055102',
-      HospitalLat: '33.693811',
-      ProvinceName: 'Islamabad',
-      HospitalContact: '+92-51-9261170',
-      HospitalAddress: 'G-8/3, Islamabad',
-      CityName: 'Islamabad',
-    },
-    {
-      HospitalName: 'Liaquat National Hospital',
-      HospitalLong: '67.075078',
-      HospitalLat: '24.873514',
-      ProvinceName: 'Sindh',
-      HospitalContact: '+92-21-111-456-456',
-      HospitalAddress: 'National Stadium Road, Karachi',
-      CityName: 'Karachi',
-    },
-  ];
-
-  useEffect(() => {
-    const formattedData = hospitals.map(item => ({
-      headerLabel: item.HospitalName,
-      headerIcon: icons.hospitalInactive,
-      longitude: item.HospitalLong,
-      latitude: item.HospitalLat,
-      ProvinceName: item.ProvinceName,
-      items: [
-        {label: 'Phone:', value: item.HospitalContact},
-        {label: 'Address:', value: item.HospitalAddress},
-        {label: 'City:', value: item.CityName},
-      ],
-    }));
-
-    setAllData(formattedData);
-  }, []);
-
   useEffect(() => {
     let filtered = allData;
     if (selectedMapTab !== 'All') {
-      filtered = filtered.filter(item => item.ProvinceName === selectedMapTab);
+      filtered = filtered.filter(item => item?.province === selectedMapTab);
     }
 
     if (searchText.trim()) {
@@ -89,28 +35,33 @@ const useHospitalsViewModel = () => {
     setTabChanging(false);
   }, [searchText, selectedMapTab, allData]);
 
-  const [position, setPosition] = useState({
-    latitude: 10,
-    longitude: 10,
-    latitudeDelta: 0.001,
-    longitudeDelta: 0.001,
+  const {loading: hospitalLoading, trigger} = useApiHook({
+    apiEndpoint: endpoints.discountedCenters.getDiscountedCenters,
+    method: 'post',
+    argsOrBody: {
+      isAllRecord: true,
+    },
+    onSuccess: res => {
+      console.log(res);
+      const formattedData =
+        res?.data?.dataList?.map(item => ({
+          headerLabel: item?.name,
+          headerIcon: icons.hospitalInactive,
+          longitude: item?.longitude,
+          latitude: item?.latitude,
+          province: item?.city?.province,
+          items: [
+            {label: 'Phone:', value: item?.phoneNumber},
+            {label: 'Address:', value: item?.address},
+            {label: 'City:', value: item?.city?.name},
+          ],
+        })) || [];
+      setAllData(formattedData);
+    },
   });
-
   useFocusEffect(
     useCallback(() => {
-      Geolocation.getCurrentPosition(
-        pos => {
-          const crd = pos.coords;
-
-          setPosition({
-            latitude: crd.latitude,
-            longitude: crd.longitude,
-            latitudeDelta: 0.0421,
-            longitudeDelta: 0.0421,
-          });
-        },
-        () => {},
-      );
+      trigger();
     }, []),
   );
 
@@ -138,10 +89,9 @@ const useHospitalsViewModel = () => {
       selectedTabRight,
       selectedMapTab,
       searchText,
-      position,
       modalVisible,
       tabChanging,
-      hospitalLoading: false,
+      hospitalLoading,
     },
     functions: {
       onPressTab,

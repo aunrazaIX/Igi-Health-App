@@ -10,25 +10,20 @@ import endpoints from '../api/endspoints';
 const useClaimsHistoryViewModel = () => {
   const {user} = useSelector(state => state.auth);
   const navigation = useNavigation();
-  const [type, setType] = useState(
-    user?.coverageType?.some(obj => obj?.isAllowed !== true)
-      ? 'Processed'
-      : 'In-Process',
-  );
+  const [type, setType] = useState('In-Process');
   const [data, setData] = useState([]);
   const [showRemarks, setShowRemarks] = useState(false);
   const [remarks, setRemarks] = useState('');
-  const [allData, setAllData] = useState([]);
   const [searchText, setSearchText] = useState('');
-  const tabs = ['Approved', 'Pending', 'Rejected'];
   const [selectedStatus, setSelectedStatus] = useState('Approved');
-
-  const isInProcessAllowed = user?.coverageType?.some(
-    obj => obj?.isAllowed !== true,
-  );
-
   const goBack = () => navigation.goBack();
   const onCloseRemarksModal = () => setShowRemarks(false);
+  const tabs = ['Approved', 'Pending', 'Rejected'];
+  const statusId = {
+    Approved: 3,
+    Pending: 2,
+    Rejected: 4,
+  };
 
   const getHeadingSubHeading = useMemo(() => {
     return {
@@ -45,132 +40,98 @@ const useClaimsHistoryViewModel = () => {
     };
   }, []);
 
-  const transformClaimData = (claim, isInProcess) => ({
-    headerLabel: `Claim #${claim.ClaimID}`,
-    ClaimStatus: claim.ClaimStatus,
-    headerIcon: icons.taskEdit,
-    RelationName: claim?.RelationName
-      ? formatName(claim?.RelationName.trim())
-      : '--',
-    items: [
-      {
-        label: 'Patient Name:',
-        value: claim.RelationName
-          ? formatName(claim.RelationName.trim())
-          : '--',
-      },
-      claim.ClaimSubmittedDate && {
-        label: 'Incurred Date:',
-        value: moment(claim.ClaimSubmittedDate).format('DD-MMM-YYYY'),
-      },
-      claim.ClaimReceivedDate && {
-        label: 'Received Date:',
-        value: moment(claim.ClaimReceivedDate).format('DD-MMM-YYYY'),
-      },
-      claim.ActionClosed && {
-        label: 'Claim Paid Date:',
-        value: moment(claim.ActionClosed).format('DD-MMM-YYYY'),
-      },
-      {label: 'Claim Type:', value: claim.ClaimsSubTypeName},
-      {label: 'Status:', value: claim.ClaimStatusName},
-      {
-        label: 'Provider Name:',
-        value: claim?.Provider_Name ? claim.Provider_Name.trim() : '--',
-      },
-      {
-        label: 'Diagnosis:',
-        value: claim?.Diagnosis_Desc ? claim.Diagnosis_Desc.trim() : '--',
-      },
-      {
-        label: 'Mode of Payment:',
-        value: claim?.Payment_type ? claim.Payment_type.trim() : '--',
-      },
-      {
-        label: 'Amount Claimed',
-        value: formatCurrencyWithPKR(claim.SubmiitedClaim),
-      },
-      {label: 'Amount Paid', value: formatCurrencyWithPKR(claim.TotalPaid)},
-      claim.ClaimStatus === '8' && {
-        label: 'Amount Deducted',
-        value: formatCurrencyWithPKR(claim.DeductedAmount),
-      },
-      (isInProcess ? claim.ClaimsDescription : claim.DeductionReason) && {
-        label: 'Claim Remarks:',
-        value: 'View Remarks',
-        isUnderLine: true,
-        onPress: () => {
-          setShowRemarks(true);
-          setRemarks(
-            isInProcess ? claim.ClaimsDescription : claim.DeductionReason,
-          );
+  const transformClaimData = (claim, isInProcess) => {
+    const amountClaimed = claim.claimTreatments?.reduce(
+      (sum, t) => sum + (t.claimAmount || 0),
+      0,
+    );
+    const amountDeducted = amountClaimed - (claim?.totalAmountPaid || 0);
+
+    return {
+      headerLabel: `Claim #${claim.claimId}`,
+      claimStatus: claim?.status,
+      headerIcon: icons.taskEdit,
+      RelationName: claim?.patientName,
+      items: [
+        {
+          label: 'Patient Name:',
+          value: claim?.patientName,
         },
-      },
-    ].filter(Boolean),
-  });
-const {loading: claimDataLoading, trigger} = useApiHook({
+        {
+          label: 'Submitted Date:',
+          value: moment(claim?.createdOn).format('DD-MMM-YYYY'),
+        },
+        {label: 'Status:', value: claim?.status},
+        claim?.paidDate && {
+          label: 'Claim Paid Date:',
+          value: moment(claim?.paidDate).format('DD-MMM-YYYY'),
+        },
+        {
+          label: 'Diagnosis:',
+          value: claim?.claimDescription,
+        },
+        {
+          label: 'Amount Claimed:',
+          value: formatCurrencyWithPKR(amountClaimed),
+        },
+        {
+          label: 'Amount Paid:',
+          value: formatCurrencyWithPKR(claim?.totalAmountPaid),
+        },
+        {
+          label: 'Amount Deducted:',
+          value: formatCurrencyWithPKR(amountDeducted),
+        },
+        claim?.deductionReason && {
+          label: 'Deduction Reason:',
+          value: claim?.deductionReason,
+        },
+        (isInProcess ? claim?.comments : claim?.DeductionReason) && {
+          label: 'Claim Remarks:',
+          value: 'View Remarks',
+          isUnderLine: true,
+          onPress: () => {
+            setShowRemarks(true);
+            setRemarks(isInProcess ? claim?.comments : claim?.DeductionReason);
+          },
+        },
+      ].filter(Boolean),
+    };
+  };
+  const {loading: claimDataLoading, trigger} = useApiHook({
     apiEndpoint: endpoints.claimHistory.getAllClaim,
     method: 'post',
-    argsOrBody: {"pagination": {
-      "isAllRecord" : true
-    }},
+    argsOrBody: {
+      pagination: {
+        isAllRecord: true,
+      },
+      statusId: statusId[selectedStatus],
+    },
     onSuccess: res => {
-      setAllData(res?.Data?.map(claim => transformClaimData(claim, true)));
+      {
+        type === 'In-Process' &&
+          setData(
+            res?.data?.claims?.map(claim => transformClaimData(claim, true)),
+          );
+      }
     },
   });
-  const hardcodedClaims = [
-    {
-      ClaimID: '1001',
-      ClaimStatus: 'In-Process',
-      RelationName: 'John Doe',
-      ClaimSubmittedDate: '2025-10-01',
-      ClaimReceivedDate: '2025-10-05',
-      ActionClosed: '2025-10-10',
-      ClaimsSubTypeName: 'Hospitalization',
-      ClaimStatusName: 'Approved',
-      Provider_Name: 'City Hospital',
-      Diagnosis_Desc: 'Appendicitis',
-      Payment_type: 'Cashless',
-      SubmiitedClaim: 15000,
-      TotalPaid: 14000,
-      DeductedAmount: 1000,
-      ClaimsDescription: 'Claim is under review',
-      DeductionReason: 'N/A',
-    },
-    {
-      ClaimID: '1002',
-      ClaimStatus: 'Processed',
-      RelationName: 'Jane Doe',
-      ClaimSubmittedDate: '2025-09-15',
-      ClaimReceivedDate: '2025-09-20',
-      ActionClosed: '2025-09-25',
-      ClaimsSubTypeName: 'OPD',
-      ClaimStatusName: 'Paid',
-      Provider_Name: 'Downtown Clinic',
-      Diagnosis_Desc: 'Flu',
-      Payment_type: 'Reimbursement',
-      SubmiitedClaim: 2000,
-      TotalPaid: 2000,
-      DeductedAmount: 0,
-      ClaimsDescription: 'Claim processed successfully',
-      DeductionReason: '',
-    },
-  ];
 
   useEffect(() => {
-    setAllData(
-      hardcodedClaims.map(claim =>
-        transformClaimData(claim, type === 'In-Process'),
-      ),
-    );
-  }, [type]);
-const onSelectTab = tab => {
-    //setData([]);
+    if (type === 'Processed') {
+      setData([]);
+      return;
+    }
+    setSearchText('');
+    trigger();
+  }, [type, selectedStatus]);
+
+  const onSelectTab = tab => {
     setSelectedStatus(tab);
-    //setSearch(null);
   };
   useEffect(() => {
     const lowerText = searchText.toLowerCase();
-    let currentData = allData;
+    let currentData = data;
     if (searchText.trim()) {
       currentData = currentData.filter(
         item =>
@@ -181,7 +142,7 @@ const onSelectTab = tab => {
       );
     }
     setData(currentData);
-  }, [searchText, allData]);
+  }, [searchText]);
 
   const onPressType = _type => {
     setType(_type);
@@ -190,12 +151,11 @@ const onSelectTab = tab => {
   return {
     states: {
       data,
-      claimDataLoading: false,
+      claimDataLoading,
       type,
       showRemarks,
       remarks,
       getHeadingSubHeading,
-      isInProcessAllowed,
       searchText,
       tabs,
       selectedStatus,

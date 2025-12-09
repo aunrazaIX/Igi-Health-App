@@ -20,7 +20,6 @@ const Hospitals = () => {
     searchText,
     hospitalLoading,
     tabChanging,
-    position,
     modalVisible,
   } = states;
   return (
@@ -39,7 +38,6 @@ const Hospitals = () => {
         hospitalLoading={hospitalLoading}
         tabChanging={tabChanging}
         handleMapDirection={handleMapDirection}
-        position={position}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
