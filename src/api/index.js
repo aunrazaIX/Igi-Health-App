@@ -1,11 +1,15 @@
 import axios from 'axios';
 import {EventRegister} from 'react-native-event-listeners';
 import {store} from '../redux/store';
-import {fetch} from '@react-native-community/netinfo';
 const api = axios.create({
   // baseURL: 'http://10.9.0.55:8088/api/',
   baseURL: 'https://testportal.igi.com.pk:8801/api/',
   //baseURL: 'https://eportal.igi.com.pk/api',
+  timeout: 60000,
+});
+
+const oladocApiInstance = axios.create({
+  baseURL: 'https://pkdemo.oladoc.com/api/v4/external/',
   timeout: 60000,
 });
 
@@ -54,14 +58,6 @@ api.interceptors.response.use(
   },
 );
 
-const checkInternet = async () => {
-  let netState = await fetch();
-  if (!netState.isConnected) {
-    EventRegister.emitEvent('aun');
-  }
-  return netState.isConnected;
-};
-
 export const dataToQueryParameter = data => {
   if (typeof data === 'object') {
     if (!Array.isArray(data)) {
@@ -95,24 +91,53 @@ export const jsonToFormdata = json => {
   });
   return data;
 };
-const get = async (endpoint, params = {}) => {
-  let abc = await checkInternet();
-  if (abc) {
-    return api.get(
-      params ? `${endpoint}${dataToQueryParameter(params)}` : endpoint,
-    );
-  }
+const get = async (
+  endpoint,
+  params = {},
+  isFormData = false,
+  headers,
+  apiInstance = 'healthApp',
+) => {
+  const instance = apiInstance === 'healthApp' ? api : oladocApiInstance;
+  return instance.get(
+    params ? `${endpoint}${dataToQueryParameter(params)}` : endpoint,
+  );
 };
-const post = async (endpoint, data = {}, isFormData = false, headers) => {
-  let abc = await checkInternet();
-  if (abc) {
-    return api.post(endpoint, isFormData ? jsonToFormdata(data) : data, {
-      headers: headers,
-    });
-  }
+const post = async (
+  endpoint,
+  data = {},
+  isFormData = false,
+  headers,
+  apiInstance = 'healthApp',
+) => {
+  const instance = apiInstance === 'healthApp' ? api : oladocApiInstance;
+  return instance.post(endpoint, isFormData ? jsonToFormdata(data) : data, {
+    headers: headers,
+  });
 };
-const put = (endpoint, data = {}) => api.put(endpoint, data);
-const patch = (endpoint, data = {}) => api.patch(endpoint, data);
-const del = (endpoint, data = {}) => api.delete(endpoint, {data});
+const put = (endpoint, data = {}, isFormData, headers, apiInstance) => {
+  const instance = apiInstance === 'healthApp' ? api : oladocApiInstance;
+  return instance.put(endpoint, data);
+};
+const patch = (
+  endpoint,
+  data = {},
+  isFormData,
+  headers,
+  apiInstance = 'healthApp',
+) => {
+  const instance = apiInstance === 'healthApp' ? api : oladocApiInstance;
+  return instance.patch(endpoint, data);
+};
+const del = (
+  endpoint,
+  data = {},
+  isFormData,
+  headers,
+  apiInstance = 'healthApp',
+) => {
+  const instance = apiInstance === 'healthApp' ? api : oladocApiInstance;
+  return instance.delete(endpoint, {data});
+};
 
 export {get, post, put, patch, del};

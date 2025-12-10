@@ -4,24 +4,26 @@ const endpoints = {
     registerUser: 'Account/RegisterUser',
     sendOtp: 'Account/getOTPforpasswordChanged',
     verifyOTP: (otp, email) => `Account/Verify-Otp?OTP=${otp}&Email=${email}`,
-    resendOTP: (email) => `Account/Resend-Otp?Email=${email}`,
+    resendOTP: email => `Account/Resend-Otp?Email=${email}`,
     setPassword: 'Account/SetPassword',
-    createPassword: (email, newPassword) => `Account/SetPassword?Email=${email}&NewPassword=${newPassword}`,
+    createPassword: (email, newPassword) =>
+      `Account/SetPassword?Email=${email}&NewPassword=${newPassword}`,
   },
   Benefits: {
     getBenefits: 'Benefit/GetUserBenefits',
   },
   dependent: {
-    getDependents: (cnic, clientCode,policyType) => `ClaimProcess/GetCustomerDependent?Cnic=${cnic}&ClientCode=${clientCode}&PolicyType=${policyType}`, 
+    getDependents: (cnic, clientCode, policyType) =>
+      `ClaimProcess/GetCustomerDependent?Cnic=${cnic}&ClientCode=${clientCode}&PolicyType=${policyType}`,
     addDependentRequest: 'Dependent/',
   },
   claimHistory: {
     getAllClaim: 'ClaimProcess/GetAllClaims',
   },
   discountedCenters: {
-    getDiscountedCenters: 'DiscountCenterAndHospital/GetAllDiscountCentersOrHospitals',
+    getDiscountedCenters:
+      'DiscountCenterAndHospital/GetAllDiscountCentersOrHospitals',
   },
-
 
   treatments: {
     getTypes: 'ClaimsType/getOPDType',
@@ -53,6 +55,9 @@ const endpoints = {
   },
   PriorApprovalHistory: {
     getPriorApprovalRequests: 'PriorApprovals/GetPriorApprovalRequests',
+  },
+  oladoc: {
+    generateToken: 'widgets/authenticate',
   },
 };
 

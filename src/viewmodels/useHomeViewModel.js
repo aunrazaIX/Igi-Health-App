@@ -23,7 +23,7 @@ const useHomeViewModel = () => {
     deductedAmount: 3000,
     paidAmount: 42000,
   });
-//console.log(user.policies[0].policyNumber, 'hgg')
+  //console.log(user.policies[0].policyNumber, 'hgg')
   const homeCardData = {
     Policy_Class: 'Corporate',
     memberName: user?.UserName,
@@ -192,6 +192,12 @@ const useHomeViewModel = () => {
       name: 'Complaint',
       image: icons.forwardArrow,
       link: 'corporate.services@igi.com.pk',
+    },
+    {
+      logo: newCardsIcons.complaint,
+      name: 'Video Call',
+      image: icons.forwardArrow,
+      to: 'Widget',
     },
     // {
     //   logo: newCardsIcons.bankDetails,

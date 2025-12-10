@@ -15,6 +15,7 @@ const useApiHook = ({
   skip = false,
   onUnmount,
   headers,
+  instance,
 }) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
@@ -33,6 +34,7 @@ const useApiHook = ({
         data ? data : argsOrBody,
         isFormData,
         headers,
+        instance,
       );
       dataToSave = res;
       if (transform) {

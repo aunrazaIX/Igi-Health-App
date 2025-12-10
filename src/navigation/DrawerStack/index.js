@@ -26,6 +26,7 @@ import SettingStack from '../SettingStack';
 import Profile from '../../screens/Profile';
 import InactivityHandler from '../../components/InActivity';
 import PrivacyPolicy from '../../screens/PrivacyPolicy';
+import Widget from '../../screens/Widget';
 
 const DrawerStack = () => {
   const {user} = useSelector(state => state.auth);
@@ -156,7 +157,6 @@ const DrawerStack = () => {
       name: 'Invite A Friend',
       icon: drawerIcons.drawerInvite,
     },
-
     {
       id: 14,
       name: 'Logout',
@@ -294,6 +294,7 @@ const DrawerStack = () => {
         <Drawer.Screen name="SettingsStack" component={SettingStack} />
         <Drawer.Screen name="Profile" component={Profile} />
         <Drawer.Screen name="Privacy" component={PrivacyPolicy} />
+        <Drawer.Screen name="Widget" component={Widget} />
       </Drawer.Navigator>
     </InactivityHandler>
   );
