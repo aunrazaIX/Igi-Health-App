@@ -4,14 +4,12 @@ import {AileronBold, CurvedView, InputField, TopView} from '../../components';
 import {icons} from '../../assets';
 import {styles} from './style';
 import DetailsContainer from '../../components/DetailsContainer';
-import {vh, vw} from '../../assets/theme/dimension';
+import {vh} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 import AlertModal from '../../components/AlertModal';
 
 const PanelHospitalListView = ({
   data,
-  selectedTab,
-  onPressTab,
   onPressRightTab,
   selectedTabRight,
   goBack,
@@ -34,13 +32,7 @@ const PanelHospitalListView = ({
 
   return (
     <>
-      <TopView
-        title={
-          selectedTab === 'PanelHospitals'
-            ? 'Panel Hospital List'
-            : 'Discount Centers'
-        }
-      />
+      <TopView title={'Discount Centers'} />
 
       <CurvedView
         containerStyle={
@@ -119,41 +111,29 @@ const PanelHospitalListView = ({
               style={{
                 width: '100%',
                 height: vh * 57,
-                // marginHorizontal: vw * 2,
-                // flex: 1,
-
-                // marginTop: vh * 2,
               }}></View>
           )}
 
-          {((selectedTab === 'PanelHospitals' && selectedTabRight === 'list') ||
-            (selectedTab === 'DiscountedCenters' &&
-              selectedTabRight === 'list')) && (
-            <FlatList
-              indicatorStyle="black"
-              data={data}
-              contentContainerStyle={{
-                paddingBottom: vh * 28,
-              }}
-              keyExtractor={(_, index) => index.toString()}
-              showsVerticalScrollIndicator={true}
-              renderItem={({item}) => (
-                <>
-                  <DetailsContainer
-                    detailsTextLabel={styles.detailsTextLabel}
-                    detailsTextValue={styles.detailsTextValue}
-                    headerIcon={
-                      selectedTab === 'PanelHospitals'
-                        ? icons.arrowDirection
-                        : [icons.arrowDirection]
-                    }
-                    data={item}
-                    onPress={handleMapDirection}
-                  />
-                </>
-              )}
-            />
-          )}
+          <FlatList
+            indicatorStyle="black"
+            data={data}
+            contentContainerStyle={{
+              paddingBottom: vh * 28,
+            }}
+            keyExtractor={(_, index) => index.toString()}
+            showsVerticalScrollIndicator={true}
+            renderItem={({item}) => (
+              <>
+                <DetailsContainer
+                  detailsTextLabel={styles.detailsTextLabel}
+                  detailsTextValue={styles.detailsTextValue}
+                  headerIcon={icons.arrowDirection}
+                  data={item}
+                  onPress={handleMapDirection}
+                />
+              </>
+            )}
+          />
         </View>
         <AlertModal
           title="Notice"

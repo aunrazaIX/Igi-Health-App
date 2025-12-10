@@ -1,7 +1,7 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useState, useEffect, useCallback} from 'react';
 import {Linking} from 'react-native';
-import {drawerIcons, icons} from '../assets';
+import {icons} from '../assets';
 import Geolocation from '@react-native-community/geolocation';
 
 const usePanelHospitalListViewModel = () => {
