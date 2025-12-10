@@ -345,7 +345,9 @@ const useHomeViewModel = () => {
     for (const item of items) {
       totalClaimAmount += item.SubmiitedClaim ?? 0;
       deductedAmount += item.DeductedAmount ?? 0;
-      paidAmount += item.TotalPaid ?? 0;
+      if (item.ClaimStatus == '8') {
+        paidAmount += item.TotalPaid ?? 0;
+      }
     }
 
     return {
