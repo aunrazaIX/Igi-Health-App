@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Animated,
   RefreshControl,
+  Modal,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -44,6 +46,11 @@ const HomeView = ({
   maternityLoading,
   notificationCount,
   onPullToRefresh,
+  showDropDown,
+  showDropdownButton,
+  setShowDropDown,
+  selectedPolicy,
+  onPressPolicy,
 }) => {
   const {user} = useSelector(state => state.auth);
 
@@ -71,6 +78,46 @@ const HomeView = ({
 
             <View style={styles.headerIconsRow}>
               <View style={styles.headerDNIcons}>
+                {showDropdownButton && (
+                  <>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setShowDropDown(!showDropDown);
+                      }}>
+                      <View style={styles.row}>
+                        <AileronSemiBold
+                          style={styles.policyName}
+                          name={selectedPolicy}
+                        />
+                        <Image
+                          source={icons.dropDownArrow}
+                          style={styles.dropDownIcon}
+                        />
+                      </View>
+                    </TouchableOpacity>
+
+                    <Modal transparent visible={showDropDown}>
+                      <TouchableWithoutFeedback
+                        onPress={() => setShowDropDown(false)}>
+                        <View style={styles.modalContainer}>
+                          <View style={styles.absoluteView}>
+                            {user?.policies?.map((policy, index) => (
+                              <TouchableOpacity
+                                key={index}
+                                style={styles.policyDropDown}
+                                onPress={() => onPressPolicy(policy)}>
+                                <AileronRegular
+                                  style={styles.policyText}
+                                  name={policy.policyNumber}
+                                />
+                              </TouchableOpacity>
+                            ))}
+                          </View>
+                        </View>
+                      </TouchableWithoutFeedback>
+                    </Modal>
+                  </>
+                )}
                 <TouchableOpacity onPress={handleCardDownload}>
                   <Image source={icons.download} style={styles.headerIcons} />
                 </TouchableOpacity>
@@ -130,7 +177,7 @@ const HomeView = ({
 
                         <View>
                           <AileronSemiBold
-                            name={`CNIC: ${homeCardData?.policyNumber}`}
+                            name={`CNIC: ${homeCardData?.cnic}`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
@@ -138,7 +185,7 @@ const HomeView = ({
 
                         <View>
                           <AileronSemiBold
-                            name={'Policy Name:'}
+                            name={`Policy Type: ${homeCardData?.policyType}`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
@@ -159,39 +206,14 @@ const HomeView = ({
                       </View>
 
                       <View style={{gap: vh * 0.5, marginBottom: vh * 1}}>
-                        <AileronSemiBold
-                          name={`Class: `}
-                          style={styles.infoCardMiddleTextlight}
-                          numberOfLines={1}
-                        />
-
-                        <AileronSemiBold
-                          name={`Cert #: `}
-                          style={styles.infoCardMiddleTextlight}
-                          numberOfLines={1}
-                        />
-
-                        <AileronSemiBold
+                        {/* <AileronSemiBold
                           name={`Age: 22`}
                           style={styles.infoCardMiddleTextlight}
                           numberOfLines={1}
-                        />
+                        /> */}
                       </View>
                     </View>
                   </View>
-                  <AileronBold
-                    name={`abc`}
-                    // name="dasopdkjawpodjawdpoawjdawpiodjawdiopwadjawoidja"
-                    style={[
-                      styles.infoCardMiddleTextlight,
-                      {
-                        width: '100%',
-                        color: COLORS.black,
-                        marginLeft: vw * -1,
-                      },
-                    ]}
-                    numberOfLines={2}
-                  />
                   <View style={[styles.infoCardFooter, {width: '100%'}]}>
                     <View>
                       <AileronSemiBold

@@ -16,6 +16,9 @@ const Home = () => {
     maternityLoading,
     maternityData,
     notificationCount,
+    showDropDown,
+    showDropdownButton,
+    selectedPolicy,
   } = states;
   const {
     animateCard,
@@ -26,6 +29,8 @@ const Home = () => {
     handleCardDownload,
     handleDependantsModal,
     onPullToRefresh,
+    setShowDropDown,
+    onPressPolicy,
   } = functions;
 
   return (
@@ -49,6 +54,11 @@ const Home = () => {
       maternityData={maternityData}
       notificationCount={notificationCount}
       maternityLoading={maternityLoading}
+      showDropDown={showDropDown}
+      showDropdownButton={showDropdownButton}
+      setShowDropDown={setShowDropDown}
+      selectedPolicy={selectedPolicy}
+      onPressPolicy={onPressPolicy}
     />
   );
 };

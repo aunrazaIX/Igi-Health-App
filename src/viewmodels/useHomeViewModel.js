@@ -8,28 +8,37 @@ import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import FileViewer from 'react-native-file-viewer';
 import RNFetchBlob from 'rn-fetch-blob';
 import {generateCardHTML} from '../utils/base64';
+import {setPolicy, setSelectedPolicyObject} from '../redux/generalSlice';
 
 const useHomeViewModel = () => {
   const {user} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigation();
-
   const [selectedTab, setSelectedTab] = useState('login');
   const [showDependantModal, setShowDependantModal] = useState(false);
   const [notificationCount, setNotificationCount] = useState(null);
+  const [showDropDown, setShowDropDown] = useState(false);
 
   const [data, setData] = useState({
     totalClaimAmount: 45000,
     deductedAmount: 3000,
     paidAmount: 42000,
   });
-  //console.log(user.policies[0].policyNumber, 'hgg')
+  const showDropdownButton = user?.policies?.length > 1;
+  const {selectedPolicy, selectedPolicyObject} = useSelector(
+    state => state.general,
+  );
+  const onPressPolicy = policy => {
+    dispatch(setPolicy(policy.policyNumber));
+    dispatch(setSelectedPolicyObject(policy));
+    setShowDropDown(false);
+  };
+
   const homeCardData = {
-    Policy_Class: 'Corporate',
-    memberName: user?.UserName,
-    memberId: 'IGI-123456',
-    policyNumber: user?.policies?.policyNumber,
-    employeeCode: 'EMP-001',
+    memberName: user?.userName,
+    cnic: user?.cnic,
+    policyNumber: selectedPolicy,
+    policyType: selectedPolicyObject?.policyType,
     expiryDate: '31-Dec-2025',
   };
 
@@ -260,6 +269,9 @@ const useHomeViewModel = () => {
       maternityLoading: false,
       showDependantModal,
       notificationCount,
+      showDropDown,
+      showDropdownButton,
+      selectedPolicy,
     },
     functions: {
       onPressTab,
@@ -271,6 +283,8 @@ const useHomeViewModel = () => {
       handleCardDownload,
       handleDependantsModal,
       onPullToRefresh,
+      setShowDropDown,
+      onPressPolicy,
     },
   };
 };

@@ -9,7 +9,11 @@ import {
   setUserData,
 } from '../redux/authSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
-import {setErrorModal} from '../redux/generalSlice';
+import {
+  setErrorModal,
+  setPolicy,
+  setSelectedPolicyObject,
+} from '../redux/generalSlice';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import {PermissionsAndroid, Platform} from 'react-native';
 import endpoints from '../api/endspoints';
@@ -88,6 +92,10 @@ const useLoginViewModel = () => {
           rememberMe: checked,
         }),
       );
+      if (res?.data?.policies?.length > 0) {
+        dispatch(setPolicy(res?.data?.policies[0].policyNumber));
+        dispatch(setSelectedPolicyObject(res?.data?.policies[0]));
+      }
       dispatch(
         setUserData({
           Token: res?.data?.token,

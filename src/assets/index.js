@@ -143,6 +143,7 @@ export const icons = {
   father: require('./icons/father.png'),
   wife: require('./icons/wife.png'),
   noDataTwo: require('./icons/noDataTwo.png'),
+  dropDownArrow: require('./icons/dropDownArrow.png'),
 };
 
 export const drawerIcons = {

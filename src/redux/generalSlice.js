@@ -6,11 +6,19 @@ const initalState = {
   errorDetail: null,
   isIntroSlider: true,
   policyClass: null,
+  selectedPolicy: null,
+  selectedPolicyObject: null,
 };
 export const generalSlice = createSlice({
   name: 'generalSlice',
   initialState: initalState,
   reducers: {
+    setPolicy: (state, action) => {
+      state.selectedPolicy = action.payload;
+    },
+    setSelectedPolicyObject: (state, action) => {
+      state.selectedPolicyObject = action.payload;
+    },
     setErrorModal: (state, {payload}) => {
       state.showErrorModal = payload?.show;
       if (payload?.message !== undefined) {
@@ -28,6 +36,11 @@ export const generalSlice = createSlice({
     },
   },
 });
-export const {setErrorModal, setIntroSlider, setPolicyClass} =
-  generalSlice.actions;
+export const {
+  setSelectedPolicyObject,
+  setPolicy,
+  setErrorModal,
+  setIntroSlider,
+  setPolicyClass,
+} = generalSlice.actions;
 export const generalReducer = generalSlice.reducer;

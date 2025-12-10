@@ -3,6 +3,43 @@ import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
 export const styles = StyleSheet.create({
+  policyName: {
+    fontSize: vh * 1.7,
+    color: COLORS.white,
+    marginRight: vw * 0.7,
+  },
+  policyText: {
+    fontSize: vh * 1.7,
+  },
+  dropDownIcon: {
+    height: vh * 2,
+    resizeMode: 'contain',
+    width: vw * 3.5,
+  },
+  absoluteView: {
+    width: vw * 32,
+    position: 'absolute',
+    right: vw * 26,
+    zIndex: 2,
+    borderRadius: vw * 2,
+    top: Platform.OS === 'ios' ? vh * 7 : vh * 4,
+    backgroundColor: COLORS.white,
+  },
+  policyDropDown: {
+    width: '100%',
+    borderBottomWidth: 1,
+    borderColor: COLORS.black + '22',
+  },
+  modalContainer: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: COLORS.black + '44',
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: vw,
+  },
   gradient: {
     paddingBottom: vh * 15,
     paddingHorizontal: vw * 5,
@@ -222,9 +259,7 @@ export const styles = StyleSheet.create({
   infoCardFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: vh * 1.25,
-
-    // borderWidth: 2
+    marginTop: vh * 3.5,
   },
   infoCardFooterTextBold: {
     fontSize: vh * 1.6,
