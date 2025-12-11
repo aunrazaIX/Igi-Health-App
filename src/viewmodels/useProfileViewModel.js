@@ -1,9 +1,10 @@
 import {useState} from 'react';
+import { useSelector } from 'react-redux';
 
 const useProfileViewModel = () => {
   const [inputDisable, setInputDisable] = useState(false);
   const [editable, setEditable] = useState(false);
-
+  const user = useSelector((state) => state.auth.user);
   const handleEdit = () => {
     setInputDisable(true);
     setEditable(true);
@@ -17,17 +18,17 @@ const useProfileViewModel = () => {
   const ProfileData = [
     {
       label: 'Full Name',
-      value: 'abc abvc',
+      value: user?.userName,
       placeholder: 'Enter Name',
     },
     {
       label: 'CNIC Number',
-      value: 'abc abvc',
+      value: user?.cnic,
       placeholder: 'Enter CNIC',
     },
     {
       label: 'Your Email',
-      value: 'abc abvc',
+      value: user?.email,
       placeholder: 'Enter Email',
     },
   ];

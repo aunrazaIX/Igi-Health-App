@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useEffect, useMemo, useState} from 'react';
 import {icons} from '../assets';
 import moment from 'moment';
-import {formatCurrencyWithPKR, formatName} from '../utils';
+import {formatCurrencyWithPKR} from '../utils';
 import {useSelector} from 'react-redux';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';

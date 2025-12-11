@@ -1,7 +1,7 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {icons} from '../assets';
 import {useSelector} from 'react-redux';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 

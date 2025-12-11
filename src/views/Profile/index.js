@@ -27,7 +27,7 @@ const ProfileView = ({
       <CurvedView containerStyle={styles.curvedStyle}>
         <View style={styles.profileDetailContainer}>
           <View style={styles.profileDetail}>
-            <AileronBold name={user?.UserName} style={styles.ProfileName} />
+            <AileronBold name={user?.userName} style={styles.ProfileName} />
             {/* <AileronRegular
               name={user?.UserEmail}
               style={styles.profileEmail}

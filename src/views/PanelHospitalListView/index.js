@@ -17,7 +17,6 @@ const PanelHospitalListView = ({
   setSearchText,
   loading,
   handleMapDirection,
-  position,
   modalVisible,
   showModal,
 }) => {
@@ -110,7 +109,7 @@ const PanelHospitalListView = ({
             <View
               style={{
                 width: '100%',
-                height: vh * 57,
+                height: vh * 47,
               }}></View>
           )}
 

@@ -3,9 +3,7 @@ import usePanelHospitalListViewModel from '../../viewmodels/usePanelHospitalList
 
 const PanelHospitalList = ({navigation}) => {
   const {states, functions} = usePanelHospitalListViewModel({navigation});
-  const {position} = states;
   const {
-    onPressTab,
     onPressRightTab,
     goBack,
     setSearchText,
@@ -15,7 +13,6 @@ const PanelHospitalList = ({navigation}) => {
 
   const {
     data,
-    selectedTab,
     selectedTabRight,
     searchText,
     loading,
@@ -25,8 +22,6 @@ const PanelHospitalList = ({navigation}) => {
   return (
     <PanelHospitalListView
       selectedTabRight={selectedTabRight}
-      selectedTab={selectedTab}
-      onPressTab={onPressTab}
       onPressRightTab={onPressRightTab}
       data={data}
       goBack={goBack}
@@ -34,7 +29,6 @@ const PanelHospitalList = ({navigation}) => {
       setSearchText={setSearchText}
       loading={loading}
       handleMapDirection={handleMapDirection}
-      position={position}
       modalVisible={modalVisible}
       showModal={showModal}
     />
