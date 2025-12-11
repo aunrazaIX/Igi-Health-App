@@ -32,8 +32,8 @@ const useForgotPasswordViewModel = ({route}) => {
     }
   };
   const onPressBack = () => {
-    if (type === 'signup' || step === 3) return navigation.navigate('Login');
-    if (isChangedPassword) return navigation.goBack();
+    if (type === 'signup' || !isChangedPassword && step === 3) return navigation.navigate('Login');
+    if (isChangedPassword && step === 3) return navigation.goBack();
     if (step > 1) return setStep(prev => prev - 1);
 
     return navigation.navigate('Login');
