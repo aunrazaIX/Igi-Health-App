@@ -1,17 +1,9 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React, {ReactNode} from 'react';
+import {View, StyleSheet} from 'react-native';
+import React from 'react';
 import {COLORS} from '../../assets/theme/colors';
-import {vh, vw} from '../../assets/theme/dimension';
+import {vh} from '../../assets/theme/dimension';
 
-type StyleObject = Record<string, string | number | boolean>;
-
-const DependentBox = ({
-  children,
-  containerStyle,
-}: {
-  children: ReactNode;
-  containerStyle?: StyleObject | StyleObject[];
-}) => {
+const DependentBox = ({children, containerStyle}) => {
   return <View style={[styles.detailBox, containerStyle]}>{children}</View>;
 };
 

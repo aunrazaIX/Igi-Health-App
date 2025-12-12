@@ -1,7 +1,9 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {setTreatments, updateTreatments} from '../redux/lodgeSlice';
-import {useEffect, useMemo, useState} from 'react';
+import {useState} from 'react';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
 
 const useAddTreatmentModel = ({navigation, route}) => {
   const dispatch = useDispatch();
@@ -10,9 +12,10 @@ const useAddTreatmentModel = ({navigation, route}) => {
   );
   const [confirmationModal, setConfirmationModal] = useState(false);
   const {treatmentIndex, treatmentData, claimType} = route?.params || {};
+  const [treatmentTypes, setTreatmentTypes] = useState([]);
 
   const extractedData = {
-    treatment: treatmentData?.treatment || 'Consultation',
+    treatment: treatmentData?.treatment || '',
     receiptNumber: treatmentData?.info?.[0]?.value || '12345',
     admissionDate: treatmentData?.info?.[1]?.value || '01-01-2023',
     amount: treatmentData?.info?.[2]?.value || '5000',
@@ -26,31 +29,17 @@ const useAddTreatmentModel = ({navigation, route}) => {
     amount: extractedData.amount,
     description: extractedData.description,
   });
-
-  const treatmentTypes = useMemo(() => {
-    if (claimType === 'priorApproval') {
-      return [
-        {label: 'Surgery', value: 'SURG001'},
-        {label: 'Hospitalization', value: 'HOSP001'},
-      ];
-    }
-    if (selectedType?.label === 'IPD - Hospitalization') {
-      return [
-        {label: 'General Ward', value: 1},
-        {label: 'Private Room', value: 2},
-      ];
-    }
-    if (selectedType?.label === 'OPD - Outpatient') {
-      return [
-        {label: 'Consultation', value: 101},
-        {label: 'Physiotherapy', value: 102},
-      ];
-    }
-    return [
-      {label: 'Antenatal Care', value: 201},
-      {label: 'Delivery', value: 202},
-    ];
-  }, [selectedType?.label, claimType]);
+    const {data} = useApiHook({
+    apiEndpoint: endpoints.priorApproval.GetPriorApprovalServices,
+    method: 'get',
+    onSuccess: res => {
+    const formatted = res?.data?.map(item => ({
+        label: item.name,
+        value: item.id,
+    }));
+    setTreatmentTypes(formatted);
+    },
+  });
 
   const loading = false;
   const error = null;

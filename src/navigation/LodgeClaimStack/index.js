@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import LodgeClaim from '../../screens/LodgeClaim';
 import AddTreatment from '../../screens/AddTreatment';
+import PriorApproval from '../../screens/PriorApproval';
 
 const LodgeClaimStack = ({ route }) => {
 
@@ -10,11 +10,11 @@ const LodgeClaimStack = ({ route }) => {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={'LodgeClaimProcess'}>
+      initialRouteName={'PriorApproval'}>
       <Stack.Screen
         initialParams={{ type }}
-        name={'LodgeClaimProcess'}
-        component={LodgeClaim}
+        name={'PriorApproval'}
+        component={PriorApproval}
       />
       <Stack.Screen name={'AddTreatment'} component={AddTreatment} />
     </Stack.Navigator>

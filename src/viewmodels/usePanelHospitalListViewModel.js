@@ -44,7 +44,7 @@ const usePanelHospitalListViewModel = () => {
   }, [searchText, allData]);
 
   const {loading, trigger} = useApiHook({
-    apiEndpoint: endpoints.discountedCenters.getDiscountedCenters,
+    apiEndpoint: endpoints.discountedCenters.getDiscountedCenters(1),
     method: 'post',
     argsOrBody: {
       isAllRecord: true,
@@ -59,7 +59,6 @@ const usePanelHospitalListViewModel = () => {
           items: [
             {label: 'Phone:', value: item?.phoneNumber},
             {label: 'Address:', value: item?.address},
-            {label: 'Discount:', value: '25%'},
             {label: 'City:', value: item?.city?.name},
           ],
         })) || [];

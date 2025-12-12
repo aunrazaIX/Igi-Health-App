@@ -5,6 +5,7 @@ import {
   AileronSemiBold,
   ConfirmationModal,
   CurvedView,
+  DatePicker,
   DependentBox,
   InputField,
   Select,
@@ -17,7 +18,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ModalLoading from '../../components/ModalLoading';
 import {vh, vw} from '../../assets/theme/dimension';
-import DatePicker from '../../components/DatePicker';
 
 const AddTreatmentView = ({
   treatmentTypes,
@@ -30,15 +30,10 @@ const AddTreatmentView = ({
   loading,
   isError,
   treatmentIndex,
-  claimType,
 }) => {
   return (
     <>
-      <TopView
-        title={`Enter ${
-          claimType === 'lodgeClaim' ? 'Claim' : 'Treatment'
-        } Details`}
-      />
+      <TopView title={'Enter Treatment Details'} />
 
       <CurvedView containerStyle={styles.curveStyle}>
         <KeyboardAwareScrollView
@@ -48,12 +43,6 @@ const AddTreatmentView = ({
           <View style={styles.container}>
             <Image source={icons.heart} style={styles.image} />
             <View style={styles.textContainer}>
-              {claimType === 'lodgeClaim' && (
-                <AileronBold
-                  name="Add receipt and"
-                  style={[styles.text, {color: COLORS.cardBackgroundBlue}]}
-                />
-              )}
               <AileronBold
                 name="Treatment information"
                 style={[styles.text, {color: COLORS.cardBackgroundRed}]}
@@ -73,45 +62,17 @@ const AddTreatmentView = ({
               }}
             />
 
-            <InputField
-              placeholderTextColor={COLORS.textGrayShade}
-              labelStyle={{color: COLORS.textBlackShade}}
-              containerStyle={styles.inputContainerStyle}
-              value={apiData?.receiptNumber}
-              onChangeText={text => {
-                const alphanumericOnly = text.replace(/[^a-zA-Z0-9]/g, '');
-                setterForApiData('receiptNumber', alphanumericOnly);
-              }}
-              maxLength={20}
-              label={
-                claimType === 'lodgeClaim'
-                  ? 'Receipt Number'
-                  : 'Admission/M.R. No.'
-              }
-              errorMessage={apiData?.error_receiptNumber}
-              placeholder={
-                claimType === 'lodgeClaim'
-                  ? 'Enter Receipt Number'
-                  : 'Enter Hospital Admission/M.R. No.'
-              }
-            />
-
             <DependentBox containerStyle={styles.dependentOuterStyle}>
               <DatePicker
                 onSelectValue={date => {
                   setterForApiData('admissionDate', date);
                 }}
                 placeholder={'Select Date'}
-                label={
-                  claimType === 'lodgeClaim'
-                    ? 'Receipt Date'
-                    : 'Admission/Procedure Date'
-                }
+                label={'Admission/Procedure Date'}
                 value={apiData?.admissionDate}
                 disabled={false}
                 mode="date"
-                minimumDate={claimType === 'lodgeClaim' ? null : new Date()}
-                maximumDate={claimType === 'lodgeClaim' ? new Date() : null}
+                minimumDate={new Date()}
               />
             </DependentBox>
 
@@ -127,12 +88,8 @@ const AddTreatmentView = ({
                 const cleanedText = text.replace(/[^0-9]/g, '');
                 setterForApiData('amount', cleanedText);
               }}
-              label={claimType === 'lodgeClaim' ? 'Amount' : 'Estimated Cost'}
-              placeholder={
-                claimType === 'lodgeClaim'
-                  ? 'Enter Amount'
-                  : 'Enter Estimated Cost'
-              }
+              label={'Estimated Cost'}
+              placeholder={'Enter Estimated Cost'}
             />
 
             <InputField

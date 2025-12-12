@@ -1,23 +1,25 @@
 import React from 'react';
 import {
+  AileronBold,
   Button,
   ConfirmationModal,
   CurvedView,
   Stepper,
   TopView,
 } from '../../components';
-import {Claim, PersonalDetails, UploadDoc} from './components';
+import {Claim, PersonalDetails, UploadDoc} from '../PriorApprovalView/components';
 import {icons, images} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
-import styles from './styles';
 import {vh} from '../../assets/theme/dimension';
 import {useSelector} from 'react-redux';
-import ImageModal from './components/ImageModal';
+import ImageModal from '../PriorApprovalView/components/ImageModal';
+import { View } from 'react-native';
+import styles from './style';
 
-const LodgeClaimView = ({
+const PriorApprovalView = ({
   steps,
   claimsDetails,
   dependantsData,
@@ -88,6 +90,7 @@ const LodgeClaimView = ({
         onSelectHospital={onSelectHospital}
         selectedHospital={selectedHospital}
         type={type}
+        dependantLoading={dependantLoading}
       />
     ),
     claim: (
@@ -130,10 +133,9 @@ const LodgeClaimView = ({
         containerStyleIcon={styles.addTreatment}
         tintColrorForTopViewFirstIcon={COLORS.white}
         FirstOpenModal={navigateTreatment}
-        onPressBack={
-          type === 'priorApproval' || 'lodgeClaim' ? handleGOBack : goBack
+        onPressBack={ goBack
         }
-        title={type === 'priorApproval' ? 'Prior Approval' : 'Lodge A Claim'}
+        title={'Prior Approval'}
         resetStates={resetStates}
       />
       <KeyboardAwareScrollView
@@ -209,7 +211,7 @@ const LodgeClaimView = ({
         loading={uploadLoading || claimLoading || personalDetailsLoading}
       />
 
-      <ConfirmationModal
+      {/* <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
         frameImage={
@@ -298,7 +300,7 @@ const LodgeClaimView = ({
               }
             : null
         }
-      />
+      /> */}
 
       {isView && (
         <ImageModal
@@ -310,4 +312,4 @@ const LodgeClaimView = ({
   );
 };
 
-export default LodgeClaimView;
+export default PriorApprovalView;

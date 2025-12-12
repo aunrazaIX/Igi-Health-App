@@ -158,13 +158,6 @@ const useHomeViewModel = () => {
       to: 'Personal',
     },
     {
-      logo: newCardsIcons.lodgeClaim,
-      name: 'Lodge Claim',
-      image: icons.forwardArrow,
-      mainParent: 'Tabs',
-      stChild: 'LodgeClaim',
-    },
-    {
       logo: newCardsIcons.taskDone,
       name: 'Prior\nApproval',
       image: icons.forwardArrow,

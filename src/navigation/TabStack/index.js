@@ -12,6 +12,7 @@ import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaimStack from '../LodgeClaimStack';
 import {AileronRegular} from '../../components';
+import PriorApproval from '../../screens/PriorApproval';
 
 const Tab = createBottomTabNavigator();
 
@@ -76,18 +77,6 @@ const Tabs = () => {
           tabBarLabel: () => <TabLabel title="Prior Approval" />,
           tabBarIcon: ({focused}) => (
             <TabIcon focused={focused} icon={tabIcons.PriorApproval} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="LodgeClaim"
-        initialParams={{type: 'lodgeClaim'}}
-        component={LodgeClaimStack}
-        options={{
-          tabBarLabel: () => <TabLabel title="Lodge Claim" />,
-          tabBarIcon: ({focused}) => (
-            <TabIcon focused={focused} icon={tabIcons.note} />
           ),
         }}
       />

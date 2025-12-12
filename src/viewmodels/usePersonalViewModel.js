@@ -20,12 +20,12 @@ const usePersonalViewModal = () => {
   const goBack = () => navigation.goBack();
 
   const {data, loading: dependantLoading} = useApiHook({
-    apiEndpoint: endpoints.dependent.getDependents(user?.cnic, 'SSL', 'abc'),
+    apiEndpoint: endpoints.dependent.getDependents,
     method: 'get',
     onSuccess: res => {
-      console.log(user);
       setGetData(
         res?.data?.map((item, index) => ({
+          key: index,
           dependent: 'Dependent Detail',
           image:
             item?.relation === 'Wife'

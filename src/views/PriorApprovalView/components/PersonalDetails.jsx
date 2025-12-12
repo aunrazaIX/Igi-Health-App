@@ -2,13 +2,14 @@ import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Select} from '../../../components';
 import {vh} from '../../../assets/theme/dimension';
+import ModalLoading from '../../../components/ModalLoading';
 
 const PersonalDetails = ({
   patientOptions,
   selectedPatient,
   selectedType,
   onSelectPatient,
-  personalDetails,
+  dependantLoading,
   type,
   dependants,
   onSelectType,
@@ -20,32 +21,23 @@ const PersonalDetails = ({
     <View style={styles.container}>
       <View>
         <Select
-          value={selectedPatient?.label.trim('')}
+          value={selectedPatient?.label}
           onSelectOption={value => onSelectPatient(value)}
           selectData={dependants}
           selectLabel={'Patient Name'}
           selectPlaceholder={'Select Patient From List'}
         />
-        {type !== 'priorApproval' && (
-          <Select
-            value={selectedType?.label}
-            onSelectOption={value => onSelectType(value)}
-            selectData={patientOptions}
-            selectLabel={'Nature of Claim'}
-            selectPlaceholder={'Select Coverage Type'}
-          />
-        )}
-
-        {type === 'priorApproval' && (
-          <Select
-            value={selectedHospital?.label}
-            onSelectOption={value => onSelectHospital(value)}
-            selectData={hospitalList}
-            selectLabel={'Select Hospital'}
-            selectPlaceholder={'Select Hospital From List'}
-            isSearch={true}
-          />
-        )}
+        <Select
+          value={selectedHospital?.label}
+          onSelectOption={value => {
+            onSelectHospital(value);
+          }}
+          selectData={hospitalList}
+          selectLabel={'Select Hospital'}
+          selectPlaceholder={'Select Hospital From List'}
+          isSearch={true}
+        />
+        <ModalLoading loading={dependantLoading} />
       </View>
     </View>
   );

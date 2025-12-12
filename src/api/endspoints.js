@@ -13,18 +13,22 @@ const endpoints = {
     getBenefits: 'Benefit/GetUserBenefits',
   },
   dependent: {
-    getDependents: (cnic, clientCode, policyType) =>
-      `ClaimProcess/GetCustomerDependent?Cnic=${cnic}&ClientCode=${clientCode}&PolicyType=${policyType}`,
+    getDependents: 'ClaimProcess/GetCustomerDependent',
     addDependentRequest: 'Dependent/',
   },
   claimHistory: {
     getAllClaim: 'ClaimProcess/GetAllClaims',
   },
   discountedCenters: {
-    getDiscountedCenters:
-      'DiscountCenterAndHospital/GetAllDiscountCentersOrHospitals',
+    getDiscountedCenters: (type) => 
+      `DiscountCenterAndHospital/GetAllDiscountCentersOrHospitals?type=${type}`,
   },
-
+  priorApproval: {
+    GetPriorApprovalServices: 'PriorApproval/GetPriorApprovalServices',
+    addPriorApproval: 'PriorApprovals/AddPriorApproval',
+    attachment: (userId, myuuid, ClientCode) =>
+      `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
+  },
   treatments: {
     getTypes: 'ClaimsType/getOPDType',
     getIPDTypes: 'ClaimsType/getIPDType',
@@ -43,11 +47,6 @@ const endpoints = {
   },
   coverage: {
     getCoverage: 'Policy/GetPolicyCoverage',
-  },
-  priorApproval: {
-    addPriorApproval: 'PriorApprovals/AddPriorApproval',
-    attachment: (userId, myuuid, ClientCode) =>
-      `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
   },
   notifications: {
     getAll: 'PushNotification/getNotifications',

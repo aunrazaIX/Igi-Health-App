@@ -67,13 +67,6 @@ const DrawerStack = () => {
       ndChild: 'Personal',
     },
     {
-      id: 4,
-      name: 'Lodge Claim',
-      icon: drawerIcons.drawerLodgeClaim,
-      mainParent: 'Tabs',
-      stChild: 'LodgeClaim',
-    },
-    {
       id: 5,
       name: 'Prior Approval',
       icon: drawerIcons.drawerPriorApproval,

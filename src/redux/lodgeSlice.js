@@ -74,7 +74,7 @@ export const setTreatments = createAsyncThunk(
 
     const treatments = state.modules[state.activeModule].treatments;
     const isDuplicate = treatments?.some(
-      treatment => treatment?.receiptNumber == _data?.receiptNumber,
+      treatment => treatment?.treatment == _data?.treatment,
     );
     const requiredFields = [
       _data?.receiptNumber,

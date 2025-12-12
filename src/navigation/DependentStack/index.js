@@ -1,6 +1,4 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import LodgeClaim from '../../screens/LodgeClaim';
-import AddTreatment from '../../screens/AddTreatment';
 import AddDependent from '../../screens/AddDependent';
 import Personal from '../../screens/Personal';
 

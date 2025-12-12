@@ -21,30 +21,20 @@ import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {launchCamera} from 'react-native-image-picker';
 import {InteractionManager} from 'react-native';
-
-const mockDependants = [
-  {label: 'John Doe', value: '101', CLNTNUM: '101'},
-  {label: 'Jane Doe', value: '102', CLNTNUM: '102'},
-];
-
-const mockHospitals = [
-  {label: 'City Hospital', value: '1'},
-  {label: 'National Medical Center', value: '2'},
-];
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
 
 const mockPersonalDetails = [
   {LGIVNAME: 'John Doe', CLNTNUM: '101'},
   {LGIVNAME: 'Jane Doe', CLNTNUM: '102'},
 ];
-
 const mockCoverageTypes = [
   {label: 'Self', value: 'self'},
   {label: 'Family', value: 'family'},
 ];
 
-const useLodgeClaimViewModel = ({navigation, route}) => {
+const usePriorApprovalViewModel = ({navigation, route}) => {
   const {type} = route?.params || {};
-  const randomId = Math.random().toString().substr(2, 6);
   const dispatch = useDispatch();
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [confirmationType, setConfirmationType] = useState('');
@@ -52,7 +42,8 @@ const useLodgeClaimViewModel = ({navigation, route}) => {
   const [deletedFileIndex, setDeletedFileIndex] = useState(null);
   const [isView, setIsView] = useState(null);
   const [showOptionModal, setShowOptionModal] = useState(false);
-  const [dependants, setDependants] = useState(mockDependants);
+  const [dependants, setDependants] = useState([]);
+  const [hospitalList, setHospitalList] = useState([]);
   const [viewIndex, setViewIndex] = useState();
 
   const {
@@ -67,12 +58,43 @@ const useLodgeClaimViewModel = ({navigation, route}) => {
   );
   const {user} = useSelector(state => state.auth);
 
+  const {loading: dependantLoading} = useApiHook({
+    apiEndpoint: endpoints.dependent.getDependents,
+    method: 'get',
+    onSuccess: res => {
+      if (res?.data) {
+        const updatedDependants = res?.data?.map(dependent => ({
+          label: dependent.memberName.trim(),
+        }));
+        const loggedInUserItem = {
+          label: user?.memberName || user?.userName,
+        };
+        setDependants([loggedInUserItem, ...updatedDependants]);
+      }
+    },
+  });
+
+  const {trigger} = useApiHook({
+    apiEndpoint: endpoints.discountedCenters.getDiscountedCenters(2),
+    method: 'post',
+    argsOrBody: {
+      isAllRecord: true,
+    },
+    onSuccess: res => {
+      const updatedHospitals = res?.data?.dataList?.map(i => ({
+        label: i.name,
+        value: i.id,
+      }));
+      setHospitalList(updatedHospitals);
+    },
+  });
+
   useFocusEffect(
     useCallback(() => {
-      dispatch(setActiveModule(type));
+      trigger();
     }, []),
   );
-  dispatch(setUserEmail(user?.UserEmail));
+  // dispatch(setUserEmail(user?.UserEmail));
 
   const {setterForApiData: setterForclaimData, apiData: claimData} =
     useErrorHandlingHook({
@@ -143,7 +165,8 @@ const useLodgeClaimViewModel = ({navigation, route}) => {
   };
 
   const navigateTreatment = () => {
-    navigation.navigate('AddTreatment', {claimType: type});
+    navigation.navigate('AddTreatment', { claimType: type }
+);
   };
 
   const onPressDelete = index => {
@@ -340,13 +363,15 @@ const useLodgeClaimViewModel = ({navigation, route}) => {
       type,
       personalDetails: mockPersonalDetails,
       dependants,
-      hospitalList: mockHospitals,
+      dependantLoading,
+      hospitalList,
       confirmationType,
       deletedIndex,
       deletedFileIndex,
       isView,
       viewIndex,
       showOptionModal,
+      selectedHospital,
       dependantsData: mockCoverageTypes,
     },
     functions: {
@@ -378,4 +403,4 @@ const useLodgeClaimViewModel = ({navigation, route}) => {
   };
 };
 
-export default useLodgeClaimViewModel;
+export default usePriorApprovalViewModel;

@@ -36,7 +36,7 @@ const useHospitalsViewModel = () => {
   }, [searchText, selectedMapTab, allData]);
 
   const {loading: hospitalLoading, trigger} = useApiHook({
-    apiEndpoint: endpoints.discountedCenters.getDiscountedCenters,
+    apiEndpoint: endpoints.discountedCenters.getDiscountedCenters(2),
     method: 'post',
     argsOrBody: {
       isAllRecord: true,
