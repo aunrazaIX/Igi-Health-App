@@ -211,7 +211,7 @@ const PriorApprovalView = ({
         loading={uploadLoading || claimLoading || personalDetailsLoading}
       />
 
-      {/* <ConfirmationModal
+      <ConfirmationModal
         ConfirmationModalVisible={confirmationModal}
         setConfirmationModalVisible={setConfirmationModal}
         frameImage={
@@ -300,7 +300,7 @@ const PriorApprovalView = ({
               }
             : null
         }
-      /> */}
+      />
 
       {isView && (
         <ImageModal

@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import {
-  AileronBold,
   AileronRegular,
   AileronSemiBold,
 } from '../../../components';

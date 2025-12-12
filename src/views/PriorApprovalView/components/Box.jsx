@@ -19,13 +19,13 @@ const Box = ({data, onPressDelete, onPressEdit}) => {
         <Image source={data?.icon} style={styles.avatar} />
         <AileronBold style={styles.headerText} name={data?.sectionTitle} />
 
-        {onPressDelete && (
+        {onPressEdit && (
           <TouchableOpacity onPress={onPressEdit} style={styles.button}>
             <Image source={icons.edit} style={styles.buttonIcon} />
           </TouchableOpacity>
         )}
 
-        {onPressEdit && (
+        {onPressDelete && (
           <TouchableOpacity onPress={onPressDelete} style={styles.button}>
             <Image source={icons.delete} style={styles.buttonIcon} />
           </TouchableOpacity>

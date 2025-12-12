@@ -25,9 +25,10 @@ const endpoints = {
   },
   priorApproval: {
     GetPriorApprovalServices: 'PriorApproval/GetPriorApprovalServices',
-    addPriorApproval: 'PriorApprovals/AddPriorApproval',
-    attachment: (userId, myuuid, ClientCode) =>
-      `PriorApprovals/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
+    addPriorApproval: 'PriorApproval/CreatePriorApprovalRequest',
+  },
+  UploadAttachment: {
+    UploadAttachment: 'General/UploadAttachment',
   },
   treatments: {
     getTypes: 'ClaimsType/getOPDType',

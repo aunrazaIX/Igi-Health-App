@@ -1,5 +1,5 @@
 import {icons} from '../assets';
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import {pick, types} from '@react-native-documents/picker';
 import {useDispatch, useSelector} from 'react-redux';
@@ -57,6 +57,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     state => state?.lodge?.modules?.[state?.lodge?.activeModule] || {},
   );
   const {user} = useSelector(state => state.auth);
+  const {selectedPolicy} = useSelector(state => state.general);
 
   const {loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependents,
@@ -112,12 +113,11 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
 
   const steps = [
     {
-      label:
-        type === 'priorApproval' ? 'Patient & Hospital' : 'Personal Details',
+      label: 'Patient & Hospital',
       key: 'personalDetails',
     },
     {
-      label: type === 'priorApproval' ? 'Treatment Information' : 'Claim',
+      label: 'Treatment Information',
       key: 'claim',
     },
     {label: 'Upload Document', key: 'uploadDoc'},
@@ -129,20 +129,18 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     info: [
       {
         key: 'receiptNumber',
-        label: type === 'lodgeClaim' ? 'Receipt Number:' : 'Admission/M.R. No.',
+        label: 'Admission/M.R. No.',
         value: item?.receiptNumber ?? '--',
       },
       {
         key: 'admission_date',
-        label:
-          type === 'lodgeClaim' ? 'Reciept Date:' : 'Admission/Procedure Date:',
+        label: 'Admission/Procedure Date:',
         value: item?.admissionDate ?? '--',
       },
       {
         key: 'amount',
-        label:
-          type === 'lodgeClaim' ? 'Amount (PKR):' : 'Estimated Cost (PKR):',
-        value: item?.amount ? item?.amount : '--',
+        label: 'Estimated Cost (PKR):',
+        value: item?.amount || '--',
         total: true,
       },
       {
@@ -165,8 +163,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
   };
 
   const navigateTreatment = () => {
-    navigation.navigate('AddTreatment', { claimType: type }
-);
+    navigation.navigate('AddTreatment', {claimType: type});
   };
 
   const onPressDelete = index => {
@@ -174,6 +171,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     setDeletedIndex(index);
     setConfirmationModal(true);
   };
+  const handleDeleteClaim = index => dispatch(onDeleteTreatment(index));
 
   const onPressEdit = (data, index) => {
     navigation.navigate('AddTreatment', {
@@ -231,14 +229,62 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     setConfirmationType('back');
     setConfirmationModal(true);
   };
-
+  const {trigger: uploadAttach} = useApiHook({
+    method: 'post',
+    isFormData: true,
+    apiEndpoint: endpoints.UploadAttachment.UploadAttachment,
+    argsOrBody: {
+      files: selectedDocuments,
+    },
+    onSuccess: res => {
+      console.log('Upload OK', res);
+    },
+    onError: e => {
+      console.log(e);
+    },
+  });
+  const uploadDocument = async e => {
+    console.log(selectedDocuments);
+    setShowOptionModal(false);
+    InteractionManager.runAfterInteractions(() => {
+      if (e === 'file') onSelectDocument();
+      else openCamera();
+    });
+  };
+  //procedureDate: "2025-12-12T11:09:40.353Z"
+  // const {
+  //   loading,
+  //   data: claimObject,
+  //   error: uploadError,
+  //   triggerSubmit,
+  // } = useApiHook({
+  //   method: 'post',
+  //   apiEndpoint: endpoints.priorApproval.addPriorApproval,
+  //   argsOrBody: {
+  //     patientName: selectedPatient,
+  //     remarks: claimData.claimComments,
+  //     cnic: user?.cnic,
+  // policyNumber: selectedPolicy,
+  // hospitalId: selectedHospital.value,
+  // services: [
+  //   {
+  //     serviceId: treatments?.item.value,
+  //     description: treatments?.item.description,
+  //     estimatedCost: item.amount,
+  //     procedureDate: new Date(item?.admissionDate),
+  //     serviceName: treatments?.item.label,
+  //   }
+  // ],
+  // attachements: [
+  //   {
+  //     fileName: selectedDocuments.fileName
+  //   }
+  // ]
+  //   },
+  // });
   const onPressSubmitClaim = () => {
     setConfirmationModal(false);
-    setTimeout(() => {
-      setConfirmationModal(true);
-      setConfirmationType('submitted');
-      resetStates();
-    }, 800);
+    triggerSubmit();
   };
 
   const totalFileSize = useMemo(() => {
@@ -290,12 +336,16 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
           });
         }
       });
-
       dispatch(setSelectedDocuments(documents));
     } catch (e) {
       console.log('Error selecting file:', e);
     }
   };
+  useEffect(() => {
+    if (selectedDocuments?.length > 0) {
+      uploadAttach();
+    }
+  }, [selectedDocuments]);
 
   const openCamera = async () => {
     try {
@@ -325,7 +375,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     }
   };
 
-  const handleCancelFile = (item, index) => {
+  const handleCancelFile = index => {
     setConfirmationType('fileDelete');
     setConfirmationModal(true);
     setDeletedFileIndex(index);
@@ -340,14 +390,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
   const onView = index => {
     setViewIndex(index);
     setIsView(true);
-  };
-
-  const uploadDocument = e => {
-    setShowOptionModal(false);
-    InteractionManager.runAfterInteractions(() => {
-      if (e === 'file') onSelectDocument();
-      else openCamera();
-    });
   };
 
   return {
@@ -399,6 +441,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       uploadDocument,
       viewOptionModal,
       setShowOptionModal,
+      handleDeleteClaim,
     },
   };
 };
