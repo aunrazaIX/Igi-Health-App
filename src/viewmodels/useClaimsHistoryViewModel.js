@@ -3,26 +3,29 @@ import {useEffect, useMemo, useState} from 'react';
 import {icons} from '../assets';
 import moment from 'moment';
 import {formatCurrencyWithPKR} from '../utils';
-import {useSelector} from 'react-redux';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 
 const useClaimsHistoryViewModel = () => {
-  const {user} = useSelector(state => state.auth);
   const navigation = useNavigation();
   const [type, setType] = useState('In-Process');
   const [data, setData] = useState([]);
   const [showRemarks, setShowRemarks] = useState(false);
   const [remarks, setRemarks] = useState('');
   const [searchText, setSearchText] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('Approved');
+  //const [selectedStatus, setSelectedStatus] = useState('Approved');
   const goBack = () => navigation.goBack();
   const onCloseRemarksModal = () => setShowRemarks(false);
-  const tabs = ['Approved', 'Pending', 'Rejected'];
-  const statusId = {
-    Approved: 3,
-    Pending: 2,
-    Rejected: 4,
+  // const tabs = ['Approved', 'Pending', 'Rejected'];
+  // const statusId = {
+  //   Approved: 3,
+  //   Pending: 2,
+  //   Rejected: 4,
+  // };
+  const statusIconMap = {
+    Approved: icons.claimPaid,
+    Rejected: icons.rejected,
+    Pending: icons.pending,
   };
 
   const getHeadingSubHeading = useMemo(() => {
@@ -48,44 +51,58 @@ const useClaimsHistoryViewModel = () => {
     const amountDeducted = amountClaimed - (claim?.totalAmountPaid || 0);
 
     return {
-      headerLabel: `Claim #${claim.claimId}`,
+      headerLabel: `Claim #${claim.claimId ?? claim.clamnum}`,
       claimStatus: claim?.status,
       headerIcon: icons.taskEdit,
-      RelationName: claim?.patientName,
+      RelationName: isInProcess ? claim?.patientName : claim?.givname,
       items: [
         {
           label: 'Patient Name:',
-          value: claim?.patientName,
+          value: claim?.patientName ?? claim.givname.trim(),
         },
+        {label: 'Status:', value: claim?.status ?? claim?.gcsts},
         {
-          label: 'Submitted Date:',
-          value: moment(claim?.createdOn).format('DD-MMM-YYYY'),
-        },
-        {label: 'Status:', value: claim?.status},
-        claim?.paidDate && {
           label: 'Claim Paid Date:',
-          value: moment(claim?.paidDate).format('DD-MMM-YYYY'),
+          value: moment(claim?.paidDate ?? claim?.claimReceivedDate).format(
+            'DD-MMM-YYYY',
+          ),
+        },
+        claim?.provider_Name && {
+          label: 'Provider Name:',
+          value: claim?.provider_Name?.trim(''),
         },
         {
           label: 'Diagnosis:',
-          value: claim?.claimDescription,
+          value: claim?.claimDescription ?? claim?.diagnosis_Desc.trim(),
         },
-        {
-          label: 'Amount Claimed:',
-          value: formatCurrencyWithPKR(amountClaimed),
+        claim?.payment_type && {
+          label: 'Mode of Payment:',
+          value: claim?.payment_type?.trim(),
         },
-        {
-          label: 'Amount Paid:',
-          value: formatCurrencyWithPKR(claim?.totalAmountPaid),
-        },
-        {
-          label: 'Amount Deducted:',
-          value: formatCurrencyWithPKR(amountDeducted),
-        },
-        claim?.deductionReason && {
-          label: 'Deduction Reason:',
-          value: claim?.deductionReason,
-        },
+        ...(isInProcess
+          ? [
+              {
+                label: 'Submitted Date:',
+                value: moment(claim?.createdOn).format('DD-MMM-YYYY'),
+              },
+              {
+                label: 'Amount Claimed:',
+                value: formatCurrencyWithPKR(amountClaimed),
+              },
+              {
+                label: 'Amount Paid:',
+                value: formatCurrencyWithPKR(claim?.totalAmountPaid || 0),
+              },
+              {
+                label: 'Amount Deducted:',
+                value: formatCurrencyWithPKR(amountDeducted),
+              },
+              {
+                label: 'Deduction Reason:',
+                value: claim?.deductionReason,
+              },
+            ]
+          : []),
         (isInProcess ? claim?.comments : claim?.DeductionReason) && {
           label: 'Claim Remarks:',
           value: 'View Remarks',
@@ -105,7 +122,7 @@ const useClaimsHistoryViewModel = () => {
       pagination: {
         isAllRecord: true,
       },
-      statusId: statusId[selectedStatus],
+      // statusId: statusId[selectedStatus],
     },
     onSuccess: res => {
       {
@@ -120,24 +137,28 @@ const useClaimsHistoryViewModel = () => {
     apiEndpoint: endpoints.claimHistory.getDxcClaims,
     method: 'post',
     argsOrBody: {
-        isAllRecord: true,},
+      isAllRecord: true,
+    },
     onSuccess: res => {
-      console.log(res)
-      setData(res?.Data?.map(claim => transformClaimData(claim, false)));
+      {
+        type === 'Processed' &&
+          setData(res?.data?.map(claim => transformClaimData(claim, false)));
+      }
     },
   });
   useEffect(() => {
-    if (type === 'Processed') {
-      setData([]);
-      return;
-    }
     setSearchText('');
-    trigger();
-  }, [type, selectedStatus]);
+    setData([]);
+    if (type === 'Processed') {
+      getDxcClaims();
+    } else {
+      trigger();
+    }
+  }, [type]); //[type, selectedStatus]
 
-  const onSelectTab = tab => {
-    setSelectedStatus(tab);
-  };
+  // const onSelectTab = tab => {
+  //   setSelectedStatus(tab);
+  // };
   useEffect(() => {
     const lowerText = searchText.toLowerCase();
     let currentData = data;
@@ -155,28 +176,27 @@ const useClaimsHistoryViewModel = () => {
 
   const onPressType = _type => {
     setType(_type);
-    setData([]);
-    _type === 'Processed' ? getDxcClaims() : trigger();
   };
 
   return {
     states: {
       data,
-      claimDataLoading,
+      claimDataLoading: claimDataLoading || dxcClaimLoading,
       type,
       showRemarks,
       remarks,
       getHeadingSubHeading,
       searchText,
-      tabs,
-      selectedStatus,
+      statusIconMap,
+      // tabs,
+      // selectedStatus,
     },
     functions: {
       goBack,
       onPressType,
       onCloseRemarksModal,
       setSearchText,
-      onSelectTab,
+      // onSelectTab,
     },
   };
 };

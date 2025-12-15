@@ -10,7 +10,6 @@ import {COLORS} from '../../assets/theme/colors';
 import {icons} from '../../assets';
 import AileronBold from '../AileronBold';
 import {vh, vw} from '../../assets/theme/dimension';
-import AileronSemiBold from '../AileronSemiBold';
 import AileronRegular from '../AileronRegular';
 
 const DetailsContainer = ({

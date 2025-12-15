@@ -14,6 +14,7 @@ const ClaimsHistory = () => {
     searchText,
     tabs,
     selectedStatus,
+    statusIconMap,
   } = states;
   const {goBack, onPressType, onCloseRemarksModal, setSearchText, onSelectTab} = functions;
   return (
@@ -32,6 +33,7 @@ const ClaimsHistory = () => {
       selectedStatus={selectedStatus}
       setSearchText={setSearchText}
       onSelectTab={onSelectTab}
+      statusIconMap={statusIconMap}
     />
   );
 };

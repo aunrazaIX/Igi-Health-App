@@ -31,19 +31,14 @@ const ClaimsHistoryView = ({
   setSearchText,
   tabs,
   selectedStatus,
+  statusIconMap,
   onSelectTab,
 }) => {
   const renderItem = ({item, index}) => {
     return (
       <DetailsContainer
         key={index}
-        headerIcon={
-          item?.claimStatus === 'Approved'
-            ? icons.claimPaid
-            : item?.ClaimStatus === 'Rejected'
-            ? icons.rejected
-            : icons.pending
-        }
+        headerIcon={statusIconMap[item?.claimStatus] ?? ''}
         headerIconPressable={false}
         patientName={item.RelationName}
         data={item}
@@ -110,8 +105,8 @@ const ClaimsHistoryView = ({
           onChangeText={text => setSearchText(text)}
           rightIcon={icons.searchBlack}
         />
-        <View style={styles.buttonContainer}>
         {tabs?.map(status => (
+          <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.statusButton}
               key={status}
@@ -128,8 +123,8 @@ const ClaimsHistoryView = ({
                 </View>
               )}
             </TouchableOpacity>
-          ))}
-      </View>
+          </View>
+        ))}
         <FlatList
           ListFooterComponent={
             claimDataLoading && (
