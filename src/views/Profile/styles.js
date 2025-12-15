@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   profileDetail: {
     alignItems: 'center',
-    paddingBottom: vh * 5,
+    paddingBottom: vh * 3,
     marginTop: vh * 2,
   },
   profileImage: {
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     fontSize: vw * 5.3,
     fontWeight: '700',
     color: COLORS.confimationDetail,
+    textAlign: 'center',
   },
   profileEmail: {
     fontSize: vw * 4,

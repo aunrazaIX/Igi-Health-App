@@ -116,7 +116,16 @@ const useClaimsHistoryViewModel = () => {
       }
     },
   });
-
+  const {loading: dxcClaimLoading, trigger: getDxcClaims} = useApiHook({
+    apiEndpoint: endpoints.claimHistory.getDxcClaims,
+    method: 'post',
+    argsOrBody: {
+        isAllRecord: true,},
+    onSuccess: res => {
+      console.log(res)
+      setData(res?.Data?.map(claim => transformClaimData(claim, false)));
+    },
+  });
   useEffect(() => {
     if (type === 'Processed') {
       setData([]);
@@ -146,6 +155,8 @@ const useClaimsHistoryViewModel = () => {
 
   const onPressType = _type => {
     setType(_type);
+    setData([]);
+    _type === 'Processed' ? getDxcClaims() : trigger();
   };
 
   return {

@@ -13,8 +13,6 @@ import {
   setSelectedType,
   setSelectedMaternityType,
   setResetTreaments,
-  setUserEmail,
-  setActiveModule,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
@@ -27,10 +25,6 @@ import endpoints from '../api/endspoints';
 const mockPersonalDetails = [
   {LGIVNAME: 'John Doe', CLNTNUM: '101'},
   {LGIVNAME: 'Jane Doe', CLNTNUM: '102'},
-];
-const mockCoverageTypes = [
-  {label: 'Self', value: 'self'},
-  {label: 'Family', value: 'family'},
 ];
 
 const usePriorApprovalViewModel = ({navigation, route}) => {
@@ -45,6 +39,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
   const [dependants, setDependants] = useState([]);
   const [hospitalList, setHospitalList] = useState([]);
   const [viewIndex, setViewIndex] = useState();
+  const [uploadedFiles, setUploadedFiles] = useState([]);
 
   const {
     selectedDocuments,
@@ -237,51 +232,65 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       files: selectedDocuments,
     },
     onSuccess: res => {
-      console.log('Upload OK', res);
+      const attachments = res?.data?.map(fileName => ({
+        fileName,
+      }));
+      setUploadedFiles(prev => [...prev, ...attachments]);
     },
     onError: e => {
-      console.log(e);
+      dispatch(
+        setErrorModal({
+          show: true,
+          message: e?.message,
+        }),
+      );
     },
   });
-  const uploadDocument = async e => {
-    console.log(selectedDocuments);
+  const uploadDocument = e => {
     setShowOptionModal(false);
     InteractionManager.runAfterInteractions(() => {
       if (e === 'file') onSelectDocument();
       else openCamera();
     });
   };
-  //procedureDate: "2025-12-12T11:09:40.353Z"
-  // const {
-  //   loading,
-  //   data: claimObject,
-  //   error: uploadError,
-  //   triggerSubmit,
-  // } = useApiHook({
-  //   method: 'post',
-  //   apiEndpoint: endpoints.priorApproval.addPriorApproval,
-  //   argsOrBody: {
-  //     patientName: selectedPatient,
-  //     remarks: claimData.claimComments,
-  //     cnic: user?.cnic,
-  // policyNumber: selectedPolicy,
-  // hospitalId: selectedHospital.value,
-  // services: [
-  //   {
-  //     serviceId: treatments?.item.value,
-  //     description: treatments?.item.description,
-  //     estimatedCost: item.amount,
-  //     procedureDate: new Date(item?.admissionDate),
-  //     serviceName: treatments?.item.label,
-  //   }
-  // ],
-  // attachements: [
-  //   {
-  //     fileName: selectedDocuments.fileName
-  //   }
-  // ]
-  //   },
-  // });
+  const servicesPayload = treatments.map(item => ({
+    serviceId: item?.treatment?.value,
+    serviceName: item?.treatment?.label,
+    description: item?.description,
+    estimatedCost: Number(item?.amount),
+    procedureDate: moment(item?.admissionDate, 'DD-MMM-YYYY').toISOString(),
+  }));
+
+  const {
+    loading: uploadLoading,
+    error: uploadError,
+    trigger: triggerSubmit,
+  } = useApiHook({
+    method: 'post',
+    apiEndpoint: endpoints.priorApproval.addPriorApproval,
+    argsOrBody: {
+      patientName: selectedPatient?.label,
+      remarks: claimData?.claimComments,
+      cnic: user?.cnic,
+      policyNumber: selectedPolicy,
+      hospitalId: selectedHospital?.value,
+      services: servicesPayload,
+      attachements: uploadedFiles,
+    },
+    onSuccess: res => {
+      setConfirmationModal(true);
+      setConfirmationType('');
+      resetStates();
+    },
+    onError: err => {
+      dispatch(
+        setErrorModal({
+          show: true,
+          message: err?.message,
+        }),
+      );
+    },
+  });
   const onPressSubmitClaim = () => {
     setConfirmationModal(false);
     triggerSubmit();
@@ -304,7 +313,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
 
       let documents = [];
       let tempFileSize = 0;
-
       res?.forEach(item => {
         const isDuplicate = selectedDocuments?.some(
           doc => doc?.name === item?.name,
@@ -334,28 +342,45 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
             name: item?.name,
             fileSizeInMB,
           });
+        } else {
+          dispatch(
+            setErrorModal({
+              show: true,
+              message: "same file can't be selected again",
+              detail: "same file can't be selected multiples times",
+            }),
+          );
+          return;
         }
       });
       dispatch(setSelectedDocuments(documents));
     } catch (e) {
-      console.log('Error selecting file:', e);
+      console.log('Error', e);
     }
   };
   useEffect(() => {
     if (selectedDocuments?.length > 0) {
+      setUploadedFiles([]);
       uploadAttach();
     }
   }, [selectedDocuments]);
 
   const openCamera = async () => {
     try {
-      let result = await launchCamera({quality: 1});
+      let options = {
+        quality: 1,
+        cameraType: 'back',
+        selectionLimit: 1,
+      };
+      let result = await launchCamera(options);
       let res = result?.assets?.[0];
 
       let file = {
         uri: res?.uri,
         type: res?.type,
-        name: `${Date.now()}.${res?.type?.split('/')[1]}`,
+        name: `${Math.floor(1000000000 + Math.random() * 9000000000)}.${
+          res?.type?.split('/')[1]
+        }`,
         fileSizeInMB: res?.fileSize / (1000 * 1000),
       };
 
@@ -368,10 +393,9 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
         );
         return;
       }
-
       dispatch(setSelectedDocuments([file]));
     } catch (e) {
-      console.log('Camera error:', e);
+      console.log('Error from opending camera or image picker', e);
     }
   };
 
@@ -414,7 +438,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       viewIndex,
       showOptionModal,
       selectedHospital,
-      dependantsData: mockCoverageTypes,
+      uploadLoading,
     },
     functions: {
       goBack,

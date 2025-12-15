@@ -7,13 +7,11 @@ const PriorApproval = ({navigation, route}) => {
   const { 
     steps,
     claimsDetails,
-    patientOptions,
     dependants,
     currentStep,
     selectedPatient,
     selectedDocuments,
     dependantLoading,
-    dependantsData,
     uploadLoading,
     confirmationModal,
     claimData,
@@ -60,7 +58,6 @@ const PriorApproval = ({navigation, route}) => {
     <PriorApprovalView
    goBack={goBack}
       steps={steps}
-      dependantsData={dependantsData}
       claimsDetails={claimsDetails}
       selectedPatient={selectedPatient}
       selectedDocuments={selectedDocuments}
@@ -69,7 +66,6 @@ const PriorApproval = ({navigation, route}) => {
       onPressDelete={onPressDelete}
       onPressEdit={onPressEdit}
       onPressNext={onPressNext}
-      patientOptions={patientOptions}
       navigateTreatment={navigateTreatment}
       onSelectPatient={onSelectPatient}
       dependantLoading={dependantLoading}

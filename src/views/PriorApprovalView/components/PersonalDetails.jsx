@@ -5,14 +5,10 @@ import {vh} from '../../../assets/theme/dimension';
 import ModalLoading from '../../../components/ModalLoading';
 
 const PersonalDetails = ({
-  patientOptions,
   selectedPatient,
-  selectedType,
   onSelectPatient,
   dependantLoading,
-  type,
   dependants,
-  onSelectType,
   hospitalList,
   onSelectHospital,
   selectedHospital,

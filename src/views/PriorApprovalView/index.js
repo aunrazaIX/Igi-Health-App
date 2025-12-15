@@ -22,12 +22,10 @@ import styles from './style';
 const PriorApprovalView = ({
   steps,
   claimsDetails,
-  dependantsData,
   dependants,
   currentStep,
   goBack,
   navigateTreatment,
-  pickFile,
   onPressNext,
   onPressDelete,
   onPressEdit,
@@ -50,18 +48,14 @@ const PriorApprovalView = ({
   onSelectType,
   deletedIndex,
   selectedType,
-  selectedMaternityType,
   hospitalList,
   onSelectHospital,
   selectedHospital,
   confirmationType,
   handleDeleteClaim,
-  setConfirmationType,
   onPressSubmitClaim,
   handleDeleteFile,
   deletedFileIndex,
-  handleBackButton,
-  handleGOBack,
   isView,
   onView,
   setIsView,
@@ -82,7 +76,6 @@ const PriorApprovalView = ({
         selectedPatient={selectedPatient}
         selectedType={selectedType}
         onSelectPatient={onSelectPatient}
-        patientOptions={dependantsData}
         dependants={dependants}
         personalDetails={personalDetails}
         onSelectType={onSelectType}

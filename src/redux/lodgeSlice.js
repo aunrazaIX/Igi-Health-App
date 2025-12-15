@@ -31,7 +31,6 @@ export const updateTreatments = createAsyncThunk(
     const state = thunkApi.getState()?.lodge;
     const treatments = state.modules[state.activeModule].treatments;
     const requiredFields = [
-      data?.receiptNumber,
       data?.amount,
       data?.description,
       data?.treatment,
@@ -77,7 +76,6 @@ export const setTreatments = createAsyncThunk(
       treatment => treatment?.treatment == _data?.treatment,
     );
     const requiredFields = [
-      _data?.receiptNumber,
       _data?.amount,
       _data?.description,
       _data?.treatment,

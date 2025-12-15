@@ -18,9 +18,10 @@ const endpoints = {
   },
   claimHistory: {
     getAllClaim: 'ClaimProcess/GetAllClaims',
+    getDxcClaims: 'ClaimProcess/GetDXCClaimByUser',
   },
   discountedCenters: {
-    getDiscountedCenters: (type) => 
+    getDiscountedCenters: type =>
       `DiscountCenterAndHospital/GetAllDiscountCentersOrHospitals?type=${type}`,
   },
   priorApproval: {
@@ -29,6 +30,10 @@ const endpoints = {
   },
   UploadAttachment: {
     UploadAttachment: 'General/UploadAttachment',
+  },
+  policy: {
+    getPolicyDetails: policyNumber =>
+      `Policy/GetPolicyDetail?PolicyNumber=${policyNumber}`,
   },
   treatments: {
     getTypes: 'ClaimsType/getOPDType',
@@ -40,11 +45,6 @@ const endpoints = {
     lodge: 'Claims/AddNewClaim',
     attachment: (userId, myuuid, ClientCode) =>
       `Attachment/upload?userId=${userId}&UUID=${myuuid}&ClientCode=${ClientCode}`,
-  },
-  policy: {
-    getPolicyTypes: 'Policy/GetPolicyTypes',
-    getPolicyDetails: 'Policy/GetPolicyDetails',
-    getMaternity: 'Policy/GetPolicyDetailsMAT',
   },
   coverage: {
     getCoverage: 'Policy/GetPolicyCoverage',

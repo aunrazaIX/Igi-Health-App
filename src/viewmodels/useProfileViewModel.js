@@ -18,7 +18,7 @@ const useProfileViewModel = () => {
   const ProfileData = [
     {
       label: 'Full Name',
-      value: user?.userName,
+      value: user?.memberName,
       placeholder: 'Enter Name',
     },
     {

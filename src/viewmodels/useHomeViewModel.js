@@ -9,6 +9,8 @@ import FileViewer from 'react-native-file-viewer';
 import RNFetchBlob from 'rn-fetch-blob';
 import {generateCardHTML} from '../utils/base64';
 import {setPolicy, setSelectedPolicyObject} from '../redux/generalSlice';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
 
 const useHomeViewModel = () => {
   const {user} = useSelector(state => state.auth);
@@ -35,13 +37,21 @@ const useHomeViewModel = () => {
   };
 
   const homeCardData = {
-    memberName: user?.userName,
+    memberName: user?.memberName,
     cnic: user?.cnic,
     policyNumber: selectedPolicy,
     policyType: selectedPolicyObject?.policyType,
     expiryDate: '31-Dec-2025',
-  };
+    //policyClass: Policy_Class
 
+  };
+// const {trigger, data:userData,
+//     loading: homeCardDataLoading,} = useApiHook({
+//     method: 'get',
+//     apiEndpoint: endpoints.policy.getPolicyDetails(selectedPolicy),
+//     onSuccess: res => {
+//     },
+//   });
   const maternityData = {
     entitlement: 65000,
     utilized: 12000,
