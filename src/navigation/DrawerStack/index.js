@@ -98,6 +98,27 @@ const DrawerStack = () => {
       ndChild: 'ClaimHistory',
     },
     {
+      id: 16,
+      name: 'Video Consultation',
+      icon: drawerIcons.drawerVideoCons,
+      to: 'Widget',
+      widgetName: 'vc',
+    },
+    {
+      id: 17,
+      name: 'In-Clinic Appointment',
+      icon: drawerIcons.drawerInClinicApp,
+      to: 'Widget',
+      widgetName: 'opd',
+    },
+    {
+      id: 18,
+      name: 'Book Lab Tests',
+      icon: drawerIcons.drawerLabTests,
+      to: 'Widget',
+      widgetName: 'labs',
+    },
+    {
       id: 8,
       name: 'Hospital Directory',
       icon: drawerIcons.drawerHospitalDirectory,
@@ -243,7 +264,11 @@ const DrawerStack = () => {
                       return;
                     }
                     if (route.to) {
-                      navigation.navigate(route.to);
+                      let params = {};
+                      if (route?.widgetName) {
+                        params.widgetName = route?.widgetName;
+                      }
+                      navigation.navigate(route.to, params);
                       return;
                     }
                     if (route?.mainParent && route?.stChild && route?.ndChild) {

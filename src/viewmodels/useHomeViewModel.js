@@ -43,15 +43,14 @@ const useHomeViewModel = () => {
     policyType: selectedPolicyObject?.policyType,
     expiryDate: '31-Dec-2025',
     //policyClass: Policy_Class
-
   };
-// const {trigger, data:userData,
-//     loading: homeCardDataLoading,} = useApiHook({
-//     method: 'get',
-//     apiEndpoint: endpoints.policy.getPolicyDetails(selectedPolicy),
-//     onSuccess: res => {
-//     },
-//   });
+  // const {trigger, data:userData,
+  //     loading: homeCardDataLoading,} = useApiHook({
+  //     method: 'get',
+  //     apiEndpoint: endpoints.policy.getPolicyDetails(selectedPolicy),
+  //     onSuccess: res => {
+  //     },
+  //   });
   const maternityData = {
     entitlement: 65000,
     utilized: 12000,
@@ -168,6 +167,13 @@ const useHomeViewModel = () => {
       to: 'Personal',
     },
     {
+      logo: newCardsIcons.lodgeClaim,
+      name: 'Lodge Claim',
+      image: icons.forwardArrow,
+      to: 'Widget',
+      widgetName: 'raise-claim',
+    },
+    {
       logo: newCardsIcons.taskDone,
       name: 'Prior\nApproval',
       image: icons.forwardArrow,
@@ -192,6 +198,28 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       to: 'ClaimHistory',
     },
+
+    {
+      logo: newCardsIcons.videoConsultation,
+      name: 'Video Consultation',
+      image: icons.forwardArrow,
+      to: 'Widget',
+      widgetName: 'vc',
+    },
+    {
+      logo: newCardsIcons.inClinic,
+      name: 'In-Clinic Appointment',
+      image: icons.forwardArrow,
+      to: 'Widget',
+      widgetName: 'opd',
+    },
+    {
+      logo: newCardsIcons.bookLabTests,
+      name: 'Book Lab test',
+      image: icons.forwardArrow,
+      to: 'Widget',
+      widgetName: 'labs',
+    },
     {
       logo: newCardsIcons.helpLine,
       name: 'Helplines',
@@ -205,18 +233,6 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       link: 'corporate.services@igi.com.pk',
     },
-    {
-      logo: newCardsIcons.complaint,
-      name: 'Video Call',
-      image: icons.forwardArrow,
-      to: 'Widget',
-    },
-    // {
-    //   logo: newCardsIcons.bankDetails,
-    //   name: 'Payout Account',
-    //   image: icons.forwardArrow,
-    //   to: 'AccountDetails',
-    // },
   ];
 
   const onPressTab = name => setSelectedTab(name);
@@ -225,7 +241,11 @@ const useHomeViewModel = () => {
 
   const onPressMenu = item => {
     if (item?.to) {
-      navigate.navigate(item.to);
+      let params = {};
+      if (item?.widgetName) {
+        params.widgetName = item?.widgetName;
+      }
+      navigate.navigate(item.to, params);
       return;
     }
 

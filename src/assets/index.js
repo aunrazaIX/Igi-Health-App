@@ -166,6 +166,9 @@ export const drawerIcons = {
   drawerArrowRight: require('./icons/drawerArrowRight.png'),
   drawerLogout: require('./icons/drawerLogout.png'),
   drawerInvite: require('./icons/inviteFriend.png'),
+  drawerVideoCons: require('./icons/drawerVideoCons.png'),
+  drawerInClinicApp: require('./icons/drawerInClinicApp.png'),
+  drawerLabTests: require('./icons/drawerLabTests.png'),
 };
 
 export const tabIcons = {
@@ -197,4 +200,7 @@ export const newCardsIcons = {
   complaint: require('./icons/newcomplaint.png'),
   claimHistory: require('./icons/claimHistory.png'),
   bankDetails: require('./icons/homeBankDetailIcon.png'),
+  inClinic: require('./icons/inClinic.png'),
+  videoConsultation: require('./icons/videoConsultation.png'),
+  bookLabTests: require('./icons/bookLabTests.png'),
 };

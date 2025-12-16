@@ -4,7 +4,8 @@ import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
 import {useCallback, useState} from 'react';
 
-const useWidgetViewModel = () => {
+const useWidgetViewModel = ({route}) => {
+  const {widgetName} = route?.params || {};
   const [showWidget, setShowWidget] = useState(false);
   const [token, setToken] = useState(null);
   const {trigger: generateToken, loading: generateTokenLoading} = useApiHook({
@@ -42,7 +43,7 @@ const useWidgetViewModel = () => {
       };
     }, []),
   );
-  const widgetUrl = 'http://pkdemo.oladoc.com/widgets/launch?screen_name=opd';
+  const widgetUrl = `http://pkdemo.oladoc.com/widgets/launch?screen_name=${widgetName}`;
   return {
     states: {
       generateTokenLoading,
