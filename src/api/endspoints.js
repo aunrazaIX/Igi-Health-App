@@ -27,6 +27,7 @@ const endpoints = {
   priorApproval: {
     GetPriorApprovalServices: 'PriorApproval/GetPriorApprovalServices',
     addPriorApproval: 'PriorApproval/CreatePriorApprovalRequest',
+    getPriorApprovalHistory: 'PriorApproval/GetAllPriorApprovalsForUsers',
   },
   UploadAttachment: {
     UploadAttachment: 'General/UploadAttachment',
@@ -52,9 +53,6 @@ const endpoints = {
   notifications: {
     getAll: 'PushNotification/getNotifications',
     markAsRead: 'PushNotification/readNotification',
-  },
-  PriorApprovalHistory: {
-    getPriorApprovalRequests: 'PriorApprovals/GetPriorApprovalRequests',
   },
   oladoc: {
     generateToken: 'widgets/authenticate',

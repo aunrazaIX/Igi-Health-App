@@ -23,13 +23,13 @@ const PriorApprovalHistoryView = ({
   const renderItem = ({item, index}) => (
     <DetailsContainer
       key={index}
-      headerIcon={
-        item?.ClaimStatus === 'Completed'
-          ? icons.claimPaid
-          : item?.ClaimStatus === 'Rejected'
-          ? icons.rejected
-          : icons.pending
-      }
+      // headerIcon={
+      //   item?.ClaimStatus === 'Completed'
+      //     ? icons.claimPaid
+      //     : item?.ClaimStatus === 'Rejected'
+      //     ? icons.rejected
+      //     : icons.pending
+      // }
       headerIconPressable={false}
       patientName={item.RelationName}
       data={item}

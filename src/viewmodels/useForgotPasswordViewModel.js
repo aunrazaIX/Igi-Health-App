@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useRef, useState} from 'react';
+import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
@@ -7,17 +7,16 @@ import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 
 const useForgotPasswordViewModel = ({route}) => {
-  const test = useRef(null);
-
   const {
     step: _step,
     verifiedUserData,
     type,
+    otpToken: tokenFromSignup,
     isChangedPassword,
   } = route?.params || {};
   const [step, setStep] = useState(_step ? _step : 1);
   const [confirmationModal, setConfirmationModal] = useState(false);
-  const [otpToken, setOtpToken] = useState(null);
+  const [otpToken, setOtpToken] = useState(tokenFromSignup || null);
   const [otp, setOtp] = useState('');
   const [showResend, setShowResend] = useState(false);
   const [countdownKey, setCountdownKey] = useState(0);
@@ -32,7 +31,8 @@ const useForgotPasswordViewModel = ({route}) => {
     }
   };
   const onPressBack = () => {
-    if (type === 'signup' || !isChangedPassword && step === 3) return navigation.navigate('Login');
+    if (type === 'signup' || (!isChangedPassword && step === 3))
+      return navigation.navigate('Login');
     if (isChangedPassword && step === 3) return navigation.goBack();
     if (step > 1) return setStep(prev => prev - 1);
 
@@ -69,7 +69,7 @@ const useForgotPasswordViewModel = ({route}) => {
         dispatch(setErrorModal({show: true, message: e?.message}));
       },
     });
-
+    
   const {
     trigger: triggerUpdatePassword,
     loading: updatePasswordLoading,
@@ -167,6 +167,10 @@ const useForgotPasswordViewModel = ({route}) => {
       }
     }
     if (step === 2 && (type === 'forgot' || type === 'signup')) {
+      if (otpToken) {
+        setStep(3);
+        return;
+      }
       triggerVerifyOtp();
     }
     if (
