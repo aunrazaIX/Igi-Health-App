@@ -5,6 +5,8 @@ import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {formatName} from '../utils';
 import moment from 'moment';
+import useApiHook from '../hooks/useApiHook';
+import endpoints from '../api/endspoints';
 
 const useAddDependentViewModal = ({route}) => {
   const {user} = useSelector(state => state.auth);
@@ -19,6 +21,11 @@ const useAddDependentViewModal = ({route}) => {
     {label: 'Child', value: 2},
     {label: 'Sibling', value: 3},
     {label: 'Parent', value: 4},
+  ];
+
+  const genderOptions = [
+    {value: 'Male', label: 'Male'},
+    {value: 'Female', label: 'Female'},
   ];
 
   const prefilledData = dependentData
@@ -43,43 +50,53 @@ const useAddDependentViewModal = ({route}) => {
         age: '',
       };
 
-  const formatAgeToDate = raw => {
-    if (!raw) return '';
-    const digits = raw.replace(/[^0-9]/g, '').padStart(8, '0');
-    const day = digits.slice(0, 2);
-    const month = digits.slice(2, 4);
-    const year = digits.slice(4, 8);
-    return `${day}-${month}-${year}`;
-  };
-
   const {
     setterForApiData: dependentSetterForApiData,
     apiData: dependentApiData,
     checkForError: dependentCheckForError,
   } = useErrorHandlingHook({
-    dependentName: prefilledData.dependentName,
+    name: prefilledData?.dependentName,
     cnic: user?.cnic,
-    clientCode: user?.ClientCode,
-    dependentTypeID: {
-      label: prefilledData.relationship.label,
-      value: prefilledData.relationship.value?.value,
-    },
-    dependentRequestTypesID: dependentIndex ? 2 : 1,
-    dependentRequestID: '0',
-    gender: {
-      label: prefilledData.gender.label,
-      Value: prefilledData.gender.value,
-    },
-    Age: prefilledData.age?.toString() ?? null,
-    dependentRequestStatus: true,
-    createdBy: user?.UserId,
+    relation: prefilledData?.relationship,
+    gender: prefilledData?.gender,
+    dob: prefilledData?.age,
+    dependentReqType: isUpdate ? 2 : 1,
   });
-
-  const genderOptions = [
-    {value: 'Male', label: 'Male'},
-    {value: 'Female', label: 'Female'},
-  ];
-
+  const {
+    trigger,
+    loading: addDependentLoading,
+    error,
+  } = useApiHook({
+    apiEndpoint: endpoints.dependent.addDependentRequest,
+    method: 'post',
+    onSuccess: res => {
+      if (!isUpdate) {
+        setConfirmatonType('');
+        setConfirmationModal(true);
+      }
+      setConfirmatonType('');
+    },
+    onError: error => {
+      setConfirmatonType('');
+      setConfirmationModal(false);
+      dispatch(
+        setErrorModal({
+          Show: true,
+          message: 'Something Went Wrong',
+          detail:
+            'An error has occurred, please fill all require fields. If the problem persists, contact IGI Life',
+        }),
+      );
+    },
+  });
+  const apiPayload = apiData => ({
+    cnicNumber: apiData?.cnic,
+    name: apiData?.name,
+    relation: apiData?.relation?.label,
+    gender: apiData?.gender?.value,
+    dob: apiData?.dob,
+    dependentReqType: apiData?.dependentReqType,
+  });
   const handleSubmitRequest = () => {
     const filled = dependentCheckForError();
     if (!filled) {
@@ -91,6 +108,9 @@ const useAddDependentViewModal = ({route}) => {
             'An error has occurred, please fill all required fields. If the problem persists, contact IGI Life',
         }),
       );
+    } else {
+      const payload = apiPayload(dependentApiData);
+      trigger(payload);
     }
   };
 
@@ -105,9 +125,14 @@ const useAddDependentViewModal = ({route}) => {
             'An error has occurred, please fill all required fields. If the problem persists, contact IGI Life',
         }),
       );
-    } else if (isUpdate) {
-      setConfirmationModal(true);
-      setConfirmatonType('update');
+    } else {
+      if (isUpdate) {
+        setConfirmationModal(true);
+        setConfirmatonType('update');
+      } else {
+        const payload = apiPayload(dependentApiData);
+        trigger(payload);
+      }
     }
   };
 
@@ -118,6 +143,7 @@ const useAddDependentViewModal = ({route}) => {
     states: {
       genderOptions,
       relationsOptions,
+      addDependentLoading,
       dependentApiData,
       confirmationModal,
       dependentData,
@@ -131,7 +157,6 @@ const useAddDependentViewModal = ({route}) => {
       setConfirmationModal,
       resetStates,
       handleCancel,
-      formatAgeToDate,
       handleSubmitRequest,
     },
   };

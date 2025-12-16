@@ -14,7 +14,7 @@ const endpoints = {
   },
   dependent: {
     getDependents: 'ClaimProcess/GetCustomerDependent',
-    addDependentRequest: 'Dependent/',
+    addDependentRequest: 'DependentRequest/CreateDependentRequest',
   },
   claimHistory: {
     getAllClaim: 'ClaimProcess/GetAllClaims',

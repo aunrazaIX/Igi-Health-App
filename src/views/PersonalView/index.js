@@ -60,7 +60,6 @@ const PersonalView = ({
             <View style={{marginBottom: vh * 12}}>
               {data?.length > 0
                 ? data?.map((dependent, index) => (
-                    <>
                       <DependentBox
                         key={index}
                         containerStyle={styles.dependentBoxStyle}>
@@ -76,8 +75,6 @@ const PersonalView = ({
                             />
 
                             <View style={styles.iconsROw}>
-                              {expandedIndex.includes(index) &&
-                                userData?.isRecordAdditionAllowed && (
                                   <View style={styles.deleteEditRow}>
                                     <TouchableOpacity
                                       onPress={() =>
@@ -106,7 +103,6 @@ const PersonalView = ({
                                       </TouchableOpacity>
                                     )}
                                   </View>
-                                )}
                               <Image
                                 source={
                                   expandedIndex === index
@@ -145,7 +141,6 @@ const PersonalView = ({
                           )}
                         </TouchableOpacity>
                       </DependentBox>
-                    </>
                   ))
                 : !dependantLoading && <NoDataView name={'No Member Found'} />}
             </View>

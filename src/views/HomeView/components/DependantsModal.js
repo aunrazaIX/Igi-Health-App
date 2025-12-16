@@ -47,7 +47,7 @@ const DependantsModal = ({show, dependants, onClose}) => {
                       textAlign: 'left',
                       fontSize: vw * 3.25,
                     }}
-                    name={`abc`}
+                    name={person?.name}
                   />
                   <AileronRegular
                     style={{
@@ -55,7 +55,7 @@ const DependantsModal = ({show, dependants, onClose}) => {
                       textAlign: 'center',
                       fontSize: vw * 3.25,
                     }}
-                    name={person?.Policy_Insured_Relaion}
+                    name={person?.relation}
                   />
                   <AileronRegular
                     style={{
@@ -63,7 +63,7 @@ const DependantsModal = ({show, dependants, onClose}) => {
                       textAlign: 'center',
                       fontSize: vw * 3.25,
                     }}
-                    name={person?.Policy_Insured_Age}
+                    name={person?.age}
                   />
                 </View>
               ))}

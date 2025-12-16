@@ -3,27 +3,27 @@ import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 import moment from 'moment';
 import {formatName} from '../utils';
-import {useSelector} from 'react-redux';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
+import { useSelector } from 'react-redux';
 
 const usePersonalViewModal = () => {
   const navigation = useNavigation();
-  const {user} = useSelector(state => state.auth);
   const [modalVisible, setModalVisible] = useState(false);
-  const [getData, setGetData] = useState([]);
+  const [data, setData] = useState([]);
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const [deleteDependent, setDeleteDependent] = useState(null);
   const [expandedIndex, setExpandedIndex] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
   const goBack = () => navigation.goBack();
+  const {user} = useSelector(state => state.auth);
 
-  const {data, loading: dependantLoading} = useApiHook({
+  const {loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependents,
     method: 'get',
     onSuccess: res => {
-      setGetData(
+      setData(
         res?.data?.map((item, index) => ({
           key: index,
           dependent: 'Dependent Detail',
@@ -84,7 +84,16 @@ const usePersonalViewModal = () => {
       isUpdate: true,
     });
   };
-
+  const {
+    trigger,
+    loading: deleteDepenedentLoading,
+  } = useApiHook({
+    apiEndpoint: endpoints.dependent.addDependentRequest,
+    method: 'post',
+    onSuccess: res => {
+      setConfirmationModal(true);
+    },
+  });
   const deleteDepenedent = dependent => {
     setModalType('delete');
     setDeleteDependent(dependent);
@@ -92,11 +101,17 @@ const usePersonalViewModal = () => {
   };
 
   const onPressDelete = () => {
-    const remaining = getData.filter(d => d !== deleteDependent);
-    setGetData(remaining);
-
-    setConfirmationModal(true);
     setModalType('');
+     let _apiData = {
+    cnicNumber: user?.cnic,
+    name: deleteDependent?.dependentDetail[0]?.value,
+    gender: deleteDependent?.dependentDetail[1]?.value,
+    relation: deleteDependent?.dependentDetail[2]?.value,
+    dob: deleteDependent?.dependentDetail[3]?.value,
+    dependentReqType: 3,
+    };
+
+    trigger(_apiData);
   };
 
   const toggleExpand = index => {
@@ -111,11 +126,12 @@ const usePersonalViewModal = () => {
 
   return {
     states: {
-      data: getData,
+      data,
       modalVisible,
       confirmationModal,
       expandedIndex,
       dependantLoading,
+      deleteDepenedentLoading,
       modalType,
     },
     functions: {

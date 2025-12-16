@@ -21,11 +21,11 @@ const useHomeViewModel = () => {
   const [notificationCount, setNotificationCount] = useState(null);
   const [showDropDown, setShowDropDown] = useState(false);
 
-  const [data, setData] = useState({
+  const claimData = {
     totalClaimAmount: 45000,
     deductedAmount: 3000,
     paidAmount: 42000,
-  });
+  };
   const showDropdownButton = user?.policies?.length > 1;
   const {selectedPolicy, selectedPolicyObject} = useSelector(
     state => state.general,
@@ -36,26 +36,36 @@ const useHomeViewModel = () => {
     setShowDropDown(false);
   };
 
+  const {data, loading} = useApiHook({
+    method: 'get',
+    apiEndpoint: endpoints.policy.getPolicyDetails(selectedPolicy),
+  });
+  const apiData = Object.values(data?.data || {})[0]?.[0];
+
   const homeCardData = {
     memberName: user?.memberName,
     cnic: user?.cnic,
     policyNumber: selectedPolicy,
     policyType: selectedPolicyObject?.policyType,
-    expiryDate: '31-Dec-2025',
-    //policyClass: Policy_Class
+    policyClass: apiData?.policy_Class ?? '',
+    policyCert: apiData?.policy_CertNo ?? '',
+    age: apiData?.policy_Insured_Age ?? '',
+    insuredName: apiData?.policy_Insured_Name ?? '',
+    startDate: apiData?.policy_Start_Date ?? '',
+    endDate: apiData?.policy_Expiry_Date ?? '',
+    perDay: apiData?.policy_Daily_RoomLimit ?? '',
+    matLimit: apiData?.policy_MatLimit ?? '',
   };
-  // const {trigger, data:userData,
-  //     loading: homeCardDataLoading,} = useApiHook({
-  //     method: 'get',
-  //     apiEndpoint: endpoints.policy.getPolicyDetails(selectedPolicy),
-  //     onSuccess: res => {
-  //     },
-  //   });
-  const maternityData = {
-    entitlement: 65000,
-    utilized: 12000,
-    remaining: 53000,
-  };
+  const {loading: dependantLoading, data: dependentData} = useApiHook({
+    apiEndpoint: endpoints.dependent.getDependents,
+    method: 'get',
+  });
+  const dependentsList =
+    dependentData?.data?.map(item => ({
+      name: item?.memberName?.trim(),
+      relation: item?.relation,
+      age: item?.age,
+    })) ?? [];
 
   const allNotifications = [
     {id: 1, title: 'Claim Approved', isRead: false},
@@ -123,7 +133,7 @@ const useHomeViewModel = () => {
       const dir = RNFetchBlob.fs.dirs.DocumentDir;
       const filePath = `${dir}/IGIPolicyCard.pdf`;
 
-      const html = generateCardHTML(homeCardData, user, maternityData);
+      const html = generateCardHTML(homeCardData, user, dependentsList);
 
       const options = {
         html,
@@ -134,7 +144,7 @@ const useHomeViewModel = () => {
 
       const file = await RNHTMLtoPDF.convert(options);
       const base64Data = file.base64;
-
+      if (!base64Data) throw new Error('PDF generation failed.');
       await RNFetchBlob.fs.writeFile(filePath, base64Data, 'base64');
 
       Alert.alert(
@@ -144,12 +154,19 @@ const useHomeViewModel = () => {
           {text: 'Cancel', style: 'cancel'},
           {
             text: 'Open',
-            onPress: () => FileViewer.open(filePath),
+            onPress: async () => {
+              try {
+                await FileViewer.open(filePath);
+              } catch (err) {
+                Alert.alert('Error', 'No app found to open the PDF.');
+              }
+            },
           },
         ],
+        {cancelable: true},
       );
     } catch (err) {
-      Alert.alert('Error', 'Unable to open PDF.');
+      Alert.alert('Error', 'No PDF app found. Please install a PDF viewer.');
     }
   };
 
@@ -280,16 +297,14 @@ const useHomeViewModel = () => {
 
   return {
     states: {
+      dependantLoading,
       selectedTab,
       cardData,
       frontAnimatedStyle,
       backAnimatedStyle,
       homeCardData,
-      maternityData,
-      claimData: data,
-      loading: false,
-      homeCardDataLoading: false,
-      maternityLoading: false,
+      claimData,
+      loading,
       showDependantModal,
       notificationCount,
       showDropDown,
@@ -297,6 +312,7 @@ const useHomeViewModel = () => {
       selectedPolicy,
     },
     functions: {
+      dependentsList,
       onPressTab,
       animateCard,
       toggleDrawer,

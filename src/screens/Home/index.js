@@ -11,17 +11,16 @@ const Home = () => {
     claimData,
     loading,
     homeCardData,
-    homeCardDataLoading,
     showDependantModal,
-    maternityLoading,
-    maternityData,
     notificationCount,
     showDropDown,
     showDropdownButton,
     selectedPolicy,
+    dependantLoading,
   } = states;
   const {
     animateCard,
+    dependentsList,
     toggleDrawer,
     onPressMenu,
     onPressHeaderIcon,
@@ -36,24 +35,23 @@ const Home = () => {
   return (
     <HomeView
       cardData={cardData}
+      dependentsList={dependentsList}
       animateCard={animateCard}
       toggleDrawer={toggleDrawer}
       onPressMenu={onPressMenu}
       onPressHeaderIcon={onPressHeaderIcon}
       handleDependantsModal={handleDependantsModal}
       onPullToRefresh={onPullToRefresh}
+      dependantLoading={dependantLoading}
       backAnimatedStyle={backAnimatedStyle}
       frontAnimatedStyle={frontAnimatedStyle}
       homeCardData={homeCardData}
       claimData={claimData}
       loading={loading}
-      homeCardDataLoading={homeCardDataLoading}
       handleAssociatedApps={handleAssociatedApps}
       handleCardDownload={handleCardDownload}
       showDependantModal={showDependantModal}
-      maternityData={maternityData}
       notificationCount={notificationCount}
-      maternityLoading={maternityLoading}
       showDropDown={showDropDown}
       showDropdownButton={showDropdownButton}
       setShowDropDown={setShowDropDown}

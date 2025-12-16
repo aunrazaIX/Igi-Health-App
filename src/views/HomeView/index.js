@@ -28,8 +28,10 @@ import {COLORS} from '../../assets/theme/colors';
 
 const HomeView = ({
   cardData,
+  dependentsList,
   animateCard,
   toggleDrawer,
+  dependantLoading,
   onPressMenu,
   onPressHeaderIcon,
   frontAnimatedStyle,
@@ -37,13 +39,10 @@ const HomeView = ({
   homeCardData,
   claimData,
   loading,
-  homeCardDataLoading,
   handleAssociatedApps,
   handleCardDownload,
   handleDependantsModal,
   showDependantModal,
-  maternityData,
-  maternityLoading,
   notificationCount,
   onPullToRefresh,
   showDropDown,
@@ -59,7 +58,7 @@ const HomeView = ({
       indicatorStyle={'black'}
       refreshControl={
         <RefreshControl
-          refreshing={maternityLoading || loading || homeCardDataLoading}
+          refreshing={loading || dependantLoading}
           onRefresh={onPullToRefresh}
           tintColor="#000"
           colors={['#0B4A98']}
@@ -146,7 +145,7 @@ const HomeView = ({
             </View>
           </View>
 
-          {homeCardData && (
+          {!loading && (
             <View style={styles.flipCardContainer}>
               <Animated.View
                 style={[styles.homeInfoContainer, frontAnimatedStyle]}>
@@ -189,28 +188,26 @@ const HomeView = ({
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
-                          {/* <AileronSemiBold
-                            name={` ${
-                              homeCardData.find(
-                                item =>
-                                  item.Policy_Insured_Relaion === 'Member',
-                              )?.SURNAME ?? ' --'
-                            }`}
-                            style={[
-                              styles.infoCardMiddleTextlight,
-                              {width: '100%', backgroundColor: 'red'},
-                            ]}
-                            numberOfLines={2}
-                          /> */}
                         </View>
                       </View>
 
                       <View style={{gap: vh * 0.5, marginBottom: vh * 1}}>
-                        {/* <AileronSemiBold
-                          name={`Age: 22`}
+                        <AileronSemiBold
+                          name={`Class: ${homeCardData?.policyClass}`}
                           style={styles.infoCardMiddleTextlight}
                           numberOfLines={1}
-                        /> */}
+                        />
+
+                        <AileronSemiBold
+                          name={`Cert #: ${homeCardData?.policyCert}`}
+                          style={styles.infoCardMiddleTextlight}
+                          numberOfLines={1}
+                        />
+                        <AileronSemiBold
+                          name={`Age: ${homeCardData?.age}`}
+                          style={styles.infoCardMiddleTextlight}
+                          numberOfLines={1}
+                        />
                       </View>
                     </View>
                   </View>
@@ -222,7 +219,7 @@ const HomeView = ({
                         numberOfLines={1}
                       />
                       <AileronBold
-                        name={'Member ABC'}
+                        name={homeCardData?.insuredName}
                         style={[
                           styles.infoCardTextBold,
                           {
@@ -299,11 +296,7 @@ const HomeView = ({
                             height: vh * 8,
                             width: '100%',
                           }}>
-                          {/* {homeCardData
-                            ?.filter(
-                              _item =>
-                                _item?.Policy_Insured_Relaion !== 'Member',
-                            )
+                          {dependentsList
                             .slice(0, 4)
                             .map((item, index) =>
                               index < 3 ? (
@@ -315,30 +308,21 @@ const HomeView = ({
                                     gap: vw * 4,
                                   }}>
                                   <AileronSemiBold
-                                    name={
-                                      item?.Policy_Insured_Name?.trim().length >
-                                      25
-                                        ? `${formatName(
-                                            item?.Policy_Insured_Name?.trim(),
-                                          )}`.slice(0, 25) + '...'
-                                        : `${formatName(
-                                            item?.Policy_Insured_Name?.trim(),
-                                          )}`
-                                    }
+                                    name={item?.name}
                                     style={[
                                       styles.homeBackCardText,
                                       {width: '60%'},
                                     ]}
                                   />
                                   <AileronSemiBold
-                                    name={item?.Policy_Insured_Relaion?.trim()}
+                                    name={item?.relation}
                                     style={[
                                       styles.homeBackCardText,
                                       {width: '22%', textAlign: 'center'},
                                     ]}
                                   />
                                   <AileronSemiBold
-                                    name={item?.Policy_Insured_Age}
+                                    name={item?.age}
                                     style={[
                                       styles.homeBackCardText,
                                       {textAlign: 'center', flex: 1},
@@ -355,7 +339,7 @@ const HomeView = ({
                                   />
                                 </TouchableOpacity>
                               ),
-                            )} */}
+                            )}
                         </View>
                       </View>
                     </View>
@@ -373,7 +357,7 @@ const HomeView = ({
                           />
                           <AileronSemiBold
                             style={styles.homeBackCardText}
-                            name={`Rs. Per Day: ${homeCardData[0]?.Policy_Daily_RoomLimit?.toLocaleString()}`}
+                            name={`Rs. Per Day: ${homeCardData?.perDay}`}
                           />
                         </View>
                       </View>
@@ -391,8 +375,7 @@ const HomeView = ({
                           <AileronSemiBold
                             style={styles.homeBackCardText}
                             name={
-                              maternityData?.length > 0 &&
-                              maternityData[0]?.Policy_MatLimit > 0
+                              homeCardData?.matLimit > 0
                                 ? 'Available'
                                 : 'Not Available'
                             }
@@ -411,7 +394,7 @@ const HomeView = ({
                           fontSize: vw * 3.25,
                         }}
                         name={`Valid from : ${moment(
-                          homeCardData[0]?.Policy_Start_Date,
+                          homeCardData?.startDate,
                           'YYYYMMDD',
                         ).format('DD-MMM-YYYY')}`}
                       />
@@ -419,7 +402,7 @@ const HomeView = ({
                       <AileronBold
                         style={{textAlign: 'left', fontSize: vw * 3.25}}
                         name={`Valid till : ${moment(
-                          homeCardData[0]?.Policy_Expiry_Date,
+                          homeCardData?.endDate,
                           'YYYYMMDD',
                         ).format('DD-MMM-YYYY')}`}
                       />
@@ -610,11 +593,11 @@ const HomeView = ({
         </View>
       </View>
       <DependantsModal
-        dependants={homeCardData}
+        dependants={dependentsList}
         show={showDependantModal}
         onClose={() => handleDependantsModal(false)}
       />
-      {/* <ModalLoading loading={homeCardDataLoading || maternityLoading} /> */}
+      {/* <ModalLoading loading={loading} /> */}
     </ScrollView>
   );
 };

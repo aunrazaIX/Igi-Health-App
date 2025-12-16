@@ -1,11 +1,8 @@
-import {View, Image, TextInput} from 'react-native';
+import {View, Image} from 'react-native';
 import React from 'react';
 import {COLORS} from '../../assets/theme/colors';
 import {icons, images} from '../../assets';
-
 import {
-  AileronBold,
-  AileronRegular,
   Button,
   ConfirmationModal,
   CurvedView,
@@ -36,11 +33,6 @@ const AddDependentView = ({
   handleSubmitRequest,
   isUpdate,
 }) => {
-  const relationship = dependentApiData?.dependentTypeID?.label;
-
-  const isSpouse = relationship === 'Spouse';
-  const genderDisabled = true;
-
   return (
     <>
       <TopView
@@ -53,22 +45,12 @@ const AddDependentView = ({
               source={images.personalFrame}
               style={styles.personalFrameIMG}
             />
-            {/* <View style={styles.manageContainer}>
-              <AileronBold
-                name={dependentIndex != undefined ? 'Manage Update' : 'Add'}
-                style={styles.manageText}
-              />
-              <AileronBold
-                name={'Dependent Details'}
-                style={styles.DependentText}
-              />
-            </View> */}
             <InputField
               placeholderTextColor={COLORS.textGrayShade}
               labelStyle={{color: COLORS.textBlackShade, fontSize: vw * 3.6}}
-              value={dependentApiData.dependentName ?? null}
+              value={dependentApiData.name ?? null}
               onChangeText={text => {
-                dependentSetterForApiData('dependentName', text);
+                dependentSetterForApiData('name', text);
               }}
               maxLength={20}
               label="Dependent Name"
@@ -80,30 +62,9 @@ const AddDependentView = ({
               selectLabel={'Relationship'}
               selectPlaceholder={'Select Relation'}
               onSelectOption={option => {
-                dependentSetterForApiData('dependentTypeID', option);
-                if (
-                  option.label === 'Son' ||
-                  option.label === 'Father' ||
-                  option.label === 'Husband'
-                ) {
-                  dependentSetterForApiData('gender', {
-                    label: 'Male',
-                    value: 'Male',
-                  });
-                } else if (
-                  option.label === 'Daughter' ||
-                  option.label === 'Mother' ||
-                  option.label === 'Wife'
-                ) {
-                  dependentSetterForApiData('gender', {
-                    label: 'Female',
-                    value: 'Female',
-                  });
-                } else {
-                  dependentSetterForApiData('gender', null);
-                }
+                dependentSetterForApiData('relation', option);
               }}
-              value={dependentApiData?.dependentTypeID?.label ?? null}
+              value={dependentApiData?.relation?.label ?? null}
               disabled={dependentApiData?.dependentTypeID?.value === 'Member'}
             />
 
@@ -115,16 +76,15 @@ const AddDependentView = ({
                 dependentSetterForApiData('gender', option)
               }
               value={dependentApiData?.gender?.label ?? ''}
-              disabled={genderDisabled}
             />
             <DependentBox containerStyle={styles.dependentOuterStyle}>
               <DatePicker
                 onSelectValue={date => {
-                  dependentSetterForApiData('Age', date);
+                  dependentSetterForApiData('dob', date);
                 }}
                 placeholder={'Select Date'}
                 label={'Date of Birth'}
-                value={dependentApiData?.Age ? dependentApiData.Age : ''}
+                value={dependentApiData?.dob ?? ''}
                 disabled={false}
                 labelStyle={{}}
                 containerStyle={{}}

@@ -22,7 +22,6 @@ const AddDependent = ({navigation, route}) => {
     setConfirmationModal,
     resetStates,
     handleCancel,
-    formatAgeToDate,
     handleSubmitRequest,
   } = functions;
 
@@ -42,7 +41,6 @@ const AddDependent = ({navigation, route}) => {
         dependentIndex={dependentIndex}
         dependantsData={dependantsData}
         handleCancel={handleCancel}
-        formatAgeToDate={formatAgeToDate}
         confirmatonType={confirmationType}
         handleSubmitRequest={handleSubmitRequest}
         isUpdate={isUpdate}
