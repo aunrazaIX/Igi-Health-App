@@ -7,10 +7,10 @@ const Notification = () => {
     data,
     loading,
     types,
+    markLoading,
     selectedType,
     showDropDown,
     selectedNotification,
-    markLoading
   } = states;
   const {onSelectType, onPressTypeDropDown, onPressMarkNotification} =
     functions;
@@ -22,8 +22,8 @@ const Notification = () => {
       onPressTypeDropDown={onPressTypeDropDown}
       types={types}
       data={data}
-      loading={loading}
       markLoading={markLoading}
+      loading={loading}
       selectedNotification={selectedNotification}
       onPressMarkNotification={onPressMarkNotification}
     />

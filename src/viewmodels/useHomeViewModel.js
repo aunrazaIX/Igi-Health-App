@@ -40,7 +40,10 @@ const useHomeViewModel = () => {
     method: 'get',
     apiEndpoint: endpoints.policy.getPolicyDetails(selectedPolicy),
   });
+
+  console.log(data);
   const apiData = Object.values(data?.data || {})[0]?.[0];
+  const matData = data?.data?.matPolicyDetail?.[0];
 
   const homeCardData = {
     memberName: user?.memberName,
@@ -54,7 +57,7 @@ const useHomeViewModel = () => {
     startDate: apiData?.policy_Start_Date ?? '',
     endDate: apiData?.policy_Expiry_Date ?? '',
     perDay: apiData?.policy_Daily_RoomLimit ?? '',
-    matLimit: apiData?.policy_MatLimit ?? '',
+    matLimit: matData?.policy_MatLimit ?? '',
   };
   const {loading: dependantLoading, data: dependentData} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependents,

@@ -19,7 +19,6 @@ const usePriorApprovalHistoryViewModel = () => {
   const {
     trigger,
     loading,
-    data: priorHistory,
   } = useApiHook({
     apiEndpoint: endpoints.priorApproval.getPriorApprovalHistory,
     method: 'post',
@@ -27,7 +26,6 @@ const usePriorApprovalHistoryViewModel = () => {
       isAllRecord: true,
     },
     onSuccess: res => {
-      console.log(res);
       const transformed = res?.data?.dataList?.map(transformClaimData);
       setAllData(transformed);
       setData(transformed);

@@ -18,6 +18,7 @@ import {formatDate} from '../../utils';
 const NotificationView = ({
   data,
   loading,
+  markLoading,
   selectedType,
   types,
   onSelectType,
@@ -25,7 +26,6 @@ const NotificationView = ({
   onPressTypeDropDown,
   selectedNotification,
   onPressMarkNotification,
-  markLoading,
 }) => {
   const renderNotifications = ({item, index}) => {
     const lastIndex = index === data.length - 1;
@@ -46,23 +46,23 @@ const NotificationView = ({
           <View style={{width: '85%'}}>
             <AileronSemiBold
               style={styles.requestTittle}
-              name={item.PushNotificationHead}
+              name={item?.title}
             />
             <AileronRegular
               style={styles.notificationBody}
-              name={item?.PushNotificationText}
+              name={item?.message}
             />
             <AileronSemiBold
               style={styles.date}
               name={
                 item?.PushNotificationDate
-                  ? formatDate(item?.PushNotificationDate)
+                  ? formatDate(item?.date)
                   : '-'
               }
             />
             {!item?.isRead && (
               <Fragment>
-                {item?.PushNotificationID == selectedNotification &&
+                {item?.id == selectedNotification &&
                 markLoading ? (
                   <SimpleLoader
                     style={styles.simpleLoading}
@@ -72,7 +72,7 @@ const NotificationView = ({
                 ) : (
                   <TouchableOpacity
                     onPress={() =>
-                      onPressMarkNotification(item?.PushNotificationID)
+                      onPressMarkNotification(item?.id)
                     }
                     style={styles.markAsReadView}>
                     <AileronSemiBold

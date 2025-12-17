@@ -43,7 +43,6 @@ const PriorApprovalView = ({
   setterForclaimData,
   claimLoading,
   type,
-  personalDetails,
   personalDetailsLoading,
   onSelectType,
   deletedIndex,
@@ -77,7 +76,6 @@ const PriorApprovalView = ({
         selectedType={selectedType}
         onSelectPatient={onSelectPatient}
         dependants={dependants}
-        personalDetails={personalDetails}
         onSelectType={onSelectType}
         hospitalList={hospitalList}
         onSelectHospital={onSelectHospital}

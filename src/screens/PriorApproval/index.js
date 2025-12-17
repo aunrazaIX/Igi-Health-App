@@ -17,7 +17,6 @@ const PriorApproval = ({navigation, route}) => {
     claimData,
     claimLoading,
     type,
-    personalDetails,
     personalDetailsLoading,
     selectedType,
     hospitalList,
@@ -42,7 +41,6 @@ const PriorApproval = ({navigation, route}) => {
     setterForclaimData,
     onSelectHospital,
     onSelectType,
-    onSelectMaternityType,
     handleDeleteClaim,
     setConfirmationType,
     onPressSubmitClaim,
@@ -73,13 +71,11 @@ const PriorApproval = ({navigation, route}) => {
       handleCancelFile={handleCancelFile}
       confirmationModal={confirmationModal}
       setConfirmationModal={setConfirmationModal}
-      onSelectMaternityType={onSelectMaternityType}
       resetStates={resetStates}
       claimLoading={claimLoading}
       claimData={claimData}
       type={type}
       setterForclaimData={setterForclaimData}
-      personalDetails={personalDetails}
       personalDetailsLoading={personalDetailsLoading}
       dependants={dependants}
       onSelectType={onSelectType}

@@ -11,8 +11,8 @@ import {
   onDeleteDocuments,
   setSelectedHospital,
   setSelectedType,
-  setSelectedMaternityType,
   setResetTreaments,
+  _setTreatmentData,
 } from '../redux/lodgeSlice';
 import moment from 'moment';
 import {setErrorModal} from '../redux/generalSlice';
@@ -21,11 +21,6 @@ import {launchCamera} from 'react-native-image-picker';
 import {InteractionManager} from 'react-native';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
-
-const mockPersonalDetails = [
-  {LGIVNAME: 'John Doe', CLNTNUM: '101'},
-  {LGIVNAME: 'Jane Doe', CLNTNUM: '102'},
-];
 
 const usePriorApprovalViewModel = ({navigation, route}) => {
   const {type} = route?.params || {};
@@ -98,6 +93,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     });
 
   const resetStates = () => {
+    dispatch(_setTreatmentData([]));
     dispatch(setSelectedDocuments([]));
     dispatch(setSelectedHospital(null));
     dispatch(setSelectedPatient(null));
@@ -181,10 +177,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     dispatch(setResetTreaments());
     dispatch(setSelectedType(item));
   };
-
-  const onSelectMaternityType = item =>
-    dispatch(setSelectedMaternityType(item));
-
   const onSelectHospital = item => dispatch(setSelectedHospital(item));
 
   const onPressNext = () => {
@@ -224,6 +216,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     setConfirmationType('back');
     setConfirmationModal(true);
   };
+
   const {trigger: uploadAttach} = useApiHook({
     method: 'post',
     isFormData: true,
@@ -238,6 +231,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       setUploadedFiles(prev => [...prev, ...attachments]);
     },
     onError: e => {
+      dispatch(setSelectedDocuments([]));
       dispatch(
         setErrorModal({
           show: true,
@@ -427,7 +421,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       confirmationModal,
       claimData,
       type,
-      personalDetails: mockPersonalDetails,
       dependants,
       dependantLoading,
       hospitalList,
@@ -454,7 +447,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       setterForclaimData,
       onSelectHospital,
       onSelectType,
-      onSelectMaternityType,
       setConfirmationType,
       onPressSubmitClaim,
       handleDeleteFile,

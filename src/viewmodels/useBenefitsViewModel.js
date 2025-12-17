@@ -32,7 +32,6 @@ const useBenefitsViewModel = () => {
     argsOrBody: payload,
     onSuccess: res => {
       setAllBenefits(res.data);
-      console.log(res.data, 'res');
     },
     onError: e => {
       dispatch(

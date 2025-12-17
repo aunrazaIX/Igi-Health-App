@@ -4,10 +4,17 @@ import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   setBiometrics,
+  setDeviceToken,
   SetIsToggle,
   setRememberMe,
   setUserData,
 } from '../redux/authSlice';
+import {
+  AuthorizationStatus,
+  getMessaging,
+  getToken,
+  requestPermission,
+} from '@react-native-firebase/messaging';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {
   setErrorModal,
@@ -20,31 +27,60 @@ import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
 import {resetAllModules} from '../redux/lodgeSlice';
 import {Buffer} from 'buffer';
+import { getApp } from '@react-native-firebase/app';
 
 const useLoginViewModel = () => {
-  const {rememberMe, credentials, biometrics, isToggle} = useSelector(
-    state => state.auth,
-  );
+  const {rememberMe, credentials, biometrics, isToggle, deviceToken} =
+    useSelector(state => state.auth);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState('login');
   const [checked, setChecked] = useState(rememberMe);
   const loginResponse = useRef(null);
   useEffect(() => {
-    requestPermissionHandler().catch(() => {});
+    requestPermissionHandler()
+      .then(bool => {
+        if (bool) {
+          const messagingInstance = getMessaging(getApp());
+          getToken(messagingInstance)
+            .then(token => {
+              console.log(token);
+              dispatch(setDeviceToken(token));
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        }
+      })
+      .catch(e => {
+        console.log('E', e);
+      });
   }, []);
 
   const requestPermissionHandler = async () => {
-    if (Platform.OS === 'ios') return true;
-
-    if (Platform.Version >= 33) {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
-      );
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    let allowed = false;
+    if (Platform.OS === 'ios') {
+      const messagingInstance = getMessaging(getApp());
+      const authStatus = await requestPermission(messagingInstance);
+      const enabled =
+        authStatus === AuthorizationStatus.AUTHORIZED ||
+        authStatus === AuthorizationStatus.PROVISIONAL;
+      if (enabled) {
+        allowed = true;
+      }
     } else {
-      return true;
+      if (Platform.Version >= 33) {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          allowed = true;
+        }
+      } else {
+        allowed = true;
+      }
     }
+    return allowed;
   };
 
   const {
@@ -142,6 +178,7 @@ const useLoginViewModel = () => {
     let apiData = {
       userName: loginApiData?.userName,
       password: loginApiData?.password,
+      deviceToken: deviceToken ?? '--',
     };
 
     if (isToggle) {
@@ -168,6 +205,7 @@ const useLoginViewModel = () => {
         console.log('Biometric setup error:', error);
       }
     }
+    console.log(apiData)
     trigger(apiData);
   };
 
@@ -228,7 +266,9 @@ const useLoginViewModel = () => {
       const apiData = {
         userName: biometrics.userName,
         password: Buffer.from(biometrics.password, 'base64').toString('utf8'),
+        deviceToken: deviceToken ?? '--',
       };
+      console.log(apiData)
       await trigger(apiData);
     } catch (error) {
       if (Platform.OS === 'ios') {
