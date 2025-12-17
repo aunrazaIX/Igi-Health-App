@@ -1,7 +1,7 @@
 import {useCallback, useMemo, useState} from 'react';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import { useFocusEffect } from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 
 const useNotificationsViewModel = () => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -9,22 +9,22 @@ const useNotificationsViewModel = () => {
   const [selectedNotification, setSelectedNotification] = useState(null);
   const types = useMemo(() => ['All', 'Read', 'Unread'], []);
 
-const {trigger, loading, data} = useApiHook({
+  const {trigger, loading, data} = useApiHook({
     apiEndpoint: endpoints.notifications.getAll,
     method: 'post',
     argsOrBody: {
-      pagination:  {
+      pagination: {
         isAllRecord: true,
-      }
+      },
     },
   });
   const apiData = data?.data?.dataList;
-    useFocusEffect(
-      useCallback(() => {
-        trigger();
-      }, []),
-    );
-    
+  useFocusEffect(
+    useCallback(() => {
+      trigger();
+    }, []),
+  );
+
   const {trigger: markRead, loading: markLoading} = useApiHook({
     apiEndpoint: endpoints.notifications.markAsRead(selectedNotification),
     method: 'post',

@@ -13,7 +13,6 @@ import moment from 'moment';
 import NoDataView from '../../components/NoDataView';
 import SimpleLoader from '../../components/SimpleLoader';
 import {COLORS} from '../../assets/theme/colors';
-import {formatDate} from '../../utils';
 
 const NotificationView = ({
   data,
@@ -44,26 +43,18 @@ const NotificationView = ({
             />
           </View>
           <View style={{width: '85%'}}>
-            <AileronSemiBold
-              style={styles.requestTittle}
-              name={item?.title}
-            />
+            <AileronSemiBold style={styles.requestTittle} name={item?.title} />
             <AileronRegular
               style={styles.notificationBody}
               name={item?.message}
             />
             <AileronSemiBold
               style={styles.date}
-              name={
-                item?.PushNotificationDate
-                  ? formatDate(item?.date)
-                  : '-'
-              }
+              name={moment(item?.createdOn).format('DD-MMM-YYYY') || '-'}
             />
             {!item?.isRead && (
               <Fragment>
-                {item?.id == selectedNotification &&
-                markLoading ? (
+                {item?.id == selectedNotification && markLoading ? (
                   <SimpleLoader
                     style={styles.simpleLoading}
                     color={COLORS.loginButton}
@@ -71,9 +62,7 @@ const NotificationView = ({
                   />
                 ) : (
                   <TouchableOpacity
-                    onPress={() =>
-                      onPressMarkNotification(item?.id)
-                    }
+                    onPress={() => onPressMarkNotification(item?.id)}
                     style={styles.markAsReadView}>
                     <AileronSemiBold
                       style={styles.markAseadText}

@@ -51,16 +51,16 @@ const useClaimsHistoryViewModel = () => {
     const amountDeducted = amountClaimed - (claim?.totalAmountPaid || 0);
 
     return {
-      headerLabel: `Claim #${claim.claimId ?? claim.clamnum}`,
+      headerLabel: `Claim #${claim.claimId ?? claim?.claimID}`,
       claimStatus: claim?.status,
       headerIcon: icons.taskEdit,
-      RelationName: isInProcess ? claim?.patientName : claim?.givname,
+      RelationName: isInProcess ? claim?.patientName : claim?.relationName,
       items: [
         {
           label: 'Patient Name:',
-          value: claim?.patientName ?? claim.givname.trim(),
+          value: claim?.patientName ?? claim.relationName.trim(),
         },
-        {label: 'Status:', value: claim?.status ?? claim?.gcsts},
+        {label: 'Status:', value: claim?.status ?? claim?.claimStatusName},
         {
           label: 'Claim Paid Date:',
           value: moment(claim?.paidDate ?? claim?.claimReceivedDate).format(
@@ -79,37 +79,38 @@ const useClaimsHistoryViewModel = () => {
           label: 'Mode of Payment:',
           value: claim?.payment_type?.trim(),
         },
-        ...(isInProcess
-          ? [
-              {
-                label: 'Submitted Date:',
-                value: moment(claim?.createdOn).format('DD-MMM-YYYY'),
-              },
-              {
-                label: 'Amount Claimed:',
-                value: formatCurrencyWithPKR(amountClaimed),
-              },
-              {
-                label: 'Amount Paid:',
-                value: formatCurrencyWithPKR(claim?.totalAmountPaid || 0),
-              },
-              {
-                label: 'Amount Deducted:',
-                value: formatCurrencyWithPKR(amountDeducted),
-              },
-              {
-                label: 'Deduction Reason:',
-                value: claim?.deductionReason,
-              },
-            ]
-          : []),
-        (isInProcess ? claim?.comments : claim?.DeductionReason) && {
+        {
+          label: 'Submitted Date:',
+          value: moment(claim?.createdOn ?? claim?.claimSubmittedDate).format(
+            'DD-MMM-YYYY',
+          ),
+        },
+        {
+          label: 'Amount Claimed:',
+          value: formatCurrencyWithPKR(amountClaimed ?? claim?.submiitedClaim),
+        },
+        {
+          label: 'Amount Paid:',
+          value: formatCurrencyWithPKR(
+            claim?.totalAmountPaid ?? claim?.totalPaid,
+          ),
+        },
+        {
+          label: 'Amount Deducted:',
+          value: formatCurrencyWithPKR(amountDeducted ?? claim?.deductedAmount),
+        },
+        {
+          label: 'Deduction Reason:',
+          value: claim?.deductionReason,
+        },
+
+        (isInProcess ? claim?.comments : claim?.deductionReason) && {
           label: 'Claim Remarks:',
           value: 'View Remarks',
           isUnderLine: true,
           onPress: () => {
             setShowRemarks(true);
-            setRemarks(isInProcess ? claim?.comments : claim?.DeductionReason);
+            setRemarks(isInProcess ? claim?.comments : claim?.deductionReason);
           },
         },
       ].filter(Boolean),
@@ -140,10 +141,9 @@ const useClaimsHistoryViewModel = () => {
       isAllRecord: true,
     },
     onSuccess: res => {
-      {
-        type === 'Processed' &&
-          setData(res?.data?.map(claim => transformClaimData(claim, false)));
-      }
+      console.log(res);
+      type === 'Processed' &&
+        setData(res?.data?.map(claim => transformClaimData(claim, false)));
     },
   });
   useEffect(() => {

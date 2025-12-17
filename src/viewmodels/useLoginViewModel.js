@@ -27,7 +27,7 @@ import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
 import {resetAllModules} from '../redux/lodgeSlice';
 import {Buffer} from 'buffer';
-import { getApp } from '@react-native-firebase/app';
+import {getApp} from '@react-native-firebase/app';
 
 const useLoginViewModel = () => {
   const {rememberMe, credentials, biometrics, isToggle, deviceToken} =
@@ -44,7 +44,6 @@ const useLoginViewModel = () => {
           const messagingInstance = getMessaging(getApp());
           getToken(messagingInstance)
             .then(token => {
-              console.log(token);
               dispatch(setDeviceToken(token));
             })
             .catch(e => {
@@ -205,7 +204,6 @@ const useLoginViewModel = () => {
         console.log('Biometric setup error:', error);
       }
     }
-    console.log(apiData)
     trigger(apiData);
   };
 
@@ -268,7 +266,6 @@ const useLoginViewModel = () => {
         password: Buffer.from(biometrics.password, 'base64').toString('utf8'),
         deviceToken: deviceToken ?? '--',
       };
-      console.log(apiData)
       await trigger(apiData);
     } catch (error) {
       if (Platform.OS === 'ios') {

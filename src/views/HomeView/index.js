@@ -58,7 +58,7 @@ const HomeView = ({
       indicatorStyle={'black'}
       refreshControl={
         <RefreshControl
-          refreshing={loading || dependantLoading}
+          refreshing={loading}
           onRefresh={onPullToRefresh}
           tintColor="#000"
           colors={['#0B4A98']}
@@ -296,50 +296,48 @@ const HomeView = ({
                             height: vh * 8,
                             width: '100%',
                           }}>
-                          {dependentsList
-                            .slice(0, 4)
-                            .map((item, index) =>
-                              index < 3 ? (
-                                <View
-                                  key={index}
-                                  style={{
-                                    width: '100%',
-                                    flexDirection: 'row',
-                                    gap: vw * 4,
-                                  }}>
-                                  <AileronSemiBold
-                                    name={item?.name}
-                                    style={[
-                                      styles.homeBackCardText,
-                                      {width: '60%'},
-                                    ]}
-                                  />
-                                  <AileronSemiBold
-                                    name={item?.relation}
-                                    style={[
-                                      styles.homeBackCardText,
-                                      {width: '22%', textAlign: 'center'},
-                                    ]}
-                                  />
-                                  <AileronSemiBold
-                                    name={item?.age}
-                                    style={[
-                                      styles.homeBackCardText,
-                                      {textAlign: 'center', flex: 1},
-                                    ]}
-                                  />
-                                </View>
-                              ) : (
-                                <TouchableOpacity
-                                  style={{width: '40%'}}
-                                  onPress={() => handleDependantsModal(true)}>
-                                  <AileronRegular
-                                    name="View more..."
-                                    style={styles.homeBackCardDottedText}
-                                  />
-                                </TouchableOpacity>
-                              ),
-                            )}
+                          {dependentsList.slice(0, 4).map((item, index) =>
+                            index < 3 ? (
+                              <View
+                                key={index}
+                                style={{
+                                  width: '100%',
+                                  flexDirection: 'row',
+                                  gap: vw * 4,
+                                }}>
+                                <AileronSemiBold
+                                  name={item?.name}
+                                  style={[
+                                    styles.homeBackCardText,
+                                    {width: '60%'},
+                                  ]}
+                                />
+                                <AileronSemiBold
+                                  name={item?.relation}
+                                  style={[
+                                    styles.homeBackCardText,
+                                    {width: '22%', textAlign: 'center'},
+                                  ]}
+                                />
+                                <AileronSemiBold
+                                  name={item?.age}
+                                  style={[
+                                    styles.homeBackCardText,
+                                    {textAlign: 'center', flex: 1},
+                                  ]}
+                                />
+                              </View>
+                            ) : (
+                              <TouchableOpacity
+                                style={{width: '40%'}}
+                                onPress={() => handleDependantsModal(true)}>
+                                <AileronRegular
+                                  name="View more..."
+                                  style={styles.homeBackCardDottedText}
+                                />
+                              </TouchableOpacity>
+                            ),
+                          )}
                         </View>
                       </View>
                     </View>
@@ -465,7 +463,7 @@ const HomeView = ({
           />
         </View>
 
-        {!loading ? (
+        {!dependantLoading ? (
           <View style={styles.graphContainer}>
             <Image
               style={styles.meterEllipseBlue}
@@ -481,12 +479,12 @@ const HomeView = ({
               name="Total Claimed Amount"
             />
 
-            {!loading ? (
+            {!dependantLoading ? (
               <AileronBold
                 style={styles.meterBoldText}
                 name={
-                  claimData.totalClaimAmount &&
-                  formatCurrency(claimData.totalClaimAmount)
+                  claimData?.totalClaimAmount &&
+                  formatCurrency(claimData?.totalClaimAmount)
                 }
               />
             ) : (
@@ -497,7 +495,7 @@ const HomeView = ({
           <SimpleLoader color="black" />
         )}
 
-        {!loading && (
+        {!dependantLoading && (
           <View style={styles.statisticsContainer}>
             <View style={styles.dashboardMeterDetail}>
               <View style={styles.totalDeducted}>
@@ -512,7 +510,7 @@ const HomeView = ({
               <AileronBold
                 name={
                   claimData?.deductedAmount &&
-                  formatCurrency(claimData.deductedAmount)
+                  formatCurrency(claimData?.deductedAmount)
                 }
                 style={styles.meterDetailTextBold}
                 numberOfLines={1}
@@ -529,13 +527,13 @@ const HomeView = ({
                 />
               </View>
 
-              {loading ? (
+              {dependantLoading ? (
                 <SimpleLoader />
               ) : (
                 <AileronBold
                   name={
                     claimData?.paidAmount &&
-                    formatCurrency(claimData.paidAmount)
+                    formatCurrency(claimData?.paidAmount)
                   }
                   style={styles.meterDetailTextBold}
                   numberOfLines={1}

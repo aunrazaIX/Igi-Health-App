@@ -1,7 +1,7 @@
-import {useRef, useState} from 'react';
+import {useCallback, useRef, useState} from 'react';
 import {newCardsIcons, icons} from '../assets';
 import {Alert, Animated, Linking, Platform} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {PermissionsAndroid} from 'react-native';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
@@ -20,12 +20,6 @@ const useHomeViewModel = () => {
   const [showDependantModal, setShowDependantModal] = useState(false);
   const [notificationCount, setNotificationCount] = useState(null);
   const [showDropDown, setShowDropDown] = useState(false);
-
-  const claimData = {
-    totalClaimAmount: 45000,
-    deductedAmount: 3000,
-    paidAmount: 42000,
-  };
   const showDropdownButton = user?.policies?.length > 1;
   const {selectedPolicy, selectedPolicyObject} = useSelector(
     state => state.general,
@@ -40,8 +34,6 @@ const useHomeViewModel = () => {
     method: 'get',
     apiEndpoint: endpoints.policy.getPolicyDetails(selectedPolicy),
   });
-
-  console.log(data);
   const apiData = Object.values(data?.data || {})[0]?.[0];
   const matData = data?.data?.matPolicyDetail?.[0];
 
@@ -59,7 +51,7 @@ const useHomeViewModel = () => {
     perDay: apiData?.policy_Daily_RoomLimit ?? '',
     matLimit: matData?.policy_MatLimit ?? '',
   };
-  const {loading: dependantLoading, data: dependentData} = useApiHook({
+  const {data: dependentData} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependents,
     method: 'get',
   });
@@ -70,17 +62,64 @@ const useHomeViewModel = () => {
       age: item?.age,
     })) ?? [];
 
-  const allNotifications = [
-    {id: 1, title: 'Claim Approved', isRead: false},
-    {id: 2, title: 'New Policy Updated', isRead: false},
-    {id: 3, title: 'Welcome to IGI', isRead: true},
-  ];
-
+  const {trigger: getNotification} = useApiHook({
+    apiEndpoint: endpoints.notifications.getAll,
+    method: 'post',
+    argsOrBody: {
+      pagination: {
+        isAllRecord: true,
+      },
+    },
+    onSuccess: res => {
+      if (res?.data?.dataList?.length > 0) {
+        let unreadNotifications = res?.data?.dataList?.filter(
+          record => !record?.isRead,
+        );
+        setNotificationCount(unreadNotifications?.length);
+      }
+    },
+  });
   const onPullToRefresh = () => {
-    const unread = allNotifications.filter(n => !n.isRead).length;
-    setNotificationCount(unread);
+    getNotification();
   };
+  const {
+    loading: dependantLoading,
+    trigger: getDxcClaims,
+    data: claimData,
+    transformResponse,
+  } = useApiHook({
+    apiEndpoint: endpoints.claimHistory.getDxcClaims,
+    method: 'post',
+    argsOrBody: {
+      isAllRecord: true,
+    },
+    onSuccess: res => {
+      let temp = sortClaimData(res?.data);
+      transformResponse(temp);
+    },
+  });
+  useFocusEffect(
+    useCallback(() => {
+      getDxcClaims();
+    }, []),
+  );
+  const sortClaimData = (items = []) => {
+    let totalClaimAmount = 0;
+    let deductedAmount = 0;
+    let paidAmount = 0;
 
+    for (const item of items) {
+      totalClaimAmount += item.submiitedClaim ?? 0;
+      deductedAmount += item.deductedAmount ?? 0;
+      paidAmount += item.totalPaid ?? 0;
+    }
+
+    return {
+      totalClaimAmount,
+      deductedAmount,
+      paidAmount,
+    };
+  };
   const animateValue = useRef(new Animated.Value(0)).current;
   const currentValue = useRef(0);
 
