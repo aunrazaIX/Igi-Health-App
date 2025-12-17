@@ -168,7 +168,7 @@ const HomeView = ({
                       <View style={styles.homeCardMainDetails}>
                         <View>
                           <AileronSemiBold
-                            name={`Policy # : ${homeCardData.policyNumber}`}
+                            name={`Policy # : ${homeCardData?.policyNumber}`}
                             style={styles.infoCardMiddleTextlight}
                             numberOfLines={1}
                           />
@@ -296,7 +296,7 @@ const HomeView = ({
                             height: vh * 8,
                             width: '100%',
                           }}>
-                          {dependentsList.slice(0, 4).map((item, index) =>
+                          {dependentsList?.slice(0, 4).map((item, index) =>
                             index < 3 ? (
                               <View
                                 key={index}
@@ -329,6 +329,7 @@ const HomeView = ({
                               </View>
                             ) : (
                               <TouchableOpacity
+                                key="view-more"
                                 style={{width: '40%'}}
                                 onPress={() => handleDependantsModal(true)}>
                                 <AileronRegular

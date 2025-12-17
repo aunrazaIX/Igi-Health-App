@@ -17,10 +17,14 @@ const useAddDependentViewModal = ({route}) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
 
   const relationsOptions = [
-    {label: 'Spouse', value: 1},
-    {label: 'Child', value: 2},
-    {label: 'Sibling', value: 3},
-    {label: 'Parent', value: 4},
+    {label: 'Husband', value: 1},
+    {label: 'Wife', value: 2},
+    {label: 'Sister', value: 3},
+    {label: 'Brother', value: 4},
+    {label: 'Son', value: 5},
+    {label: 'Daughter', value: 6},
+    {label: 'Father', value: 7},
+    {label: 'Mother', value: 8},
   ];
 
   const genderOptions = [

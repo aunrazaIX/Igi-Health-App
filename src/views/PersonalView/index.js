@@ -60,87 +60,81 @@ const PersonalView = ({
             <View style={{marginBottom: vh * 12}}>
               {data?.length > 0
                 ? data?.map((dependent, index) => (
-                      <DependentBox
-                        key={index}
-                        containerStyle={styles.dependentBoxStyle}>
-                        <TouchableOpacity onPress={() => toggleExpand(index)}>
-                          <View style={styles.header}>
-                            <Image
-                              source={dependent?.image}
-                              style={styles.avatar}
-                            />
-                            <AileronBold
-                              style={styles.headerText}
-                              name={dependent.dependentDetail[0].value}
-                            />
+                    <DependentBox
+                      key={index}
+                      containerStyle={styles.dependentBoxStyle}>
+                      <TouchableOpacity onPress={() => toggleExpand(index)}>
+                        <View style={styles.header}>
+                          <Image
+                            source={dependent?.image}
+                            style={styles.avatar}
+                          />
+                          <AileronBold
+                            style={styles.headerText}
+                            name={dependent.dependentDetail[0].value}
+                          />
 
-                            <View style={styles.iconsROw}>
-                                  <View style={styles.deleteEditRow}>
-                                    <TouchableOpacity
-                                      onPress={() =>
-                                        manageUpdate(dependent, index)
-                                      }>
-                                      <Image
-                                        source={icons.edit}
-                                        style={styles.editIcon}
-                                      />
-                                    </TouchableOpacity>
+                          <View style={styles.iconsROw}>
+                            <View style={styles.deleteEditRow}>
+                              <TouchableOpacity
+                                onPress={() => manageUpdate(dependent, index)}>
+                                <Image
+                                  source={icons.edit}
+                                  style={styles.editIcon}
+                                />
+                              </TouchableOpacity>
 
-                                    {dependent.dependentDetail.find(
-                                      item =>
-                                        item.label === 'Relationship :' &&
-                                        item.value !== 'Main Member' &&
-                                        item.value !== 'Member',
-                                    ) && (
-                                      <TouchableOpacity
-                                        onPress={() =>
-                                          deleteDepenedent(dependent, index)
-                                        }>
-                                        <Image
-                                          source={icons.delete}
-                                          style={styles.deleteIcon}
-                                        />
-                                      </TouchableOpacity>
-                                    )}
-                                  </View>
-                              <Image
-                                source={
-                                  expandedIndex === index
-                                    ? icons.selectArrowUp
-                                    : icons.arrowDown
-                                }
-                                style={styles.icon}
-                              />
-                            </View>
-                          </View>
-
-                          {expandedIndex.includes(index) && (
-                            <View style={styles.details}>
-                              {dependent?.dependentDetail?.map(
-                                (item, index) => (
-                                  <>
-                                    <View style={styles.detailRow} key={index}>
-                                      {item.label !== 'Name :' && (
-                                        <>
-                                          <AileronSemiBold
-                                            name={item?.label}
-                                            style={styles.detailLabel}
-                                          />
-
-                                          <AileronSemiBold
-                                            name={item?.value}
-                                            style={styles.detailvalue}
-                                          />
-                                        </>
-                                      )}
-                                    </View>
-                                  </>
-                                ),
+                              {dependent.dependentDetail.find(
+                                item =>
+                                  item.label === 'Relationship :' &&
+                                  item.value !== 'Main Member' &&
+                                  item.value !== 'Member',
+                              ) && (
+                                <TouchableOpacity
+                                  onPress={() =>
+                                    deleteDepenedent(dependent, index)
+                                  }>
+                                  <Image
+                                    source={icons.delete}
+                                    style={styles.deleteIcon}
+                                  />
+                                </TouchableOpacity>
                               )}
                             </View>
-                          )}
-                        </TouchableOpacity>
-                      </DependentBox>
+                            <Image
+                              source={
+                                expandedIndex === index
+                                  ? icons.selectArrowUp
+                                  : icons.arrowDown
+                              }
+                              style={styles.icon}
+                            />
+                          </View>
+                        </View>
+
+                        {expandedIndex.includes(index) && (
+                          <View style={styles.details}>
+                            {dependent?.dependentDetail?.map((item, index) => (
+                              <View style={styles.detailRow} key={index}>
+                                {item.label !== 'Name :' && (
+                                  <>
+                                    <AileronSemiBold
+                                      name={item?.label}
+                                      style={styles.detailLabel}
+                                    />
+
+                                    <AileronSemiBold
+                                      name={item?.value}
+                                      style={styles.detailvalue}
+                                    />
+                                  </>
+                                )}
+                              </View>
+                            ))}
+                          </View>
+                        )}
+                      </TouchableOpacity>
+                    </DependentBox>
                   ))
                 : !dependantLoading && <NoDataView name={'No Member Found'} />}
             </View>

@@ -1,16 +1,12 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {icons} from '../assets';
-import {useSelector} from 'react-redux';
 import {useCallback, useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 
 const useBenefitsViewModel = () => {
-  const {user} = useSelector(state => state.auth);
-  const {policyClass} = useSelector(state => state.general);
   const navigation = useNavigation();
   const [allBenefits, setAllBenefits] = useState([]);
-
   const [selectedTab, setSelectedTab] = useState('Inpatient');
   const [modalVisible, setModalVisible] = useState({show: false, note: ''});
   const onPressTab = tab => {

@@ -12,7 +12,6 @@ import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaimStack from '../LodgeClaimStack';
 import {AileronRegular} from '../../components';
-import PriorApproval from '../../screens/PriorApproval';
 
 const Tab = createBottomTabNavigator();
 

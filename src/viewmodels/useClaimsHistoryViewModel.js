@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useEffect, useMemo, useState} from 'react';
 import {icons} from '../assets';
 import moment from 'moment';
-import {formatCurrencyWithPKR} from '../utils';
+import {formatCurrencyWithPKR, universalSearch} from '../utils';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 
@@ -141,7 +141,7 @@ const useClaimsHistoryViewModel = () => {
       isAllRecord: true,
     },
     onSuccess: res => {
-      console.log(res);
+      console.log(res),
       type === 'Processed' &&
         setData(res?.data?.map(claim => transformClaimData(claim, false)));
     },
@@ -159,6 +159,21 @@ const useClaimsHistoryViewModel = () => {
   // const onSelectTab = tab => {
   //   setSelectedStatus(tab);
   // };
+  //   useEffect(() => {
+  //   if (searchText !== null) {
+  //     const delayDebounceFn = setTimeout(() => {
+  //         let searchData = universalSearch(
+  //           searchText,
+  //           ['claimID', 'relationName', 'claimId', 'patientName'],
+  //           data,
+  //         );
+  //         setData(searchData);
+  //     }, 1000);
+  //     return () => {
+  //       clearTimeout(delayDebounceFn);
+  //     };
+  //   }
+  // }, [searchText]);
   useEffect(() => {
     const lowerText = searchText.toLowerCase();
     let currentData = data;
