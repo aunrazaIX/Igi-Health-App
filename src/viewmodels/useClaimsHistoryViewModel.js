@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import {useEffect, useMemo, useState} from 'react';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {icons} from '../assets';
 import moment from 'moment';
 import {formatCurrencyWithPKR, universalSearch} from '../utils';
@@ -12,7 +12,7 @@ const useClaimsHistoryViewModel = () => {
   const [data, setData] = useState([]);
   const [showRemarks, setShowRemarks] = useState(false);
   const [remarks, setRemarks] = useState('');
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState(null);
   //const [selectedStatus, setSelectedStatus] = useState('Approved');
   const goBack = () => navigation.goBack();
   const onCloseRemarksModal = () => setShowRemarks(false);
@@ -42,6 +42,16 @@ const useClaimsHistoryViewModel = () => {
       },
     };
   }, []);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchText !== null) {
+        console.log(searchText);
+        type === 'In-Process' ? trigger() : getDxcClaims();
+      }
+    }, 1000);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchText]);
 
   const transformClaimData = (claim, isInProcess) => {
     const amountClaimed = claim.claimTreatments?.reduce(
@@ -116,78 +126,52 @@ const useClaimsHistoryViewModel = () => {
       ].filter(Boolean),
     };
   };
+
   const {loading: claimDataLoading, trigger} = useApiHook({
     apiEndpoint: endpoints.claimHistory.getAllClaim,
     method: 'post',
     argsOrBody: {
       pagination: {
+        searchString: searchText,
         isAllRecord: true,
       },
       // statusId: statusId[selectedStatus],
     },
     onSuccess: res => {
-      {
-        type === 'In-Process' &&
-          setData(
-            res?.data?.claims?.map(claim => transformClaimData(claim, true)),
-          );
-      }
+      type === 'In-Process' &&
+        setData(
+          res?.data?.claims?.map(claim => transformClaimData(claim, true)),
+        );
     },
   });
   const {loading: dxcClaimLoading, trigger: getDxcClaims} = useApiHook({
     apiEndpoint: endpoints.claimHistory.getDxcClaims,
     method: 'post',
     argsOrBody: {
+      searchString: searchText,
       isAllRecord: true,
     },
     onSuccess: res => {
-      console.log(res),
       type === 'Processed' &&
         setData(res?.data?.map(claim => transformClaimData(claim, false)));
     },
   });
-  useEffect(() => {
-    setSearchText('');
-    setData([]);
-    if (type === 'Processed') {
-      getDxcClaims();
-    } else {
-      trigger();
-    }
-  }, [type]); //[type, selectedStatus]
+  useFocusEffect(
+    useCallback(() => {
+      setSearchText(null);
+      setData([]);
+
+      if (type === 'Processed') {
+        getDxcClaims();
+      } else {
+        trigger();
+      }
+    }, [type]),
+  ); //[type, selectedStatus]
 
   // const onSelectTab = tab => {
   //   setSelectedStatus(tab);
   // };
-  //   useEffect(() => {
-  //   if (searchText !== null) {
-  //     const delayDebounceFn = setTimeout(() => {
-  //         let searchData = universalSearch(
-  //           searchText,
-  //           ['claimID', 'relationName', 'claimId', 'patientName'],
-  //           data,
-  //         );
-  //         setData(searchData);
-  //     }, 1000);
-  //     return () => {
-  //       clearTimeout(delayDebounceFn);
-  //     };
-  //   }
-  // }, [searchText]);
-  useEffect(() => {
-    const lowerText = searchText.toLowerCase();
-    let currentData = data;
-    if (searchText.trim()) {
-      currentData = currentData.filter(
-        item =>
-          item.headerLabel?.toLowerCase().includes(lowerText) ||
-          item.items?.some(subItem =>
-            subItem.value?.toLowerCase().includes(lowerText),
-          ),
-      );
-    }
-    setData(currentData);
-  }, [searchText]);
 
   const onPressType = _type => {
     setType(_type);
