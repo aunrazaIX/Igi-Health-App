@@ -57,6 +57,8 @@ const DatePicker = ({
       </TouchableOpacity>
       <DateTimePickerModal
         minimumDate={minimumDate ?? null}
+        pickerComponentStyleIOS={{height: 300}}
+        themeVariant="light"
         maximumDate={maximumDate ? maximumDate : null}
         onCancel={() => setShowModal(false)}
         mode={'date'}
