@@ -80,7 +80,7 @@ const usePanelHospitalListViewModel = () => {
       data,
       selectedTabRight,
       searchText,
-      loading: false,
+      loading,
       modalVisible,
     },
     functions: {

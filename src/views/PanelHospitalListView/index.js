@@ -7,12 +7,12 @@ import DetailsContainer from '../../components/DetailsContainer';
 import {vh} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 import AlertModal from '../../components/AlertModal';
+import ModalLoading from '../../components/ModalLoading';
 
 const PanelHospitalListView = ({
   data,
   onPressRightTab,
   selectedTabRight,
-  goBack,
   searchText,
   setSearchText,
   loading,
@@ -32,7 +32,6 @@ const PanelHospitalListView = ({
   return (
     <>
       <TopView title={'Discount Centers'} />
-
       <CurvedView
         containerStyle={
           selectedTabRight === 'map'
@@ -142,7 +141,7 @@ const PanelHospitalListView = ({
           modalVisible={modalVisible}
           setModalVisible={showModal}
         />
-        {/* <ModalLoading loading={loading} /> */}
+        <ModalLoading loading={loading} />
       </CurvedView>
     </>
   );

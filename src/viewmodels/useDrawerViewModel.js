@@ -1,4 +1,4 @@
-import {drawerIcons, icons} from '../assets';
+import {drawerIcons} from '../assets';
 
 const useDrawerViewModel = () => {
   const routes = [
