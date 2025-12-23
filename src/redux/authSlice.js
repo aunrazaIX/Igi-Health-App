@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   user: null,
@@ -9,8 +9,8 @@ const initialState = {
   biometrics: null,
   faceIdCredentials: null,
   isToggle: false,
-  deviceToken:null
-
+  deviceToken: null,
+  widgetToken: null,
 };
 
 export const authSlice = createSlice({
@@ -33,10 +33,7 @@ export const authSlice = createSlice({
     setBiometrics: (state, action) => {
       state.biometrics = action.payload;
     },
-    setFaceIdCredentials: (
-      state,
-      action,
-    ) => {
+    setFaceIdCredentials: (state, action) => {
       state.faceIdCredentials = action.payload;
     },
     SetIsToggle: (state, {payload}) => {
@@ -44,6 +41,9 @@ export const authSlice = createSlice({
     },
     setDeviceToken: (state, action) => {
       state.deviceToken = action.payload;
+    },
+    setWidgetToken: (state, action) => {
+      state.widgetToken = action.payload;
     },
   },
 });
@@ -55,6 +55,7 @@ export const {
   setBiometrics,
   setFaceIdCredentials,
   SetIsToggle,
-  setDeviceToken
+  setDeviceToken,
+  setWidgetToken,
 } = authSlice.actions;
 export const authReducer = authSlice.reducer;

@@ -6,13 +6,21 @@ import SimpleLoader from '../../components/SimpleLoader';
 import styles from './styles';
 import {COLORS} from '../../assets/theme/colors';
 
-const WidgetView = ({token, showWidget, generateTokenLoading, widgetUrl}) => {
+const WidgetView = ({
+  token,
+  handleLoadError,
+  isLoading,
+  widgetUrl,
+  incValue,
+  setLoadingState,
+  handleNavigation,
+}) => {
   return (
     <View style={styles.container}>
       <TopView title={'Widget'} />
-      <CurvedView>
-        {generateTokenLoading && <SimpleLoader color={COLORS.loginButton} />}
-        {showWidget && token && (
+      <CurvedView containerStyle={styles.subContainer}>
+        {isLoading && <SimpleLoader color={COLORS.loginButton} />}
+        {incValue && (
           <WebView
             source={{
               uri: widgetUrl,
@@ -20,8 +28,12 @@ const WidgetView = ({token, showWidget, generateTokenLoading, widgetUrl}) => {
                 'widget-token': token,
               },
             }}
+            onShouldStartLoadWithRequest={handleNavigation}
+            onLoadStart={() => setLoadingState(true)}
+            onLoadEnd={() => setLoadingState(false)}
             style={styles.container}
             javaScriptEnabled
+            onError={handleLoadError}
             domStorageEnabled
           />
         )}

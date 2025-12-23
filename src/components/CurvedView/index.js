@@ -3,11 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {vh, vw} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 
-const CurvedView = ({
-  children,
-  containerStyle,
-  backColor,
-}) => {
+const CurvedView = ({children, containerStyle, backColor}) => {
   return (
     <View style={[styles.container, backColor]}>
       <View style={[styles.subContainer, containerStyle]}>{children}</View>

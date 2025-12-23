@@ -1,55 +1,97 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {useFocusEffect} from '@react-navigation/native';
-import endpoints from '../api/endspoints';
-import useApiHook from '../hooks/useApiHook';
 import {useCallback, useState} from 'react';
+import {Alert, Linking} from 'react-native';
+import {useSelector} from 'react-redux';
 
 const useWidgetViewModel = ({route}) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [key, setKey] = useState(null);
+  const [isErrorOcuured, setIsErrorOccured] = useState(false);
+  const {widgetToken: token} = useSelector(state => state.auth);
   const {widgetName} = route?.params || {};
-  const [showWidget, setShowWidget] = useState(false);
-  const [token, setToken] = useState(null);
-  const {trigger: generateToken, loading: generateTokenLoading} = useApiHook({
-    method: 'post',
-    argsOrBody: {
-      identification_field: 'PHONE_NUMBER',
-      identification_value: '03016335810',
-      name: 'Asim Kabir',
-      city: 'Lahore',
-      country_code: '+92',
-      company_name: 'Packages Limited',
-      policy: 'PKGLTD001',
-    },
-    instance: 'oladoc',
-    headers: {
-      'x-api-key': 'ASe]dcX1Pjf91e]dcIGI-demo0qxNd_I',
-    },
-    apiEndpoint: endpoints.oladoc.generateToken,
-    onSuccess: res => {
-      if (res?.data?.data) {
-        setToken(res?.data?.data?.token);
-        setShowWidget(true);
+
+  const widgetUrl = `http://pkdemo.oladoc.com/widgets/launch?screen_name=${widgetName}`;
+
+  const setLoadingState = loading => {
+    setIsLoading(loading);
+  };
+  const handleNavigation = request => {
+    const requestUrl = request.url;
+    if (
+      requestUrl.startsWith('https://wa.me/') ||
+      requestUrl.startsWith('whatsapp://')
+    ) {
+      Linking.canOpenURL(requestUrl)
+        .then(supported => {
+          if (supported) Linking.openURL(requestUrl);
+          else Alert.alert('WhatsApp is not installed');
+        })
+        .catch(() => {});
+      return false;
+    }
+
+    if (
+      requestUrl.startsWith('geo:') ||
+      requestUrl.startsWith('google.navigation:') ||
+      requestUrl.startsWith('https://www.google.com/maps') ||
+      requestUrl.startsWith('intent://')
+    ) {
+      let urlToOpen = requestUrl;
+
+      if (requestUrl.startsWith('intent://')) {
+        const fallbackMatch = requestUrl.match(
+          /S\.browser_fallback_url=([^;]+)/,
+        );
+        if (fallbackMatch && fallbackMatch[1]) {
+          urlToOpen = decodeURIComponent(fallbackMatch[1]);
+        } else {
+          urlToOpen = 'https://www.google.com/maps';
+        }
       }
-    },
-    onError: error => {
-      console.log('Error', error);
-    },
-  });
+
+      Linking.canOpenURL(urlToOpen)
+        .then(supported => {
+          if (supported) {
+            Linking.openURL(urlToOpen);
+          } else {
+            Alert.alert('Cannot open Google Maps');
+          }
+        })
+        .catch(e => {
+          console.log('Error', e);
+        });
+
+      return false;
+    }
+    return true;
+  };
+
   useFocusEffect(
     useCallback(() => {
-      generateToken();
-
+      setKey(true);
+      setIsLoading(true);
       return () => {
-        setToken(null);
+        setKey(null);
+        setIsLoading(false);
       };
     }, []),
   );
-  const widgetUrl = `http://pkdemo.oladoc.com/widgets/launch?screen_name=${widgetName}`;
+  const handleLoadError = () => {
+    setIsErrorOccured(true);
+    setIsLoading(false);
+  };
   return {
     states: {
-      generateTokenLoading,
-      showWidget,
       token,
       widgetUrl,
+      incValue: key,
+      isLoading,
+      isErrorOcuured,
+    },
+    functions: {
+      setLoadingState,
+      handleLoadError,
+      handleNavigation,
     },
   };
 };

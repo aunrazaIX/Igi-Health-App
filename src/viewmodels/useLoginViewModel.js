@@ -8,6 +8,7 @@ import {
   SetIsToggle,
   setRememberMe,
   setUserData,
+  setWidgetToken,
 } from '../redux/authSlice';
 import {
   AuthorizationStatus,
@@ -102,6 +103,32 @@ const useLoginViewModel = () => {
     roleId: 16,
   });
 
+  const {trigger: generateToken} = useApiHook({
+    method: 'post',
+    argsOrBody: {
+      identification_field: 'PHONE_NUMBER',
+      identification_value: '03016335810',
+      name: 'Asim Kabir',
+      city: 'Lahore',
+      country_code: '+92',
+      company_name: 'Packages Limited',
+      policy: 'PKGLTD001',
+    },
+    instance: 'oladoc',
+    headers: {
+      'x-api-key': 'ASe]dcX1Pjf91e]dcIGI-demo0qxNd_I',
+    },
+    apiEndpoint: endpoints.oladoc.generateToken,
+    onSuccess: res => {
+      if (res?.data?.data) {
+        dispatch(setWidgetToken(res?.data?.data?.token));
+      }
+    },
+    onError: error => {
+      console.log('Error', error);
+    },
+  });
+
   const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
@@ -116,6 +143,7 @@ const useLoginViewModel = () => {
         );
         return;
       }
+      generateToken();
       loginResponse.current = res;
       if (res?.data.UserName !== credentials?.userName) {
         dispatch(resetAllModules());

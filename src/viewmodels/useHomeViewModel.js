@@ -11,6 +11,7 @@ import {generateCardHTML} from '../utils/base64';
 import {setPolicy, setSelectedPolicyObject} from '../redux/generalSlice';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
+import {setWidgetToken} from '../redux/authSlice';
 
 const useHomeViewModel = () => {
   const {user} = useSelector(state => state.auth);
@@ -33,6 +34,32 @@ const useHomeViewModel = () => {
   const {data, loading} = useApiHook({
     method: 'get',
     apiEndpoint: endpoints.policy.getPolicyDetails(selectedPolicy),
+  });
+
+  const {trigger: generateToken} = useApiHook({
+    method: 'post',
+    argsOrBody: {
+      identification_field: 'PHONE_NUMBER',
+      identification_value: '03016335810',
+      name: 'Asim Kabir',
+      city: 'Lahore',
+      country_code: '+92',
+      company_name: 'Packages Limited',
+      policy: 'PKGLTD001',
+    },
+    instance: 'oladoc',
+    headers: {
+      'x-api-key': 'ASe]dcX1Pjf91e]dcIGI-demo0qxNd_I',
+    },
+    apiEndpoint: endpoints.oladoc.generateToken,
+    onSuccess: res => {
+      if (res?.data?.data) {
+        dispatch(setWidgetToken(res?.data?.data?.token));
+      }
+    },
+    onError: error => {
+      console.log('Error', error);
+    },
   });
   const apiData = Object.values(data?.data || {})[0]?.[0];
   const matData = data?.data?.matPolicyDetail?.[0];
@@ -101,6 +128,7 @@ const useHomeViewModel = () => {
   useFocusEffect(
     useCallback(() => {
       getDxcClaims();
+      generateToken();
     }, []),
   );
   const sortClaimData = (items = []) => {

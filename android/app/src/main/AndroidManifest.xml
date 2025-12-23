@@ -6,6 +6,35 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- APP QUERIES for external apps -->
+    <queries>
+        <!-- WhatsApp -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="whatsapp" />
+        </intent>
+
+        <!-- Google Maps -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="geo" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="google.navigation" />
+        </intent>
+
+        <!-- Optional: PDF / Excel -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="application/pdf" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+        </intent>
+    </queries>
+
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
@@ -15,13 +44,10 @@
       android:theme="@style/AppTheme"
       android:usesCleartextTraffic="true"
       android:supportsRtl="true">
-
       <!-- <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyCKaYmOkJ9qXeaswk-cFjgpny-HAThNfBk" 
         /> -->
-
-
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
@@ -36,14 +62,4 @@
         </intent-filter>
       </activity>
     </application>
-        <queries>
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:mimeType="application/pdf" />
-    </intent>
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-    </intent>
-</queries>
 </manifest>
