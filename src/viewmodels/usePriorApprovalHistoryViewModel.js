@@ -15,7 +15,7 @@ const usePriorApprovalHistoryViewModel = () => {
   const [searchText, setSearchText] = useState('');
   const goBack = () => navigation.goBack();
   const onCloseRemarksModal = () => setShowRemarks(false);
-
+//debouncing
   const {
     trigger,
     loading,

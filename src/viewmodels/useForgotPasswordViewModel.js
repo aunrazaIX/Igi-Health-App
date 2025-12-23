@@ -20,7 +20,6 @@ const useForgotPasswordViewModel = ({route}) => {
   const [otp, setOtp] = useState('');
   const [showResend, setShowResend] = useState(false);
   const [countdownKey, setCountdownKey] = useState(0);
-  const [flushOtp, setFlushOtp] = useState(0);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -40,7 +39,6 @@ const useForgotPasswordViewModel = ({route}) => {
   };
   const {
     setterForApiData,
-    checkForError: ForgotpasswordCheckForError,
     apiData,
     resetStates: ForgotpasswordResetStates,
   } = useErrorHandlingHook({
@@ -49,7 +47,6 @@ const useForgotPasswordViewModel = ({route}) => {
 
   const {
     setterForApiData: setterForUpdatePasswordApiData,
-    checkForError: checkForErrorUpdatePasswordApiData,
     apiData: updatePasswordApiData,
     resetStates: updatePasswordResetStates,
   } = useErrorHandlingHook({
@@ -57,7 +54,7 @@ const useForgotPasswordViewModel = ({route}) => {
     confirmPassword: '',
   });
 
-  const {trigger: triggerForgotPassword, loading: ForgotPasswordLoading} =
+  const {trigger: triggerForgotPassword} =
     useApiHook({
       apiEndpoint: endpoints.auth.resendOTP(apiData?.email),
       method: 'post',
@@ -72,8 +69,6 @@ const useForgotPasswordViewModel = ({route}) => {
     
   const {
     trigger: triggerUpdatePassword,
-    loading: updatePasswordLoading,
-    error: errorUpdatePassword,
   } = useApiHook({
     apiEndpoint: endpoints.auth.createPassword(
       apiData?.email || verifiedUserData?.email,
@@ -106,6 +101,7 @@ const useForgotPasswordViewModel = ({route}) => {
     method: 'post',
     onSuccess: res => {
       setStep(2);
+      ForgotpasswordResetStates();
     },
     onError: e => {
       dispatch(
@@ -120,8 +116,6 @@ const useForgotPasswordViewModel = ({route}) => {
 
   const {
     trigger: triggerVerifyOtp,
-    loading: verifyOtpLoading,
-    error: errorVerify,
   } = useApiHook({
     apiEndpoint: endpoints.auth.verifyOTP(
       otp,
