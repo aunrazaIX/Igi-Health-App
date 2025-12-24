@@ -33,9 +33,7 @@ const ConfirmationModal = ({
   submitButton,
   handleSubmit,
   type,
-  isUpdate,
   isChangedPassword,
-  buttonName,
   claimLoading,
   heading = null,
 }) => {

@@ -2,7 +2,7 @@ import {Image, View} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import {AileronBold, AileronSemiBold} from '../../components';
+import {AileronSemiBold} from '../../components';
 const IntroView = ({handleNextButton, backgroundImages}) => {
   const renderItem = ({item, index}) => (
     <Image key={index} style={styles.backgroundImage} source={item?.images} />

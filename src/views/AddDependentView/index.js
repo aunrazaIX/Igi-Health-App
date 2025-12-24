@@ -14,7 +14,7 @@ import {
 import styles from './styles';
 import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {vh, vw} from '../../assets/theme/dimension';
+import {vw} from '../../assets/theme/dimension';
 import DatePicker from '../../components/DatePicker';
 
 const AddDependentView = ({

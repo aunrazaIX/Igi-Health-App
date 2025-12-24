@@ -10,10 +10,7 @@ import {
 } from '../../components';
 import {icons, images} from '../../assets';
 import styles from './styles';
-
 import {vh} from '../../assets/theme/dimension';
-import ModalLoading from '../../components/ModalLoading';
-import NoDataView from '../../components/NoDataView';
 
 const AccountDetailsView = ({data}) => {
   return (

@@ -12,20 +12,28 @@ const usePriorApprovalHistoryViewModel = () => {
   const [allData, setAllData] = useState([]);
   const [showRemarks, setShowRemarks] = useState(false);
   const [remarks, setRemarks] = useState('');
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState(null);
   const goBack = () => navigation.goBack();
   const onCloseRemarksModal = () => setShowRemarks(false);
-//debouncing
-  const {
-    trigger,
-    loading,
-  } = useApiHook({
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchText !== null) {
+        trigger();
+      }
+    }, 1000);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchText]);
+
+  const {trigger, loading} = useApiHook({
     apiEndpoint: endpoints.priorApproval.getPriorApprovalHistory,
     method: 'post',
     argsOrBody: {
+      searchString: searchText,
       isAllRecord: true,
     },
     onSuccess: res => {
+      console.log(res);
       const transformed = res?.data?.dataList?.map(transformClaimData);
       setAllData(transformed);
       setData(transformed);
@@ -83,18 +91,6 @@ const usePriorApprovalHistoryViewModel = () => {
       ],
     };
   };
-
-  useEffect(() => {
-    const lowerText = searchText.toLowerCase();
-
-    const filtered = allData.filter(
-      item =>
-        item.headerLabel.toLowerCase().includes(lowerText) ||
-        item.items.some(sub => sub.value?.toLowerCase().includes(lowerText)),
-    );
-
-    setData(filtered);
-  }, [searchText, allData]);
 
   return {
     states: {

@@ -17,7 +17,7 @@ import {COLORS} from '../../assets/theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import ModalLoading from '../../components/ModalLoading';
-import {vh, vw} from '../../assets/theme/dimension';
+import {vh} from '../../assets/theme/dimension';
 
 const AddTreatmentView = ({
   treatmentTypes,

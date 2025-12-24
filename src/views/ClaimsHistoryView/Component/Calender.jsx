@@ -1,4 +1,4 @@
-import { View, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Modal, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
 import { Calendar } from 'react-native-calendars';
 import { AileronBold } from '../../../components';

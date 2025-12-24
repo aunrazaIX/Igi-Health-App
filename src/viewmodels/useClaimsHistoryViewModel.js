@@ -46,7 +46,6 @@ const useClaimsHistoryViewModel = () => {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (searchText !== null) {
-        console.log(searchText);
         type === 'In-Process' ? trigger() : getDxcClaims();
       }
     }, 1000);

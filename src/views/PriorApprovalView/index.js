@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  AileronBold,
   Button,
   ConfirmationModal,
   CurvedView,
@@ -8,7 +7,7 @@ import {
   TopView,
 } from '../../components';
 import {Claim, PersonalDetails, UploadDoc} from '../PriorApprovalView/components';
-import {icons, images} from '../../assets';
+import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -16,7 +15,6 @@ import {useNavigation} from '@react-navigation/native';
 import {vh} from '../../assets/theme/dimension';
 import {useSelector} from 'react-redux';
 import ImageModal from '../PriorApprovalView/components/ImageModal';
-import { View } from 'react-native';
 import styles from './style';
 
 const PriorApprovalView = ({

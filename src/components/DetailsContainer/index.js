@@ -3,7 +3,6 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  Pressable,
 } from 'react-native';
 import React, {useState} from 'react';
 import {COLORS} from '../../assets/theme/colors';

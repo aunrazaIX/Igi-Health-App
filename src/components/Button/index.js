@@ -1,9 +1,7 @@
 import {
-  Text,
   StyleSheet,
   TouchableOpacity,
   Image,
-  TouchableOpacityProps,
 } from 'react-native';
 import React from 'react';
 import {vh, vw} from '../../assets/theme/dimension';

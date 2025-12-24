@@ -1,26 +1,13 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-
-import {
-  Image,
-  ImageSourcePropType,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {vh, vw} from '../../assets/theme/dimension';
 import {icons} from '../../assets';
 import AileronSemiBold from '../AileronSemiBold';
 import {COLORS} from '../../assets/theme/colors';
 
-const HeaderView = ({
-  title,
-  icon,
-}: {
-  title: string;
-  icon: ImageSourcePropType | null;
-}) => {
+const HeaderView = ({title, icon}) => {
   return (
     <LinearGradient colors={COLORS.activeButtonGradient}>
       <View style={styles.wrapper}>

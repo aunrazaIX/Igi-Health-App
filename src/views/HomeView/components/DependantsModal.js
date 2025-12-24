@@ -3,7 +3,6 @@ import {Modal, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
 import {COLORS} from '../../../assets/theme/colors';
 import {vh, vw} from '../../../assets/theme/dimension';
 import {AileronBold, AileronRegular} from '../../../components';
-import {formatName} from '../../../utils';
 
 const DependantsModal = ({show, dependants, onClose}) => {
   return (

@@ -3,7 +3,6 @@ import React from 'react';
 import {
   AileronBold,
   AileronRegular,
-  AileronSemiBold,
   CurvedView,
   TopView,
 } from '../../components';
@@ -15,7 +14,6 @@ import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
 import NoDataView from '../../components/NoDataView';
 import ProvinceTab from '../../components/provinceTab';
-import {vh, vw} from '../../assets/theme/dimension';
 import AlertModal from '../../components/AlertModal';
 
 const BenefitsView = ({
