@@ -2,7 +2,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {icons} from '../assets';
 import moment from 'moment';
-import {formatCurrencyWithPKR, universalSearch} from '../utils';
+import {formatCurrencyWithPKR} from '../utils';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 

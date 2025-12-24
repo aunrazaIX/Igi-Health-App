@@ -111,14 +111,6 @@ const PriorApprovalView = ({
   return (
     <>
       <TopView
-        // TopViewFirstIcon={
-        //   (currentStep === 2 && selectedType?.value === 1) ||
-        //   (currentStep === 2 && claimsDetails?.length < 1) ||
-        //   (type === 'priorApproval' && currentStep === 2)
-        //     ? icons.addSquare
-        //     : null
-        // }
-
         containerStyleIcon={styles.addTreatment}
         tintColrorForTopViewFirstIcon={COLORS.white}
         FirstOpenModal={navigateTreatment}
@@ -128,7 +120,6 @@ const PriorApprovalView = ({
         resetStates={resetStates}
       />
       <KeyboardAwareScrollView
-      // showsVerticalScrollIndicator={false}
       >
         <CurvedView containerStyle={styles.curveStyle}>
           <Stepper
@@ -155,14 +146,6 @@ const PriorApprovalView = ({
               }
             />
           ) : null}
-
-          {/* {currentStep === 2 || currentStep === 3 ? (
-            <Button
-              containerStyle={{marginBottom: vh}}
-              onPress={handleBackButton}
-              name="Back"
-            />
-          ) : null} */}
 
           <Button
             containerStyle={

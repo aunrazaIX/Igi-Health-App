@@ -1,190 +1,63 @@
-import {
-  View,
-  Modal,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-} from 'react-native';
-import React from 'react';
-import {icons} from '../../assets';
+import {View, Modal, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {COLORS} from '../../assets/theme/colors';
 import {vh, vw} from '../../assets/theme/dimension';
 import LinearGradient from 'react-native-linear-gradient';
-import Button from '../Button';
-import {useNavigation} from '@react-navigation/native';
 import AileronBold from '../AileronBold';
 import AileronSemiBold from '../AileronSemiBold';
+import {MODAL_CONFIG} from '../../utils';
 
-const ConfirmationModal = ({
-  ConfirmationModalVisible,
-  setConfirmationModalVisible,
-  frameImage,
-  confirmationMessage,
-  closeButton,
-  deleteButton,
-  confirmationRequired,
-  claimSubmission,
-  containerStyle,
-  handleDelete,
-  Successfull,
-  onClose,
-  closeIcon,
-  confirmationType,
-  submitButton,
-  handleSubmit,
-  type,
-  isChangedPassword,
-  claimLoading,
-  heading = null,
-}) => {
-  const naviagation = useNavigation();
-  const handleClose = () => {
-    setConfirmationModalVisible(false);
-    if (isChangedPassword) {
-      naviagation.navigate('Home');
-    }
-
-    if (onClose) {
-      onClose();
-    }
-  };
-
+const ConfirmationModal = ({show, type, onConfirm, onCancel, message}) => {
+  if (!type) return null;
+  const config = MODAL_CONFIG[type];
   return (
-    <Modal
-      transparent={true}
-      visible={ConfirmationModalVisible}
-      statusBarTranslucent>
+    <Modal transparent visible={show} statusBarTranslucent>
       <View style={styles.centeredView}>
-        <View style={[styles.modalView, containerStyle]}>
-          {closeIcon && (
-            <TouchableOpacity
-              onPress={() => setConfirmationModalVisible(false)}
-              style={styles.modalClose}>
-              <Image source={icons.CancelIcon} />
-            </TouchableOpacity>
-          )}
-
+        <View style={styles.modalView}>
           <View style={styles.personalFrameContainer}>
-            <Image source={frameImage} style={styles.personalFrameIMG} />
+            <Image source={config.icon} style={styles.personalFrameIMG} />
 
-            {confirmationRequired && (
-              <View style={styles.confirmationContainer}>
-                <AileronBold name="Confirmation " style={styles.confirmation} />
-                <AileronBold name="Required" style={styles.required} />
-              </View>
-            )}
-
-            {claimSubmission && (
-              <View style={styles.claimContainer}>
-                <AileronBold
-                  name={`${
-                    type === 'priorApproval' ? 'Request' : 'Claim'
-                  } Submitted`}
-                  style={styles.confirmation}
-                />
-                {/* <AileronBold name="Confirmation" style={styles.required} /> */}
-              </View>
-            )}
-
-            {Successfull && (
-              <View style={styles.confirmationContainer}>
-                <AileronBold
-                  name={
-                    isChangedPassword
-                      ? 'Password Updated'
-                      : confirmationType === 'update'
-                      ? 'Confirm Edit Request'
-                      : heading
-                      ? heading
-                      : `${
-                          type === 'signup' ? 'Signup' : 'Password changed'
-                        } Successful!`
-                  }
-                  style={styles.confirmation}
-                />
-              </View>
-            )}
-
-            {confirmationMessage && confirmationMessage.includes('Note:') ? (
-              <AileronSemiBold
-                name={'Note:' + confirmationMessage.split('Note:')[1]}
-                style={styles.confirmationDetailNote}
-              />
-            ) : (
-              <AileronSemiBold
-                name={confirmationMessage}
-                style={styles.confirmationDetail}
-              />
-            )}
+            <View style={styles.confirmationContainer}>
+              <AileronBold name={config.title} style={styles.confirmation} />
+            </View>
+            <AileronSemiBold name={message} style={styles.confirmationDetail} />
           </View>
 
-          {deleteButton && (
-            <View style={styles.confirmationButtonContainer}>
+          <View
+            style={[
+              styles.confirmationButtonContainer,
+              {flexDirection: onConfirm ? 'row' : 'column'},
+            ]}>
+            {config.confirmText && (
               <LinearGradient
-                style={styles.deleteButtonContainer}
+                style={[styles.deleteButtonContainer, {marginRight: vw * 4}]}
                 colors={COLORS.activeButtonGradient}>
                 <View style={styles.wrapper}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      if (handleDelete) handleDelete();
-                      if (setConfirmationModalVisible)
-                        setConfirmationModalVisible(false);
-                    }}>
+                  <TouchableOpacity onPress={onConfirm}>
                     <AileronBold
-                      name={confirmationType === 'back' ? 'Continue' : 'Delete'}
+                      name={config.confirmText}
                       style={styles.deleteButtonText}
                     />
                   </TouchableOpacity>
                 </View>
               </LinearGradient>
-              <LinearGradient
-                style={styles.deleteButtonContainer}
-                colors={COLORS.deleteButtonGradient}>
-                <View style={styles.wrapper}>
-                  <TouchableOpacity
-                    onPress={() => setConfirmationModalVisible(false)}>
-                    <AileronBold
-                      name="Cancel"
-                      style={styles.cancelButtonText}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </LinearGradient>
-            </View>
-          )}
-
-          {submitButton && (
-            <>
-              <Button
-                name="Submit"
-                onPress={handleSubmit}
-                disabled={claimLoading}
-              />
-              <LinearGradient
-                style={styles.cancelButtonSubmit}
-                colors={COLORS.deleteButtonGradient}>
-                <View style={styles.wrapper}>
-                  <TouchableOpacity
-                    onPress={() => setConfirmationModalVisible(false)}>
-                    <AileronBold
-                      name="Cancel"
-                      style={styles.cancelButtonText}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </LinearGradient>
-            </>
-          )}
-
-          {closeButton && (
-            <View>
-              <Button
-                // name={buttonName}
-                name="Close"
-                onPress={handleClose}
-              />
-            </View>
-          )}
+            )}
+            <LinearGradient
+              style={styles.deleteButtonContainer}
+              colors={
+                config.confirmText
+                  ? COLORS.deleteButtonGradient
+                  : COLORS.activeButtonGradient
+              }>
+              <View style={styles.wrapper}>
+                <TouchableOpacity onPress={onCancel}>
+                  <AileronBold
+                    name={config.cancelText}
+                    style={styles.cancelButtonText}
+                  />
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </View>
         </View>
       </View>
     </Modal>
@@ -229,16 +102,10 @@ const styles = StyleSheet.create({
   confirmationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    // marginTop: vh * 1,
   },
   confirmation: {
     fontSize: vw * 5,
     color: COLORS.coverageTitle,
-    fontWeight: '700',
-  },
-  required: {
-    fontSize: vw * 5,
-    color: COLORS.benefitTitle,
     fontWeight: '700',
   },
   confirmationDetail: {
@@ -247,26 +114,12 @@ const styles = StyleSheet.create({
     marginTop: vh * 1,
     marginBottom: vh * 1.5,
   },
-  confirmationDetailWithNote: {
-    fontSize: vw * 3,
-    color: COLORS.textBlackShade,
-    marginTop: vh * 1,
-    marginBottom: vh * 1.5,
-  },
-  confirmationDetailNote: {
-    fontSize: vw * 2.9,
-    color: COLORS.confimationDetail,
-    fontStyle: 'italic',
-    marginBottom: vh * 2.5,
-    marginTop: vh * 1,
-  },
   confirmationButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   cancelButton: {
-    width: '48%',
     borderRadius: vw * 4,
     backgroundColor: COLORS.cancelBottonBackground,
     marginTop: vh,
@@ -277,13 +130,12 @@ const styles = StyleSheet.create({
     marginTop: vh,
   },
   deleteButtonContainer: {
-    width: '48%',
     borderRadius: vw * 4,
+    flex: 1,
     marginTop: vh,
   },
   wrapper: {
     paddingVertical: vh * 1.5,
-    // paddingHorizontal: vh * 1.5,
   },
   cancelButtonText: {
     fontSize: vw * 3,
@@ -292,15 +144,5 @@ const styles = StyleSheet.create({
   deleteButtonText: {
     fontSize: vw * 3,
     color: COLORS.white,
-  },
-
-  closeButton: {
-    fontSize: vw * 4.4,
-    fontWeight: '700',
-    color: COLORS.white,
-  },
-  cancel: {},
-  claimContainer: {
-    marginTop: vh * 2,
   },
 });

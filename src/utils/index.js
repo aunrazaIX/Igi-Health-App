@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { icons } from '../assets';
 
 export const formatCurrency = amount => {
   const num =
@@ -79,4 +80,41 @@ export const formatDate = date => {
   } else {
     return mDate.format('DD-MMM-YYYY hh:mm A');
   }
+};
+
+export const MODAL_CONFIG = {
+  delete: {
+    icon: icons.ModalSuccessfull,
+    title: 'Confirmation Required',
+    confirmText: 'Delete',
+    cancelText: 'Cancel',
+  },
+success: {
+    icon: icons.modelSuccessful,
+    title: 'Request Submitted',
+    cancelText: 'Close',
+  },
+  submit: {
+    icon: icons.ModalSuccessfull,
+    title: 'Confirmation Required',
+    message: 'Are you sure you want to submit?',
+    confirmText: 'Submit',
+    cancelText: 'Cancel',
+  },
+
+  back: {
+    icon: icons.ModalSuccessfull,
+    title: 'Leave Screen?',
+    message:
+      'Going back will return you to the home screen. Do you want to continue?',
+    confirmText: 'Continue',
+    cancelText: 'Cancel',
+  },
+
+  error: {
+    icon: icons.errorPopup,
+    title: 'Error!',
+    message: 'Something went wrong.',
+    confirmText: 'Close',
+  },
 };

@@ -4,7 +4,6 @@ import {useNavigation} from '@react-navigation/native';
 import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {formatName} from '../utils';
-import moment from 'moment';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 
