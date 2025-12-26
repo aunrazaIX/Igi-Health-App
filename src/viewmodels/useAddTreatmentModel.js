@@ -27,15 +27,15 @@ const useAddTreatmentModel = ({navigation, route}) => {
     amount: extractedData.amount,
     description: extractedData.description,
   });
-    const {data} = useApiHook({
+  const {data} = useApiHook({
     apiEndpoint: endpoints.priorApproval.GetPriorApprovalServices,
     method: 'get',
     onSuccess: res => {
-    const formatted = res?.data?.map(item => ({
+      const formatted = res?.data?.map(item => ({
         label: item.name,
         value: item.id,
-    }));
-    setTreatmentTypes(formatted);
+      }));
+      setTreatmentTypes(formatted);
     },
   });
 

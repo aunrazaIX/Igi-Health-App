@@ -67,7 +67,6 @@ const AddDependentView = ({
               value={dependentApiData?.relation?.label ?? null}
               disabled={dependentApiData?.dependentTypeID?.value === 'Member'}
             />
-
             <Select
               selectData={genderOptions}
               selectLabel={'Gender'}
@@ -105,33 +104,18 @@ const AddDependentView = ({
               onPress={handleCancel}
             />
           </View>
-
           <ModalLoading loading={addDependentLoading} />
 
           <ConfirmationModal
-            ConfirmationModalVisible={confirmationModal}
-            setConfirmationModalVisible={setConfirmationModal}
-            submitButton={confirmatonType === 'update' ? true : false}
-            frameImage={
-              isUpdate && confirmatonType === 'update'
-                ? icons.ModalSuccessfull
-                : icons.modelSuccessful
-            }
-            confirmationMessage={
-              confirmatonType === 'update'
-                ? 'Are you sure you want to submit the request to edit the records?'
-                : isUpdate
+            show={confirmationModal}
+            type={confirmatonType}
+            message={
+              isUpdate
                 ? 'Note: All edit requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation.'
                 : 'Note: All new additions requests will be forwarded to IGI Life for review and subsequently sent to your employer for confirmation..'
             }
-            closeButton={confirmatonType === 'update' ? false : true}
-            Successfull={true}
-            CloseButtonText={'Continue To Login'}
-            onClose={resetStates}
-            handleSubmit={handleSubmitRequest}
-            confirmationType={confirmatonType}
-            isUpdate={isUpdate}
-            heading="Request Submitted"
+            onCancel={resetStates}
+            onConfirm={handleSubmitRequest}
           />
         </KeyboardAwareScrollView>
       </CurvedView>

@@ -15,13 +15,14 @@ const ConfirmationModal = ({show, type, onConfirm, onCancel, message}) => {
         <View style={styles.modalView}>
           <View style={styles.personalFrameContainer}>
             <Image source={config.icon} style={styles.personalFrameIMG} />
-
             <View style={styles.confirmationContainer}>
               <AileronBold name={config.title} style={styles.confirmation} />
             </View>
-            <AileronSemiBold name={message} style={styles.confirmationDetail} />
+            <AileronSemiBold
+              name={message || config?.message}
+              style={styles.confirmationDetail}
+            />
           </View>
-
           <View
             style={[
               styles.confirmationButtonContainer,

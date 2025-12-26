@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { icons } from '../assets';
+import {icons} from '../assets';
 
 export const formatCurrency = amount => {
   const num =
@@ -89,9 +89,24 @@ export const MODAL_CONFIG = {
     confirmText: 'Delete',
     cancelText: 'Cancel',
   },
-success: {
+  success: {
     icon: icons.modelSuccessful,
     title: 'Request Submitted',
+    cancelText: 'Close',
+  },
+  signup: {
+    icon: icons.modelSuccessful,
+    title: 'Successful!',
+    cancelText: 'Login Now',
+  },
+  forgot: {
+    icon: icons.modelSuccessful,
+    title: 'Password Change Successful!',
+    cancelText: 'Close',
+  },
+  error: {
+    icon: icons.errorPopup,
+    title: 'Error',
     cancelText: 'Close',
   },
   submit: {
@@ -101,20 +116,12 @@ success: {
     confirmText: 'Submit',
     cancelText: 'Cancel',
   },
-
   back: {
     icon: icons.ModalSuccessfull,
-    title: 'Leave Screen?',
+    title: 'Confirmation Required',
     message:
       'Going back will return you to the home screen. Do you want to continue?',
     confirmText: 'Continue',
     cancelText: 'Cancel',
-  },
-
-  error: {
-    icon: icons.errorPopup,
-    title: 'Error!',
-    message: 'Something went wrong.',
-    confirmText: 'Close',
   },
 };

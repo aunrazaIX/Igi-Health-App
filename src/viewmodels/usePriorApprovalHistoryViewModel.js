@@ -33,7 +33,6 @@ const usePriorApprovalHistoryViewModel = () => {
       isAllRecord: true,
     },
     onSuccess: res => {
-      console.log(res);
       const transformed = res?.data?.dataList?.map(transformClaimData);
       setAllData(transformed);
       setData(transformed);

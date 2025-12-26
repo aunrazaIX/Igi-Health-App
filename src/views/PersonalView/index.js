@@ -138,7 +138,6 @@ const PersonalView = ({
             </View>
           </ScrollView>
         </View>
-
         <ModalLoading loading={deleteDepenedentLoading || dependantLoading} />
       </CurvedView>
 

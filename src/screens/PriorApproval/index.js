@@ -3,8 +3,8 @@ import usePriorApprovalViewModel from '../../viewmodels/usePriorApprovalViewMode
 import PriorApprovalView from '../../views/PriorApprovalView';
 
 const PriorApproval = ({navigation, route}) => {
-  const { states, functions } = usePriorApprovalViewModel({navigation, route});
-  const { 
+  const {states, functions} = usePriorApprovalViewModel({navigation, route});
+  const {
     steps,
     claimsDetails,
     dependants,
@@ -22,12 +22,11 @@ const PriorApproval = ({navigation, route}) => {
     hospitalList,
     selectedHospital,
     confirmationType,
-    deletedIndex,
-    deletedFileIndex,
     isView,
     viewIndex,
-    showOptionModal,} = states;
-  const { 
+    showOptionModal,
+  } = states;
+  const {
     goBack,
     navigateTreatment,
     onPressNext,
@@ -41,20 +40,19 @@ const PriorApproval = ({navigation, route}) => {
     setterForclaimData,
     onSelectHospital,
     onSelectType,
-    handleDeleteClaim,
     setConfirmationType,
-    onPressSubmitClaim,
-    handleDeleteFile,
     handleBackButton,
     handleGOBack,
     onView,
     setIsView,
     viewOptionModal,
+    handleConfirm,
     openCamera,
-    uploadDocument, } = functions;
+    uploadDocument,
+  } = functions;
   return (
     <PriorApprovalView
-   goBack={goBack}
+      goBack={goBack}
       steps={steps}
       claimsDetails={claimsDetails}
       selectedPatient={selectedPatient}
@@ -84,12 +82,7 @@ const PriorApproval = ({navigation, route}) => {
       onSelectHospital={onSelectHospital}
       selectedHospital={selectedHospital}
       confirmationType={confirmationType}
-      handleDeleteClaim={handleDeleteClaim}
-      deletedIndex={deletedIndex}
       setConfirmationType={setConfirmationType}
-      onPressSubmitClaim={onPressSubmitClaim}
-      handleDeleteFile={handleDeleteFile}
-      deletedFileIndex={deletedFileIndex}
       handleBackButton={handleBackButton}
       handleGOBack={handleGOBack}
       isView={isView}
@@ -99,6 +92,7 @@ const PriorApproval = ({navigation, route}) => {
       showOptionModal={showOptionModal}
       viewOptionModal={viewOptionModal}
       uploadDocument={uploadDocument}
+      handleConfirm={handleConfirm}
     />
   );
 };

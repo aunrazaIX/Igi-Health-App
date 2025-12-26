@@ -6,7 +6,11 @@ import {
   Stepper,
   TopView,
 } from '../../components';
-import {Claim, PersonalDetails, UploadDoc} from '../PriorApprovalView/components';
+import {
+  Claim,
+  PersonalDetails,
+  UploadDoc,
+} from '../PriorApprovalView/components';
 import {icons} from '../../assets';
 import {COLORS} from '../../assets/theme/colors';
 import ModalLoading from '../../components/ModalLoading';
@@ -34,6 +38,7 @@ const PriorApprovalView = ({
   dependantLoading,
   uploadLoading,
   handleCancelFile,
+  handleConfirm,
   confirmationModal,
   setConfirmationModal,
   resetStates,
@@ -43,16 +48,11 @@ const PriorApprovalView = ({
   type,
   personalDetailsLoading,
   onSelectType,
-  deletedIndex,
   selectedType,
   hospitalList,
   onSelectHospital,
   selectedHospital,
   confirmationType,
-  handleDeleteClaim,
-  onPressSubmitClaim,
-  handleDeleteFile,
-  deletedFileIndex,
   isView,
   onView,
   setIsView,
@@ -114,13 +114,11 @@ const PriorApprovalView = ({
         containerStyleIcon={styles.addTreatment}
         tintColrorForTopViewFirstIcon={COLORS.white}
         FirstOpenModal={navigateTreatment}
-        onPressBack={ goBack
-        }
+        onPressBack={goBack}
         title={'Prior Approval'}
         resetStates={resetStates}
       />
-      <KeyboardAwareScrollView
-      >
+      <KeyboardAwareScrollView>
         <CurvedView containerStyle={styles.curveStyle}>
           <Stepper
             currentStep={currentStep}
@@ -184,94 +182,19 @@ const PriorApprovalView = ({
       />
 
       <ConfirmationModal
-        ConfirmationModalVisible={confirmationModal}
-        setConfirmationModalVisible={setConfirmationModal}
-        frameImage={
-          ['back', 'delete', 'submit'].includes(confirmationType)
-            ? icons.ModalSuccessfull
-            : icons.modelSuccessful
-        }
-        confirmationMessage={
+        show={confirmationModal}
+        message={
           confirmationType === 'delete'
-            ? 'Are you sure you want to delete this treatment?'
-            : confirmationType === 'submit'
-            ? 'Are you sure you want to submit this claim?'
-            : confirmationType === 'fileDelete'
-            ? 'Are you sure you want to delete this file?'
-            : confirmationType === 'back'
-            ? 'Going back will return you to the home screen. Do you want to continue?'
-            : `Thank you for submitting your ${
-                type === 'priorApproval' ? 'request' : 'claim'
-              }. ${
-                type !== 'priorApproval'
-                  ? 'You will soon receive a confirmation email.'
-                  : '\n\n Note: Your request has been submitted successfully. It may take up to 24 hours to process. Our team will contact you if any issues arise. You can track the status in the Prior Approval History section, and you will also receive an in-app notification once it is finalized.'
-              }`
+            ? 'Are you sure you want to delete?'
+            : confirmationType === 'success' &&
+              'Thank you for submitting your request. \n\n Note: Your request has been submitted successfully. It may take up to 24 hours to process. Our team will contact you if any issues arise. You can track the status in the Prior Approval History section, and you will also receive an in-app notification once it is finalized.'
         }
-        claimSubmission={
-          confirmationType === 'delete'
-            ? false
-            : confirmationType === 'submit'
-            ? false
-            : confirmationType === 'fileDelete'
-            ? false
-            : confirmationType === 'back'
-            ? false
-            : true
-        }
-        deleteButton={
-          confirmationType === 'delete'
-            ? true
-            : confirmationType === 'fileDelete'
-            ? true
-            : confirmationType === 'back'
-            ? true
-            : false
-        }
-        type={type}
-        submitButton={confirmationType === 'submit' ? true : false}
-        closeButton={
-          confirmationType === 'delete'
-            ? false
-            : confirmationType === 'submit'
-            ? false
-            : confirmationType === 'fileDelete'
-            ? false
-            : confirmationType === 'back'
-            ? false
-            : true
-        }
-        confirmationRequired={
-          confirmationType === 'delete' ||
-          confirmationType === 'submit' ||
-          confirmationType === 'fileDelete' ||
-          confirmationType === 'back'
-            ? true
-            : false
-        }
-        CloseButtonText={'Continue To Login'}
-        onClose={() => {
-          resetStates();
-          navigation.navigate('HomeStack');
+        type={confirmationType}
+        onCancel={() => {
+          setConfirmationModal(false);
+          confirmationType === 'success' && goBack();
         }}
-        confirmationType={confirmationType}
-        handleDelete={
-          confirmationType === 'delete'
-            ? () => handleDeleteClaim(deletedIndex)
-            : confirmationType === 'fileDelete'
-            ? () => handleDeleteFile(deletedFileIndex)
-            : confirmationType === 'back'
-            ? () => goBack()
-            : null
-        }
-        claimLoading={claimLoading}
-        handleSubmit={
-          confirmationType === 'submit'
-            ? () => {
-                onPressSubmitClaim();
-              }
-            : null
-        }
+        onConfirm={handleConfirm}
       />
 
       {isView && (
