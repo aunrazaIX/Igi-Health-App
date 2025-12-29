@@ -11,7 +11,7 @@ const useHospitalsViewModel = () => {
   const [selectedTab, setSelectedTab] = useState('Panel Hospitals');
   const [selectedTabRight, setSelectedTabRight] = useState('list');
   const [selectedMapTab, setSelectedMapTab] = useState('All');
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState(null);
   const [allData, setAllData] = useState([]);
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(true);
@@ -22,23 +22,24 @@ const useHospitalsViewModel = () => {
     if (selectedMapTab !== 'All') {
       filtered = filtered.filter(item => item?.province === selectedMapTab);
     }
-
-    if (searchText.trim()) {
-      const lower = searchText.toLowerCase();
-      filtered = filtered.filter(
-        item =>
-          item.headerLabel.toLowerCase().includes(lower) ||
-          item.items.some(sub => sub.value.toLowerCase().includes(lower)),
-      );
-    }
     setData(filtered);
     setTabChanging(false);
-  }, [searchText, selectedMapTab, allData]);
+  }, [selectedMapTab, allData]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchText !== null) {
+        trigger();
+      }
+    }, 1000);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchText]);
 
   const {loading: hospitalLoading, trigger} = useApiHook({
     apiEndpoint: endpoints.discountedCenters.getDiscountedCenters(2),
     method: 'post',
     argsOrBody: {
+      searchString: searchText,
       isAllRecord: true,
     },
     onSuccess: res => {

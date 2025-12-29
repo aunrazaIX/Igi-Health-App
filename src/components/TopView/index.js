@@ -43,9 +43,14 @@ const TopView = ({
           />
           {(TopViewSecondIcon || TopViewFirstIcon) && (
             <View style={styles.headerIcon}>
-              <TouchableOpacity onPress={SecondOpenModal}>
-                <Image style={styles.TopViewIcon} source={TopViewSecondIcon} />
-              </TouchableOpacity>
+              {TopViewSecondIcon && (
+                <TouchableOpacity onPress={SecondOpenModal}>
+                  <Image
+                    style={styles.TopViewIcon}
+                    source={TopViewSecondIcon}
+                  />
+                </TouchableOpacity>
+              )}
 
               {TopViewFirstIcon && (
                 <TouchableOpacity onPress={FirstOpenModal}>

@@ -11,8 +11,7 @@ const usePanelHospitalListViewModel = () => {
   const [selectedTabRight, setSelectedTabRight] = useState('list');
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(true);
-  const [searchText, setSearchText] = useState('');
-  const [allData, setAllData] = useState({});
+  const [searchText, setSearchText] = useState(null);
 
   const onPressRightTab = tab => {
     setSelectedTabRight(tab);
@@ -29,24 +28,19 @@ const usePanelHospitalListViewModel = () => {
   const goBack = () => navigation.goBack();
 
   useEffect(() => {
-    let filtered = allData;
-    const lowerText = searchText.toLowerCase();
-    if (searchText.trim()) {
-      filtered = filtered.filter(
-        item =>
-          item.headerLabel?.toLowerCase().includes(lowerText) ||
-          item.items?.some(subItem =>
-            subItem.value?.toLowerCase().includes(lowerText),
-          ),
-      );
-    }
-    setData(filtered);
-  }, [searchText, allData]);
+    const delayDebounceFn = setTimeout(() => {
+      if (searchText !== null) {
+        trigger();
+      }
+    }, 1000);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchText]);
 
   const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.discountedCenters.getDiscountedCenters(1),
     method: 'post',
     argsOrBody: {
+      searchString: searchText,
       isAllRecord: true,
     },
     onSuccess: res => {
@@ -62,7 +56,7 @@ const usePanelHospitalListViewModel = () => {
             {label: 'City:', value: item?.city?.name},
           ],
         })) || [];
-      setAllData(formattedData);
+      setData(formattedData);
     },
   });
   useFocusEffect(

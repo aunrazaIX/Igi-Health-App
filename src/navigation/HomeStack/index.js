@@ -22,7 +22,7 @@ const HomeStack = () => {
       initialRouteName={'Home'}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Benefits" component={Benefits} />
-      <Stack.Screen name="Personal" component={DependentStack} />
+      <Stack.Screen name="PersonalStack" component={DependentStack} />
       <Stack.Screen name="Hospitals" component={Hospitals} />
       <Stack.Screen name="PanelHospitalList" component={PanelHospitalList} />
       <Stack.Screen name="ClaimHistory" component={ClaimsHistory} />

@@ -1,10 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
 import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
+import {logout} from '../redux/authSlice';
 
 const useForgotPasswordViewModel = ({route}) => {
   const {
@@ -14,6 +15,7 @@ const useForgotPasswordViewModel = ({route}) => {
     otpToken: tokenFromSignup,
     isChangedPassword,
   } = route?.params || {};
+  const {user} = useSelector(state => state.auth);
   const [step, setStep] = useState(_step ? _step : 1);
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [otpToken, setOtpToken] = useState(tokenFromSignup || null);
@@ -68,7 +70,7 @@ const useForgotPasswordViewModel = ({route}) => {
 
   const {trigger: triggerUpdatePassword} = useApiHook({
     apiEndpoint: endpoints.auth.createPassword(
-      apiData?.email || verifiedUserData?.email,
+      apiData?.email || verifiedUserData?.email || user?.email,
       updatePasswordApiData?.newPassword,
     ),
     method: 'post',
@@ -76,7 +78,6 @@ const useForgotPasswordViewModel = ({route}) => {
       Authorization: `Bearer ${otpToken}`,
     },
     onSuccess: res => {
-      console.log(res, 'djhfj');
       if (res?.data) {
         updatePasswordResetStates();
         setConfirmationModal(true);
@@ -118,7 +119,6 @@ const useForgotPasswordViewModel = ({route}) => {
       apiData?.email || verifiedUserData?.email,
     ),
     method: 'post',
-    argsOrBody: {},
     onSuccess: res => {
       setOtpToken(res?.data);
       setStep(3);
@@ -199,7 +199,10 @@ const useForgotPasswordViewModel = ({route}) => {
     }
   };
   const onCloseSuccessModal = () => {
-    navigation.navigate('Login');
+    dispatch(logout());
+    if (!isChangedPassword) {
+      navigation.navigate('Login');
+    }
   };
 
   return {

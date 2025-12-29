@@ -69,7 +69,7 @@ const Tabs = () => {
       />
 
       <Tab.Screen
-        name="PriorApproval"
+        name="PriorApprovalStack"
         initialParams={{type: 'priorApproval'}}
         component={LodgeClaimStack}
         options={{

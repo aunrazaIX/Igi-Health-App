@@ -34,7 +34,7 @@ const PersonalView = ({
     <Container>
       <TopView
         title={'Family Details'}
-        TopViewFirstIcon={images.AddNew}
+        TopViewFirstIcon={images?.AddNew}
         FirstOpenModal={openAddDependent}
       />
       <CurvedView>

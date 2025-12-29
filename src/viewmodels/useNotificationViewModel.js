@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
 import {useFocusEffect} from '@react-navigation/native';
@@ -28,7 +28,7 @@ const useNotificationsViewModel = () => {
   const {trigger: markRead, loading: markLoading} = useApiHook({
     apiEndpoint: endpoints.notifications.markAsRead(selectedNotification),
     method: 'post',
-    onSuccess: () => {
+    onSuccess: res => {
       trigger();
       setSelectedNotification(null);
     },
@@ -36,8 +36,12 @@ const useNotificationsViewModel = () => {
 
   const onPressMarkNotification = notificationId => {
     setSelectedNotification(notificationId);
-    markRead();
   };
+  useEffect(() => {
+    if (selectedNotification) {
+      markRead();
+    }
+  }, [selectedNotification]);
 
   const onSelectType = type => {
     setSelectedType(type);

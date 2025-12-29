@@ -32,7 +32,7 @@ const useSettingsViewModel = () => {
       params: {
         step: 3,
         isChangedPassword: true,
-        type: 'changePassword',
+        type: 'forgot',
       },
       to: 'ForgotPassword',
       icon: icons.resetPasswordIcon,

@@ -119,7 +119,7 @@ const usePersonalViewModal = () => {
   };
 
   const resetStates = () => {
-    navigation.navigate('Personal');
+    navigation.navigate('Personal'); 
   };
 
   return {

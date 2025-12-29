@@ -23,11 +23,7 @@ const ConfirmationModal = ({show, type, onConfirm, onCancel, message}) => {
               style={styles.confirmationDetail}
             />
           </View>
-          <View
-            style={[
-              styles.confirmationButtonContainer,
-              {flexDirection: onConfirm ? 'row' : 'column'},
-            ]}>
+          <View style={styles.confirmationButtonContainer}>
             {config.confirmText && (
               <LinearGradient
                 style={[styles.deleteButtonContainer, {marginRight: vw * 4}]}

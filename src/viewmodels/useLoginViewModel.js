@@ -143,7 +143,7 @@ const useLoginViewModel = () => {
         name: res?.data?.memberName,
         city: '',
         country_code: '+92',
-        company_name: 'IGI LIFE LIMITED',
+        company_name: res?.data?.policies[0]?.companyName,
         policy: res?.data?.policies[0]?.policyNumber,
       };
       console.log(argsOrBody);

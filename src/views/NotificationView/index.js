@@ -102,6 +102,7 @@ const NotificationView = ({
             {showDropDown && (
               <View style={styles.dropdown}>
                 <FlatList
+                  keyExtractor={(_, index) => index.toString()}
                   indicatorStyle="black"
                   data={types}
                   renderItem={({item}) => (
@@ -131,7 +132,7 @@ const NotificationView = ({
           ListEmptyComponent={
             !loading && <NoDataView name={'No Notification Found'} />
           }
-          keyExtractor={item => item?.PushNotificationID?.toString()}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={renderNotifications}
           contentContainerStyle={styles.notificationStyles}
         />
