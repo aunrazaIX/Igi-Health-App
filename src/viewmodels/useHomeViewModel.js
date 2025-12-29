@@ -129,7 +129,7 @@ const useHomeViewModel = () => {
     useCallback(() => {
       getDxcClaims();
       generateToken();
-    }, []),
+    }, [selectedPolicyObject]),
   );
   const sortClaimData = (items = []) => {
     let totalClaimAmount = 0;
