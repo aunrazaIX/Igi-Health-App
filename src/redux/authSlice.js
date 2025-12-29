@@ -29,6 +29,7 @@ export const authSlice = createSlice({
     logout: state => {
       state.user = null;
       state.token = null;
+      state.widgetToken = null;
     },
     setBiometrics: (state, action) => {
       state.biometrics = action.payload;

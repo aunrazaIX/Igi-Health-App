@@ -9,7 +9,7 @@ import createTransform from 'redux-persist/es/createTransform';
 
 const authTransform = createTransform(
   inboundState => {
-    const {token, user, ...rest} = inboundState;
+    const {token, user, widgetToken, ...rest} = inboundState;
     return rest;
   },
   outboundState => {
@@ -20,12 +20,12 @@ const authTransform = createTransform(
 );
 
 const generalTransform = createTransform(
-  (inboundState) => {
+  inboundState => {
     const {isIntroSlider, policyClass} = inboundState;
     return {isIntroSlider, policyClass};
   },
 
-  (outboundState) => {
+  outboundState => {
     return {
       ...outboundState,
       showErrorModal: false,
