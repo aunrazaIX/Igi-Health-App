@@ -12,6 +12,7 @@ import Helpline from '../../screens/Helpline';
 import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaimStack from '../LodgeClaimStack';
 import {AileronRegular} from '../../components';
+import Widget from '../../screens/Widget';
 
 const Tab = createBottomTabNavigator();
 
@@ -80,6 +81,17 @@ const Tabs = () => {
         }}
       />
 
+      <Tab.Screen
+        name="raise-claim"
+        component={Widget}
+        initialParams={{widgetName: 'raise-claim'}}
+        options={{
+          tabBarLabel: () => <TabLabel title="Lodge Claim" />,
+          tabBarIcon: ({focused}) => (
+            <TabIcon focused={focused} icon={tabIcons.note} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Helpline"
         component={Helpline}
