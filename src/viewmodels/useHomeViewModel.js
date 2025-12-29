@@ -44,8 +44,8 @@ const useHomeViewModel = () => {
       name: user?.memberName,
       city: '',
       country_code: '+92',
-      company_name: 'IGI LIFE LIMITED',
-      policy: user?.policies[0]?.policyNumber,
+      company_name: selectedPolicyObject?.companyName,
+      policy: selectedPolicyObject?.policyNumber,
     },
     instance: 'oladoc',
     headers: {
@@ -251,7 +251,7 @@ const useHomeViewModel = () => {
       logo: newCardsIcons.personal,
       name: 'Family Details',
       image: icons.forwardArrow,
-      to: 'Personal',
+      to: 'PersonalStack',
     },
     {
       logo: newCardsIcons.lodgeClaim,
@@ -265,7 +265,7 @@ const useHomeViewModel = () => {
       name: 'Prior\nApproval',
       image: icons.forwardArrow,
       mainParent: 'Tabs',
-      stChild: 'PriorApproval',
+      stChild: 'PriorApprovalStack',
     },
     {
       logo: newCardsIcons.hospital,

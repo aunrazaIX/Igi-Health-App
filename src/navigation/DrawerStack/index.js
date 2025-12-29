@@ -64,14 +64,14 @@ const DrawerStack = () => {
       icon: drawerIcons.drawerPersonal,
       mainParent: 'Tabs',
       stChild: 'HomeStack',
-      ndChild: 'Personal',
+      ndChild: 'PersonalStack',
     },
     {
       id: 5,
       name: 'Prior Approval',
       icon: drawerIcons.drawerPriorApproval,
       mainParent: 'Tabs',
-      stChild: 'PriorApproval',
+      stChild: 'PriorApprovalStack',
     },
     {
       id: 6,
@@ -79,7 +79,7 @@ const DrawerStack = () => {
       icon: drawerIcons.drawerAddDependent,
       mainParent: 'Tabs',
       stChild: 'HomeStack',
-      ndChild: 'Personal',
+      ndChild: 'PersonalStack',
     },
     {
       id: 7,

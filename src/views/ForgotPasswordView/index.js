@@ -149,7 +149,6 @@ const ForgotPasswordView = ({
             : 'Your password has been updated successfully.'
         }
         onCancel={onCloseSuccessModal}
-        onConfirm
       />
     </Container>
   );

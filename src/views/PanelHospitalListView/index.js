@@ -7,7 +7,7 @@ import DetailsContainer from '../../components/DetailsContainer';
 import {vh} from '../../assets/theme/dimension';
 import {COLORS} from '../../assets/theme/colors';
 import AlertModal from '../../components/AlertModal';
-import ModalLoading from '../../components/ModalLoading';
+import NoDataView from '../../components/NoDataView';
 
 const PanelHospitalListView = ({
   data,
@@ -115,6 +115,9 @@ const PanelHospitalListView = ({
           <FlatList
             indicatorStyle="black"
             data={data}
+            ListEmptyComponent={
+              !loading && <NoDataView name={'No Data Found'} />
+            }
             contentContainerStyle={{
               paddingBottom: vh * 28,
             }}
@@ -141,7 +144,6 @@ const PanelHospitalListView = ({
           modalVisible={modalVisible}
           setModalVisible={showModal}
         />
-        <ModalLoading loading={loading} />
       </CurvedView>
     </>
   );

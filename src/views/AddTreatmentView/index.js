@@ -126,7 +126,6 @@ const AddTreatmentView = ({
             show={confirmationModal}
             type="error"
             message={'You cant enter the same entry'}
-            onConfirm
             onCancel={() => setConfirmationModal(false)}
           />
           <ModalLoading loading={loading} />
