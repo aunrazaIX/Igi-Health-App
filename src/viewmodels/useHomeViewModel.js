@@ -58,7 +58,7 @@ const useHomeViewModel = () => {
       }
     },
     onError: error => {
-      console.log('Error', error);
+      console.log('Error on', error);
     },
   });
   const apiData = Object.values(data?.data || {})[0]?.[0];
