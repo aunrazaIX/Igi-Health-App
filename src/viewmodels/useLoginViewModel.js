@@ -145,7 +145,6 @@ const useLoginViewModel = () => {
         company_name: res?.data?.policies[0]?.companyName,
         policy: res?.data?.policies[0]?.policyNumber,
       };
-      console.log(argsOrBody);
       generateToken(argsOrBody);
       loginResponse.current = res;
       if (res?.data.UserName !== credentials?.userName) {
