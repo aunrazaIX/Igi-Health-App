@@ -40,12 +40,12 @@ const useHomeViewModel = () => {
     method: 'post',
     argsOrBody: {
       identification_field: 'PHONE_NUMBER',
-      identification_value: '03016335810',
-      name: 'Asim Kabir',
-      city: 'Lahore',
+      identification_value: user.phoneNo,
+      name: user?.memberName,
+      city: '',
       country_code: '+92',
-      company_name: 'Packages Limited',
-      policy: 'PKGLTD001',
+      company_name: 'IGI LIFE LIMITED',
+      policy: user?.policies[0]?.policyNumber,
     },
     instance: 'oladoc',
     headers: {

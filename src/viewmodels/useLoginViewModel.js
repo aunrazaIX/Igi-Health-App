@@ -105,15 +105,7 @@ const useLoginViewModel = () => {
 
   const {trigger: generateToken} = useApiHook({
     method: 'post',
-    argsOrBody: {
-      identification_field: 'PHONE_NUMBER',
-      identification_value: '03016335810',
-      name: 'Asim Kabir',
-      city: 'Lahore',
-      country_code: '+92',
-      company_name: 'Packages Limited',
-      policy: 'PKGLTD001',
-    },
+
     instance: 'oladoc',
     headers: {
       'x-api-key': 'ASe]dcX1Pjf91e]dcIGI-demo0qxNd_I',
@@ -143,7 +135,19 @@ const useLoginViewModel = () => {
         );
         return;
       }
-      generateToken();
+
+      console.log('REs', res);
+      let argsOrBody = {
+        identification_field: 'PHONE_NUMBER',
+        identification_value: res?.data?.phoneNo,
+        name: res?.data?.memberName,
+        city: '',
+        country_code: '+92',
+        company_name: 'IGI LIFE LIMITED',
+        policy: res?.data?.policies[0]?.policyNumber,
+      };
+      console.log(argsOrBody);
+      generateToken(argsOrBody);
       loginResponse.current = res;
       if (res?.data.UserName !== credentials?.userName) {
         dispatch(resetAllModules());
