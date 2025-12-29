@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     right: vw * 26,
     zIndex: 2,
     borderRadius: vw * 2,
-    top: Platform.OS === 'ios' ? vh * 7 : vh * 4,
+    top: Platform.OS === 'ios' ? vh * 7 : vh * 6.5,
     backgroundColor: COLORS.white,
   },
   policyDropDown: {
