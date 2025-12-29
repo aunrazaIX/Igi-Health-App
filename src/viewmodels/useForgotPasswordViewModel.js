@@ -54,22 +54,19 @@ const useForgotPasswordViewModel = ({route}) => {
     confirmPassword: '',
   });
 
-  const {trigger: triggerForgotPassword} =
-    useApiHook({
-      apiEndpoint: endpoints.auth.resendOTP(apiData?.email),
-      method: 'post',
-      argsOrBody: {},
-      onSuccess: res => {
-        setStep(2);
-      },
-      onError: e => {
-        dispatch(setErrorModal({show: true, message: e?.message}));
-      },
-    });
-    
-  const {
-    trigger: triggerUpdatePassword,
-  } = useApiHook({
+  const {trigger: triggerForgotPassword} = useApiHook({
+    apiEndpoint: endpoints.auth.resendOTP(apiData?.email),
+    method: 'post',
+    argsOrBody: {},
+    onSuccess: res => {
+      setStep(2);
+    },
+    onError: e => {
+      dispatch(setErrorModal({show: true, message: e?.message}));
+    },
+  });
+
+  const {trigger: triggerUpdatePassword} = useApiHook({
     apiEndpoint: endpoints.auth.createPassword(
       apiData?.email || verifiedUserData?.email,
       updatePasswordApiData?.newPassword,
@@ -79,6 +76,7 @@ const useForgotPasswordViewModel = ({route}) => {
       Authorization: `Bearer ${otpToken}`,
     },
     onSuccess: res => {
+      console.log(res, 'djhfj');
       if (res?.data) {
         updatePasswordResetStates();
         setConfirmationModal(true);
@@ -114,9 +112,7 @@ const useForgotPasswordViewModel = ({route}) => {
   });
   const openConfimationModal = () => setConfirmationModal(true);
 
-  const {
-    trigger: triggerVerifyOtp,
-  } = useApiHook({
+  const {trigger: triggerVerifyOtp} = useApiHook({
     apiEndpoint: endpoints.auth.verifyOTP(
       otp,
       apiData?.email || verifiedUserData?.email,

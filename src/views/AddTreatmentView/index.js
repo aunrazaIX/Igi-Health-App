@@ -123,13 +123,11 @@ const AddTreatmentView = ({
           </View>
 
           <ConfirmationModal
-            ConfirmationModalVisible={confirmationModal}
-            setConfirmationModalVisible={setConfirmationModal}
-            frameImage={icons.errorPopup}
-            confirmationMessage={'You cant enter the same entry'}
-            closeButton={true}
-            Successfull={false}
-            CloseButtonText={'Continue To Login'}
+            show={confirmationModal}
+            type="error"
+            message={'You cant enter the same entry'}
+            onConfirm
+            onCancel={() => setConfirmationModal(false)}
           />
           <ModalLoading loading={loading} />
         </KeyboardAwareScrollView>

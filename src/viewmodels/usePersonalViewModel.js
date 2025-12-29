@@ -5,7 +5,7 @@ import moment from 'moment';
 import {formatName} from '../utils';
 import endpoints from '../api/endspoints';
 import useApiHook from '../hooks/useApiHook';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const usePersonalViewModal = () => {
   const navigation = useNavigation();
@@ -84,13 +84,11 @@ const usePersonalViewModal = () => {
       isUpdate: true,
     });
   };
-  const {
-    trigger,
-    loading: deleteDepenedentLoading,
-  } = useApiHook({
+  const {trigger, loading: deleteDepenedentLoading} = useApiHook({
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
     onSuccess: res => {
+      setModalType('success');
       setConfirmationModal(true);
     },
   });
@@ -102,13 +100,13 @@ const usePersonalViewModal = () => {
 
   const onPressDelete = () => {
     setModalType('');
-     let _apiData = {
-    cnicNumber: user?.cnic,
-    name: deleteDependent?.dependentDetail[0]?.value,
-    gender: deleteDependent?.dependentDetail[1]?.value,
-    relation: deleteDependent?.dependentDetail[2]?.value,
-    dob: deleteDependent?.dependentDetail[3]?.value,
-    dependentReqType: 3,
+    let _apiData = {
+      cnicNumber: user?.cnic,
+      name: deleteDependent?.dependentDetail[0]?.value,
+      gender: deleteDependent?.dependentDetail[1]?.value,
+      relation: deleteDependent?.dependentDetail[2]?.value,
+      dob: deleteDependent?.dependentDetail[3]?.value,
+      dependentReqType: 3,
     };
 
     trigger(_apiData);

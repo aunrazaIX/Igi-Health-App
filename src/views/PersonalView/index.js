@@ -25,12 +25,10 @@ const PersonalView = ({
   openAddDependent,
   setConfirmationModal,
   confirmationModal,
-  resetStates,
   deleteDepenedentLoading,
   dependantLoading,
   modalType,
   onPressDelete,
-  userData,
 }) => {
   return (
     <Container>
@@ -140,33 +138,21 @@ const PersonalView = ({
             </View>
           </ScrollView>
         </View>
-
         <ModalLoading loading={deleteDepenedentLoading || dependantLoading} />
       </CurvedView>
 
       <ConfirmationModal
-        ConfirmationModalVisible={confirmationModal}
-        setConfirmationModalVisible={setConfirmationModal}
-        frameImage={
+        show={confirmationModal}
+        type={modalType}
+        message={
           modalType === 'delete'
-            ? icons.ModalSuccessfull
-            : icons.modelSuccessful
-        }
-        confirmationMessage={
-          modalType === 'delete'
-            ? 'Are you sure you want to apply for deletion request of selected dependent ?'
+            ? 'Are you sure you want to apply for deletion request of selected dependent?'
             : 'Your deletion request for the dependent has been successfully submitted. Our team will review and process it shortly.'
         }
-        closeButton={modalType === 'delete' ? false : true}
-        deleteButton={modalType === 'delete' ? true : false}
-        handleDelete={() => {
-          onPressDelete();
+        onConfirm={onPressDelete}
+        onCancel={() => {
+          setConfirmationModal(false);
         }}
-        confirmationRequired={modalType === 'delete' ? true : false}
-        Successfull={modalType === 'delete' ? false : true}
-        CloseButtonText={'Continue To Login'}
-        onClose={resetStates}
-        heading={'Request Submitted'}
       />
     </Container>
   );

@@ -28,7 +28,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [confirmationType, setConfirmationType] = useState('');
   const [deletedIndex, setDeletedIndex] = useState(null);
-  const [deletedFileIndex, setDeletedFileIndex] = useState(null);
   const [isView, setIsView] = useState(null);
   const [showOptionModal, setShowOptionModal] = useState(false);
   const [dependants, setDependants] = useState([]);
@@ -159,10 +158,38 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
 
   const onPressDelete = index => {
     setConfirmationType('delete');
-    setDeletedIndex(index);
+    setDeletedIndex({type: 'delete', index});
     setConfirmationModal(true);
   };
   const handleDeleteClaim = index => dispatch(onDeleteTreatment(index));
+  const handleDeleteFile = index => dispatch(onDeleteDocuments(index));
+  const handleCancelFile = index => {
+    setConfirmationType('delete');
+    setConfirmationModal(true);
+    setDeletedIndex({type: 'file', index});
+  };
+  const handleConfirmDelete = () => {
+    if (!deletedIndex) return;
+
+    if (deletedIndex.type === 'delete') {
+      handleDeleteClaim(deletedIndex.index);
+    } else {
+      handleDeleteFile(deletedIndex.index);
+    }
+
+    setConfirmationModal(false);
+    setDeletedIndex(null);
+  };
+
+  const handleConfirm = () => {
+    if (confirmationType === 'delete') {
+      handleConfirmDelete();
+    } else if (confirmationType === 'back') {
+      goBack();
+    } else if (confirmationType === 'submit') {
+      onPressSubmitClaim();
+    }
+  };
 
   const onPressEdit = (data, index) => {
     navigation.navigate('AddTreatment', {
@@ -273,7 +300,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     },
     onSuccess: res => {
       setConfirmationModal(true);
-      setConfirmationType('');
+      setConfirmationType('success');
       resetStates();
     },
     onError: err => {
@@ -393,14 +420,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     }
   };
 
-  const handleCancelFile = index => {
-    setConfirmationType('fileDelete');
-    setConfirmationModal(true);
-    setDeletedFileIndex(index);
-  };
-
-  const handleDeleteFile = index => dispatch(onDeleteDocuments(index));
-
   const viewOptionModal = boolean => {
     setShowOptionModal(boolean);
   };
@@ -425,8 +444,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       dependantLoading,
       hospitalList,
       confirmationType,
-      deletedIndex,
-      deletedFileIndex,
       isView,
       viewIndex,
       showOptionModal,
@@ -434,6 +451,7 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       uploadLoading,
     },
     functions: {
+      handleConfirm,
       goBack,
       navigateTreatment,
       onPressNext,
@@ -448,8 +466,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       onSelectHospital,
       onSelectType,
       setConfirmationType,
-      onPressSubmitClaim,
-      handleDeleteFile,
       handleBackButton,
       handleGOBack,
       onView,
@@ -457,7 +473,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
       uploadDocument,
       viewOptionModal,
       setShowOptionModal,
-      handleDeleteClaim,
     },
   };
 };

@@ -4,7 +4,6 @@ import {useNavigation} from '@react-navigation/native';
 import {setErrorModal} from '../redux/generalSlice';
 import useErrorHandlingHook from '../hooks/useErrorHandlingHook';
 import {formatName} from '../utils';
-import moment from 'moment';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 
@@ -75,10 +74,9 @@ const useAddDependentViewModal = ({route}) => {
     method: 'post',
     onSuccess: res => {
       if (!isUpdate) {
-        setConfirmatonType('');
+        setConfirmatonType('success');
         setConfirmationModal(true);
       }
-      setConfirmatonType('');
     },
     onError: error => {
       setConfirmatonType('');
@@ -132,16 +130,15 @@ const useAddDependentViewModal = ({route}) => {
     } else {
       if (isUpdate) {
         setConfirmationModal(true);
-        setConfirmatonType('update');
-      } else {
-        const payload = apiPayload(dependentApiData);
-        trigger(payload);
+        setConfirmatonType('success');
       }
+      const payload = apiPayload(dependentApiData);
+      trigger(payload);
     }
   };
 
   const handleCancel = () => navigation.navigate('Personal');
-  const resetStates = () => navigation.navigate('Personal');
+  const resetStates = () => navigation.goBack();
 
   return {
     states: {

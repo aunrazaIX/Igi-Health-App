@@ -1,6 +1,6 @@
 import React from 'react';
-import { CreateNewPassword, EnterEmailView, OtpView } from './components';
-import { icons } from '../../assets';
+import {CreateNewPassword, EnterEmailView, OtpView} from './components';
+import {icons} from '../../assets';
 import {
   AileronBold,
   AileronSemiBold,
@@ -11,9 +11,9 @@ import {
   TopView,
 } from '../../components';
 import styles from './styles';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useSelector } from 'react-redux';
-import { View } from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {useSelector} from 'react-redux';
+import {View} from 'react-native';
 
 const ForgotPasswordView = ({
   step,
@@ -44,7 +44,7 @@ const ForgotPasswordView = ({
   type,
   isChangedPassword,
 }) => {
-  const { user } = useSelector(state => state.auth);
+  const {user} = useSelector(state => state.auth);
 
   const returnComponent = {
     1: (
@@ -141,19 +141,15 @@ const ForgotPasswordView = ({
       </CurvedView>
 
       <ConfirmationModal
-        ConfirmationModalVisible={confirmationModal}
-        setConfirmationModalVisible={setConfirmationModal}
-        frameImage={icons.modelSuccessful}
-        confirmationMessage={
+        show={confirmationModal}
+        type={type}
+        message={
           type === 'signup'
             ? 'Welcome aboard! Your account has been created successfully.'
             : 'Your password has been updated successfully.'
         }
-        closeButton
-        Successfull
-        onClose={onCloseSuccessModal}
-        isChangedPassword={isChangedPassword}
-        buttonName={type === 'signup' ? 'Login Now' : 'Close'}
+        onCancel={onCloseSuccessModal}
+        onConfirm
       />
     </Container>
   );
