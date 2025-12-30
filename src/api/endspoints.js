@@ -9,7 +9,10 @@ const endpoints = {
     createPassword: (email, newPassword) =>
       `Account/SetPassword?Email=${email}&NewPassword=${newPassword}`,
   },
-  Benefits: {
+  account: {
+    getBankDetails: cnic => `Account/GetBankDetails?Cnic=${cnic}`,
+  },
+  benefits: {
     getBenefits: 'Benefit/GetUserBenefits',
   },
   dependent: {

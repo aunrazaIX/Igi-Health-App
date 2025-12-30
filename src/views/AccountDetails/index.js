@@ -1,4 +1,4 @@
-import {View, ImageBackground, Image} from 'react-native';
+import {View, ImageBackground, Image, FlatList} from 'react-native';
 import React from 'react';
 import {
   AileronBold,
@@ -11,8 +11,9 @@ import {
 import {icons, images} from '../../assets';
 import styles from './styles';
 import {vh} from '../../assets/theme/dimension';
+import ModalLoading from '../../components/ModalLoading';
 
-const AccountDetailsView = ({data}) => {
+const AccountDetailsView = ({data, loading}) => {
   return (
     <Container>
       <TopView title={'Registered Bank Account'} />
@@ -37,27 +38,35 @@ const AccountDetailsView = ({data}) => {
               <Image source={icons.personalDetail} style={styles.avatar} />
               <AileronBold style={styles.headerText} name="Account Details" />
             </View>
-            <View style={styles.details}>
-              {data?.map((item, index) => (
-                <View style={styles.field} key={index}>
-                  <AileronSemiBold
-                    name={item?.label}
-                    style={styles.detailLabel}
-                  />
-                  <AileronSemiBold
-                    name={item?.value}
-                    style={styles.detailvalue}
-                  />
-                </View>
-              ))}
-            </View>
+            <FlatList
+              data={data}
+              keyExtractor={(_, index) => index.toString()}
+              contentContainerStyle={styles.details}
+              renderItem={({item}) => {
+                if (item.type === 'divider') {
+                  return <View style={{margin: vh}} />;
+                }
+                return (
+                  <View style={styles.field}>
+                    <AileronSemiBold
+                      name={item.label}
+                      style={styles.detailLabel}
+                    />
+                    <AileronSemiBold
+                      name={item.value}
+                      style={styles.detailvalue}
+                    />
+                  </View>
+                );
+              }}
+            />
           </View>
           <AileronRegular
             name="Disclaimer: If these details are incorrect or need updating, please contact IGI Life customer support."
             style={styles.disclaimer}
           />
         </View>
-        {/* <ModalLoading loading={loading} /> */}
+        <ModalLoading loading={loading} />
       </CurvedView>
     </Container>
   );

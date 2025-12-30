@@ -23,7 +23,7 @@ const useBenefitsViewModel = () => {
   };
   const payload = JSON.stringify(['abc']);
   const {loading: benefitsloading, trigger} = useApiHook({
-    apiEndpoint: endpoints.Benefits.getBenefits,
+    apiEndpoint: endpoints.benefits.getBenefits,
     method: 'post',
     argsOrBody: payload,
     onSuccess: res => {

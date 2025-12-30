@@ -5,9 +5,9 @@ import useAccountDetailsViewModel from '../../viewmodels/useAccountDetailsViewMo
 const AccountDetails = () => {
   const {states} = useAccountDetailsViewModel();
 
-  const {data} = states;
+  const {data, loading} = states;
 
-  return <AccountDetailsView data={data} />;
+  return <AccountDetailsView data={data} loading={loading}/>;
 };
 
 export default AccountDetails;

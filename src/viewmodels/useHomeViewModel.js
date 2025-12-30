@@ -323,6 +323,12 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       link: 'corporate.services@igi.com.pk',
     },
+    {
+      logo: newCardsIcons.bankDetails,
+      name: 'Payout Account',
+      image: icons.forwardArrow,
+      to: 'AccountDetails',
+    },
   ];
 
   const onPressTab = name => setSelectedTab(name);
