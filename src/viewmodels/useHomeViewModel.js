@@ -40,7 +40,7 @@ const useHomeViewModel = () => {
     method: 'post',
     argsOrBody: {
       identification_field: 'PHONE_NUMBER',
-      identification_value: user.phoneNo,
+      identification_value: user?.phoneNo,
       name: user?.memberName,
       city: '',
       country_code: '+92',
