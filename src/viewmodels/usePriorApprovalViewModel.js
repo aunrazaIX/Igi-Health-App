@@ -51,6 +51,9 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
   const {loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependents,
     method: 'get',
+    argsOrBody: {
+      PolicyNumber: selectedPolicy,
+    },
     onSuccess: res => {
       if (res?.data) {
         const updatedDependants = res?.data?.map(dependent => ({

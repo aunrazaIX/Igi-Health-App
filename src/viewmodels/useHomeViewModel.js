@@ -81,6 +81,9 @@ const useHomeViewModel = () => {
   const {data: dependentData} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependents,
     method: 'get',
+    argsOrBody: {
+      PolicyNumber: selectedPolicy,
+    },
   });
   const dependentsList =
     dependentData?.data?.map(item => ({

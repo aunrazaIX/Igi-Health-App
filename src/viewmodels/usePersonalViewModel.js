@@ -18,10 +18,14 @@ const usePersonalViewModal = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const goBack = () => navigation.goBack();
   const {user} = useSelector(state => state.auth);
+  const {selectedPolicy} = useSelector(state => state.general);
 
   const {loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependents,
     method: 'get',
+    argsOrBody: {
+      PolicyNumber: selectedPolicy,
+    },
     onSuccess: res => {
       setData(
         res?.data?.map((item, index) => ({
@@ -119,7 +123,7 @@ const usePersonalViewModal = () => {
   };
 
   const resetStates = () => {
-    navigation.navigate('Personal'); 
+    navigation.navigate('Personal');
   };
 
   return {
