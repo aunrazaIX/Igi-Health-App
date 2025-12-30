@@ -38,7 +38,7 @@ const ClaimsHistoryView = ({
     return (
       <DetailsContainer
         key={index}
-        headerIcon={statusIconMap[item?.claimStatus] ?? ''}
+        headerIcon={statusIconMap[item?.claimStatus] ?? icons.pending}
         headerIconPressable={false}
         patientName={item.RelationName}
         data={item}

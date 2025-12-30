@@ -26,6 +26,10 @@ const useClaimsHistoryViewModel = () => {
     Approved: icons.claimPaid,
     Rejected: icons.rejected,
     Pending: icons.pending,
+    Returned: icons.pending,
+    Inprocess: icons.pending,
+    Decline: icons.rejected,
+    Paid: icons.claimPaid,
   };
 
   const getHeadingSubHeading = useMemo(() => {
@@ -104,11 +108,11 @@ const useClaimsHistoryViewModel = () => {
             claim?.totalAmountPaid ?? claim?.totalPaid,
           ),
         },
-        {
+        claim?.totalAmountPaid > 0 && {
           label: 'Amount Deducted:',
           value: formatCurrencyWithPKR(amountDeducted ?? claim?.deductedAmount),
         },
-        {
+        claim?.deductionReason && {
           label: 'Deduction Reason:',
           value: claim?.deductionReason,
         },
