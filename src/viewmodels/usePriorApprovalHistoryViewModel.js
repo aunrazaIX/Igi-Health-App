@@ -52,9 +52,9 @@ const usePriorApprovalHistoryViewModel = () => {
     const serviceName =
       item?.services?.map(s => s?.serviceName).join(', ') || '--';
     const status =
-      item?.status === 1
+      item?.status === 2
         ? 'Pending'
-        : item?.status === 2
+        : item?.status === 1
         ? 'Approved'
         : 'Rejected';
 
