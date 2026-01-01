@@ -93,9 +93,8 @@ const DrawerStack = () => {
       id: 7,
       name: 'Claims History',
       icon: drawerIcons.drawerClaimHistory,
-      mainParent: 'Tabs',
-      stChild: 'HomeStack',
-      ndChild: 'ClaimHistory',
+      to: 'Widget',
+      widgetName: 'track-claim',
     },
     {
       id: 16,

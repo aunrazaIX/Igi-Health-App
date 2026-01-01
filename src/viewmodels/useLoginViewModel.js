@@ -183,7 +183,7 @@ const useLoginViewModel = () => {
     argsOrBody: signupApiData,
     onSuccess: res => {
       const hasToken = !!res?.data?.token;
-
+      console.log(res)
       navigation.navigate('ForgotPassword', {
         type: 'signup',
         step: hasToken ? 3 : 2,
