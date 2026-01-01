@@ -21,7 +21,7 @@ const endpoints = {
   },
   claimHistory: {
     getAllClaim: 'ClaimProcess/GetAllUserClaims',
-    getDxcClaims: 'ClaimProcess/GetDXCClaimByUser',
+    getDxcClaims: 'ClaimProcess/GetDXCClaims',
   },
   discountedCenters: {
     getDiscountedCenters: type =>

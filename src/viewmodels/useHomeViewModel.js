@@ -109,6 +109,7 @@ const useHomeViewModel = () => {
       }
     },
   });
+
   const onPullToRefresh = () => {
     getNotification();
   };
@@ -119,9 +120,9 @@ const useHomeViewModel = () => {
     transformResponse,
   } = useApiHook({
     apiEndpoint: endpoints.claimHistory.getDxcClaims,
-    method: 'post',
+    method: 'get',
     argsOrBody: {
-      isAllRecord: true,
+      cnic: user?.cnic,
     },
     onSuccess: res => {
       let temp = sortClaimData(res?.data);
@@ -286,7 +287,8 @@ const useHomeViewModel = () => {
       logo: newCardsIcons.claimHistory,
       name: 'Claim History',
       image: icons.forwardArrow,
-      to: 'ClaimHistory',
+      to: 'Widget',
+      widgetName: 'track-claim',
     },
 
     {
