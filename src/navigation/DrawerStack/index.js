@@ -96,21 +96,21 @@ const DrawerStack = () => {
       to: 'Widget',
       widgetName: 'track-claim',
     },
-    {
+    user?.isOladocFeatures && {
       id: 16,
       name: 'Video Consultation',
       icon: drawerIcons.drawerVideoCons,
       to: 'Widget',
       widgetName: 'vc',
     },
-    {
+    user?.isOladocFeatures && {
       id: 17,
       name: 'In-Clinic Appointment',
       icon: drawerIcons.drawerInClinicApp,
       to: 'Widget',
       widgetName: 'opd',
     },
-    {
+    user?.isOladocFeatures && {
       id: 18,
       name: 'Book Lab Tests',
       icon: drawerIcons.drawerLabTests,

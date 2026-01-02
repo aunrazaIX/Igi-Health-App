@@ -290,22 +290,21 @@ const useHomeViewModel = () => {
       to: 'Widget',
       widgetName: 'track-claim',
     },
-
-    {
+    user?.isOladocFeatures && {
       logo: newCardsIcons.videoConsultation,
       name: 'Video Consultation',
       image: icons.forwardArrow,
       to: 'Widget',
       widgetName: 'vc',
     },
-    {
+    user?.isOladocFeatures && {
       logo: newCardsIcons.inClinic,
       name: 'In-Clinic Appointment',
       image: icons.forwardArrow,
       to: 'Widget',
       widgetName: 'opd',
     },
-    {
+    user?.isOladocFeatures && {
       logo: newCardsIcons.bookLabTests,
       name: 'Book Lab test',
       image: icons.forwardArrow,
@@ -331,7 +330,7 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       to: 'AccountDetails',
     },
-  ];
+  ].filter(Boolean);
 
   const onPressTab = name => setSelectedTab(name);
 
