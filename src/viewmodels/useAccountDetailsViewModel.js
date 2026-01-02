@@ -5,22 +5,38 @@ import useApiHook from '../hooks/useApiHook';
 
 const useAccountDetailsViewModel = () => {
   const {user} = useSelector(state => state.auth);
-  const [data, setData] = useState([]);
-  const {data: details, loading} = useApiHook({
+  const [data, setData] = useState(null);
+  const {loading} = useApiHook({
     apiEndpoint: endpoints.account.getBankDetails(user?.cnic),
     method: 'get',
     onSuccess: res => {
-      const formatted = res?.data?.flatMap((item, index) => [
-        {label: 'Bank Name', value: item?.bankName?.trim() || '--'},
-        {label: 'Full Name', value: item?.memberName?.trim() || '--'},
-        {label: 'Account Number', value: item?.bankacckey?.trim() || '--'},
-        {label: 'IBAN', value: item?.iban?.trim() || '--'},
-        {type: 'divider', key: index},
+      setData([
+        {
+          label: 'Bank Name',
+          value: res?.data?.bankName
+            ? res?.data?.bankName?.trim() || '--'
+            : '--',
+        },
+        {
+          label: 'Full Name',
+          value: res?.data?.memberName
+            ? res?.data?.memberName?.trim() || '--'
+            : '--',
+        },
+        {
+          label: 'Account Number',
+          value: res?.data?.bankacckey
+            ? res?.data?.bankacckey?.trim() || '--'
+            : '--',
+        },
+        {
+          label: 'IBAN',
+          value: res?.data?.iban ? res?.data?.iban?.trim() || '--' : '--',
+        },
       ]);
-
-      setData(formatted);
     },
   });
+
   return {
     states: {data, loading},
   };
