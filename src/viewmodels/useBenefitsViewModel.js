@@ -3,12 +3,14 @@ import {icons} from '../assets';
 import {useCallback, useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
+import {useSelector} from 'react-redux';
 
 const useBenefitsViewModel = () => {
   const navigation = useNavigation();
   const [allBenefits, setAllBenefits] = useState([]);
   const [selectedTab, setSelectedTab] = useState('Inpatient');
   const [modalVisible, setModalVisible] = useState({show: false, note: ''});
+  const {selectedPolicy} = useSelector(state => state.general);
   const onPressTab = tab => {
     setSelectedTab(tab);
   };
@@ -21,13 +23,11 @@ const useBenefitsViewModel = () => {
 
     return new Intl.NumberFormat('en-PK').format(number);
   };
-  const payload = JSON.stringify(['abc']);
-  const {loading: benefitsloading, trigger} = useApiHook({
-    apiEndpoint: endpoints.benefits.getBenefits,
-    method: 'post',
-    argsOrBody: payload,
+  const {loading: benefitsloading} = useApiHook({
+    apiEndpoint: endpoints.benefits.getBenefits(selectedPolicy),
+    method: 'get',
     onSuccess: res => {
-      setAllBenefits(res.data);
+      setAllBenefits(res?.data);
     },
     onError: e => {
       dispatch(
@@ -38,11 +38,6 @@ const useBenefitsViewModel = () => {
       );
     },
   });
-  useFocusEffect(
-    useCallback(() => {
-      trigger();
-    }, []),
-  );
 
   const filteredData = allBenefits
     ?.filter(item => {

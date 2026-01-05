@@ -53,6 +53,7 @@ const usePanelHospitalListViewModel = () => {
           items: [
             {label: 'Phone:', value: item?.phoneNumber},
             {label: 'Address:', value: item?.address},
+            {label: 'Discount:', value: item?.discountPercentage},
             {label: 'City:', value: item?.city?.name},
           ],
         })) || [];
