@@ -27,6 +27,9 @@ export const generalSlice = createSlice({
       if (payload?.detail !== undefined) {
         state.errorDetail = payload.detail;
       }
+      if (payload?.message == undefined) {
+        state.errorMessage = null;
+      }
     },
     setIntroSlider: (state, {payload}) => {
       state.isIntroSlider = payload;

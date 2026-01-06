@@ -126,6 +126,7 @@ const useLoginViewModel = () => {
     method: 'post',
     argsOrBody: loginApiData,
     onSuccess: res => {
+      console.log('REs', res);
       if (!res?.data?.policies || res?.data?.roleId !== 16) {
         dispatch(
           setErrorModal({
@@ -183,7 +184,6 @@ const useLoginViewModel = () => {
     argsOrBody: signupApiData,
     onSuccess: res => {
       const hasToken = !!res?.data?.token;
-      console.log(res)
       navigation.navigate('ForgotPassword', {
         type: 'signup',
         step: hasToken ? 3 : 2,

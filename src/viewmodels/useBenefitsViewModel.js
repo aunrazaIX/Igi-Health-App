@@ -1,6 +1,7 @@
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+/* eslint-disable curly */
+import {useNavigation} from '@react-navigation/native';
 import {icons} from '../assets';
-import {useCallback, useState} from 'react';
+import {useState} from 'react';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
 import {useSelector} from 'react-redux';
@@ -10,7 +11,7 @@ const useBenefitsViewModel = () => {
   const [allBenefits, setAllBenefits] = useState([]);
   const [selectedTab, setSelectedTab] = useState('Inpatient');
   const [modalVisible, setModalVisible] = useState({show: false, note: ''});
-  const {selectedPolicy} = useSelector(state => state.general);
+  const {selectedPolicyObject} = useSelector(state => state.general);
   const onPressTab = tab => {
     setSelectedTab(tab);
   };
@@ -23,19 +24,19 @@ const useBenefitsViewModel = () => {
 
     return new Intl.NumberFormat('en-PK').format(number);
   };
+
   const {loading: benefitsloading} = useApiHook({
-    apiEndpoint: endpoints.benefits.getBenefits(selectedPolicy),
+    argsOrBody: {
+      PolicyNumber: selectedPolicyObject?.policyNumber,
+      PlanCode: selectedPolicyObject?.planCode,
+    },
+    apiEndpoint: endpoints.benefits.getBenefits,
     method: 'get',
     onSuccess: res => {
       setAllBenefits(res?.data);
     },
     onError: e => {
-      dispatch(
-        setErrorModal({
-          Show: true,
-          message: e?.message,
-        }),
-      );
+      console.log('Error', e);
     },
   });
 
