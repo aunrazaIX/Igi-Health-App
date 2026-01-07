@@ -75,7 +75,13 @@ export const generateCardHTML = (data, user, dependentsList) => `
                   </tr>
 
                   <tr>
-                    <td style="text-align: end; padding-bottom: 5px">
+                  <td style="padding-bottom: 5px">
+                      <span>Cert No: </span>
+                      <span
+                        >${data?.policyType}</span
+                      >
+                    </td>
+                    <td style="text-align: end; padding-bottom: 5px;">
                       <span>Age: </span>
                       <span
                         >${data?.age}</span
@@ -196,10 +202,10 @@ export const generateCardHTML = (data, user, dependentsList) => `
                         )}</span
                       >
                     </td>
-                    <td style="width: 50%">
+                    <td style="width: 50%; white-space: nowrap">
                       <span>Valid Till:</span>
                       <span
-                        >${moment(data[0]?.endDate, 'YYYYMMDD').format(
+                        >${moment(data?.endDate, 'YYYYMMDD').format(
                           'DD-MM-YYYY',
                         )}</span
                       >
