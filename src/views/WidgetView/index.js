@@ -22,6 +22,7 @@ const WidgetView = ({
         {isLoading && <SimpleLoader color={COLORS.loginButton} />}
         {incValue && (
           <WebView
+            incognito
             source={{
               uri: widgetUrl,
               headers: {

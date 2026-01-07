@@ -29,7 +29,7 @@ import PrivacyPolicy from '../../screens/PrivacyPolicy';
 import Widget from '../../screens/Widget';
 
 const DrawerStack = () => {
-  const {user} = useSelector(state => state.auth);
+  const {user, widgetToken} = useSelector(state => state.auth);
   const timeout = useMemo(() => {
     return 5 * 60 * 10000;
   }, []);
@@ -89,34 +89,37 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'PriorApprovalHistory',
     },
-    {
+    widgetToken && {
       id: 7,
       name: 'Claims History',
       icon: drawerIcons.drawerClaimHistory,
       to: 'Widget',
       widgetName: 'track-claim',
     },
-    user?.isOladocFeatures && {
-      id: 16,
-      name: 'Video Consultation',
-      icon: drawerIcons.drawerVideoCons,
-      to: 'Widget',
-      widgetName: 'vc',
-    },
-    user?.isOladocFeatures && {
-      id: 17,
-      name: 'In-Clinic Appointment',
-      icon: drawerIcons.drawerInClinicApp,
-      to: 'Widget',
-      widgetName: 'opd',
-    },
-    user?.isOladocFeatures && {
-      id: 18,
-      name: 'Book Lab Tests',
-      icon: drawerIcons.drawerLabTests,
-      to: 'Widget',
-      widgetName: 'labs',
-    },
+    widgetToken &&
+      user?.isOladocFeatures && {
+        id: 16,
+        name: 'Video Consultation',
+        icon: drawerIcons.drawerVideoCons,
+        to: 'Widget',
+        widgetName: 'vc',
+      },
+    widgetToken &&
+      user?.isOladocFeatures && {
+        id: 17,
+        name: 'In-Clinic Appointment',
+        icon: drawerIcons.drawerInClinicApp,
+        to: 'Widget',
+        widgetName: 'opd',
+      },
+    widgetToken &&
+      user?.isOladocFeatures && {
+        id: 18,
+        name: 'Book Lab Tests',
+        icon: drawerIcons.drawerLabTests,
+        to: 'Widget',
+        widgetName: 'labs',
+      },
     {
       id: 8,
       name: 'Hospital Directory',

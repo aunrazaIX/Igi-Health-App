@@ -32,7 +32,7 @@ class AppDelegate: RCTAppDelegate {
 
 #if DEBUG
  return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
-    // let url = URL(string: "http://192.168.18.1:8081/index.bundle?platform=ios&dev=true")
+    // let url = URL(string: "http://192.168.0.215:8081/index.bundle?platform=ios&dev=true")
     // return url
 
 #else

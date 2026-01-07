@@ -14,7 +14,7 @@ import endpoints from '../api/endspoints';
 import {setWidgetToken} from '../redux/authSlice';
 
 const useHomeViewModel = () => {
-  const {user} = useSelector(state => state.auth);
+  const {user, token, widgetToken} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigation();
   const [selectedTab, setSelectedTab] = useState('login');
@@ -53,11 +53,12 @@ const useHomeViewModel = () => {
     },
     apiEndpoint: endpoints.oladoc.generateToken,
     onSuccess: res => {
-      if (res?.data?.data) {
+      if (res?.data?.data && user && token) {
         dispatch(setWidgetToken(res?.data?.data?.token));
       }
     },
     onError: error => {
+      dispatch(setWidgetToken(null));
       console.log('Error on', error);
     },
   });
@@ -257,7 +258,7 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       to: 'PersonalStack',
     },
-    {
+    widgetToken && {
       logo: newCardsIcons.lodgeClaim,
       name: 'Lodge Claim',
       image: icons.forwardArrow,
@@ -283,34 +284,37 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       to: 'PanelHospitalList',
     },
-    {
+    widgetToken && {
       logo: newCardsIcons.claimHistory,
       name: 'Claim History',
       image: icons.forwardArrow,
       to: 'Widget',
       widgetName: 'track-claim',
     },
-    user?.isOladocFeatures && {
-      logo: newCardsIcons.videoConsultation,
-      name: 'Video Consultation',
-      image: icons.forwardArrow,
-      to: 'Widget',
-      widgetName: 'vc',
-    },
-    user?.isOladocFeatures && {
-      logo: newCardsIcons.inClinic,
-      name: 'In-Clinic Appointment',
-      image: icons.forwardArrow,
-      to: 'Widget',
-      widgetName: 'opd',
-    },
-    user?.isOladocFeatures && {
-      logo: newCardsIcons.bookLabTests,
-      name: 'Book Lab test',
-      image: icons.forwardArrow,
-      to: 'Widget',
-      widgetName: 'labs',
-    },
+    widgetToken &&
+      user?.isOladocFeatures && {
+        logo: newCardsIcons.videoConsultation,
+        name: 'Video Consultation',
+        image: icons.forwardArrow,
+        to: 'Widget',
+        widgetName: 'vc',
+      },
+    widgetToken &&
+      user?.isOladocFeatures && {
+        logo: newCardsIcons.inClinic,
+        name: 'In-Clinic Appointment',
+        image: icons.forwardArrow,
+        to: 'Widget',
+        widgetName: 'opd',
+      },
+    widgetToken &&
+      user?.isOladocFeatures && {
+        logo: newCardsIcons.bookLabTests,
+        name: 'Book Lab test',
+        image: icons.forwardArrow,
+        to: 'Widget',
+        widgetName: 'labs',
+      },
     {
       logo: newCardsIcons.helpLine,
       name: 'Helplines',

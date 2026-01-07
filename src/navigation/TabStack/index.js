@@ -13,6 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import LodgeClaimStack from '../LodgeClaimStack';
 import {AileronRegular} from '../../components';
 import Widget from '../../screens/Widget';
+import {useSelector} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,6 +49,8 @@ const TabLabel = ({title}) => (
 );
 
 const Tabs = () => {
+  const {widgetToken} = useSelector(state => state.auth);
+
   return (
     <Tab.Navigator
       initialRouteName="HomeStack"
@@ -81,17 +84,19 @@ const Tabs = () => {
         }}
       />
 
-      <Tab.Screen
-        name="raise-claim"
-        component={Widget}
-        initialParams={{widgetName: 'raise-claim'}}
-        options={{
-          tabBarLabel: () => <TabLabel title="Lodge Claim" />,
-          tabBarIcon: ({focused}) => (
-            <TabIcon focused={focused} icon={tabIcons.note} />
-          ),
-        }}
-      />
+      {widgetToken && (
+        <Tab.Screen
+          name="raise-claim"
+          component={Widget}
+          initialParams={{widgetName: 'raise-claim'}}
+          options={{
+            tabBarLabel: () => <TabLabel title="Lodge Claim" />,
+            tabBarIcon: ({focused}) => (
+              <TabIcon focused={focused} icon={tabIcons.note} />
+            ),
+          }}
+        />
+      )}
       <Tab.Screen
         name="Helpline"
         component={Helpline}
