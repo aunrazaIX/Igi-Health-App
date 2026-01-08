@@ -13,7 +13,7 @@ const endpoints = {
     getBankDetails: cnic => `Account/GetBankDetails?Cnic=${cnic}`,
   },
   benefits: {
-    getBenefits: policyNumber => `Benefit/GetUserBenefits?PolicyNumber=${policyNumber}`,
+    getBenefits: (policyNumber, planCode) => `Benefit/GetUserBenefits?PolicyNumber=${policyNumber}&PlanCode=${planCode}`,
   },
   dependent: {
     getDependents: 'ClaimProcess/GetCustomerDependent',

@@ -26,11 +26,10 @@ const useBenefitsViewModel = () => {
   };
 
   const {loading: benefitsloading} = useApiHook({
-    argsOrBody: {
-      PolicyNumber: selectedPolicyObject?.policyNumber,
-      PlanCode: selectedPolicyObject?.planCode,
-    },
-    apiEndpoint: endpoints.benefits.getBenefits,
+    apiEndpoint: endpoints.benefits.getBenefits(
+      selectedPolicyObject?.policyNumber,
+      selectedPolicyObject?.planCode,
+    ),
     method: 'get',
     onSuccess: res => {
       setAllBenefits(res?.data);
