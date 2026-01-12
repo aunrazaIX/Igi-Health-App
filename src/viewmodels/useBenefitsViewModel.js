@@ -18,18 +18,17 @@ const useBenefitsViewModel = () => {
 
   const formatPrice = value => {
     if (!value) return '0';
-
     const number = Number(value);
     if (isNaN(number)) return value;
-
     return new Intl.NumberFormat('en-PK').format(number);
   };
 
   const {loading: benefitsloading} = useApiHook({
-    apiEndpoint: endpoints.benefits.getBenefits(
-      selectedPolicyObject?.policyNumber,
-      selectedPolicyObject?.planCode,
-    ),
+    argsOrBody: {
+      PolicyNumber: selectedPolicyObject?.policyNumber,
+      PlanCode: selectedPolicyObject?.planCode,
+    },
+    apiEndpoint: endpoints.benefits.getBenefits,
     method: 'get',
     onSuccess: res => {
       setAllBenefits(res?.data);
