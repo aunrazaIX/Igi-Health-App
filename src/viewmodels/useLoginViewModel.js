@@ -90,6 +90,7 @@ const useLoginViewModel = () => {
   } = useErrorHandlingHook({
     userName: rememberMe ? credentials?.userName : null,
     password: rememberMe ? credentials?.password : null,
+    platform: 'mobileapp',
   });
 
   const {
