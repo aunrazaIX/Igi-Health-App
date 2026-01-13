@@ -125,7 +125,6 @@ const useLoginViewModel = () => {
   const {loading, trigger} = useApiHook({
     apiEndpoint: endpoints.auth.login,
     method: 'post',
-    argsOrBody: loginApiData,
     onSuccess: res => {
       console.log('REs', res);
       if (!res?.data?.policies || res?.data?.roleId !== 16) {
@@ -210,6 +209,7 @@ const useLoginViewModel = () => {
       userName: loginApiData?.userName,
       password: loginApiData?.password,
       deviceToken: deviceToken ?? '--',
+      platform: 'mobileapp',
     };
 
     if (isToggle) {
@@ -297,6 +297,7 @@ const useLoginViewModel = () => {
         userName: biometrics.userName,
         password: Buffer.from(biometrics.password, 'base64').toString('utf8'),
         deviceToken: deviceToken ?? '--',
+        platform: 'mobileapp',
       };
       await trigger(apiData);
     } catch (error) {
