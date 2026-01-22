@@ -7,6 +7,7 @@ import styles from './styles';
 import {COLORS} from '../../assets/theme/colors';
 
 const WidgetView = ({
+  title,
   token,
   handleLoadError,
   isLoading,
@@ -17,7 +18,7 @@ const WidgetView = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TopView title={'Widget'} />
+      <TopView title={title} />
       <CurvedView containerStyle={styles.subContainer}>
         {isLoading && <SimpleLoader color={COLORS.loginButton} />}
         {incValue && (

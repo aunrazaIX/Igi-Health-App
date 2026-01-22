@@ -137,18 +137,20 @@ const useLoginViewModel = () => {
         );
         return;
       }
+      const {allowClaims, isOlaDoc} = res?.data || {};
+      if (allowClaims || isOlaDoc) {
+        let argsOrBody = {
+          identification_field: 'PHONE_NUMBER',
+          identification_value: res?.data?.phoneNo,
+          name: res?.data?.memberName,
+          city: '',
+          country_code: '+92',
+          company_name: res?.data?.policies[0]?.companyName,
+          policy: res?.data?.policies[0]?.policyNumber,
+        };
+        generateToken(argsOrBody);
+      }
 
-      let argsOrBody = {
-        identification_field: 'PHONE_NUMBER',
-        identification_value: res?.data?.phoneNo,
-        name: res?.data?.memberName,
-        city: '',
-        country_code: '+92',
-        company_name: res?.data?.policies[0]?.companyName,
-        policy: res?.data?.policies[0]?.policyNumber,
-      };
-
-      generateToken(argsOrBody);
       loginResponse.current = res;
       if (res?.data.UserName !== credentials?.userName) {
         dispatch(resetAllModules());

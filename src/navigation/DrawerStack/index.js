@@ -66,7 +66,7 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'PersonalStack',
     },
-    {
+    user?.allowPriorApprovals && {
       id: 5,
       name: 'Prior Approval',
       icon: drawerIcons.drawerPriorApproval,
@@ -81,7 +81,7 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'PersonalStack',
     },
-    {
+    user?.allowPriorApprovals && {
       id: 7,
       name: 'Prior Approval History',
       icon: drawerIcons.drawerClaimHistory,
@@ -89,13 +89,15 @@ const DrawerStack = () => {
       stChild: 'HomeStack',
       ndChild: 'PriorApprovalHistory',
     },
-    widgetToken && {
-      id: 7,
-      name: 'Claims History',
-      icon: drawerIcons.drawerClaimHistory,
-      to: 'Widget',
-      widgetName: 'track-claim',
-    },
+    widgetToken &&
+      user?.allowClaims && {
+        id: 7,
+        name: 'Claims History',
+        icon: drawerIcons.drawerClaimHistory,
+        to: 'Widget',
+        widgetName: 'track-claim',
+        title: 'Claims History',
+      },
     widgetToken &&
       user?.isOladocFeatures && {
         id: 16,
@@ -103,6 +105,7 @@ const DrawerStack = () => {
         icon: drawerIcons.drawerVideoCons,
         to: 'Widget',
         widgetName: 'vc',
+        title: 'Video Consultation',
       },
     widgetToken &&
       user?.isOladocFeatures && {
@@ -111,6 +114,7 @@ const DrawerStack = () => {
         icon: drawerIcons.drawerInClinicApp,
         to: 'Widget',
         widgetName: 'opd',
+        title: 'In-Clinic Appointment',
       },
     widgetToken &&
       user?.isOladocFeatures && {
@@ -119,6 +123,7 @@ const DrawerStack = () => {
         icon: drawerIcons.drawerLabTests,
         to: 'Widget',
         widgetName: 'labs',
+        title: 'Book Lab Tests',
       },
     {
       id: 8,
@@ -269,6 +274,7 @@ const DrawerStack = () => {
                       let params = {};
                       if (route?.widgetName) {
                         params.widgetName = route?.widgetName;
+                        params.title = route?.title;
                       }
                       navigation.navigate(route.to, params);
                       return;

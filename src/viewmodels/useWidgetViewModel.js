@@ -8,8 +8,7 @@ const useWidgetViewModel = ({route}) => {
   const [key, setKey] = useState(null);
   const [isErrorOcuured, setIsErrorOccured] = useState(false);
   const {widgetToken: token} = useSelector(state => state.auth);
-  const {widgetName} = route?.params || {};
-
+  const {widgetName, title} = route?.params || {};
   const widgetUrl = `http://pkdemo.oladoc.com/widgets/launch?screen_name=${widgetName}`;
 
   const setLoadingState = loading => {
@@ -87,6 +86,7 @@ const useWidgetViewModel = ({route}) => {
       incValue: key,
       isLoading,
       isErrorOcuured,
+      title,
     },
     functions: {
       setLoadingState,

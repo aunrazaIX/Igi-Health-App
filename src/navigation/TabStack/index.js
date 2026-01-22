@@ -49,7 +49,7 @@ const TabLabel = ({title}) => (
 );
 
 const Tabs = () => {
-  const {widgetToken} = useSelector(state => state.auth);
+  const {widgetToken, user} = useSelector(state => state.auth);
 
   return (
     <Tab.Navigator
@@ -71,24 +71,25 @@ const Tabs = () => {
           ),
         }}
       />
+      {user?.allowPriorApprovals && (
+        <Tab.Screen
+          name="PriorApprovalStack"
+          initialParams={{type: 'priorApproval'}}
+          component={LodgeClaimStack}
+          options={{
+            tabBarLabel: () => <TabLabel title="Prior Approval" />,
+            tabBarIcon: ({focused}) => (
+              <TabIcon focused={focused} icon={tabIcons.PriorApproval} />
+            ),
+          }}
+        />
+      )}
 
-      <Tab.Screen
-        name="PriorApprovalStack"
-        initialParams={{type: 'priorApproval'}}
-        component={LodgeClaimStack}
-        options={{
-          tabBarLabel: () => <TabLabel title="Prior Approval" />,
-          tabBarIcon: ({focused}) => (
-            <TabIcon focused={focused} icon={tabIcons.PriorApproval} />
-          ),
-        }}
-      />
-
-      {widgetToken && (
+      {widgetToken && user?.allowClaims && (
         <Tab.Screen
           name="raise-claim"
           component={Widget}
-          initialParams={{widgetName: 'raise-claim'}}
+          initialParams={{widgetName: 'raise-claim', title: 'Lodge Claim'}}
           options={{
             tabBarLabel: () => <TabLabel title="Lodge Claim" />,
             tabBarIcon: ({focused}) => (

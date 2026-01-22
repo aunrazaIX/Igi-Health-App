@@ -25,6 +25,7 @@ const useHomeViewModel = () => {
   const {selectedPolicy, selectedPolicyObject} = useSelector(
     state => state.general,
   );
+  const {allowClaims, isOlaDoc} = user || {};
   const onPressPolicy = policy => {
     dispatch(setPolicy(policy.policyNumber));
     dispatch(setSelectedPolicyObject(policy));
@@ -133,7 +134,9 @@ const useHomeViewModel = () => {
   useFocusEffect(
     useCallback(() => {
       getDxcClaims();
-      generateToken();
+      if (allowClaims || isOlaDoc) {
+        generateToken();
+      }
     }, [selectedPolicyObject]),
   );
   const sortClaimData = (items = []) => {
@@ -258,14 +261,16 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       to: 'PersonalStack',
     },
-    widgetToken && {
-      logo: newCardsIcons.lodgeClaim,
-      name: 'Lodge Claim',
-      image: icons.forwardArrow,
-      to: 'Widget',
-      widgetName: 'raise-claim',
-    },
-    {
+    widgetToken &&
+      user?.allowClaims && {
+        logo: newCardsIcons.lodgeClaim,
+        name: 'Lodge Claim',
+        image: icons.forwardArrow,
+        to: 'Widget',
+        widgetName: 'raise-claim',
+        title: 'Lodge Claim',
+      },
+    user?.allowPriorApprovals && {
       logo: newCardsIcons.taskDone,
       name: 'Prior\nApproval',
       image: icons.forwardArrow,
@@ -284,13 +289,15 @@ const useHomeViewModel = () => {
       image: icons.forwardArrow,
       to: 'PanelHospitalList',
     },
-    widgetToken && {
-      logo: newCardsIcons.claimHistory,
-      name: 'Claim History',
-      image: icons.forwardArrow,
-      to: 'Widget',
-      widgetName: 'track-claim',
-    },
+    widgetToken &&
+      user?.allowClaims && {
+        logo: newCardsIcons.claimHistory,
+        name: 'Claim History',
+        image: icons.forwardArrow,
+        to: 'Widget',
+        widgetName: 'track-claim',
+        title: 'Claim History',
+      },
     widgetToken &&
       user?.isOladocFeatures && {
         logo: newCardsIcons.videoConsultation,
@@ -298,6 +305,7 @@ const useHomeViewModel = () => {
         image: icons.forwardArrow,
         to: 'Widget',
         widgetName: 'vc',
+        title: 'Video Consultation',
       },
     widgetToken &&
       user?.isOladocFeatures && {
@@ -306,6 +314,7 @@ const useHomeViewModel = () => {
         image: icons.forwardArrow,
         to: 'Widget',
         widgetName: 'opd',
+        title: 'In-Clinic Appointment',
       },
     widgetToken &&
       user?.isOladocFeatures && {
@@ -314,6 +323,7 @@ const useHomeViewModel = () => {
         image: icons.forwardArrow,
         to: 'Widget',
         widgetName: 'labs',
+        title: 'Book Lab test',
       },
     {
       logo: newCardsIcons.helpLine,
@@ -345,6 +355,7 @@ const useHomeViewModel = () => {
       let params = {};
       if (item?.widgetName) {
         params.widgetName = item?.widgetName;
+        params.title = item?.title;
       }
       navigate.navigate(item.to, params);
       return;

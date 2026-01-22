@@ -4,10 +4,11 @@ import useWidgetViewModel from '../../viewmodels/useWidgetViewModel';
 
 const Widget = ({route}) => {
   const {states, functions} = useWidgetViewModel({route});
-  const {token, widgetUrl, isErrorOcuured, isLoading, incValue} = states;
+  const {token, widgetUrl, isErrorOcuured, isLoading, incValue, title} = states;
   const {handleLoadError, setLoadingState, handleNavigation} = functions;
   return (
     <WidgetView
+      title={title}
       handleLoadError={handleLoadError}
       setLoadingState={setLoadingState}
       handleNavigation={handleNavigation}
