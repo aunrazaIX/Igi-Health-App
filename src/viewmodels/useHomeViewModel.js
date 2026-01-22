@@ -27,14 +27,22 @@ const useHomeViewModel = () => {
   );
   const {allowClaims, isOladocFeatures} = user || {};
   const onPressPolicy = policy => {
-    dispatch(setPolicy(policy.policyNumber));
+    dispatch(setPolicy(policy?.policyNumber));
     dispatch(setSelectedPolicyObject(policy));
+    refetchPolicyDetails({PolicyNumber: policy?.policyNumber});
     setShowDropDown(false);
   };
 
-  const {data, loading} = useApiHook({
+  const {
+    data,
+    loading,
+    trigger: refetchPolicyDetails,
+  } = useApiHook({
     method: 'get',
-    apiEndpoint: endpoints.policy.getPolicyDetails(selectedPolicy),
+    apiEndpoint: endpoints.policy.getPolicyDetails,
+    argsOrBody: {
+      PolicyNumber: selectedPolicy,
+    },
   });
 
   const {trigger: generateToken} = useApiHook({

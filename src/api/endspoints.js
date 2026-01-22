@@ -36,8 +36,7 @@ const endpoints = {
     UploadAttachment: 'General/UploadAttachment',
   },
   policy: {
-    getPolicyDetails: policyNumber =>
-      `Policy/GetPolicyDetail?PolicyNumber=${policyNumber}`,
+    getPolicyDetails: 'Policy/GetPolicyDetail',
   },
   notifications: {
     getAll: 'Notification/GetUserNotifications',
