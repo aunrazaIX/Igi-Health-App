@@ -25,7 +25,7 @@ const useHomeViewModel = () => {
   const {selectedPolicy, selectedPolicyObject} = useSelector(
     state => state.general,
   );
-  const {allowClaims, isOlaDoc} = user || {};
+  const {allowClaims, isOladocFeatures} = user || {};
   const onPressPolicy = policy => {
     dispatch(setPolicy(policy.policyNumber));
     dispatch(setSelectedPolicyObject(policy));
@@ -134,7 +134,7 @@ const useHomeViewModel = () => {
   useFocusEffect(
     useCallback(() => {
       getDxcClaims();
-      if (allowClaims || isOlaDoc) {
+      if (allowClaims || isOladocFeatures) {
         generateToken();
       }
     }, [selectedPolicyObject]),

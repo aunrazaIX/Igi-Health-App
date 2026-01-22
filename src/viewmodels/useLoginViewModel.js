@@ -137,7 +137,7 @@ const useLoginViewModel = () => {
         );
         return;
       }
-      const {allowClaims, isOlaDoc} = res?.data || {};
+      const {allowClaims, isOladocFeatures} = res?.data || {};
       if (allowClaims || isOlaDoc) {
         let argsOrBody = {
           identification_field: 'PHONE_NUMBER',
