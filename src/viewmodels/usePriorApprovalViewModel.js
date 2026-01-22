@@ -121,11 +121,6 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     icon: icons.stethoscope,
     info: [
       {
-        key: 'receiptNumber',
-        label: 'Admission/M.R. No.',
-        value: item?.receiptNumber ?? '--',
-      },
-      {
         key: 'admission_date',
         label: 'Admission/Procedure Date:',
         value: item?.admissionDate ?? '--',
