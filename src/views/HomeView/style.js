@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
   policyDropDown: {
     width: '100%',
     borderBottomWidth: 1,
+    paddingVertical: vh,
     borderColor: COLORS.black + '22',
   },
   modalContainer: {
