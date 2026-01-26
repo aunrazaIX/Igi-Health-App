@@ -19,7 +19,7 @@ const usePersonalViewModal = () => {
   const goBack = () => navigation.goBack();
   const {user} = useSelector(state => state.auth);
   const {selectedPolicy} = useSelector(state => state.general);
-
+  const {allowDependentManagement} = user || {};
   const {loading: dependantLoading} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependents,
     method: 'get',
@@ -135,6 +135,7 @@ const usePersonalViewModal = () => {
       dependantLoading,
       deleteDepenedentLoading,
       modalType,
+      allowDependentManagement,
     },
     functions: {
       openAddDependent,

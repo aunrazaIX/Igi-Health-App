@@ -14,6 +14,7 @@ const Personal = () => {
     deleteDepenedentLoading,
     dependantLoading,
     modalType,
+    allowDependentManagement,
     userData,
   } = states;
 
@@ -54,6 +55,7 @@ const Personal = () => {
         modalType={modalType}
         onPressDelete={onPressDelete}
         userData={userData}
+        allowDependentManagement={allowDependentManagement}
       />
     </>
   );
