@@ -58,7 +58,7 @@ const useHomeViewModel = () => {
     },
     instance: 'oladoc',
     headers: {
-      'x-api-key': 'ASe]dcX1Pjf91e]dcIGI-demo0qxNd_I',
+      'x-api-key': 'rjom==|tpj6w{k&Z;e7:?M)b,@8,=s1o',
     },
     apiEndpoint: endpoints.oladoc.generateToken,
     onSuccess: res => {
