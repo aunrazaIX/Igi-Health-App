@@ -16,7 +16,12 @@ const useHospitalsViewModel = () => {
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(true);
   const [tabChanging, setTabChanging] = useState(false);
-
+ const [position, setPosition] = useState({
+    latitude: 67.10846709551885, 
+    longitude: 24.903011703832806, 
+    latitudeDelta: 0.001,
+    longitudeDelta: 0.001,
+  });
   useEffect(() => {
     let filtered = allData;
     if (selectedMapTab !== 'All') {
@@ -81,7 +86,36 @@ const useHospitalsViewModel = () => {
     setTabChanging(true);
     setSelectedMapTab(tab);
   };
+ useFocusEffect(
+    useCallback(() => {
+      Geolocation.getCurrentPosition(
+        pos => {
+          const crd = pos.coords;
 
+          // setPosition({
+          //   latitude: crd.latitude,
+          //   longitude: crd.longitude,
+          //   latitudeDelta: 0.0421,
+          //   longitudeDelta: 0.0421,
+          // });
+        },
+        err => {console.log(err)},
+      );
+    }, []),
+  );
+  const cleanCoordinate = (value) => {
+    if (!value || typeof value !== 'string') return null;
+
+    const match = value.match(/^([\d.]+)\s*°/);
+    if (!match) return null;
+
+    const number = parseFloat(match[1]);
+    return isNaN(number) ? null : number;
+  };
+ const openInGoogleMaps = (latitude, longitude) => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    Linking.openURL(url);
+  };
   return {
     states: {
       data,
@@ -92,6 +126,7 @@ const useHospitalsViewModel = () => {
       modalVisible,
       tabChanging,
       hospitalLoading,
+      position,
     },
     functions: {
       onPressTab,
@@ -101,6 +136,8 @@ const useHospitalsViewModel = () => {
       setSearchText,
       handleMapDirection,
       setModalVisible,
+      cleanCoordinate,
+      openInGoogleMaps,
     },
   };
 };

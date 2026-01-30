@@ -11,6 +11,8 @@ const Hospitals = () => {
     setSearchText,
     handleMapDirection,
     setModalVisible,
+    cleanCoordinate,
+    openInGoogleMaps,
   } = functions;
   const {
     selectedTab,
@@ -21,6 +23,7 @@ const Hospitals = () => {
     hospitalLoading,
     tabChanging,
     modalVisible,
+    position,
   } = states;
   return (
     <>
@@ -40,6 +43,9 @@ const Hospitals = () => {
         handleMapDirection={handleMapDirection}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
+        position={position}
+        cleanCoordinate={cleanCoordinate}
+        openInGoogleMaps={openInGoogleMaps}
       />
     </>
   );

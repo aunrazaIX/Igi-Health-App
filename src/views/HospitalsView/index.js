@@ -17,6 +17,8 @@ import ProvinceTab from '../../components/provinceTab';
 import NoDataView from '../../components/NoDataView';
 import SimpleLoader from '../../components/SimpleLoader';
 import AlertModal from '../../components/AlertModal';
+import MapView, {Callout, Marker} from 'react-native-maps';
+import { Text } from 'react-native-gesture-handler';
 
 const HospitalsView = ({
   selectedTab,
@@ -34,7 +36,11 @@ const HospitalsView = ({
   handleMapDirection,
   modalVisible,
   setModalVisible,
+  position, 
+  cleanCoordinate,
+  openInGoogleMaps
 }) => {
+  console.log(position, 'dfjk')
   return (
     <>
       <TopView title="Network Hospitals" type="default" />
@@ -190,7 +196,51 @@ const HospitalsView = ({
               // marginHorizontal: vw * 10,
               // flex: 1,
               marginTop: vh * 2,
-            }}></View>
+            }}>
+              <MapView
+                showsUserLocation
+                key={selectedTabRight}
+                style={{flex: 1}}
+                initialRegion={{
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  }}>
+                {data.map((item, index) => {
+                  const latitude = cleanCoordinate(item.latitude ?? '');
+                  const longitude = cleanCoordinate(item.longitude ?? '');
+                  if (latitude === null || longitude === null) {
+                    return null;
+                  }
+
+                  const addressObj = item.items.find(
+                    (i) => i.label === 'Address:',
+                  );
+                  const address = addressObj ? addressObj.value : '';
+                  return (
+                    <Marker key={index} coordinate={{latitude, longitude}}>
+                      <Callout
+                        onPress={() => openInGoogleMaps(latitude, longitude)}>
+                        <TouchableOpacity style={styles.calloutContainer}>
+                          <View style={styles.callout}>
+                            <Text style={styles.calloutTitle}>
+                              {item.headerLabel}
+                            </Text>
+                            <Text style={styles.calloutDescription}>
+                              {address}
+                            </Text>
+                            <Text style={styles.calloutLink}>
+                              Tap to open in Google Maps
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      </Callout>
+                    </Marker>
+                  );
+                })}
+              </MapView>
+            </View>
         )}
         <AlertModal
           title="Notice"
