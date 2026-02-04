@@ -44,7 +44,7 @@ const useHomeViewModel = () => {
       PolicyNumber: selectedPolicy,
     },
   });
-  console.log('data', data);
+
   const {trigger: generateToken} = useApiHook({
     method: 'post',
     argsOrBody: {

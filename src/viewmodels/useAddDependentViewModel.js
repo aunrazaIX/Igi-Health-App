@@ -14,6 +14,7 @@ const useAddDependentViewModal = ({route}) => {
   const {dependentData, dependentIndex, isUpdate} = route?.params || {};
   const [confirmationType, setConfirmatonType] = useState('');
   const [confirmationModal, setConfirmationModal] = useState(false);
+  const {selectedPolicy} = useSelector(state => state.general);
 
   const relationsOptions = [
     {label: 'Husband', value: 1},
@@ -98,6 +99,8 @@ const useAddDependentViewModal = ({route}) => {
     gender: apiData?.gender?.value,
     dob: apiData?.dob,
     dependentReqType: apiData?.dependentReqType,
+    policyNumber: selectedPolicy,
+    ...(isUpdate && {clientNumber: dependentData?.clntnum}),
   });
   const handleSubmitRequest = () => {
     const filled = dependentCheckForError();

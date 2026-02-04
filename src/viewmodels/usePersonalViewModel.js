@@ -30,6 +30,7 @@ const usePersonalViewModal = () => {
       setData(
         res?.data?.map((item, index) => ({
           key: index,
+          clntnum:  item?.clntnum,
           dependent: 'Dependent Detail',
           image:
             item?.relation === 'Wife'
@@ -86,6 +87,7 @@ const usePersonalViewModal = () => {
       dependentData: dependent ?? null,
       dependentIndex: index ?? null,
       isUpdate: true,
+    clntnum: dependent?.clntnum,
     });
   };
   const {trigger, loading: deleteDepenedentLoading} = useApiHook({

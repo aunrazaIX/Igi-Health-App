@@ -183,13 +183,12 @@ const useLoginViewModel = () => {
       );
     },
   });
-  console.log(signupApiData);
+
   const {trigger: triggerSignup, loading: loadingSignup} = useApiHook({
     apiEndpoint: endpoints.auth.registerUser,
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
-      console.log('shdj', res);
       if (res?.data?.skipVerification) {
         Toast.show({
           type: 'success',

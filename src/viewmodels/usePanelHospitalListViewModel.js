@@ -47,7 +47,6 @@ const usePanelHospitalListViewModel = () => {
       isAllRecord: true,
     },
     onSuccess: res => {
-      console.log(res);
       const formattedData =
         res?.data?.dataList?.map(item => ({
           headerLabel: item?.name,

@@ -181,11 +181,11 @@ const HomeView = ({
                         />
                       </View>
 
-                      <View style={{width: '80%'}}>
+                      <View style={{width: '74%'}}>
                         <AileronSemiBold
                           name={`Company: ${homeCardData?.companyName}`}
                           style={styles.infoCardMiddleTextlight}
-                          numberOfLines={1}
+                          numberOfLines={2}
                         />
                       </View>
                     </View>
