@@ -29,6 +29,7 @@ import useApiHook from '../hooks/useApiHook';
 import {resetAllModules} from '../redux/lodgeSlice';
 import {Buffer} from 'buffer';
 import {getApp} from '@react-native-firebase/app';
+import Toast from 'react-native-toast-message';
 
 const useLoginViewModel = () => {
   const {rememberMe, credentials, biometrics, isToggle, deviceToken} =
@@ -182,11 +183,22 @@ const useLoginViewModel = () => {
       );
     },
   });
+  console.log(signupApiData);
   const {trigger: triggerSignup, loading: loadingSignup} = useApiHook({
     apiEndpoint: endpoints.auth.registerUser,
     method: 'post',
     argsOrBody: signupApiData,
     onSuccess: res => {
+      console.log('shdj', res);
+      if (res?.data?.skipVerification) {
+        Toast.show({
+          type: 'success',
+          text1: 'Account Created Successfully, Login to continue',
+        });
+        setSelectedTab('login');
+        signupResetStates();
+        return;
+      }
       const hasToken = !!res?.data?.token;
       navigation.navigate('ForgotPassword', {
         type: 'signup',

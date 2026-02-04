@@ -16,11 +16,11 @@ const useHospitalsViewModel = () => {
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(true);
   const [tabChanging, setTabChanging] = useState(false);
- const [position, setPosition] = useState({
-    latitude: 67.10846709551885, 
-    longitude: 24.903011703832806, 
-    latitudeDelta: 0.001,
-    longitudeDelta: 0.001,
+  const [position, setPosition] = useState({
+    latitude: 24.8607,
+    longitude: 67.0011,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
   });
   useEffect(() => {
     let filtered = allData;
@@ -48,6 +48,7 @@ const useHospitalsViewModel = () => {
       isAllRecord: true,
     },
     onSuccess: res => {
+      console.log(res);
       const formattedData =
         res?.data?.dataList?.map(item => ({
           headerLabel: item?.name,
@@ -63,12 +64,8 @@ const useHospitalsViewModel = () => {
         })) || [];
       setAllData(formattedData);
     },
+    onError: err => console.log(err),
   });
-  useFocusEffect(
-    useCallback(() => {
-      trigger();
-    }, []),
-  );
 
   const handleMapDirection = (latitude, longitude) => {
     if (latitude && longitude) {
@@ -86,24 +83,26 @@ const useHospitalsViewModel = () => {
     setTabChanging(true);
     setSelectedMapTab(tab);
   };
- useFocusEffect(
+  useFocusEffect(
     useCallback(() => {
+      trigger();
       Geolocation.getCurrentPosition(
         pos => {
           const crd = pos.coords;
-
-          // setPosition({
-          //   latitude: crd.latitude,
-          //   longitude: crd.longitude,
-          //   latitudeDelta: 0.0421,
-          //   longitudeDelta: 0.0421,
-          // });
+          setPosition({
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+            latitudeDelta: 0.0421,
+            longitudeDelta: 0.0421,
+          });
         },
-        err => {console.log(err)},
+        err => {
+          console.log(err);
+        },
       );
     }, []),
   );
-  const cleanCoordinate = (value) => {
+  const cleanCoordinate = value => {
     if (!value || typeof value !== 'string') return null;
 
     const match = value.match(/^([\d.]+)\s*°/);
@@ -112,7 +111,7 @@ const useHospitalsViewModel = () => {
     const number = parseFloat(match[1]);
     return isNaN(number) ? null : number;
   };
- const openInGoogleMaps = (latitude, longitude) => {
+  const openInGoogleMaps = (latitude, longitude) => {
     const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
     Linking.openURL(url);
   };

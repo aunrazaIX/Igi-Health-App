@@ -56,14 +56,14 @@ const useForgotPasswordViewModel = ({route}) => {
     confirmPassword: '',
   });
 
-  const {trigger: triggerForgotPassword} = useApiHook({
+  const {trigger: triggerForgotPassword, loading} = useApiHook({
     apiEndpoint: endpoints.auth.resendOTP(apiData?.email),
     method: 'post',
-    argsOrBody: {},
     onSuccess: res => {
       setStep(2);
     },
     onError: e => {
+      console.log(e);
       dispatch(setErrorModal({show: true, message: e?.message}));
     },
   });
@@ -105,7 +105,7 @@ const useForgotPasswordViewModel = ({route}) => {
     onError: e => {
       dispatch(
         setErrorModal({
-          Show: true,
+          show: true,
           message: e?.message,
         }),
       );
@@ -126,7 +126,7 @@ const useForgotPasswordViewModel = ({route}) => {
     onError: e => {
       dispatch(
         setErrorModal({
-          Show: true,
+          show: true,
           message: e?.message,
         }),
       );
@@ -144,7 +144,7 @@ const useForgotPasswordViewModel = ({route}) => {
       if (!apiData.email) {
         dispatch(
           setErrorModal({
-            Show: true,
+            show: true,
             message: 'Reset Failed',
             detail:
               'Please ensure that all required fields are filled out and try again. If the problem persists, contact IGI Life.',
@@ -173,7 +173,7 @@ const useForgotPasswordViewModel = ({route}) => {
       ) {
         dispatch(
           setErrorModal({
-            Show: true,
+            show: true,
             message: 'Missing Password Fields',
             detail:
               'Please enter both Password and Confirm Password to continue',
@@ -187,7 +187,7 @@ const useForgotPasswordViewModel = ({route}) => {
       ) {
         dispatch(
           setErrorModal({
-            Show: true,
+            show: true,
             message: 'Password Mismatched',
             detail:
               'Please ensure the new password and confirmation fields contain the same value before proceeding.',
@@ -215,6 +215,7 @@ const useForgotPasswordViewModel = ({route}) => {
       showResend,
       countdownKey,
       isChangedPassword,
+      loading,
     },
     functions: {
       handleStep,

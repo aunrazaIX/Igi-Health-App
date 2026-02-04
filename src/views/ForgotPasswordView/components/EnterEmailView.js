@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
-import { icons } from '../../../assets';
+import React, {Fragment} from 'react';
+import {icons} from '../../../assets';
 import styles from '../styles';
-import { StyleSheet } from 'react-native';
-import { vh, vw } from '../../../assets/theme/dimension';
-import { InputField } from '../../../components';
+import {StyleSheet} from 'react-native';
+import {vh, vw} from '../../../assets/theme/dimension';
+import {InputField} from '../../../components';
 
-const EnterEmailView = ({ setterForApiData, apiData, ForgotPasswordLoading }) => {
+const EnterEmailView = ({setterForApiData, apiData, loading}) => {
   return (
     <Fragment>
       <InputField
@@ -18,8 +18,9 @@ const EnterEmailView = ({ setterForApiData, apiData, ForgotPasswordLoading }) =>
         containerStyle={style.inputContainer}
         value={apiData?.email}
         onChangeText={text => {
-          setterForApiData('email', text);}}
-        editable={!ForgotPasswordLoading}
+          setterForApiData('email', text);
+        }}
+        editable={!loading}
       />
     </Fragment>
   );

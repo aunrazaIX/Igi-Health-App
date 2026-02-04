@@ -76,9 +76,9 @@ export const generateCardHTML = (data, user, dependentsList) => `
 
                   <tr>
                   <td style="padding-bottom: 5px">
-                      <span>Cert No: </span>
+                      <span>Company Name: </span>
                       <span
-                        >${data?.policyType}</span
+                        >${data?.companyName}</span
                       >
                     </td>
                     <td style="text-align: end; padding-bottom: 5px;">
@@ -159,7 +159,7 @@ export const generateCardHTML = (data, user, dependentsList) => `
                               </p>
                               <p style="margin: 0px">
                                 Rs. Per Day:<span>
-                                  ${data?.perDay}</span
+                                  ${data?.perDay || 0}</span
                                 >
                               </p>
                             </td>

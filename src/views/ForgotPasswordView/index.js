@@ -12,7 +12,6 @@ import {
 } from '../../components';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useSelector} from 'react-redux';
 import {View} from 'react-native';
 
 const ForgotPasswordView = ({
@@ -30,7 +29,6 @@ const ForgotPasswordView = ({
   setterForUpdatePasswordApiData,
   onPressResend,
   updatePasswordApiData,
-  ForgotPasswordLoading,
   otp,
   sendOtp,
   showResend,
@@ -43,15 +41,14 @@ const ForgotPasswordView = ({
   flushOtp,
   type,
   isChangedPassword,
+  loading,
 }) => {
-  const {user} = useSelector(state => state.auth);
-
   const returnComponent = {
     1: (
       <EnterEmailView
-        ForgotPasswordLoading={ForgotPasswordLoading}
         setterForApiData={setterForApiData}
         apiData={apiData}
+        loading={loading}
       />
     ),
     2: (
@@ -130,11 +127,7 @@ const ForgotPasswordView = ({
               onPress={handleNext}
               name={returnButtonName[step]}
               containerStyle={styles.button}
-              loading={
-                verifyOtpLoading ||
-                ForgotPasswordLoading ||
-                updatePasswordLoading
-              }
+              loading={verifyOtpLoading || loading || updatePasswordLoading}
             />
           </View>
         </KeyboardAwareScrollView>

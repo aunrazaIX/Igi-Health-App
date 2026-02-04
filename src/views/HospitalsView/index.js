@@ -18,7 +18,7 @@ import NoDataView from '../../components/NoDataView';
 import SimpleLoader from '../../components/SimpleLoader';
 import AlertModal from '../../components/AlertModal';
 import MapView, {Callout, Marker} from 'react-native-maps';
-import { Text } from 'react-native-gesture-handler';
+import {Text} from 'react-native-gesture-handler';
 
 const HospitalsView = ({
   selectedTab,
@@ -36,11 +36,10 @@ const HospitalsView = ({
   handleMapDirection,
   modalVisible,
   setModalVisible,
-  position, 
+  position,
   cleanCoordinate,
-  openInGoogleMaps
+  openInGoogleMaps,
 }) => {
-  console.log(position, 'dfjk')
   return (
     <>
       <TopView title="Network Hospitals" type="default" />
@@ -132,7 +131,7 @@ const HospitalsView = ({
                 horizontal
                 showsHorizontalScrollIndicator={true}
                 contentContainerStyle={styles.mapTabsContainer}
-                keyExtractor={(index) => index.toString()}
+                keyExtractor={index => index.toString()}
                 renderItem={({item}) => (
                   <ProvinceTab
                     onPressMapTab={onPressMapTab}
@@ -147,45 +146,30 @@ const HospitalsView = ({
         </View>
 
         {selectedTabRight === 'list' && (
-          <>
-            {tabChanging ? (
-              <SimpleLoader color={COLORS.black} />
-            ) : (
-              <FlatList
-                indicatorStyle="black"
-                data={data}
-                keyExtractor={(_, index) => index.toString()}
-                ListEmptyComponent={() => {
-                  if (tabChanging) {
-                    return (
-                      <View style={{padding: 20, alignItems: 'center'}}>
-                        <SimpleLoader
-                          size="large"
-                          color={COLORS.cardBackgroundBlue}
-                        />
-                      </View>
-                    );
-                  }
-                  return hospitalLoading ||
-                    tabChanging ||
-                    data.length !== 0 ? null : (
-                    <NoDataView name="No hospitals found" />
-                  );
-                }}
-                renderItem={({item}) => (
-                  <>
-                    <DetailsContainer
-                      detailsTextLabel={styles.detailsTextLabel}
-                      detailsTextValue={styles.detailsTextValue}
-                      headerIcon={[icons.arrowDirection]}
-                      data={item}
-                      onPress={handleMapDirection}
-                    />
-                  </>
-                )}
-              />
+          <FlatList
+            indicatorStyle="black"
+            data={data}
+            keyExtractor={(_, index) => index.toString()}
+            ListEmptyComponent={
+              !hospitalLoading && <NoDataView name="No hospitals found" />
+            }
+            ListFooterComponent={
+              hospitalLoading && (
+                <SimpleLoader color={COLORS.cardBackgroundRed} />
+              )
+            }
+            renderItem={({item}) => (
+              <>
+                <DetailsContainer
+                  detailsTextLabel={styles.detailsTextLabel}
+                  detailsTextValue={styles.detailsTextValue}
+                  headerIcon={[icons.arrowDirection]}
+                  data={item}
+                  onPress={handleMapDirection}
+                />
+              </>
             )}
-          </>
+          />
         )}
 
         {selectedTabRight === 'map' && (
@@ -197,50 +181,48 @@ const HospitalsView = ({
               // flex: 1,
               marginTop: vh * 2,
             }}>
-              <MapView
-                showsUserLocation
-                key={selectedTabRight}
-                style={{flex: 1}}
-                initialRegion={{
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  }}>
-                {data.map((item, index) => {
-                  const latitude = cleanCoordinate(item.latitude ?? '');
-                  const longitude = cleanCoordinate(item.longitude ?? '');
-                  if (latitude === null || longitude === null) {
-                    return null;
-                  }
+            <MapView
+              showsUserLocation
+              key={selectedTabRight}
+              style={{flex: 1}}
+              region={{
+                latitude: position.latitude,
+                longitude: position.longitude,
+                latitudeDelta: position.latitudeDelta,
+                longitudeDelta: position.longitudeDelta,
+              }}>
+              {data?.map((item, index) => {
+                const latitude = cleanCoordinate(item.latitude ?? '');
+                const longitude = cleanCoordinate(item.longitude ?? '');
+                if (latitude === null || longitude === null) {
+                  return null;
+                }
 
-                  const addressObj = item.items.find(
-                    (i) => i.label === 'Address:',
-                  );
-                  const address = addressObj ? addressObj.value : '';
-                  return (
-                    <Marker key={index} coordinate={{latitude, longitude}}>
-                      <Callout
-                        onPress={() => openInGoogleMaps(latitude, longitude)}>
-                        <TouchableOpacity style={styles.calloutContainer}>
-                          <View style={styles.callout}>
-                            <Text style={styles.calloutTitle}>
-                              {item.headerLabel}
-                            </Text>
-                            <Text style={styles.calloutDescription}>
-                              {address}
-                            </Text>
-                            <Text style={styles.calloutLink}>
-                              Tap to open in Google Maps
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                      </Callout>
-                    </Marker>
-                  );
-                })}
-              </MapView>
-            </View>
+                const addressObj = item.items.find(i => i.label === 'Address:');
+                const address = addressObj ? addressObj.value : '';
+                return (
+                  <Marker key={index} coordinate={{latitude, longitude}}>
+                    <Callout
+                      onPress={() => openInGoogleMaps(latitude, longitude)}>
+                      <TouchableOpacity style={styles.calloutContainer}>
+                        <View style={styles.callout}>
+                          <Text style={styles.calloutTitle}>
+                            {item.headerLabel}
+                          </Text>
+                          <Text style={styles.calloutDescription}>
+                            {address}
+                          </Text>
+                          <Text style={styles.calloutLink}>
+                            Tap to open in Google Maps
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    </Callout>
+                  </Marker>
+                );
+              })}
+            </MapView>
+          </View>
         )}
         <AlertModal
           title="Notice"

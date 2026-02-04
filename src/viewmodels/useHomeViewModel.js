@@ -44,7 +44,7 @@ const useHomeViewModel = () => {
       PolicyNumber: selectedPolicy,
     },
   });
-
+  console.log('data', data);
   const {trigger: generateToken} = useApiHook({
     method: 'post',
     argsOrBody: {
@@ -71,21 +71,24 @@ const useHomeViewModel = () => {
       console.log('Error on', error);
     },
   });
-  const apiData = Object.values(data?.data || {})[0]?.[0];
+  const apiData =
+    data?.data?.ipdPolicyDetail?.[0] ||
+    data?.data?.opdPolicyDetail?.[0] ||
+    null;
   const matData = data?.data?.matPolicyDetail?.[0];
 
   const homeCardData = {
     memberName: user?.memberName,
     cnic: user?.cnic,
     policyNumber: selectedPolicy,
-    policyType: selectedPolicyObject?.policyType,
+    companyName: selectedPolicyObject?.companyName.trim(),
     policyClass: apiData?.policy_Class ?? '',
     policyCert: apiData?.policy_CertNo ?? '',
     age: apiData?.policy_Insured_Age ?? '',
     insuredName: apiData?.policy_Insured_Name ?? '',
     startDate: apiData?.policy_Start_Date ?? '',
     endDate: apiData?.policy_Expiry_Date ?? '',
-    perDay: apiData?.policy_Daily_RoomLimit ?? '',
+    perDay: apiData?.policy_Daily_RoomLimit ?? '0',
     matLimit: matData?.policy_MatLimit ?? '',
   };
   const {data: dependentData} = useApiHook({

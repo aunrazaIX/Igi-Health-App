@@ -11,7 +11,6 @@ const ForgotPassword = ({route}) => {
     verifyOtpLoading,
     apiData,
     updatePasswordApiData,
-    ForgotPasswordLoading,
     otp,
     showResend,
     countdownKey,
@@ -19,6 +18,7 @@ const ForgotPassword = ({route}) => {
     verifiedUserData,
     flushOtp,
     savedDataForVerification,
+    loading,
     isChangedPassword,
   } = states;
   const {
@@ -49,10 +49,10 @@ const ForgotPassword = ({route}) => {
       flushOtp={flushOtp}
       setterForApiData={setterForApiData}
       handleNext={handleNext}
+      loading={loading}
       apiData={apiData}
       updatePasswordApiData={updatePasswordApiData}
       setterForUpdatePasswordApiData={setterForUpdatePasswordApiData}
-      ForgotPasswordLoading={ForgotPasswordLoading}
       otp={otp}
       sendOtp={sendOtp}
       onPressResend={onPressResend}

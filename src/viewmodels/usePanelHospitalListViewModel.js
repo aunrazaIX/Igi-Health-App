@@ -12,7 +12,12 @@ const usePanelHospitalListViewModel = () => {
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(true);
   const [searchText, setSearchText] = useState(null);
-
+  const [position, setPosition] = useState({
+    latitude: 24.8607,
+    longitude: 67.0011,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
   const onPressRightTab = tab => {
     setSelectedTabRight(tab);
   };
@@ -20,9 +25,7 @@ const usePanelHospitalListViewModel = () => {
   const handleMapDirection = (latitude, longitude) => {
     if (latitude && longitude) {
       const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-      Linking.openURL(url).catch(err => {
-        console.error('Failed to open Google Maps:', err);
-      });
+      Linking.openURL(url).catch(err => console.log(err));
     }
   };
   const goBack = () => navigation.goBack();
@@ -44,6 +47,7 @@ const usePanelHospitalListViewModel = () => {
       isAllRecord: true,
     },
     onSuccess: res => {
+      console.log(res);
       const formattedData =
         res?.data?.dataList?.map(item => ({
           headerLabel: item?.name,
@@ -60,9 +64,36 @@ const usePanelHospitalListViewModel = () => {
       setData(formattedData);
     },
   });
+  const cleanCoordinate = value => {
+    if (!value || typeof value !== 'string') return null;
+    const match = value.match(/^([\d.]+)\s*°/);
+    if (!match) return null;
+
+    const number = parseFloat(match[1]);
+    return isNaN(number) ? null : number;
+  };
+  const openInGoogleMaps = (latitude, longitude) => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    Linking.openURL(url);
+  };
+
   useFocusEffect(
     useCallback(() => {
       trigger();
+      Geolocation.getCurrentPosition(
+        pos => {
+          const crd = pos.coords;
+          setPosition({
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+            latitudeDelta: 0.0421,
+            longitudeDelta: 0.0421,
+          });
+        },
+        err => {
+          console.log(err);
+        },
+      );
     }, []),
   );
 
@@ -77,6 +108,7 @@ const usePanelHospitalListViewModel = () => {
       searchText,
       loading,
       modalVisible,
+      position,
     },
     functions: {
       onPressRightTab,
@@ -84,6 +116,8 @@ const usePanelHospitalListViewModel = () => {
       setSearchText,
       handleMapDirection,
       showModal,
+      openInGoogleMaps,
+      cleanCoordinate,
     },
   };
 };
