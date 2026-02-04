@@ -113,8 +113,8 @@ const usePersonalViewModal = () => {
       relation: deleteDependent?.dependentDetail[2]?.value,
       dob: deleteDependent?.dependentDetail[3]?.value,
       dependentReqType: 3,
+      policyNumber: selectedPolicy,
     };
-
     trigger(_apiData);
   };
 
