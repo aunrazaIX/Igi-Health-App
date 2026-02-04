@@ -95,30 +95,38 @@ const InactivityHandler = ({children, timeout, warningBefore}) => {
         return false;
       }}>
       {children}
+      <View>
+        <Modal
+          visible={showWarning}
+          transparent
+          animationType="fade"
+          statusBarTranslucent>
+          <View style={styles.modalBackground}>
+            <View style={styles.modalContainer}>
+              <AileronBold
+                name="You are about to be signed out due to inactivity."
+                style={styles.label}
+              />
 
-      <Modal visible={showWarning} transparent animationType="fade">
-        <View style={styles.modalBackground}>
-          <View style={styles.modalContainer}>
-            <AileronBold
-              name="You are about to be signed out due to inactivity."
-              style={styles.label}
-            />
-
-            <View style={styles.buttonsView}>
-              <TouchableOpacity
-                onPress={userLogout}
-                style={[styles.buttonContainer, styles.signoutButton]}>
-                <AileronBold name="Sign Out Now" style={styles.buttonText} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={extendSession}
-                style={[styles.buttonContainer, styles.stayinButton]}>
-                <AileronBold style={styles.buttonText} name="Stay Signed In" />
-              </TouchableOpacity>
+              <View style={styles.buttonsView}>
+                <TouchableOpacity
+                  onPress={userLogout}
+                  style={[styles.buttonContainer, styles.signoutButton]}>
+                  <AileronBold name="Sign Out Now" style={styles.buttonText} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={extendSession}
+                  style={[styles.buttonContainer, styles.stayinButton]}>
+                  <AileronBold
+                    style={styles.buttonText}
+                    name="Stay Signed In"
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
+      </View>
     </View>
   );
 };
@@ -127,7 +135,11 @@ export default InactivityHandler;
 
 const styles = StyleSheet.create({
   modalBackground: {
-    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.black + '66',

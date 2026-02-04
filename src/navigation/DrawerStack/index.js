@@ -304,7 +304,7 @@ const DrawerStack = () => {
     );
   };
   return (
-    <View style={{flex: 1, display: 'contents'}}>
+    <InactivityHandler timeout={timeout} warningBefore={warningBefore}>
       <Drawer.Navigator
         drawerContent={DrawerContent}
         screenOptions={{
@@ -322,7 +322,7 @@ const DrawerStack = () => {
         <Drawer.Screen name="Privacy" component={PrivacyPolicy} />
         <Drawer.Screen name="Widget" component={Widget} />
       </Drawer.Navigator>
-    </View>
+    </InactivityHandler>
   );
 };
 
