@@ -11,6 +11,7 @@ const initialState = {
   isToggle: false,
   deviceToken: null,
   widgetToken: null,
+  loginCredentials: null,
 };
 
 export const authSlice = createSlice({
@@ -25,6 +26,9 @@ export const authSlice = createSlice({
     setRememberMe: (state, action) => {
       state.credentials = action.payload;
       state.rememberMe = action.payload?.rememberMe || false;
+    },
+    setLoginCredentials: (state, action) => {
+      state.loginCredentials = action.payload;
     },
     logout: state => {
       state.user = null;
@@ -58,5 +62,6 @@ export const {
   SetIsToggle,
   setDeviceToken,
   setWidgetToken,
+  setLoginCredentials,
 } = authSlice.actions;
 export const authReducer = authSlice.reducer;
