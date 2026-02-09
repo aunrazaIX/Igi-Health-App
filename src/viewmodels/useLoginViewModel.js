@@ -39,7 +39,7 @@ const useLoginViewModel = () => {
   const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState('login');
   const [checked, setChecked] = useState(rememberMe);
-  const loginResponse = useRef(null);
+
   useEffect(() => {
     requestPermissionHandler()
       .then(bool => {
@@ -152,8 +152,6 @@ const useLoginViewModel = () => {
         };
         generateToken(argsOrBody);
       }
-
-      loginResponse.current = res;
       if (res?.data.UserName !== credentials?.userName) {
         dispatch(resetAllModules());
       }
@@ -174,15 +172,13 @@ const useLoginViewModel = () => {
           password: loginApiData?.password,
         }),
       );
-      if (rememberMe) {
-        dispatch(
-          setRememberMe({
-            userName: loginApiData?.userName,
-            password: loginApiData?.password,
-            rememberMe: true,
-          }),
-        );
-      }
+      dispatch(
+        setRememberMe({
+          userName: checked ? loginApiData?.userName : null,
+          password: checked ? loginApiData?.password : null,
+          rememberMe: checked,
+        }),
+      );
     },
     onError: e => {
       dispatch(
@@ -362,15 +358,7 @@ const useLoginViewModel = () => {
   };
 
   const handleCheck = () => {
-    const value = !checked;
-    setChecked(value);
-    dispatch(
-      setRememberMe({
-        rememberMe: value,
-        userName: loginApiData?.userName,
-        password: loginApiData?.password,
-      }),
-    );
+    setChecked(!checked);
   };
 
   const tabs = ['login', 'signup'];
