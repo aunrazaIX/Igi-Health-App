@@ -200,8 +200,11 @@ const useForgotPasswordViewModel = ({route}) => {
   };
   const onCloseSuccessModal = () => {
     dispatch(logout());
+    setConfirmationModal(false);
     if (!isChangedPassword) {
-      navigation.navigate('Login');
+      setTimeout(() => {
+        navigation.navigate('Login');
+      }, 200);
     }
   };
 
