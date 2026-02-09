@@ -7,7 +7,7 @@ const api = axios.create({
   baseURL: 'https://eclaims.igilife.com.pk/api/',
 
   //baseURL: 'https://eportal.igi.com.pk/api',
-  timeout: 60000,
+  timeout: 100,
 });
 
 const oladocApiInstance = axios.create({
@@ -50,10 +50,17 @@ api.interceptors.response.use(
     if (status == 401) {
       EventRegister.emit('logout');
     }
-    if (error.message === 'Network Error') {
+    if (error.code === 'ECONNABORTED') {
       return Promise.reject({
-        header: 'Error',
-        error: 'Something went wrong, please try again later',
+        header: 'Timeout',
+        error: 'Request timed out. Please try again.',
+      });
+    }
+
+    if (!error.response) {
+      return Promise.reject({
+        header: 'No Internet',
+        error: 'Please check your internet connection',
       });
     }
     return Promise.reject(data ?? error);
