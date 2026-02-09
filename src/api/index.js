@@ -7,7 +7,7 @@ const api = axios.create({
   baseURL: 'https://eclaims.igilife.com.pk/api/',
 
   //baseURL: 'https://eportal.igi.com.pk/api',
-  timeout: 100,
+  timeout: 60000,
 });
 
 const oladocApiInstance = axios.create({
