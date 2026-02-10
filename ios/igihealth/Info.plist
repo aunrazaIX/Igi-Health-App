@@ -44,7 +44,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to show nearby hospitals</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>For adding Attachment in leave request</string>
+	<string>For adding Attachment in Claims Process</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Bold.ttf</string>
