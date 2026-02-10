@@ -16,11 +16,10 @@ const useAddTreatmentModel = ({navigation, route}) => {
 
   const extractedData = {
     treatment: treatmentData?.treatment,
-    admissionDate: treatmentData?.info?.[1]?.value,
-    amount: treatmentData?.info?.[2]?.value,
-    description: treatmentData?.info?.[3]?.value,
+    admissionDate: treatmentData?.info?.[0]?.value,
+    amount: treatmentData?.info?.[1]?.value,
+    description: treatmentData?.info?.[2]?.value,
   };
-
   const {setterForApiData, apiData} = useErrorHandlingHook({
     treatment: extractedData.treatment,
     admissionDate: extractedData.admissionDate,

@@ -26,11 +26,14 @@
     "axios": "1.8.4",
     "moment": "^2.30.1",
     "patch-package": "^8.0.0",
+    "react": "19.0.0",
+    "react-native": "0.78.1",
     "react-native-app-intro-slider": "^4.0.4",
     "react-native-asset": "^2.1.1",
     "react-native-biometrics": "^3.0.1",
     "react-native-calendars": "^1.1310.0",
     "react-native-countdown-component": "^2.7.1",
+    "react-native-device-info": "^15.0.1",
     "react-native-event-listeners": "^1.0.7",
     "react-native-file-viewer": "^2.1.5",
     "react-native-fs": "^2.20.0",
@@ -54,8 +57,7 @@
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
     "rn-fetch-blob": "^0.12.0",
-    "react": "19.0.0",
-    "react-native": "0.78.1"
+    "sp-react-native-in-app-updates": "^1.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
