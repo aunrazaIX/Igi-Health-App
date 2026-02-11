@@ -39,7 +39,6 @@ const AppContent = () => {
         }
       })
       .catch(e => {
-        setShowUpdateModal(true);
         console.log('Error', e);
       });
   }, []);
