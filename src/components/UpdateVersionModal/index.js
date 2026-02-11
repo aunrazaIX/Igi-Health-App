@@ -19,7 +19,9 @@ const UpdateVersionModal = ({onPressClose, onPressUpdate, visible = false}) => {
               style={styles.updateAvailable}
               name="Update available"
             />
-            <TouchableOpacity style={styles.closeContainer}>
+            <TouchableOpacity
+              style={styles.closeContainer}
+              onPress={onPressClose}>
               <Image style={styles.closeIcon} source={icons.CancelIcon} />
             </TouchableOpacity>
           </View>
@@ -33,10 +35,7 @@ const UpdateVersionModal = ({onPressClose, onPressUpdate, visible = false}) => {
             <View style={styles.logo}>
               <Image style={styles.logoIcon} source={images.Logo} />
             </View>
-            <AileronSemiBold
-              style={styles.appNameText}
-              name="IGI Life Customer Solution App"
-            />
+            <AileronSemiBold style={styles.appNameText} name="IGI-Health" />
           </View>
 
           <View style={styles.row}>
@@ -98,6 +97,7 @@ const styles = StyleSheet.create({
   simpleRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: vh,
   },
   logo: {
     height: vh * 5.5,
@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
   },
   updateButton: {
     width: '47%',
-    height: vh * 5,
     elevation: 0,
     borderRadius: vw * 10,
   },
