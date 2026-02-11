@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import MainStack from './src/navigation/MainStack';
-import {StatusBar, StyleSheet, View} from 'react-native';
+import {
+  PermissionsAndroid,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {persistor, store} from './src/redux/store';
@@ -10,6 +16,14 @@ import {COLORS} from './src/assets/theme/colors';
 import SpInAppUpdates, {IAUUpdateKind} from 'sp-react-native-in-app-updates';
 import Toast from 'react-native-toast-message';
 import UpdateVersionModal from './src/components/UpdateVersionModal';
+import {getApp} from '@react-native-firebase/app';
+import {
+  getMessaging,
+  requestPermission,
+  getToken,
+  AuthorizationStatus,
+} from '@react-native-firebase/messaging';
+import {setToken} from './src/utils/firebase';
 
 const MyTheme = {
   ...DefaultTheme,

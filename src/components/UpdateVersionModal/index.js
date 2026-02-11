@@ -33,10 +33,7 @@ const UpdateVersionModal = ({onPressClose, onPressUpdate, visible = false}) => {
             <View style={styles.logo}>
               <Image style={styles.logoIcon} source={images.Logo} />
             </View>
-            <AileronSemiBold
-              style={styles.appNameText}
-              name="IGI Life Customer Solution App"
-            />
+            <AileronSemiBold style={styles.appNameText} name="IGI-Health" />
           </View>
 
           <View style={styles.row}>
