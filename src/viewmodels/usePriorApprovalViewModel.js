@@ -277,7 +277,9 @@ const usePriorApprovalViewModel = ({navigation, route}) => {
     serviceName: item?.treatment?.label,
     description: item?.description,
     estimatedCost: Number(item?.amount),
-    procedureDate: moment(item?.admissionDate, 'DD-MMM-YYYY').toISOString(),
+    procedureDate: moment(item?.admissionDate, 'DD-MMM-YYYY').format(
+      'YYYY-MM-DD[T]HH:mm:ss',
+    ),
   }));
 
   const {

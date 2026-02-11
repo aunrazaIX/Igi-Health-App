@@ -2,9 +2,9 @@ import axios from 'axios';
 import {EventRegister} from 'react-native-event-listeners';
 import {store} from '../redux/store';
 const api = axios.create({
-  // baseURL: 'http://10.9.0.55:8088/api/',
-  // baseURL: 'https://testportal.igi.com.pk:8801/api/',
-  baseURL: 'https://eclaims.igilife.com.pk/api/',
+  // baseURL: 'http://10.9.0.55:8801/api/',
+  baseURL: 'https://testportal.igi.com.pk:8801/api/',
+  // baseURL: 'https://eclaims.igilife.com.pk/api/',
 
   //baseURL: 'https://eportal.igi.com.pk/api',
   timeout: 60000,

@@ -88,7 +88,7 @@ const useHomeViewModel = () => {
     insuredName: apiData?.policy_Insured_Name ?? '',
     startDate: apiData?.policy_Start_Date ?? '',
     endDate: apiData?.policy_Expiry_Date ?? '',
-    perDay: apiData?.policy_Daily_RoomLimit ?? '0',
+    perDay: (apiData?.policy_Daily_RoomLimit ?? 0).toLocaleString(),
     matLimit: matData?.policy_MatLimit ?? '',
   };
   const {data: dependentData} = useApiHook({
