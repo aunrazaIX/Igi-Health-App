@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import MainStack from './src/navigation/MainStack';
-import {StatusBar, StyleSheet, View} from 'react-native';
+import {StatusBar, Platform, StyleSheet, View, Linking} from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {persistor, store} from './src/redux/store';
@@ -39,59 +39,20 @@ const AppContent = () => {
         }
       })
       .catch(e => {
+        setShowUpdateModal(true);
         console.log('Error', e);
       });
-    requestPermissionHandler()
-      .then(bool => {
-        if (bool) {
-          const messagingInstance = getMessaging(getApp());
-          getToken(messagingInstance)
-            .then(token => {
-              setToken(token);
-            })
-            .catch(e => {
-              console.log(e);
-            });
-        }
-      })
-      .catch(e => {
-        console.log('E', e);
-      });
   }, []);
-  const requestPermissionHandler = async () => {
-    let allowed = false;
-    if (Platform.OS === 'ios') {
-      const messagingInstance = getMessaging(getApp());
-      const authStatus = await requestPermission(messagingInstance);
-      const enabled =
-        authStatus === AuthorizationStatus.AUTHORIZED ||
-        authStatus === AuthorizationStatus.PROVISIONAL;
-      if (enabled) {
-        allowed = true;
-      }
-    } else {
-      if (Platform.Version >= 33) {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          allowed = true;
-        }
-      } else {
-        allowed = true;
-      }
-    }
-    return allowed;
-  };
+
   const openAppStore = async () => {
     setShowUpdateModal(false);
-    const url = 'itms-apps://apps.apple.com/app/id6503698678';
+    const url = 'itms-apps://apps.apple.com/app/id6746796879';
     try {
       const supported = await Linking.canOpenURL(url);
       if (supported) {
         await Linking.openURL(url);
       } else {
-        await Linking.openURL('https://apps.apple.com/app/id6503698678');
+        await Linking.openURL('https://apps.apple.com/app/id6746796879');
       }
     } catch (err) {
       console.error('Error opening App Store:', err);
