@@ -1,7 +1,7 @@
 import {View, Image} from 'react-native';
 import React from 'react';
 import {COLORS} from '../../assets/theme/colors';
-import {icons, images} from '../../assets';
+import {images} from '../../assets';
 import {
   Button,
   ConfirmationModal,

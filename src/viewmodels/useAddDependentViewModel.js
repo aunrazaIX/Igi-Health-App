@@ -141,7 +141,10 @@ const useAddDependentViewModal = ({route}) => {
   };
 
   const handleCancel = () => navigation.navigate('Personal');
-  const resetStates = () => navigation.goBack();
+  const resetStates = () => {
+    setConfirmationModal(false);
+    navigation.goBack();
+  }
 
   return {
     states: {

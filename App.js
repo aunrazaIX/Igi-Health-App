@@ -21,27 +21,27 @@ const MyTheme = {
 const AppContent = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  useEffect(() => {
-    const inAppUpdates = new SpInAppUpdates(false);
-    inAppUpdates
-      .checkNeedsUpdate()
-      .then(result => {
-        if (result.shouldUpdate) {
-          let updateOptions = {};
-          if (Platform.OS === 'android') {
-            updateOptions = {
-              updateType: IAUUpdateKind.IMMEDIATE,
-            };
-            inAppUpdates.startUpdate(updateOptions);
-          } else {
-            setShowUpdateModal(true);
-          }
-        }
-      })
-      .catch(e => {
-        console.log('Error', e);
-      });
-  }, []);
+  // useEffect(() => {
+  //   const inAppUpdates = new SpInAppUpdates(false);
+  //   inAppUpdates
+  //     .checkNeedsUpdate()
+  //     .then(result => {
+  //       if (result.shouldUpdate) {
+  //         let updateOptions = {};
+  //         if (Platform.OS === 'android') {
+  //           updateOptions = {
+  //             updateType: IAUUpdateKind.IMMEDIATE,
+  //           };
+  //           inAppUpdates.startUpdate(updateOptions);
+  //         } else {
+  //           setShowUpdateModal(true);
+  //         }
+  //       }
+  //     })
+  //     .catch(e => {
+  //       console.log('Error', e);
+  //     });
+  // }, []);
 
   const openAppStore = async () => {
     setShowUpdateModal(false);

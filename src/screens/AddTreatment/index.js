@@ -19,7 +19,6 @@ const AddTreatment = ({
   const {
     setterForApiData,
     onPressAddTreatment,
-    openConfimationModal,
     setConfirmationModal,
   } = functions;
   return (
@@ -31,7 +30,6 @@ const AddTreatment = ({
       isError={isError}
       treatmentTypes={treatmentTypes}
       confirmationModal={confirmationModal}
-      openConfimationModal={openConfimationModal}
       setConfirmationModal={setConfirmationModal}
       loading={loading}
       claimType={claimType}
