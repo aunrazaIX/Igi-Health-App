@@ -19,8 +19,6 @@ const useAddDependentViewModal = ({route}) => {
   const relationsOptions = [
     {label: 'Husband', value: 1},
     {label: 'Wife', value: 2},
-    {label: 'Sister', value: 3},
-    {label: 'Brother', value: 4},
     {label: 'Son', value: 5},
     {label: 'Daughter', value: 6},
     {label: 'Father', value: 7},
@@ -136,6 +134,7 @@ const useAddDependentViewModal = ({route}) => {
         setConfirmatonType('success');
       }
       const payload = apiPayload(dependentApiData);
+      console.log(payload);
       trigger(payload);
     }
   };
