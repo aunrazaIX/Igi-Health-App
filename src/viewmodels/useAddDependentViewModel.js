@@ -19,10 +19,10 @@ const useAddDependentViewModal = ({route}) => {
   const relationsOptions = [
     {label: 'Husband', value: 1},
     {label: 'Wife', value: 2},
-    {label: 'Son', value: 5},
-    {label: 'Daughter', value: 6},
-    {label: 'Father', value: 7},
-    {label: 'Mother', value: 8},
+    {label: 'Son', value: 3},
+    {label: 'Daughter', value: 4},
+    {label: 'Father', value: 5},
+    {label: 'Mother', value: 6},
   ];
 
   const genderOptions = [
@@ -140,7 +140,10 @@ const useAddDependentViewModal = ({route}) => {
   };
 
   const handleCancel = () => navigation.navigate('Personal');
-  const resetStates = () => navigation.goBack();
+  const resetStates = () => {
+    setConfirmationModal(false);
+    navigation.goBack();
+  };
 
   return {
     states: {

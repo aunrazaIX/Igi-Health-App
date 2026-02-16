@@ -289,6 +289,12 @@ const useHomeViewModel = () => {
       stChild: 'PriorApprovalStack',
     },
     {
+      logo: newCardsIcons.claimHistory,
+      name: 'Prior Approval History',
+      image: icons.forwardArrow,
+      to: 'PriorApprovalHistory',
+    },
+    {
       logo: newCardsIcons.hospital,
       name: 'Network Hospitals',
       image: icons.forwardArrow,

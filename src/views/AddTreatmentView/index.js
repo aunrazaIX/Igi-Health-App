@@ -25,7 +25,6 @@ const AddTreatmentView = ({
   apiData,
   onPressAddTreatment,
   setConfirmationModal,
-  openConfimationModal,
   confirmationModal,
   loading,
   isError,
