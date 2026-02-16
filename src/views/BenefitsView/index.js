@@ -48,17 +48,19 @@ const BenefitsView = ({
           }
         />
       </View>
-      {item?.price &&(<AileronBold
-        // name={`${item.price}${/\d[\d,]*/.test(item?.price) ? '/-' : ''}`}
-        name={`${
-          /^\d[\d,]*$/.test(item?.price) ? item.price + '/-' : item.price
-        }`}
-        style={
-          item.price === 'Not Covered'
-            ? styles.subTitle
-            : styles.insuredTitleCovered
-        }
-      />)}
+      {item?.price && (
+        <AileronBold
+          // name={`${item.price}${/\d[\d,]*/.test(item?.price) ? '/-' : ''}`}
+          name={`${
+            /^\d[\d,]*$/.test(item?.price) ? item.price + '/-' : item.price
+          }`}
+          style={
+            item.price === 'Not Covered'
+              ? styles.subTitle
+              : styles.insuredTitleCovered
+          }
+        />
+      )}
       {item?.note && (
         <TouchableOpacity
           onPress={() => setModalData({show: true, itemData: item})}>
