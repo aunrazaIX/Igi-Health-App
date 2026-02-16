@@ -31,6 +31,7 @@ const useBenefitsViewModel = () => {
     apiEndpoint: endpoints.benefits.getBenefits,
     method: 'get',
     onSuccess: res => {
+      console.log('REs', res?.data);
       setAllBenefits(res?.data);
     },
     onError: e => {

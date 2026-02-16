@@ -72,10 +72,8 @@ const useAddDependentViewModal = ({route}) => {
     apiEndpoint: endpoints.dependent.addDependentRequest,
     method: 'post',
     onSuccess: res => {
-      if (!isUpdate) {
-        setConfirmatonType('success');
-        setConfirmationModal(true);
-      }
+      setConfirmatonType('success');
+      setConfirmationModal(true);
     },
     onError: error => {
       setConfirmatonType('');
@@ -129,10 +127,6 @@ const useAddDependentViewModal = ({route}) => {
         }),
       );
     } else {
-      if (isUpdate) {
-        setConfirmationModal(true);
-        setConfirmatonType('success');
-      }
       const payload = apiPayload(dependentApiData);
       console.log(payload);
       trigger(payload);
