@@ -5,9 +5,7 @@ const endpoints = {
     sendOtp: 'Account/getOTPforpasswordChanged',
     verifyOTP: (otp, email) => `Account/Verify-Otp?OTP=${otp}&Email=${email}`,
     resendOTP: email => `Account/Resend-Otp?Email=${email}`,
-    setPassword: 'Account/SetPassword',
-    createPassword: (email, newPassword) =>
-      `Account/SetPassword?Email=${email}&NewPassword=${newPassword}`,
+    createPassword: 'Account/SetPassword',
   },
   account: {
     getBankDetails: cnic => `Account/GetBankDetails?Cnic=${cnic}`,

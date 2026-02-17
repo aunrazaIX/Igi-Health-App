@@ -69,14 +69,16 @@ const useForgotPasswordViewModel = ({route}) => {
   });
 
   const {trigger: triggerUpdatePassword} = useApiHook({
-    apiEndpoint: endpoints.auth.createPassword(
-      apiData?.email || verifiedUserData?.email || user?.email,
-      updatePasswordApiData?.newPassword,
-    ),
+    apiEndpoint: endpoints.auth.createPassword,
+    argsOrBody: {
+      email: apiData?.email || verifiedUserData?.email || user?.email,
+      password: updatePasswordApiData?.newPassword,
+    },
     method: 'post',
     headers: {
       Authorization: `Bearer ${otpToken}`,
     },
+
     onSuccess: res => {
       if (res?.data) {
         updatePasswordResetStates();
