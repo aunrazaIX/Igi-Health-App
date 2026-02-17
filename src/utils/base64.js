@@ -17,207 +17,193 @@ export const generateCardHTML = (data, user, dependentsList) => `
   </head>
 
   <body>
-    <table style="width: 100%">
-      <tbody>
-        <tr>
-          <td>
-            <div style="padding: 20px">
-              <table
-                style="
-                  width: 396px;
-                  border-radius: 24px;
-                  box-shadow: 0px 2px 12.1px 0px rgba(0, 0, 0, 0.25);
-                  padding: 20px;
-                  background-color: #ffffff;
-                  margin: 0 auto;
-                  font-size: 16px;
-                  color: #393939;
-                  min-height: 237px;
-                "
+    <div style="margin-top: 50px">
+      <table
+        style="
+          width: 400px;
+          border-radius: 24px;
+          box-shadow: 0px 2px 12.1px 0px rgba(0, 0, 0, 0.25);
+          padding: 20px;
+          background-color: #ffffff;
+          margin: 0 auto;
+          font-size: 16px;
+          color: #393939;
+          height: 237px;
+        "
+      >
+        <tbody>
+          <tr>
+            <td style="padding-bottom: 15px">
+              <img
+                src="data:image/png;base64,${cancelIconBase64}"
+                alt=""
+                style="width: 107px; height: 48px"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding-bottom: 5px">
+              <span>Policy Number: </span>
+              <span
+                >${data?.policyNumber}</span
               >
+            </td>
+            <td style="text-align: end; padding-bottom: 5px">
+              <span>Class: </span>
+              <span
+                >${data?.policyClass}</span
+              >
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding-bottom: 5px">
+              <span>CNIC: </span>
+              <span>${user?.cnic}</span>
+            </td>
+            <td style="text-align: end; white-space: nowrap;">
+              <span>Cert No: </span>
+              <span
+                >${data?.policyCert}</span
+              >
+            </td>
+          </tr>
+
+          <tr>
+          <td style="padding-bottom: 5px">
+              <span>Company Name: </span>
+              <span
+                >${data?.companyName}</span
+              >
+            </td>
+            <td style="text-align: end; padding-bottom: 5px;">
+              <span>Age: </span>
+              <span
+                >${data?.age}</span
+              >
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding-bottom: 5px; padding-top: 15px">
+              Card Holder Name
+            </td>
+          </tr>
+
+          <tr>
+            <td style="font-size: 17px; font-weight: 600">
+              ${data?.insuredName.trim()}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table
+        style="
+          width: 400px;
+          border-radius: 24px;
+          box-shadow: 0px 2px 12.1px 0px rgba(0, 0, 0, 0.25);
+          padding: 20px;
+          background-color: #ffffff;
+          margin: 0 auto;
+          font-size: 16px;
+          color: #393939;
+          height: 255px;
+        "
+      >
+        <tbody>
+          <tr style="font-size: 20px">
+            <td style="padding-bottom: 5px; font-weight: 700">
+              Dependent <span style="color: #ee2560">Details</span>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="font-weight: 600; width: 50%; margin-bottom: 5px"
+            >
+              Name:
+            </td>
+            <td style="width: 25%; font-weight: 600">Relation</td>
+            <td style="width: 25%; font-weight: 600">Age</td>
+          </tr>
+          ${dependentsList?.map(
+            dep => `
+              <tr style="font-size: 14px">
+                <td style="width: 50%">${dep?.name}</td>
+                <td style="width: 25%; font-weight: 600">
+                  ${dep?.relation}
+                </td>
+                <td style="width: 25%">${dep?.age}</td>
+              </tr>`,
+          )}
+          <tr>
+            <td style="margin-top: 20px">
+              <table>
                 <tbody>
                   <tr>
-                    <td style="padding-bottom: 15px">
+                    <td>
                       <img
-                        src="data:image/png;base64,${cancelIconBase64}"
+                        src="data:image/png;base64,${cardRoomBase64}"
                         alt=""
-                        style="width: 107px; height: 48px"
+                        style="width: 30px; height: 30px"
                       />
                     </td>
-                  </tr>
-
-                  <tr>
-                    <td style="padding-bottom: 5px">
-                      <span>Policy Number: </span>
-                      <span
-                        >${data?.policyNumber}</span
-                      >
-                    </td>
-                    <td style="text-align: end; padding-bottom: 5px">
-                      <span>Class: </span>
-                      <span
-                        >${data?.policyClass}</span
-                      >
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td style="padding-bottom: 5px">
-                      <span>CNIC: </span>
-                      <span>${user?.cnic}</span>
-                    </td>
-                    <td style="text-align: end; padding-bottom: 5px">
-                      <span>Cert No: </span>
-                      <span
-                        >${data?.policyCert}</span
-                      >
-                    </td>
-                  </tr>
-
-                  <tr>
-                  <td style="padding-bottom: 5px">
-                      <span>Company Name: </span>
-                      <span
-                        >${data?.companyName}</span
-                      >
-                    </td>
-                    <td style="text-align: end; padding-bottom: 5px;">
-                      <span>Age: </span>
-                      <span
-                        >${data?.age}</span
-                      >
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td style="padding-bottom: 5px; padding-top: 15px">
-                      Card Holder Name
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td style="font-size: 17px; font-weight: 600">
-                      ${data?.insuredName.trim()}
+                    <td style="font-size: 14px; padding-left: 5px">
+                      <p style="margin: 0px; width: max-content">
+                        Max. Room & Board
+                      </p>
+                      <p style="margin: 0px">
+                        Rs. Per Day:<span>
+                          ${data?.perDay || 0}</span
+                        >
+                      </p>
                     </td>
                   </tr>
                 </tbody>
               </table>
-
-              <table
-                style="
-                  width: 396px;
-                  border-radius: 24px;
-                  box-shadow: 0px 2px 12.1px 0px rgba(0, 0, 0, 0.25);
-                  padding: 20px;
-                  background-color: #ffffff;
-                  margin: 20px auto 0 auto;
-                  font-size: 16px;
-                  color: #393939;
-                  min-height: 237px;
-                "
-              >
+            </td>
+            <td>
+                <table style="margin-left: auto;">
                 <tbody>
-                  <tr style="font-size: 20px">
-                    <td style="padding-bottom: 5px; font-weight: 700">
-                      Dependent <span style="color: #ee2560">Details</span>
-                    </td>
-                  </tr>
                   <tr>
-                    <td
-                      style="font-weight: 600; width: 50%; margin-bottom: 5px"
-                    >
-                      Name:
-                    </td>
-                    <td style="width: 25%; font-weight: 600">Relation</td>
-                    <td style="width: 25%; font-weight: 600">Age</td>
-                  </tr>
-                  ${dependentsList?.map(
-                    dep => `
-                      <tr style="font-size: 14px">
-                        <td style="width: 50%">${dep?.name}</td>
-                        <td style="width: 25%; font-weight: 600">
-                          ${dep?.relation}
-                        </td>
-                        <td style="width: 25%">${dep?.age}</td>
-                      </tr>`,
-                  )}
-                  <tr>
-                    <td style="margin-top: 20px">
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <img
-                                src="data:image/png;base64,${cardRoomBase64}"
-                                alt=""
-                                style="width: 30px; height: 30px"
-                              />
-                            </td>
-                            <td style="font-size: 14px; padding-left: 5px">
-                              <p style="margin: 0px; width: max-content">
-                                Max. Room & Board
-                              </p>
-                              <p style="margin: 0px">
-                                Rs. Per Day:<span>
-                                  ${data?.perDay || 0}</span
-                                >
-                              </p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
                     <td>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <img
-                                src="data:image/png;base64,${maternityBase64}"
-                                alt=""
-                                style="width: 21px; height: 34px"
-                              />
-                            </td>
-                            <td style="font-size: 14px; padding-left: 5px">
-                              <p style="margin: 0px">Maternity</p>
-                              <p style="margin: 0px; width: max-content">
-                                ${
-                                  data?.matLimit > 0
-                                    ? 'Available'
-                                    : 'Not Available'
-                                }
-                              </p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                      <img
+                        src="data:image/png;base64,${maternityBase64}"
+                        alt=""
+                        style="width: 21px; height: 34px"
+                      />
                     </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 50%">
-                      <span>Valid From:</span>
-                      <span
-                        >${moment(data?.startDate, 'YYYYMMDD').format(
-                          'DD-MM-YYYY',
-                        )}</span
-                      >
-                    </td>
-                    <td style="width: 50%; white-space: nowrap">
-                      <span>Valid Till:</span>
-                      <span
-                        >${moment(data?.endDate, 'YYYYMMDD').format(
-                          'DD-MM-YYYY',
-                        )}</span
-                      >
+                    <td style="font-size: 14px; padding-left: 5px">
+                      <p style="margin: 0px">Maternity</p>
+                      <p style="margin: 0px; width: max-content">
+                        ${data?.matLimit > 0 ? 'Available' : 'Not Available'}
+                      </p>
                     </td>
                   </tr>
                 </tbody>
               </table>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%">
+              <span>Valid From:</span>
+              <span
+                >${moment(data?.startDate, 'YYYYMMDD').format(
+                  'DD-MM-YYYY',
+                )}</span
+              >
+            </td>
+            <td style="width: 50%; white-space: nowrap; text-align: right;">
+              <span style="margin-left: 12px">Valid Till:</span>
+              <span
+                >${moment(data?.endDate, 'YYYYMMDD').format('DD-MM-YYYY')}</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
 `;
