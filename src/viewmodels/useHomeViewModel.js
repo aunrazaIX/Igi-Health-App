@@ -48,13 +48,16 @@ const useHomeViewModel = () => {
   const {trigger: generateToken} = useApiHook({
     method: 'post',
     argsOrBody: {
-      identification_field: 'PHONE_NUMBER',
-      identification_value: user?.phoneNo,
+      identification_field: 'EMAIL',
+      identification_value: user?.email,
       name: user?.memberName,
       city: '',
       country_code: '+92',
       company_name: selectedPolicyObject?.companyName,
       policy: selectedPolicyObject?.policyNumber,
+      email: user?.email,
+      mobile_number: user?.phoneNo,
+      cnic: user?.cnic,
     },
     instance: 'oladoc',
     headers: {

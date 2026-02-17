@@ -72,7 +72,7 @@ const useForgotPasswordViewModel = ({route}) => {
     apiEndpoint: endpoints.auth.createPassword,
     argsOrBody: {
       email: apiData?.email || verifiedUserData?.email || user?.email,
-      password: updatePasswordApiData?.newPassword,
+      newPassword: updatePasswordApiData?.newPassword,
     },
     method: 'post',
     headers: {

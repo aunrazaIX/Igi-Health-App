@@ -142,13 +142,16 @@ const useLoginViewModel = () => {
       const {allowClaims, isOladocFeatures} = res?.data || {};
       if (allowClaims || isOladocFeatures) {
         let argsOrBody = {
-          identification_field: 'PHONE_NUMBER',
-          identification_value: res?.data?.phoneNo,
+          identification_field: 'EMAIL',
+          identification_value: res?.data?.email,
           name: res?.data?.memberName,
           city: '',
           country_code: '+92',
           company_name: res?.data?.policies[0]?.companyName,
           policy: res?.data?.policies[0]?.policyNumber,
+          email: res?.data?.email,
+          cnic: res?.data?.cnic,
+          mobile_number: res?.data?.phoneNo,
         };
         generateToken(argsOrBody);
       }
