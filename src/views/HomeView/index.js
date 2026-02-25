@@ -381,30 +381,32 @@ const HomeView = ({
                       </View>
                     </View>
                   </View>
-                  <View
-                    style={{
-                      justifyContent: 'space-between',
-                      flexDirection: 'row',
-                    }}>
-                    <AileronBold
+                  {homeCardData?.startDate && (
+                    <View
                       style={{
-                        textAlign: 'left',
-                        fontSize: vw * 3.25,
-                      }}
-                      name={`Valid from : ${moment(
-                        homeCardData?.startDate,
-                        'YYYYMMDD',
-                      ).format('DD-MMM-YYYY')}`}
-                    />
+                        justifyContent: 'space-between',
+                        flexDirection: 'row',
+                      }}>
+                      <AileronBold
+                        style={{
+                          textAlign: 'left',
+                          fontSize: vw * 3.25,
+                        }}
+                        name={`Valid from : ${moment(
+                          homeCardData?.startDate,
+                          'YYYYMMDD',
+                        ).format('DD-MMM-YYYY')}`}
+                      />
 
-                    <AileronBold
-                      style={{textAlign: 'left', fontSize: vw * 3.25}}
-                      name={`Valid till : ${moment(
-                        homeCardData?.endDate,
-                        'YYYYMMDD',
-                      ).format('DD-MMM-YYYY')}`}
-                    />
-                  </View>
+                      <AileronBold
+                        style={{textAlign: 'left', fontSize: vw * 3.25}}
+                        name={`Valid till : ${moment(
+                          homeCardData?.endDate,
+                          'YYYYMMDD',
+                        ).format('DD-MMM-YYYY')}`}
+                      />
+                    </View>
+                  )}
                 </View>
               </TouchableOpacity>
             </Animated.View>

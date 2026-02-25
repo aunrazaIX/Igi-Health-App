@@ -1,4 +1,4 @@
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {newCardsIcons, icons} from '../assets';
 import {Alert, Animated, Linking, Platform} from 'react-native';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
@@ -39,12 +39,15 @@ const useHomeViewModel = () => {
     trigger: refetchPolicyDetails,
   } = useApiHook({
     method: 'get',
+    skip: true,
     apiEndpoint: endpoints.policy.getPolicyDetails,
     argsOrBody: {
       PolicyNumber: selectedPolicy,
     },
   });
-
+  useEffect(() => {
+    refetchPolicyDetails();
+  }, []);
   const {trigger: generateToken} = useApiHook({
     method: 'post',
     argsOrBody: {
