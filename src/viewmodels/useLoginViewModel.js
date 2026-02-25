@@ -188,6 +188,7 @@ const useLoginViewModel = () => {
         setErrorModal({
           Show: true,
           message: e?.message,
+          detail: e?.detail,
         }),
       );
     },
@@ -221,6 +222,7 @@ const useLoginViewModel = () => {
         setErrorModal({
           Show: true,
           message: e?.message,
+          detail: e?.detail,
         }),
       );
     },
