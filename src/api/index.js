@@ -50,10 +50,10 @@ api.interceptors.response.use(
     if (status == 401) {
       EventRegister.emit('logout');
     }
-    if (error.message === 'Network Error') {
+    if (!error.response) {
       return Promise.reject({
-        header: 'Error',
-        error: 'Something went wrong, please try again later',
+        message: 'No Internet',
+        detail: 'Please check your internet connection.',
       });
     }
     return Promise.reject(data ?? error);

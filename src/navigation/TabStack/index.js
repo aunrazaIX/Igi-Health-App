@@ -91,6 +91,7 @@ const Tabs = () => {
           component={Widget}
           initialParams={{widgetName: 'raise-claim', title: 'Lodge Claim'}}
           options={{
+            tabBarStyle: {display: 'none'},
             tabBarLabel: () => <TabLabel title="Lodge Claim" />,
             tabBarIcon: ({focused}) => (
               <TabIcon focused={focused} icon={tabIcons.note} />
