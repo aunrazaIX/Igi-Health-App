@@ -30,6 +30,7 @@ const useHomeViewModel = () => {
     dispatch(setPolicy(policy?.policyNumber));
     dispatch(setSelectedPolicyObject(policy));
     refetchPolicyDetails({PolicyNumber: policy?.policyNumber});
+    trigger({PolicyNumber: selectedPolicy});
     setShowDropDown(false);
   };
 
@@ -47,6 +48,7 @@ const useHomeViewModel = () => {
   });
   useEffect(() => {
     refetchPolicyDetails();
+    trigger();
   }, []);
   const {trigger: generateToken} = useApiHook({
     method: 'post',
@@ -97,9 +99,10 @@ const useHomeViewModel = () => {
     perDay: (apiData?.policy_Daily_RoomLimit ?? 0).toLocaleString(),
     matLimit: matData?.policy_MatLimit ?? '',
   };
-  const {data: dependentData} = useApiHook({
+  const {data: dependentData, trigger} = useApiHook({
     apiEndpoint: endpoints.dependent.getDependents,
     method: 'get',
+    skip: true,
     argsOrBody: {
       PolicyNumber: selectedPolicy,
     },
