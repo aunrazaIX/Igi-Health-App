@@ -145,6 +145,7 @@ const useHomeViewModel = () => {
     method: 'get',
     argsOrBody: {
       cnic: user?.cnic,
+      policyNumber: selectedPolicy,
     },
     onSuccess: res => {
       let temp = sortClaimData(res?.data);
