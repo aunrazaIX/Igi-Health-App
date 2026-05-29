@@ -1,7 +1,7 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useState, useEffect, useCallback} from 'react';
 import {icons} from '../assets';
-import {Linking} from 'react-native';
+import {Linking, PermissionsAndroid, Platform} from 'react-native'; // ← ADD
 import Geolocation from '@react-native-community/geolocation';
 import useApiHook from '../hooks/useApiHook';
 import endpoints from '../api/endspoints';
@@ -17,11 +17,61 @@ const useHospitalsViewModel = () => {
   const [modalVisible, setModalVisible] = useState(true);
   const [tabChanging, setTabChanging] = useState(false);
   const [position, setPosition] = useState({
-    latitude: 24.8607,
+    latitude: 24.8607,   
     longitude: 67.0011,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
+
+  const requestLocationPermission = async () => {
+    if (Platform.OS !== 'android') return true;
+
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Permission',
+          message: 'Permission required to access your location for nearby hospitals',
+          buttonPositive: 'Allow',
+          buttonNegative: 'Deny',
+        },
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    } catch (err) {
+      console.log('Permission error:', err);
+      return false;
+    }
+  };
+
+  const getCurrentLocation = async () => {
+    const hasPermission = await requestLocationPermission();
+
+    if (!hasPermission) {
+      console.log('Location permission denied — using default Karachi');
+      return; 
+    }
+
+    Geolocation.getCurrentPosition(
+      pos => {
+        const crd = pos.coords;
+        setPosition({
+          latitude: crd.latitude,
+          longitude: crd.longitude,
+          latitudeDelta: 0.0421,
+          longitudeDelta: 0.0421,
+        });
+      },
+      err => {
+        console.log('Location error:', err);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 10000,
+      },
+    );
+  };
+
   useEffect(() => {
     let filtered = allData;
     if (selectedMapTab !== 'All') {
@@ -82,38 +132,27 @@ const useHospitalsViewModel = () => {
     setTabChanging(true);
     setSelectedMapTab(tab);
   };
+
   useFocusEffect(
     useCallback(() => {
       trigger();
-      Geolocation.getCurrentPosition(
-        pos => {
-          const crd = pos.coords;
-          setPosition({
-            latitude: crd.latitude,
-            longitude: crd.longitude,
-            latitudeDelta: 0.0421,
-            longitudeDelta: 0.0421,
-          });
-        },
-        err => {
-          console.log(err);
-        },
-      );
+      getCurrentLocation(); 
     }, []),
   );
+
   const cleanCoordinate = value => {
     if (!value || typeof value !== 'string') return null;
-
     const match = value.match(/^([\d.]+)\s*°/);
     if (!match) return null;
-
     const number = parseFloat(match[1]);
     return isNaN(number) ? null : number;
   };
+
   const openInGoogleMaps = (latitude, longitude) => {
     const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
     Linking.openURL(url);
   };
+
   return {
     states: {
       data,
