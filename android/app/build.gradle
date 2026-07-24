@@ -84,8 +84,8 @@ android {
         applicationId "com.igilifehealth"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 22
-        versionName "22.0"
+        versionCode 25
+        versionName "25.0"
     }
     signingConfigs {
         debug {

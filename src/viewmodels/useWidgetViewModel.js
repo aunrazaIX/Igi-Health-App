@@ -9,7 +9,7 @@ const useWidgetViewModel = ({route}) => {
   const [isErrorOcuured, setIsErrorOccured] = useState(false);
   const {widgetToken: token} = useSelector(state => state.auth);
   const {widgetName, title} = route?.params || {};
-  const widgetUrl = `http://pk.oladoc.com/widgets/launch?screen_name=${widgetName}`;
+  const widgetUrl = `https://pk.oladoc.com/widgets/launch?screen_name=${widgetName}`;
 
   const setLoadingState = loading => {
     setIsLoading(loading);

@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {PermissionsAndroid} from 'react-native';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import FileViewer from 'react-native-file-viewer';
-import RNFetchBlob from 'rn-fetch-blob';
+import RNFetchBlob from 'react-native-blob-util';
 import {generateCardHTML} from '../utils/base64';
 import {setPolicy, setSelectedPolicyObject} from '../redux/generalSlice';
 import useApiHook from '../hooks/useApiHook';
@@ -224,50 +224,52 @@ const useHomeViewModel = () => {
     }
   };
 
-  const handleCardDownload = async () => {
-    try {
-      const permissionGranted = await requestStoragePermission();
-      if (!permissionGranted) return;
 
-      const dir = RNFetchBlob.fs.dirs.DocumentDir;
-      const filePath = `${dir}/IGIPolicyCard.pdf`;
+const handleCardDownload = async () => {
+  try {
+    const permissionGranted = await requestStoragePermission();
+    if (!permissionGranted) return;
 
-      const html = generateCardHTML(homeCardData, user, dependentsList);
+    const dir = RNFetchBlob.fs.dirs.DocumentDir;
+    const filePath = `${dir}/IGIPolicyCard.pdf`;
 
-      const options = {
-        html,
-        fileName: 'IGIPolicyCard',
-        directory: 'Documents',
-        base64: true,
-      };
+    const html = generateCardHTML(homeCardData, user, dependentsList);
 
-      const file = await RNHTMLtoPDF.convert(options);
-      const base64Data = file.base64;
-      if (!base64Data) throw new Error('PDF generation failed.');
-      await RNFetchBlob.fs.writeFile(filePath, base64Data, 'base64');
+    const options = {
+      html,
+      fileName: 'IGIPolicyCard',
+      directory: 'Documents',
+      base64: true,
+    };
 
-      Alert.alert(
-        'Download Complete ✔',
-        'Your E-card has been downloaded. Do you want to open it now?',
-        [
-          {text: 'Cancel', style: 'cancel'},
-          {
-            text: 'Open',
-            onPress: async () => {
-              try {
-                await FileViewer.open(filePath);
-              } catch (err) {
-                Alert.alert('Error', 'No app found to open the PDF.');
-              }
-            },
+    const file = await RNHTMLtoPDF.convert(options);
+    const base64Data = file.base64;
+
+    if (!base64Data) throw new Error('PDF generation failed.');
+
+    await RNFetchBlob.fs.writeFile(filePath, base64Data, 'base64');
+
+    Alert.alert(
+      'Download Complete ✔',
+      'Your E-card has been downloaded. Do you want to open it now?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Open',
+          onPress: async () => {
+            try {
+              await FileViewer.open(filePath);
+            } catch (err) {
+              Alert.alert('Error', 'No app found to open the PDF.');
+            }
           },
-        ],
-        {cancelable: true},
-      );
-    } catch (err) {
-      Alert.alert('Error', 'No PDF app found. Please install a PDF viewer.');
-    }
-  };
+        },
+      ],
+    );
+  } catch (err) {
+    Alert.alert('Error', 'PDF generation failed or storage issue.');
+  }
+};
 
   const cardData = [
     {
